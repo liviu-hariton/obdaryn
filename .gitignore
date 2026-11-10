@@ -1,0 +1,20 @@
+# Build output
+build/
+cmake-build-*/
+*.qm
+
+# IDE (CLion project files stay local)
+.idea/
+*.user
+.vscode/
+
+# Python tooling (emulator venv)
+tools/.venv/
+__pycache__/
+
+# macOS
+.DS_Store
+
+# Claude Code local folder (personal skills and settings)
+.claude/
+
