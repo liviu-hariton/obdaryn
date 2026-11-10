@@ -406,7 +406,7 @@ Item {
                             required property var modelData
                             readonly property string key: row.moduleId + "/" + modelData.code
                             readonly property bool open: page.openCode === key
-                            readonly property var info: open ? App.explainCode(modelData.code) : ({})
+                            readonly property var info: { App.language; return open ? App.explainCode(modelData.code, App.moduleScanProfile, row.category) : ({}) }
                             Layout.fillWidth: true
                             spacing: Theme.s2
 
@@ -478,7 +478,7 @@ Item {
                                 Text {
                                     Layout.fillWidth: true
                                     text: code.info.known ? code.info.description
-                                        : qsTr("No explanation yet for this code. Brand-specific descriptions are planned; until then, search for the code together with the make and model.")
+                                        : qsTr("This code isn't in Obdaryn's descriptions for this brand yet. Search for it together with the make and model, or ask a workshop.")
                                     color: code.info.known ? Theme.text : Theme.textMuted
                                     font.family: Theme.sans
                                     font.pixelSize: Theme.fontBody
@@ -497,6 +497,12 @@ Item {
                                         font.pixelSize: Theme.fontSmall
                                         wrapMode: Text.WordWrap
                                     }
+                                }
+                                DescriptionSource {
+                                    Layout.fillWidth: true
+                                    Layout.topMargin: Theme.s2   // a note about the text, not another cause
+                                    visible: code.open && code.info.known === true
+                                    info: code.info
                                 }
                             }
                         }

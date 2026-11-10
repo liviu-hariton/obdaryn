@@ -57,7 +57,7 @@ QVariant ModuleScanModel::data(const QModelIndex &index, int role) const
     case DtcsRole: {
         QVariantList list;
         for (const ModuleDtc &d : r.dtcs) {
-            const DtcInfo info = DtcDatabase::instance().lookup(d.code);
+            const DtcInfo info = DtcDatabase::instance().lookup(d.code, m_scanner->profileId(), m_language, r.module.category);
             const QString kind = d.kind == DtcKind::Pending ? QStringLiteral("pending") : QStringLiteral("stored");
             list << QVariantMap{
                 {QStringLiteral("code"), d.code},

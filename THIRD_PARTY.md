@@ -14,6 +14,8 @@ PID formulas follow the public SAE J1979 / ISO 15031-5 definitions and were impl
 
 Module addresses in `src/core/data/vehicles/` are facts (CAN identifiers) gathered from public sources: OBDb, FORScan and DDT4All community lists, and VW community documentation. Each entry names its source. No third-party code or descriptive text is copied.
 
+Brand trouble-code packs (`src/core/data/dtc/brands/`) are written for Obdaryn (GPL-3.0-or-later). The meanings are facts checked against public sources, mostly Hyundai/Kia documents filed with NHTSA, and each entry links them. No manual text is copied.
+
 ## Planned
 
 - [OBDb](https://github.com/OBDb) manufacturer signal sets, CC-BY-SA-4.0. They will ship as separate, attributed data files, and changes to them will be shared under the same licence.

@@ -309,6 +309,9 @@ Calm and native; one button component with four variants.
 - **Style:** 36px, field ground, 1px field-border, 6px radius, 10px side padding, 12px muted label above. Mono when the field takes an address or hex.
 - **Focus:** border becomes 2px Telltale Blue.
 
+### Description source line
+Under every code explanation there is a quiet 12px faint note. It names where the text comes from (obdex, or Obdaryn's brand pack) and how sure the meaning is (official document or two independent sources), and always ends with "Guidance only; confirm with a workshop". Below it sits a row of source links in `blueInk`, underlined. Each link is keyboard-focusable, with the focus ring 3px outside it. NHTSA documents are labelled by their id, official ones are marked "(official)", and wrapped links align with the first link. The note is hidden when no source wrote the text above it.
+
 ### Navigation
 - **Sidebar:** product name, a framed connection-status box (state dot plus words, transport line, connect or disconnect), then nav groups Diagnose, Monitor, Vehicle, Adapter under faint sentence-case labels, and Settings plus a read-only note pinned to the bottom.
 - **Nav item:** 32px row, 16px icon plus 14px label in muted text; current item gets the `selected` ground, full text color and 600 weight. A count badge marks codes: red fill when any are stored, amber when they are only pending (Trouble codes counts generic codes; All modules counts codes outside engine and transmission). ⌘1–⌘8 follow the sidebar order.

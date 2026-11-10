@@ -47,6 +47,7 @@ QtObject {
     readonly property color amberInk:    dark ? "#F2A93B" : "#9A5800"
     readonly property color greenInk:    dark ? "#3CBF7A" : "#17703F"
     readonly property color redInk:      dark ? "#F0564A" : "#B3302A"
+    readonly property color blueInk:     dark ? "#5B97F7" : "#2A64CC"   // links and blue text (5.2:1 on light)
     readonly property color blueFill:    dark ? "#2F6FE0" : "#2F6FE0"   // primary button ground (white text 4.6:1)
     readonly property color redFill:     dark ? "#C8372D" : "#C8372D"
     readonly property color unlit:       dark ? "#3A3F47" : "#B9C0CA"   // a telltale that is off

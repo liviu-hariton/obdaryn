@@ -60,6 +60,8 @@ public:
     void setEcuNames(const QHash<QString, QString> &names);
     void clear() { setDtcs({}); }
     void retranslate();
+    /// Brand pack (vehicle-profile id) and language used for code titles.
+    void setContext(const QString &brand, const QString &language);
 
     int storedCount() const { return countOf(DtcKind::Stored); }
     int pendingCount() const { return countOf(DtcKind::Pending); }
@@ -73,6 +75,8 @@ private:
     int countOf(DtcKind kind) const;
     QList<Dtc> m_dtcs;
     QHash<QString, QString> m_ecuNames;
+    QString m_brand;
+    QString m_language = QStringLiteral("en");
 };
 
 } // namespace obdaryn

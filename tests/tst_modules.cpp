@@ -144,7 +144,7 @@ void TestModules::scansDemoCar()
     QCOMPARE(abs->state, ModuleResult::State::Answered);
     QCOMPARE(abs->protocol, DiagProtocol::Kwp);            // UDS refused, fell back to KWP
     QCOMPARE(abs->dtcs.size(), 1);
-    QCOMPARE(abs->dtcs[0].code, QStringLiteral("C0035"));
+    QCOMPARE(abs->dtcs[0].code, QStringLiteral("C1203"));
     QVERIFY(abs->dtcs[0].activeNow);
     QCOMPARE(abs->partNumber, QStringLiteral("58920-3X000"));
 
@@ -152,7 +152,7 @@ void TestModules::scansDemoCar()
     QCOMPARE(airbag->state, ModuleResult::State::Answered);
     QCOMPARE(airbag->protocol, DiagProtocol::Uds);
     QCOMPARE(airbag->dtcs.size(), 1);
-    QCOMPARE(airbag->dtcs[0].code, QStringLiteral("U0100"));
+    QCOMPARE(airbag->dtcs[0].code, QStringLiteral("B1346"));
     QCOMPARE(airbag->softwareVersion, QStringLiteral("1.04"));
 
     const ModuleResult *engine = find(scanner, "engine");

@@ -393,7 +393,8 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::moduleReply(const QByteA
     }
     if (header == "7D1") { // ABS / ESC, KWP2000
         switch (sid) {
-        case 0x18: return reply("7D9", kwpDtcs(m_absFault ? QList<QPair<quint16, quint8>>{{0x4035, 0xE0}}
+        // C1203: front-right wheel-speed sensor open/short (Hyundai-specific), present now.
+        case 0x18: return reply("7D9", kwpDtcs(m_absFault ? QList<QPair<quint16, quint8>>{{0x5203, 0xE0}}
                                                          : QList<QPair<quint16, quint8>>{}));
         case 0x1A: return reply("7D9", QByteArray::fromHex("5A87") + "58920-3X000");
         case 0x14:
@@ -405,9 +406,10 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::moduleReply(const QByteA
     if (header == "7D2") { // airbag, UDS
         switch (sid) {
         case 0x19:
-            // 59 02 <mask> then U0100, failure type 00, status 0x88 (confirmed, lamp on).
+            // 59 02 <mask> then B1346 (driver airbag stage 1, resistance too high: the
+            // classic Elantra MD clock-spring fault), failure type 00, status 0x88.
             return reply("7DA", QByteArray::fromHex("5902FF")
-                                    + (m_airbagFault ? QByteArray::fromHex("C1000088") : QByteArray()));
+                                    + (m_airbagFault ? QByteArray::fromHex("93460088") : QByteArray()));
         case 0x22:
             if (req.size() >= 3 && quint8(req[1]) == 0xF1 && quint8(req[2]) == 0x87)
                 return reply("7DA", QByteArray::fromHex("62F187") + "95910-3X100");

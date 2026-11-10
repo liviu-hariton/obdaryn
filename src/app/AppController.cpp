@@ -46,6 +46,9 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
       m_moduleScanner(new ModuleScanner(m_client, this)),
       m_moduleModel(new ModuleScanModel(m_moduleScanner, this))
 {
+    // Code titles follow the car's brand pack (e.g. Hyundai/Kia for P1326).
+    connect(this, &AppController::profileChanged, this, [this] { m_dtcs->setContext(m_profileId, m_language); });
+
     // While modules are addressed one by one, live polling (which uses the
     // shared "all modules" address) must pause; it resumes when the scan ends.
     connect(m_moduleScanner, &ModuleScanner::started, this, [this] {
@@ -554,9 +557,14 @@ QVariantList AppController::freezeFrameValues() const
     return list;
 }
 
-QVariantMap AppController::explainCode(const QString &code) const
+int AppController::brandCodeCount() const
 {
-    const DtcInfo info = DtcDatabase::instance().lookup(code);
+    return DtcDatabase::instance().brandSize(m_profileId);
+}
+
+QVariantMap AppController::explainCode(const QString &code, const QString &brand, const QString &module) const
+{
+    const DtcInfo info = DtcDatabase::instance().lookup(code, brand.isEmpty() ? m_profileId : brand, m_language, module);
     QVariantList causes;
     for (const auto &c : info.causes)
         causes << QVariantMap{{QStringLiteral("likelihood"), c.first}, {QStringLiteral("text"), c.second}};
@@ -578,6 +586,19 @@ QVariantMap AppController::explainCode(const QString &code) const
         {QStringLiteral("costMinEur"), info.costMinEur},
         {QStringLiteral("costMaxEur"), info.costMaxEur},
         {QStringLiteral("related"), info.related},
+        {QStringLiteral("warningLamp"), info.warningLamp},
+        {QStringLiteral("source"), info.source},
+        {QStringLiteral("sourceLabel"), info.sourceLabel},
+        {QStringLiteral("language"), info.language},
+        {QStringLiteral("confidence"), info.confidence},
+        {QStringLiteral("references"), [&info] {
+             QVariantList refs;
+             for (int i = 0; i < info.references.size(); ++i)
+                 refs << QVariantMap{{QStringLiteral("url"), info.references[i]},
+                                     {QStringLiteral("official"), info.referenceOfficial.value(i)}};
+             return refs;
+         }()},
+        {QStringLiteral("brandName"), info.brandName},
     };
 }
 
@@ -621,8 +642,8 @@ void AppController::setLanguage(const QString &code)
         });
     }
     m_liveData->retranslate();
-    m_dtcs->retranslate();
-    m_moduleModel->retranslate();
+    m_dtcs->setContext(m_profileId, lang);
+    m_moduleModel->setLanguage(lang);
     emit languageChanged();
     emit readinessChanged();     // monitor names
     emit freezeFrameChanged();   // PID names

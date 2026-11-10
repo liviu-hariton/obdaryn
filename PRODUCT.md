@@ -34,8 +34,8 @@ Obdaryn reads everything a car will tell an OBD-II scan tool without paying for 
 ## Capabilities and Constraints
 
 - **Allowed services.** OBD-II 01, 02, 03, 06, 07, 09 and 0A. Read-only UDS 0x19, 0x22 and 0x3E. KWP 0x18, 0x1A and 0x21. Clearing (04, 14) only after explicit user confirmation, with the engine off. Everything else is blocked in `src/core/safety/RequestGuard`.
-- **Many manufacturers, not just one.** Generic OBD-II works on every car. Brand-specific modules and data come later as data packs (OBDb, CC-BY-SA).
-- **Trouble-code explanations** come from obdex (CC0). The descriptions are English for now; Romanian descriptions are an open task.
+- **Many manufacturers, not just one.** Generic OBD-II works on every car. Brand module lists and code packs are data files per brand; enhanced live data (OBDb, CC-BY-SA) comes later.
+- **Trouble-code explanations.** Generic codes come from obdex (CC0, English). Manufacturer codes come from Obdaryn brand packs written from public sources and linked per code (Hyundai/Kia first, English and Romanian). Explanations are always labelled as guidance.
 - **Languages.** English (default) and Romanian, switchable at runtime.
 - **Clearing has side effects.** It resets readiness monitors, erases freeze frames and does not remove permanent codes. The UI must say this before the user confirms.
 - **Undecided.** Imperial units, cloud features, accounts. None of these are planned.

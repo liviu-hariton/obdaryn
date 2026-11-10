@@ -21,8 +21,8 @@ namespace obdaryn {
  *
  * Two ECUs answer generic OBD-II: the engine (7E0 → 7E8) and the
  * transmission (7E1 → 7E9). Addressed directly (module scan), more answer,
- * like on a 2014 Hyundai: ABS 7D1 (KWP2000, active wheel-speed fault C0035),
- * airbag 7D2 (UDS, stored U0100), body control 7A0 (KWP) and instrument
+ * like on a 2014 Hyundai: ABS 7D1 (KWP2000, active wheel-speed fault C1203),
+ * airbag 7D2 (UDS, stored B1346: clock spring), body control 7A0 (KWP) and instrument
  * cluster 7C6 (UDS), both without codes. TPMS 7D6 answers a keep-alive but
  * ignores code requests (an "error" row); steering and climate stay silent
  * ("not found").
@@ -87,8 +87,8 @@ private:
     QList<quint16> m_pending{0x0171};
     QList<quint16> m_permanent{0x0420};
     quint8 m_monitorsIncomplete = 0x05; ///< bit set = monitor not yet complete
-    bool m_absFault = true;     ///< C0035 in the ABS module
-    bool m_airbagFault = true;  ///< U0100 in the airbag module
+    bool m_absFault = true;     ///< C1203 in the ABS module
+    bool m_airbagFault = true;  ///< B1346 in the airbag module
 
     QByteArray m_rxBuffer;
     QElapsedTimer m_clock;

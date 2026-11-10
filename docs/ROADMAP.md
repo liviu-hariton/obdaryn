@@ -27,7 +27,8 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [x] **Clear codes per module** (UDS/KWP 0x14), with the same confirmation flow and engine-off check.
 - [ ] Confirm the Hyundai addresses on the real 2014 Elantra, then mark them verified.
 - [ ] 29-bit CAN modules (Honda, some GM), Toyota's extended addressing behind gateway 750, and VW's older TP 2.0.
-- [ ] Brand-specific code descriptions, so ABS and airbag codes get plain-language text too.
+- [x] Brand-specific code descriptions, starting with Hyundai/Kia: 177 sourced entries in English and Romanian, module-aware (see `docs/brand-packs.md`).
+- [ ] Brand packs for Toyota, Ford, VW group and Renault/Dacia.
 - [ ] **Manufacturer data packs.** Import OBDb signal sets (CC-BY-SA-4.0, shipped as separate attributed data files) for enhanced live data. Hyundai/Kia first: `21xx` reads on 7E0 / 7E1 / 7D1 and similar.
 - [ ] **Brand pack loader.** A JSON schema, a contribute-back flow, and a "record which PIDs my car answers" mode.
 

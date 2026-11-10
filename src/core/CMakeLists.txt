@@ -29,10 +29,12 @@ obdaryn_set_warnings(obdaryn_core)
 # Data files compiled into the binary: DTC descriptions and the brand module
 # profiles (one JSON file per brand; drop a new file in data/vehicles to add one).
 file(GLOB OBDARYN_VEHICLE_PROFILES "${CMAKE_CURRENT_SOURCE_DIR}/data/vehicles/*.json")
+file(GLOB OBDARYN_DTC_BRANDS "${CMAKE_CURRENT_SOURCE_DIR}/data/dtc/brands/*.json")
 qt_add_resources(obdaryn_core "obdaryn_core_data"
     PREFIX "/obdaryn"
     BASE "${CMAKE_CURRENT_SOURCE_DIR}"
     FILES
         data/dtc_generic.json
         ${OBDARYN_VEHICLE_PROFILES}
+        ${OBDARYN_DTC_BRANDS}
 )

@@ -36,7 +36,10 @@ QVariant DtcModel::data(const QModelIndex &index, int role) const
     default: break;
     }
 
-    const DtcInfo info = DtcDatabase::instance().lookup(d.code);
+    // Standard OBD-II addresses: 7E8 is the engine, 7E9 the transmission.
+    const QString module = d.ecu == QLatin1String("7E8") ? QStringLiteral("engine")
+                         : d.ecu == QLatin1String("7E9") ? QStringLiteral("transmission") : QString();
+    const DtcInfo info = DtcDatabase::instance().lookup(d.code, m_brand, m_language, module);
     switch (role) {
     case TitleRole:
         if (info.known)
@@ -135,6 +138,15 @@ void DtcModel::retranslate()
 {
     if (!m_dtcs.isEmpty())
         emit dataChanged(index(0), index(int(m_dtcs.size()) - 1), {KindLabelRole, TitleRole, SystemRole});
+}
+
+void DtcModel::setContext(const QString &brand, const QString &language)
+{
+    if (brand == m_brand && language == m_language)
+        return;
+    m_brand = brand;
+    m_language = language;
+    retranslate();
 }
 
 int DtcModel::countOf(DtcKind kind) const

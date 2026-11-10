@@ -62,12 +62,14 @@ public:
     int doneCount() const;
 
     void retranslate();
+    void setLanguage(const QString &language) { m_language = language; retranslate(); }
 
 signals:
     void summaryChanged();
 
 private:
     ModuleScanner *m_scanner;
+    QString m_language = QStringLiteral("en");
 };
 
 } // namespace obdaryn

@@ -118,16 +118,16 @@
         <translation>Poate activa modul de avarie</translation>
     </message>
     <message>
+        <source>Lights a warning lamp</source>
+        <translation>Aprinde un martor de avertizare</translation>
+    </message>
+    <message>
         <source>Needs a drive cycle to confirm a fix</source>
         <translation>Necesită un ciclu de rulare pentru confirmarea reparației</translation>
     </message>
     <message>
         <source>How the car detects it</source>
         <translation>Cum detectează mașina defectul</translation>
-    </message>
-    <message>
-        <source>Its meaning depends on the car's manufacturer. Brand-specific descriptions are planned; until then, search for this code together with the make and model.</source>
-        <translation>Semnificația depinde de producătorul mașinii. Descrierile pe mărci sunt planificate; până atunci, caută codul împreună cu marca și modelul.</translation>
     </message>
     <message>
         <source>Obdaryn doesn't have a description for this code yet.</source>
@@ -194,16 +194,12 @@
         <translation>Interval orientativ pentru piese și manoperă; variază mult în funcție de mașină și țară.</translation>
     </message>
     <message>
+        <source>Its meaning depends on the car's manufacturer, and it isn't in Obdaryn's descriptions for this brand yet. Search for it together with the make and model, or ask a workshop.</source>
+        <translation>Semnificația depinde de producătorul mașinii și codul nu există încă în descrierile Obdaryn pentru această marcă. Caută-l împreună cu marca și modelul sau întreabă un service.</translation>
+    </message>
+    <message>
         <source>Related codes</source>
         <translation>Coduri înrudite</translation>
-    </message>
-    <message>
-        <source>Descriptions: obdex database (CC0). Available in English for now.</source>
-        <translation>Descrieri: baza de date obdex (CC0). Deocamdată disponibile doar în engleză.</translation>
-    </message>
-    <message>
-        <source>Descriptions: obdex database (CC0). Guidance only; confirm with a workshop before replacing parts.</source>
-        <translation>Descrieri: baza de date obdex (CC0). Doar orientativ; confirmă cu un service înainte să înlocuiești piese.</translation>
     </message>
 </context>
 <context>
@@ -286,6 +282,49 @@
     </message>
 </context>
 <context>
+    <name>DescriptionSource</name>
+    <message>
+        <source>Description: %1, written from public sources. %2</source>
+        <translation>Descriere: %1, scrisă din surse publice. %2</translation>
+    </message>
+    <message>
+        <source>The meaning is confirmed by an official %1 document.</source>
+        <translation>Semnificația este confirmată de un document oficial %1.</translation>
+    </message>
+    <message>
+        <source>The meaning is confirmed by at least two independent sources.</source>
+        <translation>Semnificația este confirmată de cel puțin două surse independente.</translation>
+    </message>
+    <message>
+        <source>Description: obdex database (CC0).</source>
+        <translation>Descriere: baza de date obdex (CC0).</translation>
+    </message>
+    <message>
+        <source>Available in English for now.</source>
+        <translation>Deocamdată disponibilă doar în engleză.</translation>
+    </message>
+    <message>
+        <source>Guidance only; confirm with a workshop before replacing parts.</source>
+        <translation>Doar orientativ; confirmă cu un service înainte să înlocuiești piese.</translation>
+    </message>
+    <message>
+        <source>Official document</source>
+        <translation>Document oficial</translation>
+    </message>
+    <message>
+        <source>Opens in your browser; needs internet, which this computer doesn't have while joined to the adapter's Wi-Fi.</source>
+        <translation>Se deschide în browser; necesită internet, pe care acest computer nu îl are cât timp e conectat la rețeaua Wi-Fi a adaptorului.</translation>
+    </message>
+    <message>
+        <source>official</source>
+        <translation>oficial</translation>
+    </message>
+    <message>
+        <source>Sources:</source>
+        <translation>Surse:</translation>
+    </message>
+</context>
+<context>
     <name>DtcSystem</name>
     <message>
         <source>Body (airbags, comfort, lighting, ...)</source>
@@ -298,6 +337,10 @@
     <message>
         <source>Network communication between modules</source>
         <translation>Comunicația în rețea dintre module</translation>
+    </message>
+    <message>
+        <source>Powertrain (manufacturer-specific)</source>
+        <translation>Grup motopropulsor (specific producătorului)</translation>
     </message>
     <message>
         <source>Fuel, air metering and emission controls</source>
@@ -626,8 +669,8 @@
         <translation>Cere aprinderea martorului</translation>
     </message>
     <message>
-        <source>No explanation yet for this code. Brand-specific descriptions are planned; until then, search for the code together with the make and model.</source>
-        <translation>Încă nu există o explicație pentru acest cod. Descrierile pe mărci sunt planificate; până atunci, caută codul împreună cu marca și modelul.</translation>
+        <source>This code isn't in Obdaryn's descriptions for this brand yet. Search for it together with the make and model, or ask a workshop.</source>
+        <translation>Acest cod nu există încă în descrierile Obdaryn pentru această marcă. Caută-l împreună cu marca și modelul sau întreabă un service.</translation>
     </message>
     <message>
         <source>Likely</source>

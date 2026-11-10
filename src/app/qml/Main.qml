@@ -78,7 +78,7 @@ C.ApplicationWindow {
                 onOpenCode: code => { codesPage.selectedCode = code; window.page = 1 }
                 onOpenModules: window.page = 8
             }
-            CodesPage { id: codesPage; onOpenPage: p => window.page = p; onClearRequested: window.requestClear() }
+            CodesPage { id: codesPage; objectName: "codesPage"; onOpenPage: p => window.page = p; onClearRequested: window.requestClear() }
             ReadinessPage { bulbCheck: window.bulbCheck; onOpenPage: p => window.page = p }
             FreezeFramePage { onOpenPage: p => window.page = p }
             LivePage { bulbCheck: window.bulbCheck; onOpenPage: p => window.page = p }

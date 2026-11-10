@@ -14,7 +14,8 @@ Item {
     property string selectedCode: ""
 
     readonly property bool ready: App.connectionState === App.Ready
-    readonly property var info: selectedCode.length ? App.explainCode(selectedCode) : ({})
+    // Re-read when the language or the vehicle's brand pack changes.
+    readonly property var info: { App.language; App.profileId; return selectedCode.length ? App.explainCode(selectedCode) : ({}) }
 
     // Keep a sensible selection as codes come and go.
     function ensureSelection() {
@@ -211,6 +212,7 @@ Item {
                         Chip { visible: !!page.info.turnsOnMil; text: qsTr("Turns on the check-engine light"); iconName: "engine"; iconColor: Theme.amber }
                         Chip { visible: !!page.info.emissionsRelevant; text: qsTr("Matters for the ITP"); iconName: "list-checks"; iconColor: Theme.amber }
                         Chip { visible: !!page.info.limpModePossible; text: qsTr("Can trigger limp mode"); iconName: "triangle-alert"; iconColor: Theme.red }
+                        Chip { visible: !!page.info.warningLamp; text: qsTr("Lights a warning lamp"); iconName: "triangle-alert"; iconColor: Theme.amber }
                         Chip { visible: !!page.info.needsDriveCycle; text: qsTr("Needs a drive cycle to confirm a fix"); iconName: "activity" }
                     }
 
@@ -306,7 +308,7 @@ Item {
                             visible: text.length > 0
                             text: page.info.known ? page.info.description
                                 : page.info.manufacturerSpecific
-                                  ? qsTr("Its meaning depends on the car's manufacturer. Brand-specific descriptions are planned; until then, search for this code together with the make and model.")
+                                  ? qsTr("Its meaning depends on the car's manufacturer, and it isn't in Obdaryn's descriptions for this brand yet. Search for it together with the make and model, or ask a workshop.")
                                   : qsTr("Obdaryn doesn't have a description for this code yet.")
                             color: Theme.text
                             font.family: Theme.sans
@@ -335,17 +337,12 @@ Item {
                         }
                     }
 
-                    Text {
+                    DescriptionSource {
                         Layout.fillWidth: true
                         Layout.topMargin: Theme.s2
+                        // Only credit a source when it actually wrote the text above.
                         visible: page.info.known === true
-                        text: App.language === "ro"
-                              ? qsTr("Descriptions: obdex database (CC0). Available in English for now.")
-                              : qsTr("Descriptions: obdex database (CC0). Guidance only; confirm with a workshop before replacing parts.")
-                        color: Theme.textFaint
-                        font.family: Theme.sans
-                        font.pixelSize: Theme.fontSmall
-                        wrapMode: Text.WordWrap
+                        info: page.info
                     }
 
                     Item { Layout.preferredHeight: Theme.s5 }

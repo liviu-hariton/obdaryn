@@ -99,6 +99,8 @@ class AppController : public QObject
     Q_PROPERTY(bool moduleScanRunning READ moduleScanRunning NOTIFY moduleScanChanged)
     Q_PROPERTY(bool moduleScanDone READ moduleScanDone NOTIFY moduleScanChanged)
     Q_PROPERTY(QString moduleScanTime READ moduleScanTime NOTIFY moduleScanChanged)
+    /// Profile the current module results came from (its brand pack explains their codes).
+    Q_PROPERTY(QString moduleScanProfile READ moduleScanProfile NOTIFY moduleScanChanged)
 
     // App
     Q_PROPERTY(QString language READ language NOTIFY languageChanged)
@@ -128,8 +130,12 @@ public:
     /// Clears codes. QML must have shown the confirmation first; the result
     /// arrives through clearFinished().
     Q_INVOKABLE void clearCodes();
-    /// Everything known about one code, for the explanation panel.
-    Q_INVOKABLE QVariantMap explainCode(const QString &code) const;
+    /// Everything known about one code, for the explanation panel. Uses the
+    /// current vehicle profile's brand pack, unless `brand` names another one.
+    Q_INVOKABLE QVariantMap explainCode(const QString &code, const QString &brand = QString(),
+                                        const QString &module = QString()) const;
+    /// Number of codes described by the current profile's brand pack.
+    Q_INVOKABLE int brandCodeCount() const;
     Q_INVOKABLE void setLanguage(const QString &code);
     Q_INVOKABLE void copyToClipboard(const QString &text) const;
 
@@ -192,6 +198,7 @@ public:
     bool moduleScanRunning() const { return busyWithModules(); }
     bool moduleScanDone() const { return !m_moduleScanTime.isEmpty(); }
     QString moduleScanTime() const { return m_moduleScanTime; }
+    QString moduleScanProfile() const { return m_moduleScanner->profileId(); }
 
     QString language() const { return m_language; }
     QString appVersion() const;

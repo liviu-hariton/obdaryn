@@ -74,7 +74,13 @@ QString systemName(const QString &code)
     default: break;
     }
 
-    // Powertrain: the third character names the subsystem (SAE J2012 layout).
+    // Manufacturer powertrain codes don't follow the SAE subsystem layout, so
+    // guessing a subsystem from their digits would be wrong (P1A2B isn't
+    // necessarily hybrid).
+    if (isManufacturerSpecific(code))
+        return t(QT_TRANSLATE_NOOP("DtcSystem", "Powertrain (manufacturer-specific)"));
+
+    // Generic powertrain: the third character names the subsystem (SAE J2012 layout).
     switch (code[2].toLatin1()) {
     case '0': return t(QT_TRANSLATE_NOOP("DtcSystem", "Fuel, air metering and emission controls"));
     case '1':

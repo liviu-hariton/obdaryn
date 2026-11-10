@@ -20,6 +20,7 @@ private slots:
     void dtcFromCanAndLegacy();
     void dtcDatabase();
     void manufacturerSpecific();
+    void brandPack();
     void readiness();
     void vin();
     void protocolNumbers();
@@ -77,6 +78,38 @@ void TestDecoders::dtcDatabase()
     QVERIFY(!unknown.known);
     QVERIFY(unknown.manufacturerSpecific);
     QVERIFY(!unknown.system.isEmpty());
+}
+
+void TestDecoders::brandPack()
+{
+    const DtcDatabase &db = DtcDatabase::instance();
+    QVERIFY(db.brandSize("hyundai-kia") > 150);
+
+    // Same code, different module, different meaning.
+    const DtcInfo esc = db.lookup("C1604", "hyundai-kia", "en", "abs");
+    const DtcInfo mdps = db.lookup("C1604", "hyundai-kia", "en", "steering");
+    QVERIFY(esc.known && mdps.known);
+    QVERIFY(esc.title.contains(QStringLiteral("ABS/ESC")));
+    QVERIFY(mdps.title.contains(QStringLiteral("Power steering")));
+    QCOMPARE(esc.confidence, QStringLiteral("official"));
+    QVERIFY(!esc.references.isEmpty());
+
+    // A brand entry for another module is never used.
+    QVERIFY(!db.lookup("C1513", "hyundai-kia", "en", "body").known);
+    // Without a brand, a manufacturer code stays unexplained.
+    QVERIFY(!db.lookup("C1513").known);
+
+    // Romanian text, and English fallback for the generic layer.
+    const DtcInfo ro = db.lookup("B1346", "hyundai-kia", "ro", "airbag");
+    QCOMPARE(ro.language, QStringLiteral("ro"));
+    QVERIFY(ro.title.contains(QStringLiteral("Airbag frontal șofer")));
+    QCOMPARE(db.lookup("P0420", "hyundai-kia", "ro").source, QStringLiteral("generic"));
+
+    // Standard code with a Hyundai/Kia override (6-speed automatic solenoid names).
+    const DtcInfo a6 = db.lookup("P0753", "hyundai-kia", "en", "transmission");
+    QCOMPARE(a6.source, QStringLiteral("hyundai-kia"));
+    QVERIFY(a6.title.contains(QStringLiteral("UD brake")));
+    QCOMPARE(db.lookup("P0753", "", "en").source, QStringLiteral("generic"));
 }
 
 void TestDecoders::manufacturerSpecific()

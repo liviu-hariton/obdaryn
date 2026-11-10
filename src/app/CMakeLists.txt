@@ -49,6 +49,7 @@ qt_add_qml_module(obdaryn
         qml/components/Toast.qml
         qml/components/ClearCodesDialog.qml
         qml/components/NotConnected.qml
+        qml/components/DescriptionSource.qml
         qml/pages/OverviewPage.qml
         qml/pages/ConnectView.qml
         qml/pages/CodesPage.qml

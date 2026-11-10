@@ -11,9 +11,12 @@
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include <QQuickItem>
 #include <QQuickWindow>
 #include <QSettings>
 #include <QTimer>
+
+#include <functional>
 
 int main(int argc, char *argv[])
 {
@@ -79,6 +82,37 @@ int main(int argc, char *argv[])
         if (window && qEnvironmentVariableIsSet("OBDARYN_PAGE"))
             window->setProperty("page", qEnvironmentVariableIntValue("OBDARYN_PAGE"));
         const int delay = qEnvironmentVariableIsSet("OBDARYN_DELAY_MS") ? qEnvironmentVariableIntValue("OBDARYN_DELAY_MS") : 4000;
+        // OBDARYN_SELECT_CODE=C1203 selects a code on the Trouble codes screen and
+        // OBDARYN_FOCUS=<objectName> gives that item keyboard focus, just before the capture.
+        QTimer::singleShot(qMax(0, delay - 800), &app, [window] {
+            if (!window)
+                return;
+            if (qEnvironmentVariableIsSet("OBDARYN_SELECT_CODE")) {
+                if (QObject *codes = window->findChild<QObject *>(QStringLiteral("codesPage")))
+                    codes->setProperty("selectedCode", qEnvironmentVariable("OBDARYN_SELECT_CODE"));
+            }
+            if (qEnvironmentVariableIsSet("OBDARYN_FOCUS")) {
+                window->requestActivate(); // keyboard focus only exists in the active window
+                QTimer::singleShot(300, window, [window] {
+                    // Walk the visual tree: delegates aren't always QObject children of the page.
+                    QList<QQuickItem *> items;
+                    std::function<void(QQuickItem *)> walk = [&](QQuickItem *it) {
+                        if (it->objectName() == qEnvironmentVariable("OBDARYN_FOCUS"))
+                            items << it;
+                        for (QQuickItem *child : it->childItems())
+                            walk(child);
+                    };
+                    walk(window->contentItem());
+                    for (QQuickItem *item : items) {
+                        if (item->isVisible()) {
+                            item->forceActiveFocus(Qt::TabFocusReason);
+                            qInfo("capture: focused %s (active focus: %d)", qPrintable(item->objectName()), item->hasActiveFocus());
+                            break;
+                        }
+                    }
+                });
+            }
+        });
         QTimer::singleShot(delay, &app, [window, capturePath] {
             if (window)
                 window->grabWindow().save(capturePath);
