@@ -101,6 +101,7 @@ Rectangle {
                     visible: text.length > 0
                     text: App.demoMode && App.connectionState !== App.Disconnected ? qsTr("Demo car")
                         : sidebar.ready ? App.transportDescription : ""
+                    textFormat: Text.PlainText // a recording's car name comes from the file
                     color: Theme.textMuted
                     font.family: Theme.sans
                     font.pixelSize: Theme.fontSmall

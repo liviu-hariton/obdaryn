@@ -311,6 +311,8 @@ Item {
                                 Text {
                                     Layout.fillWidth: true
                                     text: rec.modelData.title
+                                    // Recordings can come from anyone: never interpret them as markup.
+                                    textFormat: Text.PlainText
                                     color: Theme.text
                                     font.family: Theme.sans
                                     font.pixelSize: Theme.fontBody
@@ -321,6 +323,7 @@ Item {
                                     Layout.fillWidth: true
                                     //: Recording list: when it was made · how long it is
                                     text: qsTr("%1 · %2").arg(rec.modelData.when).arg(rec.modelData.duration)
+                                    textFormat: Text.PlainText
                                     color: Theme.textMuted
                                     font.family: Theme.sans
                                     font.pixelSize: Theme.fontSmall
@@ -359,6 +362,7 @@ Item {
                 Text {
                     Layout.fillWidth: true
                     text: qsTr("Saved in %1. A recording includes the car's VIN, so check it before sharing.").arg(App.recordingsFolder)
+                    textFormat: Text.PlainText
                     color: Theme.textFaint
                     font.family: Theme.sans
                     font.pixelSize: Theme.fontSmall

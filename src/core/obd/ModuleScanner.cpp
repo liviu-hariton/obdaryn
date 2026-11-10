@@ -88,7 +88,9 @@ QString asciiField(const QByteArray &bytes)
 {
     QString s;
     for (char c : bytes) {
-        if (c >= 0x20 && c < 0x7F)
+        // Printable ASCII only, and never markup characters: the text reaches
+        // labels and reports, and a replayed recording could contain anything.
+        if (c >= 0x20 && c < 0x7F && c != '<' && c != '>' && c != '&')
             s.append(QLatin1Char(c));
     }
     return s.trimmed();

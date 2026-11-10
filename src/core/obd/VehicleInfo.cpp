@@ -104,7 +104,9 @@ QString asciiOf(const QByteArray &bytes)
 {
     QString s;
     for (char ch : bytes) {
-        if (ch >= 0x20 && ch < 0x7F)
+        // Printable ASCII only, and never markup characters: the text reaches
+        // labels and reports, and a replayed recording could contain anything.
+        if (ch >= 0x20 && ch < 0x7F && ch != '<' && ch != '>' && ch != '&')
             s.append(QLatin1Char(ch));
     }
     return s.trimmed();
