@@ -53,7 +53,7 @@
    },
    "ro": {
     "t": "Circuitul de declanșare al airbagului frontal al șoferului",
-    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Pentru acest circuit Volkswagen numește spirala ruptă (cablul-panglică spiralat din spatele volanului) ca o cauză cunoscută și i-a extins garanția la multe mașini din 2010-2018, inclusiv Golf. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Pentru acest circuit Volkswagen numește spirala ruptă (cablul-panglică spiralat din spatele volanului) ca o cauză cunoscută și i-a extins garanția la multe mașini din 2010-2018, inclusiv Golf. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -109,7 +109,7 @@
    },
    "ro": {
     "t": "Circuitul de declanșare al airbagului lateral (torace) al pasagerului din față",
-    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest airbag se află în spătarul scaunului. Buletinele Volkswagen și Audi pun rezistența prea mare pe seama cablajului din scaun și a conectorului lui, împinse de buretele scaunului. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest airbag se află în spătarul scaunului. Buletinele Volkswagen și Audi pun rezistența prea mare pe seama cablajului din scaun și a conectorului lui, împinse de buretele scaunului. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -160,7 +160,7 @@
    },
    "ro": {
     "t": "Circuitul de declanșare al airbagului lateral (torace) al șoferului",
-    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest airbag se află în spătarul scaunului. Buletinele Volkswagen și Audi pun rezistența prea mare pe seama cablajului din scaun și a conectorului lui, împinse de buretele scaunului. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest airbag se află în spătarul scaunului. Buletinele Volkswagen și Audi pun rezistența prea mare pe seama cablajului din scaun și a conectorului lui, împinse de buretele scaunului. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -211,7 +211,7 @@
    },
    "ro": {
     "t": "Circuitul de declanșare al limitatorului de forță al centurii șoferului",
-    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest circuit declanșează limitatorul de forță al centurii șoferului. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest circuit declanșează limitatorul de forță al centurii șoferului. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -270,7 +270,7 @@
    },
    "ro": {
     "t": "Circuitul lămpii „airbag pasager dezactivat”",
-    "d": "Unitatea airbag a găsit un defect în circuitul lămpii care arată dacă airbagul pasagerului din față este dezactivat (de exemplu scurtcircuit la plus sau circuit întrerupt). Buletinele Volkswagen numesc un conector al lămpii deconectat și, la unele mașini din 2019-2021, software-ul unității airbag care trebuie actualizat. Airbagul propriu-zis nu este problema aici. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag a găsit un defect în circuitul lămpii care arată dacă airbagul pasagerului din față este dezactivat (de exemplu scurtcircuit la plus sau circuit întrerupt). Buletinele Volkswagen numesc un conector al lămpii deconectat și, la unele mașini din 2019-2021, software-ul unității airbag care trebuie actualizat. Airbagul propriu-zis nu este problema aici. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -322,7 +322,7 @@
    },
    "ro": {
     "t": "Defect la contactul cataramei centurii șoferului",
-    "d": "Contactul din catarama centurii șoferului raportează un defect mecanic, așa că unitatea airbag nu poate ști sigur dacă centura este cuplată. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Contactul din catarama centurii șoferului raportează un defect mecanic, așa că unitatea airbag nu poate ști sigur dacă centura este cuplată. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -374,7 +374,7 @@
    },
    "ro": {
     "t": "Defect la unitatea de detectare a pasagerului",
-    "d": "Unitatea care detectează dacă cineva stă pe scaunul pasagerului din față (și pornește sau oprește airbagul pasagerului) raportează un defect electric sau nu este configurată. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea care detectează dacă cineva stă pe scaunul pasagerului din față (și pornește sau oprește airbagul pasagerului) raportează un defect electric sau nu este configurată. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -427,7 +427,7 @@
    },
    "ro": {
     "t": "Defect de semnal la senzorul de impact lateral al pasagerului din față",
-    "d": "Senzorul de impact lateral din partea pasagerului din față (din ușă) trimite un semnal în afara domeniului așteptat. Volkswagen leagă acest cod, alături de defecte de comunicație, de o conexiune proastă în cablajul ușii, la stâlpul A. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Senzorul de impact lateral din partea pasagerului din față (din ușă) trimite un semnal în afara domeniului așteptat. Volkswagen leagă acest cod, alături de defecte de comunicație, de o conexiune proastă în cablajul ușii, la stâlpul A. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -1011,7 +1011,7 @@
    },
    "ro": {
     "t": "Defect intern al unității de control airbag",
-    "d": "Unitatea de control airbag a găsit un defect în propria electronică. Dacă codul rămâne după ce tensiunea bateriei și cablajul au fost verificate, unitatea trebuie înlocuită cu una nouă; nu se montează unități airbag folosite sau reparate. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag a găsit un defect în propria electronică. Dacă codul rămâne după ce tensiunea bateriei și cablajul au fost verificate, unitatea trebuie înlocuită cu una nouă; nu se montează unități airbag folosite sau reparate. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -1205,7 +1205,7 @@
    },
    "ro": {
     "t": "Unitate airbag: lipsește programarea de final de linie",
-    "d": "Unitatea airbag nu are datele specifice mașinii pe care le primește de obicei în fabrică, tipic după ce a fost înlocuită sau actualizată. Datele trebuie încărcate online cu un tester de nivel dealer. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag nu are datele specifice mașinii pe care le primește de obicei în fabrică, tipic după ce a fost înlocuită sau actualizată. Datele trebuie încărcate online cu un tester de nivel dealer. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "high",
@@ -1293,7 +1293,7 @@
    },
    "ro": {
     "t": "Tensiunea de alimentare a unității airbag în afara domeniului",
-    "d": "Unitatea airbag vede o tensiune de alimentare neașteptată. La Tiguan 2020 cu kit de pornire de la distanță montat la dealer, Volkswagen a găsit o siguranță care trebuia scoasă după montaj. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag vede o tensiune de alimentare neașteptată. La Tiguan 2020 cu kit de pornire de la distanță montat la dealer, Volkswagen a găsit o siguranță care trebuia scoasă după montaj. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -3003,7 +3003,7 @@
    },
    "ro": {
     "t": "Tensiunea de alimentare a unității airbag prea mare",
-    "d": "Unitatea airbag a măsurat o tensiune de alimentare prea mare, de obicei din cauza sistemului de încărcare sau a pornirii cu cabluri. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag a măsurat o tensiune de alimentare prea mare, de obicei din cauza sistemului de încărcare sau a pornirii cu cabluri. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -3046,7 +3046,7 @@
    },
    "ro": {
     "t": "Unitate airbag necodată",
-    "d": "Unitatea airbag nu are codare, deci nu cunoaște echiparea mașinii. Trebuie codată cu un tester, de obicei după înlocuire. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag nu are codare, deci nu cunoaște echiparea mașinii. Trebuie codată cu un tester, de obicei după înlocuire. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "high",
@@ -3300,7 +3300,7 @@
    },
    "ro": {
     "t": "Magistrala de date: mesaj lipsă",
-    "d": "Unitatea airbag aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -3937,7 +3937,7 @@
    },
    "ro": {
     "t": "Magistrala de date: mesaj neplauzibil",
-    "d": "Unitatea airbag a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -4577,7 +4577,7 @@
    },
    "ro": {
     "t": "Magistrala de date: valoare de eroare recepționată",
-    "d": "Unitatea airbag a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea airbag a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",

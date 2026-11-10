@@ -344,7 +344,7 @@ for code, title_en, title_ro in (("C2400", "Power steering motor signal fault", 
 # ============================================================================
 SRS_EN = ("While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. "
           "Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.")
-SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. "
+SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. "
           "Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.")
 SRS_LAMP_EN = ["Airbag warning light"]
 SRS_LAMP_RO = ["Martorul airbag aprins"]
@@ -405,7 +405,7 @@ for first, name_en, name_ro, driver_wheel in SQUIBS:
             src = (CLOCKSPRING, SRS_CHART, CLOCKSPRING_KIA)
         else:
             causes_en = [("medium", "Connector (often under the seat or behind trim)"), ("medium", "Wiring"), ("low", "The airbag or pretensioner itself")]
-            causes_ro = [("medium", "Conector (adesea sub scaun sau după ornamente)"), ("medium", "Cablaj"), ("low", "Airbagul sau pretensionerul propriu-zis")]
+            causes_ro = [("medium", "Conector (adesea sub scaun sau după ornamente)"), ("medium", "Cablaj"), ("low", "Airbagul sau pretensionatorul propriu-zis")]
             src = (SRS_CHART, YCN)
         srs(code, f"{name_en}: {k_en}", f"{name_ro}: {k_ro}",
             f"Firing circuit of the {name_en.lower()}. {d_en}", f"Circuitul de declanșare pentru {name_ro.lower()}. {d_ro}",

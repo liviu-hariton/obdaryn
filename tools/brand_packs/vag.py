@@ -155,7 +155,7 @@ LAMP = ("warning_lamp",)
 # Safety note for every airbag entry (same wording as the Hyundai/Kia pack).
 SRS_EN = ("While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. "
           "Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.")
-SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. "
+SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. "
           "Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.")
 
 # ============================================================================

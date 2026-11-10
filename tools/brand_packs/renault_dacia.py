@@ -274,7 +274,7 @@ for hexcode, t_en, d_en, c_en, t_ro, d_ro, c_ro in ABS_OTHER:
 # ============================================================================
 SRS_EN = ("While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. "
           "Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.")
-SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. "
+SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. "
           "Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.")
 SRS_LAMP_EN = ["Airbag warning light"]
 SRS_LAMP_RO = ["Martorul airbag aprins"]
@@ -315,7 +315,7 @@ srs("B107F", [AUTODIAG, autoxuga("907F"), CRASHDATA_907F],
     "Calculatorul airbag a înregistrat un impact. Regula Renault este ca după un impact calculatorul să fie înlocuit; "
     "până atunci nu te poți baza pe sistemul airbag. Cere unui service să verifice tot sistemul.",
     [("medium", "A crash in which airbags or pretensioners fired"), ("low", "Airbag computer internal fault")],
-    [("medium", "Un impact în care s-au declanșat airbaguri sau pretensionere"), ("low", "Defect intern al calculatorului airbag")])
+    [("medium", "Un impact în care s-au declanșat airbaguri sau pretensionatoare"), ("low", "Defect intern al calculatorului airbag")])
 
 # ============================================================================
 # Electric power steering

@@ -452,7 +452,7 @@
    },
    "ro": {
     "t": "Memoria de impact plină și blocată",
-    "d": "Unitatea de control airbag (RCM) a memorat înregistrări de impact, iar memoria de evenimente este acum plină și blocată. Ford tratează acest cod ca dovadă că mașina a avut un accident: se înlocuiesc RCM-ul și senzorii de impact, împreună cu orice componentă declanșată. Codul nu se poate pur și simplu șterge. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag (RCM) a memorat înregistrări de impact, iar memoria de evenimente este acum plină și blocată. Ford tratează acest cod ca dovadă că mașina a avut un accident: se înlocuiesc RCM-ul și senzorii de impact, împreună cu orice componentă declanșată. Codul nu se poate pur și simplu șterge. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -505,7 +505,7 @@
    },
    "ro": {
     "t": "Circuitul semnalului de impact către întreruperea combustibilului defect",
-    "d": "Unitatea de control airbag trimite un semnal de impact către modulul pompei de combustibil sau calculatorul motorului, ca alimentarea cu combustibil să fie oprită după un accident. A găsit firul acestui semnal în scurtcircuit la plus, la masă sau întrerupt. La Fiesta, Ford precizează că acest cod nu aprinde martorul airbag, așa că trece ușor neobservat; oprirea automată a combustibilului după impact s-ar putea să nu funcționeze până la reparare. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag trimite un semnal de impact către modulul pompei de combustibil sau calculatorul motorului, ca alimentarea cu combustibil să fie oprită după un accident. A găsit firul acestui semnal în scurtcircuit la plus, la masă sau întrerupt. La Fiesta, Ford precizează că acest cod nu aprinde martorul airbag, așa că trece ușor neobservat; oprirea automată a combustibilului după impact s-ar putea să nu funcționeze până la reparare. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -566,7 +566,7 @@
    },
    "ro": {
     "t": "Circuit de declanșare pretensioner centură, șofer",
-    "d": "Unitatea de control airbag a găsit un defect în circuitul de declanșare al pretensionerului centurii șoferului (încărcătura care strânge centura la impact): scurtcircuit la masă sau la plus, circuit întrerupt, rezistență prea mică, circuit încrucișat cu altul sau piesă greșită montată. Ultimele două caractere ale codului Ford complet arată care dintre ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag a găsit un defect în circuitul de declanșare al pretensionatorului centurii șoferului (încărcătura care strânge centura la impact): scurtcircuit la masă sau la plus, circuit întrerupt, rezistență prea mică, circuit încrucișat cu altul sau piesă greșită montată. Ultimele două caractere ale codului Ford complet arată care dintre ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -631,7 +631,7 @@
    },
    "ro": {
     "t": "Circuit de declanșare pretensioner centură, pasager față",
-    "d": "Unitatea de control airbag a găsit un defect în circuitul de declanșare al pretensionerului centurii pasagerului din față (încărcătura care strânge centura la impact): scurtcircuit la masă sau la plus, circuit întrerupt, rezistență prea mică, circuit încrucișat cu altul sau piesă greșită montată. Ultimele două caractere ale codului Ford complet arată care dintre ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag a găsit un defect în circuitul de declanșare al pretensionatorului centurii pasagerului din față (încărcătura care strânge centura la impact): scurtcircuit la masă sau la plus, circuit întrerupt, rezistență prea mică, circuit încrucișat cu altul sau piesă greșită montată. Ultimele două caractere ale codului Ford complet arată care dintre ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -3009,7 +3009,7 @@
    },
    "ro": {
     "t": "Configurarea modulului nu este finalizată",
-    "d": "Unitatea de control airbag (RCM) nu a primit configurația mașinii (datele „as-built” Ford), de obicei după o înlocuire sau o reprogramare la care pasul de configurare a fost sărit sau întrerupt. Procedura Ford este repetarea configurării modulului (PMI) cu un tester de reprezentanță. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag (RCM) nu a primit configurația mașinii (datele „as-built” Ford), de obicei după o înlocuire sau o reprogramare la care pasul de configurare a fost sărit sau întrerupt. Procedura Ford este repetarea configurării modulului (PMI) cu un tester de reprezentanță. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -3293,7 +3293,7 @@
    },
    "ro": {
     "t": "Memoria de configurare a modulului este coruptă",
-    "d": "Unitatea de control airbag (RCM) a constatat că memoria în care își ține configurația este coruptă. Fișa Ford cere un modul nou, configurat apoi cu datele as-built ale mașinii. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag (RCM) a constatat că memoria în care își ține configurația este coruptă. Fișa Ford cere un modul nou, configurat apoi cu datele as-built ale mașinii. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -3392,7 +3392,7 @@
    },
    "ro": {
     "t": "Defect intern al unității de control airbag",
-    "d": "U3000 este codul standard pentru „modul de control”; la unitatea airbag Ford (RCM) raportează un defect al unității în sine. La tipul de defect 46 (memoria de calibrare) sau 49 (electronica internă), fișa Ford cere un RCM nou, configurat cu datele as-built ale mașinii; tipul 4A înseamnă că este montată o piesă cu cod greșit. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "U3000 este codul standard pentru „modul de control”; la unitatea airbag Ford (RCM) raportează un defect al unității în sine. La tipul de defect 46 (memoria de calibrare) sau 49 (electronica internă), fișa Ford cere un RCM nou, configurat cu datele as-built ale mașinii; tipul 4A înseamnă că este montată o piesă cu cod greșit. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",

@@ -82,8 +82,8 @@
         <translation>Niciun cod de eroare</translation>
     </message>
     <message>
-        <source>No module reports a stored, pending or permanent fault. If a warning light is on anyway, it may come from a module generic OBD-II can't reach yet (ABS, airbag), which a later version will scan.</source>
-        <translation>Niciun modul nu raportează un defect memorat, în așteptare sau permanent. Dacă totuși un martor este aprins, poate veni de la un modul pe care OBD-II generic nu îl poate citi încă (ABS, airbag); o versiune viitoare le va scana.</translation>
+        <source>No module reports a stored, pending or permanent fault. If a warning light such as ABS or airbag is on anyway, scan the other modules under All modules.</source>
+        <translation>Niciun modul nu raportează un defect memorat, în așteptare sau permanent. Dacă totuși un martor precum ABS sau airbag este aprins, scanează celelalte module din Toate modulele.</translation>
     </message>
     <message>
         <source>Stored: confirmed faults</source>

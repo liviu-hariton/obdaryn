@@ -69,7 +69,7 @@ Item {
             iconName: "circle-check"
             iconColor: Theme.green
             title: qsTr("No trouble codes")
-            message: qsTr("No module reports a stored, pending or permanent fault. If a warning light is on anyway, it may come from a module generic OBD-II can't reach yet (ABS, airbag), which a later version will scan.")
+            message: qsTr("No module reports a stored, pending or permanent fault. If a warning light such as ABS or airbag is on anyway, scan the other modules under All modules.")
         }
 
         RowLayout {

@@ -49,7 +49,7 @@
    },
    "ro": {
     "t": "Defect al unității de control airbag (senzorul central)",
-    "d": "Senzorul central de airbag, adică unitatea de control airbag, a găsit un defect intern. La unele Lexus NX și RX 2015-2017, Toyota a emis o actualizare software pentru un B1000 intermitent memorat în istoric. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Senzorul central de airbag, adică unitatea de control airbag, a găsit un defect intern. La unele Lexus NX și RX 2015-2017, Toyota a emis o actualizare software pentru un B1000 intermitent memorat în istoric. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -106,7 +106,7 @@
    },
    "ro": {
     "t": "Linia senzorului de impact frontal (dreapta) neinițializată",
-    "d": "Unitatea de control airbag nu a putut finaliza inițializarea liniei senzorului de impact frontal din dreapta la pornire. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag nu a putut finaliza inițializarea liniei senzorului de impact frontal din dreapta la pornire. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -167,7 +167,7 @@
    },
    "ro": {
     "t": "Linia senzorului de impact frontal (stânga) neinițializată",
-    "d": "Unitatea de control airbag nu a putut finaliza inițializarea liniei senzorului de impact frontal din stânga la pornire. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag nu a putut finaliza inițializarea liniei senzorului de impact frontal din stânga la pornire. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -230,7 +230,7 @@
    },
    "ro": {
     "t": "Defect la senzorul de impact frontal (dreapta)",
-    "d": "Senzorul de impact frontal din dreapta, aflat în fața compartimentului motor, sau circuitul lui are un defect. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Senzorul de impact frontal din dreapta, aflat în fața compartimentului motor, sau circuitul lui are un defect. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -294,7 +294,7 @@
    },
    "ro": {
     "t": "Senzorul de impact frontal (dreapta): fără comunicație",
-    "d": "Unitatea de control airbag a pierdut comunicația cu senzorul de impact frontal din dreapta. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag a pierdut comunicația cu senzorul de impact frontal din dreapta. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -358,7 +358,7 @@
    },
    "ro": {
     "t": "Senzorul de impact frontal (dreapta): neinițializat",
-    "d": "Unitatea de control airbag nu a putut finaliza inițializarea pentru senzorul de impact frontal din dreapta. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag nu a putut finaliza inițializarea pentru senzorul de impact frontal din dreapta. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -421,7 +421,7 @@
    },
    "ro": {
     "t": "Defect la senzorul de impact frontal (stânga)",
-    "d": "Senzorul de impact frontal din stânga, aflat în fața compartimentului motor, sau circuitul lui are un defect. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Senzorul de impact frontal din stânga, aflat în fața compartimentului motor, sau circuitul lui are un defect. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -485,7 +485,7 @@
    },
    "ro": {
     "t": "Senzorul de impact frontal (stânga): fără comunicație",
-    "d": "Unitatea de control airbag a pierdut comunicația cu senzorul de impact frontal din stânga. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag a pierdut comunicația cu senzorul de impact frontal din stânga. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -549,7 +549,7 @@
    },
    "ro": {
     "t": "Senzorul de impact frontal (stânga): neinițializat",
-    "d": "Unitatea de control airbag nu a putut finaliza inițializarea pentru senzorul de impact frontal din stânga. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Unitatea de control airbag nu a putut finaliza inițializarea pentru senzorul de impact frontal din stânga. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -609,7 +609,7 @@
    },
    "ro": {
     "t": "Defect la sistemul de clasificare a pasagerului",
-    "d": "Sistemul de sub scaunul pasagerului din față, care decide dacă airbagul pasagerului se poate declanșa, raportează un defect. Diagnostichează sistemul de clasificare propriu-zis; poate avea nevoie și de o calibrare a punctului zero după lucrări la scaun. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Sistemul de sub scaunul pasagerului din față, care decide dacă airbagul pasagerului se poate declanșa, raportează un defect. Diagnostichează sistemul de clasificare propriu-zis; poate avea nevoie și de o calibrare a punctului zero după lucrări la scaun. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -665,7 +665,7 @@
    },
    "ro": {
     "t": "Defect la circuitul senzorului de poziție al scaunului șoferului",
-    "d": "Senzorul care îi spune unității airbag dacă scaunul șoferului este mult în față are un defect; unitatea îl folosește ca să adapteze declanșarea airbagului șoferului. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Senzorul care îi spune unității airbag dacă scaunul șoferului este mult în față are un defect; unitatea îl folosește ca să adapteze declanșarea airbagului șoferului. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -724,7 +724,7 @@
    },
    "ro": {
     "t": "Defect la circuitul indicatorului airbag pasager ON/OFF",
-    "d": "Indicatorul care arată dacă airbagul pasagerului din față este activ sau dezactivat are un defect de circuit, așa că nu te poți baza pe ce afișează. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Indicatorul care arată dacă airbagul pasagerului din față este activ sau dezactivat are un defect de circuit, așa că nu te poți baza pe ce afișează. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -787,7 +787,7 @@
    },
    "ro": {
     "t": "Airbag șofer, circuit de declanșare: scurtcircuit în circuit",
-    "d": "Cele două fire ale circuitului de declanșare pentru airbagul șoferului din volan sunt în scurtcircuit între ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Cele două fire ale circuitului de declanșare pentru airbagul șoferului din volan sunt în scurtcircuit între ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -850,7 +850,7 @@
    },
    "ro": {
     "t": "Airbag șofer, circuit de declanșare: circuit întrerupt",
-    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este întrerupt. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este întrerupt. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -913,7 +913,7 @@
    },
    "ro": {
     "t": "Airbag șofer, circuit de declanșare: scurtcircuit la masă",
-    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este în scurtcircuit la masă. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este în scurtcircuit la masă. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -976,7 +976,7 @@
    },
    "ro": {
     "t": "Airbag șofer, circuit de declanșare: scurtcircuit la plus",
-    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este în scurtcircuit la tensiunea bateriei. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este în scurtcircuit la tensiunea bateriei. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -1035,7 +1035,7 @@
    },
    "ro": {
     "t": "Airbag pasager față, circuit de declanșare: scurtcircuit în circuit",
-    "d": "Cele două fire ale circuitului de declanșare pentru airbagul pasagerului din față din bord sunt în scurtcircuit între ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Cele două fire ale circuitului de declanșare pentru airbagul pasagerului din față din bord sunt în scurtcircuit între ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -1090,7 +1090,7 @@
    },
    "ro": {
     "t": "Airbag pasager față, circuit de declanșare: circuit întrerupt",
-    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este întrerupt. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este întrerupt. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -1145,7 +1145,7 @@
    },
    "ro": {
     "t": "Airbag pasager față, circuit de declanșare: scurtcircuit la masă",
-    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este în scurtcircuit la masă. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este în scurtcircuit la masă. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -1200,7 +1200,7 @@
    },
    "ro": {
     "t": "Airbag pasager față, circuit de declanșare: scurtcircuit la plus",
-    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este în scurtcircuit la tensiunea bateriei. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este în scurtcircuit la tensiunea bateriei. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -1253,7 +1253,7 @@
    },
    "ro": {
     "t": "Circuitul de declanșare al airbagului de genunchi al șoferului întrerupt",
-    "d": "Circuitul de declanșare al airbagului de genunchi de sub coloana de direcție este întrerupt. Pentru Lexus IS 2006-2008, Lexus a emis o reparație a cablajului pentru acest cod. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Circuitul de declanșare al airbagului de genunchi de sub coloana de direcție este întrerupt. Pentru Lexus IS 2006-2008, Lexus a emis o reparație a cablajului pentru acest cod. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",

@@ -45,7 +45,7 @@
    },
    "ro": {
     "t": "Defect la circuitul martorului airbag",
-    "d": "Calculatorul airbag a găsit un defect la circuitul martorului airbag, așa că martorul s-ar putea să nu te avertizeze despre alte defecte de airbag. Apare la unități airbag precum cea a primei generații Duster; pe Logan II și Clio IV un defect al martorului este raportat în schimb ca B00D2. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Calculatorul airbag a găsit un defect la circuitul martorului airbag, așa că martorul s-ar putea să nu te avertizeze despre alte defecte de airbag. Apare la unități airbag precum cea a primei generații Duster; pe Logan II și Clio IV un defect al martorului este raportat în schimb ca B00D2. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -100,7 +100,7 @@
    },
    "ro": {
     "t": "Calculatorul airbag blocat",
-    "d": "Calculatorul airbag raportează că este blocat. Service-urile Renault îl blochează cu aparatul de diagnoză înainte de a lucra la sistemul airbag, iar după lucrare trebuie deblocat cu un aparat compatibil Renault. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Calculatorul airbag raportează că este blocat. Service-urile Renault îl blochează cu aparatul de diagnoză înainte de a lucra la sistemul airbag, iar după lucrare trebuie deblocat cu un aparat compatibil Renault. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
@@ -152,11 +152,11 @@
    },
    "ro": {
     "t": "Impact înregistrat: calculatorul airbag trebuie înlocuit",
-    "d": "Calculatorul airbag a înregistrat un impact. Regula Renault este ca după un impact calculatorul să fie înlocuit; până atunci nu te poți baza pe sistemul airbag. Cere unui service să verifice tot sistemul. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "d": "Calculatorul airbag a înregistrat un impact. Regula Renault este ca după un impact calculatorul să fie înlocuit; până atunci nu te poți baza pe sistemul airbag. Cere unui service să verifice tot sistemul. Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
     "c": [
      [
       "medium",
-      "Un impact în care s-au declanșat airbaguri sau pretensionere"
+      "Un impact în care s-au declanșat airbaguri sau pretensionatoare"
      ],
      [
       "low",

@@ -426,7 +426,7 @@ eps("C1581", EPS_SRC, "EPS assist map not written", "Harta de asistare EPS nescr
 # ============================================================================
 SRS_EN = ("While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. "
           "Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.")
-SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. "
+SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. "
           "Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.")
 SRS_LAMP_EN = ["SRS (airbag) warning light"]
 SRS_LAMP_RO = ["Martorul SRS (airbag) aprins"]

@@ -213,7 +213,7 @@ def config_codes(module, src_u2100, src_u2101=None, src_u2200=None, extra_en="",
 # ============================================================================
 SRS_EN = ("While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. "
           "Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.")
-SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. "
+SRS_RO = ("Cât timp un defect de airbag este memorat, airbagul sau pretensionatorul afectat s-ar putea să nu se declanșeze la impact. "
           "Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.")
 SRS_LAMP_EN = ["Airbag warning light"]
 SRS_LAMP_RO = ["Martorul airbag aprins"]
@@ -248,7 +248,7 @@ for code, side_en, side_ro, short_ro in (("B1211", "driver", "șoferului", "șof
         f"The airbag control unit found a fault in the firing circuit of the {side_en}'s seat-belt pretensioner "
         "(the charge that tightens the belt in a crash): a short to ground or to battery, an open circuit, too low a resistance, "
         "a circuit crossed with another one, or the wrong part fitted. The last two characters of the full Ford code say which.",
-        f"Unitatea de control airbag a găsit un defect în circuitul de declanșare al pretensionerului centurii {side_ro} "
+        f"Unitatea de control airbag a găsit un defect în circuitul de declanșare al pretensionatorului centurii {side_ro} "
         "(încărcătura care strânge centura la impact): scurtcircuit la masă sau la plus, circuit întrerupt, rezistență prea mică, "
         "circuit încrucișat cu altul sau piesă greșită montată. Ultimele două caractere ale codului Ford complet arată care dintre ele.",
         PRETENSIONER_CAUSES_EN, PRETENSIONER_CAUSES_RO)
