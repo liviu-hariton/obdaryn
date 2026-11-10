@@ -6,11 +6,19 @@
 #include "vehicles/ModuleCatalog.h"
 #include "obd/Pids.h"
 #include "obd/VehicleInfo.h"
+#include "recording/SessionRecorder.h"
+#include "transport/ReplayTransport.h"
 #include "transport/SimulatedTransport.h"
 #include "transport/TcpTransport.h"
 
 #include <QClipboard>
 #include <QCoreApplication>
+#include <QDateTime>
+#include <QDesktopServices>
+#include <QDir>
+#include <QFileInfo>
+#include <QStandardPaths>
+#include <QUrl>
 #include <QGuiApplication>
 #include <QLibraryInfo>
 #include <QLocale>
@@ -29,6 +37,41 @@ constexpr int kDefaultPort = 35000;
 // Gap between live-data cycles. The adapter itself is the bottleneck, so this
 // only leaves room for other queued requests (scans, voltage).
 constexpr int kPollGapMs = 30;
+
+// How many recordings the connect screen lists.
+constexpr int kRecordingsListed = 8;
+
+/// "4:05", or "1:02:05" past an hour.
+QString clockText(qint64 ms)
+{
+    const qint64 s = qMax<qint64>(0, ms / 1000);
+    if (s >= 3600)
+        return QStringLiteral("%1:%2:%3").arg(s / 3600).arg((s / 60) % 60, 2, 10, QLatin1Char('0')).arg(s % 60, 2, 10, QLatin1Char('0'));
+    return QStringLiteral("%1:%2").arg(s / 60).arg(s % 60, 2, 10, QLatin1Char('0'));
+}
+
+/// "Hyundai 2014" / "Demo car" / "Unknown car", and when it was recorded, from a recording header.
+QPair<QString, QString> recordingLabel(const QJsonObject &header, const QFileInfo &file)
+{
+    QString car;
+    if (header.value(QStringLiteral("demo")).toBool())
+        car = AppController::tr("Demo car");
+    else if (const QString make = header.value(QStringLiteral("manufacturer")).toString(); !make.isEmpty()) {
+        const int year = header.value(QStringLiteral("modelYear")).toInt();
+        car = year > 0 ? QStringLiteral("%1 %2").arg(make).arg(year) : make;
+    } else
+        car = file.completeBaseName(); // e.g. a probe recording: its name says what it is
+    const QDateTime created = QDateTime::fromString(header.value(QStringLiteral("created")).toString(), Qt::ISODate);
+    const QString when = QLocale().toString((created.isValid() ? created : file.lastModified()).toLocalTime(), QLocale::ShortFormat);
+    return {car, when};
+}
+
+/// Accepts "/path/x.obdrec" or "file:///path/x.obdrec" (what QML file dialogs give).
+QString localPath(const QString &pathOrUrl)
+{
+    const QUrl url(pathOrUrl);
+    return url.isLocalFile() ? url.toLocalFile() : pathOrUrl;
+}
 } // namespace
 
 AppController *AppController::create(QQmlEngine *qmlEngine, QJSEngine *)
@@ -44,7 +87,8 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
       m_dtcs(new DtcModel(this)),
       m_trafficLog(new TrafficLogModel(this)),
       m_moduleScanner(new ModuleScanner(m_client, this)),
-      m_moduleModel(new ModuleScanModel(m_moduleScanner, this))
+      m_moduleModel(new ModuleScanModel(m_moduleScanner, this)),
+      m_recorder(new SessionRecorder(m_client->session(), this))
 {
     // Code titles follow the car's brand pack (e.g. Hyundai/Kia for P1326).
     connect(this, &AppController::profileChanged, this, [this] { m_dtcs->setContext(m_profileId, m_language); });
@@ -75,6 +119,22 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
     m_voltageTimer.setInterval(5000);
     connect(&m_voltageTimer, &QTimer::timeout, this, &AppController::readVoltage);
 
+    // Recording: report where the file went when it ends (by the user or by a disconnect).
+    m_ticker.setInterval(1000);
+    connect(&m_ticker, &QTimer::timeout, this, &AppController::recordingTick);
+    connect(m_recorder, &SessionRecorder::recordingChanged, this, [this] {
+        if (!m_recorder->isRecording() && !m_recorder->path().isEmpty()) {
+            qint64 duration = 0;
+            Recording::peek(m_recorder->path(), nullptr, &duration);
+            emit notice(true, tr("Recording saved: %1, %2 long.")
+                                  .arg(QFileInfo(m_recorder->path()).fileName(), clockText(duration)));
+            refreshRecordings();
+        }
+        updateTicker();
+        emit recordingChanged();
+        emit recordingTick();
+    });
+
     // Language: saved choice, else Romanian when the system is Romanian, else English.
     QSettings settings;
     QString lang = settings.value(kLanguageKey).toString();
@@ -98,11 +158,13 @@ void AppController::connectToAdapter(const QString &host, int port)
     settings.setValue(kHostKey, host.trimmed());
     settings.setValue(kPortKey, port);
     emit settingsChanged();
+    m_replay = nullptr;
     startSession(new TcpTransport(host.trimmed(), quint16(port)), false);
 }
 
 void AppController::connectDemo()
 {
+    m_replay = nullptr;
     auto *sim = new SimulatedTransport;
     m_simulator = sim;
     startSession(sim, true);
@@ -120,6 +182,7 @@ void AppController::startSession(Transport *transport, bool demo)
     m_trafficLog->append(QStringLiteral("!"), demo ? tr("Starting demo car") : tr("Opening %1").arg(transport->description()));
     m_client->session()->setTransport(transport);
     m_client->session()->open();
+    updateTicker();
     emit connectionChanged();
 }
 
@@ -167,6 +230,7 @@ void AppController::onSessionStateChanged()
         m_voltageTimer.stop();
         break;
     }
+    updateTicker();
     emit connectionChanged();
     emit adapterInfoChanged();
 }
@@ -352,6 +416,10 @@ void AppController::whenPollIdle(std::function<void()> action)
 
 void AppController::scanModules()
 {
+    if (m_replay && !m_replay->hasModuleRequests()) {
+        emit notice(false, tr("This recording has no module scan to replay. Scan the modules while recording to include them."));
+        return;
+    }
     const VehicleProfile *profile = ModuleCatalog::find(m_profileId);
     if (!profile || m_client->session()->state() != ElmSession::State::Ready
         || scanning() || busyWithModules())
@@ -368,6 +436,10 @@ void AppController::cancelModuleScan()
 
 void AppController::clearModuleCodes(int row)
 {
+    if (replayMode()) {
+        emit moduleClearFinished(false, tr("This is a recording, so there is no car to clear codes on."));
+        return;
+    }
     if (busyWithModules() || scanning()) {
         emit moduleClearFinished(false, tr("Wait for the current scan to finish."));
         return;
@@ -452,6 +524,10 @@ void AppController::clearCodes()
         emit clearFinished(false, tr("Not connected to a car."));
         return;
     }
+    if (replayMode()) {
+        emit clearFinished(false, tr("This is a recording, so there is no car to clear codes on."));
+        return;
+    }
     if (busyWithModules()) {
         emit clearFinished(false, tr("Wait for the module scan to finish."));
         return;
@@ -516,6 +592,165 @@ void AppController::pollLiveData()
         }
         schedulePoll();
     });
+}
+
+// ---------------------------------------------------------------------------
+// Recording and replay
+
+QString AppController::recordingsFolder() const
+{
+    // Developer capture mode and tests point this elsewhere.
+    const QString overridden = qEnvironmentVariable("OBDARYN_RECORDINGS_DIR");
+    if (!overridden.isEmpty())
+        return overridden;
+    return QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QStringLiteral("/Obdaryn/Recordings");
+}
+
+QString AppController::recordingsFolderDisplay() const
+{
+    QString path = QDir::toNativeSeparators(recordingsFolder());
+    const QString home = QDir::toNativeSeparators(QDir::homePath());
+    if (path.startsWith(home))
+        path.replace(0, home.size(), QStringLiteral("~"));
+    return path;
+}
+
+bool AppController::recording() const
+{
+    return m_recorder->isRecording();
+}
+
+QString AppController::recordingTime() const
+{
+    return clockText(m_recorder->elapsedMs());
+}
+
+QString AppController::replayPosition() const
+{
+    if (!m_replay)
+        return {};
+    return tr("%1 of %2").arg(clockText(m_replay->positionMs()), clockText(m_replay->durationMs()));
+}
+
+void AppController::updateTicker()
+{
+    const bool needed = m_recorder->isRecording() || (m_replay && m_client->session()->state() != ElmSession::State::Disconnected);
+    if (needed && !m_ticker.isActive())
+        m_ticker.start();
+    else if (!needed)
+        m_ticker.stop();
+}
+
+void AppController::startRecording()
+{
+    if (m_client->session()->state() != ElmSession::State::Ready || m_recorder->isRecording())
+        return;
+    if (replayMode()) {
+        emit notice(false, tr("This is already a recording."));
+        return;
+    }
+    const QString folder = recordingsFolder();
+    if (!QDir().mkpath(folder)) {
+        emit notice(false, tr("Couldn't create the folder %1.").arg(QDir::toNativeSeparators(folder)));
+        return;
+    }
+    // The file name says when and what, never the VIN: names show up everywhere.
+    QString name = QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd HH-mm-ss"));
+    if (m_demo)
+        name += QStringLiteral(" demo car");
+    else if (!m_manufacturer.isEmpty())
+        name += QLatin1Char(' ') + m_manufacturer + (m_modelYear > 0 ? QStringLiteral(" %1").arg(m_modelYear) : QString());
+    const QString path = folder + QLatin1Char('/') + name + QLatin1Char('.') + QLatin1String(Recording::kSuffix);
+
+    const QJsonObject metadata{
+        {QStringLiteral("app"), QStringLiteral("Obdaryn %1").arg(appVersion())},
+        {QStringLiteral("demo"), m_demo},
+        {QStringLiteral("vin"), m_vin},
+        {QStringLiteral("manufacturer"), m_manufacturer},
+        {QStringLiteral("modelYear"), m_modelYear},
+        {QStringLiteral("profile"), m_profileId},
+    };
+    QString error;
+    if (!m_recorder->start(path, metadata, &error))
+        emit notice(false, tr("Couldn't start recording: %1").arg(error));
+}
+
+void AppController::stopRecording()
+{
+    m_recorder->stop();
+}
+
+void AppController::replayRecording(const QString &pathOrUrl)
+{
+    const QString path = localPath(pathOrUrl);
+    Recording rec;
+    QString error;
+    if (!rec.load(path, &error)) {
+        emit notice(false, tr("Couldn't open %1. %2").arg(QFileInfo(path).fileName(), error));
+        return;
+    }
+    if (m_recorder->isRecording())
+        m_recorder->stop();
+    const auto [car, when] = recordingLabel(rec.header, QFileInfo(path));
+    //: Sidebar, while replaying: which car and when it was recorded, e.g. "Hyundai 2014, 11/11/26 14:03"
+    auto *replay = new ReplayTransport(std::move(rec), tr("%1, %2").arg(car, when));
+    m_replay = replay;
+    startSession(replay, false);
+}
+
+void AppController::exportRecordingCsv(const QString &pathOrUrl)
+{
+    const QString path = localPath(pathOrUrl);
+    Recording rec;
+    QString error;
+    if (!rec.load(path, &error)) {
+        emit notice(false, tr("Couldn't open %1. %2").arg(QFileInfo(path).fileName(), error));
+        return;
+    }
+    const QFileInfo info(path);
+    const QString csvPath = info.absolutePath() + QLatin1Char('/') + info.completeBaseName() + QStringLiteral(".csv");
+    QFile out(csvPath);
+    if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        emit notice(false, tr("Couldn't write %1: %2").arg(QFileInfo(csvPath).fileName(), out.errorString()));
+        return;
+    }
+    const QString csv = rec.toCsv();
+    out.write(csv.toUtf8());
+    const int rows = qMax(0, int(csv.count(QLatin1Char('\n'))) - 1);
+    if (rows == 0)
+        emit notice(false, tr("%1 has no live data, so the CSV file only has column names.").arg(info.fileName()));
+    else
+        emit notice(true, tr("Saved %1 next to the recording (%n rows).", "", rows).arg(QFileInfo(csvPath).fileName()));
+}
+
+void AppController::showRecordingsFolder() const
+{
+    QDir().mkpath(recordingsFolder());
+    QDesktopServices::openUrl(QUrl::fromLocalFile(recordingsFolder()));
+}
+
+void AppController::refreshRecordings()
+{
+    QVariantList list;
+    QDir dir(recordingsFolder());
+    const QFileInfoList files = dir.entryInfoList({QStringLiteral("*.") + QLatin1String(Recording::kSuffix)},
+                                                  QDir::Files, QDir::Time);
+    for (const QFileInfo &f : files) {
+        if (list.size() >= kRecordingsListed)
+            break;
+        QJsonObject header;
+        qint64 duration = 0;
+        if (!Recording::peek(f.absoluteFilePath(), &header, &duration))
+            continue;
+        const auto [car, when] = recordingLabel(header, f);
+        list << QVariantMap{{QStringLiteral("path"), f.absoluteFilePath()},
+                            {QStringLiteral("title"), car},
+                            {QStringLiteral("when"), when},
+                            {QStringLiteral("duration"), clockText(duration)},
+                            {QStringLiteral("fileName"), f.fileName()}};
+    }
+    m_recordings = list;
+    emit recordingsChanged();
 }
 
 // ---------------------------------------------------------------------------
@@ -645,6 +880,7 @@ void AppController::setLanguage(const QString &code)
     m_liveData->retranslate();
     m_dtcs->setContext(m_profileId, lang);
     m_moduleModel->setLanguage(lang);
+    refreshRecordings();         // car names and dates are localized
     emit languageChanged();
     emit readinessChanged();     // monitor names
     emit freezeFrameChanged();   // PID names

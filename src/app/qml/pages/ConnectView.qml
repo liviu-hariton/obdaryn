@@ -3,6 +3,7 @@
 // Connecting to the adapter. Shown in place of the Overview until a car answers.
 import QtQuick
 import QtQuick.Controls.Basic as C
+import QtQuick.Dialogs
 import QtQuick.Layouts
 import Obdaryn
 
@@ -10,6 +11,16 @@ Item {
     id: view
     readonly property int state: App.connectionState
     readonly property bool busy: state === App.Connecting || state === App.Initializing
+
+    // The list may be stale if files were added or removed in Finder meanwhile.
+    onVisibleChanged: if (visible) App.refreshRecordings()
+
+    FileDialog {
+        id: fileDialog
+        title: qsTr("Open a recording")
+        nameFilters: [qsTr("Obdaryn recordings (*.obdrec)"), qsTr("All files (*)")]
+        onAccepted: App.replayRecording(selectedFile)
+    }
 
     C.ScrollView {
         anchors.fill: parent
@@ -234,6 +245,130 @@ Item {
                     iconName: "play"
                     enabled: !view.busy
                     onClicked: App.connectDemo()
+                }
+            }
+
+            // ---- Recordings ------------------------------------------------------
+            // Sessions recorded from the sidebar, replayed as if the car were here.
+            Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: Theme.hairline; Layout.topMargin: Theme.s2 }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: Theme.s3
+                Text {
+                    Layout.fillWidth: true
+                    text: qsTr("Replay a recording")
+                    color: Theme.text
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontBody
+                    font.weight: Font.DemiBold
+                    Accessible.role: Accessible.Heading
+                }
+                AppButton {
+                    variant: "quiet"
+                    iconName: "folder-open"
+                    implicitHeight: 30
+                    text: qsTr("Open a file…")
+                    enabled: !view.busy
+                    onClicked: fileDialog.open()
+                }
+            }
+
+            Text {
+                Layout.fillWidth: true
+                Layout.topMargin: -Theme.s3
+                text: App.recordings.length > 0
+                      ? qsTr("A replay answers exactly like the car did, so every screen works without it. Codes can't be cleared in a replay.")
+                      : qsTr("Nothing recorded yet. While connected, press Record session in the sidebar: Obdaryn saves everything the car says, and you can replay it here without the car.")
+                color: Theme.textMuted
+                font.family: Theme.sans
+                font.pixelSize: Theme.fontBody
+                wrapMode: Text.WordWrap
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.topMargin: -Theme.s2
+                visible: App.recordings.length > 0
+                spacing: 0
+                Repeater {
+                    model: App.recordings
+                    delegate: ColumnLayout {
+                        id: rec
+                        required property var modelData
+                        required property int index
+                        Layout.fillWidth: true
+                        spacing: 0
+                        Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: Theme.hairline; visible: rec.index > 0 }
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Layout.topMargin: Theme.s3
+                            Layout.bottomMargin: Theme.s3
+                            spacing: Theme.s3
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 2
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: rec.modelData.title
+                                    color: Theme.text
+                                    font.family: Theme.sans
+                                    font.pixelSize: Theme.fontBody
+                                    font.weight: Font.DemiBold
+                                    elide: Text.ElideRight
+                                }
+                                Text {
+                                    Layout.fillWidth: true
+                                    //: Recording list: when it was made · how long it is
+                                    text: qsTr("%1 · %2").arg(rec.modelData.when).arg(rec.modelData.duration)
+                                    color: Theme.textMuted
+                                    font.family: Theme.sans
+                                    font.pixelSize: Theme.fontSmall
+                                    font.features: { "tnum": 1 }
+                                    elide: Text.ElideRight
+                                }
+                            }
+                            AppButton {
+                                variant: "quiet"
+                                iconName: "file-down"
+                                implicitHeight: 30
+                                text: qsTr("CSV")
+                                Accessible.name: qsTr("Export the live data of %1 as CSV").arg(rec.modelData.title)
+                                C.ToolTip.visible: hovered
+                                C.ToolTip.delay: 600
+                                C.ToolTip.text: qsTr("Save the live data as a CSV file next to the recording")
+                                onClicked: App.exportRecordingCsv(rec.modelData.path)
+                            }
+                            AppButton {
+                                iconName: "play"
+                                implicitHeight: 30
+                                text: qsTr("Replay")
+                                Accessible.name: qsTr("Replay %1, %2").arg(rec.modelData.title).arg(rec.modelData.when)
+                                enabled: !view.busy
+                                onClicked: App.replayRecording(rec.modelData.path)
+                            }
+                        }
+                    }
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: Theme.s2
+                Icon { name: "info"; size: 14; color: Theme.textFaint; Layout.alignment: Qt.AlignTop; Layout.topMargin: 2 }
+                Text {
+                    Layout.fillWidth: true
+                    text: qsTr("Saved in %1. A recording includes the car's VIN, so check it before sharing.").arg(App.recordingsFolder)
+                    color: Theme.textFaint
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontSmall
+                    wrapMode: Text.WordWrap
+                }
+                AppButton {
+                    variant: "quiet"
+                    implicitHeight: 26
+                    text: qsTr("Show folder")
+                    onClicked: App.showRecordingsFolder()
                 }
             }
 

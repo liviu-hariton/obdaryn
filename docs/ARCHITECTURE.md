@@ -17,7 +17,7 @@
 │      │          ── every line passes RequestGuard (read-only allowlist) ──   │
 │      ▼                                                                       │
 │  Transport      TcpTransport (Wi-Fi) · SimulatedTransport (demo / tests)    │
-│                 later: BLE, USB serial                                        │
+│                 ReplayTransport (recordings) · later: BLE, USB serial         │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -42,6 +42,11 @@
   - `Readiness`: the monitor status in PID 01.
   - `VehicleInfo`: VIN, model year, manufacturer, calibration IDs, CVNs and ECU names.
   - `DtcDatabase`: plain-language explanations from obdex.
+- **Recording** (`src/core/recording`) saves and replays sessions.
+  - `SessionRecorder` listens to `ElmSession::exchanged` and writes every command with its raw reply, its timing and the module it was addressed to (`AT SH`) to a `.obdrec` file (JSON Lines, flushed line by line). Answers from before Record was pressed (the handshake, the VIN) go in first as snapshot entries, so a replay can always connect.
+  - `ReplayTransport` is a pretend adapter that answers from a recording, following the recording's clock and looping at the end. Requests are matched by module + command; live data (service 01) is rebuilt value by value, so any combination of values the app asks for still gets answers. Clears are never replayed.
+  - `Recording::toCsv()` exports the live data, one row per moment and one column per value.
+  - The same files work in the app ("Replay a recording" on the connect screen) and in the probe (`--record`, `--replay`).
 - **ModuleCatalog** (`src/core/vehicles`) loads the brand profiles from `data/vehicles/*.json`: one file per brand listing each module's category, request and response CAN IDs, preferred protocol, and whether the address is verified. A profile is picked from the VIN prefix, then from the manufacturer name, else the generic list.
 - **ModuleScanner** (`src/core/obd`) runs the full-vehicle scan. For each module it:
   1. points the adapter at the module (`AT SH`, `AT CRA`, and standard flow control when the response ID isn't request ID + 8);

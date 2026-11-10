@@ -313,6 +313,7 @@ void ElmSession::finishInFlight(const QByteArray &rawReply)
         logged = r.error.isEmpty() ? QStringLiteral("(empty)") : r.error;
     emit trafficLogged(QStringLiteral("<"),
                        QStringLiteral("%1   [%2 ms]").arg(logged).arg(r.elapsedMs));
+    emit exchanged(p.command, rawReply, r.elapsedMs, false);
 
     if (p.callback)
         p.callback(r);
@@ -333,6 +334,7 @@ void ElmSession::onTimeout()
     r.elapsedMs = m_commandClock.elapsed();
     emit trafficLogged(QStringLiteral("!"), QStringLiteral("%1: %2")
                                                  .arg(QString::fromLatin1(p.command), r.error));
+    emit exchanged(p.command, QByteArray(), r.elapsedMs, true);
 
     m_resyncing = true;
     m_resyncTimer.start();

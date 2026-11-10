@@ -27,16 +27,16 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [x] **Clear codes per module** (UDS/KWP 0x14), with the same confirmation flow and engine-off check.
 - [ ] Confirm the Hyundai addresses on the real 2014 Elantra, then mark them verified.
 - [ ] 29-bit CAN modules (Honda, some GM), Toyota's extended addressing behind gateway 750, and VW's older TP 2.0.
-- [x] Brand-specific code descriptions, starting with Hyundai/Kia: 177 sourced entries in English and Romanian, module-aware (see `docs/brand-packs.md`).
+- [x] Brand-specific code descriptions, starting with Hyundai/Kia: 159 codes (177 module-specific entries) in English and Romanian, with sources (see `docs/brand-packs.md`).
 - [x] Brand packs for Toyota/Lexus, Ford, VW group and Renault/Dacia (see `docs/brand-packs.md`).
 - [ ] **Manufacturer data packs.** Import OBDb signal sets (CC-BY-SA-4.0, shipped as separate attributed data files) for enhanced live data. Hyundai/Kia first: `21xx` reads on 7E0 / 7E1 / 7D1 and similar.
 - [ ] **Brand pack loader.** A JSON schema, a contribute-back flow, and a "record which PIDs my car answers" mode.
 
 ## v0.3 — logging and reports
 
-- [ ] Record sessions: values plus raw adapter traffic, replayable through the simulator
+- [x] **Record sessions** and replay them without the car. A recording holds every request and raw answer with timing and target module (`.obdrec`, JSON Lines). Replay follows the recorded clock, rebuilds live data per value, and never replays a clear. The probe records too (`--record`, `--replay`), and `tools/first-contact.sh` saves a recording next to each log.
 - [ ] Charts with several signals, saved presets, and session comparison
-- [ ] CSV export (Parquet maybe later)
+- [x] CSV export of a recording's live data: one row per moment, one column per value (Parquet maybe later)
 - [ ] **Shareable report** (PDF/HTML): codes with explanations, readiness, freeze frame and VIN. For used-car checks and mechanics.
 - [ ] **Trip and fuel statistics** from MAF or speed-density, with a calibration factor checked against fill-ups
 
@@ -54,7 +54,6 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [ ] Mode 06 (on-board monitor test results) with readable limits
 - [x] Romanian titles for all generic codes, plus full Romanian explanations for the 132 most common
 - [ ] Imperial units
-- [ ] Brand-specific DTC description packs (P1xxx, B, C, U codes), written in our own words
 
 ## Research notes (November 2026)
 

@@ -11,6 +11,7 @@
 #include "obd/ObdClient.h"
 
 #include <QElapsedTimer>
+#include <QJsonObject>
 #include <QObject>
 #include <QPointer>
 #include <QTimer>
@@ -24,6 +25,8 @@ class QJSEngine;
 namespace obdaryn {
 
 class SimulatedTransport;
+class ReplayTransport;
+class SessionRecorder;
 
 /**
  * @brief Everything the screens need, exposed as one QML singleton "App".
@@ -102,6 +105,18 @@ class AppController : public QObject
     /// Profile the current module results came from (its brand pack explains their codes).
     Q_PROPERTY(QString moduleScanProfile READ moduleScanProfile NOTIFY moduleScanChanged)
 
+    // Recording and replay
+    Q_PROPERTY(bool recording READ recording NOTIFY recordingChanged)
+    /// Length of the running recording, "1:23".
+    Q_PROPERTY(QString recordingTime READ recordingTime NOTIFY recordingTick)
+    Q_PROPERTY(bool replayMode READ replayMode NOTIFY connectionChanged)
+    /// Where the replay is, "1:23 of 4:10".
+    Q_PROPERTY(QString replayPosition READ replayPosition NOTIFY recordingTick)
+    /// Saved recordings, newest first: {path, title, detail}.
+    Q_PROPERTY(QVariantList recordings READ recordings NOTIFY recordingsChanged)
+    /// The folder they are saved in, for display ("~/Documents/Obdaryn/Recordings").
+    Q_PROPERTY(QString recordingsFolder READ recordingsFolderDisplay CONSTANT)
+
     // App
     Q_PROPERTY(QString language READ language NOTIFY languageChanged)
     Q_PROPERTY(QString appVersion READ appVersion CONSTANT)
@@ -144,6 +159,16 @@ public:
     Q_INVOKABLE void cancelModuleScan();
     /// Clears one module's codes after the user confirmed; result via moduleClearFinished().
     Q_INVOKABLE void clearModuleCodes(int row);
+
+    /// Starts recording the connected session into the recordings folder.
+    Q_INVOKABLE void startRecording();
+    Q_INVOKABLE void stopRecording();
+    /// Connects to a recording instead of a car. Takes a path or a file:// URL.
+    Q_INVOKABLE void replayRecording(const QString &pathOrUrl);
+    /// Writes the recording's live data as CSV next to it.
+    Q_INVOKABLE void exportRecordingCsv(const QString &pathOrUrl);
+    Q_INVOKABLE void showRecordingsFolder() const;
+    Q_INVOKABLE void refreshRecordings();
 
     // ---- Property getters ------------------------------------------------------
     ConnectionState connectionState() const;
@@ -200,6 +225,13 @@ public:
     QString moduleScanTime() const { return m_moduleScanTime; }
     QString moduleScanProfile() const { return m_moduleScanner->profileId(); }
 
+    bool recording() const;
+    QString recordingTime() const;
+    bool replayMode() const { return !m_replay.isNull(); }
+    QString replayPosition() const;
+    QVariantList recordings() const { return m_recordings; }
+    QString recordingsFolderDisplay() const;
+
     QString language() const { return m_language; }
     QString appVersion() const;
     QString dtcAttribution() const;
@@ -222,6 +254,11 @@ signals:
     void moduleClearFinished(bool success, const QString &message);
     void profileChanged();
     void moduleScanChanged();
+    void recordingChanged();
+    void recordingTick();
+    void recordingsChanged();
+    /// A short message for the toast (recording saved, export written, ...).
+    void notice(bool success, const QString &message);
 
 private:
     void startSession(Transport *transport, bool demo);
@@ -237,6 +274,8 @@ private:
     /// adapter's target address, so it must never interleave with a poll.
     void whenPollIdle(std::function<void()> action);
     bool busyWithModules() const { return m_moduleScanner->running() || bool(m_afterPoll); }
+    QString recordingsFolder() const;
+    void updateTicker();
 
     QQmlEngine *m_engine;
     ObdClient *m_client;
@@ -275,6 +314,11 @@ private:
     bool m_profileChosenByUser = false;
     QString m_moduleScanTime;
     std::function<void()> m_afterPoll;
+
+    SessionRecorder *m_recorder;
+    QPointer<ReplayTransport> m_replay;
+    QTimer m_ticker; ///< refreshes the recording / replay clocks once a second
+    QVariantList m_recordings;
 };
 
 } // namespace obdaryn

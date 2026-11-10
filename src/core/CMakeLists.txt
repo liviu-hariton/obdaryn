@@ -19,6 +19,9 @@ qt_add_library(obdaryn_core STATIC
     transport/Transport.h
     transport/TcpTransport.h  transport/TcpTransport.cpp
     transport/SimulatedTransport.h transport/SimulatedTransport.cpp
+    transport/ReplayTransport.h transport/ReplayTransport.cpp
+    recording/Recording.h     recording/Recording.cpp
+    recording/SessionRecorder.h recording/SessionRecorder.cpp
     elm327/ElmSession.h       elm327/ElmSession.cpp
 )
 

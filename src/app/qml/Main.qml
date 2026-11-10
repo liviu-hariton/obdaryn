@@ -39,6 +39,7 @@ C.ApplicationWindow {
         }
         function onClearFinished(success, message) { toast.show(success, message) }
         function onModuleClearFinished(success, message) { toast.show(success, message) }
+        function onNotice(success, message) { toast.show(success, message) }
     }
 
     // Shared by the Overview and Trouble codes screens.

@@ -42,7 +42,9 @@ int main(int argc, char *argv[])
     // Renders one screen to a PNG and quits; used for design reviews and docs.
     //   OBDARYN_CAPTURE=out.png  OBDARYN_PAGE=0..7  OBDARYN_DEMO=1
     //   OBDARYN_APPEARANCE=light|dark  OBDARYN_LANG=en|ro  OBDARYN_DELAY_MS=4000  OBDARYN_SIZE=WxH
-    //   OBDARYN_SCAN_MODULES=1
+    //   OBDARYN_SCAN_MODULES=1  OBDARYN_RECORD=1 (record once the first scan ends)
+    //   OBDARYN_REPLAY=file.obdrec (replay instead of the demo car)
+    //   OBDARYN_RECORDINGS_DIR=folder (read by AppController; keeps captures out of ~/Documents)
     const QString capturePath = qEnvironmentVariable("OBDARYN_CAPTURE");
     if (qEnvironmentVariableIsSet("OBDARYN_APPEARANCE"))
         QSettings().setValue(QStringLiteral("ui/appearance"), qEnvironmentVariable("OBDARYN_APPEARANCE"));
@@ -65,6 +67,18 @@ int main(int argc, char *argv[])
                         QTimer::singleShot(300, controller, [controller] { controller->scanModules(); });
                 });
             }
+        }
+    }
+    if (qEnvironmentVariableIsSet("OBDARYN_REPLAY")) {
+        if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App"))
+            controller->replayRecording(qEnvironmentVariable("OBDARYN_REPLAY"));
+    }
+    if (qEnvironmentVariableIntValue("OBDARYN_RECORD") == 1) {
+        if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
+            QObject::connect(controller, &obdaryn::AppController::scanFinished, controller, [controller] {
+                if (!controller->vin().isEmpty() && !controller->recording())
+                    controller->startRecording();
+            });
         }
     }
     if (!capturePath.isEmpty() && !engine.rootObjects().isEmpty()) {

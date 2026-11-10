@@ -205,6 +205,18 @@
 <context>
     <name>ConnectView</name>
     <message>
+        <source>Open a recording</source>
+        <translation>Deschide o înregistrare</translation>
+    </message>
+    <message>
+        <source>Obdaryn recordings (*.obdrec)</source>
+        <translation>Înregistrări Obdaryn (*.obdrec)</translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation>Toate fișierele (*)</translation>
+    </message>
+    <message>
         <source>Connect to your car</source>
         <translation>Conectează-te la mașină</translation>
     </message>
@@ -279,6 +291,55 @@
     <message>
         <source>Try the demo car</source>
         <translation>Încearcă mașina demo</translation>
+    </message>
+    <message>
+        <source>Replay a recording</source>
+        <translation>Redă o înregistrare</translation>
+    </message>
+    <message>
+        <source>Open a file…</source>
+        <translation>Deschide un fișier…</translation>
+    </message>
+    <message>
+        <source>A replay answers exactly like the car did, so every screen works without it. Codes can't be cleared in a replay.</source>
+        <translation>O redare răspunde exact cum a răspuns mașina, așa că toate ecranele funcționează fără ea. Într-o redare codurile nu pot fi șterse.</translation>
+    </message>
+    <message>
+        <source>Nothing recorded yet. While connected, press Record session in the sidebar: Obdaryn saves everything the car says, and you can replay it here without the car.</source>
+        <translation>Nicio înregistrare încă. Cât ești conectat, apasă Înregistrează sesiunea în bara laterală: Obdaryn salvează tot ce spune mașina, iar apoi o poți reda aici fără mașină.</translation>
+    </message>
+    <message>
+        <source>%1 · %2</source>
+        <extracomment>Recording list: when it was made · how long it is</extracomment>
+        <translation>%1 · %2</translation>
+    </message>
+    <message>
+        <source>CSV</source>
+        <translation>CSV</translation>
+    </message>
+    <message>
+        <source>Export the live data of %1 as CSV</source>
+        <translation>Exportă datele în timp real din %1 ca CSV</translation>
+    </message>
+    <message>
+        <source>Save the live data as a CSV file next to the recording</source>
+        <translation>Salvează datele în timp real ca fișier CSV lângă înregistrare</translation>
+    </message>
+    <message>
+        <source>Replay</source>
+        <translation>Redă</translation>
+    </message>
+    <message>
+        <source>Replay %1, %2</source>
+        <translation>Redă %1, %2</translation>
+    </message>
+    <message>
+        <source>Saved in %1. A recording includes the car's VIN, so check it before sharing.</source>
+        <translation>Salvate în %1. O înregistrare conține seria de șasiu (VIN), așa că verific-o înainte să o trimiți cuiva.</translation>
+    </message>
+    <message>
+        <source>Show folder</source>
+        <translation>Arată dosarul</translation>
     </message>
 </context>
 <context>
@@ -1650,6 +1711,10 @@
         <translation>Conectat</translation>
     </message>
     <message>
+        <source>Replaying a recording</source>
+        <translation>Redare înregistrare</translation>
+    </message>
+    <message>
         <source>Connecting…</source>
         <translation>Se conectează…</translation>
     </message>
@@ -1670,8 +1735,40 @@
         <translation>Mașina demo</translation>
     </message>
     <message>
+        <source>Recording</source>
+        <translation>Se înregistrează</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Oprește</translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation>Înregistrează</translation>
+    </message>
+    <message>
+        <source>Stop recording</source>
+        <translation>Oprește înregistrarea</translation>
+    </message>
+    <message>
+        <source>Record session</source>
+        <translation>Înregistrează sesiunea</translation>
+    </message>
+    <message>
+        <source>Saves the recording</source>
+        <translation>Salvează înregistrarea</translation>
+    </message>
+    <message>
+        <source>Saves everything the car says, to replay later without it</source>
+        <translation>Salvează tot ce spune mașina, ca să o poți reda mai târziu fără ea</translation>
+    </message>
+    <message>
         <source>Disconnect</source>
         <translation>Deconectează</translation>
+    </message>
+    <message>
+        <source>Stop replay</source>
+        <translation>Oprește redarea</translation>
     </message>
     <message>
         <source>Diagnose</source>
@@ -2013,6 +2110,14 @@
 <context>
     <name>obdaryn::AppController</name>
     <message>
+        <source>Demo car</source>
+        <translation>Mașina demo</translation>
+    </message>
+    <message>
+        <source>Recording saved: %1, %2 long.</source>
+        <translation>Înregistrare salvată: %1, durată %2.</translation>
+    </message>
+    <message>
         <source>Starting demo car</source>
         <translation>Se pornește mașina demo</translation>
     </message>
@@ -2053,6 +2158,14 @@
         <translation>Orice mașină (doar adrese standard)</translation>
     </message>
     <message>
+        <source>This recording has no module scan to replay. Scan the modules while recording to include them.</source>
+        <translation>Înregistrarea nu conține o scanare a modulelor. Scanează modulele în timp ce înregistrezi, ca să fie incluse.</translation>
+    </message>
+    <message>
+        <source>This is a recording, so there is no car to clear codes on.</source>
+        <translation>Aceasta e o înregistrare, deci nu există o mașină pe care să ștergi coduri.</translation>
+    </message>
+    <message>
         <source>Wait for the current scan to finish.</source>
         <translation>Așteaptă terminarea scanării curente.</translation>
     </message>
@@ -2075,6 +2188,47 @@
     <message>
         <source>Codes cleared. Readiness monitors are reset; drive normally for a few days before an inspection.</source>
         <translation>Coduri șterse. Monitoarele readiness au fost resetate; condu normal câteva zile înainte de o inspecție.</translation>
+    </message>
+    <message>
+        <source>%1 of %2</source>
+        <translation>%1 din %2</translation>
+    </message>
+    <message>
+        <source>This is already a recording.</source>
+        <translation>Aceasta este deja o înregistrare.</translation>
+    </message>
+    <message>
+        <source>Couldn't create the folder %1.</source>
+        <translation>Nu s-a putut crea dosarul %1.</translation>
+    </message>
+    <message>
+        <source>Couldn't start recording: %1</source>
+        <translation>Înregistrarea nu a putut porni: %1</translation>
+    </message>
+    <message>
+        <source>Couldn't open %1. %2</source>
+        <translation>Nu s-a putut deschide %1. %2</translation>
+    </message>
+    <message>
+        <source>%1, %2</source>
+        <extracomment>Sidebar, while replaying: which car and when it was recorded, e.g. "Hyundai 2014, 11/11/26 14:03"</extracomment>
+        <translation>%1, %2</translation>
+    </message>
+    <message>
+        <source>Couldn't write %1: %2</source>
+        <translation>Nu s-a putut scrie %1: %2</translation>
+    </message>
+    <message>
+        <source>%1 has no live data, so the CSV file only has column names.</source>
+        <translation>%1 nu conține date în timp real, așa că fișierul CSV are doar numele coloanelor.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Saved %1 next to the recording (%n rows).</source>
+        <translation>
+            <numerusform>Salvat %1 lângă înregistrare (%n rând).</numerusform>
+            <numerusform>Salvat %1 lângă înregistrare (%n rânduri).</numerusform>
+            <numerusform>Salvat %1 lângă înregistrare (%n de rânduri).</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -2178,6 +2332,29 @@
     <message>
         <source>The engine is running (%1 rpm). Switch the engine off, leave the ignition ON, and try again.</source>
         <translation>Motorul este pornit (%1 rot/min). Oprește motorul, lasă contactul pus și încearcă din nou.</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::Recording</name>
+    <message>
+        <source>Couldn't open the file: %1</source>
+        <translation>Fișierul nu a putut fi deschis: %1</translation>
+    </message>
+    <message>
+        <source>This isn't an Obdaryn recording.</source>
+        <translation>Aceasta nu este o înregistrare Obdaryn.</translation>
+    </message>
+    <message>
+        <source>This recording was made by a newer Obdaryn. Update the app to open it.</source>
+        <translation>Înregistrarea a fost făcută cu o versiune mai nouă de Obdaryn. Actualizează aplicația ca să o deschizi.</translation>
+    </message>
+    <message>
+        <source>The file is empty.</source>
+        <translation>Fișierul este gol.</translation>
+    </message>
+    <message>
+        <source>Time (s)</source>
+        <translation>Timp (s)</translation>
     </message>
 </context>
 <context>

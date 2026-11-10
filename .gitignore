@@ -24,3 +24,5 @@ __pycache__/
 # Car logs (contain the VIN)
 logs/
 
+# Session recordings contain the VIN
+*.obdrec

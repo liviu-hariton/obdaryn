@@ -111,6 +111,10 @@ signals:
     void infoChanged();
     /// Raw traffic for the adapter console. direction is ">" (sent), "<" (received) or "!" (blocked / error).
     void trafficLogged(const QString &direction, const QString &text);
+    /// One command finished: everything the adapter printed before its '>' prompt,
+    /// unparsed. Used by SessionRecorder; blocked commands never get here because
+    /// they never reach the adapter. On a timeout rawReply is empty.
+    void exchanged(const QByteArray &command, const QByteArray &rawReply, qint64 elapsedMs, bool timedOut);
 
 private:
     struct Pending {

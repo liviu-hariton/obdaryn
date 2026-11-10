@@ -15,6 +15,7 @@
 - **Live data.** Every standard sensor the car supports, with sparklines. A pinned dashboard refreshes several times per second thanks to multi-PID requests.
 - **Vehicle info.** Decoded VIN, calibration IDs, CVNs and ECU names.
 - **Clearing codes**, only when you ask, never with the engine running, and with the consequences explained first.
+- **Record and replay.** Record a session (a drive, a fault that comes and goes) and replay it later without the car: every screen works as if it were connected. Export the live data as CSV for a spreadsheet.
 - **Adapter console.** Every command and answer, for troubleshooting.
 - **English and Romanian**, switchable at runtime.
 
@@ -40,7 +41,7 @@ open build/src/app/Obdaryn.app
 
 In CLion, open the folder and add `-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt` to the CMake profile.
 
-**No car nearby?** Choose **Try the demo car** on the connect screen, or run the Python ELM327 emulator (see [docs/CAR_INTERACTION.md](docs/CAR_INTERACTION.md#8-desk-testing-without-the-car)).
+**No car nearby?** Choose **Try the demo car** or replay a recording on the connect screen, or run the Python ELM327 emulator (see [docs/CAR_INTERACTION.md](docs/CAR_INTERACTION.md#8-desk-testing-without-the-car)).
 
 ## Project layout
 

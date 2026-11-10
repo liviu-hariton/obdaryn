@@ -66,4 +66,14 @@
         </translation>
     </message>
 </context>
+<context>
+    <name>obdaryn::AppController</name>
+    <message numerus="yes">
+        <source>Saved %1 next to the recording (%n rows).</source>
+        <translation>
+            <numerusform>Saved %1 next to the recording (%n row).</numerusform>
+            <numerusform>Saved %1 next to the recording (%n rows).</numerusform>
+        </translation>
+    </message>
+</context>
 </TS>

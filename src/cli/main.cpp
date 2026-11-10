@@ -11,6 +11,9 @@
 //                 value with raw bytes, readiness, freeze frame, vehicle info,
 //                 codes, module scan and a polling-speed benchmark
 //     --verbose   print the raw adapter traffic too
+//     --record FILE  save the whole session as a recording (.obdrec) that the
+//                    app can replay without the car
+//     --replay FILE  run against a recording instead of an adapter
 //
 // It uses exactly the same core library as the app, so it tells "adapter or
 // car problem" from "UI problem". Like the app, it only reads: every command
@@ -22,12 +25,15 @@
 #include "obd/Pids.h"
 #include "obd/Readiness.h"
 #include "obd/VehicleInfo.h"
+#include "recording/SessionRecorder.h"
+#include "transport/ReplayTransport.h"
 #include "transport/SimulatedTransport.h"
 #include "transport/TcpTransport.h"
 #include "vehicles/ModuleCatalog.h"
 
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QFileInfo>
 #include <QElapsedTimer>
 #include <QTextStream>
 #include <QTimer>
@@ -88,9 +94,29 @@ int main(int argc, char *argv[])
     const bool modules = args.removeAll(QStringLiteral("--modules")) > 0 || report;
     const bool verbose = args.removeAll(QStringLiteral("--verbose")) > 0;
     const bool demo = args.removeAll(QStringLiteral("--demo")) > 0;
+    // "--record FILE" / "--replay FILE": take the option and its value out of the list.
+    auto takeValue = [&args](const QString &option) {
+        const qsizetype i = args.indexOf(option);
+        if (i < 0 || i + 1 >= args.size())
+            return QString();
+        const QString value = args.takeAt(i + 1);
+        args.removeAt(i);
+        return value;
+    };
+    const QString recordPath = takeValue(QStringLiteral("--record"));
+    const QString replayPath = takeValue(QStringLiteral("--replay"));
 
     ObdClient client;
-    if (demo) {
+    SessionRecorder recorder(client.session());
+    if (!replayPath.isEmpty()) {
+        Recording recording;
+        QString error;
+        if (!recording.load(replayPath, &error)) {
+            out << "Can't replay " << replayPath << ": " << error << Qt::endl;
+            return 1;
+        }
+        client.session()->setTransport(new ReplayTransport(std::move(recording), QFileInfo(replayPath).fileName()));
+    } else if (demo) {
         client.session()->setTransport(new SimulatedTransport);
     } else {
         const QString host = args.value(0, QStringLiteral("192.168.0.10"));
@@ -101,6 +127,17 @@ int main(int argc, char *argv[])
         QObject::connect(client.session(), &ElmSession::trafficLogged, [&out](const QString &d, const QString &t) {
             out << "    " << d << ' ' << t << Qt::endl;
         });
+    }
+
+    // Recording starts before connecting, so the handshake is in the file too.
+    if (!recordPath.isEmpty()) {
+        QString error;
+        if (!recorder.start(recordPath, {{QStringLiteral("app"), QStringLiteral("obdaryn-probe")},
+                                         {QStringLiteral("demo"), demo}}, &error)) {
+            out << "Can't record to " << recordPath << ": " << error << Qt::endl;
+            return 1;
+        }
+        out << "Recording to " << recordPath << Qt::endl;
     }
 
     out << "Obdaryn probe, " << QDateTime::currentDateTime().toString(Qt::ISODate)

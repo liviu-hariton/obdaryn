@@ -7,8 +7,10 @@
 #   tools/first-contact.sh            # Vgate iCar Pro Wi-Fi at 192.168.0.10:35000
 #   tools/first-contact.sh HOST PORT
 #
-# Writes logs/first-contact-<time>-<phase>.log. The logs contain your VIN, so
-# they are git-ignored; share them only if you want to.
+# Writes logs/first-contact-<time>-<phase>.log, plus a recording of the same
+# session (.obdrec) that the app can replay without the car ("Replay a
+# recording" > "Open a file..."). Both contain your VIN, so they are
+# git-ignored; share them only if you want to.
 
 HOST=${1:-192.168.0.10}
 PORT=${2:-35000}
@@ -31,8 +33,10 @@ fi
 run() {
     LOG="$DIR/logs/first-contact-$STAMP-$1.log"
     echo "Running the full report ($1). This takes about a minute ..."
-    "$PROBE" "$HOST" "$PORT" --report --verbose > "$LOG" 2>&1
+    REC="$DIR/logs/first-contact-$STAMP-$1.obdrec"
+    "$PROBE" "$HOST" "$PORT" --report --verbose --record "$REC" > "$LOG" 2>&1
     echo "  saved $LOG"
+    echo "  and the recording $REC"
     grep -E "^  (VIN|Protocol|Adapter):|MIL |values/s|Module list|answered|not found|error" "$LOG" | grep -v "^    " | head -30
 }
 
