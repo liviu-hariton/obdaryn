@@ -1,0 +1,1858 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TS version="2.1" language="ro" sourcelanguage="en">
+<context>
+    <name>ClearCodesDialog</name>
+    <message>
+        <source>Clear trouble codes?</source>
+        <translation>Ștergi codurile de eroare?</translation>
+    </message>
+    <message>
+        <source>Do this after a repair, not to hide a fault. Before clearing, know that it:</source>
+        <translation>Fă asta după o reparație, nu ca să ascunzi un defect. Înainte de ștergere, reține că:</translation>
+    </message>
+    <message>
+        <source>Turns the check-engine light off. If the fault is still there, the light comes back.</source>
+        <translation>Stinge martorul de motor. Dacă defectul persistă, martorul se aprinde din nou.</translation>
+    </message>
+    <message>
+        <source>Erases the freeze frame, the snapshot of sensor values taken when the fault happened.</source>
+        <translation>Șterge instantaneul (freeze frame), adică valorile senzorilor salvate în momentul defectului.</translation>
+    </message>
+    <message>
+        <source>Resets all readiness monitors. The car fails the ITP emissions check until it has been driven for a few days.</source>
+        <translation>Resetează toate monitoarele readiness. Mașina nu trece testul de emisii la ITP până nu este condusă câteva zile.</translation>
+    </message>
+    <message>
+        <source>Does not remove permanent codes. They clear themselves once the car re-tests the system.</source>
+        <translation>Nu șterge codurile permanente. Acestea dispar singure după ce mașina retestează sistemul.</translation>
+    </message>
+    <message>
+        <source>Engine off, ignition ON. Obdaryn checks the engine speed first and won't clear while the engine runs.</source>
+        <translation>Motor oprit, contact pus. Obdaryn verifică întâi turația și nu șterge cât timp motorul merge.</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Anulează</translation>
+    </message>
+    <message>
+        <source>Clear codes</source>
+        <translation>Șterge codurile</translation>
+    </message>
+</context>
+<context>
+    <name>CodesPage</name>
+    <message>
+        <source>Trouble codes</source>
+        <translation>Coduri de eroare</translation>
+    </message>
+    <message>
+        <source>The check-engine light is on.</source>
+        <translation>Martorul de motor este aprins.</translation>
+    </message>
+    <message>
+        <source>The check-engine light is off.</source>
+        <translation>Martorul de motor este stins.</translation>
+    </message>
+    <message>
+        <source>Read again</source>
+        <translation>Citește din nou</translation>
+    </message>
+    <message>
+        <source>Clear codes…</source>
+        <translation>Șterge codurile…</translation>
+    </message>
+    <message>
+        <source>No trouble codes</source>
+        <translation>Niciun cod de eroare</translation>
+    </message>
+    <message>
+        <source>No module reports a stored, pending or permanent fault. If a warning light is on anyway, it may come from a module generic OBD-II can't reach yet (ABS, airbag), which a later version will scan.</source>
+        <translation>Niciun modul nu raportează un defect memorat, în așteptare sau permanent. Dacă totuși un martor este aprins, poate veni de la un modul pe care OBD-II generic nu îl poate citi încă (ABS, airbag); o versiune viitoare le va scana.</translation>
+    </message>
+    <message>
+        <source>Stored: confirmed faults</source>
+        <translation>Memorate: defecte confirmate</translation>
+    </message>
+    <message>
+        <source>Pending: seen once, not confirmed yet</source>
+        <translation>În așteptare: apărute o dată, încă neconfirmate</translation>
+    </message>
+    <message>
+        <source>Permanent: clear themselves after a repair</source>
+        <translation>Permanente: dispar singure după reparație</translation>
+    </message>
+    <message>
+        <source>Manufacturer-specific code</source>
+        <translation>Cod specific producătorului</translation>
+    </message>
+    <message>
+        <source>Code not in the database</source>
+        <translation>Cod absent din baza de date</translation>
+    </message>
+    <message>
+        <source>Turns on the check-engine light</source>
+        <translation>Aprinde martorul de motor</translation>
+    </message>
+    <message>
+        <source>Matters for the ITP</source>
+        <translation>Contează la ITP</translation>
+    </message>
+    <message>
+        <source>Can trigger limp mode</source>
+        <translation>Poate activa modul de avarie</translation>
+    </message>
+    <message>
+        <source>Needs a drive cycle to confirm a fix</source>
+        <translation>Necesită un ciclu de rulare pentru confirmarea reparației</translation>
+    </message>
+    <message>
+        <source>How the car detects it</source>
+        <translation>Cum detectează mașina defectul</translation>
+    </message>
+    <message>
+        <source>Its meaning depends on the car's manufacturer. Brand-specific descriptions are planned; until then, search for this code together with the make and model.</source>
+        <translation>Semnificația depinde de producătorul mașinii. Descrierile pe mărci sunt planificate; până atunci, caută codul împreună cu marca și modelul.</translation>
+    </message>
+    <message>
+        <source>Obdaryn doesn't have a description for this code yet.</source>
+        <translation>Obdaryn nu are încă o descriere pentru acest cod.</translation>
+    </message>
+    <message>
+        <source>Likely causes</source>
+        <translation>Cauze probabile</translation>
+    </message>
+    <message>
+        <source>Likely</source>
+        <translation>Probabil</translation>
+    </message>
+    <message>
+        <source>Possible</source>
+        <translation>Posibil</translation>
+    </message>
+    <message>
+        <source>Rare</source>
+        <translation>Rar</translation>
+    </message>
+    <message>
+        <source>What you may notice</source>
+        <translation>Ce poți observa</translation>
+    </message>
+    <message>
+        <source>Repair</source>
+        <translation>Reparație</translation>
+    </message>
+    <message>
+        <source>Difficulty</source>
+        <translation>Dificultate</translation>
+    </message>
+    <message>
+        <source>Easy</source>
+        <translation>Ușoară</translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation>Medie</translation>
+    </message>
+    <message>
+        <source>Hard</source>
+        <translation>Grea</translation>
+    </message>
+    <message>
+        <source>Often possible to do yourself.</source>
+        <translation>Adesea o poți face singur.</translation>
+    </message>
+    <message>
+        <source>Usually a job for a workshop.</source>
+        <translation>De obicei e treabă de service.</translation>
+    </message>
+    <message>
+        <source>Typical cost</source>
+        <translation>Cost tipic</translation>
+    </message>
+    <message>
+        <source>€%1 – €%2</source>
+        <translation>%1 – %2 €</translation>
+    </message>
+    <message>
+        <source>Rough range for parts and labour; varies a lot by car and country.</source>
+        <translation>Interval orientativ pentru piese și manoperă; variază mult în funcție de mașină și țară.</translation>
+    </message>
+    <message>
+        <source>Related codes</source>
+        <translation>Coduri înrudite</translation>
+    </message>
+    <message>
+        <source>Descriptions: obdex database (CC0). Available in English for now.</source>
+        <translation>Descrieri: baza de date obdex (CC0). Deocamdată disponibile doar în engleză.</translation>
+    </message>
+    <message>
+        <source>Descriptions: obdex database (CC0). Guidance only; confirm with a workshop before replacing parts.</source>
+        <translation>Descrieri: baza de date obdex (CC0). Doar orientativ; confirmă cu un service înainte să înlocuiești piese.</translation>
+    </message>
+</context>
+<context>
+    <name>ConnectView</name>
+    <message>
+        <source>Connect to your car</source>
+        <translation>Conectează-te la mașină</translation>
+    </message>
+    <message>
+        <source>Obdaryn talks to the car through a Wi-Fi OBD-II adapter such as the Vgate iCar Pro. It only reads: it can't change anything in the car.</source>
+        <translation>Obdaryn comunică cu mașina printr-un adaptor OBD-II Wi-Fi, cum ar fi Vgate iCar Pro. Doar citește: nu poate modifica nimic în mașină.</translation>
+    </message>
+    <message>
+        <source>Plug the adapter into the OBD-II socket</source>
+        <translation>Introdu adaptorul în mufa OBD-II</translation>
+    </message>
+    <message>
+        <source>Under the dashboard on the driver's side, usually left of the steering column.</source>
+        <translation>Sub bord, pe partea șoferului, de obicei în stânga coloanei de direcție.</translation>
+    </message>
+    <message>
+        <source>Turn the ignition ON</source>
+        <translation>Pune contactul</translation>
+    </message>
+    <message>
+        <source>The engine can stay off. Start it only if you want live data with the engine running.</source>
+        <translation>Motorul poate rămâne oprit. Pornește-l doar dacă vrei date în timp real cu motorul pornit.</translation>
+    </message>
+    <message>
+        <source>Join the adapter's Wi-Fi on this Mac</source>
+        <translation>Conectează acest Mac la rețeaua Wi-Fi a adaptorului</translation>
+    </message>
+    <message>
+        <source>Usually called "V-LINK" or "WiFi_OBDII". This Mac has no internet while it's connected.</source>
+        <translation>De obicei se numește „V-LINK” sau „WiFi_OBDII”. Cât timp e conectat, Mac-ul nu are internet.</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation>Conectează</translation>
+    </message>
+    <message>
+        <source>The first time, macOS asks to let Obdaryn find devices on the local network. Allow it.</source>
+        <translation>Prima dată, macOS cere permisiunea ca Obdaryn să caute dispozitive în rețeaua locală. Permite-o.</translation>
+    </message>
+    <message>
+        <source>Adapter address</source>
+        <translation>Adresa adaptorului</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Port</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation>Se conectează…</translation>
+    </message>
+    <message>
+        <source>The car isn't answering</source>
+        <translation>Mașina nu răspunde</translation>
+    </message>
+    <message>
+        <source>Couldn't reach the adapter</source>
+        <translation>Adaptorul nu poate fi accesat</translation>
+    </message>
+    <message>
+        <source>Try again</source>
+        <translation>Încearcă din nou</translation>
+    </message>
+    <message>
+        <source>No car nearby?</source>
+        <translation>Nu ai mașina la îndemână?</translation>
+    </message>
+    <message>
+        <source>The demo car is a simulated 2014 Hyundai Elantra with a few faults, live values and a freeze frame.</source>
+        <translation>Mașina demo este un Hyundai Elantra 2014 simulat, cu câteva defecte, valori în timp real și un instantaneu.</translation>
+    </message>
+    <message>
+        <source>Try the demo car</source>
+        <translation>Încearcă mașina demo</translation>
+    </message>
+</context>
+<context>
+    <name>DtcSystem</name>
+    <message>
+        <source>Body (airbags, comfort, lighting, ...)</source>
+        <translation>Caroserie (airbaguri, confort, lumini, ...)</translation>
+    </message>
+    <message>
+        <source>Chassis (ABS, stability control, steering, ...)</source>
+        <translation>Șasiu (ABS, control stabilitate, direcție, ...)</translation>
+    </message>
+    <message>
+        <source>Network communication between modules</source>
+        <translation>Comunicația în rețea dintre module</translation>
+    </message>
+    <message>
+        <source>Fuel, air metering and emission controls</source>
+        <translation>Combustibil, dozare aer și controlul emisiilor</translation>
+    </message>
+    <message>
+        <source>Fuel and air metering</source>
+        <translation>Combustibil și dozare aer</translation>
+    </message>
+    <message>
+        <source>Ignition system or misfire</source>
+        <translation>Aprindere sau rateuri</translation>
+    </message>
+    <message>
+        <source>Auxiliary emission controls</source>
+        <translation>Controale auxiliare ale emisiilor</translation>
+    </message>
+    <message>
+        <source>Vehicle speed, idle control and auxiliary inputs</source>
+        <translation>Viteză, control ralanti și intrări auxiliare</translation>
+    </message>
+    <message>
+        <source>Engine computer and output circuits</source>
+        <translation>Calculatorul motorului și circuitele de ieșire</translation>
+    </message>
+    <message>
+        <source>Transmission</source>
+        <translation>Transmisie</translation>
+    </message>
+    <message>
+        <source>Hybrid / electric propulsion</source>
+        <translation>Propulsie hibridă / electrică</translation>
+    </message>
+    <message>
+        <source>Powertrain</source>
+        <translation>Grup motopropulsor</translation>
+    </message>
+</context>
+<context>
+    <name>FreezeFramePage</name>
+    <message>
+        <source>Freeze frame</source>
+        <translation>Instantaneu</translation>
+    </message>
+    <message>
+        <source>What the sensors read at the moment a fault was stored. It helps tell whether the problem happened cold, hot, idling or under load.</source>
+        <translation>Ce citeau senzorii în momentul în care a fost memorat un defect. Te ajută să afli dacă problema a apărut la rece, la cald, la ralanti sau în sarcină.</translation>
+    </message>
+    <message>
+        <source>Read again</source>
+        <translation>Citește din nou</translation>
+    </message>
+    <message>
+        <source>No freeze frame stored</source>
+        <translation>Niciun instantaneu memorat</translation>
+    </message>
+    <message>
+        <source>The car stores one when a fault is confirmed. Clearing codes erases it.</source>
+        <translation>Mașina memorează unul când un defect este confirmat. Ștergerea codurilor îl elimină.</translation>
+    </message>
+</context>
+<context>
+    <name>KeyValue</name>
+    <message>
+        <source>Copy %1</source>
+        <translation>Copiază %1</translation>
+    </message>
+</context>
+<context>
+    <name>LivePage</name>
+    <message>
+        <source>Live data</source>
+        <translation>Date în timp real</translation>
+    </message>
+    <message>
+        <source>%1 values · %2 readings per second · pinned values refresh first</source>
+        <translation>%1 valori · %2 citiri pe secundă · valorile fixate se actualizează primele</translation>
+    </message>
+    <message>
+        <source>Copy as CSV</source>
+        <translation>Copiază ca CSV</translation>
+    </message>
+    <message>
+        <source>Filter, e.g. temperature</source>
+        <translation>Filtrează, ex. temperatură</translation>
+    </message>
+    <message>
+        <source>Filter live values</source>
+        <translation>Filtrează valorile</translation>
+    </message>
+    <message>
+        <source>Show raw bytes</source>
+        <translation>Arată octeții bruți</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Valoare</translation>
+    </message>
+    <message>
+        <source>Last 2 minutes</source>
+        <translation>Ultimele 2 minute</translation>
+    </message>
+    <message>
+        <source>Reading</source>
+        <translation>Citire</translation>
+    </message>
+    <message>
+        <source>Raw</source>
+        <translation>Brut</translation>
+    </message>
+    <message>
+        <source>Unpin %1</source>
+        <translation>Anulează fixarea pentru %1</translation>
+    </message>
+    <message>
+        <source>Pin %1 to the overview</source>
+        <translation>Fixează %1 în prezentarea generală</translation>
+    </message>
+    <message>
+        <source>PID %1</source>
+        <translation>PID %1</translation>
+    </message>
+</context>
+<context>
+    <name>LogPage</name>
+    <message>
+        <source>Adapter log</source>
+        <translation>Jurnal adaptor</translation>
+    </message>
+    <message>
+        <source>Every command sent to the adapter (→), every answer (←) and every blocked or failed command (!). Copy it into a bug report if something looks wrong.</source>
+        <translation>Fiecare comandă trimisă adaptorului (→), fiecare răspuns (←) și fiecare comandă blocată sau eșuată (!). Copiază-l într-un raport de eroare dacă ceva pare în neregulă.</translation>
+    </message>
+    <message>
+        <source>Copy log</source>
+        <translation>Copiază jurnalul</translation>
+    </message>
+    <message>
+        <source>Clear log</source>
+        <translation>Golește jurnalul</translation>
+    </message>
+    <message>
+        <source>Nothing yet</source>
+        <translation>Nimic deocamdată</translation>
+    </message>
+    <message>
+        <source>Traffic appears here as soon as Obdaryn connects to an adapter.</source>
+        <translation>Traficul apare aici imediat ce Obdaryn se conectează la un adaptor.</translation>
+    </message>
+</context>
+<context>
+    <name>Monitor</name>
+    <message>
+        <source>Misfire</source>
+        <translation>Rateuri</translation>
+    </message>
+    <message>
+        <source>Fuel system</source>
+        <translation>Sistem de alimentare</translation>
+    </message>
+    <message>
+        <source>Comprehensive components</source>
+        <translation>Componente generale</translation>
+    </message>
+    <message>
+        <source>Catalyst</source>
+        <translation>Catalizator</translation>
+    </message>
+    <message>
+        <source>Heated catalyst</source>
+        <translation>Catalizator încălzit</translation>
+    </message>
+    <message>
+        <source>Evaporative system (EVAP)</source>
+        <translation>Sistem de evaporare (EVAP)</translation>
+    </message>
+    <message>
+        <source>Secondary air system</source>
+        <translation>Sistem de aer secundar</translation>
+    </message>
+    <message>
+        <source>A/C refrigerant</source>
+        <translation>Agent frigorific A/C</translation>
+    </message>
+    <message>
+        <source>Oxygen sensor</source>
+        <translation>Sondă lambda</translation>
+    </message>
+    <message>
+        <source>Oxygen sensor heater</source>
+        <translation>Încălzire sondă lambda</translation>
+    </message>
+    <message>
+        <source>EGR / VVT system</source>
+        <translation>Sistem EGR / VVT</translation>
+    </message>
+    <message>
+        <source>NMHC catalyst</source>
+        <translation>Catalizator NMHC</translation>
+    </message>
+    <message>
+        <source>NOx / SCR aftertreatment</source>
+        <translation>Tratare NOx / SCR</translation>
+    </message>
+    <message>
+        <source>Boost pressure</source>
+        <translation>Presiune de supraalimentare</translation>
+    </message>
+    <message>
+        <source>Exhaust gas sensor</source>
+        <translation>Senzor gaze de evacuare</translation>
+    </message>
+    <message>
+        <source>Particulate filter (DPF)</source>
+        <translation>Filtru de particule (DPF)</translation>
+    </message>
+</context>
+<context>
+    <name>NotConnected</name>
+    <message>
+        <source>Connect to a car to see this</source>
+        <translation>Conectează-te la o mașină ca să vezi asta</translation>
+    </message>
+    <message>
+        <source>Obdaryn reads this information from the car while the adapter is connected and the ignition is ON.</source>
+        <translation>Obdaryn citește aceste informații de la mașină cât timp adaptorul este conectat și contactul pus.</translation>
+    </message>
+    <message>
+        <source>Go to connection</source>
+        <translation>Mergi la conectare</translation>
+    </message>
+</context>
+<context>
+    <name>Nrc</name>
+    <message>
+        <source>The module rejected the request.</source>
+        <translation>Modulul a respins cererea.</translation>
+    </message>
+    <message>
+        <source>The module does not support this service.</source>
+        <translation>Modulul nu suportă acest serviciu.</translation>
+    </message>
+    <message>
+        <source>The module does not support this sub-function.</source>
+        <translation>Modulul nu suportă această subfuncție.</translation>
+    </message>
+    <message>
+        <source>Wrong request length.</source>
+        <translation>Lungime greșită a cererii.</translation>
+    </message>
+    <message>
+        <source>The module is busy; try again.</source>
+        <translation>Modulul este ocupat; încearcă din nou.</translation>
+    </message>
+    <message>
+        <source>Conditions not correct (for example, the engine is running).</source>
+        <translation>Condiții necorespunzătoare (de exemplu, motorul este pornit).</translation>
+    </message>
+    <message>
+        <source>The requested value does not exist in this module.</source>
+        <translation>Valoarea cerută nu există în acest modul.</translation>
+    </message>
+    <message>
+        <source>Access denied by the module.</source>
+        <translation>Acces refuzat de modul.</translation>
+    </message>
+    <message>
+        <source>The module is still working on the answer.</source>
+        <translation>Modulul încă pregătește răspunsul.</translation>
+    </message>
+    <message>
+        <source>Not available in the current diagnostic session.</source>
+        <translation>Indisponibil în sesiunea de diagnoză curentă.</translation>
+    </message>
+    <message>
+        <source>Negative response 0x%1.</source>
+        <translation>Răspuns negativ 0x%1.</translation>
+    </message>
+</context>
+<context>
+    <name>ObdClient</name>
+    <message>
+        <source>No module answered this request.</source>
+        <translation>Niciun modul nu a răspuns la această cerere.</translation>
+    </message>
+    <message>
+        <source>The adapter did not answer in time.</source>
+        <translation>Adaptorul nu a răspuns la timp.</translation>
+    </message>
+    <message>
+        <source>Blocked by Obdaryn's safety guard: %1</source>
+        <translation>Blocat de protecția de siguranță Obdaryn: %1</translation>
+    </message>
+    <message>
+        <source>Not connected.</source>
+        <translation>Neconectat.</translation>
+    </message>
+    <message>
+        <source>Adapter error: %1</source>
+        <translation>Eroare adaptor: %1</translation>
+    </message>
+    <message>
+        <source>Unexpected answer.</source>
+        <translation>Răspuns neașteptat.</translation>
+    </message>
+</context>
+<context>
+    <name>OverviewPage</name>
+    <message>
+        <source>%1 · %2</source>
+        <translation>%1 · %2</translation>
+    </message>
+    <message>
+        <source>Your car</source>
+        <translation>Mașina ta</translation>
+    </message>
+    <message>
+        <source>1 module answered</source>
+        <translation>A răspuns 1 modul</translation>
+    </message>
+    <message>
+        <source>%1 modules answered</source>
+        <translation>Au răspuns %1 module</translation>
+    </message>
+    <message>
+        <source>scanned at %1</source>
+        <translation>scanat la %1</translation>
+    </message>
+    <message>
+        <source>Scan again</source>
+        <translation>Scanează din nou</translation>
+    </message>
+    <message>
+        <source>VIN</source>
+        <translation>VIN</translation>
+    </message>
+    <message>
+        <source>Copy VIN</source>
+        <translation>Copiază VIN-ul</translation>
+    </message>
+    <message>
+        <source>Check-engine light on</source>
+        <translation>Martor de motor aprins</translation>
+    </message>
+    <message>
+        <source>Check-engine light off</source>
+        <translation>Martor de motor stins</translation>
+    </message>
+    <message>
+        <source>No trouble codes</source>
+        <translation>Niciun cod de eroare</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n stored</source>
+        <translation>
+            <numerusform>%n memorat</numerusform>
+            <numerusform>%n memorate</numerusform>
+            <numerusform>%n de memorate</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n pending</source>
+        <translation>
+            <numerusform>%n în așteptare</numerusform>
+            <numerusform>%n în așteptare</numerusform>
+            <numerusform>%n în așteptare</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n permanent</source>
+        <translation>
+            <numerusform>%n permanent</numerusform>
+            <numerusform>%n permanente</numerusform>
+            <numerusform>%n de permanente</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Readiness unknown</source>
+        <translation>Pregătire necunoscută</translation>
+    </message>
+    <message>
+        <source>Likely ready for the ITP</source>
+        <translation>Probabil pregătită pentru ITP</translation>
+    </message>
+    <message>
+        <source>Not ready for the ITP</source>
+        <translation>Nepregătită pentru ITP</translation>
+    </message>
+    <message>
+        <source>All monitors complete</source>
+        <translation>Toate monitoarele sunt complete</translation>
+    </message>
+    <message>
+        <source>%1 of %2 monitors not complete</source>
+        <translation>%1 din %2 monitoare incomplete</translation>
+    </message>
+    <message>
+        <source>The car didn't report its monitors.</source>
+        <translation>Mașina nu și-a raportat monitoarele.</translation>
+    </message>
+    <message>
+        <source>Battery %1 V</source>
+        <translation>Baterie %1 V</translation>
+    </message>
+    <message>
+        <source>Battery —</source>
+        <translation>Baterie —</translation>
+    </message>
+    <message>
+        <source>Measured by the adapter at the OBD socket.</source>
+        <translation>Măsurată de adaptor la mufa OBD.</translation>
+    </message>
+    <message>
+        <source>Charging: the engine is running.</source>
+        <translation>Se încarcă: motorul este pornit.</translation>
+    </message>
+    <message>
+        <source>Healthy with the engine off.</source>
+        <translation>În regulă, cu motorul oprit.</translation>
+    </message>
+    <message>
+        <source>Getting low. Start the engine soon.</source>
+        <translation>Începe să scadă. Pornește motorul în curând.</translation>
+    </message>
+    <message>
+        <source>Low. Start the engine before continuing.</source>
+        <translation>Scăzută. Pornește motorul înainte să continui.</translation>
+    </message>
+    <message>
+        <source>Trouble codes</source>
+        <translation>Coduri de eroare</translation>
+    </message>
+    <message>
+        <source>Details and clearing</source>
+        <translation>Detalii și ștergere</translation>
+    </message>
+    <message>
+        <source>No module reports a stored, pending or permanent fault.</source>
+        <translation>Niciun modul nu raportează un defect memorat, în așteptare sau permanent.</translation>
+    </message>
+    <message>
+        <source>Live values</source>
+        <translation>Valori în timp real</translation>
+    </message>
+    <message>
+        <source>%1 readings/s</source>
+        <translation>%1 citiri/s</translation>
+    </message>
+    <message>
+        <source>All live data</source>
+        <translation>Toate datele în timp real</translation>
+    </message>
+    <message>
+        <source>Looking for live data…</source>
+        <translation>Se caută datele în timp real…</translation>
+    </message>
+    <message>
+        <source>No live data</source>
+        <translation>Nicio dată în timp real</translation>
+    </message>
+    <message>
+        <source>The car didn't report any standard live values.</source>
+        <translation>Mașina nu a raportat nicio valoare standard în timp real.</translation>
+    </message>
+</context>
+<context>
+    <name>Pid</name>
+    <message>
+        <source>Monitor status since codes cleared</source>
+        <translation>Starea monitoarelor de la ștergerea codurilor</translation>
+    </message>
+    <message>
+        <source>DTC that caused the freeze frame</source>
+        <translation>Codul care a generat instantaneul</translation>
+    </message>
+    <message>
+        <source>Fuel system status</source>
+        <translation>Starea sistemului de alimentare</translation>
+    </message>
+    <message>
+        <source>Calculated engine load</source>
+        <translation>Sarcină motor calculată</translation>
+    </message>
+    <message>
+        <source>Coolant temperature</source>
+        <translation>Temperatura lichidului de răcire</translation>
+    </message>
+    <message>
+        <source>Short-term fuel trim, bank 1</source>
+        <translation>Corecție combustibil pe termen scurt, banc 1</translation>
+    </message>
+    <message>
+        <source>Long-term fuel trim, bank 1</source>
+        <translation>Corecție combustibil pe termen lung, banc 1</translation>
+    </message>
+    <message>
+        <source>Short-term fuel trim, bank 2</source>
+        <translation>Corecție combustibil pe termen scurt, banc 2</translation>
+    </message>
+    <message>
+        <source>Long-term fuel trim, bank 2</source>
+        <translation>Corecție combustibil pe termen lung, banc 2</translation>
+    </message>
+    <message>
+        <source>Fuel pressure (gauge)</source>
+        <translation>Presiune combustibil (relativă)</translation>
+    </message>
+    <message>
+        <source>Intake manifold pressure</source>
+        <translation>Presiune în galeria de admisie</translation>
+    </message>
+    <message>
+        <source>Engine speed</source>
+        <translation>Turație motor</translation>
+    </message>
+    <message>
+        <source>Vehicle speed</source>
+        <translation>Viteză vehicul</translation>
+    </message>
+    <message>
+        <source>Ignition timing advance</source>
+        <translation>Avans la aprindere</translation>
+    </message>
+    <message>
+        <source>Intake air temperature</source>
+        <translation>Temperatura aerului admis</translation>
+    </message>
+    <message>
+        <source>Mass air flow</source>
+        <translation>Debit masic de aer</translation>
+    </message>
+    <message>
+        <source>Throttle position</source>
+        <translation>Poziția clapetei</translation>
+    </message>
+    <message>
+        <source>Commanded secondary air status</source>
+        <translation>Starea comandată a aerului secundar</translation>
+    </message>
+    <message>
+        <source>Oxygen sensors present</source>
+        <translation>Sonde lambda prezente</translation>
+    </message>
+    <message>
+        <source>O2 sensor voltage, bank 1 sensor 1</source>
+        <translation>Tensiune sondă lambda, banc 1 senzor 1</translation>
+    </message>
+    <message>
+        <source>O2 sensor voltage, bank 1 sensor 2</source>
+        <translation>Tensiune sondă lambda, banc 1 senzor 2</translation>
+    </message>
+    <message>
+        <source>O2 sensor voltage, bank 1 sensor 3</source>
+        <translation>Tensiune sondă lambda, banc 1 senzor 3</translation>
+    </message>
+    <message>
+        <source>O2 sensor voltage, bank 1 sensor 4</source>
+        <translation>Tensiune sondă lambda, banc 1 senzor 4</translation>
+    </message>
+    <message>
+        <source>O2 sensor voltage, bank 2 sensor 1</source>
+        <translation>Tensiune sondă lambda, banc 2 senzor 1</translation>
+    </message>
+    <message>
+        <source>O2 sensor voltage, bank 2 sensor 2</source>
+        <translation>Tensiune sondă lambda, banc 2 senzor 2</translation>
+    </message>
+    <message>
+        <source>O2 sensor voltage, bank 2 sensor 3</source>
+        <translation>Tensiune sondă lambda, banc 2 senzor 3</translation>
+    </message>
+    <message>
+        <source>O2 sensor voltage, bank 2 sensor 4</source>
+        <translation>Tensiune sondă lambda, banc 2 senzor 4</translation>
+    </message>
+    <message>
+        <source>OBD standard</source>
+        <translation>Standard OBD</translation>
+    </message>
+    <message>
+        <source>Oxygen sensors present (4 banks)</source>
+        <translation>Sonde lambda prezente (4 bancuri)</translation>
+    </message>
+    <message>
+        <source>Auxiliary input status</source>
+        <translation>Starea intrării auxiliare</translation>
+    </message>
+    <message>
+        <source>Run time since engine start</source>
+        <translation>Timp de la pornirea motorului</translation>
+    </message>
+    <message>
+        <source>Distance with MIL on</source>
+        <translation>Distanță cu martorul aprins</translation>
+    </message>
+    <message>
+        <source>Fuel rail pressure (relative)</source>
+        <translation>Presiune rampă combustibil (relativă)</translation>
+    </message>
+    <message>
+        <source>Fuel rail pressure (gauge)</source>
+        <translation>Presiune rampă combustibil (manometrică)</translation>
+    </message>
+    <message>
+        <source>O2 sensor 1 equivalence ratio</source>
+        <translation>Sonda lambda 1, raport lambda</translation>
+    </message>
+    <message>
+        <source>O2 sensor 2 equivalence ratio</source>
+        <translation>Sonda lambda 2, raport lambda</translation>
+    </message>
+    <message>
+        <source>O2 sensor 3 equivalence ratio</source>
+        <translation>Sonda lambda 3, raport lambda</translation>
+    </message>
+    <message>
+        <source>O2 sensor 4 equivalence ratio</source>
+        <translation>Sonda lambda 4, raport lambda</translation>
+    </message>
+    <message>
+        <source>O2 sensor 5 equivalence ratio</source>
+        <translation>Sonda lambda 5, raport lambda</translation>
+    </message>
+    <message>
+        <source>O2 sensor 6 equivalence ratio</source>
+        <translation>Sonda lambda 6, raport lambda</translation>
+    </message>
+    <message>
+        <source>O2 sensor 7 equivalence ratio</source>
+        <translation>Sonda lambda 7, raport lambda</translation>
+    </message>
+    <message>
+        <source>O2 sensor 8 equivalence ratio</source>
+        <translation>Sonda lambda 8, raport lambda</translation>
+    </message>
+    <message>
+        <source>Commanded EGR</source>
+        <translation>EGR comandat</translation>
+    </message>
+    <message>
+        <source>EGR error</source>
+        <translation>Eroare EGR</translation>
+    </message>
+    <message>
+        <source>Commanded evaporative purge</source>
+        <translation>Purjare EVAP comandată</translation>
+    </message>
+    <message>
+        <source>Fuel tank level</source>
+        <translation>Nivel combustibil în rezervor</translation>
+    </message>
+    <message>
+        <source>Warm-ups since codes cleared</source>
+        <translation>Încălziri de la ștergerea codurilor</translation>
+    </message>
+    <message>
+        <source>Distance since codes cleared</source>
+        <translation>Distanță de la ștergerea codurilor</translation>
+    </message>
+    <message>
+        <source>Evap system vapor pressure</source>
+        <translation>Presiunea vaporilor în sistemul EVAP</translation>
+    </message>
+    <message>
+        <source>Barometric pressure</source>
+        <translation>Presiune atmosferică</translation>
+    </message>
+    <message>
+        <source>O2 sensor 1 current</source>
+        <translation>Sonda lambda 1, curent</translation>
+    </message>
+    <message>
+        <source>O2 sensor 2 current</source>
+        <translation>Sonda lambda 2, curent</translation>
+    </message>
+    <message>
+        <source>O2 sensor 3 current</source>
+        <translation>Sonda lambda 3, curent</translation>
+    </message>
+    <message>
+        <source>O2 sensor 4 current</source>
+        <translation>Sonda lambda 4, curent</translation>
+    </message>
+    <message>
+        <source>O2 sensor 5 current</source>
+        <translation>Sonda lambda 5, curent</translation>
+    </message>
+    <message>
+        <source>O2 sensor 6 current</source>
+        <translation>Sonda lambda 6, curent</translation>
+    </message>
+    <message>
+        <source>O2 sensor 7 current</source>
+        <translation>Sonda lambda 7, curent</translation>
+    </message>
+    <message>
+        <source>O2 sensor 8 current</source>
+        <translation>Sonda lambda 8, curent</translation>
+    </message>
+    <message>
+        <source>Catalyst temperature, bank 1 sensor 1</source>
+        <translation>Temperatura catalizatorului, banc 1 senzor 1</translation>
+    </message>
+    <message>
+        <source>Catalyst temperature, bank 2 sensor 1</source>
+        <translation>Temperatura catalizatorului, banc 2 senzor 1</translation>
+    </message>
+    <message>
+        <source>Catalyst temperature, bank 1 sensor 2</source>
+        <translation>Temperatura catalizatorului, banc 1 senzor 2</translation>
+    </message>
+    <message>
+        <source>Catalyst temperature, bank 2 sensor 2</source>
+        <translation>Temperatura catalizatorului, banc 2 senzor 2</translation>
+    </message>
+    <message>
+        <source>Monitor status this drive cycle</source>
+        <translation>Starea monitoarelor în ciclul curent</translation>
+    </message>
+    <message>
+        <source>Control module voltage</source>
+        <translation>Tensiunea modulului de control</translation>
+    </message>
+    <message>
+        <source>Absolute load</source>
+        <translation>Sarcină absolută</translation>
+    </message>
+    <message>
+        <source>Commanded equivalence ratio</source>
+        <translation>Raport lambda comandat</translation>
+    </message>
+    <message>
+        <source>Relative throttle position</source>
+        <translation>Poziția relativă a clapetei</translation>
+    </message>
+    <message>
+        <source>Ambient air temperature</source>
+        <translation>Temperatura aerului exterior</translation>
+    </message>
+    <message>
+        <source>Absolute throttle position B</source>
+        <translation>Poziția absolută a clapetei B</translation>
+    </message>
+    <message>
+        <source>Absolute throttle position C</source>
+        <translation>Poziția absolută a clapetei C</translation>
+    </message>
+    <message>
+        <source>Accelerator pedal position D</source>
+        <translation>Poziția pedalei de accelerație D</translation>
+    </message>
+    <message>
+        <source>Accelerator pedal position E</source>
+        <translation>Poziția pedalei de accelerație E</translation>
+    </message>
+    <message>
+        <source>Accelerator pedal position F</source>
+        <translation>Poziția pedalei de accelerație F</translation>
+    </message>
+    <message>
+        <source>Commanded throttle actuator</source>
+        <translation>Actuator clapetă comandat</translation>
+    </message>
+    <message>
+        <source>Time run with MIL on</source>
+        <translation>Timp de funcționare cu martorul aprins</translation>
+    </message>
+    <message>
+        <source>Time since codes cleared</source>
+        <translation>Timp de la ștergerea codurilor</translation>
+    </message>
+    <message>
+        <source>Fuel type</source>
+        <translation>Tip de combustibil</translation>
+    </message>
+    <message>
+        <source>Ethanol fuel</source>
+        <translation>Conținut de etanol</translation>
+    </message>
+    <message>
+        <source>Fuel rail absolute pressure</source>
+        <translation>Presiune absolută rampă combustibil</translation>
+    </message>
+    <message>
+        <source>Relative accelerator pedal position</source>
+        <translation>Poziția relativă a pedalei de accelerație</translation>
+    </message>
+    <message>
+        <source>Hybrid battery remaining life</source>
+        <translation>Durata rămasă a bateriei hibride</translation>
+    </message>
+    <message>
+        <source>Engine oil temperature</source>
+        <translation>Temperatura uleiului de motor</translation>
+    </message>
+    <message>
+        <source>Fuel injection timing</source>
+        <translation>Avansul la injecție</translation>
+    </message>
+    <message>
+        <source>Engine fuel rate</source>
+        <translation>Consum de combustibil al motorului</translation>
+    </message>
+    <message>
+        <source>Driver's demand engine torque</source>
+        <translation>Cuplu motor cerut de șofer</translation>
+    </message>
+    <message>
+        <source>Actual engine torque</source>
+        <translation>Cuplu motor real</translation>
+    </message>
+    <message>
+        <source>Engine reference torque</source>
+        <translation>Cuplu motor de referință</translation>
+    </message>
+    <message>
+        <source>Odometer</source>
+        <translation>Kilometraj</translation>
+    </message>
+</context>
+<context>
+    <name>PidStatus</name>
+    <message>
+        <source>Engine off</source>
+        <translation>Motor oprit</translation>
+    </message>
+    <message>
+        <source>Open loop (engine warming up)</source>
+        <translation>Buclă deschisă (motorul se încălzește)</translation>
+    </message>
+    <message>
+        <source>Closed loop (using O2 sensors)</source>
+        <translation>Buclă închisă (folosește sondele lambda)</translation>
+    </message>
+    <message>
+        <source>Open loop (engine load or fuel cut)</source>
+        <translation>Buclă deschisă (sarcină sau întrerupere combustibil)</translation>
+    </message>
+    <message>
+        <source>Open loop (system fault)</source>
+        <translation>Buclă deschisă (defect de sistem)</translation>
+    </message>
+    <message>
+        <source>Closed loop (feedback fault)</source>
+        <translation>Buclă închisă (defect de reacție)</translation>
+    </message>
+    <message>
+        <source>Not OBD compliant</source>
+        <translation>Neconform OBD</translation>
+    </message>
+    <message>
+        <source>Not available</source>
+        <translation>Indisponibil</translation>
+    </message>
+    <message>
+        <source>Gasoline</source>
+        <translation>Benzină</translation>
+    </message>
+    <message>
+        <source>Methanol</source>
+        <translation>Metanol</translation>
+    </message>
+    <message>
+        <source>Ethanol</source>
+        <translation>Etanol</translation>
+    </message>
+    <message>
+        <source>Diesel</source>
+        <translation>Motorină</translation>
+    </message>
+    <message>
+        <source>LPG</source>
+        <translation>GPL</translation>
+    </message>
+    <message>
+        <source>CNG</source>
+        <translation>GNC</translation>
+    </message>
+    <message>
+        <source>Propane</source>
+        <translation>Propan</translation>
+    </message>
+    <message>
+        <source>Electric</source>
+        <translation>Electric</translation>
+    </message>
+    <message>
+        <source>Hybrid / bi-fuel</source>
+        <translation>Hibrid / bicombustibil</translation>
+    </message>
+</context>
+<context>
+    <name>Protocol</name>
+    <message>
+        <source>Unknown</source>
+        <translation>Necunoscut</translation>
+    </message>
+    <message>
+        <source>Automatic (searching)</source>
+        <translation>Automat (în căutare)</translation>
+    </message>
+    <message>
+        <source>ISO 14230-4 KWP (5-baud init)</source>
+        <translation>ISO 14230-4 KWP (inițializare 5 baud)</translation>
+    </message>
+    <message>
+        <source>ISO 14230-4 KWP (fast init)</source>
+        <translation>ISO 14230-4 KWP (inițializare rapidă)</translation>
+    </message>
+    <message>
+        <source>User-defined CAN 1</source>
+        <translation>CAN definit de utilizator 1</translation>
+    </message>
+    <message>
+        <source>User-defined CAN 2</source>
+        <translation>CAN definit de utilizator 2</translation>
+    </message>
+</context>
+<context>
+    <name>ReadinessPage</name>
+    <message>
+        <source>Readiness</source>
+        <translation>Pregătire ITP</translation>
+    </message>
+    <message>
+        <source>The engine computer's self-tests. They run while you drive and reset whenever codes are cleared or the battery is disconnected.</source>
+        <translation>Autotestele calculatorului motorului (monitoarele readiness). Rulează în timp ce conduci și se resetează la ștergerea codurilor sau la deconectarea bateriei.</translation>
+    </message>
+    <message>
+        <source>Read again</source>
+        <translation>Citește din nou</translation>
+    </message>
+    <message>
+        <source>Likely ready for the ITP</source>
+        <translation>Probabil pregătită pentru ITP</translation>
+    </message>
+    <message>
+        <source>Not ready for the ITP yet</source>
+        <translation>Încă nepregătită pentru ITP</translation>
+    </message>
+    <message>
+        <source>The check-engine light is on, which fails the emissions check on its own. Fix the fault first.</source>
+        <translation>Martorul de motor este aprins, iar asta singur pică testul de emisii. Remediază întâi defectul.</translation>
+    </message>
+    <message>
+        <source>All monitors have completed and the check-engine light is off.</source>
+        <translation>Toate monitoarele sunt complete și martorul de motor este stins.</translation>
+    </message>
+    <message>
+        <source>One monitor hasn't finished. Most inspections accept one; drive a little more to be safe.</source>
+        <translation>Un monitor nu s-a finalizat. Majoritatea inspecțiilor acceptă unul; mai condu puțin ca să fii sigur.</translation>
+    </message>
+    <message>
+        <source>%1 monitors haven't finished. Drive normally for a few days (city and highway) and check again.</source>
+        <translation>%1 monitoare nu s-au finalizat. Condu normal câteva zile (oraș și drum deschis) și verifică din nou.</translation>
+    </message>
+    <message>
+        <source>Guidance only: inspection rules differ by country and model year.</source>
+        <translation>Doar orientativ: regulile inspecției diferă în funcție de țară și anul de fabricație.</translation>
+    </message>
+    <message>
+        <source>The car didn't report its monitors</source>
+        <translation>Mașina nu și-a raportat monitoarele</translation>
+    </message>
+    <message>
+        <source>Older or non-standard cars may not support this. Try reading again with the ignition ON.</source>
+        <translation>Mașinile mai vechi sau nestandard s-ar putea să nu suporte asta. Încearcă să citești din nou cu contactul pus.</translation>
+    </message>
+    <message>
+        <source>Monitors (diesel)</source>
+        <translation>Monitoare (diesel)</translation>
+    </message>
+    <message>
+        <source>Monitors</source>
+        <translation>Monitoare</translation>
+    </message>
+    <message>
+        <source>%1 of %2 complete</source>
+        <translation>%1 din %2 complete</translation>
+    </message>
+    <message>
+        <source>Runs all the time</source>
+        <translation>Rulează permanent</translation>
+    </message>
+    <message>
+        <source>Complete</source>
+        <translation>Complet</translation>
+    </message>
+    <message>
+        <source>Not complete</source>
+        <translation>Incomplet</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPage</name>
+    <message>
+        <source>Settings</source>
+        <translation>Setări</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation>General</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Limbă</translation>
+    </message>
+    <message>
+        <source>Trouble-code descriptions stay in English for now.</source>
+        <translation>Descrierile codurilor de eroare rămân deocamdată în engleză.</translation>
+    </message>
+    <message>
+        <source>Appearance</source>
+        <translation>Aspect</translation>
+    </message>
+    <message>
+        <source>Dark is easier on the eyes in the car at night.</source>
+        <translation>Tema întunecată e mai odihnitoare noaptea, în mașină.</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>Sistem</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>Luminos</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>Întunecat</translation>
+    </message>
+    <message>
+        <source>Reduce motion</source>
+        <translation>Reduce animațiile</translation>
+    </message>
+    <message>
+        <source>Skip the start-up light check and other animations.</source>
+        <translation>Sare peste testul martorilor la conectare și peste alte animații.</translation>
+    </message>
+    <message>
+        <source>Demo car</source>
+        <translation>Mașina demo</translation>
+    </message>
+    <message>
+        <source>Engine running</source>
+        <translation>Motor pornit</translation>
+    </message>
+    <message>
+        <source>Turn the simulated engine off to try clearing codes. Obdaryn refuses while it runs, as with a real car.</source>
+        <translation>Oprește motorul simulat ca să încerci ștergerea codurilor. Obdaryn refuză cât timp merge, ca la o mașină reală.</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>Despre</translation>
+    </message>
+    <message>
+        <source>Obdaryn %1 · free and open-source software under the GNU GPL v3 or later.</source>
+        <translation>Obdaryn %1 · software liber și open-source, sub licența GNU GPL v3 sau ulterioară.</translation>
+    </message>
+    <message>
+        <source>Read-only by design. A safety guard checks every command and refuses anything that could write to, code, reset or flash a module in your car. The only change Obdaryn can make is clearing trouble codes, and only after you confirm.</source>
+        <translation>Doar citire, prin design. O protecție de siguranță verifică fiecare comandă și refuză orice ar putea scrie, coda, reseta sau reprograma un modul al mașinii. Singura modificare pe care o poate face Obdaryn este ștergerea codurilor de eroare, și doar după confirmarea ta.</translation>
+    </message>
+    <message>
+        <source>Trouble-code descriptions: %1 codes from %2.</source>
+        <translation>Descrierile codurilor de eroare: %1 coduri din %2.</translation>
+    </message>
+    <message>
+        <source>Fonts: Inter and JetBrains Mono (SIL Open Font License). Icons: Lucide (ISC).</source>
+        <translation>Fonturi: Inter și JetBrains Mono (SIL Open Font License). Pictograme: Lucide (ISC).</translation>
+    </message>
+</context>
+<context>
+    <name>Sidebar</name>
+    <message>
+        <source>Connected</source>
+        <translation>Conectat</translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation>Se conectează…</translation>
+    </message>
+    <message>
+        <source>Car not answering</source>
+        <translation>Mașina nu răspunde</translation>
+    </message>
+    <message>
+        <source>Connection failed</source>
+        <translation>Conectare eșuată</translation>
+    </message>
+    <message>
+        <source>Not connected</source>
+        <translation>Neconectat</translation>
+    </message>
+    <message>
+        <source>Demo car</source>
+        <translation>Mașina demo</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Deconectează</translation>
+    </message>
+    <message>
+        <source>Diagnose</source>
+        <translation>Diagnoză</translation>
+    </message>
+    <message>
+        <source>Overview</source>
+        <translation>Prezentare generală</translation>
+    </message>
+    <message>
+        <source>Trouble codes</source>
+        <translation>Coduri de eroare</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n codes stored or pending</source>
+        <translation>
+            <numerusform>%n cod memorat sau în așteptare</numerusform>
+            <numerusform>%n coduri memorate sau în așteptare</numerusform>
+            <numerusform>%n de coduri memorate sau în așteptare</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Readiness</source>
+        <translation>Pregătire ITP</translation>
+    </message>
+    <message>
+        <source>Freeze frame</source>
+        <translation>Instantaneu</translation>
+    </message>
+    <message>
+        <source>Monitor</source>
+        <translation>Monitorizare</translation>
+    </message>
+    <message>
+        <source>Live data</source>
+        <translation>Date în timp real</translation>
+    </message>
+    <message>
+        <source>Vehicle</source>
+        <translation>Vehicul</translation>
+    </message>
+    <message>
+        <source>Vehicle info</source>
+        <translation>Informații vehicul</translation>
+    </message>
+    <message>
+        <source>Adapter</source>
+        <translation>Adaptor</translation>
+    </message>
+    <message>
+        <source>Adapter log</source>
+        <translation>Jurnal adaptor</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Setări</translation>
+    </message>
+    <message>
+        <source>Read-only. Obdaryn can't change anything in your car.</source>
+        <translation>Doar citire. Obdaryn nu poate modifica nimic în mașina ta.</translation>
+    </message>
+</context>
+<context>
+    <name>Toast</name>
+    <message>
+        <source>Dismiss</source>
+        <translation>Închide</translation>
+    </message>
+</context>
+<context>
+    <name>Unit</name>
+    <message>
+        <source>kPa</source>
+        <translation>kPa</translation>
+    </message>
+    <message>
+        <source>rpm</source>
+        <translation>rot/min</translation>
+    </message>
+    <message>
+        <source>km/h</source>
+        <translation>km/h</translation>
+    </message>
+    <message>
+        <source>g/s</source>
+        <translation>g/s</translation>
+    </message>
+    <message>
+        <source>V</source>
+        <translation>V</translation>
+    </message>
+    <message>
+        <source>s</source>
+        <translation>s</translation>
+    </message>
+    <message>
+        <source>km</source>
+        <translation>km</translation>
+    </message>
+    <message>
+        <source>Pa</source>
+        <translation>Pa</translation>
+    </message>
+    <message>
+        <source>mA</source>
+        <translation>mA</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <translation>min</translation>
+    </message>
+    <message>
+        <source>L/h</source>
+        <translation>L/h</translation>
+    </message>
+    <message>
+        <source>Nm</source>
+        <translation>Nm</translation>
+    </message>
+</context>
+<context>
+    <name>VehiclePage</name>
+    <message>
+        <source>Vehicle info</source>
+        <translation>Informații vehicul</translation>
+    </message>
+    <message>
+        <source>What the car reports about itself, plus what Obdaryn can decode from the VIN.</source>
+        <translation>Ce raportează mașina despre ea însăși, plus ce poate decoda Obdaryn din VIN.</translation>
+    </message>
+    <message>
+        <source>Identification</source>
+        <translation>Identificare</translation>
+    </message>
+    <message>
+        <source>VIN</source>
+        <translation>VIN</translation>
+    </message>
+    <message>
+        <source>The car didn't report its VIN.</source>
+        <translation>Mașina nu și-a raportat VIN-ul.</translation>
+    </message>
+    <message>
+        <source>Manufacturer</source>
+        <translation>Producător</translation>
+    </message>
+    <message>
+        <source>Not in Obdaryn's manufacturer list yet.</source>
+        <translation>Încă nu figurează în lista de producători Obdaryn.</translation>
+    </message>
+    <message>
+        <source>Model year</source>
+        <translation>An model</translation>
+    </message>
+    <message>
+        <source>Decoded from the VIN. European VINs don't always encode it, so treat it as a hint.</source>
+        <translation>Decodat din VIN. VIN-urile europene nu îl conțin întotdeauna, așa că ia-l ca pe un indiciu.</translation>
+    </message>
+    <message>
+        <source>Built in</source>
+        <translation>Fabricat în</translation>
+    </message>
+    <message>
+        <source>VIN check digit</source>
+        <translation>Cifra de control VIN</translation>
+    </message>
+    <message>
+        <source>Valid</source>
+        <translation>Validă</translation>
+    </message>
+    <message>
+        <source>Not valid</source>
+        <translation>Invalidă</translation>
+    </message>
+    <message>
+        <source>Mandatory in North America only; European cars often don't use it.</source>
+        <translation>Obligatorie doar în America de Nord; mașinile europene adesea nu o folosesc.</translation>
+    </message>
+    <message>
+        <source>OBD standard</source>
+        <translation>Standard OBD</translation>
+    </message>
+    <message>
+        <source>Fuel</source>
+        <translation>Combustibil</translation>
+    </message>
+    <message>
+        <source>Modules</source>
+        <translation>Module</translation>
+    </message>
+    <message>
+        <source>answering generic OBD-II</source>
+        <translation>care răspund la OBD-II generic</translation>
+    </message>
+    <message>
+        <source>No module reported its name.</source>
+        <translation>Niciun modul nu și-a raportat numele.</translation>
+    </message>
+    <message>
+        <source>Software</source>
+        <translation>Software</translation>
+    </message>
+    <message>
+        <source>Calibration IDs</source>
+        <translation>ID-uri de calibrare</translation>
+    </message>
+    <message>
+        <source>Software versions of the emission-related modules. Useful when checking for updates or tuning.</source>
+        <translation>Versiunile software ale modulelor legate de emisii. Utile când verifici actualizări sau modificări de soft.</translation>
+    </message>
+    <message>
+        <source>Calibration verification numbers</source>
+        <translation>Numere de verificare a calibrării (CVN)</translation>
+    </message>
+    <message>
+        <source>Checksums of that software. A change without an official update can mean the ECU was modified.</source>
+        <translation>Sume de control ale acelui software. O schimbare fără o actualizare oficială poate însemna că ECU-ul a fost modificat.</translation>
+    </message>
+    <message>
+        <source>Connection</source>
+        <translation>Conexiune</translation>
+    </message>
+    <message>
+        <source>Adapter</source>
+        <translation>Adaptor</translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation>Legătură</translation>
+    </message>
+    <message>
+        <source>Demo car (simulated)</source>
+        <translation>Mașina demo (simulată)</translation>
+    </message>
+    <message>
+        <source>Protocol</source>
+        <translation>Protocol</translation>
+    </message>
+    <message>
+        <source>Battery at the OBD socket</source>
+        <translation>Bateria, măsurată la mufa OBD</translation>
+    </message>
+</context>
+<context>
+    <name>VinRegion</name>
+    <message>
+        <source>United States</source>
+        <translation>Statele Unite</translation>
+    </message>
+    <message>
+        <source>Canada</source>
+        <translation>Canada</translation>
+    </message>
+    <message>
+        <source>Mexico</source>
+        <translation>Mexic</translation>
+    </message>
+    <message>
+        <source>Australia</source>
+        <translation>Australia</translation>
+    </message>
+    <message>
+        <source>New Zealand</source>
+        <translation>Noua Zeelandă</translation>
+    </message>
+    <message>
+        <source>South America</source>
+        <translation>America de Sud</translation>
+    </message>
+    <message>
+        <source>Japan</source>
+        <translation>Japonia</translation>
+    </message>
+    <message>
+        <source>South Korea</source>
+        <translation>Coreea de Sud</translation>
+    </message>
+    <message>
+        <source>China</source>
+        <translation>China</translation>
+    </message>
+    <message>
+        <source>India / Southeast Asia</source>
+        <translation>India / Asia de Sud-Est</translation>
+    </message>
+    <message>
+        <source>Turkey / Central Asia</source>
+        <translation>Turcia / Asia Centrală</translation>
+    </message>
+    <message>
+        <source>United Kingdom</source>
+        <translation>Regatul Unit</translation>
+    </message>
+    <message>
+        <source>Central Europe (CZ, CH, HU, ...)</source>
+        <translation>Europa Centrală (CZ, CH, HU, ...)</translation>
+    </message>
+    <message>
+        <source>Eastern Europe (RO, ...)</source>
+        <translation>Europa de Est (RO, ...)</translation>
+    </message>
+    <message>
+        <source>France / Spain</source>
+        <translation>Franța / Spania</translation>
+    </message>
+    <message>
+        <source>Germany</source>
+        <translation>Germania</translation>
+    </message>
+    <message>
+        <source>Russia / Eastern Europe</source>
+        <translation>Rusia / Europa de Est</translation>
+    </message>
+    <message>
+        <source>Nordic countries</source>
+        <translation>Țările nordice</translation>
+    </message>
+    <message>
+        <source>Italy</source>
+        <translation>Italia</translation>
+    </message>
+    <message>
+        <source>Africa / other</source>
+        <translation>Africa / altele</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::AppController</name>
+    <message>
+        <source>Starting demo car</source>
+        <translation>Se pornește mașina demo</translation>
+    </message>
+    <message>
+        <source>Opening %1</source>
+        <translation>Se deschide %1</translation>
+    </message>
+    <message>
+        <source>Connecting to %1…</source>
+        <translation>Conectare la %1…</translation>
+    </message>
+    <message>
+        <source>Adapter found. Setting it up…</source>
+        <translation>Adaptor găsit. Se configurează…</translation>
+    </message>
+    <message>
+        <source>Reading vehicle information</source>
+        <translation>Se citesc informațiile vehiculului</translation>
+    </message>
+    <message>
+        <source>Checking readiness monitors</source>
+        <translation>Se verifică monitoarele readiness</translation>
+    </message>
+    <message>
+        <source>Reading trouble codes</source>
+        <translation>Se citesc codurile de eroare</translation>
+    </message>
+    <message>
+        <source>Reading the freeze frame</source>
+        <translation>Se citește instantaneul</translation>
+    </message>
+    <message>
+        <source>Finding supported live data</source>
+        <translation>Se caută datele în timp real disponibile</translation>
+    </message>
+    <message>
+        <source>Not connected to a car.</source>
+        <translation>Nu ești conectat la o mașină.</translation>
+    </message>
+    <message>
+        <source>Clearing trouble codes</source>
+        <translation>Se șterg codurile de eroare</translation>
+    </message>
+    <message>
+        <source>Codes cleared. Readiness monitors are reset; drive normally for a few days before an inspection.</source>
+        <translation>Coduri șterse. Monitoarele readiness au fost resetate; condu normal câteva zile înainte de o inspecție.</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::DtcModel</name>
+    <message>
+        <source>Stored</source>
+        <translation>Memorat</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>În așteptare</translation>
+    </message>
+    <message>
+        <source>Permanent</source>
+        <translation>Permanent</translation>
+    </message>
+    <message>
+        <source>Manufacturer-specific code (%1)</source>
+        <translation>Cod specific producătorului (%1)</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::ElmSession</name>
+    <message>
+        <source>Connection closed</source>
+        <translation>Conexiune închisă</translation>
+    </message>
+    <message>
+        <source>No adapter selected</source>
+        <translation>Niciun adaptor selectat</translation>
+    </message>
+    <message>
+        <source>Connecting to %1</source>
+        <translation>Conectare la %1</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Deconectat</translation>
+    </message>
+    <message>
+        <source>The adapter did not answer the reset command (%1).</source>
+        <translation>Adaptorul nu a răspuns la comanda de resetare (%1).</translation>
+    </message>
+    <message>
+        <source>The adapter is connected, but the car does not answer. Turn the ignition ON (engine may stay off) and retry.</source>
+        <translation>Adaptorul este conectat, dar mașina nu răspunde. Pune contactul (motorul poate rămâne oprit) și încearcă din nou.</translation>
+    </message>
+    <message>
+        <source>Blocked "%1": %2</source>
+        <translation>Blocat „%1”: %2</translation>
+    </message>
+    <message>
+        <source>Not connected</source>
+        <translation>Neconectat</translation>
+    </message>
+    <message>
+        <source>No answer within %1 ms</source>
+        <translation>Niciun răspuns în %1 ms</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::ObdClient</name>
+    <message>
+        <source>The engine is running (%1 rpm). Switch the engine off, leave the ignition ON, and try again.</source>
+        <translation>Motorul este pornit (%1 rot/min). Oprește motorul, lasă contactul pus și încearcă din nou.</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::SimulatedTransport</name>
+    <message>
+        <source>Built-in demo car</source>
+        <translation>Mașina demo integrată</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::TcpTransport</name>
+    <message>
+        <source>No answer from %1. Is this computer connected to the adapter's Wi-Fi?</source>
+        <translation>Niciun răspuns de la %1. Este acest computer conectat la rețeaua Wi-Fi a adaptorului?</translation>
+    </message>
+    <message>
+        <source>The adapter refused the connection. Another app may already be connected to it.</source>
+        <translation>Adaptorul a refuzat conexiunea. Poate o altă aplicație este deja conectată la el.</translation>
+    </message>
+    <message>
+        <source>The adapter closed the connection.</source>
+        <translation>Adaptorul a închis conexiunea.</translation>
+    </message>
+    <message>
+        <source>Address %1 not found.</source>
+        <translation>Adresa %1 nu a fost găsită.</translation>
+    </message>
+    <message>
+        <source>Network unreachable. Join the adapter's Wi-Fi network and, on macOS, allow Obdaryn under Privacy &amp; Security → Local Network.</source>
+        <translation>Rețea inaccesibilă. Conectează-te la rețeaua Wi-Fi a adaptorului și, pe macOS, permite accesul pentru Obdaryn în Confidențialitate și securitate → Rețea locală.</translation>
+    </message>
+</context>
+</TS>
