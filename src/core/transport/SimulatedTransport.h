@@ -19,7 +19,13 @@ namespace obdaryn {
  * the '>' prompt, ISO-TP multi-frame responses, "SEARCHING...", "NO DATA"),
  * so every layer above it runs exactly as it would against real hardware.
  *
- * Two ECUs answer: the engine (7E0 → 7E8) and the transmission (7E1 → 7E9).
+ * Two ECUs answer generic OBD-II: the engine (7E0 → 7E8) and the
+ * transmission (7E1 → 7E9). Addressed directly (module scan), more answer,
+ * like on a 2014 Hyundai: ABS 7D1 (KWP2000, active wheel-speed fault C0035),
+ * airbag 7D2 (UDS, stored U0100), body control 7A0 (KWP) and instrument
+ * cluster 7C6 (UDS), both without codes. TPMS 7D6 answers a keep-alive but
+ * ignores code requests (an "error" row); steering and climate stay silent
+ * ("not found").
  * The engine has two stored codes (P0133, P0420), one pending (P0171) and one
  * permanent (P0420), a freeze frame, VIN / calibration / ECU name, and live
  * values that move over time. Clearing codes works only with the engine off,
@@ -56,6 +62,7 @@ private:
     QByteArray handleObd(const QByteArray &normalized);
     QList<EcuReply> engineReply(const QByteArray &req);
     QList<EcuReply> transmissionReply(const QByteArray &req);
+    QList<EcuReply> moduleReply(const QByteArray &header, const QByteArray &req);
     QByteArray formatFrames(const EcuReply &reply) const;
     QByteArray joinBytes(const QByteArray &bytes) const;
     QByteArray pidData(quint8 pid) const;
@@ -80,6 +87,8 @@ private:
     QList<quint16> m_pending{0x0171};
     QList<quint16> m_permanent{0x0420};
     quint8 m_monitorsIncomplete = 0x05; ///< bit set = monitor not yet complete
+    bool m_absFault = true;     ///< C0035 in the ABS module
+    bool m_airbagFault = true;  ///< U0100 in the airbag module
 
     QByteArray m_rxBuffer;
     QElapsedTimer m_clock;

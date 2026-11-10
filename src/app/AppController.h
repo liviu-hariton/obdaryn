@@ -6,6 +6,7 @@
 
 #include "models/DtcModel.h"
 #include "models/LiveDataModel.h"
+#include "models/ModuleScanModel.h"
 #include "models/TrafficLogModel.h"
 #include "obd/ObdClient.h"
 
@@ -88,6 +89,16 @@ class AppController : public QObject
     Q_PROPERTY(obdaryn::LiveDataModel *liveData READ liveData CONSTANT)
     Q_PROPERTY(obdaryn::DtcModel *dtcs READ dtcs CONSTANT)
     Q_PROPERTY(obdaryn::TrafficLogModel *trafficLog READ trafficLog CONSTANT)
+    Q_PROPERTY(obdaryn::ModuleScanModel *moduleScan READ moduleScan CONSTANT)
+
+    // Full-vehicle module scan
+    Q_PROPERTY(QVariantList vehicleProfiles READ vehicleProfiles CONSTANT)
+    Q_PROPERTY(QString profileId READ profileId WRITE setProfileId NOTIFY profileChanged)
+    Q_PROPERTY(QString profileNotes READ profileNotes NOTIFY profileChanged)
+    Q_PROPERTY(bool profileChosenByUser READ profileChosenByUser NOTIFY profileChanged)
+    Q_PROPERTY(bool moduleScanRunning READ moduleScanRunning NOTIFY moduleScanChanged)
+    Q_PROPERTY(bool moduleScanDone READ moduleScanDone NOTIFY moduleScanChanged)
+    Q_PROPERTY(QString moduleScanTime READ moduleScanTime NOTIFY moduleScanChanged)
 
     // App
     Q_PROPERTY(QString language READ language NOTIFY languageChanged)
@@ -121,6 +132,12 @@ public:
     Q_INVOKABLE QVariantMap explainCode(const QString &code) const;
     Q_INVOKABLE void setLanguage(const QString &code);
     Q_INVOKABLE void copyToClipboard(const QString &text) const;
+
+    /// Scans every module of the current profile (ABS, airbag, body...).
+    Q_INVOKABLE void scanModules();
+    Q_INVOKABLE void cancelModuleScan();
+    /// Clears one module's codes after the user confirmed; result via moduleClearFinished().
+    Q_INVOKABLE void clearModuleCodes(int row);
 
     // ---- Property getters ------------------------------------------------------
     ConnectionState connectionState() const;
@@ -165,6 +182,16 @@ public:
     LiveDataModel *liveData() const { return m_liveData; }
     DtcModel *dtcs() const { return m_dtcs; }
     TrafficLogModel *trafficLog() const { return m_trafficLog; }
+    ModuleScanModel *moduleScan() const { return m_moduleModel; }
+
+    QVariantList vehicleProfiles() const;
+    QString profileId() const { return m_profileId; }
+    void setProfileId(const QString &id);
+    QString profileNotes() const;
+    bool profileChosenByUser() const { return m_profileChosenByUser; }
+    bool moduleScanRunning() const { return busyWithModules(); }
+    bool moduleScanDone() const { return !m_moduleScanTime.isEmpty(); }
+    QString moduleScanTime() const { return m_moduleScanTime; }
 
     QString language() const { return m_language; }
     QString appVersion() const;
@@ -185,6 +212,9 @@ signals:
     void languageChanged();
     /// Result of clearCodes(): success flag and a message for the user.
     void clearFinished(bool success, const QString &message);
+    void moduleClearFinished(bool success, const QString &message);
+    void profileChanged();
+    void moduleScanChanged();
 
 private:
     void startSession(Transport *transport, bool demo);
@@ -195,6 +225,11 @@ private:
     void resetVehicleData();
     void readStatusPids();
     void readVoltage();
+    void pickProfileForVehicle();
+    /// Runs `action` once no live-data poll is in flight. Module work changes the
+    /// adapter's target address, so it must never interleave with a poll.
+    void whenPollIdle(std::function<void()> action);
+    bool busyWithModules() const { return m_moduleScanner->running() || bool(m_afterPoll); }
 
     QQmlEngine *m_engine;
     ObdClient *m_client;
@@ -226,6 +261,13 @@ private:
     QElapsedTimer m_rateClock;
 
     QString m_language;
+
+    ModuleScanner *m_moduleScanner;
+    ModuleScanModel *m_moduleModel;
+    QString m_profileId = QStringLiteral("generic");
+    bool m_profileChosenByUser = false;
+    QString m_moduleScanTime;
+    std::function<void()> m_afterPoll;
 };
 
 } // namespace obdaryn

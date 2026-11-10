@@ -42,6 +42,13 @@
   - `Readiness`: the monitor status in PID 01.
   - `VehicleInfo`: VIN, model year, manufacturer, calibration IDs, CVNs and ECU names.
   - `DtcDatabase`: plain-language explanations from obdex.
+- **ModuleCatalog** (`src/core/vehicles`) loads the brand profiles from `data/vehicles/*.json`: one file per brand listing each module's category, request and response CAN IDs, preferred protocol, and whether the address is verified. A profile is picked from the VIN prefix, then from the manufacturer name, else the generic list.
+- **ModuleScanner** (`src/core/obd`) runs the full-vehicle scan. For each module it:
+  1. points the adapter at the module (`AT SH`, `AT CRA`, and standard flow control when the response ID isn't request ID + 8);
+  2. reads codes with UDS `19 02 FF` or KWP2000 `18 02 FF 00`, falling back from one to the other;
+  3. reads the part number and software version.
+
+  It always restores functional addressing (`AT SH 7DF`) afterwards. The app pauses live polling for the duration, and waits for an in-flight poll to finish first, because the adapter's target address is shared state.
 - **ObdClient** (`src/core/obd`) offers diagnostic intents as single asynchronous calls:
   - **Multi-PID batching.** On CAN it batches up to 6 PIDs per request, falling back to one per request when an ECU ignores the extras.
   - **Safe clearing.** It refuses to clear codes while the engine runs.
@@ -67,3 +74,4 @@
 - `tst_responseparser`: recorded adapter output, including multi-frame, 29-bit and legacy.
 - `tst_decoders`: PID formulas, DTC decoding, readiness, VIN and the DTC database.
 - `tst_session`: end-to-end runs against the simulator (connect, scan, clear with the engine on and off, guard enforcement).
+- `tst_modules`: brand profiles, UDS and KWP code decoding, and a full module scan of the simulated Hyundai, including the protocol fallback, restored addressing and a guarded per-module clear.

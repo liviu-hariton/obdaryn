@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
     // Renders one screen to a PNG and quits; used for design reviews and docs.
     //   OBDARYN_CAPTURE=out.png  OBDARYN_PAGE=0..7  OBDARYN_DEMO=1
     //   OBDARYN_APPEARANCE=light|dark  OBDARYN_LANG=en|ro  OBDARYN_DELAY_MS=4000  OBDARYN_SIZE=WxH
+    //   OBDARYN_SCAN_MODULES=1
     const QString capturePath = qEnvironmentVariable("OBDARYN_CAPTURE");
     if (qEnvironmentVariableIsSet("OBDARYN_APPEARANCE"))
         QSettings().setValue(QStringLiteral("ui/appearance"), qEnvironmentVariable("OBDARYN_APPEARANCE"));
@@ -52,8 +53,16 @@ int main(int argc, char *argv[])
     engine.loadFromModule("Obdaryn", "Main");
 
     if (qEnvironmentVariableIntValue("OBDARYN_DEMO") == 1) {
-        if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App"))
+        if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
             controller->connectDemo();
+            // OBDARYN_SCAN_MODULES=1 also runs the full-vehicle module scan once the first scan ends.
+            if (qEnvironmentVariableIntValue("OBDARYN_SCAN_MODULES") == 1) {
+                QObject::connect(controller, &obdaryn::AppController::scanFinished, controller, [controller] {
+                    if (!controller->moduleScanDone() && !controller->vin().isEmpty())
+                        QTimer::singleShot(300, controller, [controller] { controller->scanModules(); });
+                });
+            }
+        }
     }
     if (!capturePath.isEmpty() && !engine.rootObjects().isEmpty()) {
         auto *window = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
@@ -61,6 +70,12 @@ int main(int argc, char *argv[])
         const QStringList size = qEnvironmentVariable("OBDARYN_SIZE").split(QLatin1Char('x'));
         if (window && size.size() == 2)
             window->resize(size[0].toInt(), size[1].toInt());
+        // OBDARYN_OPEN_CODE=hk-abs/C0035 unfolds that code's explanation on the modules page.
+        if (window && qEnvironmentVariableIsSet("OBDARYN_OPEN_CODE")) {
+            const QString key = qEnvironmentVariable("OBDARYN_OPEN_CODE");
+            if (QObject *modules = window->findChild<QObject *>(QStringLiteral("modulesPage")))
+                modules->setProperty("openCode", key);
+        }
         if (window && qEnvironmentVariableIsSet("OBDARYN_PAGE"))
             window->setProperty("page", qEnvironmentVariableIntValue("OBDARYN_PAGE"));
         const int delay = qEnvironmentVariableIsSet("OBDARYN_DELAY_MS") ? qEnvironmentVariableIntValue("OBDARYN_DELAY_MS") : 4000;

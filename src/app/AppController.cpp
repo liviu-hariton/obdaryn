@@ -3,6 +3,7 @@
 #include "AppController.h"
 
 #include "obd/DtcDatabase.h"
+#include "vehicles/ModuleCatalog.h"
 #include "obd/Pids.h"
 #include "obd/VehicleInfo.h"
 #include "transport/SimulatedTransport.h"
@@ -41,8 +42,25 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
       m_client(new ObdClient(this)),
       m_liveData(new LiveDataModel(this)),
       m_dtcs(new DtcModel(this)),
-      m_trafficLog(new TrafficLogModel(this))
+      m_trafficLog(new TrafficLogModel(this)),
+      m_moduleScanner(new ModuleScanner(m_client, this)),
+      m_moduleModel(new ModuleScanModel(m_moduleScanner, this))
 {
+    // While modules are addressed one by one, live polling (which uses the
+    // shared "all modules" address) must pause; it resumes when the scan ends.
+    connect(m_moduleScanner, &ModuleScanner::started, this, [this] {
+        m_pollingEnabled = false;
+        emit moduleScanChanged();
+    });
+    connect(m_moduleScanner, &ModuleScanner::finished, this, [this] {
+        m_moduleScanTime = QLocale().toString(QTime::currentTime(), QLocale::ShortFormat);
+        emit moduleScanChanged();
+        if (m_client->session()->state() == ElmSession::State::Ready && !scanning()) {
+            m_pollingEnabled = true;
+            schedulePoll();
+        }
+    });
+
     ElmSession *session = m_client->session();
     connect(session, &ElmSession::stateChanged, this, &AppController::onSessionStateChanged);
     connect(session, &ElmSession::infoChanged, this, &AppController::adapterInfoChanged);
@@ -90,6 +108,7 @@ void AppController::connectDemo()
 
 void AppController::startSession(Transport *transport, bool demo)
 {
+    m_afterPoll = nullptr;
     m_pollingEnabled = false;
     m_pollTimer.stop();
     m_voltageTimer.stop();
@@ -103,6 +122,8 @@ void AppController::startSession(Transport *transport, bool demo)
 
 void AppController::disconnectAdapter()
 {
+    m_afterPoll = nullptr;
+    m_moduleScanner->cancel();
     m_pollingEnabled = false;
     m_pollTimer.stop();
     m_voltageTimer.stop();
@@ -212,6 +233,11 @@ void AppController::resetVehicleData()
     m_freeze = {};
     m_batteryVoltage = 0;
     m_lastScanTime.clear();
+    m_moduleScanTime.clear();
+    if (!m_profileChosenByUser)
+        m_profileId = QStringLiteral("generic");
+    emit profileChanged();
+    emit moduleScanChanged();
     m_dtcs->clear();
     m_liveData->clear();
     emit vehicleChanged();
@@ -223,7 +249,7 @@ void AppController::resetVehicleData()
 
 void AppController::runFullScan()
 {
-    if (m_client->session()->state() != ElmSession::State::Ready || scanning())
+    if (m_client->session()->state() != ElmSession::State::Ready || scanning() || m_moduleScanner->running())
         return;
 
     // The scan is a chain: each step starts when the previous one answered.
@@ -238,6 +264,7 @@ void AppController::runFullScan()
         m_vinCheckDigitValid = vin.checkDigitValid;
         m_dtcs->setEcuNames(info.ecuNames);
         emit vehicleChanged();
+        pickProfileForVehicle();
 
         setScanStep(tr("Checking readiness monitors"));
         m_client->readMonitorStatus([this](const MonitorStatus &status) {
@@ -270,6 +297,92 @@ void AppController::runFullScan()
     });
 }
 
+// ---------------------------------------------------------------------------
+// Module scan
+
+QVariantList AppController::vehicleProfiles() const
+{
+    QVariantList list;
+    for (const VehicleProfile &p : ModuleCatalog::profiles()) {
+        const QString label = p.id == QLatin1String("generic") ? tr("Any car (standard addresses only)") : p.label;
+        list << QVariantMap{{QStringLiteral("value"), p.id}, {QStringLiteral("label"), label},
+                            {QStringLiteral("moduleCount"), int(p.modules.size())}};
+    }
+    return list;
+}
+
+void AppController::setProfileId(const QString &id)
+{
+    if (!ModuleCatalog::find(id) || (id == m_profileId && m_profileChosenByUser))
+        return;
+    m_profileId = id;
+    m_profileChosenByUser = true;
+    emit profileChanged();
+}
+
+QString AppController::profileNotes() const
+{
+    const VehicleProfile *p = ModuleCatalog::find(m_profileId);
+    return p ? p->notesFor(m_language) : QString();
+}
+
+void AppController::pickProfileForVehicle()
+{
+    if (m_profileChosenByUser)
+        return;
+    const QString id = ModuleCatalog::forVehicle(m_manufacturer, m_vin).id;
+    if (!id.isEmpty() && id != m_profileId) {
+        m_profileId = id;
+        emit profileChanged();
+    }
+}
+
+void AppController::whenPollIdle(std::function<void()> action)
+{
+    m_pollingEnabled = false;
+    m_pollTimer.stop();
+    if (m_pollInFlight)
+        m_afterPoll = std::move(action);
+    else
+        action();
+}
+
+void AppController::scanModules()
+{
+    const VehicleProfile *profile = ModuleCatalog::find(m_profileId);
+    if (!profile || m_client->session()->state() != ElmSession::State::Ready
+        || scanning() || busyWithModules())
+        return;
+    const VehicleProfile copy = *profile;
+    whenPollIdle([this, copy] { m_moduleScanner->scan(copy); });
+    emit moduleScanChanged();
+}
+
+void AppController::cancelModuleScan()
+{
+    m_moduleScanner->cancel();
+}
+
+void AppController::clearModuleCodes(int row)
+{
+    if (busyWithModules() || scanning()) {
+        emit moduleClearFinished(false, tr("Wait for the current scan to finish."));
+        return;
+    }
+    const QString name = row >= 0 && row < m_moduleScanner->results().size()
+                             ? m_moduleScanner->results()[row].module.displayName() : QString();
+    whenPollIdle([this, row, name] { m_moduleScanner->clearModule(row, [this, name](bool ok, const QString &message) {
+        emit moduleScanChanged();
+        emit moduleClearFinished(ok, ok ? tr("%1: codes cleared. Any code still listed is a fault that is present right now.").arg(name)
+                                        : message);
+        if (m_client->session()->state() == ElmSession::State::Ready) {
+            m_pollingEnabled = true;
+            schedulePoll();
+        }
+    }); });
+    emit moduleScanChanged();
+}
+
 void AppController::readVoltage()
 {
     m_client->readBatteryVoltage([this](double v) {
@@ -296,7 +409,7 @@ void AppController::readStatusPids()
 
 void AppController::refreshCodes()
 {
-    if (scanning())
+    if (scanning() || busyWithModules())
         return;
     setScanStep(tr("Reading trouble codes"));
     m_client->readMonitorStatus([this](const MonitorStatus &status) {
@@ -312,6 +425,8 @@ void AppController::refreshCodes()
 
 void AppController::refreshReadiness()
 {
+    if (busyWithModules())
+        return;
     m_client->readMonitorStatus([this](const MonitorStatus &status) {
         m_readiness = status;
         emit readinessChanged();
@@ -320,6 +435,8 @@ void AppController::refreshReadiness()
 
 void AppController::refreshFreezeFrame()
 {
+    if (busyWithModules())
+        return;
     m_client->readFreezeFrame([this](const ObdClient::FreezeFrame &ff) {
         m_freeze = ff;
         emit freezeFrameChanged();
@@ -330,6 +447,10 @@ void AppController::clearCodes()
 {
     if (m_client->session()->state() != ElmSession::State::Ready) {
         emit clearFinished(false, tr("Not connected to a car."));
+        return;
+    }
+    if (busyWithModules()) {
+        emit clearFinished(false, tr("Wait for the module scan to finish."));
         return;
     }
     setScanStep(tr("Clearing trouble codes"));
@@ -371,6 +492,13 @@ void AppController::pollLiveData()
     m_pollInFlight = true;
     m_client->readPids(batch, [this](const QList<ObdClient::PidReading> &readings) {
         m_pollInFlight = false;
+        if (m_afterPoll) {
+            // Module work was waiting for this poll to finish.
+            auto action = std::move(m_afterPoll);
+            m_afterPoll = nullptr;
+            action();
+            return;
+        }
         QSet<quint8> seen;
         for (const auto &r : readings) {
             if (seen.contains(r.pid))
@@ -468,10 +596,12 @@ void AppController::setLanguage(const QString &code)
 
     QCoreApplication::removeTranslator(&m_appTranslator);
     QCoreApplication::removeTranslator(&m_qtTranslator);
+    // Our strings (compiled into the app). The English file only carries plural
+    // forms ("1 code" / "2 codes"); every other language translates everything.
+    if (m_appTranslator.load(QStringLiteral(":/i18n/obdaryn_%1.qm").arg(lang)))
+        QCoreApplication::installTranslator(&m_appTranslator);
     if (lang != QLatin1String("en")) {
-        // Our strings (compiled into the app) and Qt's own (standard dialogs).
-        if (m_appTranslator.load(QStringLiteral(":/i18n/obdaryn_%1.qm").arg(lang)))
-            QCoreApplication::installTranslator(&m_appTranslator);
+        // Qt's own strings (standard dialogs).
         if (m_qtTranslator.load(QStringLiteral("qtbase_%1").arg(lang),
                                 QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
             QCoreApplication::installTranslator(&m_qtTranslator);
@@ -492,11 +622,13 @@ void AppController::setLanguage(const QString &code)
     }
     m_liveData->retranslate();
     m_dtcs->retranslate();
+    m_moduleModel->retranslate();
     emit languageChanged();
     emit readinessChanged();     // monitor names
     emit freezeFrameChanged();   // PID names
     emit vehicleChanged();       // region names
     emit adapterInfoChanged();   // protocol names
+    emit profileChanged();       // brand notes
 }
 
 QString AppController::appVersion() const

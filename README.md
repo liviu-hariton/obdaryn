@@ -3,6 +3,7 @@
 **Free, open-source, read-only OBD-II diagnostics for your car.** It is a desktop app for ELM327-compatible adapters such as the Vgate iCar Pro Wi-Fi.
 
 - **Trouble codes in plain language.** Stored, pending and permanent codes from every OBD module, each with what it means, likely causes, symptoms, whether it matters for the inspection (ITP), and a rough repair cost.
+- **All modules.** A full-vehicle scan reads codes from ABS, airbag, body, cluster and other modules too, using per-brand module lists: Hyundai/Kia, Toyota, Ford, VW group, Renault/Dacia, or generic for any car.
 - **Readiness for inspection.** Which self-tests (monitors) have completed, and whether the car is likely to pass the emissions check.
 - **Freeze frame.** The sensor snapshot taken when a fault was stored.
 - **Live data.** Every standard sensor the car supports, with sparklines. A pinned dashboard refreshes several times per second thanks to multi-PID requests.
@@ -14,6 +15,8 @@
 ![Obdaryn overview, dark theme, connected to the built-in demo car](docs/images/overview-dark.png)
 
 ![Trouble codes with plain-language explanations](docs/images/trouble-codes-dark.png)
+
+![All modules: a full-vehicle scan of the demo car](docs/images/all-modules-light.png)
 
 > **Read-only by design.** A safety guard checks every command and refuses anything that could write to, code, actuate, reset or flash a vehicle module. See [docs/CAR_INTERACTION.md](docs/CAR_INTERACTION.md).
 

@@ -1,0 +1,18 @@
+{
+  "id": "toyota-lexus",
+  "label": "Toyota / Lexus",
+  "makes": ["Toyota", "Lexus"],
+  "wmi": ["JT", "SB1", "VNK", "NMT", "JTH", "4T1", "5TD"],
+  "notes": "Most Toyota modules answer on request ID + 8. Body modules behind the 750 gateway use extended addressing and are not scanned yet.",
+  "notes_ro": "Majoritatea modulelor Toyota răspund pe adresa cererii + 8. Modulele de caroserie din spatele gateway-ului 750 folosesc adresare extinsă și nu sunt încă scanate.",
+  "modules": [
+    {"id": "ty-engine", "category": "engine", "tx": "7E0", "rx": "7E8", "dtc": "auto", "verified": true, "source": "ISO 15765-4"},
+    {"id": "ty-transmission", "category": "transmission", "tx": "7E1", "rx": "7E9", "dtc": "auto", "verified": true, "source": "ISO 15765-4"},
+    {"id": "ty-hybrid", "category": "hybrid", "tx": "7E2", "rx": "7EA", "dtc": "auto", "verified": false, "source": "community lists"},
+    {"id": "ty-abs", "category": "abs", "tx": "7B0", "rx": "7B8", "dtc": "auto", "verified": false, "source": "community lists"},
+    {"id": "ty-airbag", "category": "airbag", "tx": "780", "rx": "788", "dtc": "auto", "verified": false, "source": "community lists"},
+    {"id": "ty-steering", "category": "steering", "tx": "7A1", "rx": "7A9", "dtc": "auto", "verified": false, "source": "community lists"},
+    {"id": "ty-cluster", "category": "cluster", "tx": "7C0", "rx": "7C8", "dtc": "auto", "verified": false, "source": "community lists"},
+    {"id": "ty-climate", "category": "climate", "tx": "7C4", "rx": "7CC", "dtc": "auto", "verified": false, "source": "community lists"}
+  ]
+}

@@ -12,6 +12,10 @@ import Obdaryn
 C.Popup {
     id: dialog
     signal confirmed()
+    /// Set to clear one module (UDS/KWP 0x14) instead of the OBD-II codes.
+    property int moduleRow: -1
+    property string moduleName: ""
+    readonly property bool moduleMode: moduleRow >= 0
 
     modal: true
     focus: true
@@ -43,7 +47,7 @@ C.Popup {
 
         Text {
             Layout.fillWidth: true
-            text: qsTr("Clear trouble codes?")
+            text: dialog.moduleMode ? qsTr("Clear the codes in %1?").arg(dialog.moduleName) : qsTr("Clear trouble codes?")
             color: Theme.text
             font.family: Theme.sans
             font.pixelSize: 20
@@ -60,7 +64,11 @@ C.Popup {
         }
 
         Repeater {
-            model: [
+            model: dialog.moduleMode ? [
+                qsTr("Turns this module's warning light off if the fault is gone. A fault that is still present comes back at once."),
+                qsTr("Erases the module's fault history, which a workshop may want to see. Note the codes first."),
+                qsTr("Clearing never repairs anything: a %1 fault usually needs a fix before it stays away.").arg(dialog.moduleName),
+            ] : [
                 qsTr("Turns the check-engine light off. If the fault is still there, the light comes back."),
                 qsTr("Erases the freeze frame, the snapshot of sensor values taken when the fault happened."),
                 qsTr("Resets all readiness monitors. The car fails the ITP emissions check until it has been driven for a few days."),

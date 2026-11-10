@@ -18,3 +18,5 @@ __pycache__/
 # Claude Code local folder (personal skills and settings)
 .claude/
 
+# Emulator and tool logs
+*.log

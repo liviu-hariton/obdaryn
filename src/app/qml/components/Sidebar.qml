@@ -129,6 +129,14 @@ Rectangle {
         }
         NavItem {
             Layout.fillWidth: true
+            text: qsTr("All modules"); iconName: "cpu"
+            badge: App.moduleScan.extraCodeCount
+            badgeColor: App.moduleScan.extraStoredCount > 0 ? Theme.redFill : Theme.amber
+            Accessible.description: qsTr("%n codes in modules other than the engine and transmission", "", App.moduleScan.extraCodeCount)
+            current: sidebar.currentPage === 8; onClicked: sidebar.navigate(8)
+        }
+        NavItem {
+            Layout.fillWidth: true
             text: qsTr("Readiness"); iconName: "list-checks"
             current: sidebar.currentPage === 2; onClicked: sidebar.navigate(2)
         }

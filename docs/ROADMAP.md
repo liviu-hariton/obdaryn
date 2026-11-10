@@ -15,10 +15,19 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [x] Adapter console (raw traffic) for troubleshooting
 - [x] Built-in demo car; English and Romanian with runtime switching
 
-## v0.2 — every module, not just the engine
+## v0.2 — every module, not just the engine (in progress)
 
-- [ ] **Full-vehicle scan.** Probe the known module addresses per brand and read their codes with UDS 0x19 or KWP 0x18. Covers ABS/ESC, airbag, transmission, body, cluster and steering.
-- [ ] **Clear codes per module** (UDS/KWP 0x14), with the same confirmation flow.
+- [x] **Full-vehicle scan.** Probes the known module addresses per brand and reads their codes with UDS 0x19 or KWP 0x18, falling back automatically. Covers ABS/ESC, airbag, transmission, body, cluster, steering and more.
+  - Brand profiles: Hyundai/Kia/Genesis, Toyota/Lexus, Ford, the VW group (MQB), Renault/Dacia, plus a generic fallback for any car.
+  - Profiles are JSON in `src/core/data/vehicles/`. Addresses not yet confirmed on a real car are labelled "unconfirmed".
+  - Standard ISO-TP flow control (`AT FC SH/SM/SD 30 00 00`) for brands whose modules don't answer on request ID + 8.
+  - Honest states: a module that answers generic OBD-II but not code requests is reported as such, not as "not found".
+  - Each answering module's spare-part number and software version.
+  - `obdaryn-probe --modules` runs the same scan from the terminal.
+- [x] **Clear codes per module** (UDS/KWP 0x14), with the same confirmation flow and engine-off check.
+- [ ] Confirm the Hyundai addresses on the real 2014 Elantra, then mark them verified.
+- [ ] 29-bit CAN modules (Honda, some GM), Toyota's extended addressing behind gateway 750, and VW's older TP 2.0.
+- [ ] Brand-specific code descriptions, so ABS and airbag codes get plain-language text too.
 - [ ] **Manufacturer data packs.** Import OBDb signal sets (CC-BY-SA-4.0, shipped as separate attributed data files) for enhanced live data. Hyundai/Kia first: `21xx` reads on 7E0 / 7E1 / 7D1 and similar.
 - [ ] **Brand pack loader.** A JSON schema, a contribute-back flow, and a "record which PIDs my car answers" mode.
 

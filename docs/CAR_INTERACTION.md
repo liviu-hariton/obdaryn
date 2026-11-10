@@ -39,7 +39,18 @@ This guide covers what each feature asks of the car, which state the car must be
 - about 13.8–14.6 V with the engine running means the alternator is charging,
 - below about 12.0 V, stop and start the engine.
 
-## 4. What clearing codes really does
+## 4. Scanning every module
+
+Generic OBD-II only reaches the engine (and usually the transmission). Warning lights for ABS, airbag, tyre pressure or the body computer come from modules that must be asked one by one. **All modules** does that:
+
+- **Car state.** Ignition ON. The engine may run.
+- **Duration.** About 5–15 seconds; each missing module costs a short adapter timeout. Live data pauses meanwhile.
+- **Which module list.** Obdaryn picks the module list from the VIN (Hyundai/Kia for your Elantra). You can choose another list if the VIN isn't reported.
+- **"Unconfirmed address".** These addresses come from community lists. If such a module shows "Not found", the module may be fine but at another address on your model.
+- **What each module answers.** For every module that answers you get its codes, whether each fault is present right now, whether it asks for a warning light, and its part number.
+- **Clearing a module's codes.** Same rules as before: confirm, engine off, ignition ON. Clearing never repairs anything; an active ABS or airbag fault comes straight back.
+
+## 5. What clearing codes really does
 
 Clearing (OBD-II service 04) is the only thing Obdaryn does that changes anything in the car. It is still not a write to a module's software or settings: the clear command is part of the standard. Before you confirm, know that clearing:
 
@@ -50,7 +61,7 @@ Clearing (OBD-II service 04) is the only thing Obdaryn does that changes anythin
 
 Clearing codes in other modules (ABS, airbag, ...) comes later and works the same way, with the same confirmation.
 
-## 5. What Obdaryn will never send
+## 6. What Obdaryn will never send
 
 The safety guard (`src/core/safety/RequestGuard.cpp`) checks every single command. It only lets through:
 
@@ -62,19 +73,19 @@ The safety guard (`src/core/safety/RequestGuard.cpp`) checks every single comman
   - KWP2000: 0x18, 0x1A and 0x21;
   - 0x14 (clear a module's codes), only after you confirm.
 
-Everything that could change how the car behaves is refused, whichever part of the app asks: writing settings (coding, adaptations), actuator tests, routines, security access, ECU resets, diagnostic session changes and flashing. The guard also refuses adapter commands that could push arbitrary bytes onto the car's network.
+Everything that could change how the car behaves is refused, whichever part of the app asks: writing settings (coding, adaptations), actuator tests, routines, security access, ECU resets, diagnostic session changes and flashing. The guard also refuses adapter commands that could push arbitrary bytes onto the car's network. ISO-TP flow control is allowed only as the standard "continue" frame (`30 00 00`), which the adapter needs to receive long answers from some brands' modules.
 
-## 6. What the 2014 Elantra will (probably) show
+## 7. What the 2014 Elantra will (probably) show
 
 - **Protocol.** ISO 15765-4 CAN, 11-bit, 500 kbit/s. Obdaryn detects it automatically.
 - **Modules that answer generic OBD-II.**
   - The engine (ECM, address 7E8) answers.
   - The automatic transmission (TCM, 7E9) usually answers too.
-  - ABS, airbag, body and cluster modules do **not** answer generic OBD-II. They need the manufacturer reads planned for a later version.
+  - ABS, airbag, body and cluster modules do **not** answer generic OBD-II. Use **All modules** to read them.
 - **Live data.** Typically 25–40 standard values. On CAN, Obdaryn asks for up to 6 values per request, so the dashboard refreshes several times per second.
 - **Permanent codes.** Many EU-market cars answer "no data" for permanent codes (service 0A). That's normal.
 
-## 7. Checking Obdaryn against another app
+## 8. Checking Obdaryn against another app
 
 Compare against **Car Scanner** on your phone, one app at a time, since the adapter only takes one connection:
 
@@ -84,7 +95,7 @@ Compare against **Car Scanner** on your phone, one app at a time, since the adap
 
 If something differs, open **Adapter log** in Obdaryn and copy it: it shows every command and answer.
 
-## 8. Desk testing without the car
+## 9. Desk testing without the car
 
 - **Demo car (built in).** Choose **Try the demo car** on the connect screen. It simulates a 2014 Elantra with a few faults, live values, a freeze frame and readiness monitors.
   - In demo mode, Settings has a switch for "engine running", so you can try clearing codes.

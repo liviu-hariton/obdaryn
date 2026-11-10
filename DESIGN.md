@@ -296,6 +296,14 @@ Calm and native; one button component with four variants.
 - **Grouped lists:** rows on the window ground separated by 1px hairlines, at least 44 to 52px tall, 6px hover highlight. Code rows lead with the code in mono.
 - **Key/value rows:** a 220px muted label column, a medium-weight value (mono when it is a code or hex), optional faint note, and a hairline beneath.
 - **Framed panels:** a surface ground with a 1px hairline and 10px radius, used sparingly: the overview status summary, the readiness verdict, the connect form and the log well. No shadow.
+- **Module rows (All modules):** a grouped-list row at least 56px tall that grows with a wrapped error reason. From left to right:
+  - an 18px state lamp: red triangle for codes, green check for clean, unlit dashed circle for not found, amber help icon for unreadable;
+  - the module name at 14px/600 with an optional faint "unconfirmed address" in 12px;
+  - beneath the name, a mono 12px address line (`7D1 → 7D9 · KWP2000`);
+  - a 190px right-aligned status word, in red ink and 600 weight only when there are codes;
+  - a chevron, shown only when the row can expand.
+
+  Expanding unfolds in place: code lines (mono code at 16px/600, title, then kind chips) that themselves unfold the explanation under the title, capped at 720px. A muted 12px line carries part number, software and the raw status byte, with the hex in mono. Raw protocol notes sit behind a quiet "About this list" toggle, never in the first viewport. "Clear this module's codes…" on Engine or Transmission opens the full OBD-II clear dialog (readiness reset, freeze-frame loss, permanent codes); other modules use the module dialog, which names the module's system. Rows spin a Telltale Blue refresh icon while being asked; the spin stops under Reduce motion.
 
 ### Inputs / Fields
 - **Style:** 36px, field ground, 1px field-border, 6px radius, 10px side padding, 12px muted label above. Mono when the field takes an address or hex.
@@ -303,7 +311,7 @@ Calm and native; one button component with four variants.
 
 ### Navigation
 - **Sidebar:** product name, a framed connection-status box (state dot plus words, transport line, connect or disconnect), then nav groups Diagnose, Monitor, Vehicle, Adapter under faint sentence-case labels, and Settings plus a read-only note pinned to the bottom.
-- **Nav item:** 32px row, 16px icon plus 14px label in muted text; current item gets the `selected` ground, full text color and 600 weight. A red count badge marks stored codes.
+- **Nav item:** 32px row, 16px icon plus 14px label in muted text; current item gets the `selected` ground, full text color and 600 weight. A count badge marks codes: red fill when any are stored, amber when they are only pending (Trouble codes counts generic codes; All modules counts codes outside engine and transmission). ⌘1–⌘8 follow the sidebar order.
 
 ### Telltale (signature)
 An instrument-cluster lamp: a line icon shown in its telltale color when lit and in `unlit` grey when off, cross-fading over 220ms with exponential ease-out. The check-engine lamp is the real engine telltale symbol, lit amber. The lead status cell draws it at 40px; secondary cells at 28px.

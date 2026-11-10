@@ -1,0 +1,18 @@
+{
+  "id": "renault-dacia",
+  "label": "Renault / Dacia",
+  "makes": ["Renault", "Dacia", "Alpine"],
+  "wmi": ["VF1", "UU1", "UU2", "VGA", "KNM"],
+  "notes": "Body and chassis modules answer on request ID + 0x20 (DDT4All addressing), so the adapter is told where to send ISO-TP flow control. Older modules speak KWP2000 on CAN, newer ones UDS.",
+  "notes_ro": "Modulele de caroserie și șasiu răspund pe adresa cererii + 0x20 (adresarea DDT4All), așa că adaptorului i se spune unde să trimită controlul de flux ISO-TP. Modulele mai vechi folosesc KWP2000 pe CAN, cele noi UDS.",
+  "modules": [
+    {"id": "rn-engine", "category": "engine", "tx": "7E0", "rx": "7E8", "dtc": "auto", "verified": true, "source": "ISO 15765-4"},
+    {"id": "rn-transmission", "category": "transmission", "tx": "7E1", "rx": "7E9", "dtc": "auto", "verified": true, "source": "ISO 15765-4"},
+    {"id": "rn-abs", "category": "abs", "tx": "740", "rx": "760", "dtc": "auto", "verified": false, "source": "DDT4All community lists"},
+    {"id": "rn-steering", "category": "steering", "tx": "742", "rx": "762", "dtc": "auto", "verified": false, "source": "DDT4All community lists"},
+    {"id": "rn-cluster", "category": "cluster", "tx": "743", "rx": "763", "dtc": "auto", "verified": false, "source": "DDT4All community lists"},
+    {"id": "rn-climate", "category": "climate", "tx": "744", "rx": "764", "dtc": "auto", "verified": false, "source": "DDT4All community lists"},
+    {"id": "rn-body", "category": "body", "tx": "745", "rx": "765", "dtc": "auto", "verified": false, "source": "DDT4All community lists (UCH)"},
+    {"id": "rn-airbag", "category": "airbag", "tx": "752", "rx": "772", "dtc": "auto", "verified": false, "source": "DDT4All community lists"}
+  ]
+}

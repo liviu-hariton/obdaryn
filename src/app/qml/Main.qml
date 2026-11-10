@@ -7,6 +7,7 @@
 //   1 Trouble codes                              5 Vehicle info
 //   2 Readiness                                  6 Adapter log
 //   3 Freeze frame                               7 Settings
+//   8 All modules (full-vehicle scan)
 import QtQuick
 import QtQuick.Controls.Basic as C
 import QtQuick.Layouts
@@ -37,19 +38,22 @@ C.ApplicationWindow {
             }
         }
         function onClearFinished(success, message) { toast.show(success, message) }
+        function onModuleClearFinished(success, message) { toast.show(success, message) }
     }
 
     // Shared by the Overview and Trouble codes screens.
-    function requestClear() { clearDialog.open() }
+    function requestClear() { clearDialog.moduleRow = -1; clearDialog.moduleName = ""; clearDialog.open() }
+    function requestModuleClear(row, name) { clearDialog.moduleRow = row; clearDialog.moduleName = name; clearDialog.open() }
 
-    // Keyboard: ⌘1…⌘7 switch screens, ⌘, opens Settings, ⌘R scans again.
-    Shortcut { sequence: "Ctrl+1"; onActivated: window.page = 0 }
-    Shortcut { sequence: "Ctrl+2"; onActivated: window.page = 1 }
-    Shortcut { sequence: "Ctrl+3"; onActivated: window.page = 2 }
-    Shortcut { sequence: "Ctrl+4"; onActivated: window.page = 3 }
-    Shortcut { sequence: "Ctrl+5"; onActivated: window.page = 4 }
-    Shortcut { sequence: "Ctrl+6"; onActivated: window.page = 5 }
-    Shortcut { sequence: "Ctrl+7"; onActivated: window.page = 6 }
+    // Keyboard: ⌘1…⌘8 follow the sidebar order, ⌘, opens Settings, ⌘R scans again.
+    readonly property var sidebarOrder: [0, 1, 8, 2, 3, 4, 5, 6]
+    Repeater {
+        model: window.sidebarOrder.length
+        delegate: Item {
+            required property int index
+            Shortcut { sequence: "Ctrl+" + (index + 1); onActivated: window.page = window.sidebarOrder[index] }
+        }
+    }
     Shortcut { sequences: [StandardKey.Preferences]; onActivated: window.page = 7 }
     Shortcut { sequences: [StandardKey.Refresh, "Ctrl+R"]; enabled: App.connectionState === App.Ready; onActivated: App.runFullScan() }
 
@@ -72,6 +76,7 @@ C.ApplicationWindow {
                 bulbCheck: window.bulbCheck
                 onOpenPage: p => window.page = p
                 onOpenCode: code => { codesPage.selectedCode = code; window.page = 1 }
+                onOpenModules: window.page = 8
             }
             CodesPage { id: codesPage; onOpenPage: p => window.page = p; onClearRequested: window.requestClear() }
             ReadinessPage { bulbCheck: window.bulbCheck; onOpenPage: p => window.page = p }
@@ -80,12 +85,18 @@ C.ApplicationWindow {
             VehiclePage { onOpenPage: p => window.page = p }
             LogPage {}
             SettingsPage {}
+            ModulesPage {
+                objectName: "modulesPage"
+                onOpenPage: p => window.page = p
+                onClearRequested: (row, name) => window.requestModuleClear(row, name)
+                onObdClearRequested: window.requestClear()
+            }
         }
     }
 
     ClearCodesDialog {
         id: clearDialog
-        onConfirmed: App.clearCodes()
+        onConfirmed: moduleRow >= 0 ? App.clearModuleCodes(moduleRow) : App.clearCodes()
     }
 
     Toast {

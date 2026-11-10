@@ -7,8 +7,24 @@
         <translation>Ștergi codurile de eroare?</translation>
     </message>
     <message>
+        <source>Clear the codes in %1?</source>
+        <translation>Ștergi codurile din %1?</translation>
+    </message>
+    <message>
         <source>Do this after a repair, not to hide a fault. Before clearing, know that it:</source>
         <translation>Fă asta după o reparație, nu ca să ascunzi un defect. Înainte de ștergere, reține că:</translation>
+    </message>
+    <message>
+        <source>Turns this module's warning light off if the fault is gone. A fault that is still present comes back at once.</source>
+        <translation>Stinge martorul acestui modul dacă defectul a dispărut. Un defect încă prezent revine imediat.</translation>
+    </message>
+    <message>
+        <source>Erases the module's fault history, which a workshop may want to see. Note the codes first.</source>
+        <translation>Șterge istoricul defectelor modulului, pe care un service ar putea vrea să-l vadă. Notează întâi codurile.</translation>
+    </message>
+    <message>
+        <source>Clearing never repairs anything: a %1 fault usually needs a fix before it stays away.</source>
+        <translation>Ștergerea nu repară nimic: un defect la %1 are de obicei nevoie de o reparație ca să nu revină.</translation>
     </message>
     <message>
         <source>Turns the check-engine light off. If the fault is still there, the light comes back.</source>
@@ -433,6 +449,220 @@
     </message>
 </context>
 <context>
+    <name>Module</name>
+    <message>
+        <source>Engine</source>
+        <translation>Motor</translation>
+    </message>
+    <message>
+        <source>Transmission</source>
+        <translation>Transmisie</translation>
+    </message>
+    <message>
+        <source>Hybrid system</source>
+        <translation>Sistem hibrid</translation>
+    </message>
+    <message>
+        <source>ABS / stability control</source>
+        <translation>ABS / control stabilitate</translation>
+    </message>
+    <message>
+        <source>Airbag (SRS)</source>
+        <translation>Airbag (SRS)</translation>
+    </message>
+    <message>
+        <source>Power steering</source>
+        <translation>Servodirecție</translation>
+    </message>
+    <message>
+        <source>Tyre pressure (TPMS)</source>
+        <translation>Presiune anvelope (TPMS)</translation>
+    </message>
+    <message>
+        <source>Body control</source>
+        <translation>Modul caroserie</translation>
+    </message>
+    <message>
+        <source>Instrument cluster</source>
+        <translation>Bord (instrumente)</translation>
+    </message>
+    <message>
+        <source>Climate control</source>
+        <translation>Climatizare</translation>
+    </message>
+    <message>
+        <source>Gateway</source>
+        <translation>Gateway</translation>
+    </message>
+    <message>
+        <source>Infotainment</source>
+        <translation>Infotainment</translation>
+    </message>
+    <message>
+        <source>Other module</source>
+        <translation>Alt modul</translation>
+    </message>
+</context>
+<context>
+    <name>ModulesPage</name>
+    <message>
+        <source>All modules</source>
+        <translation>Toate modulele</translation>
+    </message>
+    <message>
+        <source>Trouble codes from every module this brand is known to have: ABS, airbag, body, instrument cluster and more, not just the engine.</source>
+        <translation>Coduri de eroare din toate modulele cunoscute pentru această marcă: ABS, airbag, caroserie, bord și altele, nu doar motorul.</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Oprește</translation>
+    </message>
+    <message>
+        <source>Scan again</source>
+        <translation>Scanează din nou</translation>
+    </message>
+    <message>
+        <source>Scan all modules</source>
+        <translation>Scanează toate modulele</translation>
+    </message>
+    <message>
+        <source>Module list</source>
+        <translation>Lista de module</translation>
+    </message>
+    <message>
+        <source>chosen by you</source>
+        <translation>aleasă de tine</translation>
+    </message>
+    <message>
+        <source>matched from the VIN</source>
+        <translation>potrivită după VIN</translation>
+    </message>
+    <message>
+        <source>Hide details</source>
+        <translation>Ascunde detaliile</translation>
+    </message>
+    <message>
+        <source>About this list</source>
+        <translation>Despre această listă</translation>
+    </message>
+    <message>
+        <source>Asking module %1 of %2…</source>
+        <translation>Se interoghează modulul %1 din %2…</translation>
+    </message>
+    <message>
+        <source>%1 of %2 modules answered · %3</source>
+        <translation>Au răspuns %1 din %2 module · %3</translation>
+    </message>
+    <message>
+        <source>no trouble codes</source>
+        <translation>niciun cod de eroare</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n code(s)</source>
+        <translation>
+            <numerusform>%n cod</numerusform>
+            <numerusform>%n coduri</numerusform>
+            <numerusform>%n de coduri</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>in %n module(s)</source>
+        <translation>
+            <numerusform>în %n modul</numerusform>
+            <numerusform>în %n module</numerusform>
+            <numerusform>în %n de module</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>scanned at %1</source>
+        <translation>scanat la %1</translation>
+    </message>
+    <message>
+        <source>Scan every module</source>
+        <translation>Scanează toate modulele</translation>
+    </message>
+    <message>
+        <source>Generic OBD-II only reaches the engine and transmission. A module scan asks each module directly, so codes behind the ABS, airbag or body warning lights show up too. It takes 5–15 seconds; the ignition must be ON and the engine may run. Live data pauses while it runs.</source>
+        <translation>OBD-II generic ajunge doar la motor și cutia de viteze. Scanarea modulelor întreabă direct fiecare modul, așa că apar și codurile din spatele martorilor ABS, airbag sau caroserie. Durează 5–15 secunde; contactul trebuie să fie pus, iar motorul poate merge. Datele în timp real se opresc pe durata scanării.</translation>
+    </message>
+    <message>
+        <source>unconfirmed address</source>
+        <translation>adresă neconfirmată</translation>
+    </message>
+    <message>
+        <source>Waiting</source>
+        <translation>În așteptare</translation>
+    </message>
+    <message>
+        <source>Asking…</source>
+        <translation>Se interoghează…</translation>
+    </message>
+    <message>
+        <source>Not found</source>
+        <translation>Negăsit</translation>
+    </message>
+    <message>
+        <source>Couldn't read codes</source>
+        <translation>Codurile nu au putut fi citite</translation>
+    </message>
+    <message>
+        <source>Generic OBD-II only</source>
+        <translation>Doar OBD-II generic</translation>
+    </message>
+    <message>
+        <source>No codes</source>
+        <translation>Niciun cod</translation>
+    </message>
+    <message>
+        <source>This module reports no trouble codes.</source>
+        <translation>Acest modul nu raportează niciun cod de eroare.</translation>
+    </message>
+    <message>
+        <source>Present now</source>
+        <translation>Prezent acum</translation>
+    </message>
+    <message>
+        <source>Warning light requested</source>
+        <translation>Cere aprinderea martorului</translation>
+    </message>
+    <message>
+        <source>No explanation yet for this code. Brand-specific descriptions are planned; until then, search for the code together with the make and model.</source>
+        <translation>Încă nu există o explicație pentru acest cod. Descrierile pe mărci sunt planificate; până atunci, caută codul împreună cu marca și modelul.</translation>
+    </message>
+    <message>
+        <source>Likely</source>
+        <translation>Probabil</translation>
+    </message>
+    <message>
+        <source>Possible</source>
+        <translation>Posibil</translation>
+    </message>
+    <message>
+        <source>Rare</source>
+        <translation>Rar</translation>
+    </message>
+    <message>
+        <source>Part number %1</source>
+        <translation>Cod piesă %1</translation>
+    </message>
+    <message>
+        <source>Software %1</source>
+        <translation>Software %1</translation>
+    </message>
+    <message>
+        <source>Status byte %1</source>
+        <translation>Octet de stare %1</translation>
+    </message>
+    <message>
+        <source>Clear this module's codes…</source>
+        <translation>Șterge codurile acestui modul…</translation>
+    </message>
+    <message>
+        <source>"Not found" means nothing answered at that address. The module may not be fitted to this car, may use another address on this model, or may sit on a bus the OBD socket doesn't reach.</source>
+        <translation>„Negăsit” înseamnă că nimic nu a răspuns la acea adresă. Modulul poate lipsi de pe această mașină, poate folosi altă adresă pe acest model sau poate fi pe o magistrală la care mufa OBD nu ajunge.</translation>
+    </message>
+</context>
+<context>
     <name>Monitor</name>
     <message>
         <source>Misfire</source>
@@ -713,6 +943,22 @@
     <message>
         <source>Trouble codes</source>
         <translation>Coduri de eroare</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n more in other modules</source>
+        <translation>
+            <numerusform>încă %n în alte module</numerusform>
+            <numerusform>încă %n în alte module</numerusform>
+            <numerusform>încă %n în alte module</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Other modules: no codes</source>
+        <translation>Alte module: niciun cod</translation>
+    </message>
+    <message>
+        <source>Scan ABS, airbag and other modules</source>
+        <translation>Scanează ABS, airbag și alte module</translation>
     </message>
     <message>
         <source>Details and clearing</source>
@@ -1405,6 +1651,18 @@
         </translation>
     </message>
     <message>
+        <source>All modules</source>
+        <translation>Toate modulele</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n codes in modules other than the engine and transmission</source>
+        <translation>
+            <numerusform>%n cod în alte module decât motorul și cutia</numerusform>
+            <numerusform>%n coduri în alte module decât motorul și cutia</numerusform>
+            <numerusform>%n de coduri în alte module decât motorul și cutia</numerusform>
+        </translation>
+    </message>
+    <message>
         <source>Readiness</source>
         <translation>Pregătire ITP</translation>
     </message>
@@ -1748,8 +2006,24 @@
         <translation>Se caută datele în timp real disponibile</translation>
     </message>
     <message>
+        <source>Any car (standard addresses only)</source>
+        <translation>Orice mașină (doar adrese standard)</translation>
+    </message>
+    <message>
+        <source>Wait for the current scan to finish.</source>
+        <translation>Așteaptă terminarea scanării curente.</translation>
+    </message>
+    <message>
+        <source>%1: codes cleared. Any code still listed is a fault that is present right now.</source>
+        <translation>%1: coduri șterse. Orice cod încă afișat este un defect prezent chiar acum.</translation>
+    </message>
+    <message>
         <source>Not connected to a car.</source>
         <translation>Nu ești conectat la o mașină.</translation>
+    </message>
+    <message>
+        <source>Wait for the module scan to finish.</source>
+        <translation>Așteaptă terminarea scanării modulelor.</translation>
     </message>
     <message>
         <source>Clearing trouble codes</source>
@@ -1816,6 +2090,44 @@
     <message>
         <source>No answer within %1 ms</source>
         <translation>Niciun răspuns în %1 ms</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::ModuleScanModel</name>
+    <message>
+        <source>Manufacturer-specific code (%1)</source>
+        <translation>Cod specific producătorului (%1)</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>În așteptare</translation>
+    </message>
+    <message>
+        <source>Stored</source>
+        <translation>Memorat</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::ModuleScanner</name>
+    <message>
+        <source>The adapter didn't accept the module address.</source>
+        <translation>Adaptorul nu a acceptat adresa modulului.</translation>
+    </message>
+    <message>
+        <source>The module answers, but not to trouble-code requests. Scan again with the ignition ON; if it persists, this module needs the brand's own diagnostic tool.</source>
+        <translation>Modulul răspunde, dar nu la cererile de coduri de eroare. Scanează din nou cu contactul pus; dacă problema persistă, acest modul are nevoie de aparatul de diagnoză al mărcii.</translation>
+    </message>
+    <message>
+        <source>%1 Scan again with the ignition ON; if it persists, this module needs the brand's own diagnostic tool.</source>
+        <translation>%1 Scanează din nou cu contactul pus; dacă problema persistă, acest modul are nevoie de aparatul de diagnoză al mărcii.</translation>
+    </message>
+    <message>
+        <source>Scan the modules first.</source>
+        <translation>Scanează întâi modulele.</translation>
+    </message>
+    <message>
+        <source>The engine is running (%1 rpm). Switch it off, leave the ignition ON, and try again.</source>
+        <translation>Motorul este pornit (%1 rot/min). Oprește-l, lasă contactul pus și încearcă din nou.</translation>
     </message>
 </context>
 <context>

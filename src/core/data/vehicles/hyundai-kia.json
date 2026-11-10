@@ -1,0 +1,19 @@
+{
+  "id": "hyundai-kia",
+  "label": "Hyundai / Kia / Genesis",
+  "makes": ["Hyundai", "Kia", "Genesis"],
+  "wmi": ["KMH", "KMF", "KMJ", "TMA", "NLH", "MAL", "5NP", "5NM", "KNA", "KND", "KNE", "U5Y", "U6Y", "5XY", "5XX", "KMT"],
+  "notes": "Pre-2016 modules mostly speak KWP2000 on CAN (0x18 / 0x21); newer ones UDS (0x19 / 0x22). Every answer comes on request ID + 8.",
+  "notes_ro": "Modulele de dinainte de 2016 folosesc mai ales KWP2000 pe CAN (0x18 / 0x21); cele noi UDS (0x19 / 0x22). Fiecare răspuns vine pe adresa cererii + 8.",
+  "modules": [
+    {"id": "hk-engine", "category": "engine", "tx": "7E0", "rx": "7E8", "dtc": "kwp", "verified": true, "source": "OBDb Hyundai-Elantra"},
+    {"id": "hk-transmission", "category": "transmission", "tx": "7E1", "rx": "7E9", "dtc": "kwp", "verified": true, "source": "OBDb Hyundai-Elantra"},
+    {"id": "hk-abs", "category": "abs", "tx": "7D1", "rx": "7D9", "dtc": "auto", "verified": true, "source": "OBDb Hyundai-Elantra"},
+    {"id": "hk-airbag", "category": "airbag", "tx": "7D2", "rx": "7DA", "dtc": "auto", "verified": false, "source": "community lists, unconfirmed"},
+    {"id": "hk-steering", "category": "steering", "tx": "7D4", "rx": "7DC", "dtc": "auto", "verified": true, "source": "OBDb Hyundai-Elantra (MDPS)"},
+    {"id": "hk-tpms", "category": "tpms", "tx": "7D6", "rx": "7DE", "dtc": "auto", "verified": false, "source": "OBDb (2013 and earlier)"},
+    {"id": "hk-body", "category": "body", "tx": "7A0", "rx": "7A8", "dtc": "auto", "verified": true, "source": "OBDb Hyundai-Elantra (BCM)"},
+    {"id": "hk-cluster", "category": "cluster", "tx": "7C6", "rx": "7CE", "dtc": "auto", "verified": true, "source": "OBDb Hyundai-Elantra"},
+    {"id": "hk-climate", "category": "climate", "tx": "7B3", "rx": "7BB", "dtc": "auto", "verified": false, "source": "Hyundai/Kia EV PID lists, unconfirmed on ICE cars"}
+  ]
+}

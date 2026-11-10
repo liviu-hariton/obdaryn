@@ -58,11 +58,13 @@ qt_add_qml_module(obdaryn
         qml/pages/VehiclePage.qml
         qml/pages/LogPage.qml
         qml/pages/SettingsPage.qml
+        qml/pages/ModulesPage.qml
     SOURCES
         AppController.h AppController.cpp
         models/LiveDataModel.h models/LiveDataModel.cpp
         models/DtcModel.h models/DtcModel.cpp
         models/TrafficLogModel.h models/TrafficLogModel.cpp
+        models/ModuleScanModel.h models/ModuleScanModel.cpp
 )
 
 # Fonts and icons, compiled into the binary.

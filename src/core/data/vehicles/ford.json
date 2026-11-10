@@ -1,0 +1,19 @@
+{
+  "id": "ford",
+  "label": "Ford",
+  "makes": ["Ford"],
+  "wmi": ["WF0", "1FA", "1FT", "1FM", "3FA", "2FM"],
+  "notes": "Ford modules answer on request ID + 8 (FORScan addressing). Some modules sit on the medium-speed CAN bus, which a standard ELM327 can't reach without a switched adapter.",
+  "notes_ro": "Modulele Ford răspund pe adresa cererii + 8 (adresarea FORScan). Unele module sunt pe magistrala CAN de viteză medie, la care un ELM327 standard nu ajunge fără un adaptor comutabil.",
+  "modules": [
+    {"id": "fd-engine", "category": "engine", "tx": "7E0", "rx": "7E8", "dtc": "auto", "verified": true, "source": "ISO 15765-4"},
+    {"id": "fd-transmission", "category": "transmission", "tx": "7E1", "rx": "7E9", "dtc": "auto", "verified": true, "source": "ISO 15765-4"},
+    {"id": "fd-abs", "category": "abs", "tx": "760", "rx": "768", "dtc": "auto", "verified": false, "source": "FORScan community lists"},
+    {"id": "fd-airbag", "category": "airbag", "tx": "737", "rx": "73F", "dtc": "auto", "verified": false, "source": "FORScan community lists (RCM)"},
+    {"id": "fd-steering", "category": "steering", "tx": "730", "rx": "738", "dtc": "auto", "verified": false, "source": "FORScan community lists (PSCM)"},
+    {"id": "fd-body", "category": "body", "tx": "726", "rx": "72E", "dtc": "auto", "verified": false, "source": "FORScan community lists (BCM)"},
+    {"id": "fd-cluster", "category": "cluster", "tx": "720", "rx": "728", "dtc": "auto", "verified": false, "source": "FORScan community lists (IPC)"},
+    {"id": "fd-climate", "category": "climate", "tx": "733", "rx": "73B", "dtc": "auto", "verified": false, "source": "FORScan community lists (HVAC)"},
+    {"id": "fd-infotainment", "category": "infotainment", "tx": "7D0", "rx": "7D8", "dtc": "auto", "verified": false, "source": "FORScan community lists (APIM)"}
+  ]
+}

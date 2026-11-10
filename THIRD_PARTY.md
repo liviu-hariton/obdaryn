@@ -12,6 +12,8 @@ The obdex descriptions are written independently and are not SAE J2012 text. We 
 
 PID formulas follow the public SAE J1979 / ISO 15031-5 definitions and were implemented from scratch.
 
+Module addresses in `src/core/data/vehicles/` are facts (CAN identifiers) gathered from public sources: OBDb, FORScan and DDT4All community lists, and VW community documentation. Each entry names its source. No third-party code or descriptive text is copied.
+
 ## Planned
 
 - [OBDb](https://github.com/OBDb) manufacturer signal sets, CC-BY-SA-4.0. They will ship as separate, attributed data files, and changes to them will be shared under the same licence.

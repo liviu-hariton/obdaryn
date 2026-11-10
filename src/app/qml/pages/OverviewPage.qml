@@ -12,6 +12,7 @@ Item {
     property bool bulbCheck: false
     signal openPage(int p)
     signal openCode(string code)
+    signal openModules()
 
     readonly property bool ready: App.connectionState === App.Ready
 
@@ -198,6 +199,16 @@ Item {
                 SectionTitle {
                     Layout.fillWidth: true
                     text: qsTr("Trouble codes")
+                    AppButton {
+                        variant: "quiet"
+                        text: App.moduleScanDone
+                              ? (App.moduleScan.extraCodeCount > 0
+                                 ? qsTr("%n more in other modules", "", App.moduleScan.extraCodeCount)
+                                 : qsTr("Other modules: no codes"))
+                              : qsTr("Scan ABS, airbag and other modules")
+                        iconName: "cpu"
+                        onClicked: page.openModules()
+                    }
                     AppButton {
                         variant: "quiet"
                         text: qsTr("Details and clearing")

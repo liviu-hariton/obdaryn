@@ -201,7 +201,7 @@ QByteArray SimulatedTransport::handleAt(const QByteArray &body)
         return "OK";
     }
     static const QList<QByteArray> okPrefixes = {
-        "SP", "TP", "AT", "CAF", "CFC", "ST", "CRA", "D0", "D1", "AL", "NL", "PC", "AR", "CP", "CEA",
+        "SP", "TP", "AT", "CAF", "CFC", "ST", "CRA", "D0", "D1", "AL", "NL", "PC", "AR", "CP", "CEA", "FC",
     };
     for (const QByteArray &p : okPrefixes) {
         if (body.startsWith(p))
@@ -226,11 +226,14 @@ QByteArray SimulatedTransport::handleObd(const QByteArray &normalized)
     }
 
     QList<EcuReply> replies;
-    const bool toAll = m_header == "7DF";
-    if (toAll || m_header == "7E0")
+    if (m_header == "7DF") {
+        // Functional OBD-II request: every emission-related ECU may answer.
         replies += engineReply(req);
-    if (toAll || m_header == "7E1")
         replies += transmissionReply(req);
+    } else {
+        // Physical request to one module (module scan).
+        replies += moduleReply(m_header, req);
+    }
 
     if (replies.isEmpty())
         return prefix + "NO DATA";
@@ -343,6 +346,103 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::transmissionReply(const 
     default:
         return {};
     }
+}
+
+QList<SimulatedTransport::EcuReply> SimulatedTransport::moduleReply(const QByteArray &header, const QByteArray &req)
+{
+    const quint8 sid = quint8(req[0]);
+    auto reply = [](const char *ecu, const QByteArray &payload) {
+        return QList<EcuReply>{{QString::fromLatin1(ecu), payload}};
+    };
+    auto negative = [&](const char *ecu, quint8 nrc) {
+        return reply(ecu, QByteArray("\x7F", 1) + char(sid) + char(nrc));
+    };
+    auto kwpDtcs = [](const QList<QPair<quint16, quint8>> &codes) {
+        QByteArray p = QByteArray(1, char(0x58)) + char(codes.size());
+        for (const auto &c : codes)
+            p += u16(c.first) + char(c.second);
+        return p;
+    };
+    const bool clearAll = (sid == 0x14);
+
+    if (header == "7E0") { // engine, KWP2000 on CAN like a 2014 Hyundai
+        switch (sid) {
+        case 0x18: {
+            QList<QPair<quint16, quint8>> codes;
+            for (quint16 c : m_stored) codes << qMakePair(c, quint8(0xE0));   // present now, MIL on
+            for (quint16 c : m_pending) codes << qMakePair(c, quint8(0x40));  // maturing
+            return reply("7E8", kwpDtcs(codes));
+        }
+        case 0x1A: return reply("7E8", QByteArray::fromHex("5A87") + "39101-2B330");
+        case 0x14:
+            if (m_engineRunning) return negative("7E8", 0x22);
+            m_stored.clear(); m_pending.clear(); m_monitorsIncomplete = 0xE5;
+            return reply("7E8", QByteArray::fromHex("54FF00"));
+        case 0x19: return negative("7E8", 0x11);
+        default:   return engineReply(req);
+        }
+    }
+    if (header == "7E1") { // transmission, KWP2000
+        switch (sid) {
+        case 0x18: return reply("7E9", kwpDtcs({}));
+        case 0x1A: return reply("7E9", QByteArray::fromHex("5A87") + "95440-26050");
+        case 0x14: return reply("7E9", QByteArray::fromHex("54FF00"));
+        case 0x19: return negative("7E9", 0x11);
+        default:   return transmissionReply(req);
+        }
+    }
+    if (header == "7D1") { // ABS / ESC, KWP2000
+        switch (sid) {
+        case 0x18: return reply("7D9", kwpDtcs(m_absFault ? QList<QPair<quint16, quint8>>{{0x4035, 0xE0}}
+                                                         : QList<QPair<quint16, quint8>>{}));
+        case 0x1A: return reply("7D9", QByteArray::fromHex("5A87") + "58920-3X000");
+        case 0x14:
+            if (clearAll) m_absFault = false; // a real active fault would come straight back
+            return reply("7D9", QByteArray::fromHex("54FF00"));
+        default:   return negative("7D9", 0x11);
+        }
+    }
+    if (header == "7D2") { // airbag, UDS
+        switch (sid) {
+        case 0x19:
+            // 59 02 <mask> then U0100, failure type 00, status 0x88 (confirmed, lamp on).
+            return reply("7DA", QByteArray::fromHex("5902FF")
+                                    + (m_airbagFault ? QByteArray::fromHex("C1000088") : QByteArray()));
+        case 0x22:
+            if (req.size() >= 3 && quint8(req[1]) == 0xF1 && quint8(req[2]) == 0x87)
+                return reply("7DA", QByteArray::fromHex("62F187") + "95910-3X100");
+            if (req.size() >= 3 && quint8(req[1]) == 0xF1 && quint8(req[2]) == 0x89)
+                return reply("7DA", QByteArray::fromHex("62F189") + "1.04");
+            return negative("7DA", 0x31);
+        case 0x14:
+            m_airbagFault = false;
+            return reply("7DA", QByteArray::fromHex("54"));
+        default:   return negative("7DA", 0x11);
+        }
+    }
+    if (header == "7A0") { // body control, KWP2000, no codes
+        switch (sid) {
+        case 0x18: return reply("7A8", kwpDtcs({}));
+        case 0x1A: return reply("7A8", QByteArray::fromHex("5A87") + "95400-3X010");
+        default:   return negative("7A8", 0x11);
+        }
+    }
+    if (header == "7C6") { // instrument cluster, UDS, no codes
+        switch (sid) {
+        case 0x19: return reply("7CE", QByteArray::fromHex("5902FF"));
+        case 0x22:
+            if (req.size() >= 3 && quint8(req[2]) == 0x87) return reply("7CE", QByteArray::fromHex("62F187") + "94011-3X120");
+            if (req.size() >= 3 && quint8(req[2]) == 0x89) return reply("7CE", QByteArray::fromHex("62F189") + "2.00");
+            return negative("7CE", 0x31);
+        default:   return negative("7CE", 0x11);
+        }
+    }
+    if (header == "7D6") { // TPMS: answers keep-alive, ignores code requests (seen on real modules)
+        if (sid == 0x3E)
+            return reply("7DE", QByteArray::fromHex("7E00"));
+        return {};
+    }
+    return {}; // steering, climate...: not fitted in the demo car
 }
 
 QByteArray SimulatedTransport::joinBytes(const QByteArray &bytes) const

@@ -13,6 +13,8 @@ qt_add_library(obdaryn_core STATIC
     obd/Readiness.h           obd/Readiness.cpp
     obd/VehicleInfo.h         obd/VehicleInfo.cpp
     obd/ObdClient.h           obd/ObdClient.cpp
+    obd/ModuleScanner.h       obd/ModuleScanner.cpp
+    vehicles/ModuleCatalog.h  vehicles/ModuleCatalog.cpp
     safety/RequestGuard.h     safety/RequestGuard.cpp
     transport/Transport.h
     transport/TcpTransport.h  transport/TcpTransport.cpp
@@ -24,10 +26,13 @@ target_include_directories(obdaryn_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(obdaryn_core PUBLIC Qt6::Core Qt6::Network)
 obdaryn_set_warnings(obdaryn_core)
 
-# Data files compiled into the binary (DTC descriptions, ...).
+# Data files compiled into the binary: DTC descriptions and the brand module
+# profiles (one JSON file per brand; drop a new file in data/vehicles to add one).
+file(GLOB OBDARYN_VEHICLE_PROFILES "${CMAKE_CURRENT_SOURCE_DIR}/data/vehicles/*.json")
 qt_add_resources(obdaryn_core "obdaryn_core_data"
     PREFIX "/obdaryn"
     BASE "${CMAKE_CURRENT_SOURCE_DIR}"
     FILES
         data/dtc_generic.json
+        ${OBDARYN_VEHICLE_PROFILES}
 )

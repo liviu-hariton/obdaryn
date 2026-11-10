@@ -5,6 +5,8 @@
 //   obdaryn-probe                      # 192.168.0.10:35000 (Vgate iCar Pro Wi-Fi)
 //   obdaryn-probe 127.0.0.1 35000      # Python ELM327-emulator
 //   obdaryn-probe --demo               # built-in simulated car
+//   add --modules to also scan every module of the car's brand (ABS, airbag, ...)
+//   add --verbose to print the raw adapter traffic
 //
 // It connects, prints adapter / protocol / VIN / readiness / trouble codes and
 // a few live values, then exits. It uses exactly the same core library as the
@@ -12,6 +14,7 @@
 // problem" on the first day with real hardware. Like the app, it only reads.
 
 #include "obd/DtcDatabase.h"
+#include "obd/ModuleScanner.h"
 #include "obd/ObdClient.h"
 #include "obd/Pids.h"
 #include "obd/VehicleInfo.h"
@@ -44,6 +47,8 @@ int main(int argc, char *argv[])
         });
     }
 
+    QString vehicleMake, vehicleVin; // filled from the VIN, used to pick the module list
+
     // Give up after 60 s whatever happens.
     QTimer::singleShot(60000, &app, [&] { out << "Timed out." << Qt::endl; app.exit(2); });
 
@@ -62,6 +67,8 @@ int main(int argc, char *argv[])
 
         client.readVehicleInfo([&](const ObdClient::VehicleInformation &info) {
             const VinInfo vin = decodeVin(info.vin);
+            vehicleMake = vin.manufacturer;
+            vehicleVin = vin.vin;
             out << "VIN:      " << (vin.vin.isEmpty() ? QStringLiteral("(not reported)") : vin.vin);
             if (!vin.manufacturer.isEmpty())
                 out << "  (" << vin.manufacturer << ", " << vin.modelYear << ")";
@@ -91,8 +98,36 @@ int main(int argc, char *argv[])
                                 out << "Live:     " << def->translatedName() << " = " << v << ' ' << def->translatedUnit()
                                     << "  (" << r.ecu << ")" << Qt::endl;
                         }
-                        client.session()->close();
-                        app.exit(0);
+                        if (!app.arguments().contains(QStringLiteral("--modules"))) {
+                            client.session()->close();
+                            app.exit(0);
+                            return;
+                        }
+                        // Full-vehicle scan with the brand profile matched from the VIN.
+                        auto *scanner = new ModuleScanner(&client, &app);
+                        const VehicleProfile &profile = ModuleCatalog::forVehicle(vehicleMake, vehicleVin);
+                        out << "Modules:  " << profile.label << Qt::endl;
+                        QObject::connect(scanner, &ModuleScanner::finished, [&, scanner] {
+                            for (const ModuleResult &m : scanner->results()) {
+                                const char *state = m.state == ModuleResult::State::Answered ? "answered"
+                                                  : m.state == ModuleResult::State::ObdOnly ? "generic OBD-II only (see codes above)"
+                                                  : m.state == ModuleResult::State::Absent ? "not found" : "error";
+                                out << "  " << m.module.addressText() << "  " << m.module.displayName() << ": " << state;
+                                if (m.state == ModuleResult::State::Answered)
+                                    out << (m.protocol == DiagProtocol::Uds ? " (UDS)" : " (KWP2000)");
+                                if (!m.partNumber.isEmpty())
+                                    out << "  part " << m.partNumber;
+                                out << Qt::endl;
+                                for (const ModuleDtc &d : m.dtcs) {
+                                    const DtcInfo info = DtcDatabase::instance().lookup(d.code);
+                                    out << "      " << d.displayCode() << (d.activeNow ? "  [present now]" : "") << "  "
+                                        << (info.known ? info.title : info.system) << Qt::endl;
+                                }
+                            }
+                            client.session()->close();
+                            app.exit(0);
+                        });
+                        scanner->scan(profile);
                     });
                 });
             });
