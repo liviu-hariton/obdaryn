@@ -43,6 +43,15 @@ const QList<QByteArray> kExactAtCommands = {
     "I", "@1", "@2",// adapter identification (read only)
     "PC",           // close protocol
     "CRA",          // reset the receive-address filter
+    // ISO-TP flow control. When a module answers with several CAN frames, the
+    // adapter must reply "continue" (a flow-control frame) to the module's own
+    // address. Brands whose answer ID is not request ID + 8 (VW group,
+    // Renault/Dacia, GM) need the adapter told where to send it. Only the
+    // standard frame content is allowed: 30 00 00 = continue, no block limit,
+    // no delay, which is what the ELM327 sends by default anyway.
+    "FCSM0",        // flow control: automatic (default)
+    "FCSM1",        // flow control: user-defined header, fixed data below
+    "FCSD300000",   // flow control data: exactly 30 00 00
 };
 
 // AT commands followed by a hex argument: prefix → allowed argument lengths.
@@ -60,6 +69,7 @@ const QList<ParamCommand> kParamAtCommands = {
     {"CP", {2}},           // CAN priority byte for 29-bit IDs
     {"CEA", {2}},          // CAN extended address
     {"ST", {2}},           // response timeout (x 4 ms)
+    {"FCSH", {3, 8}},      // flow-control header (where "continue" frames go)
 };
 
 } // namespace

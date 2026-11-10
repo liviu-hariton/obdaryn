@@ -95,11 +95,13 @@ void TestRequestGuard::adapterCommands()
 {
     for (const char *ok : {"ATZ", "AT Z", "ate0", "ATH1", "ATSP0", "ATSPA6", "ATSH7E0",
                            "AT SH 18 DA 10 F1", "ATCRA7E8", "ATCRA", "ATST32", "ATRV",
-                           "ATDPN", "AT@1", "ATI", "ATAT2"}) {
+                           "ATDPN", "AT@1", "ATI", "ATAT2",
+                           // standard ISO-TP flow control for non "+8" module addresses
+                           "ATFCSH77D", "AT FC SH 18DA10F1", "ATFCSM1", "ATFCSM0", "AT FC SD 30 00 00"}) {
         QVERIFY2(RequestGuard::check(ok).allowed, ok);
     }
     // These could transmit arbitrary bytes or permanently change the adapter.
-    for (const char *bad : {"ATWM8210F13E", "ATFCSD300000", "ATRTR", "AT@3ABCDEFGHIJKL",
+    for (const char *bad : {"ATWM8210F13E", "ATFCSD300810", "ATFCSD3000", "ATFCSD31", "ATFCSM2", "ATFCSH7", "ATRTR", "AT@3ABCDEFGHIJKL",
                             "ATPP0ESV7A", "ATPP0EON", "ATBRD23", "ATMA", "ATLP", "ATSH7E", "ATCFC0"}) {
         QVERIFY2(!RequestGuard::check(bad).allowed, bad);
     }

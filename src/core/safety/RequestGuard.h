@@ -36,8 +36,9 @@ struct GuardVerdict {
  *                        04 (OBD-II clear), 14 (UDS/KWP ClearDiagnosticInformation)
  *
  * Adapter (AT) commands are allowlisted too, because a few of them can put
- * arbitrary bytes on the bus (AT WM, AT FC SD, AT RTR) or permanently change
- * the adapter (AT @3, AT PP ...). An empty line is refused as well: the ELM327
+ * arbitrary bytes on the bus (AT WM, AT RTR, AT FC SD with custom data) or
+ * permanently change the adapter (AT @3, AT PP ...). ISO-TP flow control is
+ * allowed only with the standard "continue" frame (AT FC SD 30 00 00). An empty line is refused as well: the ELM327
  * repeats the previous command when it receives a bare carriage return, which
  * could silently repeat a "clear codes" request.
  */
