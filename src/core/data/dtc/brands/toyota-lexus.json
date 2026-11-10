@@ -1,0 +1,5683 @@
+{
+ "brand": "toyota-lexus",
+ "label": "Obdaryn's Toyota/Lexus pack",
+ "label_ro": "pachetul Obdaryn pentru Toyota/Lexus",
+ "brandName": "Toyota/Lexus",
+ "source": {
+  "license": "GPL-3.0-or-later (text written for Obdaryn)",
+  "note": "Meanings compiled from public Toyota/Lexus documents filed with NHTSA, republished Toyota repair-manual pages and independent code tables; each code lists its sources. Verify with a workshop before replacing parts.",
+  "scope": "2008-2020 Toyota/Lexus sold in Europe and the US: Corolla, Auris, Yaris, RAV4, C-HR, Prius and hybrids, Avensis"
+ },
+ "codes": {
+  "B1000": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2017/MC-10132448-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Airbag control unit (center airbag sensor) fault",
+    "d": "The center airbag sensor assembly, which is the airbag control unit, found an internal fault. On some 2015-2017 Lexus NX and RX Toyota issued a software update for an intermittent B1000 stored in history. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Center airbag sensor assembly"
+     ],
+     [
+      "low",
+      "Software fault on some Lexus models (update available)"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect al unității de control airbag (senzorul central)",
+    "d": "Senzorul central de airbag, adică unitatea de control airbag, a găsit un defect intern. La unele Lexus NX și RX 2015-2017, Toyota a emis o actualizare software pentru un B1000 intermitent memorat în istoric. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Senzorul central de airbag"
+     ],
+     [
+      "low",
+      "Defect software la unele modele Lexus (există actualizare)"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1603": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2013/MC-10132282-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front crash sensor line (right) not initialised",
+    "d": "The airbag control unit could not finish setting up the right front crash sensor line at start-up. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector to the front crash sensor"
+     ],
+     [
+      "low",
+      "Front crash sensor"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Linia senzorului de impact frontal (dreapta) neinițializată",
+    "d": "Unitatea de control airbag nu a putut finaliza inițializarea liniei senzorului de impact frontal din dreapta la pornire. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector spre senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1608": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2013/MC-10132282-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front crash sensor line (left) not initialised",
+    "d": "The airbag control unit could not finish setting up the left front crash sensor line at start-up. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector to the front crash sensor"
+     ],
+     [
+      "low",
+      "Front crash sensor"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Linia senzorului de impact frontal (stânga) neinițializată",
+    "d": "Unitatea de control airbag nu a putut finaliza inițializarea liniei senzorului de impact frontal din stânga la pornire. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector spre senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1610": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front crash sensor (right) fault",
+    "d": "The right front crash sensor, at the front of the engine bay, or its circuit has a fault. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Front crash sensor (often after front-end damage or repair)"
+     ],
+     [
+      "medium",
+      "Sensor wiring or connector"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de impact frontal (dreapta)",
+    "d": "Senzorul de impact frontal din dreapta, aflat în fața compartimentului motor, sau circuitul lui are un defect. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de impact frontal (adesea după avarii sau reparații în față)"
+     ],
+     [
+      "medium",
+      "Cablajul sau conectorul senzorului"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1612": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2013/MC-10132282-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front crash sensor (right): no communication",
+    "d": "The airbag control unit lost communication with the right front crash sensor. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector to the front crash sensor"
+     ],
+     [
+      "low",
+      "Front crash sensor"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de impact frontal (dreapta): fără comunicație",
+    "d": "Unitatea de control airbag a pierdut comunicația cu senzorul de impact frontal din dreapta. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector spre senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1613": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2013/MC-10132282-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front crash sensor (right): not initialised",
+    "d": "The airbag control unit could not finish initialising the right front crash sensor. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector to the front crash sensor"
+     ],
+     [
+      "low",
+      "Front crash sensor"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de impact frontal (dreapta): neinițializat",
+    "d": "Unitatea de control airbag nu a putut finaliza inițializarea pentru senzorul de impact frontal din dreapta. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector spre senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1615": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front crash sensor (left) fault",
+    "d": "The left front crash sensor, at the front of the engine bay, or its circuit has a fault. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Front crash sensor (often after front-end damage or repair)"
+     ],
+     [
+      "medium",
+      "Sensor wiring or connector"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de impact frontal (stânga)",
+    "d": "Senzorul de impact frontal din stânga, aflat în fața compartimentului motor, sau circuitul lui are un defect. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de impact frontal (adesea după avarii sau reparații în față)"
+     ],
+     [
+      "medium",
+      "Cablajul sau conectorul senzorului"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1617": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2013/MC-10132282-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front crash sensor (left): no communication",
+    "d": "The airbag control unit lost communication with the left front crash sensor. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector to the front crash sensor"
+     ],
+     [
+      "low",
+      "Front crash sensor"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de impact frontal (stânga): fără comunicație",
+    "d": "Unitatea de control airbag a pierdut comunicația cu senzorul de impact frontal din stânga. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector spre senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1618": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2013/MC-10132282-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front crash sensor (left): not initialised",
+    "d": "The airbag control unit could not finish initialising the left front crash sensor. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector to the front crash sensor"
+     ],
+     [
+      "low",
+      "Front crash sensor"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de impact frontal (stânga): neinițializat",
+    "d": "Unitatea de control airbag nu a putut finaliza inițializarea pentru senzorul de impact frontal din stânga. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector spre senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Senzorul de impact frontal"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1650": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Occupant classification system fault",
+    "d": "The system under the front passenger seat that decides whether the passenger airbag may deploy reports a fault. Diagnose the occupant classification system itself; it may also need a zero point calibration after seat work. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Seat wiring or connector under the passenger seat"
+     ],
+     [
+      "medium",
+      "Occupant classification sensor or ECU"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la sistemul de clasificare a pasagerului",
+    "d": "Sistemul de sub scaunul pasagerului din față, care decide dacă airbagul pasagerului se poate declanșa, raportează un defect. Diagnostichează sistemul de clasificare propriu-zis; poate avea nevoie și de o calibrare a punctului zero după lucrări la scaun. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul de sub scaunul pasagerului"
+     ],
+     [
+      "medium",
+      "Senzorul sau calculatorul de clasificare a pasagerului"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1653": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver seat position sensor circuit fault",
+    "d": "The sensor that tells the airbag unit whether the driver's seat is far forward has a fault; the unit uses it to adapt how the driver airbag deploys. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Seat wiring or connector under the driver's seat"
+     ],
+     [
+      "medium",
+      "Seat position sensor"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la circuitul senzorului de poziție al scaunului șoferului",
+    "d": "Senzorul care îi spune unității airbag dacă scaunul șoferului este mult în față are un defect; unitatea îl folosește ca să adapteze declanșarea airbagului șoferului. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul de sub scaunul șoferului"
+     ],
+     [
+      "medium",
+      "Senzorul de poziție al scaunului"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1660": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Passenger airbag ON/OFF indicator circuit fault",
+    "d": "The indicator that shows whether the front passenger airbag is on or off has a circuit fault, so you can't trust what it shows. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Indicator wiring or connector"
+     ],
+     [
+      "low",
+      "Indicator / panel assembly"
+     ],
+     [
+      "low",
+      "Airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la circuitul indicatorului airbag pasager ON/OFF",
+    "d": "Indicatorul care arată dacă airbagul pasagerului din față este activ sau dezactivat are un defect de circuit, așa că nu te poți baza pe ce afișează. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul indicatorului"
+     ],
+     [
+      "low",
+      "Indicatorul / ansamblul panoului"
+     ],
+     [
+      "low",
+      "Unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1800": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver airbag firing circuit: short in the circuit",
+    "d": "The two wires of the firing circuit for the driver airbag in the steering wheel are shorted together. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Spiral cable (clock spring) behind the steering wheel"
+     ],
+     [
+      "medium",
+      "Connector at the steering wheel airbag"
+     ],
+     [
+      "low",
+      "Driver airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Airbag șofer, circuit de declanșare: scurtcircuit în circuit",
+    "d": "Cele două fire ale circuitului de declanșare pentru airbagul șoferului din volan sunt în scurtcircuit între ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablul spiralat (clock spring) din spatele volanului"
+     ],
+     [
+      "medium",
+      "Conectorul airbagului din volan"
+     ],
+     [
+      "low",
+      "Airbagul șoferului sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1801": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver airbag firing circuit: open circuit",
+    "d": "The firing circuit for the driver airbag in the steering wheel is open. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Spiral cable (clock spring) behind the steering wheel"
+     ],
+     [
+      "medium",
+      "Connector at the steering wheel airbag"
+     ],
+     [
+      "low",
+      "Driver airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Airbag șofer, circuit de declanșare: circuit întrerupt",
+    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este întrerupt. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablul spiralat (clock spring) din spatele volanului"
+     ],
+     [
+      "medium",
+      "Conectorul airbagului din volan"
+     ],
+     [
+      "low",
+      "Airbagul șoferului sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1802": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver airbag firing circuit: short to ground",
+    "d": "The firing circuit for the driver airbag in the steering wheel is shorted to ground. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Spiral cable (clock spring) behind the steering wheel"
+     ],
+     [
+      "medium",
+      "Connector at the steering wheel airbag"
+     ],
+     [
+      "low",
+      "Driver airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Airbag șofer, circuit de declanșare: scurtcircuit la masă",
+    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este în scurtcircuit la masă. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablul spiralat (clock spring) din spatele volanului"
+     ],
+     [
+      "medium",
+      "Conectorul airbagului din volan"
+     ],
+     [
+      "low",
+      "Airbagul șoferului sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1803": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver airbag firing circuit: short to battery voltage",
+    "d": "The firing circuit for the driver airbag in the steering wheel is shorted to battery voltage. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Spiral cable (clock spring) behind the steering wheel"
+     ],
+     [
+      "medium",
+      "Connector at the steering wheel airbag"
+     ],
+     [
+      "low",
+      "Driver airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Airbag șofer, circuit de declanșare: scurtcircuit la plus",
+    "d": "Circuitul de declanșare pentru airbagul șoferului din volan este în scurtcircuit la tensiunea bateriei. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablul spiralat (clock spring) din spatele volanului"
+     ],
+     [
+      "medium",
+      "Conectorul airbagului din volan"
+     ],
+     [
+      "low",
+      "Airbagul șoferului sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1805": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front passenger airbag firing circuit: short in the circuit",
+    "d": "The two wires of the firing circuit for the front passenger airbag in the dashboard are shorted together. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector behind the dashboard"
+     ],
+     [
+      "low",
+      "Passenger airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Airbag pasager față, circuit de declanșare: scurtcircuit în circuit",
+    "d": "Cele două fire ale circuitului de declanșare pentru airbagul pasagerului din față din bord sunt în scurtcircuit între ele. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector din spatele bordului"
+     ],
+     [
+      "low",
+      "Airbagul pasagerului sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1806": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front passenger airbag firing circuit: open circuit",
+    "d": "The firing circuit for the front passenger airbag in the dashboard is open. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector behind the dashboard"
+     ],
+     [
+      "low",
+      "Passenger airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Airbag pasager față, circuit de declanșare: circuit întrerupt",
+    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este întrerupt. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector din spatele bordului"
+     ],
+     [
+      "low",
+      "Airbagul pasagerului sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1807": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front passenger airbag firing circuit: short to ground",
+    "d": "The firing circuit for the front passenger airbag in the dashboard is shorted to ground. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector behind the dashboard"
+     ],
+     [
+      "low",
+      "Passenger airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Airbag pasager față, circuit de declanșare: scurtcircuit la masă",
+    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este în scurtcircuit la masă. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector din spatele bordului"
+     ],
+     [
+      "low",
+      "Airbagul pasagerului sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1808": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/043005.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Supplemental%20Restraint%20System/Airbag%20System/034005.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front passenger airbag firing circuit: short to battery voltage",
+    "d": "The firing circuit for the front passenger airbag in the dashboard is shorted to battery voltage. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector behind the dashboard"
+     ],
+     [
+      "low",
+      "Passenger airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Airbag pasager față, circuit de declanșare: scurtcircuit la plus",
+    "d": "Circuitul de declanșare pentru airbagul pasagerului din față din bord este în scurtcircuit la tensiunea bateriei. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conector din spatele bordului"
+     ],
+     [
+      "low",
+      "Airbagul pasagerului sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B1861": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10155240-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_srs_rav4.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver knee airbag firing circuit open",
+    "d": "The firing circuit of the knee airbag under the steering column is open. For 2006-2008 Lexus IS, Lexus issued a wiring-harness repair for this code. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Connector or wiring at the knee airbag"
+     ],
+     [
+      "low",
+      "Knee airbag or airbag control unit"
+     ]
+    ],
+    "s": [
+     "SRS (airbag) warning light"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul de declanșare al airbagului de genunchi al șoferului întrerupt",
+    "d": "Circuitul de declanșare al airbagului de genunchi de sub coloana de direcție este întrerupt. Pentru Lexus IS 2006-2008, Lexus a emis o reparație a cablajului pentru acest cod. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Conectorul sau cablajul airbagului de genunchi"
+     ],
+     [
+      "low",
+      "Airbagul de genunchi sau unitatea de control airbag"
+     ]
+    ],
+    "s": [
+     "Martorul SRS (airbag) aprins"
+    ]
+   }
+  },
+  "B2784": {
+   "module": "body",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Engine%20Immobiliser/Engine%20Immobiliser%20System/045004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_ess.htm"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Immobiliser antenna coil open or shorted",
+    "d": "The antenna coil around the ignition (or the start button) that reads the key's chip has an open or short circuit, so the key may not be recognised and the engine may not start.",
+    "c": [
+     [
+      "medium",
+      "Antenna coil / key amplifier or its wiring"
+     ],
+     [
+      "low",
+      "Immobiliser (transponder key) control unit"
+     ]
+    ],
+    "s": [
+     "Engine may not start",
+     "Security light behaves abnormally"
+    ]
+   },
+   "ro": {
+    "t": "Bobina antenei imobilizatorului întreruptă sau în scurtcircuit",
+    "d": "Bobina antenei din jurul contactului (sau al butonului de pornire), care citește cipul cheii, are circuitul întrerupt sau în scurtcircuit, așa că cheia s-ar putea să nu fie recunoscută și motorul să nu pornească.",
+    "c": [
+     [
+      "medium",
+      "Bobina antenei / amplificatorul cheii sau cablajul lor"
+     ],
+     [
+      "low",
+      "Unitatea de control a imobilizatorului (transponder)"
+     ]
+    ],
+    "s": [
+     "Motorul s-ar putea să nu pornească",
+     "Martorul de securitate se comportă anormal"
+    ]
+   }
+  },
+  "B2799": {
+   "module": "engine",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Engine%20Immobiliser/Engine%20Immobiliser%20System/045004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_ess.htm"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Engine immobiliser system fault",
+    "d": "The engine computer and the immobiliser could not agree that a valid key is present, so the engine is blocked from starting or stops right after starting. Try your spare key; if it starts with that one, the first key is the problem.",
+    "c": [
+     [
+      "medium",
+      "Key not recognised (damaged key, or not registered)"
+     ],
+     [
+      "medium",
+      "Wiring between the immobiliser unit and the engine computer"
+     ],
+     [
+      "low",
+      "Immobiliser control unit or engine computer"
+     ]
+    ],
+    "s": [
+     "Engine does not start, or stops after a second or two",
+     "Security light blinks"
+    ]
+   },
+   "ro": {
+    "t": "Defect în sistemul imobilizatorului",
+    "d": "Calculatorul motorului și imobilizatorul nu au căzut de acord că există o cheie validă, așa că motorul este blocat la pornire sau se oprește imediat după pornire. Încearcă cheia de rezervă; dacă pornește cu ea, problema este la prima cheie.",
+    "c": [
+     [
+      "medium",
+      "Cheie nerecunoscută (cheie deteriorată sau neînregistrată)"
+     ],
+     [
+      "medium",
+      "Cablajul dintre unitatea imobilizatorului și calculatorul motorului"
+     ],
+     [
+      "low",
+      "Unitatea de control a imobilizatorului sau calculatorul motorului"
+     ]
+    ],
+    "s": [
+     "Motorul nu pornește sau se oprește după o secundă-două",
+     "Martorul de securitate clipește"
+    ]
+   }
+  },
+  "C1201": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_ecb_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Engine control system fault (VSC switched off)",
+    "d": "The engine computer has a fault of its own, so the skid control unit switches VSC and traction control off as a precaution: it can no longer rely on reducing engine power. This code points elsewhere; read and repair the engine codes first and it usually clears by itself afterwards. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Any stored engine (P) code, for example a misfire or an EVAP fault"
+     ],
+     [
+      "low",
+      "Engine computer fault"
+     ]
+    ],
+    "s": [
+     "Check-engine light together with the VSC / slip light"
+    ]
+   },
+   "ro": {
+    "t": "Defect în sistemul de control al motorului (VSC dezactivat)",
+    "d": "Calculatorul motorului are un defect propriu, așa că unitatea de control al frânării dezactivează din precauție VSC-ul și controlul tracțiunii: nu se mai poate baza pe reducerea puterii motorului. Codul indică în altă parte; citește și repară întâi codurile de motor, iar acesta dispare de obicei singur după aceea. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Orice cod de motor (P) memorat, de exemplu rateuri sau un defect EVAP"
+     ],
+     [
+      "low",
+      "Defect al calculatorului motorului"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins împreună cu martorul VSC / de derapaj"
+    ]
+   }
+  },
+  "C1203": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc_sae.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "No valid communication with the engine computer",
+    "d": "The skid control unit doesn't get the data it expects from the engine computer over the CAN network. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "CAN wiring or connectors"
+     ],
+     [
+      "low",
+      "Engine computer, or a wrong computer fitted after a replacement"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Comunicație invalidă cu calculatorul motorului",
+    "d": "Unitatea de control al frânării nu primește prin rețeaua CAN datele pe care le așteaptă de la calculatorul motorului. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Cablaj sau conectori CAN"
+     ],
+     [
+      "low",
+      "Calculatorul motorului sau un calculator nepotrivit montat la înlocuire"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1210": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc_sae.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Zero point of the yaw rate sensor not calibrated",
+    "d": "The skid control unit has no stored zero point for the yaw rate sensor. This is normal after the skid control unit or the sensor was replaced, or after some battery and alignment work. A workshop clears it with a scan tool and a short calibration, done with the car level, stationary and the steering straight. C1210 and C1336 often appear together. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Calibration not done after a part was replaced"
+     ],
+     [
+      "low",
+      "Yaw rate / acceleration sensor fault"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Punctul zero pentru senzorul de rotație (yaw) necalibrat",
+    "d": "Unitatea de control al frânării nu are memorat punctul zero pentru senzorul de rotație (yaw). Este normal după înlocuirea unității sau a senzorului, ori după unele lucrări la baterie și geometrie. Un service îl reface cu un tester printr-o calibrare scurtă, cu mașina pe teren plat, oprită și cu volanul drept. C1210 și C1336 apar adesea împreună. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Calibrarea nu a fost făcută după înlocuirea unei piese"
+     ],
+     [
+      "low",
+      "Defect al senzorului de rotație / accelerație"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1223": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc_sae.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "ABS control system fault",
+    "d": "The ABS side of the skid control system reports a fault, so VSC is switched off too. Look for other ABS codes stored at the same time; they say what actually failed. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Another ABS fault, such as a wheel-speed sensor or low battery voltage"
+     ],
+     [
+      "low",
+      "Skid control unit"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect în sistemul de control ABS",
+    "d": "Partea ABS a sistemului de control al frânării raportează un defect, așa că și VSC-ul este dezactivat. Caută alte coduri ABS memorate în același timp; ele arată ce s-a defectat de fapt. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Alt defect ABS, de exemplu un senzor de turație sau tensiune scăzută a bateriei"
+     ],
+     [
+      "low",
+      "Unitatea de control al frânării"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1231": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_ecb_4d.htm"
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2013/MC-10132241-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Steering angle sensor circuit fault",
+    "d": "The steering angle signal the stability control needs is missing or faulty. The sensor sits in the steering column and talks to the skid control unit over CAN. On some 2009-2011 Camry with Bosch ABS, Toyota updated the ABS unit logic for this code. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Steering angle sensor or its wiring"
+     ],
+     [
+      "medium",
+      "CAN communication fault"
+     ],
+     [
+      "low",
+      "Skid control unit"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la circuitul senzorului de unghi al volanului",
+    "d": "Semnalul de unghi al volanului de care are nevoie controlul stabilității lipsește sau este defect. Senzorul este în coloana de direcție și comunică prin CAN cu unitatea de control al frânării. La unele Camry 2009-2011 cu ABS Bosch, Toyota a actualizat logica unității ABS pentru acest cod. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de unghi al volanului sau cablajul lui"
+     ],
+     [
+      "medium",
+      "Defect de comunicație CAN"
+     ],
+     [
+      "low",
+      "Unitatea de control al frânării"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1232": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Deceleration sensor stuck",
+    "d": "The signal from the sensor that measures how fast the car slows down or speeds up does not change as it should. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Yaw rate / deceleration sensor"
+     ],
+     [
+      "medium",
+      "Sensor wiring or connector"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de decelerație blocat",
+    "d": "Semnalul senzorului care măsoară cât de repede încetinește sau accelerează mașina nu se schimbă cum ar trebui. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de rotație / decelerație"
+     ],
+     [
+      "medium",
+      "Cablajul sau conectorul senzorului"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1234": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10131753-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Yaw rate sensor fault",
+    "d": "The sensor that tells the stability control how fast the car is turning gives a faulty signal. A bad yaw rate signal can make VSC brake a wheel when it shouldn't, so it is switched off. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Yaw rate sensor"
+     ],
+     [
+      "medium",
+      "Sensor wiring or connector"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator light",
+     "Possible unexpected VSC activation"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de rotație (yaw)",
+    "d": "Senzorul care îi spune controlului stabilității cât de repede virează mașina dă un semnal defect. Un semnal greșit poate face VSC-ul să frâneze o roată fără motiv, așa că este dezactivat. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de rotație (yaw)"
+     ],
+     [
+      "medium",
+      "Cablajul sau conectorul senzorului"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj aprins",
+     "Posibile intervenții VSC neașteptate"
+    ]
+   }
+  },
+  "C1235": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Foreign matter on the front right wheel-speed sensor",
+    "d": "The front right wheel-speed signal looks as if dirt or metal particles are stuck to the sensor tip or its tone ring. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Dirt or rust on the sensor tip or tone ring"
+     ],
+     [
+      "medium",
+      "Sensor not seated correctly"
+     ],
+     [
+      "low",
+      "Sensor wiring"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Corp străin pe senzorul de turație al roții față dreapta",
+    "d": "Semnalul de turație al roții față dreapta arată ca și cum murdărie sau particule metalice s-au lipit de vârful senzorului sau de inelul lui dințat. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Murdărie sau rugină pe vârful senzorului ori pe inelul dințat"
+     ],
+     [
+      "medium",
+      "Senzor montat incorect"
+     ],
+     [
+      "low",
+      "Cablajul senzorului"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1236": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Foreign matter on the front left wheel-speed sensor",
+    "d": "The front left wheel-speed signal looks as if dirt or metal particles are stuck to the sensor tip or its tone ring. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Dirt or rust on the sensor tip or tone ring"
+     ],
+     [
+      "medium",
+      "Sensor not seated correctly"
+     ],
+     [
+      "low",
+      "Sensor wiring"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Corp străin pe senzorul de turație al roții față stânga",
+    "d": "Semnalul de turație al roții față stânga arată ca și cum murdărie sau particule metalice s-au lipit de vârful senzorului sau de inelul lui dințat. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Murdărie sau rugină pe vârful senzorului ori pe inelul dințat"
+     ],
+     [
+      "medium",
+      "Senzor montat incorect"
+     ],
+     [
+      "low",
+      "Cablajul senzorului"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1238": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Foreign matter on the rear right wheel-speed sensor",
+    "d": "The rear right wheel-speed signal looks as if dirt or metal particles are stuck to the sensor tip or its tone ring. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Dirt or rust on the sensor tip or tone ring"
+     ],
+     [
+      "medium",
+      "Sensor not seated correctly"
+     ],
+     [
+      "low",
+      "Sensor wiring"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Corp străin pe senzorul de turație al roții spate dreapta",
+    "d": "Semnalul de turație al roții spate dreapta arată ca și cum murdărie sau particule metalice s-au lipit de vârful senzorului sau de inelul lui dințat. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Murdărie sau rugină pe vârful senzorului ori pe inelul dințat"
+     ],
+     [
+      "medium",
+      "Senzor montat incorect"
+     ],
+     [
+      "low",
+      "Cablajul senzorului"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1239": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Foreign matter on the rear left wheel-speed sensor",
+    "d": "The rear left wheel-speed signal looks as if dirt or metal particles are stuck to the sensor tip or its tone ring. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Dirt or rust on the sensor tip or tone ring"
+     ],
+     [
+      "medium",
+      "Sensor not seated correctly"
+     ],
+     [
+      "low",
+      "Sensor wiring"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Corp străin pe senzorul de turație al roții spate stânga",
+    "d": "Semnalul de turație al roții spate stânga arată ca și cum murdărie sau particule metalice s-au lipit de vârful senzorului sau de inelul lui dințat. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Murdărie sau rugină pe vârful senzorului ori pe inelul dințat"
+     ],
+     [
+      "medium",
+      "Senzor montat incorect"
+     ],
+     [
+      "low",
+      "Cablajul senzorului"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1241": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_ecb_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Skid control supply voltage out of range",
+    "d": "The skid control unit measured too low (on some systems also too high) a supply voltage. Check the battery and the charging system before suspecting the ABS unit. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Weak or discharged battery"
+     ],
+     [
+      "medium",
+      "Charging-system fault"
+     ],
+     [
+      "low",
+      "Fuse, power or ground connection"
+     ]
+    ],
+    "s": [
+     "ABS and VSC warning lights",
+     "Often other low-voltage codes at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Tensiunea de alimentare a unității de frânare în afara limitelor",
+    "d": "Unitatea de control al frânării a măsurat o tensiune de alimentare prea mică (la unele sisteme și prea mare). Verifică bateria și sistemul de încărcare înainte să bănuiești unitatea ABS. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Baterie slabă sau descărcată"
+     ],
+     [
+      "medium",
+      "Defect al sistemului de încărcare"
+     ],
+     [
+      "low",
+      "Siguranță, conexiune de alimentare sau de masă"
+     ]
+    ],
+    "s": [
+     "Martorii ABS și VSC aprinși",
+     "Adesea alte coduri de tensiune scăzută în același timp"
+    ]
+   }
+  },
+  "C1246": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Master cylinder pressure sensor fault",
+    "d": "The sensor that measures brake-fluid pressure from the pedal gives a wrong or missing signal. The stop light switch signal is checked against it, so a faulty switch can also set this code. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Pressure sensor (in the brake actuator or booster)"
+     ],
+     [
+      "medium",
+      "Stop light switch or its circuit"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de presiune din pompa centrală",
+    "d": "Senzorul care măsoară presiunea lichidului de frână dată de pedală are un semnal greșit sau lipsă. Semnalul contactorului stopurilor este comparat cu el, așa că și un contactor defect poate seta acest cod. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (în actuatorul sau servofrâna)"
+     ],
+     [
+      "medium",
+      "Contactorul stopurilor sau circuitul lui"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1247": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10132768-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Brake pedal stroke sensor fault",
+    "d": "On hybrids with electronically controlled brakes, a sensor measures how far the brake pedal moves. The skid control unit considers its signal faulty. On 2004-2009 Prius Toyota found the monitoring logic too sensitive and released an updated skid control unit. Braking still works, but the brake assist may be reduced and the pedal can feel different. If the red brake warning light is on, have the car checked before driving further.",
+    "c": [
+     [
+      "medium",
+      "Over-sensitive monitoring logic (updated unit available)"
+     ],
+     [
+      "medium",
+      "Stroke sensor or its wiring"
+     ]
+    ],
+    "s": [
+     "Check-engine, brake, ABS and VSC warning lights"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de cursă al pedalei de frână",
+    "d": "La hibridele cu frânare controlată electronic, un senzor măsoară cât de mult se deplasează pedala de frână. Unitatea de control al frânării consideră semnalul lui defect. La Prius 2004-2009, Toyota a constatat că logica de supraveghere era prea sensibilă și a lansat o unitate de control actualizată. Frâna funcționează în continuare, dar asistarea poate fi redusă și pedala se poate simți altfel. Dacă martorul roșu de frână este aprins, verifică mașina înainte să mai circuli.",
+    "c": [
+     [
+      "medium",
+      "Logică de supraveghere prea sensibilă (există unitate actualizată)"
+     ],
+     [
+      "medium",
+      "Senzorul de cursă sau cablajul lui"
+     ]
+    ],
+    "s": [
+     "Martorii de motor, frână, ABS și VSC aprinși"
+    ]
+   }
+  },
+  "C1249": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_ecb_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Stop light switch circuit open",
+    "d": "The skid control unit does not see the brake pedal signal from the stop light switch. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Stop light switch faulty or out of adjustment"
+     ],
+     [
+      "medium",
+      "STOP fuse, wiring or connector"
+     ],
+     [
+      "low",
+      "Brake lamp bulbs or stop light relay"
+     ]
+    ],
+    "s": [
+     "VSC / ABS warning light",
+     "Brake lights may not work"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul contactorului stopurilor întrerupt",
+    "d": "Unitatea de control al frânării nu vede semnalul de pedală de frână de la contactorul stopurilor. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Contactorul stopurilor defect sau dereglat"
+     ],
+     [
+      "medium",
+      "Siguranța STOP, cablaj sau conector"
+     ],
+     [
+      "low",
+      "Becurile stopurilor sau releul stopurilor"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / ABS aprins",
+     "Stopurile s-ar putea să nu funcționeze"
+    ]
+   }
+  },
+  "C1251": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Pump motor circuit open",
+    "d": "The electric pump motor in the brake actuator (or in the brake booster pump, on cars with a hydraulic booster) has an open circuit. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Pump motor wiring or connector"
+     ],
+     [
+      "medium",
+      "Brake actuator or booster pump assembly"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul motorului pompei întrerupt",
+    "d": "Motorul electric al pompei din actuatorul de frână (sau al pompei servofrânei, la mașinile cu servofrână hidraulică) are circuitul întrerupt. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul motorului pompei"
+     ],
+     [
+      "medium",
+      "Actuatorul de frână sau ansamblul pompei servofrânei"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1252": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10109482-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10158575-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11011632-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Brake booster pump runs too long",
+    "d": "The pump that keeps the brake booster's accumulator under pressure ran for longer than it should, which means it can't build or hold the pressure. On 2011-2015 Prius and 2007-2011 Camry Hybrid, Toyota links this code, together with C1256 and C1391, to a small internal fluid leak in the brake booster or actuator. Braking still works, but the brake assist may be reduced and the pedal can feel different. If the red brake warning light is on, have the car checked before driving further.",
+    "c": [
+     [
+      "medium",
+      "Internal leak in the brake booster / actuator"
+     ],
+     [
+      "medium",
+      "Brake booster pump"
+     ],
+     [
+      "low",
+      "Accumulator pressure sensor"
+     ]
+    ],
+    "s": [
+     "Brake, ABS and/or VSC warning lights",
+     "Pump running more often or longer than usual"
+    ]
+   },
+   "ro": {
+    "t": "Pompa servofrânei funcționează prea mult",
+    "d": "Pompa care ține sub presiune acumulatorul servofrânei a funcționat mai mult decât ar trebui, adică nu reușește să creeze sau să mențină presiunea. La Prius 2011-2015 și la Camry Hybrid 2007-2011, Toyota leagă acest cod, împreună cu C1256 și C1391, de o mică scurgere internă de lichid în servofrână sau în actuator. Frâna funcționează în continuare, dar asistarea poate fi redusă și pedala se poate simți altfel. Dacă martorul roșu de frână este aprins, verifică mașina înainte să mai circuli.",
+    "c": [
+     [
+      "medium",
+      "Scurgere internă în servofrână / actuator"
+     ],
+     [
+      "medium",
+      "Pompa servofrânei"
+     ],
+     [
+      "low",
+      "Senzorul de presiune al acumulatorului"
+     ]
+    ],
+    "s": [
+     "Martorii de frână, ABS și/sau VSC aprinși",
+     "Pompa pornește mai des sau mai mult decât de obicei"
+    ]
+   }
+  },
+  "C1256": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_ecb_6d.htm"
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10158575-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11011632-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Brake accumulator pressure low",
+    "d": "The pressure stored in the brake booster's accumulator is lower than it should be. On 2011-2015 Prius, Toyota lists it with C1252 and C1391 as a sign of an internal leak in the brake booster. Braking still works, but the brake assist may be reduced and the pedal can feel different. If the red brake warning light is on, have the car checked before driving further.",
+    "c": [
+     [
+      "medium",
+      "Internal leak in the brake booster / actuator"
+     ],
+     [
+      "medium",
+      "Brake booster pump"
+     ],
+     [
+      "low",
+      "Accumulator pressure sensor"
+     ]
+    ],
+    "s": [
+     "Brake, ABS and/or VSC warning lights",
+     "Pump running more often or longer than usual"
+    ]
+   },
+   "ro": {
+    "t": "Presiune scăzută în acumulatorul de frână",
+    "d": "Presiunea din acumulatorul servofrânei este mai mică decât ar trebui. La Prius 2011-2015, Toyota îl enumeră împreună cu C1252 și C1391 ca semn al unei scurgeri interne în servofrână. Frâna funcționează în continuare, dar asistarea poate fi redusă și pedala se poate simți altfel. Dacă martorul roșu de frână este aprins, verifică mașina înainte să mai circuli.",
+    "c": [
+     [
+      "medium",
+      "Scurgere internă în servofrână / actuator"
+     ],
+     [
+      "medium",
+      "Pompa servofrânei"
+     ],
+     [
+      "low",
+      "Senzorul de presiune al acumulatorului"
+     ]
+    ],
+    "s": [
+     "Martorii de frână, ABS și/sau VSC aprinși",
+     "Pompa pornește mai des sau mai mult decât de obicei"
+    ]
+   }
+  },
+  "C1271": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Low output from the front right wheel-speed sensor (test mode)",
+    "d": "During the sensor check the front right wheel-speed signal was too weak. This is a test-mode code: it only appears during the sensor check a workshop runs with a scan tool.",
+    "c": [
+     [
+      "medium",
+      "Sensor too far from the tone ring, or loose"
+     ],
+     [
+      "medium",
+      "Dirty or damaged tone ring"
+     ],
+     [
+      "low",
+      "Sensor or wiring"
+     ]
+    ],
+    "s": [
+     "ABS warning light blinks in test mode"
+    ]
+   },
+   "ro": {
+    "t": "Semnal slab de la senzorul de turație față dreapta (mod test)",
+    "d": "La verificarea senzorilor, semnalul de turație al roții față dreapta a fost prea slab. Este un cod din modul de test: apare doar la verificarea senzorilor pe care o face un service cu testerul.",
+    "c": [
+     [
+      "medium",
+      "Senzor prea departe de inelul dințat sau slăbit"
+     ],
+     [
+      "medium",
+      "Inel dințat murdar sau deteriorat"
+     ],
+     [
+      "low",
+      "Senzor sau cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul ABS clipește în modul de test"
+    ]
+   }
+  },
+  "C1272": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Low output from the front left wheel-speed sensor (test mode)",
+    "d": "During the sensor check the front left wheel-speed signal was too weak. This is a test-mode code: it only appears during the sensor check a workshop runs with a scan tool.",
+    "c": [
+     [
+      "medium",
+      "Sensor too far from the tone ring, or loose"
+     ],
+     [
+      "medium",
+      "Dirty or damaged tone ring"
+     ],
+     [
+      "low",
+      "Sensor or wiring"
+     ]
+    ],
+    "s": [
+     "ABS warning light blinks in test mode"
+    ]
+   },
+   "ro": {
+    "t": "Semnal slab de la senzorul de turație față stânga (mod test)",
+    "d": "La verificarea senzorilor, semnalul de turație al roții față stânga a fost prea slab. Este un cod din modul de test: apare doar la verificarea senzorilor pe care o face un service cu testerul.",
+    "c": [
+     [
+      "medium",
+      "Senzor prea departe de inelul dințat sau slăbit"
+     ],
+     [
+      "medium",
+      "Inel dințat murdar sau deteriorat"
+     ],
+     [
+      "low",
+      "Senzor sau cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul ABS clipește în modul de test"
+    ]
+   }
+  },
+  "C1273": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Low output from the rear right wheel-speed sensor (test mode)",
+    "d": "During the sensor check the rear right wheel-speed signal was too weak. This is a test-mode code: it only appears during the sensor check a workshop runs with a scan tool.",
+    "c": [
+     [
+      "medium",
+      "Sensor too far from the tone ring, or loose"
+     ],
+     [
+      "medium",
+      "Dirty or damaged tone ring"
+     ],
+     [
+      "low",
+      "Sensor or wiring"
+     ]
+    ],
+    "s": [
+     "ABS warning light blinks in test mode"
+    ]
+   },
+   "ro": {
+    "t": "Semnal slab de la senzorul de turație spate dreapta (mod test)",
+    "d": "La verificarea senzorilor, semnalul de turație al roții spate dreapta a fost prea slab. Este un cod din modul de test: apare doar la verificarea senzorilor pe care o face un service cu testerul.",
+    "c": [
+     [
+      "medium",
+      "Senzor prea departe de inelul dințat sau slăbit"
+     ],
+     [
+      "medium",
+      "Inel dințat murdar sau deteriorat"
+     ],
+     [
+      "low",
+      "Senzor sau cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul ABS clipește în modul de test"
+    ]
+   }
+  },
+  "C1274": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Low output from the rear left wheel-speed sensor (test mode)",
+    "d": "During the sensor check the rear left wheel-speed signal was too weak. This is a test-mode code: it only appears during the sensor check a workshop runs with a scan tool.",
+    "c": [
+     [
+      "medium",
+      "Sensor too far from the tone ring, or loose"
+     ],
+     [
+      "medium",
+      "Dirty or damaged tone ring"
+     ],
+     [
+      "low",
+      "Sensor or wiring"
+     ]
+    ],
+    "s": [
+     "ABS warning light blinks in test mode"
+    ]
+   },
+   "ro": {
+    "t": "Semnal slab de la senzorul de turație spate stânga (mod test)",
+    "d": "La verificarea senzorilor, semnalul de turație al roții spate stânga a fost prea slab. Este un cod din modul de test: apare doar la verificarea senzorilor pe care o face un service cu testerul.",
+    "c": [
+     [
+      "medium",
+      "Senzor prea departe de inelul dințat sau slăbit"
+     ],
+     [
+      "medium",
+      "Inel dințat murdar sau deteriorat"
+     ],
+     [
+      "low",
+      "Senzor sau cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul ABS clipește în modul de test"
+    ]
+   }
+  },
+  "C1275": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Irregular signal from the front right wheel-speed sensor (test mode)",
+    "d": "During the sensor check the front right wheel-speed signal changed abnormally. This is a test-mode code: it only appears during the sensor check a workshop runs with a scan tool.",
+    "c": [
+     [
+      "medium",
+      "Damaged or dirty tone ring"
+     ],
+     [
+      "medium",
+      "Sensor installation"
+     ],
+     [
+      "low",
+      "Sensor or wiring"
+     ]
+    ],
+    "s": [
+     "ABS warning light blinks in test mode"
+    ]
+   },
+   "ro": {
+    "t": "Semnal neregulat de la senzorul de turație față dreapta (mod test)",
+    "d": "La verificarea senzorilor, semnalul de turație al roții față dreapta s-a schimbat anormal. Este un cod din modul de test: apare doar la verificarea senzorilor pe care o face un service cu testerul.",
+    "c": [
+     [
+      "medium",
+      "Inel dințat deteriorat sau murdar"
+     ],
+     [
+      "medium",
+      "Montajul senzorului"
+     ],
+     [
+      "low",
+      "Senzor sau cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul ABS clipește în modul de test"
+    ]
+   }
+  },
+  "C1276": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Irregular signal from the front left wheel-speed sensor (test mode)",
+    "d": "During the sensor check the front left wheel-speed signal changed abnormally. This is a test-mode code: it only appears during the sensor check a workshop runs with a scan tool.",
+    "c": [
+     [
+      "medium",
+      "Damaged or dirty tone ring"
+     ],
+     [
+      "medium",
+      "Sensor installation"
+     ],
+     [
+      "low",
+      "Sensor or wiring"
+     ]
+    ],
+    "s": [
+     "ABS warning light blinks in test mode"
+    ]
+   },
+   "ro": {
+    "t": "Semnal neregulat de la senzorul de turație față stânga (mod test)",
+    "d": "La verificarea senzorilor, semnalul de turație al roții față stânga s-a schimbat anormal. Este un cod din modul de test: apare doar la verificarea senzorilor pe care o face un service cu testerul.",
+    "c": [
+     [
+      "medium",
+      "Inel dințat deteriorat sau murdar"
+     ],
+     [
+      "medium",
+      "Montajul senzorului"
+     ],
+     [
+      "low",
+      "Senzor sau cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul ABS clipește în modul de test"
+    ]
+   }
+  },
+  "C1277": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Irregular signal from the rear right wheel-speed sensor (test mode)",
+    "d": "During the sensor check the rear right wheel-speed signal changed abnormally. This is a test-mode code: it only appears during the sensor check a workshop runs with a scan tool.",
+    "c": [
+     [
+      "medium",
+      "Damaged or dirty tone ring"
+     ],
+     [
+      "medium",
+      "Sensor installation"
+     ],
+     [
+      "low",
+      "Sensor or wiring"
+     ]
+    ],
+    "s": [
+     "ABS warning light blinks in test mode"
+    ]
+   },
+   "ro": {
+    "t": "Semnal neregulat de la senzorul de turație spate dreapta (mod test)",
+    "d": "La verificarea senzorilor, semnalul de turație al roții spate dreapta s-a schimbat anormal. Este un cod din modul de test: apare doar la verificarea senzorilor pe care o face un service cu testerul.",
+    "c": [
+     [
+      "medium",
+      "Inel dințat deteriorat sau murdar"
+     ],
+     [
+      "medium",
+      "Montajul senzorului"
+     ],
+     [
+      "low",
+      "Senzor sau cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul ABS clipește în modul de test"
+    ]
+   }
+  },
+  "C1278": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Irregular signal from the rear left wheel-speed sensor (test mode)",
+    "d": "During the sensor check the rear left wheel-speed signal changed abnormally. This is a test-mode code: it only appears during the sensor check a workshop runs with a scan tool.",
+    "c": [
+     [
+      "medium",
+      "Damaged or dirty tone ring"
+     ],
+     [
+      "medium",
+      "Sensor installation"
+     ],
+     [
+      "low",
+      "Sensor or wiring"
+     ]
+    ],
+    "s": [
+     "ABS warning light blinks in test mode"
+    ]
+   },
+   "ro": {
+    "t": "Semnal neregulat de la senzorul de turație spate stânga (mod test)",
+    "d": "La verificarea senzorilor, semnalul de turație al roții spate stânga s-a schimbat anormal. Este un cod din modul de test: apare doar la verificarea senzorilor pe care o face un service cu testerul.",
+    "c": [
+     [
+      "medium",
+      "Inel dințat deteriorat sau murdar"
+     ],
+     [
+      "medium",
+      "Montajul senzorului"
+     ],
+     [
+      "low",
+      "Senzor sau cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul ABS clipește în modul de test"
+    ]
+   }
+  },
+  "C1290": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc_sae.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Steering angle sensor zero point fault",
+    "d": "The steering angle reading doesn't agree with where the car actually goes when driving straight. Typical after a wheel alignment with the steering wheel not centred, or when the yaw rate zero point was not calibrated. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Steering wheel not centred or wheel alignment off"
+     ],
+     [
+      "medium",
+      "Zero point calibration not done"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la punctul zero al senzorului de unghi al volanului",
+    "d": "Unghiul citit al volanului nu se potrivește cu direcția reală a mașinii când merge drept. Apare de obicei după o geometrie cu volanul necentrat sau când punctul zero al senzorului de rotație nu a fost calibrat. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Volan necentrat sau geometrie dereglată"
+     ],
+     [
+      "medium",
+      "Calibrarea punctului zero nefăcută"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1336": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_ecb_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Zero point of the acceleration (deceleration) sensor not calibrated",
+    "d": "The skid control unit has no stored zero point for the acceleration (deceleration) sensor. This is normal after the skid control unit or the sensor was replaced, or after some battery and alignment work. A workshop clears it with a scan tool and a short calibration, done with the car level, stationary and the steering straight. C1210 and C1336 often appear together. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Calibration not done after a part was replaced"
+     ],
+     [
+      "low",
+      "Yaw rate / acceleration sensor fault"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Punctul zero pentru senzorul de accelerație (decelerație) necalibrat",
+    "d": "Unitatea de control al frânării nu are memorat punctul zero pentru senzorul de accelerație (decelerație). Este normal după înlocuirea unității sau a senzorului, ori după unele lucrări la baterie și geometrie. Un service îl reface cu un tester printr-o calibrare scurtă, cu mașina pe teren plat, oprită și cu volanul drept. C1210 și C1336 apar adesea împreună. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Calibrarea nu a fost făcută după înlocuirea unei piese"
+     ],
+     [
+      "low",
+      "Defect al senzorului de rotație / accelerație"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1380": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Stop light control relay fault",
+    "d": "The relay the skid control unit uses to switch the brake lights on during automatic braking has a fault. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Stop light control relay or its wiring"
+     ],
+     [
+      "low",
+      "Stop light switch circuit"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la releul de comandă al stopurilor",
+    "d": "Releul prin care unitatea de control al frânării aprinde stopurile la frânările automate are un defect. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Releul de comandă al stopurilor sau cablajul lui"
+     ],
+     [
+      "low",
+      "Circuitul contactorului stopurilor"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1381": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0370010.pdf"
+    },
+    {
+     "u": "https://www.purefjcruiser.com/docs/2007%20Toyota%20FJ%20Cruiser%20Repair%20Manual/Brake%20Control/Vehicle%20Stability%20Control%20System/0280012.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_vsc.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Yaw rate / acceleration sensor supply voltage fault",
+    "d": "The power supply to the yaw rate and acceleration sensor is out of range. While this fault is stored, the skid control unit may switch off VSC (stability control) and traction control, and sometimes ABS; normal braking still works. Drive gently and have it checked.",
+    "c": [
+     [
+      "medium",
+      "Sensor wiring or connector"
+     ],
+     [
+      "low",
+      "Low battery voltage"
+     ],
+     [
+      "low",
+      "Yaw rate / acceleration sensor"
+     ]
+    ],
+    "s": [
+     "VSC / slip indicator or ABS warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la alimentarea senzorului de rotație / accelerație",
+    "d": "Alimentarea senzorului de rotație și accelerație este în afara limitelor. Cât timp acest defect este memorat, unitatea de control al frânării poate dezactiva VSC-ul (controlul stabilității) și controlul tracțiunii, uneori și ABS-ul; frânarea normală funcționează în continuare. Condu cu grijă și verifică mașina.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul senzorului"
+     ],
+     [
+      "low",
+      "Tensiune scăzută a bateriei"
+     ],
+     [
+      "low",
+      "Senzorul de rotație / accelerație"
+     ]
+    ],
+    "s": [
+     "Martorul VSC / de derapaj sau martorul ABS aprins"
+    ]
+   }
+  },
+  "C1391": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10109482-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/br_ecb_6d.htm"
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10158575-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11011632-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Brake accumulator leak detected",
+    "d": "The skid control unit sees the accumulator pressure falling when it should hold steady, which points to fluid leaking inside the brake booster or actuator. Toyota has run support programs that cover the brake booster and pump on some hybrids (for example 2015-2017 Prius c and 2014-2016 Highlander Hybrid), using this code as proof. Braking still works, but the brake assist may be reduced and the pedal can feel different. If the red brake warning light is on, have the car checked before driving further.",
+    "c": [
+     [
+      "medium",
+      "Internal leak in the brake booster / actuator"
+     ],
+     [
+      "low",
+      "External brake-fluid leak"
+     ]
+    ],
+    "s": [
+     "Brake, ABS and/or VSC warning lights",
+     "Pump running more often or longer than usual"
+    ]
+   },
+   "ro": {
+    "t": "Scurgere detectată la acumulatorul de frână",
+    "d": "Unitatea de control al frânării vede presiunea din acumulator scăzând când ar trebui să rămână constantă, ceea ce indică o scurgere de lichid în interiorul servofrânei sau al actuatorului. Toyota a avut programe de suport care acoperă servofrâna și pompa la unele hibride (de exemplu Prius c 2015-2017 și Highlander Hybrid 2014-2016), folosind acest cod ca dovadă. Frâna funcționează în continuare, dar asistarea poate fi redusă și pedala se poate simți altfel. Dacă martorul roșu de frână este aprins, verifică mașina înainte să mai circuli.",
+    "c": [
+     [
+      "medium",
+      "Scurgere internă în servofrână / actuator"
+     ],
+     [
+      "low",
+      "Scurgere exterioară de lichid de frână"
+     ]
+    ],
+    "s": [
+     "Martorii de frână, ABS și/sau VSC aprinși",
+     "Pompa pornește mai des sau mai mult decât de obicei"
+    ]
+   }
+  },
+  "C1511": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Torque sensor 1 fault",
+    "d": "The sensor in the steering column that measures how hard you turn the wheel reports a fault, so the power steering limits or stops its assistance. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Torque sensor in the steering column (usually replaced with the column)"
+     ],
+     [
+      "medium",
+      "Wiring between column and EPS unit"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de cuplu 1",
+    "d": "Senzorul din coloana de direcție care măsoară cât de tare rotești volanul raportează un defect, așa că servodirecția își limitează sau oprește asistența. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de cuplu din coloana de direcție (de obicei se înlocuiește cu coloana)"
+     ],
+     [
+      "medium",
+      "Cablajul dintre coloană și unitatea EPS"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1512": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Torque sensor 2 fault",
+    "d": "The sensor in the steering column that measures how hard you turn the wheel reports a fault, so the power steering limits or stops its assistance. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Torque sensor in the steering column (usually replaced with the column)"
+     ],
+     [
+      "medium",
+      "Wiring between column and EPS unit"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de cuplu 2",
+    "d": "Senzorul din coloana de direcție care măsoară cât de tare rotești volanul raportează un defect, așa că servodirecția își limitează sau oprește asistența. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de cuplu din coloana de direcție (de obicei se înlocuiește cu coloana)"
+     ],
+     [
+      "medium",
+      "Cablajul dintre coloană și unitatea EPS"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1513": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Torque sensor signals disagree",
+    "d": "The sensor in the steering column that measures how hard you turn the wheel reports a fault, so the power steering limits or stops its assistance. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Torque sensor in the steering column (usually replaced with the column)"
+     ],
+     [
+      "medium",
+      "Wiring between column and EPS unit"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Semnalele senzorului de cuplu nu concordă",
+    "d": "Senzorul din coloana de direcție care măsoară cât de tare rotești volanul raportează un defect, așa că servodirecția își limitează sau oprește asistența. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de cuplu din coloana de direcție (de obicei se înlocuiește cu coloana)"
+     ],
+     [
+      "medium",
+      "Cablajul dintre coloană și unitatea EPS"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1514": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Torque sensor supply voltage fault",
+    "d": "The sensor in the steering column that measures how hard you turn the wheel reports a fault, so the power steering limits or stops its assistance. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Torque sensor in the steering column (usually replaced with the column)"
+     ],
+     [
+      "medium",
+      "Wiring between column and EPS unit"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect la alimentarea senzorului de cuplu",
+    "d": "Senzorul din coloana de direcție care măsoară cât de tare rotești volanul raportează un defect, așa că servodirecția își limitează sau oprește asistența. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de cuplu din coloana de direcție (de obicei se înlocuiește cu coloana)"
+     ],
+     [
+      "medium",
+      "Cablajul dintre coloană și unitatea EPS"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1515": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Torque sensor zero point not set",
+    "d": "The torque sensor has no zero point stored. This is expected after the EPS unit or the steering column was replaced; a workshop sets it with a scan tool, with the wheels straight and the steering wheel untouched. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Zero point calibration not done after a replacement"
+     ]
+    ],
+    "s": [
+     "P/S warning light",
+     "Steering may pull or feel uneven left and right"
+    ]
+   },
+   "ro": {
+    "t": "Punctul zero al senzorului de cuplu nesetat",
+    "d": "Senzorul de cuplu nu are memorat punctul zero. Este normal după înlocuirea unității EPS sau a coloanei de direcție; un service îl setează cu un tester, cu roțile drepte și fără să atingă volanul. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Calibrarea punctului zero nefăcută după o înlocuire"
+     ]
+    ],
+    "s": [
+     "Martorul P/S aprins",
+     "Volanul poate trage sau poate fi inegal stânga-dreapta"
+    ]
+   }
+  },
+  "C1516": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Torque sensor zero point calibration failed",
+    "d": "A zero point calibration of the torque sensor was started but did not finish correctly, often because the steering wheel was touched during the procedure. Repeat it. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Calibration disturbed or interrupted"
+     ],
+     [
+      "low",
+      "Steering column (torque sensor)"
+     ]
+    ],
+    "s": [
+     "P/S warning light"
+    ]
+   },
+   "ro": {
+    "t": "Calibrarea punctului zero al senzorului de cuplu a eșuat",
+    "d": "O calibrare a punctului zero al senzorului de cuplu a început, dar nu s-a încheiat corect, adesea pentru că volanul a fost atins în timpul procedurii. Trebuie repetată. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Calibrare perturbată sau întreruptă"
+     ],
+     [
+      "low",
+      "Coloana de direcție (senzorul de cuplu)"
+     ]
+    ],
+    "s": [
+     "Martorul P/S aprins"
+    ]
+   }
+  },
+  "C1517": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Torque sensor signal frozen",
+    "d": "The sensor in the steering column that measures how hard you turn the wheel reports a fault, so the power steering limits or stops its assistance. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Torque sensor in the steering column (usually replaced with the column)"
+     ],
+     [
+      "medium",
+      "Wiring between column and EPS unit"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Semnalul senzorului de cuplu blocat",
+    "d": "Senzorul din coloana de direcție care măsoară cât de tare rotești volanul raportează un defect, așa că servodirecția își limitează sau oprește asistența. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de cuplu din coloana de direcție (de obicei se înlocuiește cu coloana)"
+     ],
+     [
+      "medium",
+      "Cablajul dintre coloană și unitatea EPS"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1521": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Short in the assist motor circuit",
+    "d": "The EPS unit detected a short circuit in the electric assist motor circuit and stops assisting. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector between EPS unit and motor"
+     ],
+     [
+      "medium",
+      "Assist motor (part of the column)"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Scurtcircuit în circuitul motorului de asistare",
+    "d": "Unitatea EPS a detectat un scurtcircuit în circuitul motorului electric de asistare și oprește asistența. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul dintre unitatea EPS și motor"
+     ],
+     [
+      "medium",
+      "Motorul de asistare (parte din coloană)"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1524": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Assist motor circuit fault",
+    "d": "The EPS unit sees a wrong voltage or current in the electric assist motor circuit and stops assisting. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector between EPS unit and motor"
+     ],
+     [
+      "medium",
+      "Assist motor (part of the column)"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect la circuitul motorului de asistare",
+    "d": "Unitatea EPS vede o tensiune sau un curent greșit în circuitul motorului electric de asistare și oprește asistența. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul dintre unitatea EPS și motor"
+     ],
+     [
+      "medium",
+      "Motorul de asistare (parte din coloană)"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1528": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Motor rotation angle sensor fault",
+    "d": "The sensor that tells the EPS unit the position of the assist motor gives a faulty signal. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector between EPS unit and motor"
+     ],
+     [
+      "medium",
+      "Assist motor (part of the column)"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de unghi de rotație al motorului",
+    "d": "Senzorul care îi spune unității EPS poziția motorului de asistare dă un semnal defect. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul dintre unitatea EPS și motor"
+     ],
+     [
+      "medium",
+      "Motorul de asistare (parte din coloană)"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1531": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS control unit internal fault",
+    "d": "The power steering control unit found a fault in its own electronics. Check its power, ground and connectors before replacing it. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "EPS control unit"
+     ],
+     [
+      "low",
+      "Poor power or ground connection"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern al unității de control EPS",
+    "d": "Unitatea de control a servodirecției a găsit un defect în propria electronică. Verifică alimentarea, masa și conectorii înainte s-o înlocuiești. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Unitatea de control EPS"
+     ],
+     [
+      "low",
+      "Conexiune de alimentare sau masă proastă"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1532": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS control unit internal fault",
+    "d": "The power steering control unit found a fault in its own electronics. Check its power, ground and connectors before replacing it. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "EPS control unit"
+     ],
+     [
+      "low",
+      "Poor power or ground connection"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern al unității de control EPS",
+    "d": "Unitatea de control a servodirecției a găsit un defect în propria electronică. Verifică alimentarea, masa și conectorii înainte s-o înlocuiești. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Unitatea de control EPS"
+     ],
+     [
+      "low",
+      "Conexiune de alimentare sau masă proastă"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1533": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS unit temperature sensor fault",
+    "d": "The temperature sensor inside the power steering unit reads out of range, so assistance is reduced to protect the system. Check its power, ground and connectors before replacing it. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "EPS control unit"
+     ],
+     [
+      "low",
+      "Poor power or ground connection"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de temperatură al unității EPS",
+    "d": "Senzorul de temperatură din unitatea servodirecției citește în afara limitelor, așa că asistența este redusă pentru protecția sistemului. Verifică alimentarea, masa și conectorii înainte s-o înlocuiești. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Unitatea de control EPS"
+     ],
+     [
+      "low",
+      "Conexiune de alimentare sau masă proastă"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1534": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS unit memory (EEPROM) fault",
+    "d": "The power steering unit can't read or write its internal memory. Check its power, ground and connectors before replacing it. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "EPS control unit"
+     ],
+     [
+      "low",
+      "Poor power or ground connection"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect de memorie (EEPROM) al unității EPS",
+    "d": "Unitatea servodirecției nu își poate citi sau scrie memoria internă. Verifică alimentarea, masa și conectorii înainte s-o înlocuiești. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Unitatea de control EPS"
+     ],
+     [
+      "low",
+      "Conexiune de alimentare sau masă proastă"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1551": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS ignition (IG) supply voltage fault",
+    "d": "The power steering unit measured its ignition (IG) supply voltage out of range, so assistance is reduced. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "ECU-IG fuse or IG supply wiring"
+     ],
+     [
+      "medium",
+      "Weak battery"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect de tensiune la alimentarea de la contact (IG) EPS",
+    "d": "Unitatea servodirecției a măsurat tensiunea la alimentarea de la contact (IG) în afara limitelor, așa că asistența este redusă. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Siguranța ECU-IG sau cablajul alimentării IG"
+     ],
+     [
+      "medium",
+      "Baterie slabă"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1552": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS main power (PIG) supply voltage fault",
+    "d": "The power steering unit measured its main power (PIG) supply voltage out of range, so assistance is reduced. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Weak battery or charging fault"
+     ],
+     [
+      "medium",
+      "EPS fuse or main power wiring"
+     ],
+     [
+      "low",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect de tensiune la alimentarea principală (PIG) EPS",
+    "d": "Unitatea servodirecției a măsurat tensiunea la alimentarea principală (PIG) în afara limitelor, așa că asistența este redusă. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Baterie slabă sau defect la încărcare"
+     ],
+     [
+      "medium",
+      "Siguranța EPS sau cablajul alimentării principale"
+     ],
+     [
+      "low",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1554": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS power supply relay fault",
+    "d": "The relay that powers the assist motor inside the EPS unit doesn't work correctly, so assistance stops. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "EPS fuse or main power wiring"
+     ],
+     [
+      "medium",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect la releul de alimentare EPS",
+    "d": "Releul care alimentează motorul de asistare în unitatea EPS nu funcționează corect, așa că asistența se oprește. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Siguranța EPS sau cablajul alimentării principale"
+     ],
+     [
+      "medium",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1555": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS motor relay stuck (welded)",
+    "d": "The motor relay inside the EPS unit appears stuck closed, so assistance stops. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "EPS control unit"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Releul motorului EPS blocat (lipit)",
+    "d": "Releul motorului din unitatea EPS pare blocat închis, așa că asistența se oprește. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Unitatea de control EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1581": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mgaguru.com/mgtech/steering/pdf/power_steering_yaris.pdf"
+    },
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Power%20Steering/Electronic%20Power%20Steering%20System/041004.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ch_eps_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "EPS assist map not written",
+    "d": "The power steering unit has no assist map stored for this car. It happens when a new or replacement EPS unit was fitted without loading the map with a scan tool. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Assist map not written after the EPS unit was replaced"
+     ]
+    ],
+    "s": [
+     "P/S (power steering) warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Harta de asistare EPS nescrisă",
+    "d": "Unitatea servodirecției nu are memorată harta de asistare pentru această mașină. Se întâmplă când a fost montată o unitate EPS nouă sau de schimb fără încărcarea hărții cu un tester. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Harta de asistare nescrisă după înlocuirea unității EPS"
+     ]
+    ],
+    "s": [
+     "Martorul P/S (servodirecție) aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C2111": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor ID1 stopped transmitting",
+    "d": "The tyre-pressure sensor registered as ID1 has stopped transmitting. If it starts sending again, the code clears. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Tyre-pressure sensor (valve and transmitter)"
+     ],
+     [
+      "low",
+      "Tyre-pressure control unit"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de presiune ID1 nu mai transmite",
+    "d": "Senzorul de presiune înregistrat ca ID1 nu mai transmite. Dacă reîncepe să transmită, codul se șterge. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (valvă și emițător)"
+     ],
+     [
+      "low",
+      "Unitatea de control a presiunii"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2112": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor ID2 stopped transmitting",
+    "d": "The tyre-pressure sensor registered as ID2 has stopped transmitting. If it starts sending again, the code clears. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Tyre-pressure sensor (valve and transmitter)"
+     ],
+     [
+      "low",
+      "Tyre-pressure control unit"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de presiune ID2 nu mai transmite",
+    "d": "Senzorul de presiune înregistrat ca ID2 nu mai transmite. Dacă reîncepe să transmită, codul se șterge. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (valvă și emițător)"
+     ],
+     [
+      "low",
+      "Unitatea de control a presiunii"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2113": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor ID3 stopped transmitting",
+    "d": "The tyre-pressure sensor registered as ID3 has stopped transmitting. If it starts sending again, the code clears. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Tyre-pressure sensor (valve and transmitter)"
+     ],
+     [
+      "low",
+      "Tyre-pressure control unit"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de presiune ID3 nu mai transmite",
+    "d": "Senzorul de presiune înregistrat ca ID3 nu mai transmite. Dacă reîncepe să transmită, codul se șterge. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (valvă și emițător)"
+     ],
+     [
+      "low",
+      "Unitatea de control a presiunii"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2114": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor ID4 stopped transmitting",
+    "d": "The tyre-pressure sensor registered as ID4 has stopped transmitting. If it starts sending again, the code clears. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Tyre-pressure sensor (valve and transmitter)"
+     ],
+     [
+      "low",
+      "Tyre-pressure control unit"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de presiune ID4 nu mai transmite",
+    "d": "Senzorul de presiune înregistrat ca ID4 nu mai transmite. Dacă reîncepe să transmită, codul se șterge. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (valvă și emițător)"
+     ],
+     [
+      "low",
+      "Unitatea de control a presiunii"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2121": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "No signal from tyre-pressure sensor ID1",
+    "d": "The receiver doesn't hear the tyre-pressure sensor registered as ID1. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Wheel without a sensor fitted (for example winter wheels)"
+     ],
+     [
+      "medium",
+      "Tyre-pressure sensor"
+     ],
+     [
+      "low",
+      "Radio interference, receiver or wiring"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Niciun semnal de la senzorul de presiune ID1",
+    "d": "Receptorul nu primește semnal de la senzorul de presiune înregistrat ca ID1. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Roată montată fără senzor (de exemplu roțile de iarnă)"
+     ],
+     [
+      "medium",
+      "Senzorul de presiune"
+     ],
+     [
+      "low",
+      "Interferențe radio, receptorul sau cablajul"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2122": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "No signal from tyre-pressure sensor ID2",
+    "d": "The receiver doesn't hear the tyre-pressure sensor registered as ID2. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Wheel without a sensor fitted (for example winter wheels)"
+     ],
+     [
+      "medium",
+      "Tyre-pressure sensor"
+     ],
+     [
+      "low",
+      "Radio interference, receiver or wiring"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Niciun semnal de la senzorul de presiune ID2",
+    "d": "Receptorul nu primește semnal de la senzorul de presiune înregistrat ca ID2. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Roată montată fără senzor (de exemplu roțile de iarnă)"
+     ],
+     [
+      "medium",
+      "Senzorul de presiune"
+     ],
+     [
+      "low",
+      "Interferențe radio, receptorul sau cablajul"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2123": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "No signal from tyre-pressure sensor ID3",
+    "d": "The receiver doesn't hear the tyre-pressure sensor registered as ID3. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Wheel without a sensor fitted (for example winter wheels)"
+     ],
+     [
+      "medium",
+      "Tyre-pressure sensor"
+     ],
+     [
+      "low",
+      "Radio interference, receiver or wiring"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Niciun semnal de la senzorul de presiune ID3",
+    "d": "Receptorul nu primește semnal de la senzorul de presiune înregistrat ca ID3. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Roată montată fără senzor (de exemplu roțile de iarnă)"
+     ],
+     [
+      "medium",
+      "Senzorul de presiune"
+     ],
+     [
+      "low",
+      "Interferențe radio, receptorul sau cablajul"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2124": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "No signal from tyre-pressure sensor ID4",
+    "d": "The receiver doesn't hear the tyre-pressure sensor registered as ID4. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Wheel without a sensor fitted (for example winter wheels)"
+     ],
+     [
+      "medium",
+      "Tyre-pressure sensor"
+     ],
+     [
+      "low",
+      "Radio interference, receiver or wiring"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Niciun semnal de la senzorul de presiune ID4",
+    "d": "Receptorul nu primește semnal de la senzorul de presiune înregistrat ca ID4. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Roată montată fără senzor (de exemplu roțile de iarnă)"
+     ],
+     [
+      "medium",
+      "Senzorul de presiune"
+     ],
+     [
+      "low",
+      "Interferențe radio, receptorul sau cablajul"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2141": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor ID1 internal fault",
+    "d": "The tyre-pressure sensor registered as ID1 reports a fault in its own electronics. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Tyre-pressure sensor (valve and transmitter)"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern la senzorul de presiune ID1",
+    "d": "Senzorul de presiune înregistrat ca ID1 raportează un defect în propria electronică. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (valvă și emițător)"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2142": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor ID2 internal fault",
+    "d": "The tyre-pressure sensor registered as ID2 reports a fault in its own electronics. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Tyre-pressure sensor (valve and transmitter)"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern la senzorul de presiune ID2",
+    "d": "Senzorul de presiune înregistrat ca ID2 raportează un defect în propria electronică. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (valvă și emițător)"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2143": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor ID3 internal fault",
+    "d": "The tyre-pressure sensor registered as ID3 reports a fault in its own electronics. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Tyre-pressure sensor (valve and transmitter)"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern la senzorul de presiune ID3",
+    "d": "Senzorul de presiune înregistrat ca ID3 raportează un defect în propria electronică. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (valvă și emițător)"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2144": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor ID4 internal fault",
+    "d": "The tyre-pressure sensor registered as ID4 reports a fault in its own electronics. Toyota numbers the sensors in the order they were registered (ID1, ID2, ...), not by wheel position, so a workshop identifies the wheel from the stored sensor IDs. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Tyre-pressure sensor (valve and transmitter)"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern la senzorul de presiune ID4",
+    "d": "Senzorul de presiune înregistrat ca ID4 raportează un defect în propria electronică. Toyota numerotează senzorii în ordinea în care au fost înregistrați (ID1, ID2, ...), nu după poziția roții, așa că un service identifică roata după ID-urile memorate. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune (valvă și emițător)"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2171": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    },
+    {
+     "u": "https://www.moderntiredealer.com/retail/article/11546521/tpms-toyota-ch-r-2018-2020"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure sensor IDs not registered",
+    "d": "The tyre-pressure system has no sensor IDs stored, typically after the control unit was replaced or new sensors were fitted. The IDs must be registered with a scan tool. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "IDs not registered after a sensor or control unit replacement"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "ID-urile senzorilor de presiune neînregistrate",
+    "d": "Sistemul de presiune în anvelope nu are memorat niciun ID de senzor, de obicei după înlocuirea unității de control sau montarea unor senzori noi. ID-urile trebuie înregistrate cu un tester. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "ID-uri neînregistrate după înlocuirea senzorilor sau a unității de control"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2176": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://share.qclt.com/%E4%B8%B0%E7%94%B0Toyota%20RAV4%20Repair%20Manual/Tire%20and%20Wheel/Tire%20Pressure%20Warning%20System/036007.pdf"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure receiver fault",
+    "d": "The receiver that picks up the tyre-pressure sensors' radio signals, or its connection to the control unit, has a fault. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Receiver wiring or connector"
+     ],
+     [
+      "medium",
+      "Receiver"
+     ],
+     [
+      "low",
+      "Tyre-pressure control unit"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Defect la receptorul de presiune în anvelope",
+    "d": "Receptorul care preia semnalele radio ale senzorilor de presiune, sau legătura lui cu unitatea de control, are un defect. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul receptorului"
+     ],
+     [
+      "medium",
+      "Receptorul"
+     ],
+     [
+      "low",
+      "Unitatea de control a presiunii"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "C2177": {
+   "module": "tpms",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/be_tpms_4d.htm"
+    },
+    {
+     "u": "https://www.moderntiredealer.com/retail/article/11546521/tpms-toyota-ch-r-2018-2020"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Tyre-pressure initialisation not completed",
+    "d": "After the tyre pressures were set and the system was reset, it could not finish learning the new pressures while driving. Set the pressures cold and repeat the reset. Until it is fixed, check tyre pressures yourself with a gauge.",
+    "c": [
+     [
+      "medium",
+      "Reset not completed or interrupted"
+     ],
+     [
+      "low",
+      "A sensor not received during learning"
+     ]
+    ],
+    "s": [
+     "Tyre-pressure warning light blinks, then stays on"
+    ]
+   },
+   "ro": {
+    "t": "Inițializarea presiunii în anvelope nefinalizată",
+    "d": "După reglarea presiunilor și resetarea sistemului, acesta nu a reușit să învețe noile presiuni în timpul mersului. Reglează presiunile la rece și repetă resetarea. Până la remediere, verifică singur presiunea în anvelope cu un manometru.",
+    "c": [
+     [
+      "medium",
+      "Resetare nefinalizată sau întreruptă"
+     ],
+     [
+      "low",
+      "Un senzor nerecepționat în timpul învățării"
+     ]
+    ],
+    "s": [
+     "Martorul de presiune în anvelope clipește, apoi rămâne aprins"
+    ]
+   }
+  },
+  "P148F": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10166037-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ems_1nzfxe.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ems_2zrfxe.htm"
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Electric coolant pump running too fast",
+    "d": "The electric engine coolant pump on Toyota hybrids spins faster than it should, which can happen when it pumps air because the coolant level is low. On 2016-2019 Prius and Prius Prime, Toyota traced this to a coolant leak at the exhaust heat exchanger. Check the coolant level only with the engine cold.",
+    "c": [
+     [
+      "medium",
+      "Low coolant level or a coolant leak"
+     ],
+     [
+      "low",
+      "Air in the cooling system after a repair"
+     ],
+     [
+      "low",
+      "Coolant pump"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Low coolant level",
+     "Poor cabin heating"
+    ]
+   },
+   "ro": {
+    "t": "Pompa electrică de lichid de răcire se rotește prea repede",
+    "d": "Pompa electrică de lichid de răcire a motorului, la hibridele Toyota, se rotește mai repede decât ar trebui, ceea ce se poate întâmpla când pompează aer pentru că nivelul lichidului este scăzut. La Prius și Prius Prime 2016-2019, Toyota a găsit cauza într-o scurgere la schimbătorul de căldură de pe evacuare. Verifică nivelul doar cu motorul rece.",
+    "c": [
+     [
+      "medium",
+      "Nivel scăzut de lichid de răcire sau o scurgere"
+     ],
+     [
+      "low",
+      "Aer în sistemul de răcire după o reparație"
+     ],
+     [
+      "low",
+      "Pompa de lichid de răcire"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Nivel scăzut al lichidului de răcire",
+     "Încălzire slabă în habitaclu"
+    ]
+   }
+  },
+  "P1604": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10132332-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2016/MC-10132874-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ems_2zrfe.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ems_1nzfxe.htm"
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Startability malfunction (hard or long start)",
+    "d": "The engine computer noticed that the engine took too long to start or did not start properly. It is a symptom code: look at other codes stored with it. Toyota has linked it to carbon build-up in the combustion chambers on the 2012-2013 iQ and to a fuel-quality learning error on flex-fuel V8 engines.",
+    "c": [
+     [
+      "medium",
+      "Fuel supply problem (pressure, pump, injectors)"
+     ],
+     [
+      "medium",
+      "Air leak or dirty throttle body"
+     ],
+     [
+      "low",
+      "Carbon build-up in the engine"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Long cranking before the engine starts"
+    ]
+   },
+   "ro": {
+    "t": "Defect de pornire (pornire grea sau lungă)",
+    "d": "Calculatorul motorului a observat că motorul a pornit prea greu sau nu a pornit corect. Este un cod de simptom: uită-te la celelalte coduri memorate împreună cu el. Toyota l-a legat de depunerile de carbon din camerele de ardere la iQ 2012-2013 și de o eroare de învățare a calității combustibilului la motoarele V8 flex-fuel.",
+    "c": [
+     [
+      "medium",
+      "Problemă de alimentare (presiune, pompă, injectoare)"
+     ],
+     [
+      "medium",
+      "Aer fals sau clapetă murdară"
+     ],
+     [
+      "low",
+      "Depuneri de carbon în motor"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Demarorul învârte mult până pornește motorul"
+    ]
+   }
+  },
+  "P1605": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10132332-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10143946-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2016/MC-10132874-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ems_2zrfe.htm"
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/ems_1nzfxe.htm"
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Rough idling",
+    "d": "The engine computer saw the idle speed drop or become unstable. It is a symptom code that often comes with misfire or mixture codes, so diagnose those first.",
+    "c": [
+     [
+      "medium",
+      "Misfire (spark plugs, ignition coils)"
+     ],
+     [
+      "medium",
+      "Air leak or dirty throttle body"
+     ],
+     [
+      "low",
+      "Carbon build-up in the engine"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Shaky idle or idle dips"
+    ]
+   },
+   "ro": {
+    "t": "Ralanti instabil",
+    "d": "Calculatorul motorului a văzut turația de ralanti scăzând sau devenind instabilă. Este un cod de simptom care apare adesea cu coduri de rateuri sau de amestec, așa că diagnostichează-le întâi pe acelea.",
+    "c": [
+     [
+      "medium",
+      "Rateuri (bujii, bobine de inducție)"
+     ],
+     [
+      "medium",
+      "Aer fals sau clapetă murdară"
+     ],
+     [
+      "low",
+      "Depuneri de carbon în motor"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Ralanti tremurat sau cu scăderi"
+    ]
+   }
+  },
+  "P3000": {
+   "module": "hybrid",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10132527-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/hv_p410.htm"
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Hybrid battery control system fault",
+    "d": "The hybrid control unit stored this code because the high-voltage battery system reported a fault. The information code (sub-code) stored with it matters: with 123 it only records that the battery computer set its own code, so read and repair the battery computer's codes, not this one. A hybrid warning shows the system protecting itself; if the car limits power or won't go into READY, stop somewhere safe and get help.",
+    "c": [
+     [
+      "medium",
+      "Fault reported by the high-voltage battery computer"
+     ],
+     [
+      "low",
+      "Hybrid battery or its sensors"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Hybrid system warning on the display"
+    ]
+   },
+   "ro": {
+    "t": "Defect în sistemul de control al bateriei hibride",
+    "d": "Unitatea de control hibrid a memorat acest cod pentru că sistemul bateriei de înaltă tensiune a raportat un defect. Contează codul de informație (subcodul) memorat împreună cu el: cu 123 doar înregistrează că calculatorul bateriei și-a setat propriul cod, așa că citește și repară codurile calculatorului bateriei, nu pe acesta. Un avertisment de hibrid arată că sistemul se protejează; dacă mașina limitează puterea sau nu intră în READY, oprește într-un loc sigur și cere ajutor.",
+    "c": [
+     [
+      "medium",
+      "Defect raportat de calculatorul bateriei de înaltă tensiune"
+     ],
+     [
+      "low",
+      "Bateria hibridă sau senzorii ei"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Avertisment de sistem hibrid pe afișaj"
+    ]
+   }
+  },
+  "P3004": {
+   "module": "hybrid",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2016/MC-10140583-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10109602-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/hv_p410.htm"
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "High-voltage power source fault (hybrid inverter)",
+    "d": "A fault inside the hybrid inverter, the unit that converts battery power for the electric motors. On 2010-2014 Prius and 2012-2014 Prius v, Toyota names this code (alone or with P0A94 and P0A1A) as a sign of a failed power module in the inverter, covered by an extended warranty; check with a Toyota dealer. The car usually goes into a fail-safe mode with reduced power. A hybrid warning shows the system protecting itself; if the car limits power or won't go into READY, stop somewhere safe and get help.",
+    "c": [
+     [
+      "medium",
+      "Inverter power module (IPM) or MG control board"
+     ],
+     [
+      "low",
+      "Inverter wiring or connectors"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Hybrid system warning on the display",
+     "Reduced power (fail-safe mode)"
+    ]
+   },
+   "ro": {
+    "t": "Defect al sursei de înaltă tensiune (invertor hibrid)",
+    "d": "Un defect în interiorul invertorului hibrid, unitatea care transformă energia bateriei pentru motoarele electrice. La Prius 2010-2014 și Prius v 2012-2014, Toyota indică acest cod (singur sau cu P0A94 și P0A1A) ca semn al unui modul de putere defect în invertor, acoperit de o garanție extinsă; verifică la un dealer Toyota. De obicei mașina intră într-un mod de avarie cu putere redusă. Un avertisment de hibrid arată că sistemul se protejează; dacă mașina limitează puterea sau nu intră în READY, oprește într-un loc sigur și cere ajutor.",
+    "c": [
+     [
+      "medium",
+      "Modulul de putere al invertorului (IPM) sau placa de control MG"
+     ],
+     [
+      "low",
+      "Cablajul sau conectorii invertorului"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Avertisment de sistem hibrid pe afișaj",
+     "Putere redusă (mod de avarie)"
+    ]
+   }
+  },
+  "P3190": {
+   "module": "hybrid",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10111144-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10143923-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Poor engine power",
+    "d": "The hybrid system found that the petrol engine delivers less power than expected. The cause is on the engine side: air, fuel or ignition. On 2010-2013 Prius and 2012-2013 Prius v, Toyota found a detached purge (EVAP) hose at the throttle body causing this together with P0A0F and P3191; on 2017-2018 Highlander Hybrid an engine software update addresses it at high altitude and heat.",
+    "c": [
+     [
+      "medium",
+      "Air leak, such as a detached vacuum or purge hose"
+     ],
+     [
+      "medium",
+      "Fuel supply problem, such as low fuel or a weak pump"
+     ],
+     [
+      "low",
+      "Dirty air filter or throttle body"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Weak acceleration"
+    ]
+   },
+   "ro": {
+    "t": "Putere slabă a motorului",
+    "d": "Sistemul hibrid a constatat că motorul pe benzină dă mai puțină putere decât se așteaptă. Cauza este la motor: aer, combustibil sau aprindere. La Prius 2010-2013 și Prius v 2012-2013, Toyota a găsit un furtun de purjare (EVAP) desprins de la clapeta de accelerație, care producea acest cod împreună cu P0A0F și P3191; la Highlander Hybrid 2017-2018 o actualizare software a motorului rezolvă problema la altitudine mare și căldură.",
+    "c": [
+     [
+      "medium",
+      "Aer fals, de exemplu un furtun de vacuum sau de purjare desprins"
+     ],
+     [
+      "medium",
+      "Problemă de alimentare, de exemplu combustibil puțin sau pompă slabă"
+     ],
+     [
+      "low",
+      "Filtru de aer sau clapetă murdare"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Accelerare slabă"
+    ]
+   }
+  },
+  "P3190@engine": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10111144-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10143923-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Poor engine power",
+    "d": "The hybrid system found that the petrol engine delivers less power than expected. The cause is on the engine side: air, fuel or ignition. On 2010-2013 Prius and 2012-2013 Prius v, Toyota found a detached purge (EVAP) hose at the throttle body causing this together with P0A0F and P3191; on 2017-2018 Highlander Hybrid an engine software update addresses it at high altitude and heat.",
+    "c": [
+     [
+      "medium",
+      "Air leak, such as a detached vacuum or purge hose"
+     ],
+     [
+      "medium",
+      "Fuel supply problem, such as low fuel or a weak pump"
+     ],
+     [
+      "low",
+      "Dirty air filter or throttle body"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Weak acceleration"
+    ]
+   },
+   "ro": {
+    "t": "Putere slabă a motorului",
+    "d": "Sistemul hibrid a constatat că motorul pe benzină dă mai puțină putere decât se așteaptă. Cauza este la motor: aer, combustibil sau aprindere. La Prius 2010-2013 și Prius v 2012-2013, Toyota a găsit un furtun de purjare (EVAP) desprins de la clapeta de accelerație, care producea acest cod împreună cu P0A0F și P3191; la Highlander Hybrid 2017-2018 o actualizare software a motorului rezolvă problema la altitudine mare și căldură.",
+    "c": [
+     [
+      "medium",
+      "Aer fals, de exemplu un furtun de vacuum sau de purjare desprins"
+     ],
+     [
+      "medium",
+      "Problemă de alimentare, de exemplu combustibil puțin sau pompă slabă"
+     ],
+     [
+      "low",
+      "Filtru de aer sau clapetă murdare"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Accelerare slabă"
+    ]
+   }
+  },
+  "P3190@hybrid": {
+   "module": "hybrid",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10111144-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10143923-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Poor engine power",
+    "d": "The hybrid system found that the petrol engine delivers less power than expected. The cause is on the engine side: air, fuel or ignition. On 2010-2013 Prius and 2012-2013 Prius v, Toyota found a detached purge (EVAP) hose at the throttle body causing this together with P0A0F and P3191; on 2017-2018 Highlander Hybrid an engine software update addresses it at high altitude and heat.",
+    "c": [
+     [
+      "medium",
+      "Air leak, such as a detached vacuum or purge hose"
+     ],
+     [
+      "medium",
+      "Fuel supply problem, such as low fuel or a weak pump"
+     ],
+     [
+      "low",
+      "Dirty air filter or throttle body"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Weak acceleration"
+    ]
+   },
+   "ro": {
+    "t": "Putere slabă a motorului",
+    "d": "Sistemul hibrid a constatat că motorul pe benzină dă mai puțină putere decât se așteaptă. Cauza este la motor: aer, combustibil sau aprindere. La Prius 2010-2013 și Prius v 2012-2013, Toyota a găsit un furtun de purjare (EVAP) desprins de la clapeta de accelerație, care producea acest cod împreună cu P0A0F și P3191; la Highlander Hybrid 2017-2018 o actualizare software a motorului rezolvă problema la altitudine mare și căldură.",
+    "c": [
+     [
+      "medium",
+      "Aer fals, de exemplu un furtun de vacuum sau de purjare desprins"
+     ],
+     [
+      "medium",
+      "Problemă de alimentare, de exemplu combustibil puțin sau pompă slabă"
+     ],
+     [
+      "low",
+      "Filtru de aer sau clapetă murdare"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Accelerare slabă"
+    ]
+   }
+  },
+  "P3191": {
+   "module": "hybrid",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10111144-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Engine does not start (hybrid)",
+    "d": "The hybrid system tried to start the petrol engine but it didn't start running. The car may still drive on the battery for a short while. Check fuel level first; on 2010-2013 Prius and 2012-2013 Prius v Toyota also found a detached purge (EVAP) hose at the throttle body behind this code.",
+    "c": [
+     [
+      "medium",
+      "Fuel supply: empty tank, fuel pump or filter"
+     ],
+     [
+      "medium",
+      "Air leak, such as a detached purge hose"
+     ],
+     [
+      "low",
+      "Ignition or sensor fault"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Engine does not run; limited driving on the battery"
+    ]
+   },
+   "ro": {
+    "t": "Motorul nu pornește (hibrid)",
+    "d": "Sistemul hibrid a încercat să pornească motorul pe benzină, dar acesta nu a pornit. Mașina poate merge încă puțin pe baterie. Verifică întâi nivelul combustibilului; la Prius 2010-2013 și Prius v 2012-2013 Toyota a găsit și un furtun de purjare (EVAP) desprins de la clapeta de accelerație în spatele acestui cod.",
+    "c": [
+     [
+      "medium",
+      "Alimentare: rezervor gol, pompa sau filtrul de combustibil"
+     ],
+     [
+      "medium",
+      "Aer fals, de exemplu un furtun de purjare desprins"
+     ],
+     [
+      "low",
+      "Defect de aprindere sau de senzor"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Motorul nu funcționează; mers limitat pe baterie"
+    ]
+   }
+  },
+  "P3191@engine": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10111144-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Engine does not start (hybrid)",
+    "d": "The hybrid system tried to start the petrol engine but it didn't start running. The car may still drive on the battery for a short while. Check fuel level first; on 2010-2013 Prius and 2012-2013 Prius v Toyota also found a detached purge (EVAP) hose at the throttle body behind this code.",
+    "c": [
+     [
+      "medium",
+      "Fuel supply: empty tank, fuel pump or filter"
+     ],
+     [
+      "medium",
+      "Air leak, such as a detached purge hose"
+     ],
+     [
+      "low",
+      "Ignition or sensor fault"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Engine does not run; limited driving on the battery"
+    ]
+   },
+   "ro": {
+    "t": "Motorul nu pornește (hibrid)",
+    "d": "Sistemul hibrid a încercat să pornească motorul pe benzină, dar acesta nu a pornit. Mașina poate merge încă puțin pe baterie. Verifică întâi nivelul combustibilului; la Prius 2010-2013 și Prius v 2012-2013 Toyota a găsit și un furtun de purjare (EVAP) desprins de la clapeta de accelerație în spatele acestui cod.",
+    "c": [
+     [
+      "medium",
+      "Alimentare: rezervor gol, pompa sau filtrul de combustibil"
+     ],
+     [
+      "medium",
+      "Aer fals, de exemplu un furtun de purjare desprins"
+     ],
+     [
+      "low",
+      "Defect de aprindere sau de senzor"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Motorul nu funcționează; mers limitat pe baterie"
+    ]
+   }
+  },
+  "P3191@hybrid": {
+   "module": "hybrid",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10111144-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Engine does not start (hybrid)",
+    "d": "The hybrid system tried to start the petrol engine but it didn't start running. The car may still drive on the battery for a short while. Check fuel level first; on 2010-2013 Prius and 2012-2013 Prius v Toyota also found a detached purge (EVAP) hose at the throttle body behind this code.",
+    "c": [
+     [
+      "medium",
+      "Fuel supply: empty tank, fuel pump or filter"
+     ],
+     [
+      "medium",
+      "Air leak, such as a detached purge hose"
+     ],
+     [
+      "low",
+      "Ignition or sensor fault"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Engine does not run; limited driving on the battery"
+    ]
+   },
+   "ro": {
+    "t": "Motorul nu pornește (hibrid)",
+    "d": "Sistemul hibrid a încercat să pornească motorul pe benzină, dar acesta nu a pornit. Mașina poate merge încă puțin pe baterie. Verifică întâi nivelul combustibilului; la Prius 2010-2013 și Prius v 2012-2013 Toyota a găsit și un furtun de purjare (EVAP) desprins de la clapeta de accelerație în spatele acestui cod.",
+    "c": [
+     [
+      "medium",
+      "Alimentare: rezervor gol, pompa sau filtrul de combustibil"
+     ],
+     [
+      "medium",
+      "Aer fals, de exemplu un furtun de purjare desprins"
+     ],
+     [
+      "low",
+      "Defect de aprindere sau de senzor"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Motorul nu funcționează; mers limitat pe baterie"
+    ]
+   }
+  },
+  "P324E": {
+   "module": "hybrid",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2016/MC-10140583-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10109602-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://toyota-club.net/files/techdata/dtc/hv_p410.htm"
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Hybrid inverter control (MG ECU) internal fault",
+    "d": "A fault inside the hybrid inverter, the unit that converts battery power for the electric motors. On 2010-2014 Prius and 2012-2014 Prius v, Toyota names this code (alone or with P0A94 and P0A1A) as a sign of a failed power module in the inverter, covered by an extended warranty; check with a Toyota dealer. The car usually goes into a fail-safe mode with reduced power. A hybrid warning shows the system protecting itself; if the car limits power or won't go into READY, stop somewhere safe and get help.",
+    "c": [
+     [
+      "medium",
+      "Inverter power module (IPM) or MG control board"
+     ],
+     [
+      "low",
+      "Inverter wiring or connectors"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Hybrid system warning on the display",
+     "Reduced power (fail-safe mode)"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern al controlului invertorului hibrid (MG ECU)",
+    "d": "Un defect în interiorul invertorului hibrid, unitatea care transformă energia bateriei pentru motoarele electrice. La Prius 2010-2014 și Prius v 2012-2014, Toyota indică acest cod (singur sau cu P0A94 și P0A1A) ca semn al unui modul de putere defect în invertor, acoperit de o garanție extinsă; verifică la un dealer Toyota. De obicei mașina intră într-un mod de avarie cu putere redusă. Un avertisment de hibrid arată că sistemul se protejează; dacă mașina limitează puterea sau nu intră în READY, oprește într-un loc sigur și cere ajutor.",
+    "c": [
+     [
+      "medium",
+      "Modulul de putere al invertorului (IPM) sau placa de control MG"
+     ],
+     [
+      "low",
+      "Cablajul sau conectorii invertorului"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Avertisment de sistem hibrid pe afișaj",
+     "Putere redusă (mod de avarie)"
+    ]
+   }
+  }
+ }
+}

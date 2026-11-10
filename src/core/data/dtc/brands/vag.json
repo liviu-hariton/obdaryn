@@ -1,0 +1,5131 @@
+{
+ "brand": "vag",
+ "label": "Obdaryn's Volkswagen group pack",
+ "label_ro": "pachetul Obdaryn pentru grupul Volkswagen",
+ "brandName": "Volkswagen group",
+ "source": {
+  "license": "GPL-3.0-or-later (text written for Obdaryn)",
+  "note": "Meanings compiled from public Volkswagen/Audi documents filed with NHTSA and independent sources; each code lists its sources. Verify with a workshop before replacing parts.",
+  "scope": "2013-2020 MQB cars: Golf 7, Octavia 3, Leon 3, A3 8V, Passat B8, Tiguan 2, Polo 6 (TSI/TFSI, TDI, DSG DQ200/DQ250/DQ381)"
+ },
+ "codes": {
+  "B1000": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10149942-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2025/MC-11013855-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10172984-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver front airbag igniter circuit",
+    "d": "The airbag unit measured a fault in this firing circuit. The failure-type byte says which: resistance too high (most often a loose connector or a broken wire), too low, or a short circuit. For this circuit Volkswagen names a torn clock spring (the coiled ribbon cable behind the steering wheel) as a known cause and extended its warranty on many 2010-2018 cars, Golf included. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Torn clock spring behind the steering wheel"
+     ],
+     [
+      "medium",
+      "Driver airbag connector"
+     ],
+     [
+      "low",
+      "Driver airbag module"
+     ]
+    ],
+    "s": [
+     "Airbag warning light",
+     "Horn or steering-wheel buttons not working (when the clock spring is torn)"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul de declanșare al airbagului frontal al șoferului",
+    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Pentru acest circuit Volkswagen numește spirala ruptă (cablul-panglică spiralat din spatele volanului) ca o cauză cunoscută și i-a extins garanția la multe mașini din 2010-2018, inclusiv Golf. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Spirala (clock spring) din spatele volanului ruptă"
+     ],
+     [
+      "medium",
+      "Conectorul airbagului șoferului"
+     ],
+     [
+      "low",
+      "Modulul airbagului șoferului"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins",
+     "Claxonul sau butoanele de pe volan nu funcționează (când spirala e ruptă)"
+    ]
+   }
+  },
+  "B100A": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10211688-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10247497-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front passenger side (thorax) airbag igniter circuit",
+    "d": "The airbag unit measured a fault in this firing circuit. The failure-type byte says which: resistance too high (most often a loose connector or a broken wire), too low, or a short circuit. This airbag sits in the seat backrest. Volkswagen and Audi bulletins trace high resistance here to the seat harness and its connector being pushed around by the seat foam. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Seat wiring harness or connector under the seat"
+     ],
+     [
+      "low",
+      "Side airbag module"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul de declanșare al airbagului lateral (torace) al pasagerului din față",
+    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest airbag se află în spătarul scaunului. Buletinele Volkswagen și Audi pun rezistența prea mare pe seama cablajului din scaun și a conectorului lui, împinse de buretele scaunului. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul de sub scaun"
+     ],
+     [
+      "low",
+      "Modulul airbagului lateral"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B100B": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10211688-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10247497-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver side (thorax) airbag igniter circuit",
+    "d": "The airbag unit measured a fault in this firing circuit. The failure-type byte says which: resistance too high (most often a loose connector or a broken wire), too low, or a short circuit. This airbag sits in the seat backrest. Volkswagen and Audi bulletins trace high resistance here to the seat harness and its connector being pushed around by the seat foam. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Seat wiring harness or connector under the seat"
+     ],
+     [
+      "low",
+      "Side airbag module"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul de declanșare al airbagului lateral (torace) al șoferului",
+    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest airbag se află în spătarul scaunului. Buletinele Volkswagen și Audi pun rezistența prea mare pe seama cablajului din scaun și a conectorului lui, împinse de buretele scaunului. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul de sub scaun"
+     ],
+     [
+      "low",
+      "Modulul airbagului lateral"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B1013": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10166780-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10234534-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver seat-belt force limiter igniter circuit",
+    "d": "The airbag unit measured a fault in this firing circuit. The failure-type byte says which: resistance too high (most often a loose connector or a broken wire), too low, or a short circuit. This circuit fires the force limiter of the driver's seat belt. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector at the driver's seat belt"
+     ],
+     [
+      "low",
+      "Seat-belt force limiter / belt unit"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul de declanșare al limitatorului de forță al centurii șoferului",
+    "d": "Unitatea airbag a măsurat un defect în acest circuit de declanșare. Octetul de tip de defect spune care: rezistență prea mare (cel mai des un conector slăbit sau un fir rupt), prea mică sau un scurtcircuit. Acest circuit declanșează limitatorul de forță al centurii șoferului. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul centurii șoferului"
+     ],
+     [
+      "low",
+      "Limitatorul de forță / ansamblul centurii"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B1016": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10124290-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10181980-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10230571-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Passenger airbag off indicator lamp circuit",
+    "d": "The airbag unit found a fault in the circuit of the lamp that shows whether the front passenger airbag is switched off (for example a short to battery voltage or an open circuit). Volkswagen bulletins name an unplugged lamp connector and, on some 2019-2021 cars, airbag-unit software that needs an update. The airbag itself is not the problem here. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Loose or unplugged connector of the indicator lamp"
+     ],
+     [
+      "medium",
+      "Airbag unit software (update available on some cars)"
+     ],
+     [
+      "low",
+      "Indicator lamp or its wiring"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul lămpii „airbag pasager dezactivat”",
+    "d": "Unitatea airbag a găsit un defect în circuitul lămpii care arată dacă airbagul pasagerului din față este dezactivat (de exemplu scurtcircuit la plus sau circuit întrerupt). Buletinele Volkswagen numesc un conector al lămpii deconectat și, la unele mașini din 2019-2021, software-ul unității airbag care trebuie actualizat. Airbagul propriu-zis nu este problema aici. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Conectorul lămpii slăbit sau deconectat"
+     ],
+     [
+      "medium",
+      "Software-ul unității airbag (la unele mașini există actualizare)"
+     ],
+     [
+      "low",
+      "Lampa de avertizare sau cablajul ei"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B101C": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10234534-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Driver seat-belt buckle switch fault",
+    "d": "The switch in the driver's seat-belt buckle reports a mechanical fault, so the airbag unit can't tell reliably whether the belt is fastened. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Buckle switch or buckle"
+     ],
+     [
+      "medium",
+      "Connector under the driver's seat"
+     ]
+    ],
+    "s": [
+     "Airbag warning light",
+     "Seat-belt reminder behaving oddly"
+    ]
+   },
+   "ro": {
+    "t": "Defect la contactul cataramei centurii șoferului",
+    "d": "Contactul din catarama centurii șoferului raportează un defect mecanic, așa că unitatea airbag nu poate ști sigur dacă centura este cuplată. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Contactul cataramei sau catarama"
+     ],
+     [
+      "medium",
+      "Conectorul de sub scaunul șoferului"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins",
+     "Avertizarea de centură se comportă ciudat"
+    ]
+   }
+  },
+  "B1022": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10234534-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/B1022"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Passenger occupant detection unit fault",
+    "d": "The unit that detects whether someone sits on the front passenger seat (and switches the passenger airbag on or off) reports an electrical fault or is not configured. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Fuse or wiring of the occupant detection unit"
+     ],
+     [
+      "low",
+      "Occupant detection unit, or its configuration after a replacement"
+     ]
+    ],
+    "s": [
+     "Airbag warning light",
+     "Passenger airbag status lamp wrong"
+    ]
+   },
+   "ro": {
+    "t": "Defect la unitatea de detectare a pasagerului",
+    "d": "Unitatea care detectează dacă cineva stă pe scaunul pasagerului din față (și pornește sau oprește airbagul pasagerului) raportează un defect electric sau nu este configurată. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Siguranța sau cablajul unității de detectare"
+     ],
+     [
+      "low",
+      "Unitatea de detectare sau configurarea ei după înlocuire"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins",
+     "Lampa de stare a airbagului pasagerului indică greșit"
+    ]
+   }
+  },
+  "B1036": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10238206-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10208280-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Front passenger side crash sensor signal fault",
+    "d": "The side crash sensor on the front passenger side (in the door) sends a signal outside its expected range. Volkswagen ties this code, with communication faults, to a poor connection in the door wiring at the A-pillar. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Door wiring harness connection at the A-pillar"
+     ],
+     [
+      "low",
+      "Side crash sensor"
+     ]
+    ],
+    "s": [
+     "Airbag warning light",
+     "Windows may misbehave if the door harness is the cause"
+    ]
+   },
+   "ro": {
+    "t": "Defect de semnal la senzorul de impact lateral al pasagerului din față",
+    "d": "Senzorul de impact lateral din partea pasagerului din față (din ușă) trimite un semnal în afara domeniului așteptat. Volkswagen leagă acest cod, alături de defecte de comunicație, de o conexiune proastă în cablajul ușii, la stâlpul A. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Conexiunea cablajului ușii la stâlpul A"
+     ],
+     [
+      "low",
+      "Senzorul de impact lateral"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins",
+     "Geamurile se pot comporta ciudat dacă vina e a cablajului ușii"
+    ]
+   }
+  },
+  "B103E": {
+   "module": "cluster",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10165029-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2017/MC-10127873-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2017/MC-10150884-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Fuel level sensor 1: resistance too high",
+    "d": "The instrument cluster reads too high a resistance from the fuel level sender in the tank, as from an open circuit, so the gauge can drop to empty. Volkswagen lists it on 2017 Jetta, Passat and Golf SportWagen with a fuel gauge falling to empty.",
+    "c": [
+     [
+      "medium",
+      "Fuel level sender in the tank"
+     ],
+     [
+      "medium",
+      "Wiring or connector at the fuel pump flange"
+     ]
+    ],
+    "s": [
+     "Fuel gauge drops to empty",
+     "Check-engine light possible (fuel level code in the engine computer)"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de nivel combustibil 1: rezistență prea mare",
+    "d": "Bordul citește o rezistență prea mare de la senzorul de nivel din rezervor, ca la un circuit întrerupt, așa că indicatorul poate cădea pe gol. Volkswagen îl listează la Jetta, Passat și Golf SportWagen din 2017 cu indicatorul de combustibil căzând pe gol.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de nivel din rezervor"
+     ],
+     [
+      "medium",
+      "Cablajul sau conectorul de la flanșa pompei de combustibil"
+     ]
+    ],
+    "s": [
+     "Indicatorul de combustibil cade pe gol",
+     "Posibil martorul de motor (cod de nivel în calculatorul motorului)"
+    ]
+   }
+  },
+  "B10A1": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10149907-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10172984-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Fresh-air blower diagnosis line: open or short to battery",
+    "d": "The blower motor's control unit reports back to the climate control over a separate diagnosis wire; that wire is open or shorted to battery voltage.",
+    "c": [
+     [
+      "medium",
+      "Loose connector or terminal at the blower control unit"
+     ],
+     [
+      "medium",
+      "Fuse or power supply to the blower"
+     ],
+     [
+      "low",
+      "Blower control unit"
+     ]
+    ],
+    "s": [
+     "Blower slow, erratic or not working"
+    ]
+   },
+   "ro": {
+    "t": "Linia de diagnoză a ventilatorului de aer proaspăt: întreruptă sau în scurt la plus",
+    "d": "Unitatea de comandă a ventilatorului raportează înapoi climatizării printr-un fir separat de diagnoză; firul este întrerupt sau în scurtcircuit la plus.",
+    "c": [
+     [
+      "medium",
+      "Conector sau terminal slăbit la unitatea de comandă a ventilatorului"
+     ],
+     [
+      "medium",
+      "Siguranța sau alimentarea ventilatorului"
+     ],
+     [
+      "low",
+      "Unitatea de comandă a ventilatorului"
+     ]
+    ],
+    "s": [
+     "Ventilator lent, intermitent sau oprit"
+    ]
+   }
+  },
+  "B10AD": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10172585-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Climate control sensor reference voltage too high",
+    "d": "The reference voltage the climate control unit supplies to its sensors is too high, so sensor readings can't be trusted.",
+    "c": [
+     [
+      "medium",
+      "Sensor wiring shorted to a supply voltage"
+     ],
+     [
+      "low",
+      "Climate control unit"
+     ]
+    ],
+    "s": [
+     "Climate control not regulating properly"
+    ]
+   },
+   "ro": {
+    "t": "Tensiunea de referință pentru senzorii climatizării prea mare",
+    "d": "Tensiunea de referință pe care unitatea de climatizare o dă senzorilor săi este prea mare, așa că valorile citite nu sunt de încredere.",
+    "c": [
+     [
+      "medium",
+      "Cablaj de senzor în scurt la o tensiune de alimentare"
+     ],
+     [
+      "low",
+      "Unitatea de climatizare"
+     ]
+    ],
+    "s": [
+     "Climatizarea nu reglează corect"
+    ]
+   }
+  },
+  "B10AE": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10160842-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10149909-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "A/C refrigerant pressure sensor fault",
+    "d": "The sensor that measures the refrigerant high-side pressure gives no signal or a value out of range, so the A/C compressor is kept off for safety. On 2018-2019 Tiguan and Jetta Volkswagen found the sensor's 5 A fuse missing or wrongly fitted.",
+    "c": [
+     [
+      "medium",
+      "Fuse of the pressure sensor missing or loose"
+     ],
+     [
+      "medium",
+      "Sensor connector (corrosion)"
+     ],
+     [
+      "low",
+      "Pressure sensor"
+     ],
+     [
+      "low",
+      "Refrigerant pressure genuinely too high or too low"
+     ]
+    ],
+    "s": [
+     "Air conditioning doesn't cool"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de presiune a agentului frigorific",
+    "d": "Senzorul care măsoară presiunea agentului frigorific pe partea de înaltă presiune nu dă semnal sau dă o valoare în afara domeniului, așa că compresorul de aer condiționat este ținut oprit din siguranță. La Tiguan și Jetta 2018-2019 Volkswagen a găsit siguranța de 5 A a senzorului lipsă sau montată greșit.",
+    "c": [
+     [
+      "medium",
+      "Siguranța senzorului lipsă sau slăbită"
+     ],
+     [
+      "medium",
+      "Conectorul senzorului (coroziune)"
+     ],
+     [
+      "low",
+      "Senzorul de presiune"
+     ],
+     [
+      "low",
+      "Presiune a agentului într-adevăr prea mare sau prea mică"
+     ]
+    ],
+    "s": [
+     "Aerul condiționat nu răcește"
+    ]
+   }
+  },
+  "B10BE": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10149907-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Fresh-air blower motor fault (overloaded or blocked)",
+    "d": "The fresh-air blower is overloaded, blocked or electrically faulty (current limit, open circuit or short).",
+    "c": [
+     [
+      "medium",
+      "Blocked fan or fan wheel rubbing / loose"
+     ],
+     [
+      "medium",
+      "Blower connector"
+     ],
+     [
+      "low",
+      "Blower control unit or motor"
+     ]
+    ],
+    "s": [
+     "Blower not working or noisy"
+    ]
+   },
+   "ro": {
+    "t": "Defect la motorul ventilatorului de aer proaspăt (suprasolicitat sau blocat)",
+    "d": "Ventilatorul de aer proaspăt este suprasolicitat, blocat sau are un defect electric (limită de curent, circuit întrerupt sau scurtcircuit).",
+    "c": [
+     [
+      "medium",
+      "Ventilator blocat sau rotor care freacă / desprins"
+     ],
+     [
+      "medium",
+      "Conectorul ventilatorului"
+     ],
+     [
+      "low",
+      "Unitatea de comandă sau motorul ventilatorului"
+     ]
+    ],
+    "s": [
+     "Ventilatorul nu merge sau face zgomot"
+    ]
+   }
+  },
+  "B1168": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10119991-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2021/MC-10199929-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10172984-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/B1168"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Steering angle sensor signal fault",
+    "d": "The ESC unit doesn't get a usable steering-angle signal: no signal, too low a supply voltage or no basic setting (calibration). Audi bulletins for the A3 trace the sporadic version to a voltage drop at the power steering unit during engine start. While it is stored, stability control may be switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Steering angle sensor needs calibration (after alignment or steering work)"
+     ],
+     [
+      "medium",
+      "Voltage drop at start-up (battery, main fuse carrier)"
+     ],
+     [
+      "low",
+      "Power steering unit software"
+     ]
+    ],
+    "s": [
+     "ESC, ABS or TPMS warnings at start-up"
+    ]
+   },
+   "ro": {
+    "t": "Defect la semnalul senzorului de unghi al volanului",
+    "d": "Unitatea ESC nu primește un semnal utilizabil de unghi al volanului: semnal lipsă, tensiune de alimentare prea mică sau lipsa setării de bază (calibrare). Buletinele Audi pentru A3 pun varianta sporadică pe seama unei căderi de tensiune la unitatea servodirecției în timpul pornirii. Cât timp este memorat, controlul stabilității poate fi dezactivat; frânarea normală funcționează.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de unghi trebuie calibrat (după geometrie sau lucrări la direcție)"
+     ],
+     [
+      "medium",
+      "Cădere de tensiune la pornire (baterie, suportul siguranțelor principale)"
+     ],
+     [
+      "low",
+      "Software-ul unității servodirecției"
+     ]
+    ],
+    "s": [
+     "Avertizări ESC, ABS sau TPMS la pornire"
+    ]
+   }
+  },
+  "B1479": {
+   "module": "body",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10161290-0002.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250541-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11011376-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Remote key 1: battery voltage too low",
+    "d": "The central electrics report that remote key number 1 sends with a weak battery. Volkswagen asks workshops to run its remote-battery test before replacing the battery, because a simple voltmeter reading can mislead.",
+    "c": [
+     [
+      "high",
+      "Weak key battery"
+     ]
+    ],
+    "s": [
+     "Remote lock/unlock works only close to the car, or not at all"
+    ]
+   },
+   "ro": {
+    "t": "Cheia cu telecomandă 1: tensiunea bateriei prea mică",
+    "d": "Modulul electric central raportează că cheia cu telecomandă numărul 1 transmite cu o baterie slabă. Volkswagen cere service-urilor să ruleze testul lor de baterie înainte de a o înlocui, pentru că o simplă măsurare cu voltmetrul poate înșela.",
+    "c": [
+     [
+      "high",
+      "Baterie slabă în cheie"
+     ]
+    ],
+    "s": [
+     "Închiderea/deschiderea de la telecomandă merge doar aproape de mașină sau deloc"
+    ]
+   }
+  },
+  "B147A": {
+   "module": "body",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10161290-0002.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250541-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11011376-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Remote key 2: battery voltage too low",
+    "d": "The central electrics report that remote key number 2 sends with a weak battery. Volkswagen asks workshops to run its remote-battery test before replacing the battery, because a simple voltmeter reading can mislead.",
+    "c": [
+     [
+      "high",
+      "Weak key battery"
+     ]
+    ],
+    "s": [
+     "Remote lock/unlock works only close to the car, or not at all"
+    ]
+   },
+   "ro": {
+    "t": "Cheia cu telecomandă 2: tensiunea bateriei prea mică",
+    "d": "Modulul electric central raportează că cheia cu telecomandă numărul 2 transmite cu o baterie slabă. Volkswagen cere service-urilor să ruleze testul lor de baterie înainte de a o înlocui, pentru că o simplă măsurare cu voltmetrul poate înșela.",
+    "c": [
+     [
+      "high",
+      "Baterie slabă în cheie"
+     ]
+    ],
+    "s": [
+     "Închiderea/deschiderea de la telecomandă merge doar aproape de mașină sau deloc"
+    ]
+   }
+  },
+  "B147B": {
+   "module": "body",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10161290-0002.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250541-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11011376-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Remote key 3: battery voltage too low",
+    "d": "The central electrics report that remote key number 3 sends with a weak battery. Volkswagen asks workshops to run its remote-battery test before replacing the battery, because a simple voltmeter reading can mislead.",
+    "c": [
+     [
+      "high",
+      "Weak key battery"
+     ]
+    ],
+    "s": [
+     "Remote lock/unlock works only close to the car, or not at all"
+    ]
+   },
+   "ro": {
+    "t": "Cheia cu telecomandă 3: tensiunea bateriei prea mică",
+    "d": "Modulul electric central raportează că cheia cu telecomandă numărul 3 transmite cu o baterie slabă. Volkswagen cere service-urilor să ruleze testul lor de baterie înainte de a o înlocui, pentru că o simplă măsurare cu voltmetrul poate înșela.",
+    "c": [
+     [
+      "high",
+      "Baterie slabă în cheie"
+     ]
+    ],
+    "s": [
+     "Închiderea/deschiderea de la telecomandă merge doar aproape de mașină sau deloc"
+    ]
+   }
+  },
+  "B159A": {
+   "module": "cluster",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10164232-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Digital cockpit: display replacement function active",
+    "d": "The digital instrument cluster detected a problem with its screen output and switched to a fallback mode. On 2019 Jetta Volkswagen traced a blank screen to a start-up software error in the cluster, fixed by a software update.",
+    "c": [
+     [
+      "high",
+      "Cluster software (update available on some cars)"
+     ],
+     [
+      "low",
+      "Instrument cluster"
+     ]
+    ],
+    "s": [
+     "Blank or frozen cluster screen",
+     "Several warning lamps on"
+    ]
+   },
+   "ro": {
+    "t": "Bord digital: funcția de afișaj de rezervă activă",
+    "d": "Bordul digital a detectat o problemă la ieșirea spre ecran și a trecut într-un mod de rezervă. La Jetta 2019 Volkswagen a pus ecranul gol pe seama unei erori de software la pornirea bordului, rezolvată prin actualizare.",
+    "c": [
+     [
+      "high",
+      "Software-ul bordului (actualizare la unele mașini)"
+     ],
+     [
+      "low",
+      "Bordul"
+     ]
+    ],
+    "s": [
+     "Ecranul bordului gol sau înghețat",
+     "Mai mulți martori aprinși"
+    ]
+   }
+  },
+  "B2000@airbag": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10165029-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241183-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/B2000"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Airbag control unit internal fault",
+    "d": "The airbag control unit found a fault in its own electronics. If the code stays after the battery voltage and wiring have been checked, the unit has to be replaced with a new one; used or repaired airbag units must not be fitted. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Airbag control unit"
+     ],
+     [
+      "low",
+      "Low supply voltage during its self-test"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern al unității de control airbag",
+    "d": "Unitatea de control airbag a găsit un defect în propria electronică. Dacă codul rămâne după ce tensiunea bateriei și cablajul au fost verificate, unitatea trebuie înlocuită cu una nouă; nu se montează unități airbag folosite sau reparate. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea de control airbag"
+     ],
+     [
+      "low",
+      "Tensiune de alimentare scăzută în timpul autotestului"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B2000@cluster": {
+   "module": "cluster",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10165029-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/B2000"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Instrument cluster internal fault",
+    "d": "The instrument cluster reports a fault in its own electronics. It often appears right after keys were matched with a third-party tool; if the cluster no longer works properly with this code, it usually has to be replaced.",
+    "c": [
+     [
+      "medium",
+      "Cluster data damaged by third-party key or mileage tools"
+     ],
+     [
+      "medium",
+      "Instrument cluster"
+     ]
+    ],
+    "s": [
+     "Cluster or immobilizer functions faulty"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern al bordului",
+    "d": "Bordul raportează un defect în propria electronică. Apare des imediat după învățarea cheilor cu un tester neoficial; dacă bordul nu mai funcționează corect cu acest cod, de obicei trebuie înlocuit.",
+    "c": [
+     [
+      "medium",
+      "Datele bordului deteriorate de testere neoficiale pentru chei sau kilometraj"
+     ],
+     [
+      "medium",
+      "Bordul"
+     ]
+    ],
+    "s": [
+     "Funcții ale bordului sau imobilizatorului defecte"
+    ]
+   }
+  },
+  "B2000@steering": {
+   "module": "steering",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2021/MC-10191005-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/B2000"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Power steering control unit internal fault",
+    "d": "The power steering control unit found a fault in its own electronics. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Steering unit software (updates exist for some models)"
+     ],
+     [
+      "medium",
+      "Power steering control unit"
+     ]
+    ],
+    "s": [
+     "Red steering warning",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect intern al unității de control a servodirecției",
+    "d": "Unitatea de control a servodirecției a găsit un defect în propria electronică. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Software-ul unității (există actualizări pentru unele modele)"
+     ],
+     [
+      "medium",
+      "Unitatea de control a servodirecției"
+     ]
+    ],
+    "s": [
+     "Avertizare roșie de direcție",
+     "Volan greu"
+    ]
+   }
+  },
+  "B2005@body": {
+   "module": "body",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2017/MC-10127941-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/B2005"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Body computer: invalid data record",
+    "d": "The parameter data (data record) stored in the central electrics is missing or wrong, so some functions may be limited. It is fixed by loading the correct data online with a dealer-level tool.",
+    "c": [
+     [
+      "high",
+      "Module replaced or updated without loading its data record"
+     ],
+     [
+      "low",
+      "Factory software error"
+     ]
+    ],
+    "s": [
+     "Some lighting or comfort functions limited"
+    ]
+   },
+   "ro": {
+    "t": "Calculatorul de caroserie: set de date invalid",
+    "d": "Datele de parametrizare (setul de date) memorate în modulul electric central lipsesc sau sunt greșite, așa că unele funcții pot fi limitate. Se rezolvă prin încărcarea online a datelor corecte cu un tester de nivel dealer.",
+    "c": [
+     [
+      "high",
+      "Modul înlocuit sau actualizat fără încărcarea setului de date"
+     ],
+     [
+      "low",
+      "Eroare de software din fabrică"
+     ]
+    ],
+    "s": [
+     "Unele funcții de iluminare sau confort limitate"
+    ]
+   }
+  },
+  "B2013@airbag": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10230571-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/B2013"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Airbag unit: end-of-line programming missing",
+    "d": "The airbag unit lacks the vehicle-specific data it normally gets at the factory, typically after it was replaced or updated. A dealer-level tool must load that data online. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "high",
+      "Unit replaced or reprogrammed without the online configuration step"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Unitate airbag: lipsește programarea de final de linie",
+    "d": "Unitatea airbag nu are datele specifice mașinii pe care le primește de obicei în fabrică, tipic după ce a fost înlocuită sau actualizată. Datele trebuie încărcate online cu un tester de nivel dealer. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "high",
+      "Unitate înlocuită sau reprogramată fără pasul de configurare online"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B2017@gateway": {
+   "module": "gateway",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10245531-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Control module locked",
+    "d": "The module is locked against changes (a security lock), so coding, adaptation or key matching through it is refused until it is unlocked by an authorised online procedure. It is not a hardware fault.",
+    "c": [
+     [
+      "high",
+      "Security lock active during coding or adaptation work"
+     ]
+    ],
+    "s": [
+     "Coding or key adaptation refused"
+    ]
+   },
+   "ro": {
+    "t": "Modul de control blocat",
+    "d": "Modulul este blocat împotriva modificărilor (o blocare de securitate), așa că codarea, adaptarea sau învățarea cheilor prin el sunt refuzate până la deblocarea printr-o procedură online autorizată. Nu este un defect hardware.",
+    "c": [
+     [
+      "high",
+      "Blocare de securitate activă în timpul codării sau adaptării"
+     ]
+    ],
+    "s": [
+     "Codarea sau adaptarea cheilor refuzată"
+    ]
+   }
+  },
+  "B201C@airbag": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10180569-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Airbag unit supply voltage out of range",
+    "d": "The airbag unit sees an unexpected supply voltage. On 2020 Tiguans with a dealer-fitted long-range remote start kit, Volkswagen found a fuse that had to be removed after the installation. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Battery or charging problem"
+     ],
+     [
+      "medium",
+      "Accessory installation (remote start kit)"
+     ],
+     [
+      "low",
+      "Supply wiring or ground"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Tensiunea de alimentare a unității airbag în afara domeniului",
+    "d": "Unitatea airbag vede o tensiune de alimentare neașteptată. La Tiguan 2020 cu kit de pornire de la distanță montat la dealer, Volkswagen a găsit o siguranță care trebuia scoasă după montaj. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Problemă la baterie sau la încărcare"
+     ],
+     [
+      "medium",
+      "Montaj de accesorii (kit de pornire la distanță)"
+     ],
+     [
+      "low",
+      "Cablaj de alimentare sau masă"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "C101F": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10180603-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "ESC system function test still active",
+    "d": "A workshop function test of the stability control was started and did not end by itself. It must be ended through the ABS module's basic settings with a scan tool, not just cleared.",
+    "c": [
+     [
+      "high",
+      "Function test left active after a repair"
+     ]
+    ],
+    "s": [
+     "ESC warning light possible"
+    ]
+   },
+   "ro": {
+    "t": "Testul de funcționare al sistemului ESC încă activ",
+    "d": "Un test de funcționare al controlului stabilității pornit în service nu s-a încheiat singur. Trebuie oprit din setările de bază ale modulului ABS cu un tester, nu doar șters.",
+    "c": [
+     [
+      "high",
+      "Test de funcționare lăsat activ după o reparație"
+     ]
+    ],
+    "s": [
+     "Posibil martorul ESC aprins"
+    ]
+   }
+  },
+  "C10AC": {
+   "module": "steering",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10169517-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2021/MC-10198162-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/C10AC"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Steering gear: mechanical malfunction / end stops not learned",
+    "d": "The power steering unit reports a problem with the steering rack, or (failure type F0) that the steering end stops were not learned after a calibration. On 2018-2020 Golf, Jetta and Tiguan Volkswagen says to update the steering unit's software before replacing anything. When the power steering limits or stops its assistance, the steering becomes heavy but still works mechanically.",
+    "c": [
+     [
+      "medium",
+      "Steering unit software (update available)"
+     ],
+     [
+      "medium",
+      "End stops not learned after a steering-angle calibration"
+     ],
+     [
+      "low",
+      "Steering rack"
+     ]
+    ],
+    "s": [
+     "Steering warning light",
+     "Heavy steering possible"
+    ]
+   },
+   "ro": {
+    "t": "Caseta de direcție: defect mecanic / opritori de capăt neînvățați",
+    "d": "Unitatea servodirecției raportează o problemă la caseta de direcție sau (tip de defect F0) că opritorii de capăt nu au fost învățați după o calibrare. La Golf, Jetta și Tiguan 2018-2020 Volkswagen cere actualizarea software-ului unității de direcție înainte de a înlocui ceva. Când servodirecția își limitează sau oprește asistența, volanul devine greu, dar direcția funcționează în continuare mecanic.",
+    "c": [
+     [
+      "medium",
+      "Software-ul unității de direcție (există actualizare)"
+     ],
+     [
+      "medium",
+      "Opritori de capăt neînvățați după calibrarea unghiului"
+     ],
+     [
+      "low",
+      "Caseta de direcție"
+     ]
+    ],
+    "s": [
+     "Martorul servodirecției aprins",
+     "Posibil volan greu"
+    ]
+   }
+  },
+  "P102F": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10169140-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "limp_mode"
+   ],
+   "en": {
+    "t": "Torque limited because of fuel pressure",
+    "d": "The engine computer reduces power because the fuel rail pressure is not where it should be.",
+    "c": [
+     [
+      "medium",
+      "Low-pressure fuel supply (pump, filter)"
+     ],
+     [
+      "medium",
+      "High-pressure fuel pump or pressure sensor"
+     ],
+     [
+      "low",
+      "Wiring"
+     ]
+    ],
+    "s": [
+     "Reduced power",
+     "Check-engine light"
+    ]
+   },
+   "ro": {
+    "t": "Cuplu limitat din cauza presiunii combustibilului",
+    "d": "Calculatorul motorului reduce puterea pentru că presiunea din rampa de combustibil nu este cea corectă.",
+    "c": [
+     [
+      "medium",
+      "Alimentarea de joasă presiune (pompă, filtru)"
+     ],
+     [
+      "medium",
+      "Pompa de înaltă presiune sau senzorul de presiune"
+     ],
+     [
+      "low",
+      "Cablaj"
+     ]
+    ],
+    "s": [
+     "Putere redusă",
+     "Martorul de motor aprins"
+    ]
+   }
+  },
+  "P13EA": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2021/MC-10185659-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Cold-start ignition timing performance (off idle)",
+    "d": "During a cold start the engine retards the ignition to heat the catalytic converter quickly; this code says that strategy did not work as planned. On the 2019 Jetta 1.4 TSI Volkswagen fixed it, among other codes, with engine-computer software.",
+    "c": [
+     [
+      "medium",
+      "Engine computer software (update on some cars)"
+     ],
+     [
+      "low",
+      "Misfires or air leaks during warm-up"
+     ]
+    ],
+    "s": [
+     "Check-engine light possible"
+    ]
+   },
+   "ro": {
+    "t": "Performanța avansului la aprindere la pornirea la rece (în afara ralantiului)",
+    "d": "La pornirea la rece motorul întârzie aprinderea ca să încălzească repede catalizatorul; codul spune că strategia nu a funcționat cum trebuia. La Jetta 1.4 TSI din 2019 Volkswagen a rezolvat-o, alături de alte coduri, cu software nou pentru calculatorul motorului.",
+    "c": [
+     [
+      "medium",
+      "Software-ul calculatorului motorului (actualizare la unele mașini)"
+     ],
+     [
+      "low",
+      "Rateuri sau aer fals la încălzire"
+     ]
+    ],
+    "s": [
+     "Posibil martorul de motor aprins"
+    ]
+   }
+  },
+  "P1429": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10172585-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Brake vacuum pump control: open circuit",
+    "d": "The circuit the engine computer uses to switch the electric brake vacuum pump is open. Braking still works, but the pedal can feel harder if the brake servo lacks vacuum.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector to the vacuum pump"
+     ],
+     [
+      "medium",
+      "Fuse or relay"
+     ],
+     [
+      "low",
+      "Vacuum pump"
+     ]
+    ],
+    "s": [
+     "Warning light possible",
+     "Harder brake pedal"
+    ]
+   },
+   "ro": {
+    "t": "Comanda pompei de vacuum a frânei: circuit întrerupt",
+    "d": "Circuitul prin care calculatorul motorului pornește pompa electrică de vacuum pentru frână este întrerupt. Frâna funcționează în continuare, dar pedala poate fi mai tare dacă servofrâna nu are vacuum.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul pompei de vacuum"
+     ],
+     [
+      "medium",
+      "Siguranță sau releu"
+     ],
+     [
+      "low",
+      "Pompa de vacuum"
+     ]
+    ],
+    "s": [
+     "Posibil un martor aprins",
+     "Pedală de frână mai tare"
+    ]
+   }
+  },
+  "P148D": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10166780-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "EVAP leak-detection pump: implausible frequency",
+    "d": "The pump that tests the fuel-vapour (EVAP) system for leaks gives a signal the engine computer can't use, so the leak test can't run.",
+    "c": [
+     [
+      "medium",
+      "Leak-detection pump"
+     ],
+     [
+      "medium",
+      "Wiring or connector"
+     ],
+     [
+      "low",
+      "Blocked filter or hose at the pump"
+     ]
+    ],
+    "s": [
+     "Check-engine light possible"
+    ]
+   },
+   "ro": {
+    "t": "Pompa de detectare a scurgerilor EVAP: frecvență neplauzibilă",
+    "d": "Pompa care testează etanșeitatea sistemului de vapori de combustibil (EVAP) dă un semnal pe care calculatorul motorului nu îl poate folosi, așa că testul nu poate rula.",
+    "c": [
+     [
+      "medium",
+      "Pompa de detectare a scurgerilor"
+     ],
+     [
+      "medium",
+      "Cablaj sau conector"
+     ],
+     [
+      "low",
+      "Filtru sau furtun înfundat la pompă"
+     ]
+    ],
+    "s": [
+     "Posibil martorul de motor aprins"
+    ]
+   }
+  },
+  "P1592": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10161265-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10169140-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Barometric and boost pressure sensors disagree",
+    "d": "With the engine off or idling, the barometric pressure sensor and the charge-air (boost) pressure sensor should read almost the same; here the difference is too large.",
+    "c": [
+     [
+      "medium",
+      "Charge-air pressure sensor"
+     ],
+     [
+      "low",
+      "Barometric sensor (inside the engine computer on many engines)"
+     ],
+     [
+      "low",
+      "Wiring"
+     ]
+    ],
+    "s": [
+     "Check-engine light possible",
+     "Reduced power possible"
+    ]
+   },
+   "ro": {
+    "t": "Senzorii de presiune barometrică și de supraalimentare nu concordă",
+    "d": "Cu motorul oprit sau la ralanti, senzorul de presiune barometrică și cel de presiune a aerului de supraalimentare ar trebui să arate aproape același lucru; aici diferența este prea mare.",
+    "c": [
+     [
+      "medium",
+      "Senzorul de presiune de supraalimentare"
+     ],
+     [
+      "low",
+      "Senzorul barometric (în calculatorul motorului la multe motoare)"
+     ],
+     [
+      "low",
+      "Cablaj"
+     ]
+    ],
+    "s": [
+     "Posibil martorul de motor aprins",
+     "Posibil putere redusă"
+    ]
+   }
+  },
+  "P1612": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10150806-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Engine computer programming error",
+    "d": "The engine computer is not correctly programmed or coded, typically after it was replaced. Volkswagen advises bringing both the engine and gearbox computers to the latest software and then running the software configuration.",
+    "c": [
+     [
+      "high",
+      "Engine computer replaced or reprogrammed without the final configuration"
+     ]
+    ],
+    "s": [
+     "Related software-incompatibility codes in engine and gearbox"
+    ]
+   },
+   "ro": {
+    "t": "Eroare de programare a calculatorului motorului",
+    "d": "Calculatorul motorului nu este programat sau codat corect, tipic după înlocuire. Volkswagen recomandă aducerea calculatoarelor de motor și de cutie la ultima versiune de software și apoi rularea configurării software.",
+    "c": [
+     [
+      "high",
+      "Calculatorul motorului înlocuit sau reprogramat fără configurarea finală"
+     ]
+    ],
+    "s": [
+     "Coduri înrudite de incompatibilitate software în motor și cutie"
+    ]
+   }
+  },
+  "P1647": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10168335-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Coding/versions of drivetrain modules don't match",
+    "d": "The engine computer checks that the modules of the drivetrain have matching coding and software. Volkswagen saw this after online programming of unrelated modules on 2015-2019 cars; the gateway configuration has to be redone with a dealer-level tool.",
+    "c": [
+     [
+      "high",
+      "Recent programming or replacement of another module"
+     ],
+     [
+      "low",
+      "Wrong coding of a drivetrain module"
+     ]
+    ],
+    "s": [
+     "Check-engine light possible"
+    ]
+   },
+   "ro": {
+    "t": "Codarea/versiunile modulelor transmisiei nu se potrivesc",
+    "d": "Calculatorul motorului verifică dacă modulele din lanțul de transmisie au codare și software compatibile. Volkswagen a văzut acest cod după programarea online a altor module, la mașini din 2015-2019; configurarea gateway-ului trebuie refăcută cu un tester de nivel dealer.",
+    "c": [
+     [
+      "high",
+      "Programare sau înlocuire recentă a altui modul"
+     ],
+     [
+      "low",
+      "Codare greșită a unui modul din lanțul de transmisie"
+     ]
+    ],
+    "s": [
+     "Posibil martorul de motor aprins"
+    ]
+   }
+  },
+  "P164B": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2012/SB-10072894-0699.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/P164B/005707"
+    }
+   ],
+   "f": [
+    "mil"
+   ],
+   "en": {
+    "t": "Oil pressure switch malfunction (high-pressure stage)",
+    "d": "The switch that watches the higher oil-pressure stage (blue housing on many engines) reports a fault. Check the real oil pressure before replacing the switch.",
+    "c": [
+     [
+      "medium",
+      "Faulty oil pressure switch"
+     ],
+     [
+      "medium",
+      "Genuinely low oil pressure"
+     ],
+     [
+      "low",
+      "Wiring"
+     ]
+    ],
+    "s": [
+     "Check-engine light",
+     "Oil pressure warning on some cars"
+    ]
+   },
+   "ro": {
+    "t": "Defect la contactorul de presiune a uleiului (treapta înaltă)",
+    "d": "Contactorul care supraveghează treapta înaltă de presiune a uleiului (carcasă albastră la multe motoare) raportează un defect. Verifică presiunea reală a uleiului înainte de a înlocui contactorul.",
+    "c": [
+     [
+      "medium",
+      "Contactor de presiune defect"
+     ],
+     [
+      "medium",
+      "Presiune de ulei într-adevăr scăzută"
+     ],
+     [
+      "low",
+      "Cablaj"
+     ]
+    ],
+    "s": [
+     "Martorul de motor aprins",
+     "Avertizare de presiune a uleiului la unele mașini"
+    ]
+   }
+  },
+  "P164D": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2012/SB-10072894-0699.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2017/MC-10127873-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2016/MC-10121008-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2016/MC-10118390-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "mil",
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Reduced-oil-pressure switch malfunction",
+    "d": "VW engines check oil pressure with two switches: one for the low pressure stage and one for the high stage. This code concerns the reduced-pressure switch (brown housing on many engines). Volkswagen lists it with the oil pressure light on EA888 Gen 3 1.8T/2.0T engines. Check the oil level and have the real oil pressure measured before blaming the switch; stop the engine if the red oil-pressure warning stays on.",
+    "c": [
+     [
+      "medium",
+      "Faulty switch or oil in its connector"
+     ],
+     [
+      "medium",
+      "Genuinely low oil pressure (low oil level, oil pump, filter housing)"
+     ],
+     [
+      "low",
+      "Wiring"
+     ]
+    ],
+    "s": [
+     "Oil pressure warning",
+     "Check-engine light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la contactorul de presiune redusă a uleiului",
+    "d": "Motoarele VW verifică presiunea uleiului cu două contactoare: unul pentru treapta de presiune joasă și unul pentru treapta înaltă. Codul privește contactorul de presiune redusă (carcasă maro la multe motoare). Volkswagen îl listează împreună cu martorul de presiune a uleiului la motoarele EA888 Gen 3 de 1.8T/2.0T. Verifică nivelul uleiului și cere măsurarea presiunii reale înainte de a da vina pe contactor; oprește motorul dacă avertizarea roșie de presiune a uleiului rămâne aprinsă.",
+    "c": [
+     [
+      "medium",
+      "Contactor defect sau ulei în conectorul lui"
+     ],
+     [
+      "medium",
+      "Presiune de ulei într-adevăr scăzută (nivel scăzut, pompă de ulei, carcasa filtrului)"
+     ],
+     [
+      "low",
+      "Cablaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de presiune a uleiului",
+     "Martorul de motor aprins"
+    ]
+   }
+  },
+  "P16C6": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10176773-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Heater support pump: running dry",
+    "d": "The electric pump that helps circulate coolant through the heater detects that it is running without coolant.",
+    "c": [
+     [
+      "high",
+      "Low coolant level or air in the cooling system"
+     ],
+     [
+      "low",
+      "Pump"
+     ]
+    ],
+    "s": [
+     "Weak cabin heating",
+     "Coolant warning possible"
+    ]
+   },
+   "ro": {
+    "t": "Pompa auxiliară a încălzirii: funcționare fără lichid",
+    "d": "Pompa electrică ce ajută la circulația lichidului de răcire prin radiatorul de încălzire detectează că funcționează fără lichid.",
+    "c": [
+     [
+      "high",
+      "Nivel scăzut al lichidului de răcire sau aer în sistem"
+     ],
+     [
+      "low",
+      "Pompa"
+     ]
+    ],
+    "s": [
+     "Căldură slabă în habitaclu",
+     "Posibilă avertizare de lichid de răcire"
+    ]
+   }
+  },
+  "P1701": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10150859-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Gearbox computer locked (component protection)",
+    "d": "The gearbox computer is locked because it is not yet registered to this car, typically after the mechatronic unit or the gearbox was replaced. It must be adapted to the immobilizer with a dealer-level tool.",
+    "c": [
+     [
+      "high",
+      "Mechatronic unit or gearbox replaced without immobilizer adaptation"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Gearbox may not work"
+    ]
+   },
+   "ro": {
+    "t": "Calculatorul cutiei blocat (protecția componentelor)",
+    "d": "Calculatorul cutiei este blocat pentru că nu este încă înregistrat pe această mașină, tipic după înlocuirea unității mecatronice sau a cutiei. Trebuie adaptat la imobilizator cu un tester de nivel dealer.",
+    "c": [
+     [
+      "high",
+      "Unitate mecatronică sau cutie înlocuită fără adaptare la imobilizator"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Cutia poate să nu funcționeze"
+    ]
+   }
+  },
+  "P1735": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG clutch 1 position sensor: electrical fault",
+    "d": "The sensor that tells the gearbox computer how far clutch 1 is engaged has an electrical fault. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit / sensor"
+     ],
+     [
+      "low",
+      "Gearbox computer hardware (Audi bulletin for 0GC/0DL)"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de poziție al ambreiajului 1 DSG: defect electric",
+    "d": "Senzorul care îi spune calculatorului cutiei cât de cuplat este ambreiajul 1 are un defect electric. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică / senzorul"
+     ],
+     [
+      "low",
+      "Hardware-ul calculatorului cutiei (buletin Audi pentru 0GC/0DL)"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P1736": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG clutch 2 position sensor: electrical fault",
+    "d": "The sensor that tells the gearbox computer how far clutch 2 is engaged has an electrical fault. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit / sensor"
+     ],
+     [
+      "low",
+      "Gearbox computer hardware (Audi bulletin for 0GC/0DL)"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Senzorul de poziție al ambreiajului 2 DSG: defect electric",
+    "d": "Senzorul care îi spune calculatorului cutiei cât de cuplat este ambreiajul 2 are un defect electric. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică / senzorul"
+     ],
+     [
+      "low",
+      "Hardware-ul calculatorului cutiei (buletin Audi pentru 0GC/0DL)"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P175D": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241221-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10251625-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG clutch 1 opens unintentionally",
+    "d": "The gearbox computer saw clutch 1 (it drives the odd gears (1-3-5-7)) opens when it had not commanded it. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Ambreiajul 1 al cutiei DSG se deschide neintenționat",
+    "d": "Calculatorul cutiei a văzut că ambreiajul 1 (acționează treptele impare (1-3-5-7)) se deschide fără să fi fost comandat. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P175E": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241221-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10251625-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10144636-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG clutch 1 closes unintentionally",
+    "d": "The gearbox computer saw clutch 1 (it drives the odd gears (1-3-5-7)) closes when it had not commanded it. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Ambreiajul 1 al cutiei DSG se închide neintenționat",
+    "d": "Calculatorul cutiei a văzut că ambreiajul 1 (acționează treptele impare (1-3-5-7)) se închide fără să fi fost comandat. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P176A": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG gear actuator 1 cannot be regulated",
+    "d": "Gear actuator 1 in the mechatronic unit (it moves a selector fork to engage gears) does not reach or hold its position. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Actuatorul de treaptă 1 al cutiei DSG nu poate fi reglat",
+    "d": "Actuatorul de treaptă 1 din unitatea mecatronică (mută o furcă de selectare ca să cupleze treptele) nu ajunge sau nu rămâne în poziție. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P176B": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG gear actuator 2 cannot be regulated",
+    "d": "Gear actuator 2 in the mechatronic unit (it moves a selector fork to engage gears) does not reach or hold its position. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Actuatorul de treaptă 2 al cutiei DSG nu poate fi reglat",
+    "d": "Actuatorul de treaptă 2 din unitatea mecatronică (mută o furcă de selectare ca să cupleze treptele) nu ajunge sau nu rămâne în poziție. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P176C": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG gear actuator 3 cannot be regulated",
+    "d": "Gear actuator 3 in the mechatronic unit (it moves a selector fork to engage gears) does not reach or hold its position. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Actuatorul de treaptă 3 al cutiei DSG nu poate fi reglat",
+    "d": "Actuatorul de treaptă 3 din unitatea mecatronică (mută o furcă de selectare ca să cupleze treptele) nu ajunge sau nu rămâne în poziție. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P176D": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG gear actuator 4 cannot be regulated",
+    "d": "Gear actuator 4 in the mechatronic unit (it moves a selector fork to engage gears) does not reach or hold its position. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Actuatorul de treaptă 4 al cutiei DSG nu poate fi reglat",
+    "d": "Actuatorul de treaptă 4 din unitatea mecatronică (mută o furcă de selectare ca să cupleze treptele) nu ajunge sau nu rămâne în poziție. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P176E": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241221-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10251625-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10144636-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG clutch 2 opens unintentionally",
+    "d": "The gearbox computer saw clutch 2 (it drives the even gears and reverse) opens when it had not commanded it. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Ambreiajul 2 al cutiei DSG se deschide neintenționat",
+    "d": "Calculatorul cutiei a văzut că ambreiajul 2 (acționează treptele pare și marșarierul) se deschide fără să fi fost comandat. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P176F": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242931-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241221-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10251625-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2018/MC-10144636-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG clutch 2 closes unintentionally",
+    "d": "The gearbox computer saw clutch 2 (it drives the even gears and reverse) closes when it had not commanded it. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Ambreiajul 2 al cutiei DSG se închide neintenționat",
+    "d": "Calculatorul cutiei a văzut că ambreiajul 2 (acționează treptele pare și marșarierul) se închide fără să fi fost comandat. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P1899": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-10250796-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241181-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241221-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp",
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG clutch 2 function restricted",
+    "d": "The gearbox computer limits the use of clutch 2 (even gears and reverse) after detecting a problem with it. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (valves, pressure, software)"
+     ],
+     [
+      "medium",
+      "Gearbox oil pressure supply (auxiliary pump on the DQ381)"
+     ],
+     [
+      "low",
+      "Clutch pack"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears"
+    ]
+   },
+   "ro": {
+    "t": "Funcționarea ambreiajului 2 DSG restricționată",
+    "d": "Calculatorul cutiei limitează folosirea ambreiajului 2 (treptele pare și marșarierul) după ce a detectat o problemă la el. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (supape, presiune, software)"
+     ],
+     [
+      "medium",
+      "Alimentarea cu presiune de ulei (pompa auxiliară la DQ381)"
+     ],
+     [
+      "low",
+      "Pachetul de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă"
+    ]
+   }
+  },
+  "P189C": {
+   "module": "transmission",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/P189C/006300"
+    },
+    {
+     "u": "https://www.actronics.co.uk/dq200-dsg-p17bf-p189c-fault-codes-tcu-repair"
+    }
+   ],
+   "f": [
+    "limp_mode"
+   ],
+   "en": {
+    "t": "DSG function restricted: hydraulic pressure builds up too slowly",
+    "d": "On the 7-speed dry-clutch DSG (DQ200/0AM) the mechatronic unit has its own electric pump that keeps hydraulic pressure up. This code says the pressure doesn't build up as it should, so the gearbox limits its operation. The gearbox may switch to an emergency mode with only some gears (for example only odd or only even gears) and show a warning. Check for software updates and bulletins before replacing the mechatronic unit or the clutch.",
+    "c": [
+     [
+      "medium",
+      "Mechatronic unit (pump motor, accumulator, internal leak)"
+     ],
+     [
+      "low",
+      "Fuse or power supply to the mechatronic unit"
+     ],
+     [
+      "low",
+      "Wiring"
+     ]
+    ],
+    "s": [
+     "Gearbox warning",
+     "Jerks, shudder or missing gears",
+     "Basic settings cannot be completed"
+    ]
+   },
+   "ro": {
+    "t": "Funcție DSG restricționată: presiunea hidraulică crește prea încet",
+    "d": "La cutia DSG cu 7 trepte și ambreiaj uscat (DQ200/0AM) unitatea mecatronică are propria pompă electrică ce menține presiunea hidraulică. Codul spune că presiunea nu crește cum ar trebui, așa că cutia își limitează funcționarea. Cutia poate trece într-un regim de avarie, doar cu unele trepte (de exemplu doar cele pare sau doar cele impare), și afișa o avertizare. Verifică actualizările software și buletinele înainte de a înlocui unitatea mecatronică sau ambreiajul.",
+    "c": [
+     [
+      "medium",
+      "Unitatea mecatronică (motorul pompei, acumulatorul, scurgere internă)"
+     ],
+     [
+      "low",
+      "Siguranța sau alimentarea unității mecatronice"
+     ],
+     [
+      "low",
+      "Cablaj"
+     ]
+    ],
+    "s": [
+     "Avertizare de cutie de viteze",
+     "Smucituri, vibrații sau trepte lipsă",
+     "Setările de bază nu pot fi finalizate"
+    ]
+   }
+  },
+  "P3073": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10168670-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Fuel pump: electrical fault in the circuit",
+    "d": "The fuel pump circuit has an electrical fault, so the fuel supply may be cut or limited.",
+    "c": [
+     [
+      "medium",
+      "Fuel pump wiring or connector"
+     ],
+     [
+      "medium",
+      "Fuel pump control unit or fuse"
+     ],
+     [
+      "low",
+      "Fuel pump"
+     ]
+    ],
+    "s": [
+     "Hard starting or stalling",
+     "Check-engine light possible"
+    ]
+   },
+   "ro": {
+    "t": "Pompa de combustibil: defect electric în circuit",
+    "d": "Circuitul pompei de combustibil are un defect electric, așa că alimentarea cu combustibil poate fi întreruptă sau limitată.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul pompei"
+     ],
+     [
+      "medium",
+      "Unitatea de comandă a pompei sau siguranța"
+     ],
+     [
+      "low",
+      "Pompa de combustibil"
+     ]
+    ],
+    "s": [
+     "Pornire grea sau oprire a motorului",
+     "Posibil martorul de motor aprins"
+    ]
+   }
+  },
+  "P3081": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2017/MC-10128047-9999.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Engine temperature too low",
+    "d": "The engine warms up more slowly than the engine computer expects. A thermostat or coolant-control valve that stays open is the usual mechanical reason; on 2016-2017 Jetta 1.4T Volkswagen released engine-computer software that improves this check.",
+    "c": [
+     [
+      "medium",
+      "Thermostat or coolant control valve stuck open"
+     ],
+     [
+      "low",
+      "Coolant temperature sensor"
+     ],
+     [
+      "low",
+      "Engine computer software (update on some cars)"
+     ]
+    ],
+    "s": [
+     "Check-engine light possible",
+     "Slow warm-up, weak cabin heating"
+    ]
+   },
+   "ro": {
+    "t": "Temperatura motorului prea scăzută",
+    "d": "Motorul se încălzește mai încet decât se așteaptă calculatorul motorului. Un termostat sau o supapă de control al lichidului de răcire care rămâne deschisă este cauza mecanică obișnuită; pentru Jetta 1.4T 2016-2017 Volkswagen a lansat un software care îmbunătățește această verificare.",
+    "c": [
+     [
+      "medium",
+      "Termostat sau supapă de control al răcirii blocată deschis"
+     ],
+     [
+      "low",
+      "Senzorul de temperatură a lichidului de răcire"
+     ],
+     [
+      "low",
+      "Software-ul calculatorului motorului (actualizare la unele mașini)"
+     ]
+    ],
+    "s": [
+     "Posibil martorul de motor aprins",
+     "Încălzire lentă, căldură slabă în habitaclu"
+    ]
+   }
+  },
+  "U1008@engine": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2021/MC-10185659-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Diagnostic interface (gateway) reports stored codes",
+    "d": "The engine computer notes that the data-bus diagnostic interface (gateway) holds fault codes of its own. Read the gateway's codes.",
+    "c": [
+     [
+      "high",
+      "Faults stored in the gateway or other modules"
+     ]
+    ],
+    "s": [
+     "Usually none by itself"
+    ]
+   },
+   "ro": {
+    "t": "Interfața de diagnoză (gateway) raportează coduri memorate",
+    "d": "Calculatorul motorului semnalează că interfața de diagnoză a magistralei de date (gateway-ul) are propriile coduri de defect. Citește codurile gateway-ului.",
+    "c": [
+     [
+      "high",
+      "Defecte memorate în gateway sau în alte module"
+     ]
+    ],
+    "s": [
+     "De obicei niciunul în sine"
+    ]
+   }
+  },
+  "U1011@climate": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Climate control unit supply voltage too low",
+    "d": "The climate control unit measured too low a supply voltage and may switch off some functions to save power.",
+    "c": [
+     [
+      "high",
+      "Weak battery or charging fault"
+     ],
+     [
+      "low",
+      "Poor supply or ground connection"
+     ]
+    ],
+    "s": [
+     "A/C or blower temporarily limited"
+    ]
+   },
+   "ro": {
+    "t": "Tensiunea de alimentare a unității de climatizare prea mică",
+    "d": "Unitatea de climatizare a măsurat o tensiune de alimentare prea mică și poate opri unele funcții ca să economisească energie.",
+    "c": [
+     [
+      "high",
+      "Baterie slabă sau defect la încărcare"
+     ],
+     [
+      "low",
+      "Conexiune de alimentare sau masă proastă"
+     ]
+    ],
+    "s": [
+     "Aerul condiționat sau ventilatorul limitate temporar"
+    ]
+   }
+  },
+  "U1012@airbag": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10241183-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Airbag unit supply voltage too high",
+    "d": "The airbag unit measured too high a supply voltage, usually from the charging system or from jump-starting. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Alternator overcharging"
+     ],
+     [
+      "low",
+      "Jump-starting or a charger connected with the engine running"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Tensiunea de alimentare a unității airbag prea mare",
+    "d": "Unitatea airbag a măsurat o tensiune de alimentare prea mare, de obicei din cauza sistemului de încărcare sau a pornirii cu cabluri. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Alternatorul supraîncarcă"
+     ],
+     [
+      "low",
+      "Pornire cu cabluri sau încărcător conectat cu motorul pornit"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "U1013@airbag": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10172585-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Airbag unit not coded",
+    "d": "The airbag unit has no coding, so it doesn't know the car's equipment. It needs coding with a scan tool, usually after a replacement. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "high",
+      "Unit replaced without coding"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Unitate airbag necodată",
+    "d": "Unitatea airbag nu are codare, deci nu cunoaște echiparea mașinii. Trebuie codată cu un tester, de obicei după înlocuire. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "high",
+      "Unitate înlocuită fără codare"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "U1013@climate": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10161265-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Climate control unit not coded",
+    "d": "The climate control unit has no coding, so it doesn't know the car's equipment. It needs coding with a scan tool, usually after a replacement.",
+    "c": [
+     [
+      "high",
+      "Unit replaced without coding"
+     ]
+    ],
+    "s": [
+     "Climate functions missing or wrong"
+    ]
+   },
+   "ro": {
+    "t": "Unitatea de climatizare necodată",
+    "d": "Unitatea de climatizare nu are codare, deci nu cunoaște echiparea mașinii. Trebuie codată cu un tester, de obicei după înlocuire.",
+    "c": [
+     [
+      "high",
+      "Unitate înlocuită fără codare"
+     ]
+    ],
+    "s": [
+     "Funcții de climatizare lipsă sau greșite"
+    ]
+   }
+  },
+  "U1101@cluster": {
+   "module": "cluster",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10220396-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2022/MC-10214780-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Component protection active",
+    "d": "VW's component protection (the anti-theft pairing of modules to one car) is active, so a module restricts its functions or stays silent on the network. It is cleared online by a dealer after a module change; Audi also found sporadic cases fixed by software.",
+    "c": [
+     [
+      "high",
+      "Module replaced or swapped without online component-protection removal"
+     ],
+     [
+      "low",
+      "Module software"
+     ]
+    ],
+    "s": [
+     "A system (radio, parking aid, ...) not working",
+     "Check-engine light possible as a side effect"
+    ]
+   },
+   "ro": {
+    "t": "Protecția componentelor activă",
+    "d": "Protecția componentelor VW (asocierea antifurt a modulelor cu o anumită mașină) este activă, așa că un modul își restricționează funcțiile sau tace în rețea. Se dezactivează online la dealer după schimbarea unui modul; Audi a găsit și cazuri sporadice rezolvate prin software.",
+    "c": [
+     [
+      "high",
+      "Modul înlocuit sau mutat fără eliminarea online a protecției"
+     ],
+     [
+      "low",
+      "Software-ul modulului"
+     ]
+    ],
+    "s": [
+     "Un sistem (radio, senzori de parcare, ...) nu funcționează",
+     "Posibil martorul de motor ca efect secundar"
+    ]
+   }
+  },
+  "U1103@engine": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10160831-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Production (transport) mode active",
+    "d": "The car is still in the mode used at the factory and during transport, which limits some functions. A dealer switches it off before delivery; if the code is stored on a car in use, that step was missed.",
+    "c": [
+     [
+      "high",
+      "Transport mode not switched off at delivery"
+     ]
+    ],
+    "s": [
+     "Some comfort functions limited"
+    ]
+   },
+   "ro": {
+    "t": "Mod de producție (transport) activ",
+    "d": "Mașina este încă în modul folosit în fabrică și la transport, care limitează unele funcții. Dealerul îl dezactivează înainte de livrare; dacă codul apare la o mașină în uz, pasul acesta a fost omis.",
+    "c": [
+     [
+      "high",
+      "Modul de transport nedezactivat la livrare"
+     ]
+    ],
+    "s": [
+     "Unele funcții de confort limitate"
+    ]
+   }
+  },
+  "U1121@abs": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The ABS/ESC unit expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Unitatea ABS/ESC aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1121@airbag": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The airbag unit expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Unitatea airbag aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1121@body": {
+   "module": "body",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The central electrics (body computer) expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Modulul electric central (calculatorul de caroserie) aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1121@climate": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The climate control unit expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Unitatea de climatizare aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1121@cluster": {
+   "module": "cluster",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The instrument cluster expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Bordul (instrumentele de bord) aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1121@engine": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The engine computer expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Calculatorul motorului aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1121@gateway": {
+   "module": "gateway",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The gateway expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Gateway-ul aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1121@steering": {
+   "module": "steering",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The power steering unit expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Unitatea servodirecției aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1121@transmission": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10123730-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009334-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233278-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: missing message",
+    "d": "The gearbox computer expected a message from another module over the CAN network and didn't get it. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj lipsă",
+    "d": "Calculatorul cutiei de viteze aștepta un mesaj de la alt modul prin rețeaua CAN și nu l-a primit. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@abs": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The ABS/ESC unit received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Unitatea ABS/ESC a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@airbag": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The airbag unit received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Unitatea airbag a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@body": {
+   "module": "body",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The central electrics (body computer) received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Modulul electric central (calculatorul de caroserie) a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@climate": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The climate control unit received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Unitatea de climatizare a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@cluster": {
+   "module": "cluster",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The instrument cluster received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Bordul (instrumentele de bord) a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@engine": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The engine computer received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Calculatorul motorului a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@gateway": {
+   "module": "gateway",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The gateway received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Gateway-ul a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@steering": {
+   "module": "steering",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The power steering unit received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Unitatea servodirecției a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1122@transmission": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10233766-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://wiki.ross-tech.com/wiki/index.php/U1122"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: implausible message",
+    "d": "The gearbox computer received a message over the CAN network whose content doesn't make sense. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: mesaj neplauzibil",
+    "d": "Calculatorul cutiei de viteze a primit prin rețeaua CAN un mesaj cu un conținut care nu are sens. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@abs": {
+   "module": "abs",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the ABS/ESC unit an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Unitatea ABS/ESC a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@airbag": {
+   "module": "airbag",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the airbag unit an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Unitatea airbag a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@body": {
+   "module": "body",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the central electrics (body computer) an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Modulul electric central (calculatorul de caroserie) a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@climate": {
+   "module": "climate",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the climate control unit an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Unitatea de climatizare a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@cluster": {
+   "module": "cluster",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the instrument cluster an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Bordul (instrumentele de bord) a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@engine": {
+   "module": "engine",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the engine computer an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Calculatorul motorului a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@gateway": {
+   "module": "gateway",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the gateway an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Gateway-ul a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@steering": {
+   "module": "steering",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the power steering unit an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Unitatea servodirecției a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  },
+  "U1123@transmission": {
+   "module": "transmission",
+   "confidence": "official",
+   "src": [
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10121609-9999.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11009349-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10235530-0001.pdf",
+     "o": true
+    },
+    {
+     "u": "https://static.nhtsa.gov/odi/tsbs/2024/MC-11008863-0001.pdf",
+     "o": true
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Data bus: error value received",
+    "d": "Another module sent the gearbox computer an \"error\" value instead of real data, usually because that module has a fault of its own. The code names no single part: it says something went wrong on the network. Check the other modules' codes first; a weak battery, a voltage drop at start-up or a module whose software needs an update are the usual reasons. If it was stored once and doesn't come back, it is often harmless.",
+    "c": [
+     [
+      "medium",
+      "A fault in the module that should send the data (see its own codes)"
+     ],
+     [
+      "medium",
+      "Low battery voltage or a voltage drop when starting"
+     ],
+     [
+      "low",
+      "Module software that needs an update"
+     ],
+     [
+      "low",
+      "CAN wiring or connector"
+     ]
+    ],
+    "s": [
+     "Often no symptom",
+     "Sometimes warnings for other systems at the same time"
+    ]
+   },
+   "ro": {
+    "t": "Magistrala de date: valoare de eroare recepționată",
+    "d": "Calculatorul cutiei de viteze a primit de la alt modul o valoare de „eroare” în loc de date reale, de obicei pentru că acel modul are el însuși un defect. Codul nu indică o anumită piesă, ci o problemă pe rețea. Verifică întâi codurile din celelalte module; cauzele obișnuite sunt o baterie slabă, o cădere de tensiune la pornire sau un modul care are nevoie de actualizare software. Dacă a apărut o singură dată și nu revine, de multe ori nu are urmări.",
+    "c": [
+     [
+      "medium",
+      "Un defect în modulul care ar trebui să trimită datele (vezi codurile lui)"
+     ],
+     [
+      "medium",
+      "Tensiune scăzută a bateriei sau cădere de tensiune la pornire"
+     ],
+     [
+      "low",
+      "Software de modul care trebuie actualizat"
+     ],
+     [
+      "low",
+      "Cablaj sau conector CAN"
+     ]
+    ],
+    "s": [
+     "Adesea fără simptome",
+     "Uneori avertizări pentru alte sisteme în același timp"
+    ]
+   }
+  }
+ }
+}

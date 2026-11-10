@@ -3,7 +3,12 @@
 **Free, open-source, read-only OBD-II diagnostics for your car.** It is a desktop app for ELM327-compatible adapters such as the Vgate iCar Pro Wi-Fi.
 
 - **Trouble codes in plain language.** Stored, pending and permanent codes from every OBD module, each with what it means, likely causes, symptoms, whether it matters for the inspection (ITP), and a rough repair cost.
-- **Brand code explanations.** Manufacturer-specific codes are explained per brand, starting with Hyundai/Kia (177 sourced entries, English and Romanian), with links to the public sources.
+- **Brand code explanations.** Manufacturer-specific codes are explained per brand, with links to the public sources, in English and Romanian:
+  - Hyundai/Kia (159 codes)
+  - Toyota/Lexus (96)
+  - Ford (62)
+  - VW group (59)
+  - Renault/Dacia (24)
 - **All modules.** A full-vehicle scan reads codes from ABS, airbag, body, cluster and other modules too, using per-brand module lists: Hyundai/Kia, Toyota, Ford, VW group, Renault/Dacia, or generic for any car.
 - **Readiness for inspection.** Which self-tests (monitors) have completed, and whether the car is likely to pass the emissions check.
 - **Freeze frame.** The sensor snapshot taken when a fault was stored.

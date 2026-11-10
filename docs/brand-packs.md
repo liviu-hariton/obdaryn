@@ -59,6 +59,54 @@ Meanings were researched in November 2026, mainly from Hyundai/Kia documents fil
 
 **Help wanted:** codes seen on your own Hyundai/Kia, with the scan-tool output and sources.
 
+## Other packs (researched November 2026)
+
+Every pack follows the same rules and links its sources per code. Counts are distinct codes; some codes have one entry per module.
+
+### Toyota / Lexus (2008–2020: Corolla, Auris, Yaris, RAV4, C-HR, Prius)
+- **Coverage:** 96 codes, across ABS/VSC (including the hybrid brake system), airbag, electric power steering, TPMS, hybrid system, engine and immobiliser.
+- **Sources:** 26 entries are backed by Toyota/Lexus documents filed with NHTSA. The rest rely on Toyota repair-manual pages hosted by third parties, plus toyota-club.net.
+- **Left out:**
+  - Side and curtain airbag codes (B1620–B1648, B1820–B1838, B1900–B1908): which side they mean differs between models.
+  - The buckle switch codes B1655/B1656.
+  - C1253 and P1603: the sources conflict.
+  - Single-source codes.
+  - The info.myairbags.com list, as a whole: it contradicts Toyota's own documents.
+- **Next candidates:** the driver second-stage airbag codes B1810–B1818 are well sourced and can be added.
+
+### Ford (2008–2020: Focus, Fiesta, Kuga/Escape, Mondeo, C-Max)
+- **Coverage:** 62 codes, across engine, climate, airbag, SYNC, cluster, ABS, power steering and the PowerShift transmission computer.
+- **Sources:**
+  - Ford documents filed with NHTSA, including the DPS6 programme and the power-steering recalls.
+  - For most codes, two different Ford workshop manuals (Focus 2012 and Fiesta 2014) on unrelated mirror sites. Those are counted as "two sources", not "official".
+- **Left out:**
+  - Body control (BCM) codes: no second source.
+  - Codes found in only one model's manual.
+  - Codes that recalls list without stating their meaning (C200B–C200D, C1B00).
+  - The DPS6 standard codes: Ford adds nothing to their standard meaning.
+
+### Volkswagen group (2013–2020 MQB: Golf 7, Octavia 3, Leon 3, A3 8V, Passat B8, Tiguan 2)
+- **Coverage:** 59 codes, across engine, DSG gearboxes, airbag, ABS, steering, body, gateway, cluster and climate.
+- **Sources:** almost all are backed by VW/Audi documents filed with NHTSA.
+- **Shared codes:** the data-bus codes U1121–U1123 mean the same in every module, so they are listed once per module.
+- **Left out:**
+  - Codes found only on Ross-Tech: pelvic belt tensioners, pedestrian sensors, P189A and others.
+  - P17BF: its sources word it differently.
+  - Codes used only by Bentley, the e-tron, or PQ35-generation cars.
+- **Not supported yet:** older TP 2.0 cars.
+
+### Renault / Dacia (2010–2020: Logan, Sandero, Duster, Clio, Megane, Captur)
+- **Coverage:** 24 codes, across Bosch ABS/ESP (wheel-speed sensors and tone rings), airbag, power steering, cluster and engine (P1525, P1560).
+- **Sources:** two independent sources each. Renault isn't sold in the US, so there are no NHTSA documents to draw on.
+- **DF numbers versus what a reader sees:**
+  - Renault's own tools show internal "DF" fault numbers, and those change between computer versions.
+  - A generic reader sees the code associated with each DF number, in standard form (9040 → B1040). Only those codes are used.
+  - Engine computers mostly report standard SAE codes.
+- **Left out:**
+  - Airbag codes from the older ACU4 tables: their numbering changed between airbag computer generations.
+  - Power-steering codes whose tables disagree.
+  - Single-tool body, radio and EDC-gearbox codes.
+
 ## Romanian for generic codes
 
 `src/core/data/dtc_generic_ro.json` is a Romanian layer over the obdex codes:

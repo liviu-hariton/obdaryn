@@ -1,0 +1,1436 @@
+{
+ "brand": "renault-dacia",
+ "label": "Obdaryn's Renault/Dacia pack",
+ "label_ro": "pachetul Obdaryn pentru Renault/Dacia",
+ "brandName": "Renault/Dacia",
+ "source": {
+  "license": "GPL-3.0-or-later (text written for Obdaryn)",
+  "note": "Meanings compiled from public Renault fault-finding tables, scan-tool reports of real cars and owner forums; each code lists its sources. Renault's internal DF numbers are not used. Verify with a workshop before replacing parts.",
+  "scope": "2010-2020 Dacia Logan, Sandero, Duster, Lodgy, Dokker; Renault Clio, Megane, Captur, Kangoo"
+ },
+ "codes": {
+  "B1040@airbag": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc9040.html"
+    },
+    {
+     "u": "https://cliosport.net/threads/airbag-fault-code-df165-restraint-system-malfunction-warnlight.682452/"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Airbag warning light circuit fault",
+    "d": "The airbag computer found a fault in the circuit of the airbag warning light, so the light may not warn you about other airbag faults. Seen on airbag units such as the first-generation Duster; on Logan II and Clio IV a warning-light fault is reported as B00D2 instead. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Warning light or its wiring in the instrument cluster faulty, or the light removed"
+     ],
+     [
+      "low",
+      "Instrument cluster or airbag computer fault"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Defect la circuitul martorului airbag",
+    "d": "Calculatorul airbag a găsit un defect la circuitul martorului airbag, așa că martorul s-ar putea să nu te avertizeze despre alte defecte de airbag. Apare la unități airbag precum cea a primei generații Duster; pe Logan II și Clio IV un defect al martorului este raportat în schimb ca B00D2. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Martorul sau cablajul lui din bordul de instrumente defect, ori martorul scos"
+     ],
+     [
+      "low",
+      "Defect al bordului de instrumente sau al calculatorului airbag"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B107E@airbag": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc907E.html"
+    },
+    {
+     "u": "https://reportview.thinkcar.com/report/think_car/?id=76be4be7geTd1uAEAE2YLroG54&type=diag&lan=en-us"
+    },
+    {
+     "u": "https://crashdata.co.uk/product/a2c80613911-renault-clio-dacia-duster-airbag-module-repair-and-reset-985101389r-a/"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Airbag computer locked",
+    "d": "The airbag computer reports that it is locked. Renault workshops lock it with the diagnostic tool before working on the airbag system, and it has to be unlocked with a Renault-compatible tool afterwards. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "Computer left locked after work on the airbags, steering wheel or seats"
+     ],
+     [
+      "low",
+      "Airbag computer internal fault"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Calculatorul airbag blocat",
+    "d": "Calculatorul airbag raportează că este blocat. Service-urile Renault îl blochează cu aparatul de diagnoză înainte de a lucra la sistemul airbag, iar după lucrare trebuie deblocat cu un aparat compatibil Renault. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Calculatorul a rămas blocat după o lucrare la airbaguri, volan sau scaune"
+     ],
+     [
+      "low",
+      "Defect intern al calculatorului airbag"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B107F@airbag": {
+   "module": "airbag",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc907F.html"
+    },
+    {
+     "u": "https://crashdata.co.uk/product/a2c80613911-renault-clio-dacia-duster-airbag-module-repair-and-reset-985101389r-a/"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Crash recorded: airbag computer must be replaced",
+    "d": "The airbag computer has recorded a crash. Renault's rule is that the computer is replaced after an impact; until then the airbag system cannot be trusted. Have the whole system checked by a workshop. While an airbag fault is stored, the affected airbag or pretensioner may not deploy in a crash. Have it repaired before relying on it. Never probe airbag connectors with a meter: that can fire the airbag.",
+    "c": [
+     [
+      "medium",
+      "A crash in which airbags or pretensioners fired"
+     ],
+     [
+      "low",
+      "Airbag computer internal fault"
+     ]
+    ],
+    "s": [
+     "Airbag warning light"
+    ]
+   },
+   "ro": {
+    "t": "Impact înregistrat: calculatorul airbag trebuie înlocuit",
+    "d": "Calculatorul airbag a înregistrat un impact. Regula Renault este ca după un impact calculatorul să fie înlocuit; până atunci nu te poți baza pe sistemul airbag. Cere unui service să verifice tot sistemul. Cât timp un defect de airbag este memorat, airbagul sau pretensionerul afectat s-ar putea să nu se declanșeze la impact. Repară-l înainte să te bazezi pe el. Nu măsura niciodată conectorii de airbag cu un aparat: poate declanșa airbagul.",
+    "c": [
+     [
+      "medium",
+      "Un impact în care s-au declanșat airbaguri sau pretensionere"
+     ],
+     [
+      "low",
+      "Defect intern al calculatorului airbag"
+     ]
+    ],
+    "s": [
+     "Martorul airbag aprins"
+    ]
+   }
+  },
+  "B1408@cluster": {
+   "module": "cluster",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGVF15R400E59090389.pdf"
+    },
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGVF12R141A58555675.pdf"
+    },
+    {
+     "u": "https://reportview.thinkcar.com/report/think_car/?id=289129aage3b3bTd8cTdLrIFOM&type=diag&lan=en-us"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Seat-belt warning light circuit fault",
+    "d": "The instrument cluster found a fault on the circuit of the seat-belt reminder light, so the reminder may not work.",
+    "c": [
+     [
+      "medium",
+      "Wiring or connector fault"
+     ],
+     [
+      "low",
+      "Instrument cluster fault"
+     ]
+    ],
+    "s": [
+     "Seat-belt reminder light does not work correctly"
+    ]
+   },
+   "ro": {
+    "t": "Defect la circuitul martorului de centură",
+    "d": "Bordul de instrumente a găsit un defect la circuitul martorului de centură de siguranță, așa că avertizarea s-ar putea să nu funcționeze.",
+    "c": [
+     [
+      "medium",
+      "Defect de cablaj sau de conector"
+     ],
+     [
+      "low",
+      "Defect al bordului de instrumente"
+     ]
+    ],
+    "s": [
+     "Martorul de centură nu funcționează corect"
+    ]
+   }
+  },
+  "B1411@cluster": {
+   "module": "cluster",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://www.mfcauctions.co.za/dekra-reports/DIGVF15SRAA455903438.pdf"
+    },
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGVF15SRLA463065623.pdf"
+    },
+    {
+     "u": "https://reportview.thinkcar.com/report/think_car/?id=76be4be7geTd1uAEAE2YLroG54&type=diag&lan=en-us"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Oil pressure sensor circuit fault",
+    "d": "The instrument cluster, which shows the oil-pressure warning, found a fault on the oil-pressure sensor circuit (on the cars checked, a short to ground). The oil warning light cannot be trusted until this is fixed: check the oil level, and stop the engine if the oil light comes on while driving.",
+    "c": [
+     [
+      "medium",
+      "Damaged wire or connector at the oil-pressure sensor"
+     ],
+     [
+      "medium",
+      "Failed oil-pressure sensor"
+     ],
+     [
+      "low",
+      "Instrument cluster fault"
+     ]
+    ],
+    "s": [
+     "Oil warning light stays on, or never comes on"
+    ]
+   },
+   "ro": {
+    "t": "Defect la circuitul senzorului de presiune a uleiului",
+    "d": "Bordul de instrumente, care afișează avertizarea de presiune a uleiului, a găsit un defect la circuitul senzorului de presiune a uleiului (la mașinile verificate, un scurtcircuit la masă). Nu te poți baza pe martorul de ulei până nu se repară: verifică nivelul uleiului și oprește motorul dacă martorul de ulei se aprinde în mers.",
+    "c": [
+     [
+      "medium",
+      "Fir sau conector deteriorat la senzorul de presiune a uleiului"
+     ],
+     [
+      "medium",
+      "Senzor de presiune a uleiului defect"
+     ],
+     [
+      "low",
+      "Defect al bordului de instrumente"
+     ]
+    ],
+    "s": [
+     "Martorul de ulei rămâne aprins sau nu se aprinde deloc"
+    ]
+   }
+  },
+  "C100F@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc500F.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel-speed sensor front-right: circuit fault",
+    "d": "The ABS unit sees an electrical fault in the front-right wheel-speed sensor circuit. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Damaged sensor wire or connector (chafing, corrosion)"
+     ],
+     [
+      "medium",
+      "Failed sensor"
+     ],
+     [
+      "low",
+      "ABS unit fault"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Senzor de turație roată față dreapta: defect de circuit",
+    "d": "Unitatea ABS vede un defect electric în circuitul senzorului de turație al roții față dreapta. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Fir sau conector al senzorului deteriorat (frecare, coroziune)"
+     ],
+     [
+      "medium",
+      "Senzor defect"
+     ],
+     [
+      "low",
+      "Defect al unității ABS"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C101F@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc501F.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel-speed sensor front-left: circuit fault",
+    "d": "The ABS unit sees an electrical fault in the front-left wheel-speed sensor circuit. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Damaged sensor wire or connector (chafing, corrosion)"
+     ],
+     [
+      "medium",
+      "Failed sensor"
+     ],
+     [
+      "low",
+      "ABS unit fault"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Senzor de turație roată față stânga: defect de circuit",
+    "d": "Unitatea ABS vede un defect electric în circuitul senzorului de turație al roții față stânga. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Fir sau conector al senzorului deteriorat (frecare, coroziune)"
+     ],
+     [
+      "medium",
+      "Senzor defect"
+     ],
+     [
+      "low",
+      "Defect al unității ABS"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C102F@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc502F.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel-speed sensor rear-right: circuit fault",
+    "d": "The ABS unit sees an electrical fault in the rear-right wheel-speed sensor circuit. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Damaged sensor wire or connector (chafing, corrosion)"
+     ],
+     [
+      "medium",
+      "Failed sensor"
+     ],
+     [
+      "low",
+      "ABS unit fault"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Senzor de turație roată spate dreapta: defect de circuit",
+    "d": "Unitatea ABS vede un defect electric în circuitul senzorului de turație al roții spate dreapta. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Fir sau conector al senzorului deteriorat (frecare, coroziune)"
+     ],
+     [
+      "medium",
+      "Senzor defect"
+     ],
+     [
+      "low",
+      "Defect al unității ABS"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C103F@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc503F.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel-speed sensor rear-left: circuit fault",
+    "d": "The ABS unit sees an electrical fault in the rear-left wheel-speed sensor circuit. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Damaged sensor wire or connector (chafing, corrosion)"
+     ],
+     [
+      "medium",
+      "Failed sensor"
+     ],
+     [
+      "low",
+      "ABS unit fault"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Senzor de turație roată spate stânga: defect de circuit",
+    "d": "Unitatea ABS vede un defect electric în circuitul senzorului de turație al roții spate stânga. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Fir sau conector al senzorului deteriorat (frecare, coroziune)"
+     ],
+     [
+      "medium",
+      "Senzor defect"
+     ],
+     [
+      "low",
+      "Defect al unității ABS"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C1041@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc5041.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel-speed signal front-right: sensor target (tone ring) fault",
+    "d": "The front-right wheel-speed signal is not plausible. Renault's tables link this code to the sensor target, the toothed or magnetic ring the sensor reads. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Damaged, dirty or rusted tone ring"
+     ],
+     [
+      "medium",
+      "Loose sensor or too large a gap to the ring"
+     ],
+     [
+      "low",
+      "Wheel bearing play"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Semnal de turație roată față dreapta: defect la ținta senzorului (inel dințat)",
+    "d": "Semnalul de turație al roții față dreapta nu este plauzibil. Tabelele Renault leagă acest cod de ținta senzorului, inelul dințat sau magnetic pe care îl citește senzorul. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Inel dințat deteriorat, murdar sau ruginit"
+     ],
+     [
+      "medium",
+      "Senzor slăbit sau distanță prea mare față de inel"
+     ],
+     [
+      "low",
+      "Joc la rulmentul roții"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C1042@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc5042.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel-speed signal front-left: sensor target (tone ring) fault",
+    "d": "The front-left wheel-speed signal is not plausible. Renault's tables link this code to the sensor target, the toothed or magnetic ring the sensor reads. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Damaged, dirty or rusted tone ring"
+     ],
+     [
+      "medium",
+      "Loose sensor or too large a gap to the ring"
+     ],
+     [
+      "low",
+      "Wheel bearing play"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Semnal de turație roată față stânga: defect la ținta senzorului (inel dințat)",
+    "d": "Semnalul de turație al roții față stânga nu este plauzibil. Tabelele Renault leagă acest cod de ținta senzorului, inelul dințat sau magnetic pe care îl citește senzorul. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Inel dințat deteriorat, murdar sau ruginit"
+     ],
+     [
+      "medium",
+      "Senzor slăbit sau distanță prea mare față de inel"
+     ],
+     [
+      "low",
+      "Joc la rulmentul roții"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C1043@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc5043.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel-speed signal rear-right: sensor target (tone ring) fault",
+    "d": "The rear-right wheel-speed signal is not plausible. Renault's tables link this code to the sensor target, the toothed or magnetic ring the sensor reads. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Damaged, dirty or rusted tone ring"
+     ],
+     [
+      "medium",
+      "Loose sensor or too large a gap to the ring"
+     ],
+     [
+      "low",
+      "Wheel bearing play"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Semnal de turație roată spate dreapta: defect la ținta senzorului (inel dințat)",
+    "d": "Semnalul de turație al roții spate dreapta nu este plauzibil. Tabelele Renault leagă acest cod de ținta senzorului, inelul dințat sau magnetic pe care îl citește senzorul. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Inel dințat deteriorat, murdar sau ruginit"
+     ],
+     [
+      "medium",
+      "Senzor slăbit sau distanță prea mare față de inel"
+     ],
+     [
+      "low",
+      "Joc la rulmentul roții"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C1044@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc5044.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel-speed signal rear-left: sensor target (tone ring) fault",
+    "d": "The rear-left wheel-speed signal is not plausible. Renault's tables link this code to the sensor target, the toothed or magnetic ring the sensor reads. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Damaged, dirty or rusted tone ring"
+     ],
+     [
+      "medium",
+      "Loose sensor or too large a gap to the ring"
+     ],
+     [
+      "low",
+      "Wheel bearing play"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Semnal de turație roată spate stânga: defect la ținta senzorului (inel dințat)",
+    "d": "Semnalul de turație al roții spate stânga nu este plauzibil. Tabelele Renault leagă acest cod de ținta senzorului, inelul dințat sau magnetic pe care îl citește senzorul. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Inel dințat deteriorat, murdar sau ruginit"
+     ],
+     [
+      "medium",
+      "Senzor slăbit sau distanță prea mare față de inel"
+     ],
+     [
+      "low",
+      "Joc la rulmentul roții"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C1046@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc5046.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Wheel speeds inconsistent",
+    "d": "The speeds measured at the four wheels do not agree with each other. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Mixed tyre sizes, or one tyre very worn or under-inflated"
+     ],
+     [
+      "medium",
+      "Wheel-speed sensor or tone ring problem"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Turațiile roților sunt incoerente",
+    "d": "Turațiile măsurate la cele patru roți nu se potrivesc între ele. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Anvelope de dimensiuni diferite sau o anvelopă foarte uzată ori dezumflată"
+     ],
+     [
+      "medium",
+      "Problemă la un senzor de turație sau la un inel dințat"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C10C3@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc50C3.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "ABS/ESP computer fault or configuration missing",
+    "d": "The ABS/ESP computer reports an internal fault, or that its configuration (such as the tyre-size index or other vehicle parameters) has not been programmed. A workshop with Renault-compatible software can check and program it. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Configuration not programmed after the ABS unit was replaced"
+     ],
+     [
+      "low",
+      "ABS/ESP computer internal fault"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Defect al calculatorului ABS/ESP sau configurare lipsă",
+    "d": "Calculatorul ABS/ESP raportează un defect intern sau faptul că nu i s-a programat configurarea (de exemplu indicele de dimensiune a anvelopelor sau alți parametri ai mașinii). Un service cu soft compatibil Renault îl poate verifica și programa. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Configurarea nu a fost programată după înlocuirea unității ABS"
+     ],
+     [
+      "low",
+      "Defect intern al calculatorului ABS/ESP"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C10C6@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc50C6.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Brake light switch circuit",
+    "d": "The ABS/ESP unit sees a fault in the brake light switch signal. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Badly adjusted or failed brake light switch"
+     ],
+     [
+      "low",
+      "Wiring or connector at the brake pedal"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Circuitul contactorului lămpilor de frână",
+    "d": "Unitatea ABS/ESP vede un defect la semnalul contactorului lămpilor de frână. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Contactorul lămpilor de frână dereglat sau defect"
+     ],
+     [
+      "low",
+      "Cablaj sau conector la pedala de frână"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C10CC@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc50CC.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "ABS/ESP supply voltage fault",
+    "d": "The supply voltage of the ABS/ESP unit is out of range. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Weak battery or charging-system fault"
+     ],
+     [
+      "low",
+      "Corroded ground or supply connection, or a blown fuse"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Defect la tensiunea de alimentare ABS/ESP",
+    "d": "Tensiunea de alimentare a unității ABS/ESP este în afara limitelor. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Baterie slabă sau defect la sistemul de încărcare"
+     ],
+     [
+      "low",
+      "Masă sau alimentare oxidată, ori o siguranță arsă"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C10E6@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc50E6.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "ABS/ESP network (CAN) fault",
+    "d": "The ABS/ESP unit reports a fault on the CAN network it uses to talk to the other computers. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "CAN wiring or connector fault"
+     ],
+     [
+      "low",
+      "Another computer on the network disturbing it"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Defect de rețea (CAN) la ABS/ESP",
+    "d": "Unitatea ABS/ESP raportează un defect pe rețeaua CAN prin care comunică cu celelalte calculatoare. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Defect de cablaj sau de conector pe rețeaua CAN"
+     ],
+     [
+      "low",
+      "Alt calculator din rețea care o perturbă"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C10F4@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc50F4.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "ESP yaw-rate / lateral-acceleration sensor fault",
+    "d": "The combined sensor that measures how fast the car turns and how hard it is pushed sideways gives an implausible signal or has a circuit fault. Stability control needs it, so ESP is switched off. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "Sensor wiring or connector"
+     ],
+     [
+      "medium",
+      "Failed combined sensor"
+     ],
+     [
+      "low",
+      "Sensor loose on its mounting"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Defect la senzorul de rotire / accelerație laterală ESP",
+    "d": "Senzorul combinat care măsoară cât de repede se rotește mașina și cât de tare este împinsă lateral dă un semnal neplauzibil sau are un defect de circuit. Controlul stabilității are nevoie de el, așa că ESP-ul se dezactivează. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Cablajul sau conectorul senzorului"
+     ],
+     [
+      "medium",
+      "Senzor combinat defect"
+     ],
+     [
+      "low",
+      "Senzor slăbit pe suport"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C1180@abs": {
+   "module": "abs",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.autoxuga.com/averiasrecibidas/faultcars/faultsrenault/renaultdtc5180.html"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "No engine-computer data on the network",
+    "d": "The ABS/ESP unit is not receiving the messages the engine computer sends over the CAN network. Check the engine computer for its own faults first. This meaning comes from Renault's tables for its older Bosch ABS/ESP 8.0 units; newer ABS units (for example on Logan II and Clio IV) report wheel faults under other codes. While the fault is present, ABS (and ESP, if fitted) is usually switched off; normal braking still works.",
+    "c": [
+     [
+      "medium",
+      "CAN wiring fault between the ABS unit and the engine computer"
+     ],
+     [
+      "medium",
+      "Engine computer fault or unpowered"
+     ],
+     [
+      "low",
+      "Battery voltage dropped during starting"
+     ]
+    ],
+    "s": [
+     "ABS (and ESP) warning light",
+     "ABS does not work"
+    ]
+   },
+   "ro": {
+    "t": "Lipsesc datele calculatorului de motor din rețea",
+    "d": "Unitatea ABS/ESP nu primește mesajele pe care calculatorul motorului le trimite pe rețeaua CAN. Verifică întâi defectele memorate în calculatorul motorului. Acest sens provine din tabelele Renault pentru unitățile mai vechi Bosch ABS/ESP 8.0; unitățile ABS mai noi (de exemplu pe Logan II și Clio IV) raportează defectele roților cu alte coduri. Cât timp defectul este prezent, ABS-ul (și ESP-ul, dacă există) este de obicei dezactivat; frânarea normală funcționează în continuare.",
+    "c": [
+     [
+      "medium",
+      "Defect de cablaj CAN între unitatea ABS și calculatorul motorului"
+     ],
+     [
+      "medium",
+      "Calculatorul motorului defect sau nealimentat"
+     ],
+     [
+      "low",
+      "Tensiunea bateriei a scăzut la pornire"
+     ]
+    ],
+    "s": [
+     "Martorul ABS (și ESP) aprins",
+     "ABS-ul nu funcționează"
+    ]
+   }
+  },
+  "C1607@steering": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://www.mfcauctions.co.za/dekra-reports/DIGVF15SRAA455903438.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Power steering computer memory fault",
+    "d": "The electric power steering computer reports an internal memory or electronic fault. Steering assistance may be reduced or lost; the car can still be steered, but the wheel is much heavier. Battery or charging problems can set power-steering faults, so check them first.",
+    "c": [
+     [
+      "medium",
+      "Power steering computer internal fault"
+     ],
+     [
+      "low",
+      "Supply voltage dropped while the computer was working"
+     ]
+    ],
+    "s": [
+     "Power steering warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect de memorie al calculatorului servodirecției",
+    "d": "Calculatorul servodirecției electrice raportează un defect intern de memorie sau electronic. Asistența direcției poate fi redusă sau pierdută; mașina poate fi condusă în continuare, dar volanul devine mult mai greu. Problemele de baterie sau de încărcare pot genera defecte la servodirecție, așa că verifică-le întâi.",
+    "c": [
+     [
+      "medium",
+      "Defect intern al calculatorului servodirecției"
+     ],
+     [
+      "low",
+      "Tensiunea de alimentare a scăzut în timp ce calculatorul funcționa"
+     ]
+    ],
+    "s": [
+     "Martorul servodirecției aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "C1608@steering": {
+   "module": "steering",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://autodiag-france.com/en/blogs/infos/la-liste-complete-des-codes-defaut-renault-comprendre-et-diagnostiquer-efficacement"
+    },
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGAAPV0342010672620.pdf"
+    },
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGVF15SRLA463065623.pdf"
+    }
+   ],
+   "f": [
+    "warning_lamp"
+   ],
+   "en": {
+    "t": "Power steering computer fault",
+    "d": "The electric power steering computer reports an internal electronic failure. Steering assistance may be reduced or lost; the car can still be steered, but the wheel is much heavier. Battery or charging problems can set power-steering faults, so check them first.",
+    "c": [
+     [
+      "medium",
+      "Power steering computer internal fault"
+     ],
+     [
+      "low",
+      "Poor supply or ground connection at the computer"
+     ]
+    ],
+    "s": [
+     "Power steering warning light",
+     "Heavy steering"
+    ]
+   },
+   "ro": {
+    "t": "Defect al calculatorului servodirecției",
+    "d": "Calculatorul servodirecției electrice raportează o defecțiune electronică internă. Asistența direcției poate fi redusă sau pierdută; mașina poate fi condusă în continuare, dar volanul devine mult mai greu. Problemele de baterie sau de încărcare pot genera defecte la servodirecție, așa că verifică-le întâi.",
+    "c": [
+     [
+      "medium",
+      "Defect intern al calculatorului servodirecției"
+     ],
+     [
+      "low",
+      "Alimentare sau masă cu contact slab la calculator"
+     ]
+    ],
+    "s": [
+     "Martorul servodirecției aprins",
+     "Volan greu"
+    ]
+   }
+  },
+  "P1525": {
+   "module": "engine",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://www.mfcauctions.co.za/dekra-reports/DIGVF15SRAA455903438.pdf"
+    },
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGVF15R400E59090389.pdf"
+    },
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGVF1HJD20462169972.pdf"
+    },
+    {
+     "u": "https://www.planeterenault.com/forum/post1067302.html"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Cruise control / speed limiter: inconsistent network data",
+    "d": "The engine computer received data for the cruise control or speed limiter over the CAN network that does not make sense, so it switches both functions off. It is often a side effect of another stored fault (network, ABS or engine), so read every module and repair the other faults first, then clear the codes.",
+    "c": [
+     [
+      "medium",
+      "Another stored fault that makes the cruise-control data invalid (CAN network, ABS or engine fault)"
+     ],
+     [
+      "low",
+      "Faulty cruise control / speed limiter switch, or brake or clutch pedal switch"
+     ]
+    ],
+    "s": [
+     "Cruise control and speed limiter not available"
+    ]
+   },
+   "ro": {
+    "t": "Pilot automat / limitator de viteză: date incoerente pe rețea",
+    "d": "Calculatorul motorului a primit pe rețeaua CAN date pentru pilotul automat sau limitatorul de viteză care nu au sens, așa că dezactivează ambele funcții. Apare des ca urmare a altui defect memorat (rețea, ABS sau motor), deci citește toate modulele, repară întâi celelalte defecte și apoi șterge codurile.",
+    "c": [
+     [
+      "medium",
+      "Alt defect memorat care face invalide datele pilotului automat (rețea CAN, ABS sau motor)"
+     ],
+     [
+      "low",
+      "Comutator defect al pilotului automat / limitatorului sau contactor defect la pedala de frână ori de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Pilotul automat și limitatorul de viteză nu sunt disponibile"
+    ]
+   }
+  },
+  "P1525@engine": {
+   "module": "engine",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://www.mfcauctions.co.za/dekra-reports/DIGVF15SRAA455903438.pdf"
+    },
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGVF15R400E59090389.pdf"
+    },
+    {
+     "u": "https://mfcauctions.co.za/dekra-reports/DIGVF1HJD20462169972.pdf"
+    },
+    {
+     "u": "https://www.planeterenault.com/forum/post1067302.html"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Cruise control / speed limiter: inconsistent network data",
+    "d": "The engine computer received data for the cruise control or speed limiter over the CAN network that does not make sense, so it switches both functions off. It is often a side effect of another stored fault (network, ABS or engine), so read every module and repair the other faults first, then clear the codes.",
+    "c": [
+     [
+      "medium",
+      "Another stored fault that makes the cruise-control data invalid (CAN network, ABS or engine fault)"
+     ],
+     [
+      "low",
+      "Faulty cruise control / speed limiter switch, or brake or clutch pedal switch"
+     ]
+    ],
+    "s": [
+     "Cruise control and speed limiter not available"
+    ]
+   },
+   "ro": {
+    "t": "Pilot automat / limitator de viteză: date incoerente pe rețea",
+    "d": "Calculatorul motorului a primit pe rețeaua CAN date pentru pilotul automat sau limitatorul de viteză care nu au sens, așa că dezactivează ambele funcții. Apare des ca urmare a altui defect memorat (rețea, ABS sau motor), deci citește toate modulele, repară întâi celelalte defecte și apoi șterge codurile.",
+    "c": [
+     [
+      "medium",
+      "Alt defect memorat care face invalide datele pilotului automat (rețea CAN, ABS sau motor)"
+     ],
+     [
+      "low",
+      "Comutator defect al pilotului automat / limitatorului sau contactor defect la pedala de frână ori de ambreiaj"
+     ]
+    ],
+    "s": [
+     "Pilotul automat și limitatorul de viteză nu sunt disponibile"
+    ]
+   }
+  },
+  "P1560": {
+   "module": "engine",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://www.mfcauctions.co.za/dekra-reports/DIGVF15SRAA455903438.pdf"
+    },
+    {
+     "u": "https://www.elektroda.pl/rtvforum/topic4149141.html"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Oil pump solenoid valve circuit",
+    "d": "Petrol engines with a variable-pressure oil pump (such as the TCe and SCe engines) let the engine computer control the pump through a solenoid valve. The computer found an electrical fault in that circuit, most often an open circuit. The valve gets +12 V from the fuse and relay box and is switched to ground by the engine computer. Older diesel computers outside this pack's range used P1560 for a supply-voltage fault instead.",
+    "c": [
+     [
+      "medium",
+      "Broken wire or poor connector between the valve, the fuse/relay box and the engine computer"
+     ],
+     [
+      "medium",
+      "No +12 V supply at the valve connector"
+     ],
+     [
+      "low",
+      "Failed oil pump solenoid valve"
+     ]
+    ]
+   },
+   "ro": {
+    "t": "Circuitul electrovalvei pompei de ulei",
+    "d": "La motoarele pe benzină cu pompă de ulei cu presiune variabilă (cum sunt motoarele TCe și SCe), calculatorul motorului comandă pompa printr-o electrovalvă. Calculatorul a găsit un defect electric în acest circuit, cel mai des un circuit întrerupt. Electrovalva primește +12 V de la cutia de siguranțe și relee, iar calculatorul motorului îi comandă masa. Calculatoarele diesel mai vechi, din afara acestui pachet, foloseau P1560 pentru un defect de tensiune de alimentare.",
+    "c": [
+     [
+      "medium",
+      "Fir întrerupt sau conector cu contact slab între electrovalvă, cutia de siguranțe/relee și calculatorul motorului"
+     ],
+     [
+      "medium",
+      "Lipsește alimentarea de +12 V la conectorul electrovalvei"
+     ],
+     [
+      "low",
+      "Electrovalva pompei de ulei defectă"
+     ]
+    ]
+   }
+  },
+  "P1560@engine": {
+   "module": "engine",
+   "confidence": "two-sources",
+   "src": [
+    {
+     "u": "https://www.mfcauctions.co.za/dekra-reports/DIGVF15SRAA455903438.pdf"
+    },
+    {
+     "u": "https://www.elektroda.pl/rtvforum/topic4149141.html"
+    }
+   ],
+   "f": [],
+   "en": {
+    "t": "Oil pump solenoid valve circuit",
+    "d": "Petrol engines with a variable-pressure oil pump (such as the TCe and SCe engines) let the engine computer control the pump through a solenoid valve. The computer found an electrical fault in that circuit, most often an open circuit. The valve gets +12 V from the fuse and relay box and is switched to ground by the engine computer. Older diesel computers outside this pack's range used P1560 for a supply-voltage fault instead.",
+    "c": [
+     [
+      "medium",
+      "Broken wire or poor connector between the valve, the fuse/relay box and the engine computer"
+     ],
+     [
+      "medium",
+      "No +12 V supply at the valve connector"
+     ],
+     [
+      "low",
+      "Failed oil pump solenoid valve"
+     ]
+    ]
+   },
+   "ro": {
+    "t": "Circuitul electrovalvei pompei de ulei",
+    "d": "La motoarele pe benzină cu pompă de ulei cu presiune variabilă (cum sunt motoarele TCe și SCe), calculatorul motorului comandă pompa printr-o electrovalvă. Calculatorul a găsit un defect electric în acest circuit, cel mai des un circuit întrerupt. Electrovalva primește +12 V de la cutia de siguranțe și relee, iar calculatorul motorului îi comandă masa. Calculatoarele diesel mai vechi, din afara acestui pachet, foloseau P1560 pentru un defect de tensiune de alimentare.",
+    "c": [
+     [
+      "medium",
+      "Fir întrerupt sau conector cu contact slab între electrovalvă, cutia de siguranțe/relee și calculatorul motorului"
+     ],
+     [
+      "medium",
+      "Lipsește alimentarea de +12 V la conectorul electrovalvei"
+     ],
+     [
+      "low",
+      "Electrovalva pompei de ulei defectă"
+     ]
+    ]
+   }
+  }
+ }
+}

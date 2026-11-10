@@ -41,7 +41,9 @@ def main(paths):
             if len(value.get("c", [])) != len(en.get("c", [])) or len(value.get("s", [])) != len(en.get("s", [])):
                 errors.append(f"{code}: causes/symptoms count differs from English; full text skipped")
                 continue
-            entry.update({k: value[k] for k in ("t", "d", "c", "s") if k in value})
+            # Keep the title set's consistent style; take the full text from here.
+            entry.setdefault("t", value.get("t", ""))
+            entry.update({k: value[k] for k in ("d", "c", "s") if k in value})
     for err in errors:
         print("warning:", err)
     out = {"source": {"name": "obdex (Romanian translation for Obdaryn)", "license": "CC0-1.0 source; translation GPL-3.0-or-later"},

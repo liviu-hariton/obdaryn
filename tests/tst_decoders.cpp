@@ -104,6 +104,12 @@ void TestDecoders::brandPack()
     QCOMPARE(ro.language, QStringLiteral("ro"));
     QVERIFY(ro.title.contains(QStringLiteral("Airbag frontal șofer")));
     QCOMPARE(db.lookup("P0420", "hyundai-kia", "ro").source, QStringLiteral("generic"));
+    // Every vehicle profile with a brand pack loads, with Romanian text.
+    for (const char *brand : {"toyota-lexus", "ford", "vag", "renault-dacia"})
+        QVERIFY2(db.brandSize(brand) > 20, brand);
+    QVERIFY(db.lookup("C1201", "toyota-lexus", "en", "abs").known);
+    QCOMPARE(db.lookup("B1000", "vag", "ro", "airbag").language, QStringLiteral("ro"));
+
     // Romanian layer over the generic codes: every title is translated.
     QVERIFY(db.lookup("P0420", "", "ro").title.contains(QStringLiteral("catalizator")));
     QCOMPARE(db.lookup("P0420", "", "en").title, QStringLiteral("Catalyst System Efficiency Below Threshold Bank 1"));
