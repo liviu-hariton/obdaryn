@@ -18,7 +18,8 @@ namespace obdaryn {
 
 namespace {
 
-QString tr(const char *text) { return QCoreApplication::translate("Recording", text); }
+// lupdate files these tr() calls under the enclosing namespace, so that is the context.
+QString tr(const char *text) { return QCoreApplication::translate("obdaryn::Recording", text); }
 
 /// The data lines of a raw reply: hex bytes only (drops the echo, "SEARCHING...",
 /// "NO DATA", errors), which is what ResponseParser expects.

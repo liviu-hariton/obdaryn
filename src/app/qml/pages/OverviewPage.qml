@@ -13,6 +13,7 @@ Item {
     signal openPage(int p)
     signal openCode(string code)
     signal openModules()
+    signal saveReportRequested()
 
     readonly property bool ready: App.connectionState === App.Ready
 
@@ -50,6 +51,16 @@ Item {
                     font.family: Theme.sans
                     font.pixelSize: Theme.fontSmall
                     anchors.verticalCenter: parent.verticalCenter
+                }
+                AppButton {
+                    text: qsTr("Save report…")
+                    iconName: "file-down"
+                    enabled: !App.scanning && !App.moduleScanRunning
+                    Accessible.description: qsTr("Saves everything read from the car as a PDF or web page, to share with a buyer or a mechanic")
+                    C.ToolTip.visible: hovered
+                    C.ToolTip.delay: 600
+                    C.ToolTip.text: Accessible.description
+                    onClicked: page.saveReportRequested()
                 }
                 AppButton {
                     text: qsTr("Scan again")

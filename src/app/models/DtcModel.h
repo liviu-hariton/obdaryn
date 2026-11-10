@@ -57,6 +57,8 @@ public:
     Q_INVOKABLE QVariantList grouped() const;
 
     void setDtcs(const QList<Dtc> &dtcs);
+    /// The codes as read, one entry per code and memory (for reports).
+    const QList<Dtc> &dtcList() const { return m_dtcs; }
     void setEcuNames(const QHash<QString, QString> &names);
     void clear() { setDtcs({}); }
     void retranslate();

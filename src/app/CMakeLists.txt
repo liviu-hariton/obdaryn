@@ -66,6 +66,7 @@ qt_add_qml_module(obdaryn
         models/DtcModel.h models/DtcModel.cpp
         models/TrafficLogModel.h models/TrafficLogModel.cpp
         models/ModuleScanModel.h models/ModuleScanModel.cpp
+        report/ReportWriter.h report/ReportWriter.cpp
 )
 
 # Fonts and icons, compiled into the binary.

@@ -37,7 +37,8 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [x] **Record sessions** and replay them without the car. A recording holds every request and raw answer with timing and target module (`.obdrec`, JSON Lines). Replay follows the recorded clock, rebuilds live data per value, and never replays a clear. The probe records too (`--record`, `--replay`), and `tools/first-contact.sh` saves a recording next to each log.
 - [ ] Charts with several signals, saved presets, and session comparison
 - [x] CSV export of a recording's live data: one row per moment, one column per value (Parquet maybe later)
-- [ ] **Shareable report** (PDF/HTML): codes with explanations, readiness, freeze frame and VIN. For used-car checks and mechanics.
+- [x] **Shareable report** (PDF or web page): a summary at a glance (check-engine light, codes, other modules, ITP readiness, when the codes were last cleared, battery), every code with its explanation, the module scan, readiness monitors, freeze frame and vehicle identification. It says plainly when it was made from the demo car or a recording. Save with ⌘S or "Save report…" on the Overview.
+- [ ] The probe writes the same report (`--report-html`), so first-contact runs leave one behind
 - [ ] **Trip and fuel statistics** from MAF or speed-density, with a calibration factor checked against fill-ups
 
 ## v0.4 — adapter health and robustness

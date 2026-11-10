@@ -553,6 +553,21 @@
     </message>
 </context>
 <context>
+    <name>Main</name>
+    <message>
+        <source>Save report</source>
+        <translation>Salvează raportul</translation>
+    </message>
+    <message>
+        <source>PDF document (*.pdf)</source>
+        <translation>Document PDF (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Web page (*.html)</source>
+        <translation>Pagină web (*.html)</translation>
+    </message>
+</context>
+<context>
     <name>Module</name>
     <message>
         <source>Engine</source>
@@ -943,6 +958,14 @@
     <message>
         <source>scanned at %1</source>
         <translation>scanat la %1</translation>
+    </message>
+    <message>
+        <source>Save report…</source>
+        <translation>Salvează raportul…</translation>
+    </message>
+    <message>
+        <source>Saves everything read from the car as a PDF or web page, to share with a buyer or a mechanic</source>
+        <translation>Salvează tot ce s-a citit din mașină ca PDF sau pagină web, ca să-l trimiți unui cumpărător sau unui mecanic</translation>
     </message>
     <message>
         <source>Scan again</source>
@@ -1626,6 +1649,18 @@
     </message>
 </context>
 <context>
+    <name>Report</name>
+    <message>
+        <source>the PDF file couldn't be created (is the folder writable?)</source>
+        <translation>fișierul PDF nu a putut fi creat (se poate scrie în acel dosar?)</translation>
+    </message>
+    <message>
+        <source>%1 / %2</source>
+        <extracomment>PDF footer, e.g. "2 / 5"</extracomment>
+        <translation>%1 / %2</translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>
@@ -2230,6 +2265,22 @@
             <numerusform>Salvat %1 lângă înregistrare (%n de rânduri).</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Connect to a car first: the report shows what it reads.</source>
+        <translation>Conectează-te întâi la o mașină: raportul arată ce citește din ea.</translation>
+    </message>
+    <message>
+        <source>Wait for the current scan to finish, then save the report.</source>
+        <translation>Așteaptă să se termine scanarea, apoi salvează raportul.</translation>
+    </message>
+    <message>
+        <source>Couldn't save the report: %1</source>
+        <translation>Raportul nu a putut fi salvat: %1</translation>
+    </message>
+    <message>
+        <source>Report saved: %1</source>
+        <translation>Raport salvat: %1</translation>
+    </message>
 </context>
 <context>
     <name>obdaryn::DtcModel</name>
@@ -2385,6 +2436,421 @@
     <message>
         <source>Network unreachable. Join the adapter's Wi-Fi network and, on macOS, allow Obdaryn under Privacy &amp; Security → Local Network.</source>
         <translation>Rețea inaccesibilă. Conectează-te la rețeaua Wi-Fi a adaptorului și, pe macOS, permite accesul pentru Obdaryn în Confidențialitate și securitate → Rețea locală.</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::VehicleReport</name>
+    <message>
+        <source>Stored</source>
+        <translation>Memorat</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>În așteptare</translation>
+    </message>
+    <message>
+        <source>Permanent</source>
+        <translation>Permanent</translation>
+    </message>
+    <message>
+        <source>Likely</source>
+        <translation>Probabil</translation>
+    </message>
+    <message>
+        <source>Possible</source>
+        <translation>Posibil</translation>
+    </message>
+    <message>
+        <source>Rare</source>
+        <translation>Rar</translation>
+    </message>
+    <message>
+        <source>No description for this code yet.</source>
+        <translation>Încă nu există o descriere pentru acest cod.</translation>
+    </message>
+    <message>
+        <source>Causes</source>
+        <translation>Cauze</translation>
+    </message>
+    <message>
+        <source>obdex, a free generic code database</source>
+        <translation>obdex, o bază de date liberă de coduri generice</translation>
+    </message>
+    <message>
+        <source>the Obdaryn %1 pack, written from public sources</source>
+        <translation>pachetul Obdaryn pentru %1, scris din surse publice</translation>
+    </message>
+    <message>
+        <source>Explanation from %1. Guidance only: confirm with a workshop before replacing parts.</source>
+        <translation>Explicație din %1. Doar orientativ: confirmă cu un service înainte să înlocuiești piese.</translation>
+    </message>
+    <message>
+        <source>Vehicle report</source>
+        <translation>Raport vehicul</translation>
+    </message>
+    <message>
+        <source>VIN %1</source>
+        <translation>VIN %1</translation>
+    </message>
+    <message>
+        <source>Obdaryn report of %1, %2</source>
+        <translation>Raport Obdaryn din %1, %2</translation>
+    </message>
+    <message>
+        <source>Read from the car through the adapter at %1.</source>
+        <translation>Citit din mașină prin adaptorul de la %1.</translation>
+    </message>
+    <message>
+        <source>Codes read at %1.</source>
+        <translation>Coduri citite la %1.</translation>
+    </message>
+    <message>
+        <source>Demo car: simulated data, not a real vehicle.</source>
+        <translation>Mașina demo: date simulate, nu un vehicul real.</translation>
+    </message>
+    <message>
+        <source>Made from a recording (%1).</source>
+        <translation>Făcut dintr-o înregistrare (%1).</translation>
+    </message>
+    <message>
+        <source>The values are those the car gave when it was recorded.</source>
+        <translation>Valorile sunt cele date de mașină în momentul înregistrării.</translation>
+    </message>
+    <message>
+        <source>The engine computer has the warning light on.</source>
+        <translation>Calculatorul motorului are martorul aprins.</translation>
+    </message>
+    <message>
+        <source>The engine computer doesn't ask for the warning light.</source>
+        <translation>Calculatorul motorului nu cere aprinderea martorului.</translation>
+    </message>
+    <message>
+        <source>Driven %1 km with it on.</source>
+        <translation>S-au parcurs %1 km cu el aprins.</translation>
+    </message>
+    <message>
+        <source>Check-engine light</source>
+        <translation>Martor de motor</translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation>Aprins</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Stins</translation>
+    </message>
+    <message>
+        <source>Trouble codes</source>
+        <translation>Coduri de eroare</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Niciunul</translation>
+    </message>
+    <message>
+        <source>No stored, pending or permanent code in the engine or transmission.</source>
+        <translation>Niciun cod memorat, în așteptare sau permanent la motor sau la cutia de viteze.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n stored</source>
+        <translation><numerusform>%n memorat</numerusform><numerusform>%n memorate</numerusform><numerusform>%n de memorate</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n pending</source>
+        <translation><numerusform>%n în așteptare</numerusform><numerusform>%n în așteptare</numerusform><numerusform>%n în așteptare</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n permanent</source>
+        <translation><numerusform>%n permanent</numerusform><numerusform>%n permanente</numerusform><numerusform>%n de permanente</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n code(s)</source>
+        <translation><numerusform>%n cod</numerusform><numerusform>%n coduri</numerusform><numerusform>%n de coduri</numerusform></translation>
+    </message>
+    <message>
+        <source>Other modules</source>
+        <translation>Alte module</translation>
+    </message>
+    <message>
+        <source>Not scanned</source>
+        <translation>Nescanat</translation>
+    </message>
+    <message>
+        <source>ABS, airbag and the other modules weren't read for this report.</source>
+        <translation>ABS, airbag și celelalte module nu au fost citite pentru acest raport.</translation>
+    </message>
+    <message>
+        <source>No codes</source>
+        <translation>Fără coduri</translation>
+    </message>
+    <message>
+        <source>In %1.</source>
+        <translation>La %1.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n module(s) answered.</source>
+        <translation><numerusform>A răspuns %n modul.</numerusform><numerusform>Au răspuns %n module.</numerusform><numerusform>Au răspuns %n de module.</numerusform></translation>
+    </message>
+    <message>
+        <source>Inspection readiness</source>
+        <translation>Pregătire ITP</translation>
+    </message>
+    <message>
+        <source>Likely ready</source>
+        <translation>Probabil pregătită</translation>
+    </message>
+    <message>
+        <source>Not ready</source>
+        <translation>Nepregătită</translation>
+    </message>
+    <message>
+        <source>%1 of %2 self-tests haven't finished since the codes were last cleared.</source>
+        <translation>%1 din %2 autoteste nu s-au încheiat de la ultima ștergere a codurilor.</translation>
+    </message>
+    <message>
+        <source>Every self-test has finished.</source>
+        <translation>Toate autotestele s-au încheiat.</translation>
+    </message>
+    <message>
+        <source>%1 km</source>
+        <translation>%1 km</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n warm-up(s)</source>
+        <translation><numerusform>%n ciclu de încălzire</numerusform><numerusform>%n cicluri de încălzire</numerusform><numerusform>%n de cicluri de încălzire</numerusform></translation>
+    </message>
+    <message>
+        <source>%1 h of engine running</source>
+        <translation>%1 h de funcționare a motorului</translation>
+    </message>
+    <message>
+        <source>Codes last cleared</source>
+        <translation>Ultima ștergere a codurilor</translation>
+    </message>
+    <message>
+        <source>Recently</source>
+        <translation>Recent</translation>
+    </message>
+    <message>
+        <source>Not recently</source>
+        <translation>Nu recent</translation>
+    </message>
+    <message>
+        <source>%1 ago.</source>
+        <translation>Acum %1.</translation>
+    </message>
+    <message>
+        <source>Normal after a repair. On a car for sale, ask why: clearing hides faults until the car checks itself again.</source>
+        <translation>Normal după o reparație. La o mașină de vânzare, întreabă de ce: ștergerea ascunde defectele până când mașina se verifică din nou.</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Necunoscut</translation>
+    </message>
+    <message>
+        <source>This car doesn't report when its codes were cleared.</source>
+        <translation>Mașina nu raportează când i-au fost șterse codurile.</translation>
+    </message>
+    <message>
+        <source>Charging: the engine was running.</source>
+        <translation>Se încărca: motorul era pornit.</translation>
+    </message>
+    <message>
+        <source>Healthy with the engine off.</source>
+        <translation>În regulă cu motorul oprit.</translation>
+    </message>
+    <message>
+        <source>Getting low.</source>
+        <translation>Începe să scadă.</translation>
+    </message>
+    <message>
+        <source>Low.</source>
+        <translation>Scăzută.</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation>Baterie</translation>
+    </message>
+    <message>
+        <source>%1 V</source>
+        <translation>%1 V</translation>
+    </message>
+    <message>
+        <source>Measured by the adapter at the OBD socket.</source>
+        <translation>Măsurată de adaptor la mufa OBD.</translation>
+    </message>
+    <message>
+        <source>At a glance</source>
+        <translation>Pe scurt</translation>
+    </message>
+    <message>
+        <source>Trouble codes: engine and transmission</source>
+        <translation>Coduri de eroare: motor și cutie de viteze</translation>
+    </message>
+    <message>
+        <source>None. The emission-related modules report no stored, pending or permanent code.</source>
+        <translation>Niciunul. Modulele legate de emisii nu raportează niciun cod memorat, în așteptare sau permanent.</translation>
+    </message>
+    <message>
+        <source>Not found</source>
+        <translation>Negăsit</translation>
+    </message>
+    <message>
+        <source>Answers only generic OBD-II</source>
+        <translation>Răspunde doar la OBD-II generic</translation>
+    </message>
+    <message>
+        <source>Couldn't read codes</source>
+        <translation>Codurile nu au putut fi citite</translation>
+    </message>
+    <message>
+        <source>All modules</source>
+        <translation>Toate modulele</translation>
+    </message>
+    <message>
+        <source>Not scanned. To include ABS, airbag, body and the other modules, run the module scan (All modules) before saving the report.</source>
+        <translation>Nescanate. Ca să incluzi ABS, airbag, caroserie și celelalte module, rulează scanarea modulelor (Toate modulele) înainte să salvezi raportul.</translation>
+    </message>
+    <message>
+        <source>Part %1</source>
+        <translation>Piesa %1</translation>
+    </message>
+    <message>
+        <source>software %1</source>
+        <translation>software %1</translation>
+    </message>
+    <message>
+        <source>Present now</source>
+        <translation>Prezent acum</translation>
+    </message>
+    <message>
+        <source>Warning light requested</source>
+        <translation>Aprinde un martor de avertizare</translation>
+    </message>
+    <message>
+        <source>Codes in other modules</source>
+        <translation>Coduri în alte module</translation>
+    </message>
+    <message>
+        <source>Complete</source>
+        <translation>Încheiat</translation>
+    </message>
+    <message>
+        <source>Incomplete</source>
+        <translation>Neîncheiat</translation>
+    </message>
+    <message>
+        <source>runs continuously</source>
+        <translation>rulează continuu</translation>
+    </message>
+    <message>
+        <source>runs during certain drives</source>
+        <translation>rulează în anumite condiții de mers</translation>
+    </message>
+    <message>
+        <source>Readiness monitors</source>
+        <translation>Monitoare de pregătire</translation>
+    </message>
+    <message>
+        <source>The self-tests the car runs on its emission systems. They reset when codes are cleared and finish over a few days of normal driving. An emissions inspection (ITP) can fail a car with incomplete monitors; how many are allowed depends on the country.</source>
+        <translation>Autotestele pe care mașina le face sistemelor de emisii. Se resetează la ștergerea codurilor și se încheie după câteva zile de mers normal. O inspecție de emisii (ITP) poate respinge o mașină cu monitoare neîncheiate; câte sunt acceptate depinde de țară.</translation>
+    </message>
+    <message>
+        <source>Freeze frame</source>
+        <translation>Instantaneu</translation>
+    </message>
+    <message>
+        <source>Sensor values saved when a fault was stored.</source>
+        <translation>Valorile senzorilor salvate când s-a memorat un defect.</translation>
+    </message>
+    <message>
+        <source>Sensor values saved when %1 was stored.</source>
+        <translation>Valorile senzorilor salvate când s-a memorat %1.</translation>
+    </message>
+    <message>
+        <source>VIN</source>
+        <translation>VIN</translation>
+    </message>
+    <message>
+        <source>Manufacturer</source>
+        <translation>Producător</translation>
+    </message>
+    <message>
+        <source>Model year</source>
+        <translation>An model</translation>
+    </message>
+    <message>
+        <source>Made in</source>
+        <translation>Fabricat în</translation>
+    </message>
+    <message>
+        <source>VIN check digit</source>
+        <translation>Cifra de control VIN</translation>
+    </message>
+    <message>
+        <source>Valid</source>
+        <translation>Validă</translation>
+    </message>
+    <message>
+        <source>Doesn't match (normal outside North America)</source>
+        <translation>Nu se potrivește (normal în afara Americii de Nord)</translation>
+    </message>
+    <message>
+        <source>OBD standard</source>
+        <translation>Standard OBD</translation>
+    </message>
+    <message>
+        <source>Fuel</source>
+        <translation>Combustibil</translation>
+    </message>
+    <message>
+        <source>Protocol</source>
+        <translation>Protocol</translation>
+    </message>
+    <message>
+        <source>Adapter</source>
+        <translation>Adaptor</translation>
+    </message>
+    <message>
+        <source>Modules (OBD-II)</source>
+        <translation>Module (OBD-II)</translation>
+    </message>
+    <message>
+        <source>Calibration IDs</source>
+        <translation>ID-uri de calibrare</translation>
+    </message>
+    <message>
+        <source>CVNs</source>
+        <translation>CVN-uri</translation>
+    </message>
+    <message>
+        <source>Vehicle</source>
+        <translation>Vehicul</translation>
+    </message>
+    <message>
+        <source>About this report</source>
+        <translation>Despre acest raport</translation>
+    </message>
+    <message>
+        <source>This report shows what the car's computers told a standard OBD-II adapter. It can't show the mileage, accident history or faults the car hasn't detected, and it doesn't replace an inspection by a mechanic.</source>
+        <translation>Raportul arată ce au transmis calculatoarele mașinii unui adaptor OBD-II standard. Nu poate arăta kilometrajul, istoricul de accidente sau defectele pe care mașina nu le-a detectat și nu înlocuiește o verificare la mecanic.</translation>
+    </message>
+    <message>
+        <source>Obdaryn only reads: it can't change anything in a car. Code explanations are guidance; confirm with a workshop before replacing parts.</source>
+        <translation>Obdaryn doar citește: nu poate modifica nimic într-o mașină. Explicațiile codurilor sunt orientative; confirmă cu un service înainte să înlocuiești piese.</translation>
+    </message>
+    <message>
+        <source>Made with Obdaryn %1, free and open-source software: %2</source>
+        <translation>Făcut cu Obdaryn %1, software liber și open-source: %2</translation>
+    </message>
+    <message>
+        <source>Obdaryn report</source>
+        <translation>Raport Obdaryn</translation>
+    </message>
+    <message>
+        <source>demo car</source>
+        <translation>mașina demo</translation>
     </message>
 </context>
 </TS>

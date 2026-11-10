@@ -7,6 +7,8 @@
 #include "obd/Pids.h"
 #include "obd/VehicleInfo.h"
 #include "recording/SessionRecorder.h"
+#include "report/ReportWriter.h"
+#include "report/VehicleReport.h"
 #include "transport/ReplayTransport.h"
 #include "transport/SimulatedTransport.h"
 #include "transport/TcpTransport.h"
@@ -751,6 +753,85 @@ void AppController::refreshRecordings()
     }
     m_recordings = list;
     emit recordingsChanged();
+}
+
+// ---------------------------------------------------------------------------
+// Shareable report
+
+QString AppController::reportsFolder() const
+{
+    const QString overridden = qEnvironmentVariable("OBDARYN_REPORTS_DIR");
+    if (!overridden.isEmpty())
+        return overridden;
+    return QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + QStringLiteral("/Obdaryn/Reports");
+}
+
+QUrl AppController::suggestedReportUrl() const
+{
+    ReportInput input;
+    input.createdAt = QDateTime::currentDateTime();
+    input.source = m_demo ? ReportInput::Source::Demo : ReportInput::Source::Car;
+    input.info.vin = m_vin;
+    QDir().mkpath(reportsFolder());
+    return QUrl::fromLocalFile(reportsFolder() + QLatin1Char('/') + VehicleReport::suggestedBaseName(input) + QStringLiteral(".pdf"));
+}
+
+void AppController::saveReport(const QString &pathOrUrl, bool open)
+{
+    if (m_client->session()->state() != ElmSession::State::Ready) {
+        emit notice(false, tr("Connect to a car first: the report shows what it reads."));
+        return;
+    }
+    if (scanning() || busyWithModules()) {
+        emit notice(false, tr("Wait for the current scan to finish, then save the report."));
+        return;
+    }
+    QString path = localPath(pathOrUrl);
+    const QString suffix = QFileInfo(path).suffix().toLower();
+    const bool asHtml = suffix == QLatin1String("html") || suffix == QLatin1String("htm");
+    if (!asHtml && suffix != QLatin1String("pdf"))
+        path += QStringLiteral(".pdf");
+
+    // The "since codes were cleared" counters are read fresh: on a car for
+    // sale, they are among the most telling numbers in the report.
+    m_client->readPids({0x21, 0x30, 0x31, 0x4D, 0x4E}, [this, path, asHtml, open](const QList<ObdClient::PidReading> &readings) {
+        ReportInput input;
+        input.source = m_replay ? ReportInput::Source::Replay : m_demo ? ReportInput::Source::Demo : ReportInput::Source::Car;
+        input.sourceDetail = transportDescription();
+        input.appVersion = appVersion();
+        input.createdAt = QDateTime::currentDateTime();
+        input.scanTime = m_lastScanTime;
+        input.brand = m_profileId;
+        input.language = m_language;
+        input.adapter = adapterVersion();
+        input.protocol = protocolName();
+        input.batteryVolts = m_batteryVoltage;
+        input.info = m_info;
+        input.obdStandard = m_obdStandard;
+        input.fuelType = m_fuelType;
+        input.readiness = m_readiness;
+        input.dtcs = m_dtcs->dtcList();
+        input.freezeFrame = m_freeze;
+        input.modulesScanned = moduleScanDone();
+        input.modules = m_moduleScanner->results();
+        for (const auto &r : readings) {
+            if (!input.pids.contains(r.pid)) // the engine (first ECU) wins
+                input.pids.insert(r.pid, r.raw);
+        }
+
+        QString error;
+        QDir().mkpath(QFileInfo(path).absolutePath());
+        const bool ok = asHtml ? ReportWriter::writeHtml(VehicleReport::html(input, VehicleReport::Target::Web), path, &error)
+                               : ReportWriter::writePdf(VehicleReport::html(input, VehicleReport::Target::Pdf), path,
+                                                        VehicleReport::suggestedBaseName(input), &error);
+        if (!ok) {
+            emit notice(false, tr("Couldn't save the report: %1").arg(error));
+            return;
+        }
+        emit notice(true, tr("Report saved: %1").arg(QFileInfo(path).fileName()));
+        if (open)
+            QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    });
 }
 
 // ---------------------------------------------------------------------------

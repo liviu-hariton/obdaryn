@@ -6,7 +6,9 @@
 #include "IconProvider.h"
 
 #include <QDirIterator>
+#include <QFile>
 #include <QFontDatabase>
+#include "report/ReportWriter.h"
 #include <QGuiApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
@@ -35,6 +37,20 @@ int main(int argc, char *argv[])
     while (fonts.hasNext())
         QFontDatabase::addApplicationFont(fonts.next());
 
+    // Developer shortcut: OBDARYN_RENDER_HTML=in.html OBDARYN_RENDER_PDF=out.pdf renders a
+    // saved report to PDF and quits (for working on the report layout).
+    if (qEnvironmentVariableIsSet("OBDARYN_RENDER_HTML")) {
+        QFile in(qEnvironmentVariable("OBDARYN_RENDER_HTML"));
+        QString error;
+        if (!in.open(QIODevice::ReadOnly)
+            || !obdaryn::ReportWriter::writePdf(QString::fromUtf8(in.readAll()), qEnvironmentVariable("OBDARYN_RENDER_PDF"),
+                                                QStringLiteral("render test"), &error)) {
+            qWarning("render failed: %s", qPrintable(error));
+            return 1;
+        }
+        return 0;
+    }
+
     // "Basic" is Qt's fully customizable control style: Obdaryn draws its own look.
     QQuickStyle::setStyle(QStringLiteral("Basic"));
 
@@ -44,7 +60,8 @@ int main(int argc, char *argv[])
     //   OBDARYN_APPEARANCE=light|dark  OBDARYN_LANG=en|ro  OBDARYN_DELAY_MS=4000  OBDARYN_SIZE=WxH
     //   OBDARYN_SCAN_MODULES=1  OBDARYN_RECORD=1 (record once the first scan ends)
     //   OBDARYN_REPLAY=file.obdrec (replay instead of the demo car)
-    //   OBDARYN_RECORDINGS_DIR=folder (read by AppController; keeps captures out of ~/Documents)
+    //   OBDARYN_RECORDINGS_DIR / OBDARYN_REPORTS_DIR=folder (read by AppController; keeps captures out of ~/Documents)
+    //   OBDARYN_REPORT=out.pdf|out.html (save the report after the scan, or after the module scan with OBDARYN_SCAN_MODULES=1)
     const QString capturePath = qEnvironmentVariable("OBDARYN_CAPTURE");
     if (qEnvironmentVariableIsSet("OBDARYN_APPEARANCE"))
         QSettings().setValue(QStringLiteral("ui/appearance"), qEnvironmentVariable("OBDARYN_APPEARANCE"));
@@ -79,6 +96,25 @@ int main(int argc, char *argv[])
                 if (!controller->vin().isEmpty() && !controller->recording())
                     controller->startRecording();
             });
+        }
+    }
+    if (qEnvironmentVariableIsSet("OBDARYN_REPORT")) {
+        if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
+            const bool afterModules = qEnvironmentVariableIntValue("OBDARYN_SCAN_MODULES") == 1;
+            auto save = [controller] {
+                static bool saved = false;
+                if (saved || controller->vin().isEmpty() || controller->scanning() || controller->moduleScanRunning())
+                    return;
+                saved = true;
+                QTimer::singleShot(300, controller, [controller] { controller->saveReport(qEnvironmentVariable("OBDARYN_REPORT"), false); });
+            };
+            if (afterModules)
+                QObject::connect(controller, &obdaryn::AppController::moduleScanChanged, controller, [controller, save] {
+                    if (controller->moduleScanDone())
+                        save();
+                });
+            else
+                QObject::connect(controller, &obdaryn::AppController::scanFinished, controller, save);
         }
     }
     if (!capturePath.isEmpty() && !engine.rootObjects().isEmpty()) {

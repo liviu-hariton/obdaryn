@@ -16,6 +16,7 @@
 #include <QPointer>
 #include <QTimer>
 #include <QTranslator>
+#include <QUrl>
 #include <QVariantList>
 #include <QtQml/qqmlregistration.h>
 
@@ -170,6 +171,17 @@ public:
     Q_INVOKABLE void showRecordingsFolder() const;
     Q_INVOKABLE void refreshRecordings();
 
+    /// Where the save dialog starts: Documents/Obdaryn/Reports/<date> <car>.pdf
+    Q_INVOKABLE QUrl suggestedReportUrl() const;
+    /**
+     * @brief Saves the shareable report: PDF, or a web page when the name ends in .html.
+     *
+     * Reads the "since codes were cleared" counters fresh, then writes the
+     * report from the last scan (and module scan, if one ran). Opens the file
+     * afterwards unless `open` is false. The result arrives through notice().
+     */
+    Q_INVOKABLE void saveReport(const QString &pathOrUrl, bool open = true);
+
     // ---- Property getters ------------------------------------------------------
     ConnectionState connectionState() const;
     QString statusMessage() const { return m_statusMessage; }
@@ -275,6 +287,7 @@ private:
     void whenPollIdle(std::function<void()> action);
     bool busyWithModules() const { return m_moduleScanner->running() || bool(m_afterPoll); }
     QString recordingsFolder() const;
+    QString reportsFolder() const;
     void updateTicker();
 
     QQmlEngine *m_engine;

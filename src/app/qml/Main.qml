@@ -10,6 +10,7 @@
 //   8 All modules (full-vehicle scan)
 import QtQuick
 import QtQuick.Controls.Basic as C
+import QtQuick.Dialogs
 import QtQuick.Layouts
 import Obdaryn
 
@@ -46,7 +47,21 @@ C.ApplicationWindow {
     function requestClear() { clearDialog.moduleRow = -1; clearDialog.moduleName = ""; clearDialog.open() }
     function requestModuleClear(row, name) { clearDialog.moduleRow = row; clearDialog.moduleName = name; clearDialog.open() }
 
-    // Keyboard: ⌘1…⌘8 follow the sidebar order, ⌘, opens Settings, ⌘R scans again.
+    // The shareable report: a native save dialog, PDF by default, or a web page.
+    function requestReport() {
+        reportDialog.selectedFile = App.suggestedReportUrl()
+        reportDialog.open()
+    }
+    FileDialog {
+        id: reportDialog
+        title: qsTr("Save report")
+        fileMode: FileDialog.SaveFile
+        nameFilters: [qsTr("PDF document (*.pdf)"), qsTr("Web page (*.html)")]
+        defaultSuffix: selectedNameFilter.index === 1 ? "html" : "pdf"
+        onAccepted: App.saveReport(selectedFile)
+    }
+
+    // Keyboard: ⌘1…⌘8 follow the sidebar order, ⌘, opens Settings, ⌘R scans again, ⌘S saves the report.
     readonly property var sidebarOrder: [0, 1, 8, 2, 3, 4, 5, 6]
     Repeater {
         model: window.sidebarOrder.length
@@ -57,6 +72,7 @@ C.ApplicationWindow {
     }
     Shortcut { sequences: [StandardKey.Preferences]; onActivated: window.page = 7 }
     Shortcut { sequences: [StandardKey.Refresh, "Ctrl+R"]; enabled: App.connectionState === App.Ready; onActivated: App.runFullScan() }
+    Shortcut { sequences: [StandardKey.Save]; enabled: App.connectionState === App.Ready && !App.scanning; onActivated: window.requestReport() }
 
     RowLayout {
         anchors.fill: parent
@@ -78,6 +94,7 @@ C.ApplicationWindow {
                 onOpenPage: p => window.page = p
                 onOpenCode: code => { codesPage.selectedCode = code; window.page = 1 }
                 onOpenModules: window.page = 8
+                onSaveReportRequested: window.requestReport()
             }
             CodesPage { id: codesPage; objectName: "codesPage"; onOpenPage: p => window.page = p; onClearRequested: window.requestClear() }
             ReadinessPage { bulbCheck: window.bulbCheck; onOpenPage: p => window.page = p }

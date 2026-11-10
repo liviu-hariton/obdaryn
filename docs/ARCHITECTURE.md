@@ -47,6 +47,8 @@
   - `ReplayTransport` is a pretend adapter that answers from a recording, following the recording's clock and looping at the end. Requests are matched by module + command; live data (service 01) is rebuilt value by value, so any combination of values the app asks for still gets answers. Clears are never replayed.
   - `Recording::toCsv()` exports the live data, one row per moment and one column per value.
   - The same files work in the app ("Replay a recording" on the connect screen) and in the probe (`--record`, `--replay`).
+- **VehicleReport** (`src/core/report`) turns a `ReportInput` (the last scan, module scan, readiness, freeze frame, "since codes were cleared" counters) into one standalone HTML document. Every value from the car or a recording is HTML-escaped. It keeps to tables, paragraphs and simple CSS so the same document works as a web page and in Qt's rich-text engine; `Target::Pdf` drops screen-only rules and uses static system fonts, because PDF output can't use the variable Inter.
+  - The app's `ReportWriter` (`src/app/report`, it needs QtGui) renders the PDF: A4, laid out at screen DPI and scaled onto the page, with a fixed dark ink (never the dark-mode palette) and a page-number footer.
 - **ModuleCatalog** (`src/core/vehicles`) loads the brand profiles from `data/vehicles/*.json`: one file per brand listing each module's category, request and response CAN IDs, preferred protocol, and whether the address is verified. A profile is picked from the VIN prefix, then from the manufacturer name, else the generic list.
 - **ModuleScanner** (`src/core/obd`) runs the full-vehicle scan. For each module it:
   1. points the adapter at the module (`AT SH`, `AT CRA`, and standard flow control when the response ID isn't request ID + 8);
