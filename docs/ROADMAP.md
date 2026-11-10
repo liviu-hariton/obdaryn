@@ -52,7 +52,7 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [ ] Windows build (MSIX or installer), then Android and iOS (Qt for mobile; BLE adapters on iOS)
 - [ ] Bluetooth LE and USB serial transports
 - [ ] Mode 06 (on-board monitor test results) with readable limits
-- [ ] Romanian translations of code descriptions (obdex is English and German)
+- [x] Romanian titles for all generic codes, plus full Romanian explanations for the 132 most common
 - [ ] Imperial units
 - [ ] Brand-specific DTC description packs (P1xxx, B, C, U codes), written in our own words
 

@@ -35,6 +35,7 @@ qt_add_resources(obdaryn_core "obdaryn_core_data"
     BASE "${CMAKE_CURRENT_SOURCE_DIR}"
     FILES
         data/dtc_generic.json
+        data/dtc_generic_ro.json
         ${OBDARYN_VEHICLE_PROFILES}
         ${OBDARYN_DTC_BRANDS}
 )

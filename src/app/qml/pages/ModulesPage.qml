@@ -26,6 +26,14 @@ Item {
     readonly property var scan: App.moduleScan
     property string expandedId: ""
 
+    /// The module's own warning lamp (ISO 2575), or "" when it has none.
+    function telltaleOf(category) {
+        return category === "engine" ? "engine" : category === "abs" ? "abs" : category === "airbag" ? "airbag"
+             : category === "tpms" ? "tpms" : category === "steering" ? "steering" : ""
+    }
+    /// Telltale colour: airbag lamps are red, the others amber (ISO 2575).
+    function telltaleColor(category) { return category === "airbag" ? Theme.red : Theme.amber }
+
     // When a scan ends, open the first module (other than engine/transmission,
     // which the Trouble codes screen already covers) that reported codes.
     Connections {
@@ -298,11 +306,11 @@ Item {
                                 visible: row.state !== "scanning"
                                 size: 18
                                 name: row.state === "obdonly" ? "circle-check"
-                                    : row.state === "answered" ? (row.codeCount > 0 ? "triangle-alert" : "circle-check")
+                                    : row.state === "answered" ? (row.codeCount > 0 ? (page.telltaleOf(row.category) || "triangle-alert") : "circle-check")
                                     : row.state === "error" ? "circle-help"
                                     : "circle-dashed"
                                 color: row.state === "obdonly" ? Theme.textFaint
-                                     : row.state === "answered" ? (row.codeCount > 0 ? Theme.red : Theme.green)
+                                     : row.state === "answered" ? (row.codeCount > 0 ? (page.telltaleOf(row.category) ? page.telltaleColor(row.category) : Theme.red) : Theme.green)
                                      : row.state === "error" ? Theme.amber
                                      : Theme.unlit
                             }
@@ -455,7 +463,12 @@ Item {
                                             spacing: Theme.s2
                                             KindChip { kind: code.modelData.kind; label: code.modelData.kindLabel }
                                             Chip { visible: code.modelData.activeNow; text: qsTr("Present now"); dotColor: Theme.red }
-                                            Chip { visible: code.modelData.warningLamp; text: qsTr("Warning light requested"); iconName: "triangle-alert"; iconColor: Theme.amber }
+                                            Chip {
+                                                visible: code.modelData.warningLamp
+                                                text: qsTr("Warning light requested")
+                                                iconName: page.telltaleOf(row.category) || "triangle-alert"
+                                                iconColor: page.telltaleColor(row.category)
+                                            }
                                         }
                                     }
                                     Icon {

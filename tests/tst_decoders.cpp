@@ -104,6 +104,9 @@ void TestDecoders::brandPack()
     QCOMPARE(ro.language, QStringLiteral("ro"));
     QVERIFY(ro.title.contains(QStringLiteral("Airbag frontal șofer")));
     QCOMPARE(db.lookup("P0420", "hyundai-kia", "ro").source, QStringLiteral("generic"));
+    // Romanian layer over the generic codes: every title is translated.
+    QVERIFY(db.lookup("P0420", "", "ro").title.contains(QStringLiteral("catalizator")));
+    QCOMPARE(db.lookup("P0420", "", "en").title, QStringLiteral("Catalyst System Efficiency Below Threshold Bank 1"));
 
     // Standard code with a Hyundai/Kia override (6-speed automatic solenoid names).
     const DtcInfo a6 = db.lookup("P0753", "hyundai-kia", "en", "transmission");

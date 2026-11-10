@@ -599,6 +599,7 @@ QVariantMap AppController::explainCode(const QString &code, const QString &brand
              return refs;
          }()},
         {QStringLiteral("brandName"), info.brandName},
+        {QStringLiteral("module"), info.module},
     };
 }
 

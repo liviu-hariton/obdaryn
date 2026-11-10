@@ -58,3 +58,11 @@ Meanings were researched in November 2026, mainly from Hyundai/Kia documents fil
   - The 2016+ MDPS codes.
 
 **Help wanted:** codes seen on your own Hyundai/Kia, with the scan-tool output and sources.
+
+## Romanian for generic codes
+
+`src/core/data/dtc_generic_ro.json` is a Romanian layer over the obdex codes:
+- **Titles:** all 9,533 codes have a Romanian title.
+- **Full text:** the 132 most common codes also have a Romanian description, causes and symptoms. Numbers are in Romanian format.
+
+The layer is built by `tools/build_generic_ro.py` from translation files (`{"P0420": "title"}` or full entries). It refuses entries that drop causes or symptoms. To improve a translation, edit the JSON, or rebuild from your own translation files.

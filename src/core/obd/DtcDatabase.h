@@ -49,7 +49,9 @@ struct DtcInfo {
  *
  * Two layers:
  *  - Generic codes from the obdex database (CC0-1.0, independently written,
- *    not SAE J2012 text), compiled in from data/dtc_generic.json. English.
+ *    not SAE J2012 text), compiled in from data/dtc_generic.json, with a
+ *    Romanian layer (data/dtc_generic_ro.json): every title, and the full
+ *    explanation for the most common codes.
  *  - Brand packs (data/dtc/brands/<brand>.json), keyed by the vehicle-profile
  *    id (e.g. "hyundai-kia"). They describe manufacturer-specific codes such as
  *    C1611 or B1650 in English and Romanian, written for Obdaryn from public
@@ -94,6 +96,7 @@ private:
         QJsonObject codes;
     };
     QJsonObject m_codes;
+    QJsonObject m_codesRo;     ///< Romanian layer over the generic codes (title, sometimes full text)
     QHash<QString, BrandPack> m_brands;
     QString m_attribution;
 };

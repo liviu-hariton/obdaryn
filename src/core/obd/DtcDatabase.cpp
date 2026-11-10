@@ -22,6 +22,9 @@ DtcDatabase::DtcDatabase()
 {
     // Parsed once, on first use (≈ 10 k entries, a few hundred ms at most).
     loadFile(QStringLiteral(":/obdaryn/data/dtc_generic.json"));
+    QFile ro(QStringLiteral(":/obdaryn/data/dtc_generic_ro.json"));
+    if (ro.open(QIODevice::ReadOnly))
+        m_codesRo = QJsonDocument::fromJson(ro.readAll()).object().value(QStringLiteral("codes")).toObject();
     const QDir brands(QStringLiteral(":/obdaryn/data/dtc/brands"));
     for (const QString &name : brands.entryList({QStringLiteral("*.json")}, QDir::Files))
         loadBrandFile(brands.filePath(name));
@@ -149,6 +152,16 @@ DtcInfo DtcDatabase::lookup(const QString &rawCode, const QString &brand, const 
 
     fillFrom(info, generic);
     info.language = QStringLiteral("en");
+    if (language == QLatin1String("ro")) {
+        // Romanian title for every code; full text where it has been translated.
+        const QJsonObject ro = m_codesRo.value(info.code).toObject();
+        if (ro.contains(QStringLiteral("d"))) {
+            fillFrom(info, ro);
+            info.language = QStringLiteral("ro");
+        } else if (ro.contains(QStringLiteral("t"))) {
+            info.title = ro.value(QStringLiteral("t")).toString();
+        }
+    }
     info.source = QStringLiteral("generic");
     info.sourceLabel = QStringLiteral("obdex");
 

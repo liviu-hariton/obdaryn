@@ -1,0 +1,8 @@
+<!-- Obdaryn power-steering telltale (ISO 2575): steering wheel with an exclamation mark. Drawn for this app, GPL-3.0-or-later. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="10" cy="12" r="7.5"/>
+  <circle cx="10" cy="12" r="2"/>
+  <path d="M3 10.5h5M12 10.5h5M10 14v5"/>
+  <path d="M21 7v6"/>
+  <path d="M21 16.5h.01"/>
+</svg>

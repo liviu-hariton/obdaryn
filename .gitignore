@@ -20,3 +20,6 @@ __pycache__/
 
 # Emulator and tool logs
 *.log
+
+# Car logs (contain the VIN)
+logs/

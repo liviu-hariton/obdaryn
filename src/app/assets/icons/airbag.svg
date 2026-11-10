@@ -1,0 +1,8 @@
+<!-- Obdaryn airbag telltale (ISO 2575): seated occupant with a deployed airbag. Drawn for this app, GPL-3.0-or-later. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="7" cy="4.5" r="2"/>
+  <path d="M6 8.5 4.5 15H10l2 6"/>
+  <path d="M6.2 9.5 9 13.5"/>
+  <circle cx="16" cy="11" r="4.5"/>
+  <path d="M3 21h4"/>
+</svg>

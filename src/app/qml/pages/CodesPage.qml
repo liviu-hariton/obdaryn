@@ -212,7 +212,12 @@ Item {
                         Chip { visible: !!page.info.turnsOnMil; text: qsTr("Turns on the check-engine light"); iconName: "engine"; iconColor: Theme.amber }
                         Chip { visible: !!page.info.emissionsRelevant; text: qsTr("Matters for the ITP"); iconName: "list-checks"; iconColor: Theme.amber }
                         Chip { visible: !!page.info.limpModePossible; text: qsTr("Can trigger limp mode"); iconName: "triangle-alert"; iconColor: Theme.red }
-                        Chip { visible: !!page.info.warningLamp; text: qsTr("Lights a warning lamp"); iconName: "triangle-alert"; iconColor: Theme.amber }
+                        Chip {
+                            visible: !!page.info.warningLamp
+                            text: qsTr("Lights a warning lamp")
+                            iconName: ({ abs: "abs", airbag: "airbag", tpms: "tpms", steering: "steering", engine: "engine" })[page.info.module] || "triangle-alert"
+                            iconColor: page.info.module === "airbag" ? Theme.red : Theme.amber
+                        }
                         Chip { visible: !!page.info.needsDriveCycle; text: qsTr("Needs a drive cycle to confirm a fix"); iconName: "activity" }
                     }
 
