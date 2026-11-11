@@ -17,7 +17,8 @@ Item {
 
     Image {
         anchors.fill: parent
-        source: "qrc:/brand/logo" + (logo.size < 32 ? "-small" : "") + (Theme.dark ? "-dark" : "") + ".svg"
+        // Shared with the reports, so it lives in the core library's data.
+        source: "qrc:/obdaryn/data/brand/logo" + (logo.size < 32 ? "-small" : "") + (Theme.dark ? "-dark" : "") + ".svg"
         sourceSize: Qt.size(logo.size * 2, logo.size * 2) // crisp on Retina
         smooth: true
         mipmap: true

@@ -89,6 +89,13 @@ QString html(const ReportInput &input, Target target = Target::Web);
 /// A file name for the report, without extension: "Obdaryn report 2026-11-11 Hyundai 2014".
 QString suggestedBaseName(const ReportInput &input);
 
+/// The PDF target refers to the logo by this image name; the PDF writer
+/// supplies the picture (Qt's rich-text engine can't draw SVG on its own).
+/// The web target embeds the logo in the page instead.
+inline constexpr const char *kLogoImageName = "obdaryn-logo";
+/// The logo mark as SVG: the full drawing, or the simplified one for small sizes.
+QByteArray logoSvg(bool small = false);
+
 } // namespace VehicleReport
 
 } // namespace obdaryn

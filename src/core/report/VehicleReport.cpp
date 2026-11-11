@@ -9,6 +9,7 @@
 #include "vehicles/ModuleCatalog.h"
 
 #include <QCoreApplication>
+#include <QFile>
 #include <QLocale>
 #include <QMap>
 #include <QRegularExpression>
@@ -146,6 +147,18 @@ QString explanation(const DtcInfo &info)
 
 // ---------------------------------------------------------------------------
 // Sections
+
+/// A letterhead: the logo mark and the name, above the car. The full drawing,
+/// at 32px (the size from which every pin of the port shows).
+QString masthead(Target target)
+{
+    const QString src = target == Target::Pdf
+        ? QString::fromLatin1(kLogoImageName)
+        : QStringLiteral("data:image/svg+xml;base64,") + QString::fromLatin1(logoSvg(false).toBase64());
+    return QStringLiteral("<table class=\"brand\" cellspacing=\"0\" cellpadding=\"0\"><tr>"
+                          "<td><img src=\"%1\" width=\"32\" height=\"32\" alt=\"\"></td>"
+                          "<td class=\"brand-name\">Obdaryn</td></tr></table>").arg(src);
+}
 
 QString headerSection(const ReportInput &in)
 {
@@ -550,6 +563,8 @@ QString aboutSection(const ReportInput &in)
 const char *kStyle = R"(
 body { font-family: %1; font-size: 10pt; color: #15181C; }
 h1 { font-size: 20pt; font-weight: 700; margin: 0 0 6px 0; }
+.brand { margin: 0 0 18px 0; }
+.brand-name { font-size: 12pt; font-weight: 700; padding-left: 8px; vertical-align: middle; }
 h2 { font-size: 13pt; font-weight: 700; margin: 28px 0 8px 0; }
 h3 { font-size: 11pt; font-weight: 700; margin: 20px 0 6px 0; }
 p { margin: 0 0 5px 0; }
@@ -597,6 +612,7 @@ QString html(const ReportInput &in, Target target)
         style += QLatin1String(kWebStyle);
 
     QString body;
+    body += masthead(target);
     body += headerSection(in);
     body += summarySection(in);
     body += codesSection(in);
@@ -608,10 +624,20 @@ QString html(const ReportInput &in, Target target)
     body += vehicleSection(in);
     body += aboutSection(in);
 
+    // The browser tab shows the small drawing, as a favicon embedded in the page.
+    const QString favicon = pdf ? QString()
+        : QStringLiteral("<link rel=\"icon\" type=\"image/svg+xml\" href=\"data:image/svg+xml;base64,%1\">")
+              .arg(QString::fromLatin1(logoSvg(true).toBase64()));
     return QStringLiteral("<!DOCTYPE html>\n<html lang=\"%1\"><head><meta charset=\"utf-8\">"
                           "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-                          "<title>%2</title><style>%3</style></head><body>%4</body></html>\n")
-        .arg(in.language == QLatin1String("ro") ? QStringLiteral("ro") : QStringLiteral("en"), esc(title), style, body);
+                          "<title>%2</title>%5<style>%3</style></head><body>%4</body></html>\n")
+        .arg(in.language == QLatin1String("ro") ? QStringLiteral("ro") : QStringLiteral("en"), esc(title), style, body, favicon);
+}
+
+QByteArray logoSvg(bool small)
+{
+    QFile f(small ? QStringLiteral(":/obdaryn/data/brand/logo-small.svg") : QStringLiteral(":/obdaryn/data/brand/logo.svg"));
+    return f.open(QIODevice::ReadOnly) ? f.readAll() : QByteArray();
 }
 
 QString suggestedBaseName(const ReportInput &in)

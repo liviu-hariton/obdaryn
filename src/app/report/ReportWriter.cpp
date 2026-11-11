@@ -2,6 +2,8 @@
 
 #include "report/ReportWriter.h"
 
+#include "report/VehicleReport.h"
+
 #include <QAbstractTextDocumentLayout>
 #include <QCoreApplication>
 #include <QFile>
@@ -10,6 +12,9 @@
 #include <QPainter>
 #include <QPdfWriter>
 #include <QTextDocument>
+#include <QSvgRenderer>
+#include <QImage>
+#include <QUrl>
 
 namespace obdaryn::ReportWriter {
 
@@ -48,6 +53,17 @@ bool writePdf(const QString &html, const QString &path, const QString &title, QS
     base.setPointSizeF(10);
     doc.setDefaultFont(base);
     doc.setDocumentMargin(0);
+    // The logo, drawn from its SVG at 8x so it stays sharp at print resolution.
+    {
+        QSvgRenderer svg(VehicleReport::logoSvg(false));
+        QImage logo(256, 256, QImage::Format_ARGB32_Premultiplied);
+        logo.fill(Qt::transparent);
+        QPainter p(&logo);
+        p.setRenderHint(QPainter::Antialiasing);
+        svg.render(&p);
+        p.end();
+        doc.addResource(QTextDocument::ImageResource, QUrl(QString::fromLatin1(VehicleReport::kLogoImageName)), logo);
+    }
     doc.setHtml(html);
 
     const qreal scale = writer.resolution() / kLayoutDpi;

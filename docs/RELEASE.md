@@ -26,7 +26,7 @@ The script:
 ## Version and icon
 
 - The version comes from `project(Obdaryn VERSION …)` in the top-level `CMakeLists.txt`.
-- The in-app logo is `src/app/assets/brand/logo.svg` (32px and up) and `logo-small.svg` (below 32px), each with a `-dark` variant that adds the hairline edge. The app icon is the same drawing with the macOS margins: `src/app/macos/icon-master.svg` and `icon-master-small.svg`. Change them together.
+- The in-app logo is `src/core/data/brand/logo.svg` (32px and up) and `logo-small.svg` (below 32px), each with a `-dark` variant that adds the hairline edge. The app icon is the same drawing with the macOS margins: `src/app/macos/icon-master.svg` and `icon-master-small.svg`. Change them together.
 - The icon is `src/app/macos/Obdaryn.icns`, built from the PNGs in `src/app/macos/Obdaryn.iconset` (the 16 and 32px slots use the small drawing, so don't resample them from the 1024px master):
 
   ```bash

@@ -90,9 +90,7 @@ file(GLOB OBDARYN_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/assets/icons/*.svg")
 qt_add_resources(obdaryn "obdaryn_assets"
     PREFIX "/"
     BASE "${CMAKE_CURRENT_SOURCE_DIR}/assets"
-    FILES ${OBDARYN_FONTS} ${OBDARYN_ICONS}
-          assets/brand/logo.svg assets/brand/logo-dark.svg
-          assets/brand/logo-small.svg assets/brand/logo-small-dark.svg)
+    FILES ${OBDARYN_FONTS} ${OBDARYN_ICONS})
 
 target_link_libraries(obdaryn PRIVATE
     obdaryn_core

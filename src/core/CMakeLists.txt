@@ -46,6 +46,8 @@ obdaryn_set_warnings(obdaryn_core)
 file(GLOB OBDARYN_VEHICLE_PROFILES "${CMAKE_CURRENT_SOURCE_DIR}/data/vehicles/*.json")
 file(GLOB OBDARYN_DTC_BRANDS "${CMAKE_CURRENT_SOURCE_DIR}/data/dtc/brands/*.json")
 file(GLOB OBDARYN_OBDB_PACKS "${CMAKE_CURRENT_SOURCE_DIR}/data/obdb/*.json")
+# The logo mark: used by the app (Logo.qml) and by the reports.
+file(GLOB OBDARYN_BRAND "${CMAKE_CURRENT_SOURCE_DIR}/data/brand/*.svg")
 qt_add_resources(obdaryn_core "obdaryn_core_data"
     PREFIX "/obdaryn"
     BASE "${CMAKE_CURRENT_SOURCE_DIR}"
@@ -55,4 +57,5 @@ qt_add_resources(obdaryn_core "obdaryn_core_data"
         ${OBDARYN_VEHICLE_PROFILES}
         ${OBDARYN_DTC_BRANDS}
         ${OBDARYN_OBDB_PACKS}
+        ${OBDARYN_BRAND}
 )

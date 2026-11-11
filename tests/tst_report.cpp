@@ -110,7 +110,10 @@ void TestReport::escapesEverything()
     in.info.calibrationIds << QStringLiteral("<b>cal</b>");
     in.adapter = QStringLiteral("ELM327 <i>v1.5</i>");
     const QString html = VehicleReport::html(in);
-    QVERIFY(!html.contains(QStringLiteral("<img")));
+    // The only image is Obdaryn's own logo, embedded: nothing from the car becomes one.
+    QCOMPARE(html.count(QStringLiteral("<img")), 1);
+    QVERIFY(html.contains(QStringLiteral("<img src=\"data:image/svg+xml;base64,")));
+    QVERIFY(!html.contains(QStringLiteral("example.invalid/x>")));
     QVERIFY(!html.contains(QStringLiteral("<script")));
     QVERIFY(!html.contains(QStringLiteral("<b>cal")));
     QVERIFY(!html.contains(QStringLiteral("<i>v1.5")));
@@ -127,6 +130,16 @@ void TestReport::targets()
     // Qt's PDF path would apply screen rules, and can't use the variable Inter.
     QVERIFY(!pdf.contains(QStringLiteral("@media")));
     QVERIFY(!pdf.contains(QStringLiteral("Inter,")));
+
+    // The logo: embedded in the web page (letterhead and favicon, so the page
+    // stays one file); named for the PDF writer, which supplies the picture.
+    QVERIFY(VehicleReport::logoSvg(false).contains("<svg"));
+    QVERIFY(VehicleReport::logoSvg(true).contains("<svg"));
+    QVERIFY(VehicleReport::logoSvg(false) != VehicleReport::logoSvg(true));
+    QCOMPARE(web.count(QStringLiteral("data:image/svg+xml;base64,")), 2);
+    QVERIFY(web.contains(QStringLiteral("<link rel=\"icon\"")));
+    QVERIFY(pdf.contains(QStringLiteral("src=\"%1\"").arg(QString::fromLatin1(VehicleReport::kLogoImageName))));
+    QVERIFY(!pdf.contains(QStringLiteral("data:image")));
 }
 
 void TestReport::fileName()
