@@ -356,6 +356,19 @@ void ChartModel::loadRecording(int slot, const QString &pathOrUrl)
     }
     m_source = QStringLiteral("recording");
     m_refresh.stop();
+    // Nothing chosen yet, or nothing chosen that this recording has: start with
+    // useful values rather than an empty screen.
+    const QSet<quint8> available = availablePids();
+    bool anyAvailable = false;
+    for (quint8 pid : std::as_const(m_selected))
+        anyAvailable |= available.contains(pid);
+    if (!anyAvailable) {
+        m_selected.clear();
+        for (quint8 pid : {quint8(0x0C), quint8(0x0D), quint8(0x04)}) {
+            if (available.contains(pid))
+                m_selected << pid;
+        }
+    }
     emit sourceChanged();
     emit selectionChanged();
     emit presetsChanged();

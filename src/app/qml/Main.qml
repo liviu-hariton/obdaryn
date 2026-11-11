@@ -8,7 +8,7 @@
 //   2 Readiness                                  6 Adapter log
 //   3 Freeze frame                               7 Settings
 //   8 All modules (full-vehicle scan)          9 Trip (distance and fuel)
-//  10 Charts (several values over time)
+//  10 Charts (several values over time)        11 Help
 import QtQuick
 import QtQuick.Controls.Basic as C
 import QtQuick.Dialogs
@@ -72,6 +72,7 @@ C.ApplicationWindow {
         }
     }
     Shortcut { sequences: [StandardKey.Preferences]; onActivated: window.page = 7 }
+    Shortcut { sequences: [StandardKey.HelpContents]; onActivated: window.page = 11 }
     Shortcut { sequences: [StandardKey.Refresh, "Ctrl+R"]; enabled: App.connectionState === App.Ready; onActivated: App.runFullScan() }
     Shortcut { sequences: [StandardKey.Save]; enabled: App.connectionState === App.Ready && !App.scanning; onActivated: window.requestReport() }
 
@@ -112,6 +113,7 @@ C.ApplicationWindow {
             }
             TripPage { onOpenPage: p => window.page = p }
             ChartsPage { current: window.page === 10; onOpenPage: p => window.page = p }
+            HelpPage { onOpenPage: p => window.page = p }
         }
     }
 

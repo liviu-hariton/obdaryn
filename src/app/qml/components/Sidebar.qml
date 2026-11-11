@@ -281,6 +281,11 @@ Rectangle {
 
         NavItem {
             Layout.fillWidth: true
+            text: qsTr("Help"); iconName: "circle-help"
+            current: sidebar.currentPage === 11; onClicked: sidebar.navigate(11)
+        }
+        NavItem {
+            Layout.fillWidth: true
             text: qsTr("Settings"); iconName: "settings"
             current: sidebar.currentPage === 7; onClicked: sidebar.navigate(7)
         }

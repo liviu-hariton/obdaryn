@@ -63,6 +63,7 @@ qt_add_qml_module(obdaryn
         qml/pages/ModulesPage.qml
         qml/pages/TripPage.qml
         qml/pages/ChartsPage.qml
+        qml/pages/HelpPage.qml
     SOURCES
         AppController.h AppController.cpp
         models/LiveDataModel.h models/LiveDataModel.cpp

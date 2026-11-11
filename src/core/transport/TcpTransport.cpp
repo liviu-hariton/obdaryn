@@ -74,7 +74,7 @@ void TcpTransport::onErrorOccurred(QAbstractSocket::SocketError error)
     switch (error) {
     case QAbstractSocket::ConnectionRefusedError:
         setLastFailure(Failure::Refused);
-        message = tr("The adapter refused the connection. Another app may already be connected to it.");
+        message = tr("The adapter refused the connection."); // the connect screen explains why
         break;
     case QAbstractSocket::RemoteHostClosedError:
         setLastFailure(Failure::Closed);

@@ -448,31 +448,69 @@ Item {
                 }
 
                 // ---- Crosshair: one vertical line through every strip, one readout ----
-                MouseArea {
+                // Mouse: follows the pointer. Keyboard: Tab to the charts, then
+                // ← → move it (Shift: bigger steps), Home / End jump, Esc hides it.
+                Item {
                     id: hover
+                    objectName: "chartsCursor"
                     x: page.labelWidth
                     width: stripsArea.plotWidth
                     height: stripColumn.height
-                    hoverEnabled: true
-                    acceptedButtons: Qt.NoButton
-                    readonly property real fraction: Math.max(0, Math.min(1, mouseX / width))
+                    activeFocusOnTab: true
+                    Accessible.role: Accessible.Chart
+                    Accessible.name: qsTr("Charts. Use the left and right arrow keys to read the values at a moment.")
+                    property real fraction: 1
+                    property bool keyboard: false
+                    readonly property bool showing: mouse.containsMouse || (activeFocus && keyboard)
+                    readonly property real cursorX: mouse.containsMouse ? mouse.mouseX : fraction * width
+                    readonly property real cursorY: mouse.containsMouse ? mouse.mouseY : height / 2
                     property var reading: ({ time: "", rows: [] })
-                    onPositionChanged: reading = page.charts.readout(fraction)
-                    onContainsMouseChanged: if (containsMouse) reading = page.charts.readout(fraction)
+                    function update() { reading = page.charts.readout(fraction) }
+                    function step(delta) { keyboard = true; fraction = Math.max(0, Math.min(1, fraction + delta)); update() }
+                    Keys.onLeftPressed: e => step(e.modifiers & Qt.ShiftModifier ? -0.1 : -0.01)
+                    Keys.onRightPressed: e => step(e.modifiers & Qt.ShiftModifier ? 0.1 : 0.01)
+                    Keys.onPressed: e => {
+                        if (e.key === Qt.Key_Home) { step(-1); e.accepted = true }
+                        else if (e.key === Qt.Key_End) { step(1); e.accepted = true }
+                        else if (e.key === Qt.Key_Escape) { keyboard = false; e.accepted = true }
+                    }
+                    onActiveFocusChanged: if (activeFocus) { keyboard = true; update() }
+                    Connections { target: page.charts; function onStripsChanged() { if (hover.showing) hover.update() } }
+
+                    MouseArea {
+                        id: mouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        acceptedButtons: Qt.NoButton
+                        onPositionChanged: { hover.fraction = Math.max(0, Math.min(1, mouseX / width)); hover.update() }
+                        onContainsMouseChanged: if (containsMouse) hover.update()
+                    }
+                }
+                // Keyboard focus ring around the whole chart area, clear of the titles.
+                Rectangle {
+                    x: -8
+                    y: -8
+                    width: stripsArea.width + 16
+                    height: stripColumn.height + axis.height + 22
+                    radius: Theme.radiusLarge
+                    color: "transparent"
+                    border.width: 2
+                    border.color: Theme.blue
+                    visible: hover.activeFocus
                 }
                 Rectangle {
-                    visible: hover.containsMouse
-                    x: page.labelWidth + hover.mouseX
+                    visible: hover.showing
+                    x: page.labelWidth + hover.cursorX
                     width: 1
                     height: stripColumn.height
                     color: Theme.textMuted
                 }
                 Rectangle {
                     id: readoutBox
-                    visible: hover.containsMouse
-                    readonly property real anchorX: page.labelWidth + hover.mouseX
+                    visible: hover.showing
+                    readonly property real anchorX: page.labelWidth + hover.cursorX
                     x: anchorX + 14 + width > stripsArea.width ? anchorX - 14 - width : anchorX + 14
-                    y: Math.max(0, Math.min(stripColumn.height - height, hover.mouseY - height / 2))
+                    y: Math.max(0, Math.min(stripColumn.height - height, hover.cursorY - height / 2))
                     width: readoutColumn.implicitWidth + 2 * Theme.s3
                     height: readoutColumn.implicitHeight + 2 * Theme.s2
                     radius: Theme.radius

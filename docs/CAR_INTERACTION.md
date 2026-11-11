@@ -59,7 +59,7 @@ Clearing (OBD-II service 04) is the only thing Obdaryn does that changes anythin
 - **resets all readiness monitors to "not complete"**. The car will **fail the ITP emissions check** until it has been driven enough for the monitors to re-run, typically 50–150 km of mixed city and highway driving over a few days. Never clear codes right before an inspection;
 - **does not remove permanent codes**. Those disappear by themselves once the car has re-tested the system and found it fixed.
 
-Clearing codes in other modules (ABS, airbag, ...) comes later and works the same way, with the same confirmation.
+Clearing codes in other modules (ABS, airbag, ...) works the same way, with the same confirmation (see section 4).
 
 ## 6. What Obdaryn will never send
 

@@ -7,6 +7,8 @@
 
 #include <QDirIterator>
 #include <QFile>
+#include <QSettings>
+#include <QTemporaryDir>
 #include <QFontDatabase>
 #include "report/ReportWriter.h"
 #include <QGuiApplication>
@@ -19,6 +21,7 @@
 #include <QTimer>
 
 #include <functional>
+#include <memory>
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +32,23 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationDomain(QStringLiteral("obdaryn.ro"));
     QGuiApplication::setApplicationName(QStringLiteral("Obdaryn"));
     QGuiApplication::setApplicationVersion(QStringLiteral(OBDARYN_VERSION));
+
+    // Developer runs (screenshots, reports, rendering) get their own settings,
+    // so they never change the user's real preferences (language, appearance,
+    // charts, trips...). Each run starts fresh in a temporary folder, unless
+    // OBDARYN_SETTINGS_DIR names one to keep state between runs.
+    const bool developerRun = qEnvironmentVariableIsSet("OBDARYN_CAPTURE") || qEnvironmentVariableIsSet("OBDARYN_REPORT")
+                              || qEnvironmentVariableIsSet("OBDARYN_RENDER_HTML");
+    std::unique_ptr<QTemporaryDir> captureSettings;
+    if (developerRun) {
+        QString dir = qEnvironmentVariable("OBDARYN_SETTINGS_DIR");
+        if (dir.isEmpty()) {
+            captureSettings = std::make_unique<QTemporaryDir>();
+            dir = captureSettings->path();
+        }
+        QSettings::setDefaultFormat(QSettings::IniFormat);
+        QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, dir);
+    }
 
     // Bundled typefaces (SIL Open Font License), so the app looks the same on
     // every platform. They live in qrc:/fonts.
@@ -56,7 +76,7 @@ int main(int argc, char *argv[])
 
     // ---- Developer capture mode -------------------------------------------
     // Renders one screen to a PNG and quits; used for design reviews and docs.
-    //   OBDARYN_CAPTURE=out.png  OBDARYN_PAGE=0..7  OBDARYN_DEMO=1
+    //   OBDARYN_CAPTURE=out.png  OBDARYN_PAGE=0..10  OBDARYN_DEMO=1
     //   OBDARYN_APPEARANCE=light|dark  OBDARYN_LANG=en|ro  OBDARYN_DELAY_MS=4000  OBDARYN_SIZE=WxH
     //   OBDARYN_SCAN_MODULES=1  OBDARYN_RECORD=1 (record once the first scan ends)
     //   OBDARYN_REPLAY=file.obdrec (replay instead of the demo car)
@@ -86,6 +106,12 @@ int main(int argc, char *argv[])
                 });
             }
         }
+    }
+    // OBDARYN_CONNECT=host:port connects to an adapter (to capture connection failures).
+    if (qEnvironmentVariableIsSet("OBDARYN_CONNECT")) {
+        const QStringList hostPort = qEnvironmentVariable("OBDARYN_CONNECT").split(QLatin1Char(':'));
+        if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App"); controller && hostPort.size() == 2)
+            controller->connectToAdapter(hostPort[0], hostPort[1].toInt());
     }
     if (qEnvironmentVariableIsSet("OBDARYN_REPLAY")) {
         if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App"))
@@ -121,6 +147,9 @@ int main(int argc, char *argv[])
             controller->charts()->loadRecording(0, qEnvironmentVariable("OBDARYN_CHART_A"));
         if (qEnvironmentVariableIsSet("OBDARYN_CHART_B"))
             controller->charts()->loadRecording(1, qEnvironmentVariable("OBDARYN_CHART_B"));
+        // OBDARYN_CHART_PRESET=<name> applies a chart preset (after the recordings load).
+        if (qEnvironmentVariableIsSet("OBDARYN_CHART_PRESET"))
+            controller->charts()->applyPreset(qEnvironmentVariable("OBDARYN_CHART_PRESET"));
     }
     if (qEnvironmentVariableIsSet("OBDARYN_REPORT")) {
         if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
