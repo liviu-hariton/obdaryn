@@ -32,7 +32,23 @@ const here = { en: pathIn("en"), ro: pathIn("ro") };
 
 const group = e.code.slice(0, 3);
 const up = isGeneric ? { href: `${base}${group.toLowerCase()}/`, label: c.groupTitle(`${group}xx`) } : { href: `${base}${e.pack}/`, label: c.packTitle(brand!) };
-const title = isGeneric ? c.pageTitle(e.code, e.title) : c.brandPageTitle(e.code, brand!, e.title);
+// One code can have a page per module (U2100 in the ABS and in the cluster): the
+// module goes in their title and description, or they'd read as duplicates.
+const variantModule = !isGeneric && e.slug !== e.code && e.module ? c.modules[e.module] ?? e.module : undefined;
+const variant = variantModule ? `${brand}, ${variantModule}` : brand;
+const title = isGeneric ? c.pageTitle(e.code, e.title) : c.brandPageTitle(e.code, variant!, e.title);
+const description = isGeneric ? c.pageDescription(e.code, e.title) : c.brandPageDescription(e.code, brand!, e.title, variantModule);
+// The breadcrumb above the code, for search engines.
+const abs = (path: string) => new URL(path, Astro.site).href;
+const crumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: c.indexTitle, item: abs(base) },
+    { "@type": "ListItem", position: 2, name: up.label, item: abs(up.href) },
+    { "@type": "ListItem", position: 3, name: `${e.code}: ${e.title}`, item: abs(here[lang]!) },
+  ],
+};
 // A related code links to its page in this language when there is one, else in English.
 const relatedHref = (code: string) => (lang === "ro" && hasGeneric("ro", code) ? `${base}${code}/` : `${routes.en.codes}${code}/`);
 const euro = (n: number) => `€${num(lang, n)}`;
@@ -47,7 +63,7 @@ const sourceName = (u: string) => {
   } catch { return u; }
 };
 ---
-<Base lang={lang} page="codes" title={`${title} · Obdaryn`} description={c.pageDescription(e.code, e.title)} here={here}>
+<Base lang={lang} page="codes" title={title} description={description} here={here} jsonLd={crumbs}>
   <div class="wrap code-page">
     <nav class="crumbs" aria-label={lang === "ro" ? "Unde ești" : "You are here"}>
       <a href={base}>{c.indexTitle}</a><span aria-hidden="true">/</span><a href={up.href}>{up.label}</a>

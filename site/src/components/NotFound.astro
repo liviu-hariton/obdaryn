@@ -13,13 +13,23 @@ const other: Lang = lang === "en" ? "ro" : "en";
 const here = t(lang).notFound;
 const there = t(other).notFound;
 ---
-<Base lang={lang} page="404" title={`${here.title} · Obdaryn`} description={here.text}>
+<Base lang={lang} page="404" title={here.title} description={here.text} noindex>
   <div class="wrap page">
     <p class="code">404</p>
     <h1>{here.title}</h1>
     <p>{here.text} <a href={routes[lang].home}>{here.home}</a></p>
     <p lang={other} class="other">{there.text} <a href={routes[other].home}>{there.home}</a></p>
   </div>
+  <!-- Code pages are named in capitals (/codes/P0420/). Someone who typed
+       /codes/p0420/ lands here: send them to the capitalised address. -->
+  <script is:inline>
+    (() => {
+      const path = location.pathname;
+      if (!/^\/(codes|ro\/coduri)\//.test(path)) return;
+      const fixed = path.replace(/\/([pbcu][0-9a-f]{4})(?=[-\/])/gi, (m, code) => "/" + code.toUpperCase());
+      if (fixed !== path) location.replace(fixed + location.search + location.hash);
+    })();
+  </script>
 </Base>
 <style>
   .page { padding-top: clamp(48px, 8vw, 112px); }

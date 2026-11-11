@@ -40,6 +40,7 @@ const en = {
   pageTitle: (code: string, title: string) => `${code}: ${title}`,
   pageDescription: (code: string, title: string) => `${code} (${title}): what it means, likely causes, what you may notice and what fixing it involves.`,
   brandPageTitle: (code: string, brand: string, title: string) => `${code} (${brand}): ${title}`,
+  brandPageDescription: (code: string, brand: string, title: string, module?: string) => `${code} on ${brand} cars${module ? ` (${module})` : ""}: ${title}. What it means, likely causes and what fixing it involves.`,
   kind: { generic: "Generic OBD-II code", brand: (b: string) => `${b} code` },
   rows: {
     detects: "How the car detects it", notice: "What you may notice", causes: "Likely causes",
@@ -110,6 +111,7 @@ const ro: typeof en = {
   pageTitle: (code: string, title: string) => `${code}: ${title}`,
   pageDescription: (code: string, title: string) => `${code} (${title}): ce înseamnă, cauze probabile, ce poți observa și ce presupune reparația.`,
   brandPageTitle: (code: string, brand: string, title: string) => `${code} (${brand}): ${title}`,
+  brandPageDescription: (code: string, brand: string, title: string, module?: string) => `${code} la ${brand}${module ? ` (${module})` : ""}: ${title}. Ce înseamnă, cauze probabile și ce presupune reparația.`,
   kind: { generic: "Cod generic OBD-II", brand: (b: string) => `Cod de producător, ${b}` },
   rows: {
     detects: "Cum detectează mașina defectul", notice: "Ce poți observa", causes: "Cauze probabile",

@@ -15,7 +15,7 @@ const s = t(lang);
 const p = s.startedPage;
 const d = s.downloadPage;
 ---
-<Base lang={lang} page="started" title={`${p.title} · Obdaryn`} description={p.description} noindex>
+<Base lang={lang} page="started" title={p.title} description={p.description} noindex>
   <!-- Without JavaScript the browser starts the download itself, after a second. -->
   <noscript slot="head"><meta http-equiv="refresh" content={`1;url=${dmgUrl}`} /></noscript>
   <div class="wrap page">

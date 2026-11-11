@@ -11,7 +11,7 @@ const { lang } = Astro.props;
 const p = t(lang).privacyPage;
 const last = p.sections.length - 1;
 ---
-<Base lang={lang} page="privacy" title={`${p.title} · Obdaryn`} description={p.description}>
+<Base lang={lang} page="privacy" title={p.title} description={p.description}>
   <div class="wrap page"><div class="prose">
     <h1 class="page-title">{p.title}</h1>
     {p.sections.map(([h, text], i) => (

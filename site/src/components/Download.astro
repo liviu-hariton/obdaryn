@@ -5,15 +5,17 @@
 // confirmation an app that isn't notarized asks for.
 import Base from "../layouts/Base.astro";
 import DownloadButton from "./DownloadButton.astro";
-import { releasesUrl, repoUrl, version } from "../data/site";
-import { t, type Lang } from "../i18n/ui";
+import { releasesUrl, repoUrl, softwareJsonLd, version } from "../data/site";
+import Icon from "./Icon.astro";
+import { routes, t, type Lang } from "../i18n/ui";
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
 const d = s.downloadPage;
 ---
-<Base lang={lang} page="download" title={`${d.title} · Obdaryn`} description={d.description}>
+<Base lang={lang} page="download" title={d.title} description={d.description}
+      jsonLd={softwareJsonLd(lang, new URL(routes[lang].download, Astro.site).href, d.description)}>
   <div class="wrap page">
     <header class="head">
       <h1 class="page-title">{d.title}</h1>
@@ -45,17 +47,19 @@ const d = s.downloadPage;
 
     <section aria-labelledby="why">
       <h2 id="why">{d.whyTitle}</h2>
-      <p class="sub">{d.why} <a href={`${repoUrl}#build-macos`}>{d.buildLink}</a></p>
+      <p class="sub">{d.why} <a class="gh-link" href={`${repoUrl}#build-macos`}><Icon name="github" size={15} />{d.buildLink}</a></p>
     </section>
 
     <section aria-labelledby="other">
       <h2 id="other">{d.otherTitle}</h2>
-      <p class="sub">{d.other} <a href={releasesUrl}>{d.otherLink}</a></p>
+      <p class="sub">{d.other} <a class="gh-link" href={releasesUrl}><Icon name="github" size={15} />{d.otherLink}</a></p>
     </section>
   </div>
 </Base>
 
 <style>
+  /* Links to GitHub carry its mark, kept with the first word so it never wraps alone. */
+  .gh-link :global(svg) { display: inline-block; vertical-align: -2px; margin-right: 5px; }
   .early { margin-top: var(--s3); }
   .mac { display: none; }
   @media (hover: none) and (pointer: coarse) { .mac { display: block; } }

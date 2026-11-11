@@ -18,10 +18,20 @@ interface Props {
   /** Pages outside the fixed routes (a code's page): this page's address in each
    *  language it exists in. Without the other language, the switch goes to its home. */
   here?: Partial<Record<Lang, string>>;
-  /** Keep the page out of search results (the download-started page). */
+  /** Keep the page out of search results (the download-started page, the 404s). */
   noindex?: boolean;
+  /** Structured data (schema.org JSON-LD) describing the page for search engines. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
-const { lang, page, title, description, here, noindex = false } = Astro.props;
+const { lang, page, title: pageTitle, description: pageDescription, here, noindex = false, jsonLd } = Astro.props;
+// Search results show about 60 characters of a title and 160 of a description.
+// The site's name goes after the page's own title when it fits and isn't there yet.
+const title = pageTitle.includes("Obdaryn") || pageTitle.length + 10 > 65 ? pageTitle : `${pageTitle} · Obdaryn`;
+const description = pageDescription.length <= 160
+  ? pageDescription
+  : pageDescription.slice(0, 157).replace(/[\s,;:.(–-]+\S*$/, "") + "…";
+// JSON-LD inside <script>: "<" escaped so a text can never close the tag.
+const ld = jsonLd && JSON.stringify(jsonLd).replace(/</g, "\\u003c");
 const s = t(lang);
 const other: Lang = lang === "en" ? "ro" : "en";
 const r = routes[lang];
@@ -71,7 +81,13 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   <meta property="og:image" content={ogImage} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={s.ogAlt} />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content={s.ogAlt} />
+  {ld && <script type="application/ld+json" set:html={ld} />}
   <slot name="head" />
 </head>
 <body>
@@ -90,10 +106,10 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
               <a class="hit" href={n.href} aria-current={n.id === page && n.id !== "home" ? "page" : undefined}>{n.label}</a>
             </li>
           ))}
-          <li class="nav-gh"><a class="hit" href={repoUrl}>{s.nav.github}</a></li>
         </ul>
       </nav>
       <div class="tools">
+        <a class="gh hit" href={repoUrl} aria-label={s.nav.githubLabel} title={s.nav.githubLabel}><Icon name="github" /></a>
         <!-- Hidden until the script below runs: without JavaScript it couldn't work. -->
         <button type="button" class="theme hit" data-theme-toggle hidden aria-pressed="false"
                 aria-label={s.theme.label} data-to-dark={s.theme.toDark} data-to-light={s.theme.toLight}>
@@ -125,7 +141,7 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
         <li><a href={r.guide}>{s.nav.guide}</a></li>
         <li><a href={r.cars}>{s.nav.cars}</a></li>
         <li><a href={r.privacy}>{s.footer.privacy}</a></li>
-        <li><a href={repoUrl}>{s.nav.github}</a></li>
+        <li><a class="with-mark" href={repoUrl}><Icon name="github" size={15} />{s.nav.github}</a></li>
         <li><a href={`mailto:${contactEmail}`}>{s.footer.contact}</a></li>
         <li><a href={otherHref} hreflang={other} lang={other}>{s.otherLang}</a></li>
       </ul>
@@ -184,21 +200,19 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
 
   /* Theme button and language switch: two quiet outlined controls of one height. */
   .tools { display: flex; align-items: center; gap: var(--s2); }
-  .theme, .lang {
+  .gh, .theme, .lang {
     display: inline-flex; align-items: center; justify-content: center; height: 34px;
     border: 1px solid var(--field-border); border-radius: var(--radius); background: transparent;
     color: var(--text-muted); text-decoration: none; font: 500 15px/1 var(--sans);
     transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
   }
-  .theme { width: 34px; padding: 0; cursor: pointer; }
+  .gh, .theme { width: 34px; padding: 0; }
+  .theme { cursor: pointer; }
+  .gh :global(svg) { width: 18px; height: 18px; }
   .theme[hidden] { display: none; }
   .theme :global(svg) { width: 18px; height: 18px; }
   .lang { padding: 0 11px; }
-  .theme:hover, .lang:hover { background: var(--hover); color: var(--text); }
-
-  @media (max-width: 860px) {
-    .nav-gh { display: none; }
-  }
+  .gh:hover, .theme:hover, .lang:hover { background: var(--hover); color: var(--text); }
   /* Narrow windows and phones: the brand and the two controls on the first row,
      the links under them (--top-h in global.css matches this height). */
   @media (max-width: 800px) {
@@ -219,6 +233,7 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   .foot-links a { color: var(--text-muted); text-decoration: none; font-size: 15px; }
   @media (pointer: coarse) { .foot-links { row-gap: 0; } .foot-links a { display: inline-block; padding-block: 12px; } }
   .foot-links a:hover { color: var(--text); text-decoration: underline; }
+  .foot-links .with-mark { display: inline-flex; align-items: center; gap: 7px; vertical-align: top; }
   .foot-small { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2) var(--s5); border-top: 1px solid var(--hairline); padding-top: var(--s4); font-size: 13px; color: var(--text-faint); }
   @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; } }
 </style>

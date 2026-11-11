@@ -14,7 +14,7 @@ const c = s.carsPage;
 const withModels = brands.filter((b) => Object.keys(b.models).length > 0);
 const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce((n, l) => n + l.length, 0);
 ---
-<Base lang={lang} page="cars" title={`${c.title} · Obdaryn`} description={c.description}>
+<Base lang={lang} page="cars" title={c.title} description={c.description}>
   <div class="wrap page">
     <h1 class="page-title">{c.title}</h1>
     <p class="lede">{c.lede}</p>

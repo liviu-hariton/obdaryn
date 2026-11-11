@@ -28,3 +28,26 @@ export const copyrightYears = (() => {
   const now = new Date().getFullYear();
   return now > firstPublished ? `${firstPublished}–${now}` : String(firstPublished);
 })();
+
+/** Obdaryn as schema.org data (JSON-LD), for the home and download pages: what it
+ *  is, what it runs on, that it's free, its licence and where to get it. */
+export function softwareJsonLd(lang: "en" | "ro", pageUrl: string, description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Obdaryn",
+    url: pageUrl,
+    description,
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "macOS 14.4 or later",
+    softwareVersion: version,
+    downloadUrl: dmgUrl,
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+    license: "https://www.gnu.org/licenses/gpl-3.0.html",
+    inLanguage: ["en", "ro"],
+    image: `https://obdaryn.eu/og-${lang}.png`,
+    author: { "@type": "Person", name: "Liviu Hariton" },
+    sameAs: [repoUrl],
+  };
+}

@@ -14,7 +14,7 @@ import Icon from "./Icon.astro";
 import Screen from "./Screen.astro";
 import { brands, brandCodeTotal, generic, modelCount } from "../data/cars";
 import { genericCount } from "../data/codes";
-import { repoUrl, version } from "../data/site";
+import { repoUrl, softwareJsonLd, version } from "../data/site";
 import { num, routes, t, type Lang } from "../i18n/ui";
 
 interface Props { lang: Lang }
@@ -25,7 +25,10 @@ const r = routes[lang];
 const docs = `${repoUrl}/blob/main/docs/`;
 const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce((n, l) => n + l.length, 0);
 ---
-<Base lang={lang} page="home" title={h.title} description={h.description}>
+<Base lang={lang} page="home" title={h.title} description={h.description} jsonLd={[
+  { "@context": "https://schema.org", "@type": "WebSite", name: "Obdaryn", url: new URL(r.home, Astro.site).href, inLanguage: lang },
+  softwareJsonLd(lang, new URL(r.home, Astro.site).href, h.description),
+]}>
   <section class="hero wrap">
     <div class="offer">
       <h1>{h.headline}</h1>
@@ -150,7 +153,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
     <p>{h.closeText}</p>
     <div class="close-actions">
       <DownloadButton lang={lang} />
-      <a class="btn btn-secondary" href={repoUrl}>{h.source}</a>
+      <a class="btn btn-secondary" href={repoUrl}><Icon name="github" />{h.source}</a>
     </div>
     <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
   </section>

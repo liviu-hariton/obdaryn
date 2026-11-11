@@ -25,7 +25,7 @@ const c = codeStrings[lang];
 const base = routes[lang].codes;
 const href = (e: CodeEntry) => (pack ? `${base}${pack}/${e.slug}/` : `${base}${e.slug}/`);
 ---
-<Base lang={lang} page="codes" title={`${title} · Obdaryn`} description={lede} here={here}>
+<Base lang={lang} page="codes" title={title} description={lede} here={here}>
   <div class="wrap page">
     <nav class="crumbs" aria-label={lang === "ro" ? "Unde ești" : "You are here"}><a href={base}>{c.indexTitle}</a></nav>
     <h1 class="page-title">{title}</h1>

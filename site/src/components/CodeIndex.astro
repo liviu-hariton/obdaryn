@@ -21,7 +21,7 @@ const bySystem = (["powertrain", "body", "chassis", "network"] as const)
 const brandCount = (id: string) => distinctCodes(list.brand.filter((e) => e.pack === id));
 const brandTotal = distinctCodes(list.brand);
 ---
-<Base lang={lang} page="codes" title={`${c.indexTitle} · Obdaryn`} description={c.indexDescription(num(lang, list.generic.length + brandTotal))}>
+<Base lang={lang} page="codes" title={c.indexTitle} description={c.indexDescription(num(lang, list.generic.length + brandTotal))}>
   <div class="wrap page">
     <h1 class="page-title">{c.indexTitle}</h1>
     <p class="lede">{c.indexLede(num(lang, list.generic.length), num(lang, brandTotal))}</p>
