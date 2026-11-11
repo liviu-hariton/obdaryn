@@ -36,7 +36,8 @@ C.AbstractButton {
         radius: Theme.radius
         color: control.filled
                ? (control.down ? Qt.darker(control.fillColor, 1.15)
-                  : control.hovered ? Qt.lighter(control.fillColor, 1.08) : control.fillColor)
+                  : control.hovered ? (control.variant === "primary" ? Theme.blueFillHover : Qt.lighter(control.fillColor, 1.08))
+                  : control.fillColor)
                : (control.down ? Theme.selected : control.hovered ? Theme.hover : "transparent")
         border.width: control.filled || (control.variant === "quiet" && !control.hovered) ? 0 : 1
         border.color: control.variant === "danger" ? Theme.red : Theme.fieldBorder

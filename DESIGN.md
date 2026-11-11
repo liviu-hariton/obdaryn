@@ -22,7 +22,7 @@ colors:
   text-dark: "#E8EAED"
   text-muted: "#545C67"
   text-muted-dark: "#A3A9B2"
-  text-faint: "#6B737E"
+  text-faint: "#646C77"
   text-faint-dark: "#7E858F"
   telltale-red: "#C8372D"
   telltale-red-dark: "#F0564A"
@@ -39,10 +39,15 @@ colors:
   green-ink: "#17703F"
   green-ink-dark: "#3CBF7A"
   blue-fill: "#2F6FE0"
+  blue-ink: "#2860C4"
+  blue-ink-dark: "#5B97F7"
   red-fill: "#C8372D"
+  amber-fill: "#9A5800"
   on-fill: "#FFFFFF"
   unlit: "#B9C0CA"
   unlit-dark: "#3A3F47"
+  track-off: "#848C97"
+  track-off-dark: "#636A75"
   trace-1: "#2F6FE0"
   trace-2: "#1E8A50"
   trace-3: "#8A4FC4"
@@ -53,7 +58,7 @@ colors:
   trace-2-dark: "#3CBF7A"
   trace-3-dark: "#C792EA"
   trace-4-dark: "#4FC1C9"
-  trace-5-dark: "#E8EAED"
+  trace-5-dark: "#A3A9B2"
   trace-6-dark: "#9AA4FF"
   chart-a: "#2F6FE0"
   chart-a-dark: "#4C88EE"
@@ -127,7 +132,7 @@ components:
     padding: "0 14px"
     height: "34px"
   button-primary-hover:
-    backgroundColor: "#3378F2"
+    backgroundColor: "#2A68D8"
   button-primary-active:
     backgroundColor: "#2961C3"
   button-secondary:
@@ -221,7 +226,7 @@ Cool, low-chroma neutrals carry the whole interface; four telltale hues are rese
 
 ### Primary
 - **Telltale Blue** (`telltale-blue`, `telltale-blue-dark`): information, selection and keyboard focus. Focus rings (2px), selected-field borders, permanent-code dots, the outgoing arrow in the adapter log, and the first live trace.
-- **Signal Blue Fill** (`blue-fill`): the ground of the one primary button per screen, the on-state of toggles and text selection. Same value in both themes so white text holds about 4.6:1.
+- **Signal Blue Fill** (`blue-fill`): the ground of the one primary button per screen, the on-state of toggles and text selection. Same value in both themes so white text holds about 4.7:1; on hover it darkens to `#2A68D8` (5.2:1) rather than lightening.
 
 ### Secondary
 - **Telltale Amber** (`telltale-amber`, `telltale-amber-dark`): caution or pending. The lit check-engine telltale, pending-code dots, incomplete readiness monitors, connecting status, warning toasts.
@@ -229,7 +234,7 @@ Cool, low-chroma neutrals carry the whole interface; four telltale hues are rese
 - **Telltale Green** (`telltale-green`, `telltale-green-dark`): complete or connected. The connected dot, complete monitors, battery charging, success toasts.
 
 ### Tertiary
-- **Ink variants** (`amber-ink`, `red-ink`, `green-ink`, with `-dark` pairs): the text forms of the state colors. In light theme they are darker than the lamp colors so state text clears 4.5:1 on the window; in dark theme they equal the lamp colors, which already pass.
+- **Ink variants** (`amber-ink`, `red-ink`, `green-ink`, with `-dark` pairs): the text forms of the state colors. In light theme they are darker than the lamp colors so state text clears 4.5:1 on the window; in dark theme they equal the lamp colors, which already pass. `blue-ink` (`#2860C4` light) is the same for links and blue text.
 - **Trace series** (`trace-1` to `trace-6`, with `-dark` pairs): calm, distinct hues for live-value sparklines, cycled by tile index. Blue, green, violet, teal, neutral, periwinkle.
 
 ### Neutral
@@ -240,7 +245,8 @@ Cool, low-chroma neutrals carry the whole interface; four telltale hues are rese
 - **Hairline** (`hairline`): every divider, list rule, chip outline and panel border.
 - **Field / Field Border** (`field`, `field-border`): text inputs and secondary-button outlines.
 - **Text / Muted / Faint** (`text`, `text-muted`, `text-faint`): primary copy; subtitles, labels and descriptions; group labels, timestamps and notes.
-- **Unlit** (`unlit`): a telltale that is off, the disconnected dot, and the off toggle track.
+- **Unlit** (`unlit`): a telltale that is off and the disconnected dot.
+- **Track off** (`track-off`): the track of a switch that is off, dark enough (3:1 against the window) to read as a control rather than a lamp that is off.
 
 ### Named Rules
 **The Telltale Rule.** Red, amber, green and blue mean stop/fault, caution/pending, complete/connected and information/selection/focus, as on an ISO 2575 instrument cluster. They are never decoration, and live traces never use red or amber.
@@ -335,7 +341,7 @@ Under every code explanation there is a quiet 12px faint note. It names where th
 - **Overview header:** "Save report…" (secondary, file icon) beside "Scan again"; ⌘S does the same.
 - **Recordings (connect screen):** under the demo car, "Replay a recording" with Open a file…, then hairline rows (car or file name, date · length, a quiet CSV export and a Replay button) and a faint note naming the folder and warning that recordings include the VIN.
 - **Sidebar:** the logo mark and product name, a framed connection-status box (state dot plus words, transport line; when connected to a car, a Record button beside an icon-only disconnect; while recording, a red "Recording 1:23" line; while replaying, a blue dot, the recorded car and date, the position "0:05 of 0:19" and Stop replay), then nav groups Diagnose, Monitor, Vehicle, Adapter under faint sentence-case labels, and Help, Settings and a read-only note pinned to the bottom. Below 760px of height the group gaps tighten; if the content still doesn't fit (recording or replaying at the 680px minimum), the sidebar scrolls instead of clipping the read-only note.
-- **Nav item:** 32px row, 16px icon plus 14px label in muted text; current item gets the `selected` ground, full text color and 600 weight. A count badge marks codes: red fill when any are stored, amber when they are only pending (Trouble codes counts generic codes; All modules counts codes outside engine and transmission). ⌘1–⌘8 follow the sidebar order.
+- **Nav item:** 32px row, 16px icon plus 14px label in muted text; current item gets the `selected` ground, full text color and 600 weight. A count badge marks codes: red fill when any are stored, `amber-fill` (a darker amber, so the white count holds 5.6:1) when they are only pending (Trouble codes counts generic codes; All modules counts codes outside engine and transmission). ⌘1–⌘8 follow the sidebar order.
 
 ### Logo mark
 The OBD-II port on a graphite tile (22.5% corner radius, `#262B34` to `#121519` top to bottom): the port outline in `#A3A9B2`, its 16 pins unlit in `#4A515C` except pin 16, battery power, lit `#F2A93B`. At 32px and up the full drawing shows every pin; below 32px a simplified drawing keeps only the outline and the lit pin (`src/core/data/brand/logo.svg` and `logo-small.svg`; the app icon is the same drawing with the macOS margins, and its 16 and 32px slots use the simplified one). In the app, two places only: 24px beside the name at the top of the sidebar (20px in windows under 760px tall), and 56px above "Connect to your car"; in the reports, a 32px letterhead (and the web page's favicon). In dark theme the tile carries a 1px `#262A31` edge (the `-dark` files) so it stays a tile on the dark sidebar.

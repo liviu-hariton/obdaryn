@@ -36,7 +36,7 @@ QtObject {
 
     readonly property color text:        dark ? "#E8EAED" : "#15181C"
     readonly property color textMuted:   dark ? "#A3A9B2" : "#545C67"
-    readonly property color textFaint:   dark ? "#7E858F" : "#6B737E"
+    readonly property color textFaint:   dark ? "#7E858F" : "#646C77"   // 4.65:1 on the sidebar, 5.0 on the window
 
     // Telltale colours (ISO 2575), for lamps, dots and icons.
     readonly property color red:         dark ? "#F0564A" : "#C8372D"
@@ -47,11 +47,14 @@ QtObject {
     readonly property color amberInk:    dark ? "#F2A93B" : "#9A5800"
     readonly property color greenInk:    dark ? "#3CBF7A" : "#17703F"
     readonly property color redInk:      dark ? "#F0564A" : "#B3302A"
-    readonly property color blueInk:     dark ? "#5B97F7" : "#2A64CC"   // links and blue text (5.2:1 on light)
-    readonly property color blueFill:    dark ? "#2F6FE0" : "#2F6FE0"   // primary button ground (white text 4.6:1)
+    readonly property color blueInk:     dark ? "#5B97F7" : "#2860C4"   // links and blue text (5.5:1 on light)
+    readonly property color blueFill:    dark ? "#2F6FE0" : "#2F6FE0"   // primary button ground (white text 4.7:1)
+    readonly property color blueFillHover: "#2A68D8"                   // darker on hover, so white text gains (5.2:1)
     readonly property color redFill:     dark ? "#C8372D" : "#C8372D"
     readonly property color onFill:      "#FFFFFF"                      // text and marks on a filled ground
     readonly property color unlit:       dark ? "#3A3F47" : "#B9C0CA"   // a telltale that is off
+    readonly property color trackOff:    dark ? "#636A75" : "#848C97"   // a switch that is off: 3:1 against the window
+    readonly property color amberFill:   "#9A5800"                      // pending-count badge ground (white text 5.6:1)
 
     // Charts comparing two recordings: A and B. Validated with the dataviz
     // palette checks (lightness band, colour-blind and normal-vision separation,
@@ -62,7 +65,7 @@ QtObject {
 
     // Series colours for live traces: calm, distinct, never red/amber (those mean state).
     readonly property var series: dark
-        ? ["#5B97F7", "#3CBF7A", "#C792EA", "#4FC1C9", "#E8EAED", "#9AA4FF"]
+        ? ["#5B97F7", "#3CBF7A", "#C792EA", "#4FC1C9", "#A3A9B2", "#9AA4FF"]   // 5: not the text colour
         : ["#2F6FE0", "#1E8A50", "#8A4FC4", "#1C8C95", "#3B424B", "#5560D8"]
 
     // ---- Type ------------------------------------------------------------------

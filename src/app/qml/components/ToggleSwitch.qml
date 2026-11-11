@@ -49,7 +49,7 @@ C.AbstractButton {
             implicitWidth: 38
             implicitHeight: 22
             radius: 11
-            color: sw.checked ? Theme.blueFill : Theme.unlit
+            color: sw.checked ? Theme.blueFill : Theme.trackOff
             border.width: sw.visualFocus ? 2 : 0
             border.color: Theme.text
             Behavior on color { ColorAnimation { duration: Theme.fast } }

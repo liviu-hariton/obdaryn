@@ -239,13 +239,13 @@ Rectangle {
             text: qsTr("Trouble codes"); iconName: "triangle-alert"
             badge: App.dtcs.activeCodeCount
             Accessible.description: qsTr("%n codes stored or pending", "", App.dtcs.activeCodeCount)
-            badgeColor: App.dtcs.storedCount > 0 ? Theme.redFill : Theme.amber
+            badgeColor: App.dtcs.storedCount > 0 ? Theme.redFill : Theme.amberFill
             current: sidebar.currentPage === 1; onClicked: sidebar.navigate(1)
         }
         Nav {
             text: qsTr("All modules"); iconName: "cpu"
             badge: App.moduleScan.extraCodeCount
-            badgeColor: App.moduleScan.extraStoredCount > 0 ? Theme.redFill : Theme.amber
+            badgeColor: App.moduleScan.extraStoredCount > 0 ? Theme.redFill : Theme.amberFill
             Accessible.description: qsTr("%n codes in modules other than the engine and transmission", "", App.moduleScan.extraCodeCount)
             current: sidebar.currentPage === 8; onClicked: sidebar.navigate(8)
         }
