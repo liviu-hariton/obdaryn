@@ -2,6 +2,189 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ro" sourcelanguage="en">
 <context>
+    <name>AppMenuBar</name>
+    <message>
+        <source>Obdaryn</source>
+        <translation>Obdaryn</translation>
+    </message>
+    <message>
+        <source>About Obdaryn</source>
+        <translation>Despre Obdaryn</translation>
+    </message>
+    <message>
+        <source>Settings…</source>
+        <translation>Setări…</translation>
+    </message>
+    <message>
+        <source>Quit Obdaryn</source>
+        <translation>Ieși din Obdaryn</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation>Fișier</translation>
+    </message>
+    <message>
+        <source>Connect to Adapter…</source>
+        <translation>Conectează-te la adaptor…</translation>
+    </message>
+    <message>
+        <source>Try the Demo Car</source>
+        <translation>Încearcă mașina demo</translation>
+    </message>
+    <message>
+        <source>Replay a Recording…</source>
+        <translation>Redă o înregistrare…</translation>
+    </message>
+    <message>
+        <source>Stop Recording</source>
+        <translation>Oprește înregistrarea</translation>
+    </message>
+    <message>
+        <source>Start Recording</source>
+        <translation>Pornește înregistrarea</translation>
+    </message>
+    <message>
+        <source>Save Report…</source>
+        <translation>Salvează raportul…</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Deconectează</translation>
+    </message>
+    <message>
+        <source>Close Window</source>
+        <translation>Închide fereastra</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editare</translation>
+    </message>
+    <message>
+        <source>Undo</source>
+        <translation>Anulează</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>Refă</translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation>Taie</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>Copiază</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation>Lipește</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Selectează tot</translation>
+    </message>
+    <message>
+        <source>Car</source>
+        <translation>Mașină</translation>
+    </message>
+    <message>
+        <source>Scan Again</source>
+        <translation>Scanează din nou</translation>
+    </message>
+    <message>
+        <source>Scan All Modules</source>
+        <translation>Scanează toate modulele</translation>
+    </message>
+    <message>
+        <source>Read Self-Test Results</source>
+        <translation>Citește rezultatele autotestelor</translation>
+    </message>
+    <message>
+        <source>Clear Trouble Codes…</source>
+        <translation>Șterge codurile de eroare…</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Vizualizare</translation>
+    </message>
+    <message>
+        <source>Overview</source>
+        <translation>Prezentare generală</translation>
+    </message>
+    <message>
+        <source>Trouble Codes</source>
+        <translation>Coduri de eroare</translation>
+    </message>
+    <message>
+        <source>Readiness</source>
+        <translation>Pregătire ITP</translation>
+    </message>
+    <message>
+        <source>Freeze Frame</source>
+        <translation>Instantaneu</translation>
+    </message>
+    <message>
+        <source>Live Data</source>
+        <translation>Date în timp real</translation>
+    </message>
+    <message>
+        <source>Vehicle Info</source>
+        <translation>Informații vehicul</translation>
+    </message>
+    <message>
+        <source>Adapter Log</source>
+        <translation>Jurnal adaptor</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Setări</translation>
+    </message>
+    <message>
+        <source>All Modules</source>
+        <translation>Toate modulele</translation>
+    </message>
+    <message>
+        <source>Trip</source>
+        <translation>Călătorie</translation>
+    </message>
+    <message>
+        <source>Charts</source>
+        <translation>Grafice</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Ajutor</translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation>Fereastră</translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation>Minimizează</translation>
+    </message>
+    <message>
+        <source>Zoom</source>
+        <translation>Zoom</translation>
+    </message>
+    <message>
+        <source>Obdaryn Help</source>
+        <translation>Ajutor Obdaryn</translation>
+    </message>
+    <message>
+        <source>Supported Cars</source>
+        <translation>Mașini compatibile</translation>
+    </message>
+    <message>
+        <source>Obdaryn on GitHub</source>
+        <translation>Obdaryn pe GitHub</translation>
+    </message>
+    <message>
+        <source>Report a Problem</source>
+        <translation>Raportează o problemă</translation>
+    </message>
+</context>
+<context>
     <name>BrandValues</name>
     <message>
         <source>Choose the model…</source>
@@ -1290,6 +1473,18 @@
     <message>
         <source>Web page (*.html)</source>
         <translation>Pagină web (*.html)</translation>
+    </message>
+    <message>
+        <source>Open a recording</source>
+        <translation>Deschide o înregistrare</translation>
+    </message>
+    <message>
+        <source>Obdaryn recordings (*.obdrec)</source>
+        <translation>Înregistrări Obdaryn (*.obdrec)</translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation>Toate fișierele (*)</translation>
     </message>
 </context>
 <context>

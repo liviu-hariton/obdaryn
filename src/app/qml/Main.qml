@@ -62,19 +62,53 @@ C.ApplicationWindow {
         onAccepted: App.saveReport(selectedFile)
     }
 
+    // Replaying a recording from the menu (the connect screen has its own button).
+    function openRecording() { recordingDialog.open() }
+    FileDialog {
+        id: recordingDialog
+        title: qsTr("Open a recording")
+        nameFilters: [qsTr("Obdaryn recordings (*.obdrec)"), qsTr("All files (*)")]
+        onAccepted: { App.replayRecording(selectedFile); window.page = 0 }
+    }
+    /// Help, scrolled to one of its sections (1 = Supported cars).
+    function showHelpSection(index) {
+        window.page = 11
+        Qt.callLater(() => helpPage.showSection(index))
+    }
+
+    // ---- The macOS menu bar ----------------------------------------------------
+    // Native, so it lives in the top bar like any Mac app's. It carries the
+    // keyboard shortcuts there; on other systems the shortcuts below do.
+    readonly property bool nativeMenus: Qt.platform.os === "osx"
+    Component.onCompleted: {
+        if (!nativeMenus)
+            return
+        const bar = menuComponent.createObject(window, { app: window, window: window })
+        // Developer check: "--print-menus" prints the menu bar's structure.
+        if (Qt.application.arguments.indexOf("--print-menus") >= 0) {
+            for (const m of bar.menus) {
+                const items = []
+                for (const i of m.items)
+                    items.push(i.separator ? "—" : i.text + (i.shortcut ? " [" + i.shortcut + "]" : "") + (i.role ? " (role " + i.role + ")" : "") + (i.enabled ? "" : " (off)"))
+                console.log("menu", m.title + ":", items.join(" | "))
+            }
+        }
+    }
+    Component { id: menuComponent; AppMenuBar {} }
+
     // Keyboard: ⌘1…⌘9 follow the sidebar order, ⌘, opens Settings, ⌘R scans again, ⌘S saves the report.
     readonly property var sidebarOrder: [0, 1, 8, 2, 3, 4, 10, 9, 5, 6]
     Repeater {
-        model: Math.min(9, window.sidebarOrder.length) // ⌘1–⌘9
+        model: window.nativeMenus ? 0 : Math.min(9, window.sidebarOrder.length) // ⌘1–⌘9
         delegate: Item {
             required property int index
             Shortcut { sequence: "Ctrl+" + (index + 1); onActivated: window.page = window.sidebarOrder[index] }
         }
     }
-    Shortcut { sequences: [StandardKey.Preferences]; onActivated: window.page = 7 }
-    Shortcut { sequences: [StandardKey.HelpContents]; onActivated: window.page = 11 }
-    Shortcut { sequences: [StandardKey.Refresh, "Ctrl+R"]; enabled: App.connectionState === App.Ready; onActivated: App.runFullScan() }
-    Shortcut { sequences: [StandardKey.Save]; enabled: App.connectionState === App.Ready && !App.scanning; onActivated: window.requestReport() }
+    Shortcut { enabled: !window.nativeMenus; sequences: [StandardKey.Preferences]; onActivated: window.page = 7 }
+    Shortcut { enabled: !window.nativeMenus; sequences: [StandardKey.HelpContents]; onActivated: window.page = 11 }
+    Shortcut { sequences: [StandardKey.Refresh, "Ctrl+R"]; enabled: !window.nativeMenus && App.connectionState === App.Ready; onActivated: App.runFullScan() }
+    Shortcut { sequences: [StandardKey.Save]; enabled: !window.nativeMenus && App.connectionState === App.Ready && !App.scanning; onActivated: window.requestReport() }
 
     RowLayout {
         anchors.fill: parent
@@ -113,7 +147,7 @@ C.ApplicationWindow {
             }
             TripPage { onOpenPage: p => window.page = p }
             ChartsPage { current: window.page === 10; onOpenPage: p => window.page = p }
-            HelpPage { onOpenPage: p => window.page = p }
+            HelpPage { id: helpPage; onOpenPage: p => window.page = p }
         }
     }
 

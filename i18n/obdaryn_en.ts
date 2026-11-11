@@ -118,8 +118,8 @@
     <message numerus="yes">
         <source>%n module(s) at the brand&apos;s own addresses, %1 of them confirmed on real cars.</source>
         <translation>
-            <numerusform>%n module at the brand's own address, %1 of them confirmed on real cars.</numerusform>
-            <numerusform>%n modules at the brand's own addresses, %1 of them confirmed on real cars.</numerusform>
+            <numerusform>%n module at the brand&apos;s own address, %1 of them confirmed on real cars.</numerusform>
+            <numerusform>%n modules at the brand&apos;s own addresses, %1 of them confirmed on real cars.</numerusform>
         </translation>
     </message>
     <message numerus="yes">

@@ -52,6 +52,7 @@ qt_add_qml_module(obdaryn
         qml/components/EmptyState.qml
         qml/components/BrandValues.qml
         qml/components/Logo.qml
+        qml/components/AppMenuBar.qml
         qml/components/Segmented.qml
         qml/components/ToggleSwitch.qml
         qml/components/TextInput.qml
