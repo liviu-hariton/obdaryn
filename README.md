@@ -10,7 +10,7 @@
   - VW group (59)
   - Renault/Dacia (24)
   - Suzuki (23 engine and automatic-gearbox codes, 2005–2014 models)
-- **All modules.** A full-vehicle scan reads codes from ABS, airbag, body, cluster and other modules too, using per-brand module lists: Hyundai/Kia, Toyota, Ford, VW group, Renault/Dacia, or generic for any car.
+- **All modules.** A full-vehicle scan reads codes from ABS, airbag, body, cluster and other modules too, using per-brand module lists: Hyundai/Kia, Toyota, Ford, VW group, Renault/Dacia, or generic for any car. For a brand with no list yet (Suzuki today), or a module the list misses, **Search every address** asks each diagnostic address whether a module is there (about a minute, only "are you there?" requests) and then reads the codes of whatever answered.
 - **Readiness for inspection.** Which self-tests (monitors) have completed, and whether the car is likely to pass the emissions check.
 - **Self-test results (Mode 06).** The numbers behind the readiness monitors, each next to the limits the car judges it by, so a part that's wearing out shows before the check-engine light comes on.
 - **Freeze frame.** The sensor snapshot taken when a fault was stored.
@@ -25,6 +25,7 @@
 - **Adapter health.** What your adapter really supports (most are ELM327-compatible clones, which is usually fine), how fast it answers, and automatic reconnection when the Wi-Fi link drops or the adapter falls asleep. When the ignition goes off, Obdaryn waits and picks up again by itself.
 - **Adapter console.** Every command and answer, for troubleshooting.
 - **English and Romanian**, switchable at runtime; metric, UK or US units.
+- **Update check, if you want one.** Off until you turn it on in Settings: once a day Obdaryn asks obdaryn.eu for the newest version number and, when there is one, links to the download page. It installs nothing by itself.
 
 ![Obdaryn overview, dark theme, connected to the built-in demo car](docs/images/overview-dark.png)
 
@@ -41,6 +42,8 @@
 ![The trip computer](docs/images/trip-light.png)
 
 > **Read-only by design.** A safety guard checks every command and refuses anything that could write to, code, actuate, reset or flash a vehicle module. See [docs/CAR_INTERACTION.md](docs/CAR_INTERACTION.md).
+>
+> **Private.** Obdaryn sends nothing about you or your car online. Its only internet request is the opt-in update check, which fetches one small file holding the newest version number ([privacy](https://obdaryn.eu/privacy/)).
 
 Status: v0.4, in active development and not yet tested on a real car. macOS first; Windows, Android and iOS will follow from the same Qt codebase. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -72,7 +75,7 @@ In CLion, open the folder and add `-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt` to 
 | `src/app` | Qt Quick desktop app: controllers, models and QML screens |
 | `tests` | Qt Test unit tests that run against recorded replies and the built-in simulator |
 | `i18n` | Translations (`obdaryn_ro.ts`) |
-| `tools` | Data import scripts (obdex codes, OBDb values, Romanian code texts), the first real-car test (`first-contact.sh`), and the release and website scripts (`make-release.sh`, `publish-release.sh`, `deploy-site.sh`, `capture-site-images.sh`) |
+| `tools` | Data import scripts (obdex codes, OBDb values, Romanian code texts), the first real-car test (`first-contact.sh`), and the release, website and screenshot scripts (`make-release.sh`, `publish-release.sh`, `deploy-site.sh`, `capture-site-images.sh`, `capture-readme-images.sh`) |
 | `docs` | Architecture, car-interaction guide, roadmap, user guide (English and Romanian) |
 | `site` | The obdaryn.eu website (Astro, static), built from the app's own data, including a page per trouble code; see [docs/RELEASE.md](docs/RELEASE.md#the-website) |
 

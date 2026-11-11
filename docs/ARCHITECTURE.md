@@ -63,16 +63,20 @@
   3. reads the part number and software version.
 
   It always restores functional addressing (`AT SH 7DF`) afterwards. The app pauses live polling for the duration, and waits for an in-flight poll to finish first, because the adapter's target address is shared state.
+- **ModuleDiscovery** (`src/core/obd`) finds modules no brand list knows. After `AT CRA` it asks every 11-bit request ID from 700 to 7F7 with `AT SH <id>` and TesterPresent (`3E 00`), skipping 7DF, the standard reply IDs 7E8–7EF and every reply ID found so far, so it never transmits on an ID a module answers with. A positive answer (`7E`) or a refusal (`7F 3E`) both mean a module is there. `asProfile()` turns the answers into a `VehicleProfile`: an address the brand's list knows keeps its entry, the others become "Module at 7D1" (category `other`, unconfirmed). `ModuleScanner` then reads them like any list. The app runs it from **Search every address** (All modules screen, Car menu), the probe from `--discover`; see [CAR_INTERACTION.md](CAR_INTERACTION.md#4c-looking-for-modules-a-brand-list-doesnt-know-discovery).
 - **ObdClient** (`src/core/obd`) offers diagnostic intents as single asynchronous calls:
   - **Multi-PID batching.** On CAN it batches up to 6 PIDs per request, falling back to one per request when an ECU ignores the extras.
   - **Safe clearing.** It refuses to clear codes while the engine runs.
 - **App** (`src/app`):
   - **QML singleton.** `AppController` is exposed to QML as the `App` singleton and sequences the first scan: vehicle info → readiness → codes → freeze frame → supported PIDs.
   - **Polling.** After the scan, live data is polled continuously. Pinned values refresh on every cycle; the rest refresh in rotation.
+  - **Update check.** `UpdateChecker` (`src/app`, exposed as `App.updates`) is off unless the user turns it on. It GETs `https://obdaryn.eu/latest.json` (`{"version":"0.4.18"}`, written by the site build) at most once a day, reads at most 4 KB, compares with `QVersionNumber` and remembers the answer in the settings. It never downloads or installs anything, and links to a download page whose address is fixed in the app. The only network code outside the adapter connection; no `QNetworkAccessManager` exists until a check runs. `OBDARYN_UPDATE_URL` points it at a test file.
 - **Release** (`tools/make-release.sh`): a Release build against the official Qt 6.12 binaries, as one universal binary (arm64 + x86_64) for macOS 14.4 and later, made self-contained by `macdeployqt`. The script then leaves out the Qt modules the app never loads, by name, and checks the result before signing: no binary may link to a library that was left out, every binary must run on macOS 14.4, and every screen must open from the packaged app. See [RELEASE.md](RELEASE.md).
 - **Website** (`site/`): the obdaryn.eu presentation site, a static Astro build that is separate from the app. At build time it reads the app's version, its code databases, its brand data and the user guide straight from this repo, so it can't drift from the app.
   - `site/src/data/allCodes.ts` turns `dtc_generic*.json` and the brand packs into one page per code (`/codes/P0420/`, `/codes/<brand>/<code>/`), in Romanian only where the whole explanation is translated; `codeRoutes.ts` holds the static paths, and `/codes/lookup.json` is the list the "Look up a code" box checks against.
   - Download buttons open `/download/started/`, which starts the installer from the GitHub release named by the version and shows macOS's first-open step.
+  - `/latest.json` holds the version for the app's update check. The lookup list is fetched as `/codes/lookup.json?v=<fingerprint>` (`site/src/data/lookup.ts`), because the server's nginx caches `.json` for years.
+  - Search engines: the layout (`Base.astro`) adds " · Obdaryn" to a title only when it fits, cuts descriptions to 160 characters, and writes JSON-LD passed by the page (SoftwareApplication on the home and download pages, BreadcrumbList on code pages).
   - See [RELEASE.md](RELEASE.md#the-website).
 
 ## Conventions

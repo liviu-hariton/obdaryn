@@ -30,8 +30,10 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [x] Brand-specific code descriptions, starting with Hyundai/Kia: 159 codes (177 module-specific entries) in English and Romanian, with sources (see `docs/brand-packs.md`).
 - [x] Brand packs for Toyota/Lexus, Ford, VW group and Renault/Dacia (see `docs/brand-packs.md`).
 - [x] **Suzuki,** first part: a profile recognised from the VIN (with the Santana-built `VSE` and the Toyota-built Across fixed), and a pack of 23 engine and automatic-gearbox codes for 2005–2014 Swift, SX4 and Grand Vitara.
-  - [ ] Module addresses for ABS, airbag, body and the rest: none are public; to be found on a real 2010–2017 Swift (K12B) with the module discovery mode.
+  - [ ] Module addresses for ABS, airbag, body and the rest: none are public; to be found on a real 2010–2017 Swift (K12B) with Search every address.
   - [ ] Confirm the pack's codes on the 2010–2017 Swift and later; ABS and airbag codes once their modules can be read.
+- [x] **Module discovery** for brands without a module list: **Search every address** on the All modules screen (and `obdaryn-probe --discover`, step 3 of `tools/first-contact.sh`) asks every 11-bit address from 700 to 7F7 with TesterPresent only, then scans the codes of whatever answered. Unknown modules are named by their address.
+  - [ ] Extended addressing (Toyota's 750 gateway) and 29-bit CAN.
 - [x] **Manufacturer data packs.** OBDb signal sets for 52 Hyundai and Kia models (`tools/import_obdb.py`, CC BY-SA 4.0, a separate attributed data file): read-only `21xx` / `22xxxx` requests, verified (non-debug) commands only, filtered by model year. Live data gets a "Hyundai values" view: choose the model, find what the modules answer (remembered per VIN), then the values refresh at OBDb's suggested rates while on screen. The probe reads them too (`--model Elantra`), and `tools/first-contact.sh` asks for the model.
   - Decoder checked against OBDb's recordings of real 2012–2015 Elantras; signals that decode to impossible values there are left out.
   - [ ] Confirm the Elantra values against Car Scanner on the real car; report wrong definitions upstream to OBDb.
@@ -63,7 +65,9 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 
 - [x] **Installer for macOS 14.4 and later,** one universal app for Apple Silicon and Intel, built with the official Qt binaries (`tools/make-release.sh`). Qt modules the app never loads are left out (77 MB → 56 MB), guarded by a link check and an "every screen opens" check.
 - [x] **Releases on GitHub** with the installer and its SHA-256 (`tools/publish-release.sh`).
-- [x] **obdaryn.eu,** in English and Romanian, built from the app's data: the home page explains a demo code the way the app does, a page for every trouble code the app explains (9,533 generic and 461 manufacturer explanations), supported cars, the user guide, a download page that walks through macOS's first-open step, and no cookies or trackers (`tools/deploy-site.sh`).
+- [x] **obdaryn.eu,** in English and Romanian, built from the app's data: the home page explains a demo code the way the app does, a page for every trouble code the app explains (9,533 generic and 484 manufacturer explanations), supported cars, the user guide, a download page that walks through macOS's first-open step, and no cookies or trackers (`tools/deploy-site.sh`). Titles, descriptions and structured data (JSON-LD) are set for search engines.
+- [x] **Opt-in update check:** off by default; once a day it fetches the newest version number from obdaryn.eu/latest.json and links to the download page. Nothing is installed by itself.
+  - [ ] Installing updates in the app (Sparkle) would need a signing key per release, and works poorly while the app isn't notarized.
 - [ ] Sign with an Apple Developer ID and notarize, so macOS opens the app without the Open Anyway step (needs a paid Apple Developer account).
 - [ ] Run the installer on a real Intel Mac (so far only under Rosetta).
 - [ ] macOS older than 14.4: needs an older Qt, or Qt built from source.
