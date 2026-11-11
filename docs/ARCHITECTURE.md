@@ -76,6 +76,7 @@
   - `site/src/data/allCodes.ts` turns `dtc_generic*.json` and the brand packs into one page per code (`/codes/P0420/`, `/codes/<brand>/<code>/`), in Romanian only where the whole explanation is translated; `codeRoutes.ts` holds the static paths, and `/codes/lookup.json` is the list the "Look up a code" box checks against.
   - Download buttons open `/download/started/`, which starts the installer from the GitHub release named by the version and shows macOS's first-open step.
   - `/latest.json` holds the version for the app's update check. The lookup list is fetched as `/codes/lookup.json?v=<fingerprint>` (`site/src/data/lookup.ts`), because the server's nginx caches `.json` for years.
+  - AI agents: `robots.txt` allows search and agents and asks not to train on the site (`Content-Signal: search=yes, ai-input=yes, ai-train=no`); `/llms.txt` (`src/pages/llms.txt.ts`, built from the code data) maps the site and spells out how code pages are addressed; the guide is also served as Markdown (`/guide.md`, `/ro/ghid.md`, announced with `rel="alternate"`). Code pages describe themselves as a schema.org `DefinedTerm`.
   - Search engines: the layout (`Base.astro`) adds " · Obdaryn" to a title only when it fits, cuts descriptions to 160 characters, and writes JSON-LD passed by the page (SoftwareApplication on the home and download pages, BreadcrumbList on code pages).
   - See [RELEASE.md](RELEASE.md#the-website).
 

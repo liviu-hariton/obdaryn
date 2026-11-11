@@ -38,7 +38,8 @@ const variantModule = !isGeneric && e.slug !== e.code && e.module ? c.modules[e.
 const variant = variantModule ? `${brand}, ${variantModule}` : brand;
 const title = isGeneric ? c.pageTitle(e.code, e.title) : c.brandPageTitle(e.code, variant!, e.title);
 const description = isGeneric ? c.pageDescription(e.code, e.title) : c.brandPageDescription(e.code, brand!, e.title, variantModule);
-// The breadcrumb above the code, for search engines.
+// What the page defines (a code in a set of codes), and the breadcrumb above it,
+// for search engines and agents.
 const abs = (path: string) => new URL(path, Astro.site).href;
 const crumbs = {
   "@context": "https://schema.org",
@@ -48,6 +49,16 @@ const crumbs = {
     { "@type": "ListItem", position: 2, name: up.label, item: abs(up.href) },
     { "@type": "ListItem", position: 3, name: `${e.code}: ${e.title}`, item: abs(here[lang]!) },
   ],
+};
+const term = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  termCode: e.code,
+  name: `${e.code}: ${e.title}`,
+  description: e.detects || e.title,
+  url: abs(here[lang]!),
+  inLanguage: lang,
+  inDefinedTermSet: { "@type": "DefinedTermSet", name: isGeneric ? c.indexTitle : c.packTitle(brand!), url: abs(isGeneric ? base : up.href) },
 };
 // A related code links to its page in this language when there is one, else in English.
 const relatedHref = (code: string) => (lang === "ro" && hasGeneric("ro", code) ? `${base}${code}/` : `${routes.en.codes}${code}/`);
@@ -63,7 +74,7 @@ const sourceName = (u: string) => {
   } catch { return u; }
 };
 ---
-<Base lang={lang} page="codes" title={title} description={description} here={here} jsonLd={crumbs}>
+<Base lang={lang} page="codes" title={title} description={description} here={here} jsonLd={[crumbs, term]}>
   <div class="wrap code-page">
     <nav class="crumbs" aria-label={lang === "ro" ? "Unde ești" : "You are here"}>
       <a href={base}>{c.indexTitle}</a><span aria-hidden="true">/</span><a href={up.href}>{up.label}</a>

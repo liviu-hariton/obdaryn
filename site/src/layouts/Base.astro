@@ -7,7 +7,7 @@
 import "../styles/global.css";
 import Icon from "../components/Icon.astro";
 import { routes, t, type Lang, type PageId } from "../i18n/ui";
-import { copyrightYears, contactEmail, repoUrl } from "../data/site";
+import { coffeeUrl, copyrightYears, contactEmail, repoUrl } from "../data/site";
 import { codeStrings } from "../i18n/codes";
 
 interface Props {
@@ -20,10 +20,12 @@ interface Props {
   here?: Partial<Record<Lang, string>>;
   /** Keep the page out of search results (the download-started page, the 404s). */
   noindex?: boolean;
+  /** The same content as Markdown (the guide), announced to agents with rel="alternate". */
+  markdown?: string;
   /** Structured data (schema.org JSON-LD) describing the page for search engines. */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
-const { lang, page, title: pageTitle, description: pageDescription, here, noindex = false, jsonLd } = Astro.props;
+const { lang, page, title: pageTitle, description: pageDescription, here, noindex = false, markdown, jsonLd } = Astro.props;
 // Search results show about 60 characters of a title and 160 of a description.
 // The site's name goes after the page's own title when it fits and isn't there yet.
 const title = pageTitle.includes("Obdaryn") || pageTitle.length + 10 > 65 ? pageTitle : `${pageTitle} · Obdaryn`;
@@ -87,12 +89,13 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
   <meta name="twitter:image:alt" content={s.ogAlt} />
+  {markdown && <link rel="alternate" type="text/markdown" href={markdown} />}
   {ld && <script type="application/ld+json" set:html={ld} />}
   <slot name="head" />
 </head>
 <body>
   <a class="skip" href="#main">{s.skip}</a>
-  <header class="top">
+  <header class="top" id="top" tabindex="-1">
     <div class="wrap top-inner">
       <a class="brand" href={r.home} aria-label="Obdaryn">
         <img class="when-light" src="/logo.svg" alt="" width="36" height="36" />
@@ -134,6 +137,8 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
           <span>Obdaryn</span>
         </a>
         <p>{s.footer.tagline}</p>
+        <p class="coffee-note">{s.footer.coffeeNote}</p>
+        <a class="coffee" href={coffeeUrl} rel="noopener"><Icon name="coffee" size={17} />{s.footer.coffee}</a>
       </div>
       <ul class="foot-links">
         <li><a href={r.download}>{s.nav.download}</a></li>
@@ -151,6 +156,10 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
       </div>
     </div>
   </footer>
+
+  <!-- Back to top: appears once the page has been scrolled a good way down.
+       Hidden until the script below runs; without JavaScript the Home key does it. -->
+  <a class="to-top" href="#top" data-to-top hidden aria-label={s.toTop} title={s.toTop}><Icon name="arrow-up" /></a>
   <script>
     // The theme button flips light and dark and remembers the choice in this
     // browser. Until it's used, the site follows the system theme, live.
@@ -182,6 +191,22 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
     }
     systemDark.addEventListener("change", sync);
     sync();
+
+    // Back to top: shown after about a screen and a half of scrolling. It scrolls
+    // without adding #top to the address and puts the keyboard focus back at the top.
+    const toTop = document.querySelector<HTMLAnchorElement>("[data-to-top]");
+    if (toTop) {
+      toTop.hidden = false;
+      const update = () => toTop.classList.toggle("shown", window.scrollY > window.innerHeight * 1.5);
+      window.addEventListener("scroll", update, { passive: true });
+      update();
+      toTop.addEventListener("click", (event) => {
+        event.preventDefault();
+        const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: still ? "auto" : "smooth" });
+        document.getElementById("top")?.focus({ preventScroll: true });
+      });
+    }
   </script>
 </body>
 </html>
@@ -224,7 +249,8 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
     nav a { font-size: 14px; }
   }
 
-  .foot { margin-top: var(--s9); border-top: 1px solid var(--hairline); background: var(--sidebar); }
+  /* The bottom padding keeps the last line clear of the back-to-top button. */
+  .foot { margin-top: var(--s9); border-top: 1px solid var(--hairline); background: var(--sidebar); padding-bottom: 56px; }
   .foot-inner { display: grid; grid-template-columns: 1fr auto; gap: var(--s5) var(--s7); padding-block: var(--s7); }
   .foot .brand { font-size: 18px; gap: 10px; }
   .foot .brand img { width: 32px; height: 32px; }
@@ -233,6 +259,31 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   .foot-links a { color: var(--text-muted); text-decoration: none; font-size: 15px; }
   @media (pointer: coarse) { .foot-links { row-gap: 0; } .foot-links a { display: inline-block; padding-block: 12px; } }
   .foot-links a:hover { color: var(--text); text-decoration: underline; }
+  .foot-brand .coffee-note { margin-top: var(--s4); font-size: 14px; color: var(--text-faint); }
+  .coffee {
+    display: inline-flex; align-items: center; gap: 8px; height: 36px; margin-top: var(--s2); padding: 0 14px;
+    border: 1px solid var(--field-border); border-radius: var(--radius); color: var(--text); text-decoration: none;
+    font: 500 15px/1 var(--sans); transition: background-color var(--fast) var(--ease);
+  }
+  .coffee :global(svg) { color: var(--amber); }
+  .coffee:hover { background: var(--hover); }
+
+  /* Back to top: a quiet control like the theme button, bottom right, above the page. */
+  .to-top {
+    position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 9;
+    display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    border: 1px solid var(--field-border); border-radius: var(--radius); background: var(--window); color: var(--text-muted);
+    box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.35);
+    opacity: 0; transform: translateY(8px); pointer-events: none; visibility: hidden;
+    transition: opacity var(--normal) var(--ease), transform var(--normal) var(--ease), visibility 0s linear var(--normal),
+                background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+  }
+  .to-top[hidden] { display: none; }
+  .to-top.shown { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
+  .to-top:hover { background: var(--hover); color: var(--text); }
+  .to-top :global(svg) { width: 20px; height: 20px; }
+  @media (prefers-reduced-motion: reduce) { .to-top { transform: none; } }
+  .top:focus { outline: none; }
   .foot-links .with-mark { display: inline-flex; align-items: center; gap: 7px; vertical-align: top; }
   .foot-small { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2) var(--s5); border-top: 1px solid var(--hairline); padding-top: var(--s4); font-size: 13px; color: var(--text-faint); }
   @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; } }

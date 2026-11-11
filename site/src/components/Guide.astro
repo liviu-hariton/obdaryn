@@ -15,7 +15,7 @@ const s = t(lang).guidePage;
 const doc = lang === "ro" ? ro : en;
 const headings = doc.getHeadings().filter((h) => h.depth === 2);
 ---
-<Base lang={lang} page="guide" title={s.title} description={s.description}>
+<Base lang={lang} page="guide" title={s.title} description={s.description} markdown={lang === "ro" ? "/ro/ghid.md" : "/guide.md"}>
   <div class="wrap layout">
     <nav class="rail" aria-label={lang === "ro" ? "Pe această pagină" : "On this page"}>
       <p>{lang === "ro" ? "Pe această pagină" : "On this page"}</p>
