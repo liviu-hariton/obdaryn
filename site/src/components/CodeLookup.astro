@@ -2,18 +2,19 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 //
 // "Look up a code": type the code your scan tool shows and go to its page. The
-// list of codes (/codes/lookup.json, about 30 KB compressed) loads only when
+// list of codes (/codes/lookup.json?v=…, about 30 KB compressed) loads only when
 // someone looks something up. A code with a page in the visitor's language opens
 // there, otherwise in English; a manufacturer code that several brands use asks
 // which brand. Without JavaScript the form opens the code index instead.
 import { routes, type Lang } from "../i18n/ui";
 import { codeStrings } from "../i18n/codes";
+import { lookupUrl } from "../data/lookup";
 
 interface Props { lang: Lang; compact?: boolean; another?: boolean; id?: string; label?: string }
 const { lang, compact = false, another = false, id = "lookup", label } = Astro.props;
 const s = codeStrings[lang].lookup;
 ---
-<form class:list={["lookup", { compact }]} action={routes[lang].codes} method="get" data-lookup={lang}
+<form class:list={["lookup", { compact }]} action={routes[lang].codes} method="get" data-lookup={lang} data-list={lookupUrl}
       data-msg-format={s.badFormat} data-msg-unknown={s.unknown("{c}")} data-msg-maker={s.unknownMaker("{c}")}
       data-msg-many={s.many("{c}")} data-msg-failed={s.failed}>
   <label for={id}>{label ?? (another ? s.labelAnother : s.label)}</label>
@@ -53,7 +54,9 @@ const s = codeStrings[lang].lookup;
   // list and go to the page. The list is fetched once, the first time it's needed.
   type Lookup = { en: string; ro: string; generic: string[]; genericRo: string[]; brand: Record<string, [string, string, string, string][]> };
   let list: Promise<Lookup> | undefined;
-  const load = () => (list ??= fetch("/codes/lookup.json").then((r) => { if (!r.ok) throw new Error(); return r.json(); }));
+  // The address carries a fingerprint of the list (data-list), so a new list is never read from an old cache.
+  const listUrl = document.querySelector<HTMLElement>("[data-lookup]")?.dataset.list ?? "/codes/lookup.json";
+  const load = () => (list ??= fetch(listUrl).then((r) => { if (!r.ok) throw new Error(); return r.json(); }));
 
   for (const form of document.querySelectorAll<HTMLFormElement>("[data-lookup]")) {
     const lang = form.dataset.lookup as "en" | "ro";
