@@ -1,6 +1,6 @@
 # Obdaryn
 
-**Free, open-source, read-only OBD-II diagnostics for your car.** It is a desktop app for ELM327-compatible adapters such as the Vgate iCar Pro Wi-Fi.
+**Free, open-source, read-only OBD-II diagnostics for your car.** It is a desktop app for ELM327-compatible adapters such as the [Vgate iCar Pro Wi-Fi](https://www.vgatemall.com/products-detail/i-14/), the adapter it is developed with.
 
 - **Trouble codes in plain language.** Stored, pending and permanent codes from every OBD module, each with what it means, likely causes, symptoms, whether it matters for the inspection (ITP), and a rough repair cost. The same explanations are on the web, one page per code: [obdaryn.eu/codes](https://obdaryn.eu/codes/).
 - **Brand code explanations.** Manufacturer-specific codes are explained per brand, with links to the public sources, in English and Romanian:

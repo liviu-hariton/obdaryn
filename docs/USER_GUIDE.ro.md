@@ -10,7 +10,7 @@ Același ghid e și în aplicație, la **Ajutor** (⌘?). Pentru ce îi cere fie
 
 ## Primii pași
 
-Obdaryn citește ce raportează calculatoarele mașinii printr-un adaptor Wi-Fi compatibil ELM327, de exemplu Vgate iCar Pro. Doar citește: nu poate modifica nimic în mașină.
+Obdaryn citește ce raportează calculatoarele mașinii printr-un adaptor Wi-Fi compatibil ELM327, de exemplu [Vgate iCar Pro Wi-Fi](https://www.vgatemall.com/products-detail/i-14/), cel cu care e dezvoltat Obdaryn. Doar citește: nu poate modifica nimic în mașină.
 
 1. Pune adaptorul în priza OBD-II, sub bord, pe partea șoferului.
 2. Pune contactul. Motorul poate rămâne oprit; pornește-l pentru datele în timp real cu motorul în funcțiune.

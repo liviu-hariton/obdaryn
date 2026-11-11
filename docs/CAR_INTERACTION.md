@@ -4,7 +4,7 @@ This guide covers what each feature asks of the car, which state the car must be
 
 ## 1. What you need
 
-- **The adapter.** A Vgate iCar Pro Wi-Fi or any ELM327-compatible Wi-Fi adapter.
+- **The adapter.** A [Vgate iCar Pro Wi-Fi](https://www.vgatemall.com/products-detail/i-14/) (the one Obdaryn is developed with) or any ELM327-compatible Wi-Fi adapter.
 - **The OBD-II socket.** On the 2014 Elantra it is under the dashboard, left of the steering column, above the pedals. Every car sold in the EU since 2001 (petrol) or 2004 (diesel) has one, within reach of the driver's seat.
 - **A laptop with Obdaryn**, macOS for now.
 

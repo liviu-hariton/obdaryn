@@ -10,7 +10,7 @@ The same guide is in the app under **Help** (⌘?). For what each feature asks o
 
 ## Start here
 
-Obdaryn reads what the car's computers report through an ELM327-compatible Wi-Fi adapter such as the Vgate iCar Pro. It only reads: it can't change anything in the car.
+Obdaryn reads what the car's computers report through an ELM327-compatible Wi-Fi adapter such as the [Vgate iCar Pro Wi-Fi](https://www.vgatemall.com/products-detail/i-14/), the one Obdaryn is developed with. It only reads: it can't change anything in the car.
 
 1. Plug the adapter into the OBD-II socket, under the dashboard on the driver's side.
 2. Turn the ignition ON. The engine can stay off; start it for live data with the engine running.
