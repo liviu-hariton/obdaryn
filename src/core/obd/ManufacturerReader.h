@@ -34,8 +34,13 @@ public:
         QString key;           ///< ManufacturerCommand::key()
         bool answered = false; ///< a positive answer came back
         bool refused = false;  ///< the module answered "not supported" (negative response)
+        /// The connection was lost before this command got an answer: nothing is
+        /// known about it. Once that happens, the remaining commands aren't sent.
+        bool lostConnection = false;
         QList<Value> values;
     };
+    /// True if any result lost the connection (the read is incomplete).
+    static bool interrupted(const QList<Result> &results);
 
     /// Reads every command once; done() gets one result per command, in order.
     /// progress(requests done so far, total), if given, runs after each request.

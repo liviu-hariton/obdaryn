@@ -409,6 +409,8 @@ void AppController::setScanStep(const QString &step)
 
 void AppController::resetVehicleData()
 {
+    m_manufacturerReading = false;
+    m_afterManufacturerRead = nullptr;
     m_manufacturerModel.clear();
     m_manufacturerYear = 0;
     m_manufacturerAnswered.clear();
@@ -626,7 +628,7 @@ void AppController::readStatusPids()
 
 void AppController::refreshCodes()
 {
-    if (scanning() || busyWithModules())
+    if (scanning() || adapterBusy())
         return;
     setScanStep(tr("Reading trouble codes"));
     m_client->readMonitorStatus([this](const MonitorStatus &status) {
@@ -642,7 +644,7 @@ void AppController::refreshCodes()
 
 void AppController::refreshReadiness()
 {
-    if (busyWithModules())
+    if (adapterBusy())
         return;
     m_client->readMonitorStatus([this](const MonitorStatus &status) {
         m_readiness = status;
@@ -652,7 +654,7 @@ void AppController::refreshReadiness()
 
 void AppController::refreshFreezeFrame()
 {
-    if (busyWithModules())
+    if (adapterBusy())
         return;
     m_client->readFreezeFrame([this](const ObdClient::FreezeFrame &ff) {
         m_freeze = ff;
@@ -662,7 +664,7 @@ void AppController::refreshFreezeFrame()
 
 void AppController::readMonitorTests()
 {
-    if (m_readingMonitorTests || busyWithModules() || m_client->session()->state() != ElmSession::State::Ready)
+    if (m_readingMonitorTests || adapterBusy() || m_client->session()->state() != ElmSession::State::Ready)
         return;
     m_readingMonitorTests = true;
     emit monitorTestsChanged();
@@ -769,6 +771,11 @@ void AppController::clearCodes()
     }
     if (busyWithModules()) {
         emit clearFinished(false, tr("Wait for the module scan to finish."));
+        return;
+    }
+    if (m_manufacturerReading) {
+        // The adapter is pointed at one module: a clear now would reach only that one.
+        emit clearFinished(false, tr("Wait a moment: Obdaryn is reading the car's modules. Try again when it's done."));
         return;
     }
     setScanStep(tr("Clearing trouble codes"));
@@ -951,13 +958,36 @@ void AppController::findManufacturerValues()
     m_manufacturerState = QStringLiteral("finding");
     m_manufacturerProgress = 0;
     m_manufacturerTotal = int(commands.size());
+    m_manufacturerReading = true;
+    // Shown like any scan, so actions that need the standard addressing wait.
+    //: Status while finding manufacturer values, e.g. "Asking the modules for Hyundai values"
+    const QString step = tr("Asking the modules for %1 values").arg(m_manufacturer);
+    setScanStep(step);
     emit manufacturerSetupChanged();
     // Module requests change the adapter's target address: never during a poll.
     const QString vin = m_vin;
-    whenPollIdle([this, commands, vin] {
-        ManufacturerReader::read(m_client, commands, [this, commands, vin](const QList<ManufacturerReader::Result> &results) {
-            if (vin != m_vin || m_manufacturerState != QLatin1String("finding"))
-                return; // another car (or a new connection) meanwhile: these answers aren't its
+    whenPollIdle([this, commands, vin, step] {
+        ManufacturerReader::read(m_client, commands, [this, commands, vin, step](const QList<ManufacturerReader::Result> &results) {
+            // Whatever happened, the standard addressing is back: resume.
+            m_manufacturerReading = false;
+            if (m_scanStep == step)
+                setScanStep({}); // only our own status, never a scan that started since
+            const auto resume = [this] {
+                if (m_client->session()->state() == ElmSession::State::Ready) {
+                    m_pollingEnabled = true;
+                    schedulePoll();
+                }
+            };
+            if (vin != m_vin || m_manufacturerState != QLatin1String("finding")) {
+                resume(); // another car, model or year meanwhile: these answers aren't for it
+                return;
+            }
+            if (ManufacturerReader::interrupted(results)) {
+                // The connection dropped: nothing is known, so nothing is remembered.
+                loadManufacturerSetup();
+                resume();
+                return;
+            }
             m_manufacturerAnswered.clear();
             QStringList keys;
             for (int i = 0; i < results.size(); ++i) {
@@ -983,10 +1013,7 @@ void AppController::findManufacturerValues()
             }
             m_manufacturerState = m_manufacturerAnswered.isEmpty() ? QStringLiteral("none") : QStringLiteral("found");
             emit manufacturerSetupChanged();
-            if (m_client->session()->state() == ElmSession::State::Ready) {
-                m_pollingEnabled = true;
-                schedulePoll();
-            }
+            resume();
         }, [this](int done, int total) {
             m_manufacturerProgress = done;
             m_manufacturerTotal = total;
@@ -1017,8 +1044,15 @@ bool AppController::pollManufacturerValues()
     for (const ManufacturerCommand &c : std::as_const(due))
         m_manufacturerLastRead.insert(c.key(), now);
     m_pollInFlight = true;
+    m_manufacturerReading = true;
     ManufacturerReader::read(m_client, due, [this, due](const QList<ManufacturerReader::Result> &results) {
         m_pollInFlight = false;
+        m_manufacturerReading = false;
+        if (m_afterManufacturerRead) {
+            auto action = std::move(m_afterManufacturerRead);
+            m_afterManufacturerRead = nullptr;
+            action();
+        }
         if (m_afterPoll) {
             // Module work was waiting for this poll to finish.
             auto action = std::move(m_afterPoll);
@@ -1223,6 +1257,12 @@ void AppController::saveReport(const QString &pathOrUrl, bool open)
     }
     if (scanning() || busyWithModules()) {
         emit notice(false, tr("Wait for the current scan to finish, then save the report."));
+        return;
+    }
+    if (m_manufacturerReading) {
+        // A manufacturer poll has the adapter pointed at one module for a moment:
+        // save once it's done (its one request goes ahead of the next poll).
+        m_afterManufacturerRead = [this, pathOrUrl, open] { saveReport(pathOrUrl, open); };
         return;
     }
     QString path = localPath(pathOrUrl);
@@ -1788,6 +1828,7 @@ void AppController::setLanguage(const QString &code)
     m_moduleModel->setLanguage(lang);
     refreshRecordings();         // car names and dates are localized
     m_charts->retranslate();
+    m_manufacturerValues->refreshTexts(); // value and group names
     emit languageChanged();
     emit readinessChanged();     // monitor names
     emit freezeFrameChanged();   // PID names

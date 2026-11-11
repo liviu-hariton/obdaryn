@@ -7,6 +7,8 @@
 
 #include <QHash>
 
+#include <algorithm>
+
 #include <memory>
 
 namespace obdaryn {
@@ -22,6 +24,7 @@ struct ReadState {
     QList<QList<int>> groups;   ///< command indices per module
     QList<ManufacturerReader::Result> results;
     int group = 0, item = 0, finished = 0;
+    bool lost = false; ///< the connection went away: skip what's left
     std::function<void(const QList<ManufacturerReader::Result> &)> done;
     std::function<void(int, int)> progress;
 };
@@ -35,6 +38,15 @@ void finish(const std::shared_ptr<ReadState> &st)
 
 void readItem(const std::shared_ptr<ReadState> &st)
 {
+    if (st->lost) {
+        // Nothing more can be asked; mark the rest unknown and finish.
+        for (ManufacturerReader::Result &r : st->results) {
+            if (!r.answered && !r.refused)
+                r.lostConnection = true;
+        }
+        finish(st);
+        return;
+    }
     const QList<int> &indices = st->groups[st->group];
     if (st->item >= indices.size()) {
         ++st->group;
@@ -55,6 +67,8 @@ void readItem(const std::shared_ptr<ReadState> &st)
             }
         }
         res.refused = !res.answered && !r.negative.isEmpty();
+        if (!res.answered && r.reply.status == ElmSession::Reply::Status::NotConnected)
+            st->lost = true;
         if (st->progress)
             st->progress(++st->finished, int(st->commands.size()));
         readItem(st);
@@ -70,17 +84,21 @@ void step(const std::shared_ptr<ReadState> &st)
     const ManufacturerCommand &first = st->commands[st->groups[st->group].first()];
     ModuleAddressing::address(st->client->session(), first.header, first.receiver, first.flowControlHeader,
                               [st](bool ok) {
-        if (!ok) { // the adapter refused the header: skip this module
-            ++st->group;
-            st->item = 0;
-            step(st);
-            return;
-        }
+        // The adapter didn't take the header: the connection is gone, or it
+        // refuses module addressing. Either way nothing can be learned now, and
+        // "no answer" must not be mistaken for "not supported".
+        if (!ok)
+            st->lost = true;
         readItem(st);
     });
 }
 
 } // namespace
+
+bool ManufacturerReader::interrupted(const QList<Result> &results)
+{
+    return std::any_of(results.cbegin(), results.cend(), [](const Result &r) { return r.lostConnection; });
+}
 
 bool ManufacturerReader::decodeAnswer(const ManufacturerCommand &command, const QByteArray &answer, QList<Value> *values)
 {

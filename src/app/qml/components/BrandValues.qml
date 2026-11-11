@@ -46,6 +46,7 @@ ColumnLayout {
         C.TextField {
             id: yearField
             visible: panel.setup.yearFromVin !== true
+            enabled: !panel.finding
             width: 110
             height: 36
             text: panel.setup.year > 0 ? String(panel.setup.year) : ""

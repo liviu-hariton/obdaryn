@@ -3522,12 +3522,21 @@
         <translation>Așteaptă terminarea scanării modulelor.</translation>
     </message>
     <message>
+        <source>Wait a moment: Obdaryn is reading the car&apos;s modules. Try again when it&apos;s done.</source>
+        <translation>Așteaptă puțin: Obdaryn citește modulele mașinii. Încearcă din nou după ce termină.</translation>
+    </message>
+    <message>
         <source>Clearing trouble codes</source>
         <translation>Se șterg codurile de eroare</translation>
     </message>
     <message>
         <source>Codes cleared. Readiness monitors are reset; drive normally for a few days before an inspection.</source>
         <translation>Coduri șterse. Monitoarele readiness au fost resetate; condu normal câteva zile înainte de o inspecție.</translation>
+    </message>
+    <message>
+        <source>Asking the modules for %1 values</source>
+        <extracomment>Status while finding manufacturer values, e.g. &quot;Asking the modules for Hyundai values&quot;</extracomment>
+        <translation>Se întreabă modulele despre valorile %1</translation>
     </message>
     <message>
         <source>%1 of %2</source>
@@ -3745,6 +3754,565 @@
     <message>
         <source>The car stopped answering, probably because the ignition was turned off. Obdaryn picks up again by itself as soon as the car answers.</source>
         <translation>Mașina nu mai răspunde, probabil pentru că s-a luat contactul. Obdaryn reia singur imediat ce mașina răspunde.</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::ManufacturerNames</name>
+    <message>
+        <source>Vehicle speed</source>
+        <translation>Viteza vehiculului</translation>
+    </message>
+    <message>
+        <source>Vehicle speed, average</source>
+        <translation>Viteza vehiculului, medie</translation>
+    </message>
+    <message>
+        <source>Vehicle speed, v%1</source>
+        <translation>Viteza vehiculului (sursa %1)</translation>
+    </message>
+    <message>
+        <source>Front left wheel speed</source>
+        <translation>Viteza roții față stânga</translation>
+    </message>
+    <message>
+        <source>Front right wheel speed</source>
+        <translation>Viteza roții față dreapta</translation>
+    </message>
+    <message>
+        <source>Rear left wheel speed</source>
+        <translation>Viteza roții spate stânga</translation>
+    </message>
+    <message>
+        <source>Rear right wheel speed</source>
+        <translation>Viteza roții spate dreapta</translation>
+    </message>
+    <message>
+        <source>Steering wheel angle</source>
+        <translation>Unghiul volanului</translation>
+    </message>
+    <message>
+        <source>Steering angle</source>
+        <translation>Unghiul de virare</translation>
+    </message>
+    <message>
+        <source>Brake pressure</source>
+        <translation>Presiunea de frânare</translation>
+    </message>
+    <message>
+        <source>Brake pedal</source>
+        <translation>Pedala de frână</translation>
+    </message>
+    <message>
+        <source>Brake switch</source>
+        <translation>Contactul pedalei de frână</translation>
+    </message>
+    <message>
+        <source>Brake light</source>
+        <translation>Stopul de frână</translation>
+    </message>
+    <message>
+        <source>Handbrake engaged?</source>
+        <translation>Frâna de mână trasă?</translation>
+    </message>
+    <message>
+        <source>Reverse gear selected</source>
+        <translation>Marșarier cuplat</translation>
+    </message>
+    <message>
+        <source>Motor-driven power steering current</source>
+        <translation>Curentul servodirecției electrice</translation>
+    </message>
+    <message>
+        <source>Vehicle traction control switch (raw)</source>
+        <translation>Butonul controlului tracțiunii (brut)</translation>
+    </message>
+    <message>
+        <source>Front left door open?</source>
+        <translation>Ușa față stânga deschisă?</translation>
+    </message>
+    <message>
+        <source>Front right door open?</source>
+        <translation>Ușa față dreapta deschisă?</translation>
+    </message>
+    <message>
+        <source>Rear left door open?</source>
+        <translation>Ușa spate stânga deschisă?</translation>
+    </message>
+    <message>
+        <source>Rear right door open?</source>
+        <translation>Ușa spate dreapta deschisă?</translation>
+    </message>
+    <message>
+        <source>Trunk open?</source>
+        <translation>Portbagajul deschis?</translation>
+    </message>
+    <message>
+        <source>Hood latched?</source>
+        <translation>Capota închisă?</translation>
+    </message>
+    <message>
+        <source>Front left door locked?</source>
+        <translation>Ușa față stânga încuiată?</translation>
+    </message>
+    <message>
+        <source>Front right door locked?</source>
+        <translation>Ușa față dreapta încuiată?</translation>
+    </message>
+    <message>
+        <source>Driver seatbelt latched?</source>
+        <translation>Centura șoferului cuplată?</translation>
+    </message>
+    <message>
+        <source>Passenger seatbelt latched?</source>
+        <translation>Centura pasagerului cuplată?</translation>
+    </message>
+    <message>
+        <source>Rear left seatbelt latched?</source>
+        <translation>Centura spate stânga cuplată?</translation>
+    </message>
+    <message>
+        <source>Rear middle seatbelt latched?</source>
+        <translation>Centura spate mijloc cuplată?</translation>
+    </message>
+    <message>
+        <source>Rear right seatbelt latched?</source>
+        <translation>Centura spate dreapta cuplată?</translation>
+    </message>
+    <message>
+        <source>Headlight high beam</source>
+        <translation>Faza lungă</translation>
+    </message>
+    <message>
+        <source>Headlight low beam</source>
+        <translation>Faza scurtă</translation>
+    </message>
+    <message>
+        <source>Headlight switch</source>
+        <translation>Comutatorul farurilor</translation>
+    </message>
+    <message>
+        <source>Hazard switch</source>
+        <translation>Butonul de avarie</translation>
+    </message>
+    <message>
+        <source>Left turn signal on?</source>
+        <translation>Semnalizarea stânga pornită?</translation>
+    </message>
+    <message>
+        <source>Right turn signal on?</source>
+        <translation>Semnalizarea dreapta pornită?</translation>
+    </message>
+    <message>
+        <source>Defog light</source>
+        <translation>Lampa de ceață</translation>
+    </message>
+    <message>
+        <source>Defogging?</source>
+        <translation>Dezaburire pornită?</translation>
+    </message>
+    <message>
+        <source>Front left tire pressure</source>
+        <translation>Presiunea anvelopei față stânga</translation>
+    </message>
+    <message>
+        <source>Front right tire pressure</source>
+        <translation>Presiunea anvelopei față dreapta</translation>
+    </message>
+    <message>
+        <source>Rear left tire pressure</source>
+        <translation>Presiunea anvelopei spate stânga</translation>
+    </message>
+    <message>
+        <source>Rear right tire pressure</source>
+        <translation>Presiunea anvelopei spate dreapta</translation>
+    </message>
+    <message>
+        <source>Tire pressure front left</source>
+        <translation>Presiunea anvelopei față stânga</translation>
+    </message>
+    <message>
+        <source>Tire pressure front right</source>
+        <translation>Presiunea anvelopei față dreapta</translation>
+    </message>
+    <message>
+        <source>Tire pressure rear left</source>
+        <translation>Presiunea anvelopei spate stânga</translation>
+    </message>
+    <message>
+        <source>Tire pressure rear right</source>
+        <translation>Presiunea anvelopei spate dreapta</translation>
+    </message>
+    <message>
+        <source>Front left tire temperature</source>
+        <translation>Temperatura anvelopei față stânga</translation>
+    </message>
+    <message>
+        <source>Front right tire temperature</source>
+        <translation>Temperatura anvelopei față dreapta</translation>
+    </message>
+    <message>
+        <source>Rear left tire temperature</source>
+        <translation>Temperatura anvelopei spate stânga</translation>
+    </message>
+    <message>
+        <source>Rear right tire temperature</source>
+        <translation>Temperatura anvelopei spate dreapta</translation>
+    </message>
+    <message>
+        <source>Tire temperature front left</source>
+        <translation>Temperatura anvelopei față stânga</translation>
+    </message>
+    <message>
+        <source>Tire temperature front right</source>
+        <translation>Temperatura anvelopei față dreapta</translation>
+    </message>
+    <message>
+        <source>Tire temperature rear left</source>
+        <translation>Temperatura anvelopei spate stânga</translation>
+    </message>
+    <message>
+        <source>Tire temperature rear right</source>
+        <translation>Temperatura anvelopei spate dreapta</translation>
+    </message>
+    <message>
+        <source>Sensor %1 odometer event %2</source>
+        <translation>Senzorul %1: kilometrajul la evenimentul %2</translation>
+    </message>
+    <message>
+        <source>Engine RPM</source>
+        <translation>Turația motorului</translation>
+    </message>
+    <message>
+        <source>Commanded engine idle RPM</source>
+        <translation>Turația de ralanti cerută</translation>
+    </message>
+    <message>
+        <source>Engine coolant temperature</source>
+        <translation>Temperatura lichidului de răcire</translation>
+    </message>
+    <message>
+        <source>Engine oil temperature</source>
+        <translation>Temperatura uleiului de motor</translation>
+    </message>
+    <message>
+        <source>Calculated oil temperature</source>
+        <translation>Temperatura uleiului, calculată</translation>
+    </message>
+    <message>
+        <source>Intake air temperature</source>
+        <translation>Temperatura aerului admis</translation>
+    </message>
+    <message>
+        <source>Intake manifold absolute pressure</source>
+        <translation>Presiunea absolută în galeria de admisie</translation>
+    </message>
+    <message>
+        <source>Barometric pressure</source>
+        <translation>Presiunea atmosferică</translation>
+    </message>
+    <message>
+        <source>MAP sensor voltage</source>
+        <translation>Tensiunea senzorului de presiune din galerie (MAP)</translation>
+    </message>
+    <message>
+        <source>IAT sensor voltage</source>
+        <translation>Tensiunea senzorului de temperatură a aerului (IAT)</translation>
+    </message>
+    <message>
+        <source>Coolant temperature sensor voltage</source>
+        <translation>Tensiunea senzorului de temperatură a lichidului de răcire</translation>
+    </message>
+    <message>
+        <source>Oxygen sensor %1 bank %2</source>
+        <translation>Sonda lambda %1, bancul %2</translation>
+    </message>
+    <message>
+        <source>Short term fuel % trim, bank %1</source>
+        <translation>Corecția de amestec pe termen scurt, bancul %1</translation>
+    </message>
+    <message>
+        <source>Short term fuel % trim, bank %1 idle</source>
+        <translation>Corecția de amestec pe termen scurt, bancul %1, la ralanti</translation>
+    </message>
+    <message>
+        <source>Commanded evaporative purge</source>
+        <translation>Purjarea vaporilor de benzină, cerută</translation>
+    </message>
+    <message>
+        <source>Commanded throttle actuator</source>
+        <translation>Deschiderea clapetei, cerută</translation>
+    </message>
+    <message>
+        <source>Throttle position #%1</source>
+        <translation>Poziția clapetei #%1</translation>
+    </message>
+    <message>
+        <source>Throttle position sensor voltage #%1</source>
+        <translation>Tensiunea senzorului de poziție a clapetei #%1</translation>
+    </message>
+    <message>
+        <source>Relative accelerator pedal position</source>
+        <translation>Poziția relativă a pedalei de accelerație</translation>
+    </message>
+    <message>
+        <source>Requested torque</source>
+        <translation>Cuplul cerut</translation>
+    </message>
+    <message>
+        <source>Timing advance #%1</source>
+        <translation>Avansul la aprindere #%1</translation>
+    </message>
+    <message>
+        <source>Knock retard cylinder %1, alternate</source>
+        <translation>Întârzierea aprinderii la detonație, cilindrul %1 (alternativ)</translation>
+    </message>
+    <message>
+        <source>Knock retard, cylinder %1</source>
+        <translation>Întârzierea aprinderii la detonație, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Knock detected</source>
+        <translation>Detonație detectată</translation>
+    </message>
+    <message>
+        <source>Fuel cut</source>
+        <translation>Injecție întreruptă</translation>
+    </message>
+    <message>
+        <source>Intake camshaft position</source>
+        <translation>Poziția arborelui cu came de admisie</translation>
+    </message>
+    <message>
+        <source>Exhaust camshaft position</source>
+        <translation>Poziția arborelui cu came de evacuare</translation>
+    </message>
+    <message>
+        <source>intake camshaft position actual</source>
+        <translation>Poziția reală a arborelui cu came de admisie</translation>
+    </message>
+    <message>
+        <source>intake camshaft position commanded</source>
+        <translation>Poziția cerută a arborelui cu came de admisie</translation>
+    </message>
+    <message>
+        <source>Engine run time, total</source>
+        <translation>Timpul total de funcționare a motorului</translation>
+    </message>
+    <message>
+        <source>Coolant fan PWM</source>
+        <translation>Ventilatorul de răcire (PWM)</translation>
+    </message>
+    <message>
+        <source>Air conditioning pressure</source>
+        <translation>Presiunea din instalația de aer condiționat</translation>
+    </message>
+    <message>
+        <source>Overheat protection, active</source>
+        <translation>Protecția la supraîncălzire activă</translation>
+    </message>
+    <message>
+        <source>Fuel injection timing #%1</source>
+        <translation>Durata injecției #%1</translation>
+    </message>
+    <message>
+        <source>Injection duration cylinder %1</source>
+        <translation>Durata injecției, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Direct injection time %1</source>
+        <translation>Durata injecției directe %1</translation>
+    </message>
+    <message>
+        <source>Misfires, cylinder %1</source>
+        <translation>Rateuri, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Misfires, current, cylinder %1</source>
+        <translation>Rateuri acum, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Misfires current, cylinder %1</source>
+        <translation>Rateuri acum, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Misfires current total</source>
+        <translation>Rateuri acum, total</translation>
+    </message>
+    <message>
+        <source>Misfires harmful for catalyst cylinder %1</source>
+        <translation>Rateuri care afectează catalizatorul, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Misfires harmful for catalyst, cylinder %1</source>
+        <translation>Rateuri care afectează catalizatorul, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Emission relevant misfires total, cylinder %1</source>
+        <translation>Rateuri relevante pentru emisii, total, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Emission relevant misfires total all cylinders</source>
+        <translation>Rateuri relevante pentru emisii, total pe toți cilindrii</translation>
+    </message>
+    <message>
+        <source>Catalyst damaging misfires total, cylinder %1</source>
+        <translation>Rateuri care afectează catalizatorul, total, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Catalyst damaging misfires total all cylinders</source>
+        <translation>Rateuri care afectează catalizatorul, total pe toți cilindrii</translation>
+    </message>
+    <message>
+        <source>Automatic transmission fluid temperature</source>
+        <translation>Temperatura uleiului cutiei automate</translation>
+    </message>
+    <message>
+        <source>Current gear</source>
+        <translation>Treapta actuală</translation>
+    </message>
+    <message>
+        <source>Commanded gear</source>
+        <translation>Treapta cerută</translation>
+    </message>
+    <message>
+        <source>Turbine speed</source>
+        <translation>Turația turbinei convertizorului</translation>
+    </message>
+    <message>
+        <source>Output speed</source>
+        <translation>Turația la ieșirea cutiei</translation>
+    </message>
+    <message>
+        <source>Torque converter slip</source>
+        <translation>Patinarea convertizorului de cuplu</translation>
+    </message>
+    <message>
+        <source>Battery voltage</source>
+        <translation>Tensiunea bateriei</translation>
+    </message>
+    <message>
+        <source>Battery voltage after ignition</source>
+        <translation>Tensiunea bateriei după contact</translation>
+    </message>
+    <message>
+        <source>%1V battery voltage</source>
+        <translation>Tensiunea bateriei de %1 V</translation>
+    </message>
+    <message>
+        <source>Cluster voltage</source>
+        <translation>Tensiunea la bord</translation>
+    </message>
+    <message>
+        <source>Odometer (metric)</source>
+        <translation>Kilometraj</translation>
+    </message>
+    <message>
+        <source>Odometer, metric</source>
+        <translation>Kilometraj</translation>
+    </message>
+    <message>
+        <source>Odometer (imperial)</source>
+        <translation>Kilometraj (din mile)</translation>
+    </message>
+    <message>
+        <source>Odometer, imperial</source>
+        <translation>Kilometraj (din mile)</translation>
+    </message>
+    <message>
+        <source>Fuel level (volume)</source>
+        <translation>Combustibil în rezervor</translation>
+    </message>
+    <message>
+        <source>Fuel level, volume</source>
+        <translation>Combustibil în rezervor</translation>
+    </message>
+    <message>
+        <source>Interior temperature, passenger vent</source>
+        <translation>Temperatura la gura de aerisire a pasagerului</translation>
+    </message>
+    <message>
+        <source>Interior temperature, passenger legs vent</source>
+        <translation>Temperatura la aerisirea de la picioarele pasagerului</translation>
+    </message>
+    <message>
+        <source>Engine</source>
+        <translation>Motor</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation>Baterie</translation>
+    </message>
+    <message>
+        <source>Movement</source>
+        <translation>Mișcare</translation>
+    </message>
+    <message>
+        <source>Tires</source>
+        <translation>Anvelope</translation>
+    </message>
+    <message>
+        <source>Cells</source>
+        <translation>Celule</translation>
+    </message>
+    <message>
+        <source>Trips</source>
+        <translation>Călătorii</translation>
+    </message>
+    <message>
+        <source>Charging</source>
+        <translation>Încărcare</translation>
+    </message>
+    <message>
+        <source>Lights</source>
+        <translation>Lumini</translation>
+    </message>
+    <message>
+        <source>Doors</source>
+        <translation>Uși</translation>
+    </message>
+    <message>
+        <source>Transmission</source>
+        <translation>Transmisie</translation>
+    </message>
+    <message>
+        <source>Climate</source>
+        <translation>Climatizare</translation>
+    </message>
+    <message>
+        <source>Control</source>
+        <translation>Comenzi</translation>
+    </message>
+    <message>
+        <source>Seatbelts</source>
+        <translation>Centuri</translation>
+    </message>
+    <message>
+        <source>Fuel</source>
+        <translation>Combustibil</translation>
+    </message>
+    <message>
+        <source>Misfires</source>
+        <translation>Rateuri</translation>
+    </message>
+    <message>
+        <source>Orientation</source>
+        <translation>Orientare</translation>
+    </message>
+    <message>
+        <source>Electrical</source>
+        <translation>Electric</translation>
+    </message>
+    <message>
+        <source>ECU</source>
+        <translation>Calculator</translation>
+    </message>
+    <message>
+        <source>Modules</source>
+        <translation>Module</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Necunoscut</translation>
     </message>
 </context>
 <context>

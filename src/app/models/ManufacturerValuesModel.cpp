@@ -35,8 +35,8 @@ QVariant ManufacturerValuesModel::data(const QModelIndex &index, int role) const
     const Row &r = m_rows[index.row()];
     const ManufacturerSignal &s = r.signal;
     switch (role) {
-    case NameRole: return s.name;
-    case GroupRole: return s.group.isEmpty() ? tr("Other") : s.group;
+    case NameRole: return s.displayName();
+    case GroupRole: return s.group.isEmpty() ? tr("Other") : ManufacturerData::groupName(s.group);
     case ModuleRole: return r.module;
     case RequestRole: return r.request;
     case HasValueRole: return r.hasValue;
@@ -80,15 +80,23 @@ void ManufacturerValuesModel::setCommands(const QList<ManufacturerCommand> &comm
             m_rows << r;
         }
     }
-    // Grouped as OBDb groups them, then by name.
-    std::stable_sort(m_rows.begin(), m_rows.end(), [](const Row &a, const Row &b) {
-        const int g = QString::compare(a.signal.group, b.signal.group, Qt::CaseInsensitive);
-        return g != 0 ? g < 0 : QString::compare(a.signal.name, b.signal.name, Qt::CaseInsensitive) < 0;
-    });
-    for (int i = 0; i < m_rows.size(); ++i)
-        m_rowsOfCommand[m_rows[i].commandKey] << i;
+    sortRows();
     endResetModel();
     emit countChanged();
+}
+
+void ManufacturerValuesModel::sortRows()
+{
+    // Grouped as OBDb groups them, then alphabetically by the name as shown,
+    // so the order follows the UI language.
+    std::stable_sort(m_rows.begin(), m_rows.end(), [](const Row &a, const Row &b) {
+        const int g = QString::localeAwareCompare(ManufacturerData::groupName(a.signal.group),
+                                                  ManufacturerData::groupName(b.signal.group));
+        return g != 0 ? g < 0 : QString::localeAwareCompare(a.signal.displayName(), b.signal.displayName()) < 0;
+    });
+    m_rowsOfCommand.clear();
+    for (int i = 0; i < m_rows.size(); ++i)
+        m_rowsOfCommand[m_rows[i].commandKey] << i;
 }
 
 void ManufacturerValuesModel::clear()
@@ -117,8 +125,12 @@ void ManufacturerValuesModel::applyResult(const ManufacturerCommand &command, co
 
 void ManufacturerValuesModel::refreshTexts()
 {
-    if (!m_rows.isEmpty())
-        emit dataChanged(index(0), index(int(m_rows.size()) - 1), {ValueTextRole, UnitRole, GroupRole});
+    if (m_rows.isEmpty())
+        return;
+    // Names may have changed language: sort again, then show every text anew.
+    beginResetModel();
+    sortRows();
+    endResetModel();
 }
 
 } // namespace obdaryn

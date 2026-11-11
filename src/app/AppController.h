@@ -406,6 +406,9 @@ private:
     /// adapter's target address, so it must never interleave with a poll.
     void whenPollIdle(std::function<void()> action);
     bool busyWithModules() const { return m_moduleScanner->running() || bool(m_afterPoll); }
+    /// The adapter is pointed at one module (module work or a manufacturer read):
+    /// requests meant for all OBD-II ECUs must wait.
+    bool adapterBusy() const { return busyWithModules() || m_manufacturerReading; }
     QString recordingsFolder() const;
     QString reportsFolder() const;
     // Trip computer
@@ -487,6 +490,8 @@ private:
     QString m_manufacturerState = QStringLiteral("choose");
     int m_manufacturerProgress = 0, m_manufacturerTotal = 0;
     bool m_manufacturerActive = false;
+    bool m_manufacturerReading = false;          ///< a ManufacturerReader pass is running
+    std::function<void()> m_afterManufacturerRead; ///< one short request waiting for it (Save report)
     QSet<quint8> m_tripInputs;
     TripComputer m_trip;
     bool m_tripActive = false;

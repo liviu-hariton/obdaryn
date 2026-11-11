@@ -17,6 +17,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QTest>
+#include <QTimer>
+#include <QTranslator>
 
 #include <cmath>
 
@@ -33,6 +35,8 @@ private slots:
     void decodesFields();
     void units();
     void readsTheDemoCar();
+    void lostConnectionIsNotAnAnswer();
+    void translatedNames();
 
 private:
     static const ManufacturerModel &elantra();
@@ -250,6 +254,77 @@ void TestManufacturer::readsTheDemoCar()
     client.readPids({0x0C}, [&](const QList<ObdClient::PidReading> &r) { readings = r; done = true; });
     QVERIFY(QTest::qWaitFor([&] { return done; }, 5000));
     QVERIFY(!readings.isEmpty());
+}
+
+void TestManufacturer::lostConnectionIsNotAnAnswer()
+{
+    // A link that drops mid-read must not look like "nothing answered": the app
+    // would otherwise remember that this car answers nothing.
+    ObdClient client;
+    auto *sim = new SimulatedTransport;
+    sim->setLatencyMs(15);
+    client.session()->setTransport(sim);
+    client.session()->open();
+    QVERIFY(QTest::qWaitFor([&] { return client.session()->state() == ElmSession::State::Ready; }, 5000));
+
+    const QList<ManufacturerCommand> commands = elantra().commandsFor(2014);
+    QList<ManufacturerReader::Result> results;
+    bool done = false;
+    ManufacturerReader::read(&client, commands, [&](const QList<ManufacturerReader::Result> &r) { results = r; done = true; });
+    QTimer::singleShot(150, &client, [&] { client.session()->close(); });
+    QVERIFY(QTest::qWaitFor([&] { return done; }, 10000));
+    QCOMPARE(results.size(), commands.size());
+    QVERIFY(ManufacturerReader::interrupted(results));
+    int lost = 0;
+    for (const auto &r : results) {
+        QVERIFY(!(r.lostConnection && (r.answered || r.refused)));
+        lost += r.lostConnection ? 1 : 0;
+    }
+    QVERIFY(lost > 0);
+
+    // A complete read is not "interrupted".
+    QVERIFY(!ManufacturerReader::interrupted({ManufacturerReader::Result{}}));
+}
+
+namespace {
+/// Stands in for the Romanian translation file.
+class FakeTranslator : public QTranslator
+{
+public:
+    QString translate(const char *context, const char *source, const char *, int) const override
+    {
+        if (qstrcmp(context, "obdaryn::ManufacturerNames") != 0)
+            return {};
+        static const QHash<QByteArray, QString> table{
+            {"Engine oil temperature", QStringLiteral("Temperatura uleiului de motor")},
+            {"Misfires, cylinder %1", QStringLiteral("Rateuri, cilindrul %1")},
+            {"Oxygen sensor %1 bank %2", QStringLiteral("Sonda lambda %1, bancul %2")},
+            {"Battery", QStringLiteral("Baterie")},
+            {"Cells", QStringLiteral("Celule")},
+        };
+        return table.value(source);
+    }
+};
+} // namespace
+
+void TestManufacturer::translatedNames()
+{
+    FakeTranslator ro;
+    QCoreApplication::installTranslator(&ro);
+    ManufacturerSignal s;
+    s.name = QStringLiteral("Engine oil temperature");
+    QCOMPARE(s.displayName(), QStringLiteral("Temperatura uleiului de motor"));
+    s.name = QStringLiteral("Misfires, cylinder 3");                 // numbered: one template
+    QCOMPARE(s.displayName(), QStringLiteral("Rateuri, cilindrul 3"));
+    s.name = QStringLiteral("Oxygen sensor 2 bank 1");                // two numbers, in order
+    QCOMPARE(s.displayName(), QStringLiteral("Sonda lambda 2, bancul 1"));
+    s.name = QStringLiteral("Dual-clutch transmission fluid temperature 1"); // not translated: OBDb's name
+    QCOMPARE(s.displayName(), s.name);
+    QCOMPARE(ManufacturerData::groupName(QStringLiteral("Battery.Cells")), QStringLiteral("Baterie · Celule"));
+    QCOMPARE(ManufacturerData::groupName(QStringLiteral("Engine")), QStringLiteral("Engine")); // no translation
+    QCoreApplication::removeTranslator(&ro);
+    s.name = QStringLiteral("Misfires, cylinder 3");
+    QCOMPARE(s.displayName(), s.name);                                // English UI: unchanged
 }
 
 QTEST_GUILESS_MAIN(TestManufacturer)

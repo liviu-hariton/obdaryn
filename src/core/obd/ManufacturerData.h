@@ -39,6 +39,10 @@ struct ManufacturerSignal {
     bool hasNullMin = false, hasNullMax = false;
     double nullMin = 0, nullMax = 0;  ///< values outside this range mean "not available"
 
+    /// The name in the UI language: a translated name where Obdaryn has one
+    /// (the common values, see ManufacturerNames), OBDb's English name otherwise.
+    QString displayName() const;
+
     /// Decodes the value (in OBDb's unit) from the bytes after the identifier.
     /// False when the answer is too short or the value means "not available".
     bool decode(const QByteArray &data, double *value) const;
@@ -105,6 +109,9 @@ public:
     /// Models of a make ("Hyundai"), sorted by name.
     QStringList modelsOf(const QString &make) const;
     const ManufacturerModel *find(const QString &make, const QString &model) const;
+    /// An OBDb group ("Engine", "Battery.Cells") in the UI language, segments
+    /// joined with " · " ("Baterie · Celule").
+    static QString groupName(const QString &path);
     /// Credits to show wherever these values appear.
     QString attribution() const { return m_attribution; }
 

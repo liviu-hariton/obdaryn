@@ -67,6 +67,7 @@ private:
         double metric = 0;
         bool hasValue = false;
     };
+    void sortRows();
     QList<Row> m_rows;
     QHash<QString, QList<int>> m_rowsOfCommand; ///< command key -> row indices
 };
