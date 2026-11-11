@@ -7,10 +7,11 @@
 #   tools/first-contact.sh            # Vgate iCar Pro Wi-Fi at 192.168.0.10:35000
 #   tools/first-contact.sh HOST PORT
 #
-# Writes logs/first-contact-<time>-<phase>.log, plus a recording of the same
+# Writes logs/first-contact-<time>-<phase>.log, a recording of the same
 # session (.obdrec) that the app can replay without the car ("Replay a
-# recording" > "Open a file..."). Both contain your VIN, so they are
-# git-ignored; share them only if you want to.
+# recording" > "Open a file..."), and the shareable report as a web page
+# (.html, the same one the app saves). All of them contain your VIN, so they
+# are git-ignored; share them only if you want to.
 
 HOST=${1:-192.168.0.10}
 PORT=${2:-35000}
@@ -34,9 +35,11 @@ run() {
     LOG="$DIR/logs/first-contact-$STAMP-$1.log"
     echo "Running the full report ($1). This takes about a minute ..."
     REC="$DIR/logs/first-contact-$STAMP-$1.obdrec"
-    "$PROBE" "$HOST" "$PORT" --report --verbose --record "$REC" > "$LOG" 2>&1
+    HTML="$DIR/logs/first-contact-$STAMP-$1.html"
+    "$PROBE" "$HOST" "$PORT" --report --verbose --record "$REC" --report-html "$HTML" > "$LOG" 2>&1
     echo "  saved $LOG"
-    echo "  and the recording $REC"
+    echo "  the recording $REC"
+    [ -s "$HTML" ] && echo "  and the report $HTML (open it in a browser)"
     grep -E "^  (VIN|Protocol|Adapter):|MIL |values/s|Module list|answered|not found|error" "$LOG" | grep -v "^    " | head -30
 }
 

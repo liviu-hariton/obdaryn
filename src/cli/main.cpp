@@ -14,6 +14,8 @@
 //     --record FILE  save the whole session as a recording (.obdrec) that the
 //                    app can replay without the car
 //     --replay FILE  run against a recording instead of an adapter
+//     --report-html FILE  also save the shareable report (the same web page the
+//                    app saves with "Save report..."); implies --report
 //
 // It uses exactly the same core library as the app, so it tells "adapter or
 // car problem" from "UI problem". Like the app, it only reads: every command
@@ -26,6 +28,7 @@
 #include "obd/Pids.h"
 #include "obd/Readiness.h"
 #include "obd/VehicleInfo.h"
+#include "report/VehicleReport.h"
 #include "recording/SessionRecorder.h"
 #include "transport/ReplayTransport.h"
 #include "transport/SimulatedTransport.h"
@@ -34,6 +37,7 @@
 
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QFile>
 #include <QFileInfo>
 #include <QElapsedTimer>
 #include <QTextStream>
@@ -89,12 +93,9 @@ QString pidHex(quint8 p)
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
+    QCoreApplication::setApplicationVersion(QStringLiteral(OBDARYN_VERSION));
     QTextStream out(stdout);
     QStringList args = app.arguments().mid(1);
-    const bool report = args.removeAll(QStringLiteral("--report")) > 0;
-    const bool modules = args.removeAll(QStringLiteral("--modules")) > 0 || report;
-    const bool verbose = args.removeAll(QStringLiteral("--verbose")) > 0;
-    const bool demo = args.removeAll(QStringLiteral("--demo")) > 0;
     // "--record FILE" / "--replay FILE": take the option and its value out of the list.
     auto takeValue = [&args](const QString &option) {
         const qsizetype i = args.indexOf(option);
@@ -104,11 +105,20 @@ int main(int argc, char *argv[])
         args.removeAt(i);
         return value;
     };
+    const QString reportHtmlPath = takeValue(QStringLiteral("--report-html"));
+    const bool report = args.removeAll(QStringLiteral("--report")) > 0 || !reportHtmlPath.isEmpty();
+    const bool modules = args.removeAll(QStringLiteral("--modules")) > 0 || report;
+    const bool verbose = args.removeAll(QStringLiteral("--verbose")) > 0;
+    const bool demo = args.removeAll(QStringLiteral("--demo")) > 0;
     const QString recordPath = takeValue(QStringLiteral("--record"));
     const QString replayPath = takeValue(QStringLiteral("--replay"));
 
     ObdClient client;
     SessionRecorder recorder(client.session());
+    // What the shareable report needs, filled in by the steps below as they read.
+    ReportInput rep;
+    rep.appVersion = QCoreApplication::applicationVersion();
+    rep.language = QStringLiteral("en"); // the probe has no translations loaded
     if (!replayPath.isEmpty()) {
         Recording recording;
         QString error;
@@ -117,12 +127,17 @@ int main(int argc, char *argv[])
             return 1;
         }
         client.session()->setTransport(new ReplayTransport(std::move(recording), QFileInfo(replayPath).fileName()));
+        rep.source = ReportInput::Source::Replay;
+        rep.sourceDetail = QFileInfo(replayPath).fileName();
     } else if (demo) {
         client.session()->setTransport(new SimulatedTransport);
+        rep.source = ReportInput::Source::Demo;
     } else {
         const QString host = args.value(0, QStringLiteral("192.168.0.10"));
         const quint16 port = quint16(args.value(1, QStringLiteral("35000")).toUInt());
         client.session()->setTransport(new TcpTransport(host, port));
+        rep.source = ReportInput::Source::Car;
+        rep.sourceDetail = QStringLiteral("%1:%2").arg(host).arg(port);
     }
     if (verbose) {
         QObject::connect(client.session(), &ElmSession::trafficLogged, [&out](const QString &d, const QString &t) {
@@ -175,7 +190,10 @@ int main(int argc, char *argv[])
         section("Vehicle");
         out << "  Adapter:  " << client.session()->adapterVersion() << " / " << client.session()->adapterDescription() << Qt::endl;
         out << "  Protocol: " << protocolDisplayName(client.session()->protocol()) << Qt::endl;
+        rep.adapter = client.session()->adapterVersion();
+        rep.protocol = protocolDisplayName(client.session()->protocol());
         client.readVehicleInfo([&, next](const ObdClient::VehicleInformation &info) {
+            rep.info = info;
             const VinInfo v = decodeVin(info.vin);
             make = v.manufacturer;
             vin = v.vin;
@@ -198,6 +216,7 @@ int main(int argc, char *argv[])
     steps.add([&](Steps::Next next) {
         section("Readiness");
         client.readMonitorStatus([&, next](const MonitorStatus &st) {
+            rep.readiness = st;
             if (!st.valid) {
                 out << "  (not reported)" << Qt::endl;
                 next();
@@ -216,6 +235,9 @@ int main(int argc, char *argv[])
     steps.add([&](Steps::Next next) {
         section("Trouble codes (generic OBD-II)");
         client.readAllDtcs([&, next](const QList<Dtc> &dtcs, const QString &err) {
+            rep.dtcs = dtcs;
+            rep.scanTime = QTime::currentTime().toString(QStringLiteral("HH:mm"));
+            rep.brand = ModuleCatalog::forVehicle(make, vin).id;
             if (dtcs.isEmpty())
                 out << "  none" << (err.isEmpty() ? QString() : "  (" + err + ")") << Qt::endl;
             const QString brand = ModuleCatalog::forVehicle(make, vin).id;
@@ -240,6 +262,14 @@ int main(int argc, char *argv[])
                 out << "  Supported PIDs (" << pids.size() << "): " << list.join(QLatin1Char(' ')) << Qt::endl;
                 client.readPids(pids, [&, next](const QList<ObdClient::PidReading> &rs) {
                     for (const auto &r : rs) {
+                        // For the report: OBD standard and fuel type (text values), and the
+                        // "since codes were cleared" counters. The engine (first ECU) wins.
+                        if (r.pid == 0x1C && rep.obdStandard.isEmpty())
+                            rep.obdStandard = PidTable::describeStatus(0x1C, r.raw);
+                        if (r.pid == 0x51 && rep.fuelType.isEmpty())
+                            rep.fuelType = PidTable::describeStatus(0x51, r.raw);
+                        if (QList<quint8>{0x21, 0x30, 0x31, 0x4D, 0x4E}.contains(r.pid) && !rep.pids.contains(r.pid))
+                            rep.pids.insert(r.pid, r.raw);
                         const PidDefinition *def = PidTable::find(r.pid);
                         double v = 0;
                         const QString value = def && def->value(r.raw, &v)
@@ -257,6 +287,7 @@ int main(int argc, char *argv[])
         steps.add([&](Steps::Next next) {
             section("Freeze frame");
             client.readFreezeFrame([&, next](const ObdClient::FreezeFrame &ff) {
+                rep.freezeFrame = ff;
                 if (!ff.available) {
                     out << "  none stored" << Qt::endl;
                     next();
@@ -269,6 +300,39 @@ int main(int argc, char *argv[])
                     if (def && def->value(r.raw, &v))
                         out << "  " << def->translatedName().leftJustified(42) << v << ' ' << def->translatedUnit() << Qt::endl;
                 }
+                next();
+            });
+        });
+
+        // ---- Self-test results (service 06): the numbers behind the readiness monitors
+        steps.add([&](Steps::Next next) {
+            section("Self-test results (Mode 06)");
+            client.readMonitorTests([&, next](const QList<MonitorTest> &tests, const QString &error) {
+                rep.monitorTestsRead = error.isEmpty();
+                rep.monitorTests = tests;
+                if (!error.isEmpty())
+                    out << "  " << error << Qt::endl;
+                else if (tests.isEmpty())
+                    out << "  none reported" << Qt::endl;
+                for (const MonitorTest &t : tests) {
+                    const char *verdict = t.verdict == MonitorTest::Verdict::Passed ? "passed"
+                                        : t.verdict == MonitorTest::Verdict::Close ? "CLOSE to its limit"
+                                        : t.verdict == MonitorTest::Verdict::Failed ? "FAILED" : "not run";
+                    out << "  " << t.ecu << "  MID " << pidHex(t.mid) << " TID " << pidHex(t.tid) << "  "
+                        << (t.monitorName() + QStringLiteral(": ") + t.testName()).leftJustified(62) << "  "
+                        << QString::number(t.value, 'f', t.decimals) << ' ' << t.unit
+                        << "  (min " << QString::number(t.minimum, 'f', t.decimals)
+                        << ", max " << QString::number(t.maximum, 'f', t.decimals) << ")  " << verdict
+                        << "  raw " << t.rawValue << '/' << t.rawMin << '/' << t.rawMax << Qt::endl;
+                }
+                next();
+            });
+        });
+
+        // ---- Battery voltage at the OBD socket (measured by the adapter)
+        steps.add([&](Steps::Next next) {
+            client.readBatteryVoltage([&, next](double volts) {
+                rep.batteryVolts = volts;
                 next();
             });
         });
@@ -343,7 +407,9 @@ int main(int argc, char *argv[])
             section("All modules");
             out << "  Module list: " << profile.label << Qt::endl;
             auto *scanner = new ModuleScanner(&client, &app);
-            QObject::connect(scanner, &ModuleScanner::finished, [&out, scanner, next, profile] {
+            QObject::connect(scanner, &ModuleScanner::finished, [&out, &rep, scanner, next, profile] {
+                rep.modulesScanned = true;
+                rep.modules = scanner->results();
                 for (const ModuleResult &m : scanner->results()) {
                     const char *state = m.state == ModuleResult::State::Answered ? "answered"
                                       : m.state == ModuleResult::State::ObdOnly ? "generic OBD-II only"
@@ -381,6 +447,16 @@ int main(int argc, char *argv[])
         if (s != ElmSession::State::Ready)
             return;
         steps.run([&] {
+            if (!reportHtmlPath.isEmpty()) {
+                // The same web page the app saves; it says where the data came from.
+                rep.createdAt = QDateTime::currentDateTime();
+                QFile file(reportHtmlPath);
+                if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)
+                    && file.write(VehicleReport::html(rep, VehicleReport::Target::Web).toUtf8()) >= 0 && file.flush())
+                    out << Qt::endl << "Report saved to " << reportHtmlPath << Qt::endl;
+                else
+                    out << Qt::endl << "Couldn't save the report to " << reportHtmlPath << ": " << file.errorString() << Qt::endl;
+            }
             out << Qt::endl << "Done." << Qt::endl;
             client.session()->close();
             app.exit(0);
