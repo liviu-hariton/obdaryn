@@ -9,6 +9,7 @@
   - Ford (62)
   - VW group (59)
   - Renault/Dacia (24)
+  - Suzuki (23 engine and automatic-gearbox codes, 2005–2014 models)
 - **All modules.** A full-vehicle scan reads codes from ABS, airbag, body, cluster and other modules too, using per-brand module lists: Hyundai/Kia, Toyota, Ford, VW group, Renault/Dacia, or generic for any car.
 - **Readiness for inspection.** Which self-tests (monitors) have completed, and whether the car is likely to pass the emissions check.
 - **Self-test results (Mode 06).** The numbers behind the readiness monitors, each next to the limits the car judges it by, so a part that's wearing out shows before the check-engine light comes on.

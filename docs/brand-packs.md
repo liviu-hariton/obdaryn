@@ -107,6 +107,14 @@ Every pack follows the same rules and links its sources per code. Counts are dis
   - Power-steering codes whose tables disagree.
   - Single-tool body, radio and EDC-gearbox codes.
 
+
+### Suzuki (2005–2014: Swift, SX4, Grand Vitara)
+
+- **Coverage:** 23 codes from the engine computer (power supply, electrical-load sensor, CAN network, immobiliser and keyless start) and the 4-speed automatic gearbox computer.
+- **Sources:** the workshop manuals of different Suzuki models (Swift 2005–2010, SX4 2008, Grand Vitara JB416/JB420), each a separately written book. Every code appears in at least two of them. No Suzuki document filed with NHTSA defines a P1 code, so nothing is "official".
+- **Not yet confirmed** for the 2010–2017 Swift and later; no workshop manual for those is public. The 2008 SX4 already reports network faults as standard U-codes, and newer cars may too.
+- **Left out:** P1615 and P1616 (meaning differs between models), the 4WD low switch codes (one model only), and the 1.3 DDiS diesel codes (one source, and some clash with the petrol meanings). See `tools/brand_packs/suzuki.py`.
+- **Modules:** `vehicles/suzuki.json` lists only the standard OBD-II addresses so far (engine, gearbox and 7E4 confirmed from OBDb's recordings), so ABS and airbag codes wait for their addresses.
 ## Romanian for generic codes
 
 `src/core/data/dtc_generic_ro.json` is a Romanian layer over the obdex codes:

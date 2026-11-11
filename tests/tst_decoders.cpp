@@ -111,6 +111,15 @@ void TestDecoders::brandPack()
         QVERIFY2(db.brandSize(brand) > 20, brand);
     QVERIFY(db.lookup("C1201", "toyota-lexus", "en", "abs").known);
     QCOMPARE(db.lookup("B1000", "vag", "ro", "airbag").language, QStringLiteral("ro"));
+    // Suzuki: engine and gearbox P1xxx codes, read by a generic scan (no module known).
+    QVERIFY(db.brandSize("suzuki") >= 20);
+    const DtcInfo sz = db.lookup("P1510", "suzuki", "en");
+    QCOMPARE(sz.source, QStringLiteral("suzuki"));
+    QVERIFY(sz.turnsOnMil);
+    QCOMPARE(db.lookup("P1702", "suzuki", "ro", "transmission").language, QStringLiteral("ro"));
+    QVERIFY(db.lookup("P1702", "suzuki", "en", "transmission").limpModePossible);
+    QVERIFY(!db.lookup("P1702", "suzuki", "en", "abs").known); // never a gearbox meaning for another module
+    QVERIFY(db.lookup("P1510", "hyundai-kia", "en").source != QStringLiteral("suzuki"));
 
     // Romanian layer over the generic codes: every title is translated.
     QVERIFY(db.lookup("P0420", "", "ro").title.contains(QStringLiteral("catalizator")));

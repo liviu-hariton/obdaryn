@@ -29,6 +29,9 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [ ] 29-bit CAN modules (Honda, some GM), Toyota's extended addressing behind gateway 750, and VW's older TP 2.0.
 - [x] Brand-specific code descriptions, starting with Hyundai/Kia: 159 codes (177 module-specific entries) in English and Romanian, with sources (see `docs/brand-packs.md`).
 - [x] Brand packs for Toyota/Lexus, Ford, VW group and Renault/Dacia (see `docs/brand-packs.md`).
+- [x] **Suzuki,** first part: a profile recognised from the VIN (with the Santana-built `VSE` and the Toyota-built Across fixed), and a pack of 23 engine and automatic-gearbox codes for 2005–2014 Swift, SX4 and Grand Vitara.
+  - [ ] Module addresses for ABS, airbag, body and the rest: none are public; to be found on a real 2010–2017 Swift (K12B) with the module discovery mode.
+  - [ ] Confirm the pack's codes on the 2010–2017 Swift and later; ABS and airbag codes once their modules can be read.
 - [x] **Manufacturer data packs.** OBDb signal sets for 52 Hyundai and Kia models (`tools/import_obdb.py`, CC BY-SA 4.0, a separate attributed data file): read-only `21xx` / `22xxxx` requests, verified (non-debug) commands only, filtered by model year. Live data gets a "Hyundai values" view: choose the model, find what the modules answer (remembered per VIN), then the values refresh at OBDb's suggested rates while on screen. The probe reads them too (`--model Elantra`), and `tools/first-contact.sh` asks for the model.
   - Decoder checked against OBDb's recordings of real 2012–2015 Elantras; signals that decode to impossible values there are left out.
   - [ ] Confirm the Elantra values against Car Scanner on the real car; report wrong definitions upstream to OBDb.
