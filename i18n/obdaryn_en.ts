@@ -2,6 +2,16 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en" sourcelanguage="en">
 <context>
+    <name>LogPage</name>
+    <message numerus="yes">
+        <source>%n command(s) answered with an error; the log below shows which</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>ModulesPage</name>
     <message numerus="yes">
         <source>%n code(s)</source>

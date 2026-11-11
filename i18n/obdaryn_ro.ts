@@ -1,4 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
 <TS version="2.1" language="ro" sourcelanguage="en">
 <context>
     <name>ChartsPage</name>
@@ -182,11 +183,11 @@
         <translation>Fă asta după o reparație, nu ca să ascunzi un defect. Înainte de ștergere, reține că:</translation>
     </message>
     <message>
-        <source>Turns this module's warning light off if the fault is gone. A fault that is still present comes back at once.</source>
+        <source>Turns this module&apos;s warning light off if the fault is gone. A fault that is still present comes back at once.</source>
         <translation>Stinge martorul acestui modul dacă defectul a dispărut. Un defect încă prezent revine imediat.</translation>
     </message>
     <message>
-        <source>Erases the module's fault history, which a workshop may want to see. Note the codes first.</source>
+        <source>Erases the module&apos;s fault history, which a workshop may want to see. Note the codes first.</source>
         <translation>Șterge istoricul defectelor modulului, pe care un service ar putea vrea să-l vadă. Notează întâi codurile.</translation>
     </message>
     <message>
@@ -210,7 +211,7 @@
         <translation>Nu șterge codurile permanente. Acestea dispar singure după ce mașina retestează sistemul.</translation>
     </message>
     <message>
-        <source>Engine off, ignition ON. Obdaryn checks the engine speed first and won't clear while the engine runs.</source>
+        <source>Engine off, ignition ON. Obdaryn checks the engine speed first and won&apos;t clear while the engine runs.</source>
         <translation>Motor oprit, contact pus. Obdaryn verifică întâi turația și nu șterge cât timp motorul merge.</translation>
     </message>
     <message>
@@ -297,7 +298,7 @@
         <translation>Cum detectează mașina defectul</translation>
     </message>
     <message>
-        <source>Obdaryn doesn't have a description for this code yet.</source>
+        <source>Obdaryn doesn&apos;t have a description for this code yet.</source>
         <translation>Obdaryn nu are încă o descriere pentru acest cod.</translation>
     </message>
     <message>
@@ -361,7 +362,7 @@
         <translation>Interval orientativ pentru piese și manoperă; variază mult în funcție de mașină și țară.</translation>
     </message>
     <message>
-        <source>Its meaning depends on the car's manufacturer, and it isn't in Obdaryn's descriptions for this brand yet. Search for it together with the make and model, or ask a workshop.</source>
+        <source>Its meaning depends on the car&apos;s manufacturer, and it isn&apos;t in Obdaryn&apos;s descriptions for this brand yet. Search for it together with the make and model, or ask a workshop.</source>
         <translation>Semnificația depinde de producătorul mașinii și codul nu există încă în descrierile Obdaryn pentru această marcă. Caută-l împreună cu marca și modelul sau întreabă un service.</translation>
     </message>
     <message>
@@ -388,7 +389,7 @@
         <translation>Conectează-te la mașină</translation>
     </message>
     <message>
-        <source>Obdaryn talks to the car through a Wi-Fi OBD-II adapter such as the Vgate iCar Pro. It only reads: it can't change anything in the car.</source>
+        <source>Obdaryn talks to the car through a Wi-Fi OBD-II adapter such as the Vgate iCar Pro. It only reads: it can&apos;t change anything in the car.</source>
         <translation>Obdaryn comunică cu mașina printr-un adaptor OBD-II Wi-Fi, cum ar fi Vgate iCar Pro. Doar citește: nu poate modifica nimic în mașină.</translation>
     </message>
     <message>
@@ -396,7 +397,7 @@
         <translation>Introdu adaptorul în mufa OBD-II</translation>
     </message>
     <message>
-        <source>Under the dashboard on the driver's side, usually left of the steering column.</source>
+        <source>Under the dashboard on the driver&apos;s side, usually left of the steering column.</source>
         <translation>Sub bord, pe partea șoferului, de obicei în stânga coloanei de direcție.</translation>
     </message>
     <message>
@@ -408,11 +409,11 @@
         <translation>Motorul poate rămâne oprit. Pornește-l doar dacă vrei date în timp real cu motorul pornit.</translation>
     </message>
     <message>
-        <source>Join the adapter's Wi-Fi on this Mac</source>
+        <source>Join the adapter&apos;s Wi-Fi on this Mac</source>
         <translation>Conectează acest Mac la rețeaua Wi-Fi a adaptorului</translation>
     </message>
     <message>
-        <source>Usually called "V-LINK" or "WiFi_OBDII". This Mac has no internet while it's connected.</source>
+        <source>Usually called &quot;V-LINK&quot; or &quot;WiFi_OBDII&quot;. This Mac has no internet while it&apos;s connected.</source>
         <translation>De obicei se numește „V-LINK” sau „WiFi_OBDII”. Cât timp e conectat, Mac-ul nu are internet.</translation>
     </message>
     <message>
@@ -436,7 +437,7 @@
         <translation>Se conectează…</translation>
     </message>
     <message>
-        <source>The car isn't answering</source>
+        <source>The car isn&apos;t answering</source>
         <translation>Mașina nu răspunde</translation>
     </message>
     <message>
@@ -444,7 +445,7 @@
         <translation>Adaptorul este ocupat</translation>
     </message>
     <message>
-        <source>Couldn't reach the adapter</source>
+        <source>Couldn&apos;t reach the adapter</source>
         <translation>Adaptorul nu poate fi accesat</translation>
     </message>
     <message>
@@ -452,7 +453,7 @@
         <translation>Probabil o altă aplicație este conectată la adaptor, de exemplu Car Scanner pe un telefon. Un adaptor Wi-Fi acceptă o singură conexiune odată: închide cealaltă aplicație, apoi conectează-te din nou.</translation>
     </message>
     <message>
-        <source>Check that this computer is on the adapter's Wi-Fi (usually "V-LINK"). On macOS 15 and later, also check that Obdaryn is allowed under System Settings → Privacy &amp; Security → Local Network. If the adapter was idle for a while it may be asleep: turn the ignition off and on again to wake it.</source>
+        <source>Check that this computer is on the adapter&apos;s Wi-Fi (usually &quot;V-LINK&quot;). On macOS 15 and later, also check that Obdaryn is allowed under System Settings → Privacy &amp; Security → Local Network. If the adapter was idle for a while it may be asleep: turn the ignition off and on again to wake it.</source>
         <translation>Verifică dacă acest computer este conectat la rețeaua Wi-Fi a adaptorului (de obicei „V-LINK”). Pe macOS 15 și mai nou, verifică și dacă Obdaryn are permisiune în Setări sistem → Confidențialitate și securitate → Rețea locală. Dacă adaptorul a stat nefolosit o vreme, poate fi adormit: oprește și pornește din nou contactul ca să-l trezești.</translation>
     </message>
     <message>
@@ -484,7 +485,7 @@
         <translation>Deschide un fișier…</translation>
     </message>
     <message>
-        <source>A replay answers exactly like the car did, so every screen works without it. Codes can't be cleared in a replay.</source>
+        <source>A replay answers exactly like the car did, so every screen works without it. Codes can&apos;t be cleared in a replay.</source>
         <translation>O redare răspunde exact cum a răspuns mașina, așa că toate ecranele funcționează fără ea. Într-o redare codurile nu pot fi șterse.</translation>
     </message>
     <message>
@@ -517,7 +518,7 @@
         <translation>Redă %1, %2</translation>
     </message>
     <message>
-        <source>Saved in %1. A recording includes the car's VIN, so check it before sharing.</source>
+        <source>Saved in %1. A recording includes the car&apos;s VIN, so check it before sharing.</source>
         <translation>Salvate în %1. O înregistrare conține seria de șasiu (VIN), așa că verific-o înainte să o trimiți cuiva.</translation>
     </message>
     <message>
@@ -556,7 +557,7 @@
         <translation>Document oficial</translation>
     </message>
     <message>
-        <source>Opens in your browser; needs internet, which this computer doesn't have while joined to the adapter's Wi-Fi.</source>
+        <source>Opens in your browser; needs internet, which this computer doesn&apos;t have while joined to the adapter&apos;s Wi-Fi.</source>
         <translation>Se deschide în browser; necesită internet, pe care acest computer nu îl are cât timp e conectat la rețeaua Wi-Fi a adaptorului.</translation>
     </message>
     <message>
@@ -661,35 +662,23 @@
         <translation>Începe aici</translation>
     </message>
     <message>
-        <source>Which car state</source>
-        <translation>Starea mașinii</translation>
-    </message>
-    <message>
-        <source>Clearing codes</source>
-        <translation>Ștergerea codurilor</translation>
-    </message>
-    <message>
         <source>The screens</source>
         <translation>Ecranele</translation>
     </message>
     <message>
-        <source>When something doesn't work</source>
+        <source>When something doesn&apos;t work</source>
         <translation>Când ceva nu merge</translation>
-    </message>
-    <message>
-        <source>Words</source>
-        <translation>Termeni</translation>
     </message>
     <message>
         <source>Privacy and safety</source>
         <translation>Confidențialitate și siguranță</translation>
     </message>
     <message>
-        <source>Obdaryn reads what the car's computers report through an ELM327-compatible Wi-Fi adapter such as the Vgate iCar Pro. It only reads: it can't change anything in the car.</source>
+        <source>Obdaryn reads what the car&apos;s computers report through an ELM327-compatible Wi-Fi adapter such as the Vgate iCar Pro. It only reads: it can&apos;t change anything in the car.</source>
         <translation>Obdaryn citește ce raportează calculatoarele mașinii printr-un adaptor Wi-Fi compatibil ELM327, cum ar fi Vgate iCar Pro. Doar citește: nu poate modifica nimic în mașină.</translation>
     </message>
     <message>
-        <source>Plug the adapter into the OBD-II socket, under the dashboard on the driver's side.</source>
+        <source>Plug the adapter into the OBD-II socket, under the dashboard on the driver&apos;s side.</source>
         <translation>Introdu adaptorul în mufa OBD-II, sub bord, pe partea șoferului.</translation>
     </message>
     <message>
@@ -697,7 +686,7 @@
         <translation>Pune contactul. Motorul poate rămâne oprit; pornește-l pentru date în timp real cu motorul pornit.</translation>
     </message>
     <message>
-        <source>Join the adapter's Wi-Fi (usually "V-LINK", no password). This computer has no internet while it's connected; that's normal.</source>
+        <source>Join the adapter&apos;s Wi-Fi (usually &quot;V-LINK&quot;, no password). This computer has no internet while it&apos;s connected; that&apos;s normal.</source>
         <translation>Conectează-te la rețeaua Wi-Fi a adaptorului (de obicei „V-LINK”, fără parolă). Cât timp e conectat, computerul nu are internet; e normal.</translation>
     </message>
     <message>
@@ -757,7 +746,7 @@
         <translation>Ce face de fapt ștergerea codurilor</translation>
     </message>
     <message>
-        <source>Clearing is the only thing Obdaryn does that changes anything in the car, and only after you confirm with the engine off. It doesn't repair anything:</source>
+        <source>Clearing is the only thing Obdaryn does that changes anything in the car, and only after you confirm with the engine off. It doesn&apos;t repair anything:</source>
         <translation>Ștergerea este singurul lucru prin care Obdaryn schimbă ceva în mașină, și doar după ce confirmi, cu motorul oprit. Nu repară nimic:</translation>
     </message>
     <message>
@@ -797,7 +786,7 @@
         <translation>Toate modulele</translation>
     </message>
     <message>
-        <source>Asks ABS, airbag, body and the other modules for their codes, using the module list of your car's brand.</source>
+        <source>Asks ABS, airbag, body and the other modules for their codes, using the module list of your car&apos;s brand.</source>
         <translation>Întreabă ABS, airbag, caroseria și celelalte module de codurile lor, folosind lista de module a mărcii mașinii tale.</translation>
     </message>
     <message>
@@ -857,11 +846,11 @@
         <translation>Ce suportă adaptorul, cât de repede răspunde și fiecare comandă și răspuns, pentru depanare.</translation>
     </message>
     <message>
-        <source>Can't reach the adapter</source>
+        <source>Can&apos;t reach the adapter</source>
         <translation>Adaptorul nu poate fi accesat</translation>
     </message>
     <message>
-        <source>Check that this computer is on the adapter's Wi-Fi; macOS sometimes jumps back to your usual network. On macOS 15 and later, allow Obdaryn under System Settings → Privacy &amp; Security → Local Network.</source>
+        <source>Check that this computer is on the adapter&apos;s Wi-Fi; macOS sometimes jumps back to your usual network. On macOS 15 and later, allow Obdaryn under System Settings → Privacy &amp; Security → Local Network.</source>
         <translation>Verifică dacă acest computer e conectat la rețeaua Wi-Fi a adaptorului; macOS revine uneori la rețeaua obișnuită. Pe macOS 15 și mai nou, permite Obdaryn în Setări sistem → Confidențialitate și securitate → Rețea locală.</translation>
     </message>
     <message>
@@ -873,11 +862,11 @@
         <translation>O altă aplicație e conectată la el, adesea una de pe telefon. Închide-o și conectează-te din nou.</translation>
     </message>
     <message>
-        <source>The car isn't answering</source>
+        <source>The car isn&apos;t answering</source>
         <translation>Mașina nu răspunde</translation>
     </message>
     <message>
-        <source>Turn the ignition ON. If you switched it off, Obdaryn picks up again by itself when it's back on.</source>
+        <source>Turn the ignition ON. If you switched it off, Obdaryn picks up again by itself when it&apos;s back on.</source>
         <translation>Pune contactul. Dacă l-ai luat, Obdaryn reia singur când e pus din nou.</translation>
     </message>
     <message>
@@ -889,11 +878,11 @@
         <translation>Adaptorul poate să fi adormit sau s-a schimbat rețeaua Wi-Fi. Obdaryn se reconectează singur; dacă renunță, oprește și pornește contactul, apoi apasă din nou Conectează.</translation>
     </message>
     <message>
-        <source>A module shows "Not found"</source>
+        <source>A module shows &quot;Not found&quot;</source>
         <translation>Un modul apare „Negăsit”</translation>
     </message>
     <message>
-        <source>Your model may not have it, or uses another address. Addresses marked "unconfirmed" come from community lists.</source>
+        <source>Your model may not have it, or uses another address. Addresses marked &quot;unconfirmed&quot; come from community lists.</source>
         <translation>Modelul tău s-ar putea să nu îl aibă sau folosește altă adresă. Adresele marcate „neconfirmată” provin din liste ale comunității.</translation>
     </message>
     <message>
@@ -913,7 +902,7 @@
         <translation>Defectul e tot acolo. Ștergerea doar stinge martorul; cauza trebuie remediată.</translation>
     </message>
     <message>
-        <source>Words you'll see</source>
+        <source>Words you&apos;ll see</source>
         <translation>Termeni pe care îi vei întâlni</translation>
     </message>
     <message>
@@ -937,7 +926,7 @@
         <translation>Memorat, în așteptare, permanent</translation>
     </message>
     <message>
-        <source>Stored: confirmed. Pending: seen once, stored if it happens again. Permanent: can't be cleared by a tool, clears itself once fixed.</source>
+        <source>Stored: confirmed. Pending: seen once, stored if it happens again. Permanent: can&apos;t be cleared by a tool, clears itself once fixed.</source>
         <translation>Memorat: confirmat. În așteptare: văzut o dată, se memorează dacă reapare. Permanent: nu poate fi șters cu un aparat, dispare singur după reparație.</translation>
     </message>
     <message>
@@ -973,7 +962,7 @@
         <translation>VIN</translation>
     </message>
     <message>
-        <source>The car's 17-character serial number.</source>
+        <source>The car&apos;s 17-character serial number.</source>
         <translation>Seria de șasiu a mașinii, din 17 caractere.</translation>
     </message>
     <message>
@@ -993,8 +982,9 @@
         <translation>Explicațiile codurilor sunt orientative, din surse publice. Confirmă cu un service înainte să înlocuiești piese.</translation>
     </message>
     <message>
-        <source>Obdaryn %1 is free and open-source software (GPL-3.0). Source code and the full guide: github.com/liviu-hariton/obdaryn</source>
-        <translation>Obdaryn %1 este software liber și open-source (GPL-3.0). Codul sursă și ghidul complet: github.com/liviu-hariton/obdaryn</translation>
+        <source>Obdaryn %1 is free and open-source software (GPL-3.0). Source code and the full guide: %2</source>
+        <extracomment>%1 = version, %2 = a link to the project page</extracomment>
+        <translation>Obdaryn %1 este software liber și open-source (GPL-3.0). Codul sursă și ghidul complet: %2</translation>
     </message>
 </context>
 <context>
@@ -1094,6 +1084,14 @@
         <translation>nesuportat</translation>
     </message>
     <message>
+        <source>Works.</source>
+        <translation>Funcționează.</translation>
+    </message>
+    <message>
+        <source>Not supported by this adapter.</source>
+        <translation>Adaptorul nu o suportă.</translation>
+    </message>
+    <message>
         <source>Answer time</source>
         <translation>Timp de răspuns</translation>
     </message>
@@ -1110,40 +1108,44 @@
         <translation>%1 din %2 comenzi</translation>
     </message>
     <message>
-        <source>Errors</source>
-        <translation>Erori</translation>
+        <source>Error answers</source>
+        <translation>Erori în răspunsuri</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n command(s) answered with an error; the log below shows which</source>
+        <translation>
+            <numerusform>%n comandă a primit o eroare; jurnalul de mai jos arată care</numerusform>
+            <numerusform>%n comenzi au primit o eroare; jurnalul de mai jos arată care</numerusform>
+            <numerusform>%n de comenzi au primit o eroare; jurnalul de mai jos arată care</numerusform>
+        </translation>
     </message>
     <message>
-        <source>%1 ("?", CAN ERROR, ...)</source>
-        <translation>%1 („?”, CAN ERROR, ...)</translation>
+        <source>Values per request</source>
+        <translation>Valori pe cerere</translation>
+    </message>
+    <message>
+        <source>Up to 6 at once</source>
+        <translation>Până la 6 deodată</translation>
+    </message>
+    <message>
+        <source>One at a time</source>
+        <translation>Câte una</translation>
+    </message>
+    <message>
+        <source>Quick answers</source>
+        <translation>Răspunsuri rapide</translation>
+    </message>
+    <message>
+        <source>On: the adapter stops waiting once the car has answered</source>
+        <translation>Pornit: adaptorul nu mai așteaptă după ce mașina a răspuns</translation>
+    </message>
+    <message>
+        <source>Not supported: each answer waits for the car to go quiet</source>
+        <translation>Nesuportat: fiecare răspuns așteaptă până când mașina tace</translation>
     </message>
     <message>
         <source>None</source>
         <translation>Niciuna</translation>
-    </message>
-    <message>
-        <source>Combined requests</source>
-        <translation>Cereri combinate</translation>
-    </message>
-    <message>
-        <source>Yes, up to 6 values per request</source>
-        <translation>Da, până la 6 valori pe cerere</translation>
-    </message>
-    <message>
-        <source>No, one value per request</source>
-        <translation>Nu, o valoare pe cerere</translation>
-    </message>
-    <message>
-        <source>Response counts</source>
-        <translation>Număr de răspunsuri</translation>
-    </message>
-    <message>
-        <source>Working: answers return without waiting</source>
-        <translation>Funcționează: răspunsurile vin fără așteptare</translation>
-    </message>
-    <message>
-        <source>Not supported by this adapter</source>
-        <translation>Nesuportat de acest adaptor</translation>
     </message>
     <message>
         <source>Off</source>
@@ -1331,7 +1333,7 @@
         <translation>Negăsit</translation>
     </message>
     <message>
-        <source>Couldn't read codes</source>
+        <source>Couldn&apos;t read codes</source>
         <translation>Codurile nu au putut fi citite</translation>
     </message>
     <message>
@@ -1355,7 +1357,7 @@
         <translation>Cere aprinderea martorului</translation>
     </message>
     <message>
-        <source>This code isn't in Obdaryn's descriptions for this brand yet. Search for it together with the make and model, or ask a workshop.</source>
+        <source>This code isn&apos;t in Obdaryn&apos;s descriptions for this brand yet. Search for it together with the make and model, or ask a workshop.</source>
         <translation>Acest cod nu există încă în descrierile Obdaryn pentru această marcă. Caută-l împreună cu marca și modelul sau întreabă un service.</translation>
     </message>
     <message>
@@ -1383,11 +1385,11 @@
         <translation>Octet de stare %1</translation>
     </message>
     <message>
-        <source>Clear this module's codes…</source>
+        <source>Clear this module&apos;s codes…</source>
         <translation>Șterge codurile acestui modul…</translation>
     </message>
     <message>
-        <source>"Not found" means nothing answered at that address. The module may not be fitted to this car, may use another address on this model, or may sit on a bus the OBD socket doesn't reach.</source>
+        <source>&quot;Not found&quot; means nothing answered at that address. The module may not be fitted to this car, may use another address on this model, or may sit on a bus the OBD socket doesn&apos;t reach.</source>
         <translation>„Negăsit” înseamnă că nimic nu a răspuns la acea adresă. Modulul poate lipsi de pe această mașină, poate folosi altă adresă pe acest model sau poate fi pe o magistrală la care mufa OBD nu ajunge.</translation>
     </message>
 </context>
@@ -1485,20 +1487,20 @@
         <translation>Distribuție variabilă</translation>
     </message>
     <message>
-        <source>EVAP system, cap off or large leak (0.150")</source>
-        <translation>Sistem EVAP, bușon lipsă sau scăpare mare (0,150")</translation>
+        <source>EVAP system, cap off or large leak (0.150&quot;)</source>
+        <translation>Sistem EVAP, bușon lipsă sau scăpare mare (0,150&quot;)</translation>
     </message>
     <message>
-        <source>EVAP system, 0.090" leak</source>
-        <translation>Sistem EVAP, scăpare de 0,090"</translation>
+        <source>EVAP system, 0.090&quot; leak</source>
+        <translation>Sistem EVAP, scăpare de 0,090&quot;</translation>
     </message>
     <message>
-        <source>EVAP system, 0.040" leak</source>
-        <translation>Sistem EVAP, scăpare de 0,040"</translation>
+        <source>EVAP system, 0.040&quot; leak</source>
+        <translation>Sistem EVAP, scăpare de 0,040&quot;</translation>
     </message>
     <message>
-        <source>EVAP system, 0.020" leak</source>
-        <translation>Sistem EVAP, scăpare de 0,020"</translation>
+        <source>EVAP system, 0.020&quot; leak</source>
+        <translation>Sistem EVAP, scăpare de 0,020&quot;</translation>
     </message>
     <message>
         <source>EVAP purge flow</source>
@@ -1608,7 +1610,7 @@
         <translation>Reconectare la adaptor…</translation>
     </message>
     <message>
-        <source>The car isn't answering</source>
+        <source>The car isn&apos;t answering</source>
         <translation>Mașina nu răspunde</translation>
     </message>
     <message>
@@ -1686,7 +1688,7 @@
         <translation>Adaptorul nu a răspuns la timp.</translation>
     </message>
     <message>
-        <source>Blocked by Obdaryn's safety guard: %1</source>
+        <source>Blocked by Obdaryn&apos;s safety guard: %1</source>
         <translation>Blocat de protecția de siguranță Obdaryn: %1</translation>
     </message>
     <message>
@@ -1801,12 +1803,12 @@
         <translation>%1 din %2 monitoare incomplete</translation>
     </message>
     <message>
-        <source>The car didn't report its monitors.</source>
+        <source>The car didn&apos;t report its monitors.</source>
         <translation>Mașina nu și-a raportat monitoarele.</translation>
     </message>
     <message>
-        <source>Battery %1 V</source>
-        <translation>Baterie %1 V</translation>
+        <source>Battery %1&#xa0;V</source>
+        <translation>Baterie %1&#xa0;V</translation>
     </message>
     <message>
         <source>Battery —</source>
@@ -1881,7 +1883,7 @@
         <translation>Nicio dată în timp real</translation>
     </message>
     <message>
-        <source>The car didn't report any standard live values.</source>
+        <source>The car didn&apos;t report any standard live values.</source>
         <translation>Mașina nu a raportat nicio valoare standard în timp real.</translation>
     </message>
 </context>
@@ -2224,7 +2226,7 @@
         <translation>Consum de combustibil al motorului</translation>
     </message>
     <message>
-        <source>Driver's demand engine torque</source>
+        <source>Driver&apos;s demand engine torque</source>
         <translation>Cuplu motor cerut de șofer</translation>
     </message>
     <message>
@@ -2345,7 +2347,7 @@
         <translation>Pregătire ITP</translation>
     </message>
     <message>
-        <source>The engine computer's self-tests. They run while you drive and reset whenever codes are cleared or the battery is disconnected.</source>
+        <source>The engine computer&apos;s self-tests. They run while you drive and reset whenever codes are cleared or the battery is disconnected.</source>
         <translation>Autotestele calculatorului motorului (monitoarele readiness). Rulează în timp ce conduci și se resetează la ștergerea codurilor sau la deconectarea bateriei.</translation>
     </message>
     <message>
@@ -2369,11 +2371,11 @@
         <translation>Toate monitoarele sunt complete și martorul de motor este stins.</translation>
     </message>
     <message>
-        <source>One monitor hasn't finished. Most inspections accept one; drive a little more to be safe.</source>
+        <source>One monitor hasn&apos;t finished. Most inspections accept one; drive a little more to be safe.</source>
         <translation>Un monitor nu s-a finalizat. Majoritatea inspecțiilor acceptă unul; mai condu puțin ca să fii sigur.</translation>
     </message>
     <message>
-        <source>%1 monitors haven't finished. Drive normally for a few days (city and highway) and check again.</source>
+        <source>%1 monitors haven&apos;t finished. Drive normally for a few days (city and highway) and check again.</source>
         <translation>%1 monitoare nu s-au finalizat. Condu normal câteva zile (oraș și drum deschis) și verifică din nou.</translation>
     </message>
     <message>
@@ -2381,7 +2383,7 @@
         <translation>Doar orientativ: regulile inspecției diferă în funcție de țară și anul de fabricație.</translation>
     </message>
     <message>
-        <source>The car didn't report its monitors</source>
+        <source>The car didn&apos;t report its monitors</source>
         <translation>Mașina nu și-a raportat monitoarele</translation>
     </message>
     <message>
@@ -2461,11 +2463,11 @@
         <translation>Citește din nou rezultatele</translation>
     </message>
     <message>
-        <source>Each monitor keeps the result of its last test next to the limits the car judges it by. A result close to its limit points to a part that's wearing out, before the check-engine light comes on. Results reset when codes are cleared.</source>
+        <source>Each monitor keeps the result of its last test next to the limits the car judges it by. A result close to its limit points to a part that&apos;s wearing out, before the check-engine light comes on. Results reset when codes are cleared.</source>
         <translation>Fiecare monitor păstrează rezultatul ultimului test, alături de limitele după care îl judecă mașina. Un rezultat aproape de limită arată o piesă care se uzează, înainte să se aprindă martorul de motor. Rezultatele se resetează la ștergerea codurilor.</translation>
     </message>
     <message>
-        <source>Outside the car's own limit: the part or system it checks needs attention.</source>
+        <source>Outside the car&apos;s own limit: the part or system it checks needs attention.</source>
         <translation>În afara limitei mașinii: piesa sau sistemul verificat are nevoie de atenție.</translation>
     </message>
     <message>
@@ -2476,12 +2478,12 @@
 <context>
     <name>Report</name>
     <message>
-        <source>the PDF file couldn't be created (is the folder writable?)</source>
+        <source>the PDF file couldn&apos;t be created (is the folder writable?)</source>
         <translation>fișierul PDF nu a putut fi creat (se poate scrie în acel dosar?)</translation>
     </message>
     <message>
         <source>%1 / %2</source>
-        <extracomment>PDF footer, e.g. "2 / 5"</extracomment>
+        <extracomment>PDF footer, e.g. &quot;2 / 5&quot;</extracomment>
         <translation>%1 / %2</translation>
     </message>
 </context>
@@ -2568,7 +2570,7 @@
         <translation>Contact pus</translation>
     </message>
     <message>
-        <source>Turn the ignition off and the car stops answering, as when you switch a real car off. Obdaryn waits and picks up again by itself when it's back on.</source>
+        <source>Turn the ignition off and the car stops answering, as when you switch a real car off. Obdaryn waits and picks up again by itself when it&apos;s back on.</source>
         <translation>Oprește contactul și mașina nu mai răspunde, ca atunci când oprești o mașină reală. Obdaryn așteaptă și reia singur când contactul e pus din nou.</translation>
     </message>
     <message>
@@ -2747,7 +2749,7 @@
         <translation>Setări</translation>
     </message>
     <message>
-        <source>Read-only. Obdaryn can't change anything in your car.</source>
+        <source>Read-only. Obdaryn can&apos;t change anything in your car.</source>
         <translation>Doar citire. Obdaryn nu poate modifica nimic în mașina ta.</translation>
     </message>
 </context>
@@ -2783,6 +2785,14 @@
     <message>
         <source>Fuel used</source>
         <translation>Combustibil consumat</translation>
+    </message>
+    <message>
+        <source>Needs the engine size, below</source>
+        <translation>Necesită capacitatea motorului, mai jos</translation>
+    </message>
+    <message>
+        <source>Not available on this car</source>
+        <translation>Indisponibil la această mașină</translation>
     </message>
     <message>
         <source>Average</source>
@@ -2825,11 +2835,11 @@
         <translation>Calculatorul motorului raportează debitul de combustibil, deci consumul este măsurat, nu estimat.</translation>
     </message>
     <message>
-        <source>Estimated from the air-flow sensor: fuel is the air the engine breathes divided by the air-fuel ratio. Expect up to 10–20 % error until it's calibrated with fill-ups.</source>
+        <source>Estimated from the air-flow sensor: fuel is the air the engine breathes divided by the air-fuel ratio. Expect up to 10–20 % error until it&apos;s calibrated with fill-ups.</source>
         <translation>Estimat din debitmetrul de aer: combustibilul este aerul aspirat de motor împărțit la raportul aer-combustibil. Eroarea poate fi de 10–20 % până la calibrarea cu alimentări.</translation>
     </message>
     <message>
-        <source>This car has no air-flow sensor, so fuel is estimated from manifold pressure, intake temperature, engine speed and the engine size. Expect up to 10–20 % error until it's calibrated with fill-ups.</source>
+        <source>This car has no air-flow sensor, so fuel is estimated from manifold pressure, intake temperature, engine speed and the engine size. Expect up to 10–20 % error until it&apos;s calibrated with fill-ups.</source>
         <translation>Mașina nu are debitmetru de aer, așa că consumul este estimat din presiunea din galeria de admisie, temperatura aerului, turația și capacitatea motorului. Eroarea poate fi de 10–20 % până la calibrarea cu alimentări.</translation>
     </message>
     <message>
@@ -2837,11 +2847,11 @@
         <translation>Mașina nu are debitmetru de aer. Introdu capacitatea motorului și Obdaryn estimează consumul din presiunea din galeria de admisie, temperatura aerului și turație.</translation>
     </message>
     <message>
-        <source>This diesel doesn't report its fuel rate, and a diesel's air-fuel ratio varies too much to estimate fuel from air flow. Distance and times still work.</source>
+        <source>This diesel doesn&apos;t report its fuel rate, and a diesel&apos;s air-fuel ratio varies too much to estimate fuel from air flow. Distance and times still work.</source>
         <translation>Acest diesel nu raportează debitul de combustibil, iar la un diesel raportul aer-combustibil variază prea mult ca să estimezi consumul din aer. Distanța și timpii funcționează în continuare.</translation>
     </message>
     <message>
-        <source>This car reports neither fuel rate, air flow nor manifold pressure, so fuel can't be estimated. Distance and times still work.</source>
+        <source>This car reports neither fuel rate, air flow nor manifold pressure, so fuel can&apos;t be estimated. Distance and times still work.</source>
         <translation>Mașina nu raportează nici debitul de combustibil, nici debitul de aer, nici presiunea din galerie, așa că consumul nu poate fi estimat. Distanța și timpii funcționează în continuare.</translation>
     </message>
     <message>
@@ -2861,7 +2871,7 @@
         <translation>Din certificatul de înmatriculare: cm³ ÷ 1000.</translation>
     </message>
     <message>
-        <source>Trips of the demo car and of recordings aren't saved, and fill-ups can't be recorded for them.</source>
+        <source>Trips of the demo car and of recordings aren&apos;t saved, and fill-ups can&apos;t be recorded for them.</source>
         <translation>Călătoriile mașinii demo și ale înregistrărilor nu se salvează, iar pentru ele nu se pot înregistra alimentări.</translation>
     </message>
     <message numerus="yes">
@@ -3075,7 +3085,7 @@
         <translation>VIN</translation>
     </message>
     <message>
-        <source>The car didn't report its VIN.</source>
+        <source>The car didn&apos;t report its VIN.</source>
         <translation>Mașina nu și-a raportat VIN-ul.</translation>
     </message>
     <message>
@@ -3083,7 +3093,7 @@
         <translation>Producător</translation>
     </message>
     <message>
-        <source>Not in Obdaryn's manufacturer list yet.</source>
+        <source>Not in Obdaryn&apos;s manufacturer list yet.</source>
         <translation>Încă nu figurează în lista de producători Obdaryn.</translation>
     </message>
     <message>
@@ -3091,7 +3101,7 @@
         <translation>An model</translation>
     </message>
     <message>
-        <source>Decoded from the VIN. European VINs don't always encode it, so treat it as a hint.</source>
+        <source>Decoded from the VIN. European VINs don&apos;t always encode it, so treat it as a hint.</source>
         <translation>Decodat din VIN. VIN-urile europene nu îl conțin întotdeauna, așa că ia-l ca pe un indiciu.</translation>
     </message>
     <message>
@@ -3111,7 +3121,7 @@
         <translation>Invalidă</translation>
     </message>
     <message>
-        <source>Mandatory in North America only; European cars often don't use it.</source>
+        <source>Mandatory in North America only; European cars often don&apos;t use it.</source>
         <translation>Obligatorie doar în America de Nord; mașinile europene adesea nu o folosesc.</translation>
     </message>
     <message>
@@ -3269,20 +3279,40 @@
         <translation>Citește intrarea de contact</translation>
     </message>
     <message>
-        <source>CAN error counters</source>
-        <translation>Contoare de erori CAN</translation>
+        <source>Ignition sensing</source>
+        <translation>Detectarea contactului</translation>
+    </message>
+    <message>
+        <source>Network error counters</source>
+        <translation>Contoare de erori din rețea</translation>
+    </message>
+    <message>
+        <source>How many errors the adapter saw on the car&apos;s network (CAN)</source>
+        <translation>Câte erori a văzut adaptorul în rețeaua mașinii (CAN)</translation>
     </message>
     <message>
         <source>Lists its settings</source>
         <translation>Își listează setările</translation>
     </message>
     <message>
+        <source>Settings list</source>
+        <translation>Lista setărilor</translation>
+    </message>
+    <message>
         <source>Flow control, needed for module scans of VW-group, Renault/Dacia and GM cars</source>
         <translation>Controlul fluxului, necesar la scanarea modulelor pentru mașinile grupului VW, Renault/Dacia și GM</translation>
     </message>
     <message>
+        <source>Module-scan flow control</source>
+        <translation>Controlul fluxului la scanarea modulelor</translation>
+    </message>
+    <message>
         <source>Battery voltage at the OBD socket</source>
         <translation>Tensiunea bateriei la mufa OBD</translation>
+    </message>
+    <message>
+        <source>Battery voltage</source>
+        <translation>Tensiunea bateriei</translation>
     </message>
 </context>
 <context>
@@ -3296,11 +3326,11 @@
         <translation>Un adaptor compatibil ELM327. Raportează v1.5, o versiune pe care Elm Electronics nu a produs-o niciodată, lucru des întâlnit și de obicei fără probleme. Mai jos e ce suportă.</translation>
     </message>
     <message>
-        <source>An ELM327-compatible adapter: it reports v%1 but lacks some commands of that version. That's common and usually fine. What it supports is listed below.</source>
+        <source>An ELM327-compatible adapter: it reports v%1 but lacks some commands of that version. That&apos;s common and usually fine. What it supports is listed below.</source>
         <translation>Un adaptor compatibil ELM327: raportează v%1, dar îi lipsesc unele comenzi ale acelei versiuni. E des întâlnit și de obicei fără probleme. Mai jos e ce suportă.</translation>
     </message>
     <message>
-        <source>This adapter doesn't identify itself as an ELM327, so Obdaryn may not work fully with it.</source>
+        <source>This adapter doesn&apos;t identify itself as an ELM327, so Obdaryn may not work fully with it.</source>
         <translation>Adaptorul nu se identifică drept ELM327, așa că Obdaryn s-ar putea să nu funcționeze complet cu el.</translation>
     </message>
 </context>
@@ -3335,7 +3365,7 @@
         <translation>Legătura cu adaptorul s-a pierdut. Reconectare, încercarea %1 din %2…</translation>
     </message>
     <message>
-        <source>Couldn't reconnect to the adapter after %1 tries. Check that it has power and that this computer is on its Wi-Fi, then connect again.</source>
+        <source>Couldn&apos;t reconnect to the adapter after %1 tries. Check that it has power and that this computer is on its Wi-Fi, then connect again.</source>
         <translation>Reconectarea la adaptor a eșuat după %1 încercări. Verifică dacă are alimentare și dacă acest computer e conectat la rețeaua lui Wi-Fi, apoi conectează-te din nou.</translation>
     </message>
     <message>
@@ -3415,24 +3445,24 @@
         <translation>Aceasta este deja o înregistrare.</translation>
     </message>
     <message>
-        <source>Couldn't create the folder %1.</source>
+        <source>Couldn&apos;t create the folder %1.</source>
         <translation>Nu s-a putut crea dosarul %1.</translation>
     </message>
     <message>
-        <source>Couldn't start recording: %1</source>
+        <source>Couldn&apos;t start recording: %1</source>
         <translation>Înregistrarea nu a putut porni: %1</translation>
     </message>
     <message>
-        <source>Couldn't open %1. %2</source>
+        <source>Couldn&apos;t open %1. %2</source>
         <translation>Nu s-a putut deschide %1. %2</translation>
     </message>
     <message>
         <source>%1, %2</source>
-        <extracomment>Sidebar, while replaying: which car and when it was recorded, e.g. "Hyundai 2014, 11/11/26 14:03"</extracomment>
+        <extracomment>Sidebar, while replaying: which car and when it was recorded, e.g. &quot;Hyundai 2014, 11/11/26 14:03&quot;</extracomment>
         <translation>%1, %2</translation>
     </message>
     <message>
-        <source>Couldn't write %1: %2</source>
+        <source>Couldn&apos;t write %1: %2</source>
         <translation>Nu s-a putut scrie %1: %2</translation>
     </message>
     <message>
@@ -3456,7 +3486,7 @@
         <translation>Așteaptă să se termine scanarea, apoi salvează raportul.</translation>
     </message>
     <message>
-        <source>Couldn't save the report: %1</source>
+        <source>Couldn&apos;t save the report: %1</source>
         <translation>Raportul nu a putut fi salvat: %1</translation>
     </message>
     <message>
@@ -3474,6 +3504,11 @@
     <message>
         <source>%1 h %2 min</source>
         <translation>%1 h %2 min</translation>
+    </message>
+    <message>
+        <source>Shown after %1</source>
+        <extracomment>Trip, under an empty &quot;Average&quot;: it appears once the car has driven this far. %1 = e.g. &quot;0.2 km&quot;</extracomment>
+        <translation>Apare după %1</translation>
     </message>
     <message>
         <source>Fill-ups can only be recorded with your own car connected, not the demo car or a recording.</source>
@@ -3496,7 +3531,7 @@
         <translation>Prea puțin drum de la ultima alimentare pentru o comparație (sub 5 L estimați). Numărarea reîncepe de la această alimentare.</translation>
     </message>
     <message>
-        <source>The pump and the estimate are more than twice apart, so this fill-up wasn't used. Usually some drives happened without Obdaryn. Counting starts again from this fill-up.</source>
+        <source>The pump and the estimate are more than twice apart, so this fill-up wasn&apos;t used. Usually some drives happened without Obdaryn. Counting starts again from this fill-up.</source>
         <translation>Pompa și estimarea diferă de mai mult de două ori, așa că alimentarea nu a fost folosită. De obicei unele drumuri au fost făcute fără Obdaryn. Numărarea reîncepe de la această alimentare.</translation>
     </message>
 </context>
@@ -3523,11 +3558,11 @@
         <translation>Viteză și accelerație</translation>
     </message>
     <message>
-        <source>Saved the preset "%1".</source>
+        <source>Saved the preset &quot;%1&quot;.</source>
         <translation>Setul „%1” a fost salvat.</translation>
     </message>
     <message>
-        <source>Couldn't open %1. %2</source>
+        <source>Couldn&apos;t open %1. %2</source>
         <translation>Nu s-a putut deschide %1. %2</translation>
     </message>
     <message>
@@ -3541,6 +3576,16 @@
     <message>
         <source>now</source>
         <translation>acum</translation>
+    </message>
+    <message>
+        <source>Recording A ended at %1</source>
+        <extracomment>Charts readout, comparing recordings A and B: A is shorter than the moment pointed at. %1 = time, e.g. &quot;12:05&quot;</extracomment>
+        <translation>Înregistrarea A s-a încheiat la %1</translation>
+    </message>
+    <message>
+        <source>Recording B ended at %1</source>
+        <extracomment>Charts readout, comparing recordings A and B: B is shorter than the moment pointed at. %1 = time, e.g. &quot;12:05&quot;</extracomment>
+        <translation>Înregistrarea B s-a încheiat la %1</translation>
     </message>
     <message>
         <source>Time (s)</source>
@@ -3593,7 +3638,7 @@
         <translation>Adaptorul este conectat, dar mașina nu răspunde. Pune contactul (motorul poate rămâne oprit) și încearcă din nou.</translation>
     </message>
     <message>
-        <source>Blocked "%1": %2</source>
+        <source>Blocked &quot;%1&quot;: %2</source>
         <translation>Blocat „%1”: %2</translation>
     </message>
     <message>
@@ -3627,15 +3672,15 @@
 <context>
     <name>obdaryn::ModuleScanner</name>
     <message>
-        <source>The adapter didn't accept the module address.</source>
+        <source>The adapter didn&apos;t accept the module address.</source>
         <translation>Adaptorul nu a acceptat adresa modulului.</translation>
     </message>
     <message>
-        <source>The module answers, but not to trouble-code requests. Scan again with the ignition ON; if it persists, this module needs the brand's own diagnostic tool.</source>
+        <source>The module answers, but not to trouble-code requests. Scan again with the ignition ON; if it persists, this module needs the brand&apos;s own diagnostic tool.</source>
         <translation>Modulul răspunde, dar nu la cererile de coduri de eroare. Scanează din nou cu contactul pus; dacă problema persistă, acest modul are nevoie de aparatul de diagnoză al mărcii.</translation>
     </message>
     <message>
-        <source>%1 Scan again with the ignition ON; if it persists, this module needs the brand's own diagnostic tool.</source>
+        <source>%1 Scan again with the ignition ON; if it persists, this module needs the brand&apos;s own diagnostic tool.</source>
         <translation>%1 Scanează din nou cu contactul pus; dacă problema persistă, acest modul are nevoie de aparatul de diagnoză al mărcii.</translation>
     </message>
     <message>
@@ -3654,7 +3699,7 @@
         <translation>Deocamdată rezultatele testelor se citesc doar la mașinile CAN (majoritatea mașinilor din 2008 încoace).</translation>
     </message>
     <message>
-        <source>The car doesn't report any test results.</source>
+        <source>The car doesn&apos;t report any test results.</source>
         <translation>Mașina nu raportează niciun rezultat de test.</translation>
     </message>
     <message>
@@ -3665,11 +3710,11 @@
 <context>
     <name>obdaryn::Recording</name>
     <message>
-        <source>Couldn't open the file: %1</source>
+        <source>Couldn&apos;t open the file: %1</source>
         <translation>Fișierul nu a putut fi deschis: %1</translation>
     </message>
     <message>
-        <source>This isn't an Obdaryn recording.</source>
+        <source>This isn&apos;t an Obdaryn recording.</source>
         <translation>Aceasta nu este o înregistrare Obdaryn.</translation>
     </message>
     <message>
@@ -3711,7 +3756,7 @@
         <translation>Adresa %1 nu a fost găsită.</translation>
     </message>
     <message>
-        <source>Can't reach the adapter at %1.</source>
+        <source>Can&apos;t reach the adapter at %1.</source>
         <translation>Adaptorul de la %1 nu poate fi accesat.</translation>
     </message>
 </context>
@@ -3798,7 +3843,7 @@
         <translation>Calculatorul motorului are martorul aprins.</translation>
     </message>
     <message>
-        <source>The engine computer doesn't ask for the warning light.</source>
+        <source>The engine computer doesn&apos;t ask for the warning light.</source>
         <translation>Calculatorul motorului nu cere aprinderea martorului.</translation>
     </message>
     <message>
@@ -3866,7 +3911,7 @@
         <translation>Nescanat</translation>
     </message>
     <message>
-        <source>ABS, airbag and the other modules weren't read for this report.</source>
+        <source>ABS, airbag and the other modules weren&apos;t read for this report.</source>
         <translation>ABS, airbag și celelalte module nu au fost citite pentru acest raport.</translation>
     </message>
     <message>
@@ -3898,7 +3943,7 @@
         <translation>Nepregătită</translation>
     </message>
     <message>
-        <source>%1 of %2 self-tests haven't finished since the codes were last cleared.</source>
+        <source>%1 of %2 self-tests haven&apos;t finished since the codes were last cleared.</source>
         <translation>%1 din %2 autoteste nu s-au încheiat de la ultima ștergere a codurilor.</translation>
     </message>
     <message>
@@ -3982,7 +4027,7 @@
         <translation>Necunoscut</translation>
     </message>
     <message>
-        <source>This car doesn't report when its codes were cleared.</source>
+        <source>This car doesn&apos;t report when its codes were cleared.</source>
         <translation>Mașina nu raportează când i-au fost șterse codurile.</translation>
     </message>
     <message>
@@ -4034,7 +4079,7 @@
         <translation>Răspunde doar la OBD-II generic</translation>
     </message>
     <message>
-        <source>Couldn't read codes</source>
+        <source>Couldn&apos;t read codes</source>
         <translation>Codurile nu au putut fi citite</translation>
     </message>
     <message>
@@ -4110,7 +4155,7 @@
         <translation>Încă nerulat</translation>
     </message>
     <message>
-        <source>The latest result of each monitor's tests, next to the limits the car judges it by. A result close to its limit points to a part that's wearing out.</source>
+        <source>The latest result of each monitor&apos;s tests, next to the limits the car judges it by. A result close to its limit points to a part that&apos;s wearing out.</source>
         <translation>Ultimul rezultat al testelor fiecărui monitor, alături de limitele după care îl judecă mașina. Un rezultat aproape de limită arată o piesă care se uzează.</translation>
     </message>
     <message>
@@ -4218,7 +4263,7 @@
         <translation>Validă</translation>
     </message>
     <message>
-        <source>Doesn't match (normal outside North America)</source>
+        <source>Doesn&apos;t match (normal outside North America)</source>
         <translation>Nu se potrivește (normal în afara Americii de Nord)</translation>
     </message>
     <message>
@@ -4258,11 +4303,11 @@
         <translation>Despre acest raport</translation>
     </message>
     <message>
-        <source>This report shows what the car's computers told a standard OBD-II adapter. It can't show the mileage, accident history or faults the car hasn't detected, and it doesn't replace an inspection by a mechanic.</source>
+        <source>This report shows what the car&apos;s computers told a standard OBD-II adapter. It can&apos;t show the mileage, accident history or faults the car hasn&apos;t detected, and it doesn&apos;t replace an inspection by a mechanic.</source>
         <translation>Raportul arată ce au transmis calculatoarele mașinii unui adaptor OBD-II standard. Nu poate arăta kilometrajul, istoricul de accidente sau defectele pe care mașina nu le-a detectat și nu înlocuiește o verificare la mecanic.</translation>
     </message>
     <message>
-        <source>Obdaryn only reads: it can't change anything in a car. Code explanations are guidance; confirm with a workshop before replacing parts.</source>
+        <source>Obdaryn only reads: it can&apos;t change anything in a car. Code explanations are guidance; confirm with a workshop before replacing parts.</source>
         <translation>Obdaryn doar citește: nu poate modifica nimic într-o mașină. Explicațiile codurilor sunt orientative; confirmă cu un service înainte să înlocuiești piese.</translation>
     </message>
     <message>

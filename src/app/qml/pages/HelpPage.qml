@@ -134,21 +134,14 @@ Item {
                 Layout.fillWidth: true
                 spacing: 6
                 Repeater {
-                    model: [
-                        { label: qsTr("Start here"), target: start },
-                        { label: qsTr("Which car state"), target: states },
-                        { label: qsTr("Clearing codes"), target: clearing },
-                        { label: qsTr("The screens"), target: screens },
-                        { label: qsTr("When something doesn't work"), target: trouble },
-                        { label: qsTr("Words"), target: words },
-                        { label: qsTr("Privacy and safety"), target: safety },
-                    ]
+                    // Each link reads exactly like the heading it jumps to.
+                    model: [start, states, clearing, screens, trouble, words, safety]
                     delegate: AppButton {
                         required property var modelData
                         variant: "quiet"
                         implicitHeight: 28
-                        text: modelData.label
-                        onClicked: page.jumpTo(modelData.target)
+                        text: modelData.title
+                        onClicked: page.jumpTo(modelData)
                     }
                 }
             }
@@ -262,10 +255,19 @@ Item {
                     ]
                 }
                 Para {
+                    id: about
                     Layout.bottomMargin: Theme.s6
-                    text: qsTr("Obdaryn %1 is free and open-source software (GPL-3.0). Source code and the full guide: github.com/liviu-hariton/obdaryn").arg(App.appVersion)
-                    color: Theme.textFaint
+                    readonly property string url: "https://github.com/liviu-hariton/obdaryn"
+                    //: %1 = version, %2 = a link to the project page
+                    text: qsTr("Obdaryn %1 is free and open-source software (GPL-3.0). Source code and the full guide: %2")
+                          .arg(App.appVersion)
+                          .arg("<a href=\"" + url + "\">github.com/liviu-hariton/obdaryn</a>")
+                    textFormat: Text.StyledText
+                    color: Theme.textMuted
                     font.pixelSize: Theme.fontSmall
+                    linkColor: Theme.blue
+                    onLinkActivated: link => Qt.openUrlExternally(link)
+                    HoverHandler { cursorShape: about.hoveredLink.length ? Qt.PointingHandCursor : Qt.ArrowCursor }
                 }
             }
         }

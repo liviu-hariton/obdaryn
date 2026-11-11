@@ -54,7 +54,7 @@ Rectangle {
             font.weight: Font.Bold
             font.letterSpacing: -0.2
             Layout.leftMargin: 10
-            Layout.bottomMargin: sidebar.compact ? Theme.s3 : Theme.s4
+            Layout.bottomMargin: sidebar.compact ? Theme.s2 : Theme.s4
         }
 
         // ---- Connection status --------------------------------------------
@@ -214,82 +214,77 @@ Rectangle {
             font.pixelSize: Theme.fontSmall
             font.weight: Font.DemiBold
             Layout.leftMargin: 10
-            Layout.topMargin: sidebar.compact ? Theme.s2 : Theme.s3
-            Layout.bottomMargin: sidebar.compact ? 2 : 4
+            Layout.topMargin: sidebar.compact ? Theme.s1 + 2 : Theme.s3
+            Layout.bottomMargin: sidebar.compact ? 1 : 4
+        }
+
+        // Rows are 28 px in short windows (the size of macOS sidebar rows), so
+        // Settings and the read-only note still fit while recording or replaying.
+        component Nav: NavItem {
+            Layout.fillWidth: true
+            implicitHeight: sidebar.compact ? 28 : 32
         }
 
         GroupLabel { text: qsTr("Diagnose") }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Overview"); iconName: "layout-dashboard"
             current: sidebar.currentPage === 0; onClicked: sidebar.navigate(0)
         }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Trouble codes"); iconName: "triangle-alert"
             badge: App.dtcs.activeCodeCount
             Accessible.description: qsTr("%n codes stored or pending", "", App.dtcs.activeCodeCount)
             badgeColor: App.dtcs.storedCount > 0 ? Theme.redFill : Theme.amber
             current: sidebar.currentPage === 1; onClicked: sidebar.navigate(1)
         }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("All modules"); iconName: "cpu"
             badge: App.moduleScan.extraCodeCount
             badgeColor: App.moduleScan.extraStoredCount > 0 ? Theme.redFill : Theme.amber
             Accessible.description: qsTr("%n codes in modules other than the engine and transmission", "", App.moduleScan.extraCodeCount)
             current: sidebar.currentPage === 8; onClicked: sidebar.navigate(8)
         }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Readiness"); iconName: "list-checks"
             current: sidebar.currentPage === 2; onClicked: sidebar.navigate(2)
         }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Freeze frame"); iconName: "snowflake"
             current: sidebar.currentPage === 3; onClicked: sidebar.navigate(3)
         }
 
         GroupLabel { text: qsTr("Monitor") }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Live data"); iconName: "activity"
             current: sidebar.currentPage === 4; onClicked: sidebar.navigate(4)
         }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Charts"); iconName: "chart-line"
             current: sidebar.currentPage === 10; onClicked: sidebar.navigate(10)
         }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Trip"); iconName: "fuel"
             current: sidebar.currentPage === 9; onClicked: sidebar.navigate(9)
         }
 
         GroupLabel { text: qsTr("Vehicle") }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Vehicle info"); iconName: "car-front"
             current: sidebar.currentPage === 5; onClicked: sidebar.navigate(5)
         }
         GroupLabel { text: qsTr("Adapter") }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Adapter log"); iconName: "terminal"
             current: sidebar.currentPage === 6; onClicked: sidebar.navigate(6)
         }
 
         Item { Layout.fillHeight: true }
 
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Help"); iconName: "circle-help"
             current: sidebar.currentPage === 11; onClicked: sidebar.navigate(11)
         }
-        NavItem {
-            Layout.fillWidth: true
+        Nav {
             text: qsTr("Settings"); iconName: "settings"
             current: sidebar.currentPage === 7; onClicked: sidebar.navigate(7)
         }

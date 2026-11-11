@@ -22,17 +22,18 @@ QString tr(const char *text)
 struct Probe {
     const char *command;   ///< sent as is (allowlisted)
     const char *label;     ///< shown as "AT IGN"
+    const char *name;      ///< a short name in plain words, translated in tr()
     const char *purpose;   ///< English source, translated in tr()
     bool versionCheck;     ///< a command every genuine v1.4+ knows
 };
 
 // The order matters only for the log; each is independent and read-only.
 const Probe kProbes[] = {
-    {"ATIGN", "AT IGN", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Reads the ignition input"), true},
-    {"ATCS", "AT CS", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "CAN error counters"), true},
-    {"ATPPS", "AT PPS", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Lists its settings"), true},
-    {"ATFCSM0", "AT FC SM 0", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Flow control, needed for module scans of VW-group, Renault/Dacia and GM cars"), false},
-    {"ATRV", "AT RV", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Battery voltage at the OBD socket"), false},
+    {"ATIGN", "AT IGN", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Ignition sensing"), QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Reads the ignition input"), true},
+    {"ATCS", "AT CS", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Network error counters"), QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "How many errors the adapter saw on the car's network (CAN)"), true},
+    {"ATPPS", "AT PPS", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Settings list"), QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Lists its settings"), true},
+    {"ATFCSM0", "AT FC SM 0", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Module-scan flow control"), QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Flow control, needed for module scans of VW-group, Renault/Dacia and GM cars"), false},
+    {"ATRV", "AT RV", QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Battery voltage"), QT_TRANSLATE_NOOP("obdaryn::AdapterCheck", "Battery voltage at the OBD socket"), false},
 };
 
 struct State {
@@ -127,6 +128,7 @@ void AdapterCheck::run(ElmSession *session, std::function<void(const Result &)> 
             Item item;
             item.command = QString::fromLatin1(p.label);
             item.purpose = tr(p.purpose);
+            item.name = tr(p.name);
             item.supported = r.ok() && !r.lines.isEmpty() && firstLine(r) != QLatin1String("?");
             item.answer = firstLine(r);
             st->result.items << item;

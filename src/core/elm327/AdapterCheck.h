@@ -38,6 +38,7 @@ public:
         QString purpose;   ///< translated: what it is for
         bool supported = false;
         QString answer;    ///< what the adapter said
+        QString name;      ///< translated: a short name, e.g. "Battery voltage"
     };
 
     enum class Verdict {

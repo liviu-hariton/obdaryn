@@ -58,8 +58,11 @@ Item {
                 property string label
                 property string value
                 property string unit
+                /// Why the value is missing, under the dash (empty: nothing to say).
+                property string note
                 Layout.fillWidth: true
                 Layout.preferredWidth: 1
+                Layout.alignment: Qt.AlignTop // a note under one value mustn't shift the row
                 spacing: 4
                 Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: Theme.hairline; Layout.bottomMargin: Theme.s2 }
                 Text {
@@ -91,6 +94,15 @@ Item {
                         font.pixelSize: Theme.fontEmphasis
                     }
                 }
+                Text {
+                    Layout.fillWidth: true
+                    visible: big.note.length > 0
+                    text: big.note
+                    color: Theme.textMuted
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontSmall
+                    wrapMode: Text.WordWrap
+                }
             }
 
             RowLayout {
@@ -105,11 +117,17 @@ Item {
                     label: qsTr("Fuel used")
                     value: page.trip.fuelKnown ? page.num(page.trip.fuelValue, page.trip.fuelValue < 10 ? 2 : 1) : "—"
                     unit: page.trip.fuelUnit || ""
+                    // One reason for the three empty fuel values, here where they start.
+                    note: page.trip.fuelKnown ? ""
+                        : page.trip.method === "needsEngineSize" ? qsTr("Needs the engine size, below")
+                        : ["fuelRate", "maf", "speedDensity"].includes(page.trip.method) ? ""
+                        : qsTr("Not available on this car")
                 }
                 BigValue {
                     label: qsTr("Average")
                     value: page.trip.fuelKnown && page.trip.averageValue > 0 ? page.num(page.trip.averageValue, 1) : "—"
                     unit: page.trip.consumptionUnit || ""
+                    note: page.trip.averageNote || ""
                 }
                 BigValue {
                     // Standing still, L/100 km is meaningless: show the flow instead.

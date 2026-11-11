@@ -49,7 +49,7 @@ class ChartModel : public QObject
     Q_PROPERTY(QVariantList presets READ presets NOTIFY presetsChanged)
     Q_PROPERTY(QString recordingA READ recordingA NOTIFY sourceChanged)
     Q_PROPERTY(QString recordingB READ recordingB NOTIFY sourceChanged)
-    /// File paths of the loaded recordings (to show their friendly names).
+    /// File paths of the loaded recordings.
     Q_PROPERTY(QString recordingAPath READ recordingAPath NOTIFY sourceChanged)
     Q_PROPERTY(QString recordingBPath READ recordingBPath NOTIFY sourceChanged)
     Q_PROPERTY(int maxSignals READ maxSignals CONSTANT)
@@ -85,7 +85,8 @@ public:
     /// Loads a recording as A (`slot` 0) or B (1); an empty path removes B.
     Q_INVOKABLE void loadRecording(int slot, const QString &pathOrUrl);
     /// The values under the crosshair at `fraction` (0..1) of the time axis:
-    /// {time, rows: [{name, a, b}]}.
+    /// {time, note, rows: [{name, a, b}]}. When comparing, `note` says which
+    /// recording has ended by then, and that recording's values are empty.
     Q_INVOKABLE QVariantMap readout(qreal fraction) const;
     /// The charted window as CSV text (one column per signal), for the clipboard.
     Q_INVOKABLE QString toCsv() const;

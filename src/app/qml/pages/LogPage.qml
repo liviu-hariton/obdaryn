@@ -67,14 +67,19 @@ Item {
                         model: adapterPanel.check.items || []
                         delegate: Chip {
                             required property var modelData
-                            text: qsTr("%1: %2").arg(modelData.command).arg(modelData.supported ? qsTr("works") : qsTr("not supported"))
+                            // Plain name first, the command itself after it in mono.
+                            text: modelData.name
+                            code: modelData.command
                             iconName: modelData.supported ? "check" : "x"
                             iconColor: modelData.supported ? Theme.green : Theme.textFaint
+                            Accessible.role: Accessible.StaticText
+                            Accessible.name: qsTr("%1: %2").arg(modelData.name).arg(modelData.supported ? qsTr("works") : qsTr("not supported"))
                             Accessible.description: modelData.purpose
                             HoverHandler { id: chipHover }
                             C.ToolTip.visible: chipHover.hovered
                             C.ToolTip.delay: 400
-                            C.ToolTip.text: modelData.purpose + (modelData.answer ? " (" + modelData.answer + ")" : "")
+                            C.ToolTip.text: (modelData.supported ? qsTr("Works.") : qsTr("Not supported by this adapter.")) + " " + modelData.purpose
+                                            + (modelData.answer ? " (" + modelData.answer + ")" : "")
                         }
                     }
                 }
@@ -89,6 +94,7 @@ Item {
                 columnSpacing: Theme.s4
                 rowSpacing: 4
                 component Label: Text {
+                    Layout.alignment: Qt.AlignTop | Qt.AlignLeft // level with a value's first line
                     color: Theme.textMuted
                     font.family: Theme.sans
                     font.pixelSize: Theme.fontSmall
@@ -112,14 +118,16 @@ Item {
                     text: qsTr("%1 of %2 commands").arg(adapterPanel.health.timeouts).arg(adapterPanel.health.commands)
                     color: adapterPanel.health.timeouts > 0 ? Theme.amberInk : Theme.text
                 }
-                Label { text: qsTr("Errors") }
-                Value { text: adapterPanel.health.errors > 0 ? qsTr("%1 (\"?\", CAN ERROR, ...)").arg(adapterPanel.health.errors) : qsTr("None") }
-                Label { text: qsTr("Combined requests") }
-                Value { text: adapterPanel.health.multiPid ? qsTr("Yes, up to 6 values per request") : qsTr("No, one value per request") }
-                Label { text: qsTr("Response counts") }
+                Label { text: qsTr("Error answers") }
+                Value { text: adapterPanel.health.errors > 0 ? qsTr("%n command(s) answered with an error; the log below shows which", "", adapterPanel.health.errors) : qsTr("None") }
+                Label { text: qsTr("Values per request") }
+                Value { text: adapterPanel.health.multiPid ? qsTr("Up to 6 at once") : qsTr("One at a time") }
+                Label { text: qsTr("Quick answers") }
                 Value {
-                    text: adapterPanel.health.responseCounts === "working" ? qsTr("Working: answers return without waiting")
-                        : adapterPanel.health.responseCounts === "notSupported" ? qsTr("Not supported by this adapter")
+                    // The ELM327 "response count" digit: the adapter returns as soon as
+                    // the expected answers are in, instead of waiting for silence.
+                    text: adapterPanel.health.responseCounts === "working" ? qsTr("On: the adapter stops waiting once the car has answered")
+                        : adapterPanel.health.responseCounts === "notSupported" ? qsTr("Not supported: each answer waits for the car to go quiet")
                         : adapterPanel.health.responseCounts === "off" ? qsTr("Off")
                         : qsTr("Not used yet")
                 }

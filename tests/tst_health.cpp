@@ -164,7 +164,7 @@ void TestHealth::verdicts()
     auto items = [](bool all) {
         QList<AdapterCheck::Item> list;
         for (const char *c : {"AT IGN", "AT CS", "AT PPS"})
-            list << AdapterCheck::Item{QString::fromLatin1(c), {}, all, {}};
+            list << AdapterCheck::Item{QString::fromLatin1(c), {}, all, {}, {}};
         return list;
     };
     QCOMPARE(AdapterCheck::verdictFor(QStringLiteral("2.1"), items(true)), V::Genuine);

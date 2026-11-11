@@ -7,6 +7,8 @@ import Obdaryn
 Rectangle {
     id: chip
     property alias text: label.text
+    /// Optional code after the text, set in mono (e.g. an adapter command "AT RV").
+    property string code: ""
     property color dotColor: "transparent"
     property string iconName: ""
     property color iconColor: Theme.textMuted
@@ -39,12 +41,23 @@ Rectangle {
         }
         Text {
             id: label
-            width: Math.min(implicitWidth, chip.maxWidth - 16 - (chip.dotColor.a > 0 ? 13 : 0) - (chip.iconName.length ? 19 : 0))
+            width: Math.min(implicitWidth, chip.maxWidth - 16 - (chip.dotColor.a > 0 ? 13 : 0) - (chip.iconName.length ? 19 : 0)
+                                           - (chip.code.length ? codeLabel.implicitWidth + 6 : 0))
             elide: Text.ElideRight
             color: Theme.textMuted
             font.family: Theme.sans
             font.pixelSize: Theme.fontSmall
             font.weight: Font.Medium
+            anchors.verticalCenter: parent.verticalCenter
+        }
+        Text {
+            id: codeLabel
+            visible: chip.code.length > 0
+            text: chip.code
+            textFormat: Text.PlainText
+            color: Theme.textMuted
+            font.family: Theme.mono
+            font.pixelSize: Theme.fontCaption
             anchors.verticalCenter: parent.verticalCenter
         }
     }

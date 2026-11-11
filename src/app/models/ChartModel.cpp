@@ -2,6 +2,8 @@
 
 #include "models/ChartModel.h"
 
+#include "AppController.h"
+
 #include "obd/Pids.h"
 #include "obd/Units.h"
 #include "recording/Recording.h"
@@ -346,15 +348,19 @@ void ChartModel::loadRecording(int slot, const QString &pathOrUrl)
         emit notice(false, tr("%1 has no live data to chart.").arg(QFileInfo(path).fileName()));
         return;
     }
+    // Named like in the recordings list, wherever the file came from: date first,
+    // so two drives of the same car tell apart.
+    const auto [car, when] = AppController::recordingLabel(rec.header, QFileInfo(path));
+    const QString name = when + QStringLiteral(" · ") + car;
     if (slot == 1 && !m_a.isEmpty()) {
         m_b = std::move(series);
         m_durationB = rec.durationMs;
-        m_nameB = QFileInfo(path).completeBaseName();
+        m_nameB = name;
         m_pathB = QFileInfo(path).absoluteFilePath();
     } else {
         m_a = std::move(series);
         m_durationA = rec.durationMs;
-        m_nameA = QFileInfo(path).completeBaseName();
+        m_nameA = name;
         m_pathA = QFileInfo(path).absoluteFilePath();
     }
     m_source = QStringLiteral("recording");
@@ -472,17 +478,31 @@ QVariantMap ChartModel::readout(qreal fraction) const
     const qint64 t = from + qint64(std::clamp(fraction, 0.0, 1.0) * double(to - from));
     // A value counts if it was read close to that moment (rotation can leave gaps).
     const qint64 tolerance = std::max<qint64>(2000, (to - from) / 150);
+    // Comparing two drives of different length: past the end of the shorter one
+    // there is nothing to show for it. Say so once, instead of a dash per row.
+    const bool comparing = !live && !m_b.isEmpty();
+    const bool endedA = comparing && t > m_durationA + tolerance;
+    const bool endedB = comparing && t > m_durationB + tolerance;
+    QString note;
+    if (endedA)
+        //: Charts readout, comparing recordings A and B: A is shorter than the moment pointed at. %1 = time, e.g. "12:05"
+        note = tr("Recording A ended at %1").arg(clock(m_durationA));
+    else if (endedB)
+        //: Charts readout, comparing recordings A and B: B is shorter than the moment pointed at. %1 = time, e.g. "12:05"
+        note = tr("Recording B ended at %1").arg(clock(m_durationB));
     QVariantList rows;
     for (const QVariant &v : m_strips) {
         const quint8 pid = quint8(v.toMap().value(QStringLiteral("pid")).toInt());
         double a = 0, b = 0;
         const bool hasA = (live ? m_live.value(pid) : m_a.value(pid)).valueAt(t, tolerance, &a);
-        const bool hasB = !live && m_b.value(pid).valueAt(t, tolerance, &b);
+        const bool hasB = comparing && m_b.value(pid).valueAt(t, tolerance, &b);
+        // "—": a gap in the data (values are read in rotation); empty: that recording has ended.
         rows << QVariantMap{{QStringLiteral("name"), v.toMap().value(QStringLiteral("name"))},
-                            {QStringLiteral("a"), hasA ? text(pid, a) : QStringLiteral("—")},
-                            {QStringLiteral("b"), hasB ? text(pid, b) : QString()}};
+                            {QStringLiteral("a"), hasA ? text(pid, a) : endedA ? QString() : QStringLiteral("—")},
+                            {QStringLiteral("b"), hasB ? text(pid, b) : endedB ? QString() : QStringLiteral("—")}};
     }
     return {{QStringLiteral("time"), live ? (to - t < 500 ? tr("now") : clock(t - to, true)) : clock(t)},
+            {QStringLiteral("note"), note},
             {QStringLiteral("rows"), rows}};
 }
 

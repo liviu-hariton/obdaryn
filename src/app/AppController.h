@@ -26,6 +26,8 @@
 class QQmlEngine;
 class QJSEngine;
 
+class QFileInfo;
+
 namespace obdaryn {
 
 class SimulatedTransport;
@@ -173,6 +175,10 @@ public:
 
     /// Factory used by the QML engine for the singleton.
     static AppController *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
+
+    /// How a recording is named on screen, from its header: the car ("Hyundai 2014",
+    /// "Demo car", or the file name) and when it was recorded, in the user's locale.
+    static QPair<QString, QString> recordingLabel(const QJsonObject &header, const QFileInfo &file);
 
     // ---- Actions callable from QML -------------------------------------------
     Q_INVOKABLE void connectToAdapter(const QString &host, int port);

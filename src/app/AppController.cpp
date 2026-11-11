@@ -59,22 +59,6 @@ QString clockText(qint64 ms)
     return QStringLiteral("%1:%2").arg(s / 60).arg(s % 60, 2, 10, QLatin1Char('0'));
 }
 
-/// "Hyundai 2014" / "Demo car" / "Unknown car", and when it was recorded, from a recording header.
-QPair<QString, QString> recordingLabel(const QJsonObject &header, const QFileInfo &file)
-{
-    QString car;
-    if (header.value(QStringLiteral("demo")).toBool())
-        car = AppController::tr("Demo car");
-    else if (const QString make = header.value(QStringLiteral("manufacturer")).toString(); !make.isEmpty()) {
-        const int year = header.value(QStringLiteral("modelYear")).toInt();
-        car = year > 0 ? QStringLiteral("%1 %2").arg(make).arg(year) : make;
-    } else
-        car = file.completeBaseName(); // e.g. a probe recording: its name says what it is
-    const QDateTime created = QDateTime::fromString(header.value(QStringLiteral("created")).toString(), Qt::ISODate);
-    const QString when = QLocale().toString((created.isValid() ? created : file.lastModified()).toLocalTime(), QLocale::ShortFormat);
-    return {car, when};
-}
-
 /// Accepts "/path/x.obdrec" or "file:///path/x.obdrec" (what QML file dialogs give).
 QString localPath(const QString &pathOrUrl)
 {
@@ -86,6 +70,21 @@ QString localPath(const QString &pathOrUrl)
 AppController *AppController::create(QQmlEngine *qmlEngine, QJSEngine *)
 {
     return new AppController(qmlEngine);
+}
+
+QPair<QString, QString> AppController::recordingLabel(const QJsonObject &header, const QFileInfo &file)
+{
+    QString car;
+    if (header.value(QStringLiteral("demo")).toBool())
+        car = tr("Demo car");
+    else if (const QString make = header.value(QStringLiteral("manufacturer")).toString(); !make.isEmpty()) {
+        const int year = header.value(QStringLiteral("modelYear")).toInt();
+        car = year > 0 ? QStringLiteral("%1 %2").arg(make).arg(year) : make;
+    } else
+        car = file.completeBaseName(); // e.g. a probe recording: its name says what it is
+    const QDateTime created = QDateTime::fromString(header.value(QStringLiteral("created")).toString(), Qt::ISODate);
+    const QString when = QLocale().toString((created.isValid() ? created : file.lastModified()).toLocalTime(), QLocale::ShortFormat);
+    return {car, when};
 }
 
 AppController::AppController(QQmlEngine *engine, QObject *parent)
@@ -308,6 +307,7 @@ void AppController::runAdapterCheck()
         QVariantList items;
         for (const AdapterCheck::Item &i : r.items)
             items << QVariantMap{{QStringLiteral("command"), i.command}, {QStringLiteral("purpose"), i.purpose},
+                                 {QStringLiteral("name"), i.name},
                                  {QStringLiteral("supported"), i.supported}, {QStringLiteral("answer"), i.answer}};
         const char *verdict = r.verdict == AdapterCheck::Verdict::Genuine ? "genuine"
                             : r.verdict == AdapterCheck::Verdict::Compatible ? "compatible" : "unknown";
@@ -1283,6 +1283,8 @@ QVariantMap AppController::buildTripMap() const
     const Units::Shown avgSpeed = Units::show(st.averageSpeedKmh(), "km/h", 0);
     const Units::Shown maxSpeed = Units::show(st.maxSpeedKmh, "km/h", 0);
     const Units::Shown sinceFill = Units::show(sinceFillUp, "L", 1);
+    // The average needs a little distance first (TripComputer::Stats::litersPer100Km).
+    const Units::Shown averageFrom = Units::show(0.2, "km", 1);
     const QLocale locale;
     return {
         // Shown in the chosen units (values + unit text).
@@ -1292,6 +1294,9 @@ QVariantMap AppController::buildTripMap() const
         {QStringLiteral("fuelUnit"), fuel.unit},
         {QStringLiteral("averageValue"), average.value},
         {QStringLiteral("consumptionUnit"), average.unit},
+        //: Trip, under an empty "Average": it appears once the car has driven this far. %1 = e.g. "0.2 km"
+        {QStringLiteral("averageNote"), st.fuelKnown && st.litersPer100Km() <= 0
+             ? tr("Shown after %1").arg(QStringLiteral("%1 %2").arg(locale.toString(averageFrom.value, 'f', 1), averageFrom.unit)) : QString()},
         {QStringLiteral("instantValue"), instant.value},
         {QStringLiteral("flowValue"), flow.value},
         {QStringLiteral("flowUnit"), flow.unit},

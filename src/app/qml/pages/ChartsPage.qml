@@ -90,16 +90,11 @@ Item {
                 visible: !page.live
                 // Date and time first: two drives of the same car differ there.
                 readonly property var choices: App.recordings.map(r => ({ label: r.when + " · " + r.title, value: r.path }))
-                function labelFor(path, fallback) {
-                    const match = choices.find(c => c.value === path)
-                    return match ? match.label : fallback
-                }
                 Dropdown {
                     width: 300
                     model: [{ label: qsTr("Choose a recording…"), value: "" }].concat(recordingRow.choices)
                     value: ""
-                    displayText: page.charts.recordingA.length ? recordingRow.labelFor(page.charts.recordingAPath, page.charts.recordingA)
-                                                               : qsTr("Choose a recording…")
+                    displayText: page.charts.recordingA.length ? page.charts.recordingA : qsTr("Choose a recording…")
                     Accessible.name: qsTr("Recording to chart")
                     onPicked: v => { if (v.length) page.charts.loadRecording(0, v) }
                 }
@@ -108,8 +103,7 @@ Item {
                     enabled: page.charts.recordingA.length > 0
                     model: [{ label: qsTr("Compare with…"), value: "" }].concat(recordingRow.choices)
                     value: ""
-                    displayText: page.charts.recordingB.length ? recordingRow.labelFor(page.charts.recordingBPath, page.charts.recordingB)
-                                                               : qsTr("Compare with…")
+                    displayText: page.charts.recordingB.length ? page.charts.recordingB : qsTr("Compare with…")
                     Accessible.name: qsTr("Second recording to compare")
                     onPicked: v => page.charts.loadRecording(1, v)
                 }
@@ -276,8 +270,8 @@ Item {
                 visible: page.comparing
                 spacing: Theme.s5
                 Repeater {
-                    model: [{ key: "A", name: recordingRow.labelFor(page.charts.recordingAPath, page.charts.recordingA), dashed: false },
-                            { key: "B", name: recordingRow.labelFor(page.charts.recordingBPath, page.charts.recordingB), dashed: true }]
+                    model: [{ key: "A", name: page.charts.recordingA, dashed: false },
+                            { key: "B", name: page.charts.recordingB, dashed: true }]
                     delegate: Row {
                         required property var modelData
                         spacing: 8
@@ -512,9 +506,14 @@ Item {
                 Rectangle {
                     id: readoutBox
                     visible: hover.showing
-                    readonly property real anchorX: page.labelWidth + hover.cursorX
-                    x: anchorX + 14 + width > stripsArea.width ? anchorX - 14 - width : anchorX + 14
-                    y: Math.max(0, Math.min(stripColumn.height - height, hover.cursorY - height / 2))
+                    // On the far side of the plot from the cursor, so it never hides the
+                    // lines being read (in live charts, the newest values at the right).
+                    // The mouse moves it up and down; from the keyboard it sits at the top,
+                    // below the first chart's title row.
+                    readonly property bool cursorOnRight: hover.cursorX > hover.width / 2
+                    readonly property real topClear: 32
+                    x: cursorOnRight ? page.labelWidth + 8 : page.labelWidth + hover.width - width - 8
+                    y: mouse.containsMouse ? Math.max(topClear, Math.min(stripColumn.height - height, hover.cursorY - height / 2)) : topClear
                     width: readoutColumn.implicitWidth + 2 * Theme.s3
                     height: readoutColumn.implicitHeight + 2 * Theme.s2
                     radius: Theme.radius
@@ -533,6 +532,14 @@ Item {
                             font.pixelSize: Theme.fontSmall
                             font.features: { "tnum": 1 }
                         }
+                        Text {
+                            visible: text.length > 0
+                            text: hover.reading.note || ""
+                            color: Theme.textMuted
+                            font.family: Theme.sans
+                            font.pixelSize: Theme.fontSmall
+                            font.features: { "tnum": 1 }
+                        }
                         Repeater {
                             model: hover.reading.rows
                             delegate: Row {
@@ -540,7 +547,10 @@ Item {
                                 spacing: 8
                                 // Values lead, names follow.
                                 Text {
-                                    text: page.comparing ? "A " + modelData.a + "   B " + (modelData.b || "—") : modelData.a
+                                    // Comparing: "A 2,100 rpm   B 1,950 rpm"; a recording that has ended is left out.
+                                    text: page.comparing ? [modelData.a ? "A " + modelData.a : "", modelData.b ? "B " + modelData.b : ""]
+                                                           .filter(t => t.length).join("   ")
+                                                         : modelData.a
                                     color: Theme.text
                                     font.family: Theme.sans
                                     font.pixelSize: Theme.fontSmall
