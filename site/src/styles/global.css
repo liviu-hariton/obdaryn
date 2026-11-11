@@ -102,7 +102,9 @@ a:hover { text-decoration-thickness: 2px; }
 code, kbd, .mono { font-family: var(--mono); font-size: 0.92em; }
 h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
-html { scrollbar-color: var(--field-border) transparent; }
+/* The scrollbar's room is always reserved, so the layout never reflows when it
+ * appears: short and long pages line up, and full-page captures match the page. */
+html { scrollbar-color: var(--field-border) transparent; scrollbar-gutter: stable; }
 
 .wrap { width: 100%; max-width: calc(var(--page) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
 .visually-hidden {

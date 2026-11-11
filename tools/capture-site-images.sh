@@ -4,8 +4,9 @@
 # Captures the app screenshots the website (site/) shows, from the built-in demo
 # car, in English and Romanian, light and dark, at 2x. Run after building the app:
 #
-#   cmake --build build && tools/capture-site-images.sh
+#   cmake --build build && tools/capture-site-images.sh [screen ...]
 #
+# Name screens (codes, modules, readiness, charts) to capture only those.
 # Writes site/src/assets/screens/<screen>-<lang>-<theme>.png. Captures run one at a
 # time: launching them back to back in parallel fails to create the offscreen buffer.
 set -euo pipefail
@@ -21,22 +22,28 @@ mkdir -p "$OUT"
 
 # screen name | page index | crop (x,y,w,h in capture pixels, 2x) | extra environment
 # The crops keep the part of each screen that proves what the site says about it,
-# at a size where the app's text stays readable on the page.
+# at a size where the app's text stays readable on the page. The site never shows a
+# screenshot larger than the app's real size, so the two full-width screens come
+# from a 1600-point window: cropped, they are at least the page's 1312-point
+# column wide and fill it, lining up with the text above them. Charts caps its own
+# content width, so its crop is exactly 1312 points, centred on the charts.
 SCREENS=(
   "codes|1|1360,180,1240,1480|"
-  "modules|8|480,340,2160,1260|OBDARYN_SCAN_MODULES=1 OBDARYN_DELAY_MS=9000"
+  "modules|8|480,340,2720,1260|OBDARYN_SIZE=1600x860 OBDARYN_SCAN_MODULES=1 OBDARYN_DELAY_MS=9000"
   "readiness|2|600,260,1900,1440|OBDARYN_READ_TESTS=1 OBDARYN_DELAY_MS=6000"
-  "charts|10|496,208,2104,1092|OBDARYN_DELAY_MS=135000"
+  "charts|10|520,208,2624,1092|OBDARYN_SIZE=1600x860 OBDARYN_DELAY_MS=135000"
 )
 
 for lang in en ro; do
   for theme in dark light; do
     for entry in "${SCREENS[@]}"; do
       IFS='|' read -r name page crop extra <<<"$entry"
+      if (( $# > 0 )) && [[ " $* " != *" $name "* ]]; then continue; fi
       file="$OUT/$name-$lang-$theme.png"
       echo "capturing $(basename "$file")"
-      # The offscreen platform has no screen-size limit, so the 1320 x 860 window
-      # renders whole at scale 2. Each run gets its own settings and folders.
+      # The offscreen platform has no screen-size limit, so the window (1320 x 860
+      # unless the screen's extra environment sets OBDARYN_SIZE) renders whole at
+      # scale 2. Each run gets its own settings and folders.
       env QT_QPA_PLATFORM=offscreen QT_SCALE_FACTOR=2 \
           OBDARYN_SETTINGS_DIR="$TMP/settings-$name-$lang-$theme" \
           OBDARYN_RECORDINGS_DIR="$TMP/rec" OBDARYN_REPORTS_DIR="$TMP/rep" \
