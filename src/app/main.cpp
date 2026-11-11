@@ -256,9 +256,20 @@ int main(int argc, char *argv[])
                 });
             }
         });
-        QTimer::singleShot(delay, &app, [window, capturePath] {
-            if (window)
-                window->grabWindow().save(capturePath);
+        // OBDARYN_ABOUT=1 opens the About window and captures it instead.
+        const bool aboutCapture = qEnvironmentVariableIntValue("OBDARYN_ABOUT") == 1;
+        if (window && aboutCapture)
+            QTimer::singleShot(qMax(0, delay - 1200), window, [window] { QMetaObject::invokeMethod(window, "showAbout"); });
+        QTimer::singleShot(delay, &app, [window, capturePath, aboutCapture] {
+            QQuickWindow *target = window;
+            if (window && aboutCapture) {
+                for (QWindow *w : QGuiApplication::allWindows()) {
+                    if (w->objectName() == QLatin1String("aboutWindow"))
+                        target = qobject_cast<QQuickWindow *>(w);
+                }
+            }
+            if (target)
+                target->grabWindow().save(capturePath);
             QCoreApplication::quit();
         });
     }

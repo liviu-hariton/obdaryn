@@ -2,6 +2,49 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ro" sourcelanguage="en">
 <context>
+    <name>AboutWindow</name>
+    <message>
+        <source>About Obdaryn</source>
+        <translation>Despre Obdaryn</translation>
+    </message>
+    <message>
+        <source>Version %1</source>
+        <translation>Versiunea %1</translation>
+    </message>
+    <message>
+        <source>Free, open-source OBD-II diagnostics.</source>
+        <translation>Diagnoză OBD-II gratuită și open-source.</translation>
+    </message>
+    <message>
+        <source>Read-only. Obdaryn can&apos;t change anything in your car.</source>
+        <translation>Doar citire: Obdaryn nu poate modifica nimic în mașină.</translation>
+    </message>
+    <message>
+        <source>Project page</source>
+        <translation>Pagina proiectului</translation>
+    </message>
+    <message>
+        <source>Copied</source>
+        <translation>Copiat</translation>
+    </message>
+    <message>
+        <source>Copy version info</source>
+        <translation>Copiază versiunea</translation>
+    </message>
+    <message>
+        <source>Free software under the %1.</source>
+        <translation>Software liber sub licența %1.</translation>
+    </message>
+    <message>
+        <source>GNU GPL v3 or later</source>
+        <translation>GNU GPL v3 sau mai nouă</translation>
+    </message>
+    <message>
+        <source>Code explanations from obdex (CC0). Manufacturer values from OBDb (CC BY-SA 4.0). Fonts: Inter and JetBrains Mono (SIL Open Font License). Icons: Lucide (ISC). Built with Qt.</source>
+        <translation>Explicațiile codurilor provin din obdex (CC0). Valorile de producător provin din OBDb (CC BY-SA 4.0). Fonturi: Inter și JetBrains Mono (SIL Open Font License). Pictograme: Lucide (ISC). Construit cu Qt.</translation>
+    </message>
+</context>
+<context>
     <name>AppMenuBar</name>
     <message>
         <source>Obdaryn</source>

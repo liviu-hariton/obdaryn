@@ -28,6 +28,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QStandardPaths>
+#include <QSysInfo>
 #include <QUrl>
 
 #include <cmath>
@@ -1869,6 +1870,11 @@ void AppController::setLanguage(const QString &code)
 QString AppController::appVersion() const
 {
     return QCoreApplication::applicationVersion();
+}
+
+QString AppController::buildInfo() const
+{
+    return QStringLiteral("Qt %1 · %2").arg(QString::fromLatin1(qVersion()), QSysInfo::prettyProductName());
 }
 
 QString AppController::dtcAttribution() const

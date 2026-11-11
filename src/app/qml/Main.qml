@@ -70,6 +70,23 @@ C.ApplicationWindow {
         nameFilters: [qsTr("Obdaryn recordings (*.obdrec)"), qsTr("All files (*)")]
         onAccepted: { App.replayRecording(selectedFile); window.page = 0 }
     }
+    // About Obdaryn: its own small window, centred over this one.
+    AboutWindow { id: aboutWindow }
+    function showAbout() {
+        aboutWindow.x = window.x + (window.width - aboutWindow.width) / 2
+        aboutWindow.y = window.y + Math.max(60, (window.height - aboutWindow.height) / 3)
+        aboutWindow.show()
+        aboutWindow.raise()
+        aboutWindow.requestActivate()
+    }
+    /// ⌘W closes the window in front: the About window if it is, otherwise this one.
+    function closeFrontWindow() {
+        if (aboutWindow.visible && aboutWindow.active)
+            aboutWindow.close()
+        else
+            window.close()
+    }
+
     /// Help, scrolled to one of its sections (1 = Supported cars).
     function showHelpSection(index) {
         window.page = 11

@@ -29,7 +29,7 @@ P.MenuBar {
         P.MenuItem {
             text: qsTr("About Obdaryn")
             role: P.MenuItem.AboutRole
-            onTriggered: bar.app.page = 7 // Settings has the About section
+            onTriggered: bar.app.showAbout()
         }
         P.MenuItem {
             text: qsTr("Settings…")
@@ -86,7 +86,7 @@ P.MenuBar {
         P.MenuItem {
             text: qsTr("Close Window")
             shortcut: StandardKey.Close
-            onTriggered: bar.app.close()
+            onTriggered: bar.app.closeFrontWindow()
         }
     }
 
