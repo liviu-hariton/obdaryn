@@ -152,6 +152,9 @@ class AppController : public QObject
     /// This car's last trips, newest first: {when, distanceKm, fuelLiters, averageL100, duration, fuelKnown}.
     Q_PROPERTY(QVariantList tripHistory READ tripHistory NOTIFY tripHistoryChanged)
 
+    /// "metric", "us" or "uk": how distances, speeds, temperatures, pressures and fuel are shown.
+    Q_PROPERTY(QString units READ units WRITE setUnits NOTIFY unitsChanged)
+
     // App
     Q_PROPERTY(QString language READ language NOTIFY languageChanged)
     Q_PROPERTY(QString appVersion READ appVersion CONSTANT)
@@ -213,11 +216,15 @@ public:
 
     /// Saves the current trip to the history and starts a new one.
     Q_INVOKABLE void newTrip();
-    /// The tank was just filled to the click with `liters`; learns the calibration (see TripComputer).
-    Q_INVOKABLE void recordFillUp(double liters);
+    /// The tank was just filled to the click with this amount (liters, or gallons
+    /// in US/UK units); learns the calibration (see TripComputer).
+    Q_INVOKABLE void recordFillUp(double amount);
     Q_INVOKABLE void resetFuelCalibration();
     /// Engine size in liters, needed by cars without an air-flow sensor.
     Q_INVOKABLE void setEngineLiters(double liters);
+    /// Fuel price in the shown volume unit (per liter, or per gallon in US/UK units),
+    /// and the currency text to show next to costs. 0 removes the price.
+    Q_INVOKABLE void setFuelPrice(double pricePerShownUnit, const QString &currency);
 
     /// Where the save dialog starts: Documents/Obdaryn/Reports/<date> <car>.pdf
     Q_INVOKABLE QUrl suggestedReportUrl() const;
@@ -307,6 +314,8 @@ public:
     QString connectionHint() const { return m_connectionHint; }
     QVariantList tripHistory() const { return m_tripHistory; }
 
+    QString units() const;
+    void setUnits(const QString &units);
     QString language() const { return m_language; }
     QString appVersion() const;
     QString dtcAttribution() const;
@@ -325,6 +334,7 @@ signals:
     void freezeFrameChanged();
     void monitorTestsChanged();
     void languageChanged();
+    void unitsChanged();
     /// Result of clearCodes(): success flag and a message for the user.
     void clearFinished(bool success, const QString &message);
     void moduleClearFinished(bool success, const QString &message);

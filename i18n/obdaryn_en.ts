@@ -1,4 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
 <TS version="2.1" language="en" sourcelanguage="en">
 <context>
     <name>ModulesPage</name>
@@ -52,11 +53,17 @@
     <name>ReadinessPage</name>
     <message numerus="yes">
         <source>%n failed</source>
-        <translation><numerusform>%n failed</numerusform><numerusform>%n failed</numerusform></translation>
+        <translation>
+            <numerusform>%n failed</numerusform>
+            <numerusform>%n failed</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n close to the limit</source>
-        <translation><numerusform>%n close to the limit</numerusform><numerusform>%n close to the limit</numerusform></translation>
+        <translation>
+            <numerusform>%n close to the limit</numerusform>
+            <numerusform>%n close to the limit</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -135,11 +142,17 @@
     </message>
     <message numerus="yes">
         <source>%n failed</source>
-        <translation><numerusform>%n failed</numerusform><numerusform>%n failed</numerusform></translation>
+        <translation>
+            <numerusform>%n failed</numerusform>
+            <numerusform>%n failed</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n close to the limit</source>
-        <translation><numerusform>%n close to the limit</numerusform><numerusform>%n close to the limit</numerusform></translation>
+        <translation>
+            <numerusform>%n close to the limit</numerusform>
+            <numerusform>%n close to the limit</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n warm-up(s)</source>

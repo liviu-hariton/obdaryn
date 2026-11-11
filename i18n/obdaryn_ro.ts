@@ -1916,11 +1916,19 @@
     </message>
     <message numerus="yes">
         <source>%n failed</source>
-        <translation><numerusform>%n picat</numerusform><numerusform>%n picate</numerusform><numerusform>%n de picate</numerusform></translation>
+        <translation>
+            <numerusform>%n picat</numerusform>
+            <numerusform>%n picate</numerusform>
+            <numerusform>%n de picate</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n close to the limit</source>
-        <translation><numerusform>%n aproape de limită</numerusform><numerusform>%n aproape de limită</numerusform><numerusform>%n aproape de limită</numerusform></translation>
+        <translation>
+            <numerusform>%n aproape de limită</numerusform>
+            <numerusform>%n aproape de limită</numerusform>
+            <numerusform>%n aproape de limită</numerusform>
+        </translation>
     </message>
     <message>
         <source>Read test results</source>
@@ -1958,8 +1966,8 @@
         <translation>Limbă</translation>
     </message>
     <message>
-        <source>Trouble-code descriptions stay in English for now.</source>
-        <translation>Descrierile codurilor de eroare rămân deocamdată în engleză.</translation>
+        <source>Switches the whole app, trouble-code explanations included.</source>
+        <translation>Schimbă limba întregii aplicații, inclusiv explicațiile codurilor de eroare.</translation>
     </message>
     <message>
         <source>Appearance</source>
@@ -1980,6 +1988,26 @@
     <message>
         <source>Dark</source>
         <translation>Întunecat</translation>
+    </message>
+    <message>
+        <source>Units</source>
+        <translation>Unități</translation>
+    </message>
+    <message>
+        <source>How distances, speeds, temperatures, pressures and fuel are shown. Exports stay metric.</source>
+        <translation>Cum se afișează distanțele, vitezele, temperaturile, presiunile și combustibilul. Exporturile rămân în sistemul metric.</translation>
+    </message>
+    <message>
+        <source>Metric</source>
+        <translation>Metric</translation>
+    </message>
+    <message>
+        <source>UK</source>
+        <translation>Marea Britanie</translation>
+    </message>
+    <message>
+        <source>US</source>
+        <translation>SUA</translation>
     </message>
     <message>
         <source>Reduce motion</source>
@@ -2207,24 +2235,12 @@
         <translation>Distanță</translation>
     </message>
     <message>
-        <source>km</source>
-        <translation>km</translation>
-    </message>
-    <message>
         <source>Fuel used</source>
         <translation>Combustibil consumat</translation>
     </message>
     <message>
-        <source>L</source>
-        <translation>L</translation>
-    </message>
-    <message>
         <source>Average</source>
         <translation>Medie</translation>
-    </message>
-    <message>
-        <source>L/100 km</source>
-        <translation>L/100 km</translation>
     </message>
     <message>
         <source>Right now</source>
@@ -2235,10 +2251,6 @@
         <translation>Acum, pe loc</translation>
     </message>
     <message>
-        <source>L/h</source>
-        <translation>L/h</translation>
-    </message>
-    <message>
         <source>Driving</source>
         <translation>În mers</translation>
     </message>
@@ -2247,16 +2259,16 @@
         <translation>Viteză medie</translation>
     </message>
     <message>
-        <source>%1 km/h</source>
-        <translation>%1 km/h</translation>
-    </message>
-    <message>
         <source>Idling</source>
         <translation>La ralanti</translation>
     </message>
     <message>
         <source>Top speed</source>
         <translation>Viteză maximă</translation>
+    </message>
+    <message>
+        <source>Cost</source>
+        <translation>Cost</translation>
     </message>
     <message>
         <source>How fuel is measured</source>
@@ -2315,12 +2327,16 @@
         </translation>
     </message>
     <message>
-        <source>Since the last fill-up: %1 L.</source>
-        <translation>De la ultima alimentare: %1 L.</translation>
+        <source>Since the last fill-up: %1.</source>
+        <translation>De la ultima alimentare: %1.</translation>
     </message>
     <message>
-        <source>Counting since your last fill-up: %1 L so far. At the next fill-up, enter the liters the pump shows to calibrate. Every drive in between must be followed by Obdaryn.</source>
-        <translation>Se numără de la ultima alimentare: %1 L până acum. La următoarea alimentare, introdu litrii afișați de pompă ca să calibrezi. Fiecare drum dintre alimentări trebuie urmărit de Obdaryn.</translation>
+        <source>Counting since your last fill-up: %1 so far. At the next fill-up, enter the amount the pump shows to calibrate. Every drive in between must be followed by Obdaryn.</source>
+        <translation>Se numără de la ultima alimentare: %1 până acum. La următoarea alimentare, introdu cantitatea afișată de pompă ca să calibrezi. Fiecare drum dintre alimentări trebuie urmărit de Obdaryn.</translation>
+    </message>
+    <message>
+        <source>Amount at the pump (%1)</source>
+        <translation>Cantitate la pompă (%1)</translation>
     </message>
     <message>
         <source>Not calibrated yet. Fill the tank to the click and record the fill-up, drive normally with Obdaryn connected, then record the next fill-up: Obdaryn compares the pump with its estimate.</source>
@@ -2333,10 +2349,6 @@
     <message>
         <source>Reset calibration</source>
         <translation>Resetează calibrarea</translation>
-    </message>
-    <message>
-        <source>Liters at the pump</source>
-        <translation>Litri la pompă</translation>
     </message>
     <message>
         <source>e.g. 38.5</source>
@@ -2355,24 +2367,24 @@
         <translation>Alimentează de fiecare dată până la prima oprire a pistolului.</translation>
     </message>
     <message>
+        <source>Fuel price per %1</source>
+        <translation>Preț combustibil pe %1</translation>
+    </message>
+    <message>
+        <source>optional</source>
+        <translation>opțional</translation>
+    </message>
+    <message>
+        <source>Currency</source>
+        <translation>Monedă</translation>
+    </message>
+    <message>
         <source>Recent trips</source>
         <translation>Călătorii recente</translation>
     </message>
     <message>
         <source>Trips are saved here when you disconnect or start a new trip.</source>
         <translation>Călătoriile se salvează aici când te deconectezi sau începi o călătorie nouă.</translation>
-    </message>
-    <message>
-        <source>%1 km</source>
-        <translation>%1 km</translation>
-    </message>
-    <message>
-        <source>%1 L</source>
-        <translation>%1 L</translation>
-    </message>
-    <message>
-        <source>%1 L/100 km</source>
-        <translation>%1 L/100 km</translation>
     </message>
 </context>
 <context>
@@ -2468,6 +2480,34 @@
     <message>
         <source>%</source>
         <translation>%</translation>
+    </message>
+    <message>
+        <source>mph</source>
+        <translation>mph</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation>mi</translation>
+    </message>
+    <message>
+        <source>psi</source>
+        <translation>psi</translation>
+    </message>
+    <message>
+        <source>°F</source>
+        <translation>°F</translation>
+    </message>
+    <message>
+        <source>gal</source>
+        <translation>gal</translation>
+    </message>
+    <message>
+        <source>gal/h</source>
+        <translation>gal/h</translation>
+    </message>
+    <message>
+        <source>mpg</source>
+        <translation>mpg</translation>
     </message>
 </context>
 <context>
@@ -3169,10 +3209,6 @@
         <translation>Calculatorul motorului nu cere aprinderea martorului.</translation>
     </message>
     <message>
-        <source>Driven %1 km with it on.</source>
-        <translation>S-au parcurs %1 km cu el aprins.</translation>
-    </message>
-    <message>
         <source>Check-engine light</source>
         <translation>Martor de motor</translation>
     </message>
@@ -3278,11 +3314,19 @@
     </message>
     <message numerus="yes">
         <source>%n failed</source>
-        <translation><numerusform>%n picat</numerusform><numerusform>%n picate</numerusform><numerusform>%n de picate</numerusform></translation>
+        <translation>
+            <numerusform>%n picat</numerusform>
+            <numerusform>%n picate</numerusform>
+            <numerusform>%n de picate</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n close to the limit</source>
-        <translation><numerusform>%n aproape de limită</numerusform><numerusform>%n aproape de limită</numerusform><numerusform>%n aproape de limită</numerusform></translation>
+        <translation>
+            <numerusform>%n aproape de limită</numerusform>
+            <numerusform>%n aproape de limită</numerusform>
+            <numerusform>%n aproape de limită</numerusform>
+        </translation>
     </message>
     <message>
         <source>Self-test results</source>
@@ -3305,8 +3349,8 @@
         <translation>Toate testele rulate sunt în limite.</translation>
     </message>
     <message>
-        <source>%1 km</source>
-        <translation>%1 km</translation>
+        <source>Driven %1 with it on.</source>
+        <translation>S-au parcurs %1 cu el aprins.</translation>
     </message>
     <message numerus="yes">
         <source>%n warm-up(s)</source>
@@ -3487,6 +3531,74 @@
     <message>
         <source>Sensor values saved when %1 was stored.</source>
         <translation>Valorile senzorilor salvate când s-a memorat %1.</translation>
+    </message>
+    <message>
+        <source>%1 min</source>
+        <translation>%1 min</translation>
+    </message>
+    <message>
+        <source>%1 h %2 min</source>
+        <translation>%1 h %2 min</translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation>Distanță</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Durată</translation>
+    </message>
+    <message>
+        <source>%1, of which %2 standing with the engine running</source>
+        <translation>%1, din care %2 pe loc cu motorul pornit</translation>
+    </message>
+    <message>
+        <source>Average speed</source>
+        <translation>Viteză medie</translation>
+    </message>
+    <message>
+        <source>Top speed</source>
+        <translation>Viteză maximă</translation>
+    </message>
+    <message>
+        <source>Fuel used</source>
+        <translation>Combustibil consumat</translation>
+    </message>
+    <message>
+        <source>Average consumption</source>
+        <translation>Consum mediu</translation>
+    </message>
+    <message>
+        <source>Cost</source>
+        <translation>Cost</translation>
+    </message>
+    <message>
+        <source>measured by the engine computer (fuel rate)</source>
+        <translation>măsurat de calculatorul motorului (debit de combustibil)</translation>
+    </message>
+    <message>
+        <source>estimated from the air-flow sensor</source>
+        <translation>estimat din debitmetrul de aer</translation>
+    </message>
+    <message>
+        <source>estimated from manifold pressure and the engine size</source>
+        <translation>estimat din presiunea din galerie și capacitatea motorului</translation>
+    </message>
+    <message>
+        <source>Fuel figures</source>
+        <translation>Valorile consumului</translation>
+    </message>
+    <message>
+        <source>%1, calibrated with fill-ups</source>
+        <translation>%1, calibrat cu alimentări</translation>
+    </message>
+    <message>
+        <source>%1, not calibrated yet (can be 10–20 % off)</source>
+        <translation>%1, încă necalibrat (eroare posibilă de 10–20 %)</translation>
+    </message>
+    <message>
+        <source>This drive</source>
+        <translation>Acest drum</translation>
     </message>
     <message>
         <source>VIN</source>

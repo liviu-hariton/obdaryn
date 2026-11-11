@@ -12,6 +12,7 @@ qt_add_library(obdaryn_core STATIC
     obd/DtcDatabase.h         obd/DtcDatabase.cpp
     obd/Readiness.h           obd/Readiness.cpp
     obd/MonitorTests.h        obd/MonitorTests.cpp
+    obd/Units.h               obd/Units.cpp
     obd/VehicleInfo.h         obd/VehicleInfo.cpp
     obd/ObdClient.h           obd/ObdClient.cpp
     obd/ModuleScanner.h       obd/ModuleScanner.cpp

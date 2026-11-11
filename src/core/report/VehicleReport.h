@@ -46,6 +46,19 @@ struct ReportInput
     QList<Dtc> dtcs;           ///< generic OBD-II codes (stored, pending, permanent)
     ObdClient::FreezeFrame freezeFrame;
 
+    /// The trip running when the report was made (TripComputer::Stats, flattened
+    /// so the report doesn't depend on the app). Shown when distanceKm >= 0.1.
+    struct Trip {
+        double distanceKm = 0;
+        double fuelLiters = 0;
+        bool fuelKnown = false;
+        qint64 durationMs = 0, movingMs = 0, idleMs = 0;
+        double averageSpeedKmh = 0, maxSpeedKmh = 0;
+        QString method;        ///< "fuelRate", "maf", "speedDensity", ...
+        int calibrationFillUps = 0;
+        QString cost;          ///< "12.40 RON", or empty
+    } trip;
+
     bool monitorTestsRead = false;  ///< service 06 results were read for this report
     QList<MonitorTest> monitorTests;
 

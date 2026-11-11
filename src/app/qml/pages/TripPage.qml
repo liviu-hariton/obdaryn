@@ -98,25 +98,25 @@ Item {
                 spacing: Theme.s5
                 BigValue {
                     label: qsTr("Distance")
-                    value: page.num(page.trip.distanceKm, page.trip.distanceKm < 100 ? 1 : 0)
-                    unit: qsTr("km")
+                    value: page.num(page.trip.distanceValue || 0, page.trip.distanceValue < 100 ? 1 : 0)
+                    unit: page.trip.distanceUnit || ""
                 }
                 BigValue {
                     label: qsTr("Fuel used")
-                    value: page.trip.fuelKnown ? page.num(page.trip.fuelLiters, page.trip.fuelLiters < 10 ? 2 : 1) : "—"
-                    unit: qsTr("L")
+                    value: page.trip.fuelKnown ? page.num(page.trip.fuelValue, page.trip.fuelValue < 10 ? 2 : 1) : "—"
+                    unit: page.trip.fuelUnit || ""
                 }
                 BigValue {
                     label: qsTr("Average")
-                    value: page.trip.fuelKnown && page.trip.averageL100 > 0 ? page.num(page.trip.averageL100, 1) : "—"
-                    unit: qsTr("L/100 km")
+                    value: page.trip.fuelKnown && page.trip.averageValue > 0 ? page.num(page.trip.averageValue, 1) : "—"
+                    unit: page.trip.consumptionUnit || ""
                 }
                 BigValue {
                     // Standing still, L/100 km is meaningless: show the flow instead.
                     label: page.trip.moving ? qsTr("Right now") : qsTr("Right now, standing")
                     value: !page.trip.fuelKnown ? "—"
-                         : page.trip.moving ? page.num(page.trip.instantL100, 1) : page.num(page.trip.instantLph, 1)
-                    unit: page.trip.moving ? qsTr("L/100 km") : qsTr("L/h")
+                         : page.trip.moving ? page.num(page.trip.instantValue, 1) : page.num(page.trip.flowValue, 1)
+                    unit: (page.trip.moving ? page.trip.consumptionUnit : page.trip.flowUnit) || ""
                 }
             }
 
@@ -128,10 +128,12 @@ Item {
                 rowSpacing: 0
                 KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Driving"); value: page.trip.drivingTime || "" }
                 KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Average speed")
-                           value: page.trip.averageSpeed > 0 ? qsTr("%1 km/h").arg(page.num(page.trip.averageSpeed, 0)) : "—" }
+                           value: page.trip.averageSpeedText || "—" }
                 KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Idling"); value: page.trip.idleTime || "" }
                 KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Top speed")
-                           value: qsTr("%1 km/h").arg(page.num(page.trip.maxSpeed || 0, 0)) }
+                           value: page.trip.maxSpeedText || "" }
+                KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Cost")
+                           visible: (page.trip.costText || "").length > 0; value: page.trip.costText || "" }
             }
 
             // ---- How fuel is measured ----------------------------------------------
@@ -210,9 +212,9 @@ Item {
                           ? qsTr("Trips of the demo car and of recordings aren't saved, and fill-ups can't be recorded for them.")
                           : page.trip.calibrationFillUps > 0
                             ? qsTr("Calibrated with %n fill-up(s): estimates are multiplied by %1.", "", page.trip.calibrationFillUps).arg(page.num(page.trip.calibration, 2))
-                              + (page.trip.fillUpStarted ? " " + qsTr("Since the last fill-up: %1 L.").arg(page.num(page.trip.sinceFillUpLiters, 1)) : "")
+                              + (page.trip.fillUpStarted ? " " + qsTr("Since the last fill-up: %1.").arg(page.trip.sinceFillUpText) : "")
                             : page.trip.fillUpStarted
-                              ? qsTr("Counting since your last fill-up: %1 L so far. At the next fill-up, enter the liters the pump shows to calibrate. Every drive in between must be followed by Obdaryn.").arg(page.num(page.trip.sinceFillUpLiters, 1))
+                              ? qsTr("Counting since your last fill-up: %1 so far. At the next fill-up, enter the amount the pump shows to calibrate. Every drive in between must be followed by Obdaryn.").arg(page.trip.sinceFillUpText)
                               : qsTr("Not calibrated yet. Fill the tank to the click and record the fill-up, drive normally with Obdaryn connected, then record the next fill-up: Obdaryn compares the pump with its estimate.")
                 }
 
@@ -241,7 +243,7 @@ Item {
                         id: litersField
                         Layout.preferredWidth: 180
                         Layout.maximumWidth: 180
-                        label: qsTr("Liters at the pump")
+                        label: qsTr("Amount at the pump (%1)").arg(page.trip.volumeUnit || "")
                         placeholder: qsTr("e.g. 38.5")
                         inputMethodHints: Qt.ImhFormattedNumbersOnly
                         onAccepted: fillSave.clicked()
@@ -272,6 +274,41 @@ Item {
                         font.family: Theme.sans
                         font.pixelSize: Theme.fontSmall
                         wrapMode: Text.WordWrap
+                    }
+                }
+
+                // Fuel price, for the trip's cost. Per liter, or per gallon in US/UK units.
+                RowLayout {
+                    visible: page.trip.fuelKnown === true || page.trip.method === "maf" || page.trip.method === "speedDensity" || page.trip.method === "fuelRate"
+                    Layout.topMargin: Theme.s2
+                    spacing: Theme.s3
+                    TextInput {
+                        id: priceField
+                        Layout.preferredWidth: 180
+                        Layout.maximumWidth: 180
+                        label: qsTr("Fuel price per %1").arg(page.trip.volumeUnit || "")
+                        placeholder: qsTr("optional")
+                        text: page.trip.fuelPrice > 0 ? page.num(page.trip.fuelPrice, 2) : ""
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        onAccepted: priceSave.clicked()
+                    }
+                    TextInput {
+                        id: currencyField
+                        Layout.preferredWidth: 90
+                        Layout.maximumWidth: 90
+                        label: qsTr("Currency")
+                        text: page.trip.currency || ""
+                        onAccepted: priceSave.clicked()
+                    }
+                    AppButton {
+                        id: priceSave
+                        Layout.alignment: Qt.AlignBottom
+                        implicitHeight: 36
+                        text: qsTr("Save")
+                        readonly property real price: priceField.text.length ? page.parseNumber(priceField.text) : 0
+                        enabled: (price >= 0 || priceField.text.length === 0)
+                                 && (Math.abs(price - (page.trip.fuelPrice || 0)) > 0.0001 || currencyField.text !== page.trip.currency)
+                        onClicked: App.setFuelPrice(isNaN(price) ? 0 : price, currencyField.text)
                     }
                 }
             }
@@ -315,11 +352,11 @@ Item {
                                 elide: Text.ElideRight
                             }
                             Cell { Layout.fillWidth: true; text: row.modelData.when; color: Theme.textMuted }
-                            Cell { Layout.preferredWidth: 90; horizontalAlignment: Text.AlignRight; text: qsTr("%1 km").arg(page.num(row.modelData.distanceKm, 1)) }
-                            Cell { Layout.preferredWidth: 80; horizontalAlignment: Text.AlignRight
-                                   text: row.modelData.fuelKnown ? qsTr("%1 L").arg(page.num(row.modelData.fuelLiters, 2)) : "—" }
-                            Cell { Layout.preferredWidth: 120; horizontalAlignment: Text.AlignRight
-                                   text: row.modelData.averageL100 > 0 ? qsTr("%1 L/100 km").arg(page.num(row.modelData.averageL100, 1)) : "—" }
+                            Cell { Layout.preferredWidth: 90; horizontalAlignment: Text.AlignRight; text: row.modelData.distanceText }
+                            Cell { Layout.preferredWidth: 80; horizontalAlignment: Text.AlignRight; text: row.modelData.fuelText || "—" }
+                            Cell { Layout.preferredWidth: 120; horizontalAlignment: Text.AlignRight; text: row.modelData.averageText || "—" }
+                            Cell { Layout.preferredWidth: 90; horizontalAlignment: Text.AlignRight; visible: (row.modelData.cost || "").length > 0
+                                   text: row.modelData.cost || "" }
                             Cell { Layout.preferredWidth: 90; horizontalAlignment: Text.AlignRight; text: row.modelData.duration; color: Theme.textMuted }
                         }
                         Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: Theme.hairline }

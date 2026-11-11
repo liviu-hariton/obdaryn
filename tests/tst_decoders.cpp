@@ -5,6 +5,7 @@
 #include "obd/Pids.h"
 #include "obd/Protocol.h"
 #include "obd/Readiness.h"
+#include "obd/Units.h"
 #include "obd/VehicleInfo.h"
 
 #include <QTest>
@@ -24,6 +25,7 @@ private slots:
     void readiness();
     void vin();
     void protocolNumbers();
+    void units();
 };
 
 void TestDecoders::pidFormulas()
@@ -175,6 +177,30 @@ void TestDecoders::protocolNumbers()
     QCOMPARE(protocolFromDpn("?"), Protocol::Unknown);
     QVERIFY(isCan(Protocol::Can11_250));
     QVERIFY(!isCan(Protocol::KwpFast));
+}
+
+void TestDecoders::units()
+{
+    using namespace Units;
+    setSystem(System::Metric);
+    QCOMPARE(show(100, "km/h", 0).value, 100.0);
+    QCOMPARE(show(90, "°C", 0).unit, QStringLiteral("°C"));
+
+    setSystem(System::US);
+    QVERIFY(qAbs(show(100, "km/h", 0).value - 62.137) < 0.001);
+    QCOMPARE(show(100, "km/h", 0).unit, QStringLiteral("mph"));
+    QCOMPARE(show(100, "°C", 0).value, 212.0);
+    QVERIFY(qAbs(show(100, "kPa", 0).value - 14.5038) < 0.001);
+    QVERIFY(qAbs(show(10, "L/100 km", 1).value - 23.52) < 0.01); // US mpg
+    QCOMPARE(show(0, "L/100 km", 1).value, 0.0);                 // unknown stays unknown
+    QVERIFY(qAbs(litersFromShownVolume(1) - 3.785) < 0.001);
+    QCOMPARE(show(14.2, "V", 1).value, 14.2);                     // not converted
+
+    setSystem(System::UK);
+    QCOMPARE(show(90, "°C", 0).unit, QStringLiteral("°C"));       // the UK keeps Celsius
+    QVERIFY(qAbs(show(10, "L/100 km", 1).value - 28.25) < 0.01); // imperial mpg
+    QVERIFY(qAbs(show(4.54609, "L", 2).value - 1.0) < 1e-9);
+    setSystem(System::Metric);
 }
 
 QTEST_GUILESS_MAIN(TestDecoders)

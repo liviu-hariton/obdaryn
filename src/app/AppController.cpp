@@ -7,6 +7,7 @@
 #include "obd/DtcDatabase.h"
 #include "vehicles/ModuleCatalog.h"
 #include "obd/Pids.h"
+#include "obd/Units.h"
 #include "obd/VehicleInfo.h"
 #include "recording/SessionRecorder.h"
 #include "report/ReportWriter.h"
@@ -145,6 +146,8 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
         emit recordingChanged();
         emit recordingTick();
     });
+
+    Units::setSystem(Units::fromKey(QSettings().value(QStringLiteral("ui/units")).toString()));
 
     // Language: saved choice, else Romanian when the system is Romanian, else English.
     QSettings settings;
@@ -1030,6 +1033,13 @@ void AppController::saveReport(const QString &pathOrUrl, bool open)
         input.readiness = m_readiness;
         input.dtcs = m_dtcs->dtcList();
         input.freezeFrame = m_freeze;
+        if (m_tripActive) {
+            const TripComputer::Stats &st = m_trip.stats();
+            input.trip = {st.distanceKm, st.fuelLiters, st.fuelKnown, st.durationMs, st.movingMs, st.idleMs,
+                          st.averageSpeedKmh(), st.maxSpeedKmh, m_tripCache.value(QStringLiteral("method")).toString(),
+                          m_tripCache.value(QStringLiteral("calibrationFillUps")).toInt(),
+                          m_tripCache.value(QStringLiteral("costText")).toString()};
+        }
         input.monitorTestsRead = m_monitorTestsRead && m_monitorTestsError.isEmpty();
         input.monitorTests = m_monitorTests;
         input.modulesScanned = moduleScanDone();
@@ -1183,7 +1193,9 @@ void AppController::endTrip()
                                     {QStringLiteral("km"), st.distanceKm},
                                     {QStringLiteral("liters"), st.fuelLiters},
                                     {QStringLiteral("ms"), double(st.durationMs)},
-                                    {QStringLiteral("fuelKnown"), st.fuelKnown}});
+                                    {QStringLiteral("fuelKnown"), st.fuelKnown},
+                                    // The cost at the price of that day, if one was set.
+                                    {QStringLiteral("cost"), m_tripCache.value(QStringLiteral("costText")).toString()}});
         while (history.size() > kTripHistoryLength)
             history.removeLast();
         settings.setValue(QStringLiteral("history"), QJsonDocument(history).toJson(QJsonDocument::Compact));
@@ -1215,10 +1227,15 @@ void AppController::loadTripHistory()
             const double liters = o.value(QStringLiteral("liters")).toDouble();
             const bool known = o.value(QStringLiteral("fuelKnown")).toBool();
             const QDateTime start = QDateTime::fromString(o.value(QStringLiteral("start")).toString(), Qt::ISODate);
+            const QLocale locale;
+            const Units::Shown d = Units::show(km, "km", 1);
+            const Units::Shown f = Units::show(liters, "L", 2);
+            const Units::Shown a = Units::show(known && km >= 0.2 ? liters / km * 100.0 : 0.0, "L/100 km", 1);
             m_tripHistory << QVariantMap{{QStringLiteral("when"), QLocale().toString(start, QLocale::ShortFormat)},
-                                         {QStringLiteral("distanceKm"), km},
-                                         {QStringLiteral("fuelLiters"), liters},
-                                         {QStringLiteral("averageL100"), known && km >= 0.2 ? liters / km * 100.0 : 0.0},
+                                         {QStringLiteral("distanceText"), QStringLiteral("%1 %2").arg(locale.toString(d.value, 'f', d.decimals), d.unit)},
+                                         {QStringLiteral("fuelText"), known ? QStringLiteral("%1 %2").arg(locale.toString(f.value, 'f', f.decimals), f.unit) : QString()},
+                                         {QStringLiteral("averageText"), a.value > 0 ? QStringLiteral("%1 %2").arg(locale.toString(a.value, 'f', a.decimals), a.unit) : QString()},
+                                         {QStringLiteral("cost"), o.value(QStringLiteral("cost")).toString()},
                                          {QStringLiteral("duration"), durationText(qint64(o.value(QStringLiteral("ms")).toDouble()))},
                                          {QStringLiteral("fuelKnown"), known}};
         }
@@ -1238,7 +1255,40 @@ QVariantMap AppController::buildTripMap() const
                                 + (tripSaved() ? st.rawFuelLiters - m_tripBanked : 0)) * ts.calibration;
     const int fillUps = settings.value(QStringLiteral("calibrationFillUps")).toInt();
     settings.endGroup();
+    QSettings global;
+    const double pricePerLiter = global.value(QStringLiteral("trip/fuelPrice")).toDouble();
+    QString currency = global.value(QStringLiteral("trip/currency")).toString();
+    if (currency.isEmpty())
+        currency = QLocale::system().currencySymbol(QLocale::CurrencySymbol); // the user's country, not the UI language
+    const Units::Shown distance = Units::show(st.distanceKm, "km", 1);
+    const Units::Shown fuel = Units::show(st.fuelLiters, "L", 2);
+    const Units::Shown average = Units::show(st.litersPer100Km(), "L/100 km", 1);
+    const Units::Shown instant = Units::show(st.instantLitersPer100Km(), "L/100 km", 1);
+    const Units::Shown flow = Units::show(st.instantLph, "L/h", 1);
+    const Units::Shown avgSpeed = Units::show(st.averageSpeedKmh(), "km/h", 0);
+    const Units::Shown maxSpeed = Units::show(st.maxSpeedKmh, "km/h", 0);
+    const Units::Shown sinceFill = Units::show(sinceFillUp, "L", 1);
+    const QLocale locale;
     return {
+        // Shown in the chosen units (values + unit text).
+        {QStringLiteral("distanceValue"), distance.value},
+        {QStringLiteral("distanceUnit"), distance.unit},
+        {QStringLiteral("fuelValue"), fuel.value},
+        {QStringLiteral("fuelUnit"), fuel.unit},
+        {QStringLiteral("averageValue"), average.value},
+        {QStringLiteral("consumptionUnit"), average.unit},
+        {QStringLiteral("instantValue"), instant.value},
+        {QStringLiteral("flowValue"), flow.value},
+        {QStringLiteral("flowUnit"), flow.unit},
+        {QStringLiteral("averageSpeedText"), st.averageSpeedKmh() > 0 ? QStringLiteral("%1 %2").arg(locale.toString(avgSpeed.value, 'f', 0), avgSpeed.unit) : QString()},
+        {QStringLiteral("maxSpeedText"), QStringLiteral("%1 %2").arg(locale.toString(maxSpeed.value, 'f', 0), maxSpeed.unit)},
+        {QStringLiteral("sinceFillUpText"), QStringLiteral("%1 %2").arg(locale.toString(sinceFill.value, 'f', 1), sinceFill.unit)},
+        {QStringLiteral("volumeUnit"), Units::unitFor("L")},
+        // Fuel price (per shown volume unit) and the trip's cost.
+        {QStringLiteral("fuelPrice"), pricePerLiter * Units::litersFromShownVolume(1.0)},
+        {QStringLiteral("currency"), currency},
+        {QStringLiteral("costText"), pricePerLiter > 0 && st.fuelKnown
+             ? QStringLiteral("%1 %2").arg(locale.toString(st.fuelLiters * pricePerLiter, 'f', 2), currency) : QString()},
         {QStringLiteral("active"), m_tripActive},
         {QStringLiteral("saved"), tripSaved()},
         {QStringLiteral("startedAt"), m_tripStarted.isValid() ? QLocale().toString(m_tripStarted.time(), QLocale::ShortFormat) : QString()},
@@ -1271,6 +1321,38 @@ void AppController::refreshTrip()
     emit tripChanged();
 }
 
+QString AppController::units() const
+{
+    return Units::key(Units::system());
+}
+
+void AppController::setUnits(const QString &units)
+{
+    const Units::System system = Units::fromKey(units);
+    if (system == Units::system())
+        return;
+    Units::setSystem(system);
+    QSettings().setValue(QStringLiteral("ui/units"), Units::key(system));
+    m_liveData->retranslate();
+    emit freezeFrameChanged();
+    refreshTrip();
+    loadTripHistory();
+    emit unitsChanged();
+}
+
+void AppController::setFuelPrice(double pricePerShownUnit, const QString &currency)
+{
+    QSettings settings;
+    if (pricePerShownUnit <= 0) {
+        settings.remove(QStringLiteral("trip/fuelPrice"));
+    } else {
+        // Stored per liter; typed per liter or per gallon.
+        settings.setValue(QStringLiteral("trip/fuelPrice"), pricePerShownUnit / Units::litersFromShownVolume(1.0));
+        settings.setValue(QStringLiteral("trip/currency"), currency.trimmed());
+    }
+    refreshTrip();
+}
+
 void AppController::setEngineLiters(double liters)
 {
     if (liters < 0.5 || liters > 10 || !m_tripActive)
@@ -1282,8 +1364,10 @@ void AppController::setEngineLiters(double liters)
     refreshTrip();
 }
 
-void AppController::recordFillUp(double liters)
+void AppController::recordFillUp(double shownAmount)
 {
+    // Typed in liters, or in gallons with US/UK units.
+    const double liters = Units::litersFromShownVolume(shownAmount);
     if (!tripSaved()) {
         emit notice(false, tr("Fill-ups can only be recorded with your own car connected, not the demo car or a recording."));
         return;
@@ -1375,8 +1459,9 @@ QVariantList AppController::freezeFrameValues() const
         if (!def || !def->value(r.raw, &v))
             continue;
         list << QVariantMap{{QStringLiteral("name"), def->translatedName()},
-                            {QStringLiteral("value"), QLocale().toString(v, 'f', def->decimals)},
-                            {QStringLiteral("unit"), def->translatedUnit()}};
+                            {QStringLiteral("value"), QLocale().toString(Units::show(v, def->unit, def->decimals).value, 'f',
+                                                                         Units::show(v, def->unit, def->decimals).decimals)},
+                            {QStringLiteral("unit"), Units::show(v, def->unit, def->decimals).unit}};
     }
     return list;
 }

@@ -3,6 +3,7 @@
 // The shareable report: what it says, and that nothing from the car or a
 // recording can inject markup into it.
 
+#include "obd/Units.h"
 #include "report/VehicleReport.h"
 #include "vehicles/ModuleCatalog.h"
 
@@ -14,6 +15,8 @@ class TestReport : public QObject
 {
     Q_OBJECT
 private slots:
+    // Numbers follow the locale; pin it so "32.2" doesn't become "32,2" on a Romanian Mac.
+    void initTestCase() { QLocale::setDefault(QLocale(QLocale::English, QLocale::UnitedStates)); }
     void summaryAndCodes();
     void saysWhereTheDataCameFrom();
     void recentlyCleared();
@@ -21,6 +24,7 @@ private slots:
     void targets();
     void fileName();
     void monitorTests();
+    void tripAndUnits();
 
 private:
     static ReportInput sample();
@@ -144,6 +148,28 @@ void TestReport::monitorTests()
     QVERIFY(html.contains(QStringLiteral("Self-test results")));
     QVERIFY(html.contains(QStringLiteral("Catalyst, bank 1")));
     QVERIFY(html.contains(QStringLiteral(">Failed<")));
+}
+
+void TestReport::tripAndUnits()
+{
+    ReportInput in = sample();
+    QVERIFY(!VehicleReport::html(in).contains(QStringLiteral("This drive"))); // no trip: no section
+    in.trip.distanceKm = 32.2;
+    in.trip.fuelLiters = 2.4;
+    in.trip.fuelKnown = true;
+    in.trip.durationMs = 40 * 60000;
+    in.trip.method = QStringLiteral("speedDensity");
+    QString html = VehicleReport::html(in);
+    QVERIFY(html.contains(QStringLiteral("This drive")));
+    QVERIFY(html.contains(QStringLiteral("32.2 km")));
+    QVERIFY(html.contains(QStringLiteral("7.5 L/100 km")));
+    QVERIFY(html.contains(QStringLiteral("not calibrated yet")));
+
+    Units::setSystem(Units::System::US);
+    html = VehicleReport::html(in);
+    Units::setSystem(Units::System::Metric);
+    QVERIFY(html.contains(QStringLiteral("20.0 mi")));
+    QVERIFY(html.contains(QStringLiteral("31.6 mpg"))); // 235.2 / 7.453 (2.4 L over 32.2 km)
 }
 
 QTEST_GUILESS_MAIN(TestReport)

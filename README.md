@@ -21,7 +21,7 @@
 - **Record and replay.** Record a session (a drive, a fault that comes and goes) and replay it later without the car: every screen works as if it were connected. Export the live data as CSV for a spreadsheet.
 - **Adapter health.** What your adapter really supports (most are ELM327-compatible clones, which is usually fine), how fast it answers, and automatic reconnection when the Wi-Fi link drops or the adapter falls asleep. When the ignition goes off, Obdaryn waits and picks up again by itself.
 - **Adapter console.** Every command and answer, for troubleshooting.
-- **English and Romanian**, switchable at runtime.
+- **English and Romanian**, switchable at runtime; metric, UK or US units.
 
 ![Obdaryn overview, dark theme, connected to the built-in demo car](docs/images/overview-dark.png)
 

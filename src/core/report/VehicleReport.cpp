@@ -4,6 +4,7 @@
 
 #include "obd/DtcDatabase.h"
 #include "obd/Pids.h"
+#include "obd/Units.h"
 #include "obd/VehicleInfo.h"
 #include "vehicles/ModuleCatalog.h"
 
@@ -88,6 +89,13 @@ bool pidValue(const ReportInput &in, quint8 pid, double *value)
 QString number(double v, int decimals = 0)
 {
     return QLocale().toString(v, 'f', decimals);
+}
+
+/// "1,450 km" or "901 mi", following the chosen units.
+QString distanceText(double km)
+{
+    const Units::Shown d = Units::show(km, "km", 0);
+    return QStringLiteral("%1 %2").arg(number(d.value), d.unit);
 }
 
 /// One "label | verdict | detail" row of the summary table.
@@ -182,7 +190,7 @@ QString summarySection(const ReportInput &in)
                                             : tr("The engine computer doesn't ask for the warning light.");
         double milKm = 0;
         if (in.readiness.milOn && pidValue(in, 0x21, &milKm) && milKm > 0)
-            detail += QLatin1Char(' ') + tr("Driven %1 km with it on.").arg(number(milKm));
+            detail += QLatin1Char(' ') + tr("Driven %1 with it on.").arg(distanceText(milKm));
         rows += summaryRow(tr("Check-engine light"),
                            in.readiness.milOn ? colored(kRed, tr("On")) : colored(kGreen, tr("Off")), detail);
     }
@@ -259,7 +267,7 @@ QString summarySection(const ReportInput &in)
     const bool hasKm = pidValue(in, 0x31, &km), hasWarmups = pidValue(in, 0x30, &warmups), hasMinutes = pidValue(in, 0x4E, &minutes);
     if (hasKm || hasWarmups || hasMinutes) {
         QStringList parts;
-        if (hasKm) parts << tr("%1 km").arg(number(km));
+        if (hasKm) parts << distanceText(km);
         if (hasWarmups) parts << tr("%n warm-up(s)", "", int(warmups));
         if (hasMinutes) parts << tr("%1 h of engine running").arg(number(minutes / 60.0, minutes < 600 ? 1 : 0));
         // Distance is the better signal when the car reports it; warm-ups otherwise.
@@ -450,7 +458,8 @@ QString freezeFrameSection(const ReportInput &in)
         if (!def || !def->value(r.raw, &v) || !std::isfinite(v))
             continue;
         rows += QStringLiteral("<tr><td class=\"label\" width=\"45%\">%1</td><td class=\"num\">%2 <span class=\"faint\">%3</span></td></tr>")
-                    .arg(esc(def->translatedName()), number(v, def->decimals), esc(def->translatedUnit()));
+                    .arg(esc(def->translatedName()), number(Units::show(v, def->unit, def->decimals).value, Units::show(v, def->unit, def->decimals).decimals),
+                         esc(Units::show(v, def->unit, def->decimals).unit));
     }
     if (rows.isEmpty())
         return {};
@@ -459,6 +468,40 @@ QString freezeFrameSection(const ReportInput &in)
              in.freezeFrame.dtc.isEmpty() ? tr("Sensor values saved when a fault was stored.")
                                           : tr("Sensor values saved when %1 was stored.").arg(QStringLiteral("<span class=\"mono\">%1</span>").arg(esc(in.freezeFrame.dtc))),
              rows);
+}
+
+QString tripSection(const ReportInput &in)
+{
+    const ReportInput::Trip &t = in.trip;
+    if (t.distanceKm < 0.1)
+        return {};
+    auto minutes = [](qint64 ms) {
+        const qint64 m = ms / 60000;
+        return m < 60 ? tr("%1 min").arg(m) : tr("%1 h %2 min").arg(m / 60).arg(m % 60, 2, 10, QLatin1Char('0'));
+    };
+    auto shown = [](double v, const char *unit, int decimals) {
+        const Units::Shown s = Units::show(v, unit, decimals);
+        return QStringLiteral("%1 %2").arg(number(s.value, s.decimals), s.unit);
+    };
+    QString rows;
+    rows += keyValueRow(tr("Distance"), shown(t.distanceKm, "km", 1));
+    rows += keyValueRow(tr("Time"), tr("%1, of which %2 standing with the engine running").arg(minutes(t.durationMs), minutes(t.idleMs)));
+    rows += keyValueRow(tr("Average speed"), shown(t.averageSpeedKmh, "km/h", 0));
+    rows += keyValueRow(tr("Top speed"), shown(t.maxSpeedKmh, "km/h", 0));
+    if (t.fuelKnown) {
+        rows += keyValueRow(tr("Fuel used"), shown(t.fuelLiters, "L", 2));
+        if (t.distanceKm >= 0.2)
+            rows += keyValueRow(tr("Average consumption"), shown(t.fuelLiters / t.distanceKm * 100.0, "L/100 km", 1));
+        rows += keyValueRow(tr("Cost"), esc(t.cost));
+        const QString how = t.method == QLatin1String("fuelRate") ? tr("measured by the engine computer (fuel rate)")
+                          : t.method == QLatin1String("maf") ? tr("estimated from the air-flow sensor")
+                                                             : tr("estimated from manifold pressure and the engine size");
+        rows += keyValueRow(tr("Fuel figures"), t.calibrationFillUps > 0
+                                                    ? tr("%1, calibrated with fill-ups").arg(how)
+                                                    : tr("%1, not calibrated yet (can be 10–20 % off)").arg(how));
+    }
+    return QStringLiteral("<h2>%1</h2><table class=\"rows\" width=\"100%\" cellspacing=\"0\" cellpadding=\"4\">%2</table>")
+        .arg(tr("This drive"), rows);
 }
 
 QString vehicleSection(const ReportInput &in)
@@ -561,6 +604,7 @@ QString html(const ReportInput &in, Target target)
     body += readinessSection(in);
     body += monitorTestsSection(in);
     body += freezeFrameSection(in);
+    body += tripSection(in);
     body += vehicleSection(in);
     body += aboutSection(in);
 

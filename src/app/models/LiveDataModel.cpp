@@ -3,6 +3,7 @@
 #include "models/LiveDataModel.h"
 
 #include "obd/Pids.h"
+#include "obd/Units.h"
 
 #include <QLocale>
 #include <QSettings>
@@ -49,22 +50,29 @@ QVariant LiveDataModel::data(const QModelIndex &index, int role) const
     if (!def)
         return {};
 
+    // Values are kept in metric and converted for display (Units::system()).
+    auto shown = [def](double v) { return Units::show(v, def->unit, def->decimals); };
+
     switch (role) {
     case PidRole: return row.pid;
     case PidHexRole: return QStringLiteral("%1").arg(row.pid, 2, 16, QLatin1Char('0')).toUpper();
     case NameRole: return def->translatedName();
-    case UnitRole: return def->translatedUnit();
-    case ValueRole: return row.hasValue ? row.value : std::numeric_limits<double>::quiet_NaN();
-    case ValueTextRole:
-        return row.hasValue ? QLocale().toString(row.value, 'f', def->decimals) : QStringLiteral("—");
+    case UnitRole: return shown(0).unit;
+    case ValueRole: return row.hasValue ? shown(row.value).value : std::numeric_limits<double>::quiet_NaN();
+    case ValueTextRole: {
+        if (!row.hasValue)
+            return QStringLiteral("—");
+        const Units::Shown v = shown(row.value);
+        return QLocale().toString(v.value, 'f', v.decimals);
+    }
     case RawRole: return QString::fromLatin1(row.raw.toHex(' ').toUpper());
-    case MinimumRole: return def->minimum;
-    case MaximumRole: return def->maximum;
+    case MinimumRole: return shown(def->minimum).value;
+    case MaximumRole: return shown(def->maximum).value;
     case HistoryRole: {
         QVariantList list;
         list.reserve(row.history.size());
         for (double v : row.history)
-            list << v;
+            list << shown(v).value;
         return list;
     }
     case PinnedRole: return m_pinned.contains(row.pid);
@@ -221,7 +229,9 @@ void LiveDataModel::setSamplesPerSecond(double v)
 void LiveDataModel::retranslate()
 {
     if (!m_rows.isEmpty())
-        emit dataChanged(index(0), index(int(m_rows.size()) - 1), {NameRole, UnitRole, ValueTextRole});
+        // Names follow the language; values, units and history follow the unit system.
+        emit dataChanged(index(0), index(int(m_rows.size()) - 1),
+                         {NameRole, UnitRole, ValueRole, ValueTextRole, MinimumRole, MaximumRole, HistoryRole});
     emit pinnedChanged();
 }
 

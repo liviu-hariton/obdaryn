@@ -65,7 +65,7 @@ Item {
                 SectionTitle { text: qsTr("General") }
                 SettingRow {
                     label: qsTr("Language")
-                    description: qsTr("Trouble-code descriptions stay in English for now.")
+                    description: qsTr("Switches the whole app, trouble-code explanations included.")
                     Segmented {
                         model: [{ value: "en", label: "English" }, { value: "ro", label: "Română" }]
                         value: App.language
@@ -80,6 +80,16 @@ Item {
                                 { value: "dark", label: qsTr("Dark") }]
                         value: Theme.settings.appearance
                         onPicked: v => Theme.settings.appearance = v
+                    }
+                }
+                SettingRow {
+                    label: qsTr("Units")
+                    description: qsTr("How distances, speeds, temperatures, pressures and fuel are shown. Exports stay metric.")
+                    Segmented {
+                        model: [{ value: "metric", label: qsTr("Metric") }, { value: "uk", label: qsTr("UK") },
+                                { value: "us", label: qsTr("US") }]
+                        value: App.units
+                        onPicked: v => App.units = v
                     }
                 }
                 ToggleSwitch {
