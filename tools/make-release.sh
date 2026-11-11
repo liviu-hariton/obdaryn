@@ -56,8 +56,10 @@ APP="$DIST/Obdaryn.app"
 #     macOS, Native);
 #   - SQL and LocalStorage (no database), Particles, VectorImage, the Shapes and
 #     Qt Design Studio helpers, XmlListModel, FolderListModel, the QML tooling;
-#   - the TLS, network-status and SVG icon plugins (the app only talks plain TCP
-#     to the adapter, and draws its icons itself).
+#   - the network-status and SVG icon plugins, and the OpenSSL and certificate-only
+#     TLS backends (the adapter is plain TCP; the opt-in update check's HTTPS uses
+#     macOS's own TLS, the Secure Transport backend, which stays; the app draws its
+#     icons itself).
 # A named list, not a pattern, so a new Qt version can't quietly lose something
 # the app needs. The checks below catch a mistake: a dangling link, or a screen
 # that no longer opens.
@@ -75,7 +77,8 @@ for fw in QtQuickControls2FluentWinUI3 QtQuickControls2FluentWinUI3StyleImpl \
           QtQmlLocalStorage QtSql; do
     rm -rf "$C/Frameworks/$fw.framework"
 done
-rm -rf "$C/PlugIns/sqldrivers" "$C/PlugIns/tls" "$C/PlugIns/networkinformation" "$C/PlugIns/iconengines"
+rm -rf "$C/PlugIns/sqldrivers" "$C/PlugIns/networkinformation" "$C/PlugIns/iconengines"
+rm -f "$C/PlugIns/tls/libqopensslbackend.dylib" "$C/PlugIns/tls/libqcertonlybackend.dylib"
 for style in fluentwinui3 imagine ios material universal fusion macos; do
     rm -f "$C/PlugIns/quick/libqtquickcontrols2${style}styleplugin.dylib" \
           "$C/PlugIns/quick/libqtquickcontrols2${style}styleimplplugin.dylib"

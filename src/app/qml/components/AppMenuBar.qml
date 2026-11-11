@@ -32,6 +32,12 @@ P.MenuBar {
             onTriggered: bar.app.showAbout()
         }
         P.MenuItem {
+            text: qsTr("Check for Updates…")
+            role: P.MenuItem.ApplicationSpecificRole
+            enabled: !App.updates.checking
+            onTriggered: App.updates.check(true)
+        }
+        P.MenuItem {
             text: qsTr("Settings…")
             role: P.MenuItem.PreferencesRole
             shortcut: StandardKey.Preferences
@@ -115,6 +121,11 @@ P.MenuBar {
             text: qsTr("Scan All Modules")
             enabled: bar.ready && !App.scanning && !App.moduleScanRunning
             onTriggered: { bar.app.page = 8; App.scanModules() }
+        }
+        P.MenuItem {
+            text: qsTr("Search Every Address for Modules")
+            enabled: bar.ready && !App.scanning && !App.moduleScanRunning
+            onTriggered: { bar.app.page = 8; App.discoverModules() }
         }
         P.MenuItem {
             text: qsTr("Read Self-Test Results")

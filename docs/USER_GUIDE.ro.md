@@ -70,7 +70,7 @@ Cu contactul pus și motorul oprit, mașina își descarcă bateria. Ține astfe
 | **Călătorie** | Distanța, combustibilul și consumul. La mașinile fără debitmetru, introdu capacitatea motorului. Calibrează estimarea consumului cu două alimentări și setează un preț al combustibilului ca să vezi costul. |
 | **Informații vehicul** | Seria de șasiu (VIN) și ce spune ea, versiunile software și modulele care răspund. |
 | **Jurnal adaptor** | Ce suportă adaptorul, cât de repede răspunde și fiecare comandă și răspuns, pentru depanare. |
-| **Ajutor**, **Setări** | Acest ghid; limba (română, engleză), aspectul, unitățile de măsură (metric, UK, SUA). |
+| **Ajutor**, **Setări** | Acest ghid; limba (română, engleză), aspectul, unitățile de măsură (metric, UK, SUA) și verificarea actualizărilor (oprită până o pornești). |
 
 ### Înregistrare și redare
 
@@ -103,7 +103,7 @@ Apasă **Înregistrează** în bara laterală cât timp ești conectat. Obdaryn 
 
 ## Confidențialitate și siguranță
 
-- Obdaryn nu trimite nimic online. Comunică doar cu adaptorul.
+- Obdaryn nu trimite online nimic despre tine sau mașina ta. Comunică cu adaptorul și, doar dacă pornești **Caută actualizări** în Setări, întreabă o dată pe zi obdaryn.eu care e cea mai nouă versiune.
 - Înregistrările și rapoartele rămân pe calculatorul tău și conțin seria de șasiu (VIN). Verifică-le înainte să le trimiți cuiva.
 - O protecție verifică fiecare comandă și refuză orice ar putea scrie, coda, reseta sau rescrie un modul. Singura modificare permisă e ștergerea codurilor de eroare, după ce confirmi, cu motorul oprit.
 - Explicațiile codurilor sunt orientative și vin din surse publice. Confirmă la un service înainte să schimbi piese.

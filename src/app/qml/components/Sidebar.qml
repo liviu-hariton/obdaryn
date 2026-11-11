@@ -26,7 +26,8 @@ Rectangle {
     }
 
     // Short windows (the 680 px minimum) get tighter gaps between groups.
-    readonly property bool compact: height < 760
+    // The update link takes one more row, so compact spacing starts sooner then.
+    readonly property bool compact: height < (App.updates.available ? 800 : 760)
 
     // Scrolls only when the content can't fit (a short window while recording
     // or replaying); otherwise Settings and the read-only note stay at the bottom.
@@ -292,6 +293,42 @@ Rectangle {
         Nav {
             text: qsTr("Settings"); iconName: "settings"
             current: sidebar.currentPage === 7; onClicked: sidebar.navigate(7)
+        }
+
+        // A newer version was announced (only if the user turned update checks on,
+        // or checked by hand). A link to the download page, not a page of the app.
+        C.AbstractButton {
+            id: updateLink
+            visible: App.updates.available
+            Layout.fillWidth: true
+            implicitHeight: 32
+            hoverEnabled: true
+            activeFocusOnTab: true
+            Accessible.role: Accessible.Link
+            Accessible.name: qsTr("Obdaryn %1 is available. Download it").arg(App.updates.latestVersion)
+            onClicked: Qt.openUrlExternally(App.updates.downloadUrl)
+            background: Rectangle {
+                radius: Theme.radius
+                color: updateLink.hovered ? Theme.hover : "transparent"
+                border.width: updateLink.visualFocus ? 2 : 0
+                border.color: Theme.blue
+            }
+            contentItem: RowLayout {
+                id: updateRow
+                spacing: 10
+                Icon { name: "file-down"; size: 16; color: Theme.blue; Layout.leftMargin: 10 }
+                Text {
+                    Layout.fillWidth: true
+                    Layout.rightMargin: 6
+                    text: qsTr("Obdaryn %1 is available").arg(App.updates.latestVersion)
+                    elide: Text.ElideRight
+                    color: Theme.blueInk
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontSmall
+                    font.weight: Font.Medium
+                    font.underline: updateLink.hovered
+                }
+            }
         }
 
         // The safety promise, always visible.

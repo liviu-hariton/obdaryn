@@ -94,6 +94,13 @@ Item {
                 }
                 ToggleSwitch {
                     Layout.fillWidth: true
+                    text: qsTr("Check for updates")
+                    description: qsTr("Once a day, Obdaryn asks obdaryn.eu for the number of the newest version. Nothing about you or your car is sent, and nothing is installed: you download an update yourself.")
+                    checked: App.updates.automatic
+                    onToggled: App.updates.automatic = checked
+                }
+                ToggleSwitch {
+                    Layout.fillWidth: true
                     text: qsTr("Reduce motion")
                     description: qsTr("Skip the start-up light check and other animations.")
                     checked: Theme.settings.reduceMotion
@@ -135,6 +142,33 @@ Item {
                     font.family: Theme.sans
                     font.pixelSize: Theme.fontBody
                     wrapMode: Text.WordWrap
+                }
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: Theme.s3
+                    AppButton {
+                        visible: !App.updates.available
+                        iconName: "refresh-cw"
+                        text: App.updates.checking ? qsTr("Checking…") : qsTr("Check for updates")
+                        enabled: !App.updates.checking
+                        onClicked: App.updates.check(true)
+                    }
+                    AppButton {
+                        visible: App.updates.available
+                        variant: "primary"
+                        iconName: "file-down"
+                        text: qsTr("Download Obdaryn %1").arg(App.updates.latestVersion)
+                        onClicked: Qt.openUrlExternally(App.updates.downloadUrl)
+                    }
+                    Text {
+                        Layout.fillWidth: true
+                        visible: App.updates.available
+                        text: qsTr("Opens obdaryn.eu. Install it over this one; your settings and recordings stay.")
+                        color: Theme.textMuted
+                        font.family: Theme.sans
+                        font.pixelSize: Theme.fontSmall
+                        wrapMode: Text.WordWrap
+                    }
                 }
                 RowLayout {
                     Layout.fillWidth: true

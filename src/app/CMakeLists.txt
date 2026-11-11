@@ -90,6 +90,7 @@ qt_add_qml_module(obdaryn
         qml/pages/HelpPage.qml
     SOURCES
         AppController.h AppController.cpp
+        UpdateChecker.h UpdateChecker.cpp
         models/LiveDataModel.h models/LiveDataModel.cpp
         models/DtcModel.h models/DtcModel.cpp
         models/TrafficLogModel.h models/TrafficLogModel.cpp

@@ -70,7 +70,7 @@ Clearing is the only thing Obdaryn does that changes anything in the car, and on
 | **Trip** | Distance, fuel and consumption. On cars without an air-flow sensor, enter the engine size. Calibrate the fuel estimate with two fill-ups, and set a fuel price to see the cost. |
 | **Vehicle info** | The VIN and what it tells, software versions and the modules that answer. |
 | **Adapter log** | What the adapter supports, how fast it answers, and every command and answer, for troubleshooting. |
-| **Help**, **Settings** | This guide; language (English, Romanian), appearance, units (metric, UK, US). |
+| **Help**, **Settings** | This guide; language (English, Romanian), appearance, units (metric, UK, US), and the update check (off until you turn it on). |
 
 ### Recording and replaying
 
@@ -103,7 +103,7 @@ Press **Record** in the sidebar while connected. Obdaryn saves everything the ca
 
 ## Privacy and safety
 
-- Obdaryn sends nothing online. It talks only to the adapter.
+- Obdaryn sends nothing about you or your car online. It talks to the adapter and, only if you turn on **Check for updates** in Settings, asks obdaryn.eu once a day for the newest version number.
 - Recordings and reports stay on your computer and include the VIN. Check them before sharing.
 - A safety guard checks every command and refuses anything that could write to, code, reset or flash a module. The only change it allows is clearing trouble codes, after you confirm, with the engine off.
 - Code explanations are guidance from public sources. Confirm with a workshop before replacing parts.

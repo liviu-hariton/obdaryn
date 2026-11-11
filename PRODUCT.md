@@ -39,7 +39,7 @@ Obdaryn reads everything a car will tell an OBD-II scan tool without paying for 
 - **Languages.** English (default) and Romanian, switchable at runtime.
 - **Clearing has side effects.** It resets readiness monitors, erases freeze frames and does not remove permanent codes. The UI must say this before the user confirms.
 - **Units.** Metric, UK (mph, mpg, °C, psi) or US (mph, mpg, °F, psi) for display; everything is stored in metric and exports stay metric.
-- **Not planned.** Cloud features and accounts. Obdaryn sends nothing online.
+- **Not planned.** Cloud features and accounts. Obdaryn sends nothing about the user or the car online; its only internet request is the opt-in update check (the newest version number from obdaryn.eu/latest.json).
 
 ## Brand Commitments
 

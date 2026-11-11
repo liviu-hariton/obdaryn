@@ -163,9 +163,10 @@ export const ui = {
     guidePage: { title: "User guide", description: "How to use Obdaryn: connecting, the screens, what clearing codes does, troubleshooting and the words you'll see." },
     privacyPage: {
       title: "Privacy",
-      description: "Obdaryn sends nothing online, and this site uses no cookies and no trackers.",
+      description: "Obdaryn sends nothing about you or your car online, and this site uses no cookies and no trackers.",
       sections: [
-        ["The app", "Obdaryn sends nothing online. It talks only to the OBD-II adapter in your car. There are no accounts, no analytics and no update checks. Recordings and reports stay on your computer, in folders you choose. They include your car's VIN, so check them before sharing."],
+        ["The app", "Obdaryn sends nothing about you or your car online. It talks to the OBD-II adapter in your car and, only if you allow it, to obdaryn.eu for the update check below. There are no accounts and no analytics. Recordings and reports stay on your computer, in folders you choose. They include your car's VIN, so check them before sharing."],
+        ["Update check", "Off until you turn it on in Settings, or choose Obdaryn → Check for Updates. Once a day it downloads one small file, obdaryn.eu/latest.json, which holds only the newest version number. The request carries the app's version and, like any web request, your IP address, which lands in the server's access logs described below. Nothing about your car is sent, and nothing is installed by itself: if there's a newer version, Obdaryn says so and links to the download page."],
         ["This website", "This site sets no cookies, runs no analytics or trackers, and loads nothing from other companies: its fonts and images come from obdaryn.eu itself. Like any web server, ours keeps standard access logs (IP address, time, page requested, browser) for security and to fix errors. They are not shared with anyone and are deleted after a few weeks. If you switch between the light and dark theme, your browser remembers the choice on your device; it isn't a cookie and is never sent to us."],
         ["Downloads", "The installer is published on GitHub, and the download button fetches it from there. GitHub's own privacy statement applies to that download."],
         ["Contact", "Questions about privacy, or anything else:"],
@@ -177,7 +178,7 @@ export const ui = {
       tagline: "Free, open-source, read-only OBD-II diagnostics.",
       privacy: "Privacy",
       contact: "Contact",
-      noTracking: "Obdaryn sends nothing online. Neither does this site: no cookies, no trackers.",
+      noTracking: "Obdaryn sends nothing about you or your car online. This site: no cookies, no trackers.",
       copyright: (years: string) => `© ${years} Liviu Hariton and contributors. GPL-3.0-or-later.`,
     },
   },
@@ -326,9 +327,10 @@ export const ui = {
     guidePage: { title: "Ghidul utilizatorului", description: "Cum folosești Obdaryn: conectarea, ecranele, ce face ștergerea codurilor, rezolvarea problemelor și termenii pe care îi vei vedea." },
     privacyPage: {
       title: "Confidențialitate",
-      description: "Obdaryn nu trimite nimic online, iar acest site nu folosește cookie-uri și nici instrumente de urmărire.",
+      description: "Obdaryn nu trimite online nimic despre tine sau mașina ta, iar acest site nu folosește cookie-uri și nici instrumente de urmărire.",
       sections: [
-        ["Aplicația", "Obdaryn nu trimite nimic online. Comunică doar cu adaptorul OBD-II din mașină. Nu are conturi, statistici sau verificări de actualizări. Înregistrările și rapoartele rămân pe calculatorul tău, în dosarele pe care le alegi. Ele conțin seria de șasiu (VIN) a mașinii, așa că verifică-le înainte să le trimiți cuiva."],
+        ["Aplicația", "Obdaryn nu trimite online nimic despre tine sau mașina ta. Comunică cu adaptorul OBD-II din mașină și, doar dacă îi permiți, cu obdaryn.eu, pentru verificarea actualizărilor de mai jos. Nu are conturi și nici statistici. Înregistrările și rapoartele rămân pe calculatorul tău, în dosarele pe care le alegi. Ele conțin seria de șasiu (VIN) a mașinii, așa că verifică-le înainte să le trimiți cuiva."],
+        ["Verificarea actualizărilor", "E oprită până o pornești din Setări sau alegi Obdaryn → Caută actualizări. O dată pe zi descarcă un singur fișier mic, obdaryn.eu/latest.json, care conține doar numărul celei mai noi versiuni. Cererea conține versiunea aplicației și, ca orice cerere web, adresa ta IP, care ajunge în jurnalele de acces ale serverului, descrise mai jos. Nu se trimite nimic despre mașină și nu se instalează nimic de la sine: dacă există o versiune nouă, Obdaryn îți spune și îți dă legătura spre pagina de descărcare."],
         ["Acest site", "Site-ul nu setează cookie-uri, nu rulează statistici sau instrumente de urmărire și nu încarcă nimic de la alte companii: fonturile și imaginile vin chiar de pe obdaryn.eu. Ca orice server web, al nostru păstrează jurnale de acces standard (adresa IP, ora, pagina cerută, browserul), pentru securitate și pentru remedierea erorilor. Nu sunt date nimănui și se șterg după câteva săptămâni. Dacă treci între tema deschisă și cea întunecată, browserul ține minte alegerea pe dispozitivul tău; nu e un cookie și nu ne e trimisă nouă."],
         ["Descărcări", "Programul de instalare e publicat pe GitHub, iar butonul de descărcare îl ia de acolo. Pentru acea descărcare se aplică declarația de confidențialitate a GitHub."],
         ["Contact", "Întrebări despre confidențialitate sau orice altceva:"],
@@ -340,7 +342,7 @@ export const ui = {
       tagline: "Diagnoză OBD-II gratuită, open-source, doar citire.",
       privacy: "Confidențialitate",
       contact: "Contact",
-      noTracking: "Obdaryn nu trimite nimic online. Nici acest site: fără cookie-uri, fără urmărire.",
+      noTracking: "Obdaryn nu trimite online nimic despre tine sau mașina ta. Acest site: fără cookie-uri, fără urmărire.",
       copyright: (years: string) => `© ${years} Liviu Hariton și colaboratorii. GPL-3.0-or-later.`,
     },
   },

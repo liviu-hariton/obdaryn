@@ -108,6 +108,9 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
       m_charts(new ChartModel(this)),
       m_manufacturerValues(new ManufacturerValuesModel(this))
 {
+    m_updates = new UpdateChecker(QCoreApplication::applicationVersion(), this);
+    // Only a check the user asked for reports back; automatic ones stay quiet.
+    connect(m_updates, &UpdateChecker::finished, this, &AppController::notice);
     m_chartClock.start();
     connect(m_charts, &ChartModel::requiredPidsChanged, this, &AppController::updateRequiredPids);
     connect(m_charts, &ChartModel::notice, this, &AppController::notice);
@@ -1903,6 +1906,8 @@ void AppController::setLanguage(const QString &code)
     QLocale::setDefault(QLocale(lang == QLatin1String("ro") ? QLocale::Romanian : QLocale::English));
 
     m_language = lang;
+    if (m_updates)
+        m_updates->setLanguage(lang);
     QSettings().setValue(kLanguageKey, lang);
     // Re-evaluate every qsTr() binding. Deferred by one event-loop turn: the
     // first call happens while QML is still creating this singleton, inside a

@@ -10,6 +10,7 @@
 #include "models/ManufacturerValuesModel.h"
 #include "models/ModuleScanModel.h"
 #include "models/TrafficLogModel.h"
+#include "UpdateChecker.h"
 #include "obd/ObdClient.h"
 #include "trip/TripComputer.h"
 
@@ -187,6 +188,8 @@ class AppController : public QObject
     // App
     Q_PROPERTY(QString language READ language NOTIFY languageChanged)
     Q_PROPERTY(QString appVersion READ appVersion CONSTANT)
+    /// The opt-in check for a newer version (Settings, and Obdaryn → Check for Updates).
+    Q_PROPERTY(obdaryn::UpdateChecker *updates READ updates CONSTANT)
     /// "Qt 6.12.0 · macOS 27.0": for the About window and bug reports.
     Q_PROPERTY(QString buildInfo READ buildInfo CONSTANT)
     /// The copyright years: "2026", or "2026–2028" for a build made in 2028.
@@ -380,6 +383,7 @@ public:
     void setUnits(const QString &units);
     QString language() const { return m_language; }
     QString appVersion() const;
+    UpdateChecker *updates() const { return m_updates; }
     QString buildInfo() const;
     QString copyrightYears() const;
     QString dtcAttribution() const;
@@ -509,6 +513,7 @@ private:
     ModuleScanner *m_moduleScanner;
     ModuleScanModel *m_moduleModel;
     ModuleDiscovery *m_discovery;
+    UpdateChecker *m_updates = nullptr;
     bool m_moduleScanSearched = false;
     QString m_profileId = QStringLiteral("generic");
     bool m_profileChosenByUser = false;

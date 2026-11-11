@@ -60,6 +60,10 @@
         <translation>Despre Obdaryn</translation>
     </message>
     <message>
+        <source>Check for Updates…</source>
+        <translation>Caută actualizări…</translation>
+    </message>
+    <message>
         <source>Settings…</source>
         <translation>Setări…</translation>
     </message>
@@ -142,6 +146,10 @@
     <message>
         <source>Scan All Modules</source>
         <translation>Scanează toate modulele</translation>
+    </message>
+    <message>
+        <source>Search Every Address for Modules</source>
+        <translation>Caută module la toate adresele</translation>
     </message>
     <message>
         <source>Read Self-Test Results</source>
@@ -2942,6 +2950,14 @@
         <translation>SUA</translation>
     </message>
     <message>
+        <source>Check for updates</source>
+        <translation>Caută actualizări</translation>
+    </message>
+    <message>
+        <source>Once a day, Obdaryn asks obdaryn.eu for the number of the newest version. Nothing about you or your car is sent, and nothing is installed: you download an update yourself.</source>
+        <translation>O dată pe zi, Obdaryn întreabă obdaryn.eu care e numărul celei mai noi versiuni. Nu se trimite nimic despre tine sau mașina ta și nu se instalează nimic: descarci singur actualizarea.</translation>
+    </message>
+    <message>
         <source>Reduce motion</source>
         <translation>Reduce animațiile</translation>
     </message>
@@ -2976,6 +2992,18 @@
     <message>
         <source>Obdaryn %1 · free and open-source software under the GNU GPL v3 or later.</source>
         <translation>Obdaryn %1 · software liber și open-source, sub licența GNU GPL v3 sau ulterioară.</translation>
+    </message>
+    <message>
+        <source>Checking…</source>
+        <translation>Se verifică…</translation>
+    </message>
+    <message>
+        <source>Download Obdaryn %1</source>
+        <translation>Descarcă Obdaryn %1</translation>
+    </message>
+    <message>
+        <source>Opens obdaryn.eu. Install it over this one; your settings and recordings stay.</source>
+        <translation>Deschide obdaryn.eu. Instaleaz-o peste aceasta; setările și înregistrările rămân.</translation>
     </message>
     <message>
         <source>Read-only by design. A safety guard checks every command and refuses anything that could write to, code, reset or flash a module in your car. The only change Obdaryn can make is clearing trouble codes, and only after you confirm.</source>
@@ -3143,6 +3171,14 @@
     <message>
         <source>Settings</source>
         <translation>Setări</translation>
+    </message>
+    <message>
+        <source>Obdaryn %1 is available. Download it</source>
+        <translation>Obdaryn %1 e disponibil. Descarcă-l</translation>
+    </message>
+    <message>
+        <source>Obdaryn %1 is available</source>
+        <translation>Obdaryn %1 e disponibil</translation>
     </message>
     <message>
         <source>Read-only. Obdaryn can&apos;t change anything in your car.</source>
@@ -4791,6 +4827,25 @@
     <message>
         <source>Can&apos;t reach the adapter at %1.</source>
         <translation>Adaptorul de la %1 nu poate fi accesat.</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::UpdateChecker</name>
+    <message>
+        <source>obdaryn.eu answered, but not with a version number. Try again later.</source>
+        <translation>obdaryn.eu a răspuns, dar nu cu un număr de versiune. Încearcă mai târziu.</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t reach obdaryn.eu. The adapter&apos;s Wi-Fi has no internet: check again when your Mac is online.</source>
+        <translation>Nu am putut ajunge la obdaryn.eu. Wi-Fi-ul adaptorului nu are internet: verifică din nou când Mac-ul e online.</translation>
+    </message>
+    <message>
+        <source>Obdaryn %1 is available. You have %2.</source>
+        <translation>Obdaryn %1 e disponibil. Tu ai %2.</translation>
+    </message>
+    <message>
+        <source>You have the latest version, Obdaryn %1.</source>
+        <translation>Ai cea mai nouă versiune, Obdaryn %1.</translation>
     </message>
 </context>
 <context>
