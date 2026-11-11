@@ -18,13 +18,16 @@ Day-to-day development keeps using Homebrew's Qt; only the installer needs the o
 The script:
 
 1. builds a Release configuration in `build-release/` (configured fresh each time) for macOS 14.4 and later, as one universal binary for Apple Silicon and Intel, and runs the unit tests;
-2. copies `Obdaryn.app` to `dist/` and makes it self-contained with `macdeployqt` (the Qt frameworks and plugins go inside the app), leaving out the database drivers Qt adds that need client libraries the app doesn't ship;
+2. copies `Obdaryn.app` to `dist/` and makes it self-contained with `macdeployqt` (the Qt frameworks and plugins go inside the app);
 3. removes the build's Qt library path, so a missing library can't hide behind the Qt installed on this Mac;
-4. checks that every binary in the app runs on macOS 14.4, and stops if one needs a newer macOS;
-5. signs the app ad hoc (`codesign --sign -`), which Apple Silicon requires before an app may run;
-6. makes `dist/Obdaryn-<version>.dmg` with the app and an Applications shortcut.
+4. leaves out the Qt modules the app never loads (about 48 MB: the other Qt Quick Controls styles, SQL and LocalStorage, Particles, VectorImage, the design helpers, the TLS, network-status and SVG icon plugins). The list is explicit in the script and came from tracing the packaged app through every screen and both report formats with `DYLD_PRINT_LIBRARIES=1`. Two checks follow: every Qt library a remaining binary links to must still be there, and every screen must open from the packaged app (their windows flash up for a moment);
+5. checks that every binary in the app runs on macOS 14.4, and stops if one needs a newer macOS;
+6. signs the app ad hoc (`codesign --sign -`), which Apple Silicon requires before an app may run;
+7. makes `dist/Obdaryn-<version>.dmg` with the app and an Applications shortcut.
 
 `macdeployqt` prints "Cannot resolve rpath" for some QML plugins (3D, virtual keyboard, PDF, timeline) and "no file at" for the Mimer, ODBC and PostgreSQL client libraries. Obdaryn never loads any of them, so those messages are expected.
+
+The installer is about 58 MB. The website states the size (`fileLine` and the download-started lede in `site/src/i18n/ui.ts`); update it when a release changes it noticeably. If a new Qt version adds a module the app needs, the screen check fails with "Type … unavailable" or "module … is not installed": take that module off the trim list.
 
 ## Installing and the first launch
 

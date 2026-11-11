@@ -112,7 +112,7 @@ export const ui = {
       title: "Download Obdaryn",
       description: "Download Obdaryn for macOS: the installer, what you need, and how to open it the first time.",
       lede: "One installer for Macs with Apple Silicon or Intel. Free, with no account to create.",
-      fileLine: (v: string) => `Obdaryn-${v}.dmg · about 80 MB`,
+      fileLine: (v: string) => `Obdaryn-${v}.dmg · about 58 MB`,
       reqTitle: "Requirements",
       reqs: [
         ["Mac", "Apple Silicon or Intel."],
@@ -141,7 +141,7 @@ export const ui = {
     startedPage: {
       title: "Your download has started",
       description: "Obdaryn is downloading. How to open it the first time.",
-      lede: (v: string) => `Obdaryn-${v}.dmg, about 80 MB, is on its way from GitHub. The first time you open it, macOS asks you to confirm once.`,
+      lede: (v: string) => `Obdaryn-${v}.dmg, about 58 MB, is on its way from GitHub. The first time you open it, macOS asks you to confirm once.`,
       retry: "Download didn't start?",
       retryLink: "Download it directly",
       nextTitle: "Then, at the car",
@@ -275,7 +275,7 @@ export const ui = {
       title: "Descarcă Obdaryn",
       description: "Descarcă Obdaryn pentru macOS: programul de instalare, de ce ai nevoie și cum îl deschizi prima dată.",
       lede: "Un singur program de instalare pentru Mac-urile cu Apple Silicon sau Intel. Gratuit, fără cont.",
-      fileLine: (v: string) => `Obdaryn-${v}.dmg · aproximativ 80 MB`,
+      fileLine: (v: string) => `Obdaryn-${v}.dmg · aproximativ 58 MB`,
       reqTitle: "Cerințe",
       reqs: [
         ["Mac", "Apple Silicon sau Intel."],
@@ -304,7 +304,7 @@ export const ui = {
     startedPage: {
       title: "Descărcarea a început",
       description: "Obdaryn se descarcă. Cum îl deschizi prima dată.",
-      lede: (v: string) => `Obdaryn-${v}.dmg, aproximativ 80 MB, se descarcă de pe GitHub. Prima dată când îl deschizi, macOS îți cere o confirmare, o singură dată.`,
+      lede: (v: string) => `Obdaryn-${v}.dmg, aproximativ 58 MB, se descarcă de pe GitHub. Prima dată când îl deschizi, macOS îți cere o confirmare, o singură dată.`,
       retry: "Nu a pornit descărcarea?",
       retryLink: "Descarcă direct",
       nextTitle: "Apoi, la mașină",

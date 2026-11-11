@@ -44,13 +44,66 @@ rm -rf "$DIST" && mkdir -p "$DIST"
 cp -R "$BUILD/src/app/Obdaryn.app" "$DIST/"
 APP="$DIST/Obdaryn.app"
 # macdeployqt reports unresolved libraries of QML plugins Obdaryn never loads
-# (3D, virtual keyboard, PDF) and of the database drivers removed below; those
-# messages are expected.
+# (3D, virtual keyboard, PDF) and of database drivers (Mimer, ODBC, PostgreSQL)
+# that the trim below removes; those messages are expected.
 "$QT/bin/macdeployqt" "$APP" -qmldir="$DIR/src/app/qml" -libpath="$QT/lib" -no-codesign -verbose=0
-# Qt's database drivers come along with Qt Quick's LocalStorage. Obdaryn uses no
-# database; these three link to client libraries the app doesn't ship (Mimer,
-# ODBC, PostgreSQL), so leave them out rather than ship broken plugins.
-for driver in mimer odbc psql; do rm -f "$APP/Contents/PlugIns/sqldrivers/libqsql$driver.dylib"; done
+
+# macdeployqt copies every QML module Qt might need, about 48 MB the app never
+# loads. Tracing the packaged app through every screen and both report formats
+# (DYLD_PRINT_LIBRARIES) showed these are never opened, so they're left out:
+#   - the other Qt Quick Controls styles: the app draws with Controls.Basic and
+#     its own theme (FluentWinUI3, Imagine, iOS, Material, Universal, Fusion,
+#     macOS, Native);
+#   - SQL and LocalStorage (no database), Particles, VectorImage, the Shapes and
+#     Qt Design Studio helpers, XmlListModel, FolderListModel, the QML tooling;
+#   - the TLS, network-status and SVG icon plugins (the app only talks plain TCP
+#     to the adapter, and draws its icons itself).
+# A named list, not a pattern, so a new Qt version can't quietly lose something
+# the app needs. The checks below catch a mistake: a dangling link, or a screen
+# that no longer opens.
+C="$APP/Contents"
+for fw in QtQuickControls2FluentWinUI3 QtQuickControls2FluentWinUI3StyleImpl \
+          QtQuickControls2Imagine QtQuickControls2ImagineStyleImpl \
+          QtQuickControls2IOS QtQuickControls2IOSStyleImpl \
+          QtQuickControls2Material QtQuickControls2MaterialStyleImpl \
+          QtQuickControls2Universal QtQuickControls2UniversalStyleImpl \
+          QtQuickControls2Fusion QtQuickControls2FusionStyleImpl \
+          QtQuickControls2Macos QtQuickControls2MacOSStyleImpl \
+          QtQuickControls2Native QtQuickNativeStyle \
+          QtQuickParticles QtQuickVectorImage QtQuickVectorImageGenerator QtQuickVectorImageHelpers \
+          QtQuickShapesDesignHelpers QtQmlDesignSupport QtQmlXmlListModel QtLabsFolderListModel \
+          QtQmlLocalStorage QtSql; do
+    rm -rf "$C/Frameworks/$fw.framework"
+done
+rm -rf "$C/PlugIns/sqldrivers" "$C/PlugIns/tls" "$C/PlugIns/networkinformation" "$C/PlugIns/iconengines"
+for style in fluentwinui3 imagine ios material universal fusion macos; do
+    rm -f "$C/PlugIns/quick/libqtquickcontrols2${style}styleplugin.dylib" \
+          "$C/PlugIns/quick/libqtquickcontrols2${style}styleimplplugin.dylib"
+done
+for plugin in qtquicknativestyle qtquickcontrols2nativestyle particles qquickvectorimage qquickvectorimagehelpers \
+              qtquickshapesdesignhelpers qmldesignsupport qmlxmllistmodel qmlfolderlistmodel qmllocalstorage quicktooling; do
+    rm -f "$C/PlugIns/quick/lib${plugin}plugin.dylib"
+done
+for dir in QtQuick/Controls/FluentWinUI3 QtQuick/Controls/Imagine QtQuick/Controls/iOS QtQuick/Controls/Material \
+           QtQuick/Controls/Universal QtQuick/Controls/Fusion QtQuick/Controls/macOS QtQuick/Controls/Native \
+           QtQuick/Controls/designer QtQuick/NativeStyle QtQuick/Particles QtQuick/VectorImage \
+           QtQuick/Shapes/DesignHelpers QtQuick/LocalStorage QtQuick/tooling \
+           QtQml/DesignSupport QtQml/XmlListModel Qt/labs/folderlistmodel; do
+    rm -rf "$C/Resources/qml/$dir"
+done
+
+# Every Qt library a remaining binary links to must still be in the app.
+echo "Checking nothing links to a library that was left out..."
+MISSING=$(find "$C" -type f \( -perm -u+x -o -name '*.dylib' \) | while IFS= read -r f; do
+    otool -L "$f" 2>/dev/null | awk 'NR > 1 { print $1 }' | grep '^@rpath/Qt' | while IFS= read -r dep; do
+        lib=${dep#@rpath/}
+        [ -e "$C/Frameworks/$lib" ] || echo "${f#$C/} needs ${lib%%/*}"
+    done
+done | sort -u)
+if [ -n "$MISSING" ]; then
+    echo "$MISSING" >&2
+    exit 1
+fi
 # The build's Qt search path would hide a missing library on this Mac.
 install_name_tool -delete_rpath "$QT/lib" "$APP/Contents/MacOS/Obdaryn" 2>/dev/null || true
 
@@ -67,6 +120,23 @@ if [ -n "$TOO_NEW" ]; then
     echo "$TOO_NEW" >&2
     exit 1
 fi
+
+# Open every screen from the packaged app, with its own libraries only: a module
+# left out by mistake shows up as a screen that fails to load. The windows flash
+# up for a moment each.
+echo "Opening every screen of the packaged app..."
+CHECK=$(mktemp -d)
+for page in 0 1 2 3 4 5 6 7 8 9 10; do
+    OBDARYN_SETTINGS_DIR="$CHECK/settings-$page" OBDARYN_RECORDINGS_DIR="$CHECK/rec" OBDARYN_REPORTS_DIR="$CHECK/rep" \
+    OBDARYN_DEMO=1 OBDARYN_PAGE=$page OBDARYN_CAPTURE="$CHECK/page-$page.png" OBDARYN_DELAY_MS=2500 \
+        "$C/MacOS/Obdaryn" > "$CHECK/page-$page.log" 2>&1 || true
+    if [ ! -s "$CHECK/page-$page.png" ] || grep -qE "is not installed|Cannot load library|Library not loaded|failed to load component|Type .* unavailable" "$CHECK/page-$page.log"; then
+        echo "Screen $page didn't open from the packaged app:" >&2
+        grep -E "QML|qml|Library|library|module|plugin" "$CHECK/page-$page.log" | head -20 >&2
+        exit 1
+    fi
+done
+rm -rf "$CHECK"
 
 echo "Signing (ad hoc)..."
 codesign --force --deep --sign - "$APP"
