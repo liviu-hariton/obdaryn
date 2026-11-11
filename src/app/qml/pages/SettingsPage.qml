@@ -92,7 +92,9 @@ Item {
             }
 
             ColumnLayout {
-                visible: App.demoMode && App.connectionState === App.Ready
+                // Not only while Ready: with the ignition off the car doesn't answer,
+                // and the switch must stay reachable to turn it back on.
+                visible: App.demoMode && App.connectionState !== App.Disconnected
                 Layout.fillWidth: true
                 spacing: Theme.s4
                 SectionTitle { text: qsTr("Demo car") }
@@ -102,6 +104,13 @@ Item {
                     description: qsTr("Turn the simulated engine off to try clearing codes. Obdaryn refuses while it runs, as with a real car.")
                     checked: App.demoEngineRunning
                     onToggled: App.demoEngineRunning = checked
+                }
+                ToggleSwitch {
+                    Layout.fillWidth: true
+                    text: qsTr("Ignition on")
+                    description: qsTr("Turn the ignition off and the car stops answering, as when you switch a real car off. Obdaryn waits and picks up again by itself when it's back on.")
+                    checked: App.demoIgnitionOn
+                    onToggled: App.demoIgnitionOn = checked
                 }
             }
 

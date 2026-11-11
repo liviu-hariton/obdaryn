@@ -2,6 +2,8 @@
 
 #include "AppController.h"
 
+#include "elm327/AdapterCheck.h"
+#include "elm327/ConnectionKeeper.h"
 #include "obd/DtcDatabase.h"
 #include "vehicles/ModuleCatalog.h"
 #include "obd/Pids.h"
@@ -94,8 +96,10 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
       m_trafficLog(new TrafficLogModel(this)),
       m_moduleScanner(new ModuleScanner(m_client, this)),
       m_moduleModel(new ModuleScanModel(m_moduleScanner, this)),
-      m_recorder(new SessionRecorder(m_client->session(), this))
+      m_recorder(new SessionRecorder(m_client->session(), this)),
+      m_keeper(new ConnectionKeeper(m_client->session(), this))
 {
+    connect(m_keeper, &ConnectionKeeper::changed, this, &AppController::onKeeperChanged);
     // Code titles follow the car's brand pack (e.g. Hyundai/Kia for P1326).
     connect(this, &AppController::profileChanged, this, [this] { m_dtcs->setContext(m_profileId, m_language); });
 
@@ -128,6 +132,7 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
     // Recording: report where the file went when it ends (by the user or by a disconnect).
     m_ticker.setInterval(1000);
     connect(&m_ticker, &QTimer::timeout, this, &AppController::recordingTick);
+    connect(&m_ticker, &QTimer::timeout, this, &AppController::adapterHealthChanged);
     connect(m_recorder, &SessionRecorder::recordingChanged, this, [this] {
         if (!m_recorder->isRecording() && !m_recorder->path().isEmpty()) {
             qint64 duration = 0;
@@ -166,12 +171,15 @@ void AppController::connectToAdapter(const QString &host, int port)
     settings.setValue(kPortKey, port);
     emit settingsChanged();
     m_replay = nullptr;
+    m_keeper->start(true);
     startSession(new TcpTransport(host.trimmed(), quint16(port)), false);
 }
 
 void AppController::connectDemo()
 {
     m_replay = nullptr;
+    m_keeper->start(true);
+    m_demoIgnitionOn = true;
     auto *sim = new SimulatedTransport;
     m_simulator = sim;
     startSession(sim, true);
@@ -188,6 +196,9 @@ void AppController::startSession(Transport *transport, bool demo)
     m_demo = demo;
     resetVehicleData();
     m_trafficLog->append(QStringLiteral("!"), demo ? tr("Starting demo car") : tr("Opening %1").arg(transport->description()));
+    m_adapterCheck.clear();
+    emit adapterCheckChanged();
+    m_connectionHint.clear();
     m_client->session()->setTransport(transport);
     m_client->session()->open();
     updateTicker();
@@ -196,6 +207,7 @@ void AppController::startSession(Transport *transport, bool demo)
 
 void AppController::disconnectAdapter()
 {
+    m_keeper->stop(); // the user asked: no reconnecting
     m_afterPoll = nullptr;
     m_moduleScanner->cancel();
     m_pollingEnabled = false;
@@ -224,11 +236,21 @@ void AppController::onSessionStateChanged()
     case ElmSession::State::Failed:
         endTrip();
         m_statusMessage = s->lastError();
+        m_connectionHint.clear();
+        if (s->state() == ElmSession::State::Failed && s->transport() && !m_demo && !m_replay) {
+            switch (s->transport()->lastFailure()) {
+            case Transport::Failure::Unreachable: m_connectionHint = QStringLiteral("unreachable"); break;
+            case Transport::Failure::Timeout: m_connectionHint = QStringLiteral("timeout"); break;
+            case Transport::Failure::Refused: m_connectionHint = QStringLiteral("refused"); break;
+            default: break;
+            }
+        }
         m_pollingEnabled = false;
         m_voltageTimer.stop();
         break;
     case ElmSession::State::Ready:
         m_statusMessage.clear();
+        m_connectionHint.clear();
         m_voltageTimer.start();
         readVoltage(); // right away, then every 5 s
         runFullScan();
@@ -240,6 +262,8 @@ void AppController::onSessionStateChanged()
         m_voltageTimer.stop();
         break;
     }
+    if (m_keeper->reconnecting() && s->state() != ElmSession::State::Ready)
+        onKeeperChanged(); // keep "Reconnecting, attempt n" instead of each attempt's error
     updateTicker();
     emit connectionChanged();
     emit adapterInfoChanged();
@@ -247,7 +271,68 @@ void AppController::onSessionStateChanged()
 
 AppController::ConnectionState AppController::connectionState() const
 {
+    if (m_keeper->reconnecting() && m_client->session()->state() != ElmSession::State::Ready)
+        return ConnectionState::Reconnecting;
     return static_cast<ConnectionState>(m_client->session()->state());
+}
+
+void AppController::onKeeperChanged()
+{
+    if (m_keeper->reconnecting()) {
+        m_statusMessage = tr("Lost the adapter. Reconnecting, attempt %1 of %2…")
+                              .arg(qMax(1, m_keeper->attempt())).arg(ConnectionKeeper::kMaxAttempts);
+    } else if (m_keeper->gaveUp()) {
+        m_statusMessage = tr("Couldn't reconnect to the adapter after %1 tries. Check that it has power and that "
+                             "this computer is on its Wi-Fi, then connect again.").arg(ConnectionKeeper::kMaxAttempts);
+    }
+    emit connectionChanged();
+}
+
+void AppController::openLocalNetworkSettings() const
+{
+#ifdef Q_OS_MACOS
+    QDesktopServices::openUrl(QUrl(QStringLiteral("x-apple.systempreferences:com.apple.preference.security?Privacy_LocalNetwork")));
+#endif
+}
+
+void AppController::runAdapterCheck()
+{
+    AdapterCheck::run(m_client->session(), [this](const AdapterCheck::Result &r) {
+        QVariantList items;
+        for (const AdapterCheck::Item &i : r.items)
+            items << QVariantMap{{QStringLiteral("command"), i.command}, {QStringLiteral("purpose"), i.purpose},
+                                 {QStringLiteral("supported"), i.supported}, {QStringLiteral("answer"), i.answer}};
+        const char *verdict = r.verdict == AdapterCheck::Verdict::Genuine ? "genuine"
+                            : r.verdict == AdapterCheck::Verdict::Compatible ? "compatible" : "unknown";
+        m_adapterCheck = {{QStringLiteral("done"), true},
+                          {QStringLiteral("identification"), r.identification},
+                          {QStringLiteral("version"), r.version},
+                          {QStringLiteral("description"), r.description},
+                          {QStringLiteral("deviceId"), r.deviceId},
+                          {QStringLiteral("verdict"), QLatin1String(verdict)},
+                          {QStringLiteral("summary"), r.summary()},
+                          {QStringLiteral("items"), items}};
+        emit adapterCheckChanged();
+    });
+}
+
+QVariantMap AppController::adapterHealth() const
+{
+    const ElmSession::Health h = m_client->session()->health();
+    const char *counts = "unknown";
+    switch (m_client->responseCounts()) {
+    case ObdClient::ResponseCounts::Working: counts = "working"; break;
+    case ObdClient::ResponseCounts::NotSupported: counts = "notSupported"; break;
+    case ObdClient::ResponseCounts::Off: counts = "off"; break;
+    case ObdClient::ResponseCounts::Unknown: break;
+    }
+    return {{QStringLiteral("commands"), h.commands},
+            {QStringLiteral("timeouts"), h.timeouts},
+            {QStringLiteral("errors"), h.errors},
+            {QStringLiteral("averageMs"), h.averageMs},
+            {QStringLiteral("p95Ms"), h.p95Ms},
+            {QStringLiteral("multiPid"), m_client->multiPidSupported()},
+            {QStringLiteral("responseCounts"), QLatin1String(counts)}};
 }
 
 QString AppController::transportDescription() const
@@ -275,6 +360,21 @@ int AppController::adapterPort() const
 bool AppController::demoEngineRunning() const
 {
     return m_simulator ? m_simulator->engineRunning() : false;
+}
+
+void AppController::setDemoIgnitionOn(bool on)
+{
+    if (!m_simulator || m_demoIgnitionOn == on)
+        return;
+    m_demoIgnitionOn = on;
+    m_simulator->setCarAnswering(on);
+    emit demoEngineRunningChanged();
+}
+
+void AppController::simulateLinkDrop()
+{
+    if (m_simulator)
+        m_simulator->close();
 }
 
 void AppController::setDemoEngineRunning(bool running)
@@ -361,6 +461,10 @@ void AppController::runFullScan()
                     m_client->readSupportedPids(0x01, [this](const QList<quint8> &pids) {
                         m_liveData->setSupportedPids(pids);
                         readStatusPids();
+                        if (m_adapterCheck.isEmpty() && !m_replay) {
+                            m_adapterCheck.insert(QStringLiteral("done"), false);
+                            runAdapterCheck(); // once per connection, after the important reads
+                        }
                         m_lastScanTime = QLocale().toString(QTime::currentTime(), QLocale::ShortFormat);
                         setScanStep({});
                         emit scanFinished();
@@ -649,7 +753,8 @@ QString AppController::replayPosition() const
 
 void AppController::updateTicker()
 {
-    const bool needed = m_recorder->isRecording() || (m_replay && m_client->session()->state() != ElmSession::State::Disconnected);
+    // Also refreshes the adapter's health numbers while connected.
+    const bool needed = m_recorder->isRecording() || m_client->session()->state() != ElmSession::State::Disconnected;
     if (needed && !m_ticker.isActive())
         m_ticker.start();
     else if (!needed)
@@ -710,6 +815,7 @@ void AppController::replayRecording(const QString &pathOrUrl)
     //: Sidebar, while replaying: which car and when it was recorded, e.g. "Hyundai 2014, 11/11/26 14:03"
     auto *replay = new ReplayTransport(std::move(rec), tr("%1, %2").arg(car, when));
     m_replay = replay;
+    m_keeper->start(false); // a recording has no link to lose
     startSession(replay, false);
 }
 

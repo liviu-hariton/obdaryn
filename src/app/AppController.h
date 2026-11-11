@@ -28,6 +28,7 @@ class QJSEngine;
 namespace obdaryn {
 
 class SimulatedTransport;
+class ConnectionKeeper;
 class ReplayTransport;
 class SessionRecorder;
 
@@ -53,6 +54,8 @@ class AppController : public QObject
     Q_PROPERTY(QString statusMessage READ statusMessage NOTIFY connectionChanged)
     Q_PROPERTY(bool demoMode READ demoMode NOTIFY connectionChanged)
     Q_PROPERTY(bool demoEngineRunning READ demoEngineRunning WRITE setDemoEngineRunning NOTIFY demoEngineRunningChanged)
+    /// Demo car: ignition ON. Off, the car stops answering, and Obdaryn waits for it.
+    Q_PROPERTY(bool demoIgnitionOn READ demoIgnitionOn WRITE setDemoIgnitionOn NOTIFY demoEngineRunningChanged)
     Q_PROPERTY(QString adapterHost READ adapterHost NOTIFY settingsChanged)
     Q_PROPERTY(int adapterPort READ adapterPort NOTIFY settingsChanged)
     Q_PROPERTY(QString adapterVersion READ adapterVersion NOTIFY adapterInfoChanged)
@@ -120,6 +123,18 @@ class AppController : public QObject
     /// The folder they are saved in, for display ("~/Documents/Obdaryn/Recordings").
     Q_PROPERTY(QString recordingsFolder READ recordingsFolderDisplay CONSTANT)
 
+    // Adapter health
+    /// What the adapter supports (filled after the first scan): identification, version,
+    /// description, deviceId, verdict ("genuine"/"compatible"/"unknown"), summary,
+    /// items [{command, purpose, supported, answer}], done.
+    Q_PROPERTY(QVariantMap adapterCheck READ adapterCheck NOTIFY adapterCheckChanged)
+    /// Live connection numbers: commands, timeouts, errors, averageMs, p95Ms,
+    /// multiPid, responseCounts ("unknown"/"working"/"notSupported"/"off").
+    Q_PROPERTY(QVariantMap adapterHealth READ adapterHealth NOTIFY adapterHealthChanged)
+    /// Why the last connection attempt failed, when the UI can help: "unreachable"
+    /// (wrong Wi-Fi or macOS Local Network permission), "timeout", "refused", or "".
+    Q_PROPERTY(QString connectionHint READ connectionHint NOTIFY connectionChanged)
+
     // Trip computer
     /// The running trip: distanceKm, fuelLiters, averageL100, instantL100, instantLph,
     /// averageSpeed, maxSpeed, duration, drivingTime, idleTime, startedAt, fuelKnown,
@@ -136,7 +151,8 @@ class AppController : public QObject
     Q_PROPERTY(int dtcDatabaseSize READ dtcDatabaseSize CONSTANT)
 
 public:
-    enum class ConnectionState { Disconnected, Connecting, Initializing, NoVehicle, Ready, Failed };
+    /// The session's states, plus Reconnecting while the keeper brings a lost link back.
+    enum class ConnectionState { Disconnected, Connecting, Initializing, NoVehicle, Ready, Failed, Reconnecting };
     Q_ENUM(ConnectionState)
 
     explicit AppController(QQmlEngine *engine, QObject *parent = nullptr);
@@ -182,6 +198,9 @@ public:
     Q_INVOKABLE void showRecordingsFolder() const;
     Q_INVOKABLE void refreshRecordings();
 
+    /// Opens macOS System Settings at Privacy & Security → Local Network.
+    Q_INVOKABLE void openLocalNetworkSettings() const;
+
     /// Saves the current trip to the history and starts a new one.
     Q_INVOKABLE void newTrip();
     /// The tank was just filled to the click with `liters`; learns the calibration (see TripComputer).
@@ -207,6 +226,10 @@ public:
     bool demoMode() const { return m_demo; }
     bool demoEngineRunning() const;
     void setDemoEngineRunning(bool running);
+    bool demoIgnitionOn() const { return m_demoIgnitionOn; }
+    void setDemoIgnitionOn(bool on);
+    /// Developer capture mode: the demo adapter's link drops, to show reconnecting.
+    void simulateLinkDrop();
     QString adapterHost() const;
     int adapterPort() const;
     QString adapterVersion() const { return m_client->session()->adapterVersion(); }
@@ -263,6 +286,9 @@ public:
     QVariantList recordings() const { return m_recordings; }
     QString recordingsFolderDisplay() const;
     QVariantMap trip() const { return m_tripCache; }
+    QVariantMap adapterCheck() const { return m_adapterCheck; }
+    QVariantMap adapterHealth() const;
+    QString connectionHint() const { return m_connectionHint; }
     QVariantList tripHistory() const { return m_tripHistory; }
 
     QString language() const { return m_language; }
@@ -291,12 +317,16 @@ signals:
     void recordingTick();
     void recordingsChanged();
     void tripChanged();
+    void adapterCheckChanged();
+    void adapterHealthChanged();
     void tripHistoryChanged();
     /// A short message for the toast (recording saved, export written, ...).
     void notice(bool success, const QString &message);
 
 private:
     void startSession(Transport *transport, bool demo);
+    void onKeeperChanged();
+    void runAdapterCheck();
     void onSessionStateChanged();
     void setScanStep(const QString &step);
     void schedulePoll();
@@ -340,6 +370,7 @@ private:
     QTranslator m_qtTranslator;
 
     bool m_demo = false;
+    bool m_demoIgnitionOn = true;
     QString m_statusMessage;
     double m_batteryVoltage = 0;
     QString m_scanStep;
@@ -381,6 +412,10 @@ private:
     qint64 m_tripLastBank = 0;
     qint64 m_tripLastEmit = 0;
     int m_fuelTypeCode = 0;       ///< PID 51 raw value
+    ConnectionKeeper *m_keeper;
+    QVariantMap m_adapterCheck;
+    QString m_connectionHint;
+
     QVariantList m_tripHistory;
     QVariantMap m_tripCache;
 };

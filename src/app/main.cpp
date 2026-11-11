@@ -99,6 +99,14 @@ int main(int argc, char *argv[])
             });
         }
     }
+    // OBDARYN_DROP_AT_MS=9000 drops the demo adapter's link then (shows reconnecting);
+    // OBDARYN_IGNITION_OFF_AT_MS=9000 turns the demo ignition off then (shows waiting for the car).
+    if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
+        if (qEnvironmentVariableIsSet("OBDARYN_DROP_AT_MS"))
+            QTimer::singleShot(qEnvironmentVariableIntValue("OBDARYN_DROP_AT_MS"), controller, [controller] { controller->simulateLinkDrop(); });
+        if (qEnvironmentVariableIsSet("OBDARYN_IGNITION_OFF_AT_MS"))
+            QTimer::singleShot(qEnvironmentVariableIntValue("OBDARYN_IGNITION_OFF_AT_MS"), controller, [controller] { controller->setDemoIgnitionOn(false); });
+    }
     if (qEnvironmentVariableIsSet("OBDARYN_REPORT")) {
         if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
             const bool afterModules = qEnvironmentVariableIntValue("OBDARYN_SCAN_MODULES") == 1;

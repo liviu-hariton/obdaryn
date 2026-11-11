@@ -10,7 +10,7 @@ import Obdaryn
 Item {
     id: view
     readonly property int state: App.connectionState
-    readonly property bool busy: state === App.Connecting || state === App.Initializing
+    readonly property bool busy: state === App.Connecting || state === App.Initializing || state === App.Reconnecting
 
     // The list may be stale if files were added or removed in Finder meanwhile.
     onVisibleChanged: if (visible) App.refreshRecordings()
@@ -205,6 +205,28 @@ Item {
                             font.family: Theme.sans
                             font.pixelSize: Theme.fontBody
                             wrapMode: Text.WordWrap
+                        }
+                        // What to do about it, for the failures we can recognize.
+                        Text {
+                            Layout.fillWidth: true
+                            Layout.topMargin: Theme.s2
+                            visible: view.state === App.Failed && App.connectionHint.length > 0
+                            text: App.connectionHint === "refused"
+                                  ? qsTr("Another app is probably connected to the adapter, such as Car Scanner on a phone. A Wi-Fi adapter takes one connection at a time: close the other app, then connect again.")
+                                  : qsTr("Check that this computer is on the adapter's Wi-Fi (usually \"V-LINK\"). On macOS 15 and later, also check that Obdaryn is allowed under System Settings → Privacy & Security → Local Network. If the adapter was idle for a while it may be asleep: turn the ignition off and on again to wake it.")
+                            color: Theme.text
+                            font.family: Theme.sans
+                            font.pixelSize: Theme.fontBody
+                            wrapMode: Text.WordWrap
+                            lineHeight: 1.3
+                        }
+                        AppButton {
+                            Layout.topMargin: Theme.s2
+                            visible: view.state === App.Failed && (App.connectionHint === "unreachable" || App.connectionHint === "timeout")
+                                     && Qt.platform.os === "osx"
+                            iconName: "settings"
+                            text: qsTr("Open Local Network settings")
+                            onClicked: App.openLocalNetworkSettings()
                         }
                         Row {
                             visible: view.state === App.NoVehicle

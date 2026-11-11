@@ -277,6 +277,18 @@
         <translation>Adaptorul nu poate fi accesat</translation>
     </message>
     <message>
+        <source>Another app is probably connected to the adapter, such as Car Scanner on a phone. A Wi-Fi adapter takes one connection at a time: close the other app, then connect again.</source>
+        <translation>Probabil o altă aplicație este conectată la adaptor, de exemplu Car Scanner pe un telefon. Un adaptor Wi-Fi acceptă o singură conexiune odată: închide cealaltă aplicație, apoi conectează-te din nou.</translation>
+    </message>
+    <message>
+        <source>Check that this computer is on the adapter's Wi-Fi (usually "V-LINK"). On macOS 15 and later, also check that Obdaryn is allowed under System Settings → Privacy &amp; Security → Local Network. If the adapter was idle for a while it may be asleep: turn the ignition off and on again to wake it.</source>
+        <translation>Verifică dacă acest computer este conectat la rețeaua Wi-Fi a adaptorului (de obicei „V-LINK”). Pe macOS 15 și mai nou, verifică și dacă Obdaryn are permisiune în Setări sistem → Confidențialitate și securitate → Rețea locală. Dacă adaptorul a stat nefolosit o vreme, poate fi adormit: oprește și pornește din nou contactul ca să-l trezești.</translation>
+    </message>
+    <message>
+        <source>Open Local Network settings</source>
+        <translation>Deschide setările Rețea locală</translation>
+    </message>
+    <message>
         <source>Try again</source>
         <translation>Încearcă din nou</translation>
     </message>
@@ -542,6 +554,82 @@
     <message>
         <source>Clear log</source>
         <translation>Golește jurnalul</translation>
+    </message>
+    <message>
+        <source>Checking what the adapter supports…</source>
+        <translation>Se verifică ce suportă adaptorul…</translation>
+    </message>
+    <message>
+        <source>%1: %2</source>
+        <translation>%1: %2</translation>
+    </message>
+    <message>
+        <source>works</source>
+        <translation>funcționează</translation>
+    </message>
+    <message>
+        <source>not supported</source>
+        <translation>nesuportat</translation>
+    </message>
+    <message>
+        <source>Answer time</source>
+        <translation>Timp de răspuns</translation>
+    </message>
+    <message>
+        <source>%1 ms on average, 95 % within %2 ms</source>
+        <translation>%1 ms în medie, 95 % sub %2 ms</translation>
+    </message>
+    <message>
+        <source>No answer</source>
+        <translation>Fără răspuns</translation>
+    </message>
+    <message>
+        <source>%1 of %2 commands</source>
+        <translation>%1 din %2 comenzi</translation>
+    </message>
+    <message>
+        <source>Errors</source>
+        <translation>Erori</translation>
+    </message>
+    <message>
+        <source>%1 ("?", CAN ERROR, ...)</source>
+        <translation>%1 („?”, CAN ERROR, ...)</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Niciuna</translation>
+    </message>
+    <message>
+        <source>Combined requests</source>
+        <translation>Cereri combinate</translation>
+    </message>
+    <message>
+        <source>Yes, up to 6 values per request</source>
+        <translation>Da, până la 6 valori pe cerere</translation>
+    </message>
+    <message>
+        <source>No, one value per request</source>
+        <translation>Nu, o valoare pe cerere</translation>
+    </message>
+    <message>
+        <source>Response counts</source>
+        <translation>Număr de răspunsuri</translation>
+    </message>
+    <message>
+        <source>Working: answers return without waiting</source>
+        <translation>Funcționează: răspunsurile vin fără așteptare</translation>
+    </message>
+    <message>
+        <source>Not supported by this adapter</source>
+        <translation>Nesuportat de acest adaptor</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Oprit</translation>
+    </message>
+    <message>
+        <source>Not used yet</source>
+        <translation>Încă nefolosit</translation>
     </message>
     <message>
         <source>Nothing yet</source>
@@ -851,6 +939,14 @@
 <context>
     <name>NotConnected</name>
     <message>
+        <source>Reconnecting to the adapter…</source>
+        <translation>Reconectare la adaptor…</translation>
+    </message>
+    <message>
+        <source>The car isn't answering</source>
+        <translation>Mașina nu răspunde</translation>
+    </message>
+    <message>
         <source>Connect to a car to see this</source>
         <translation>Conectează-te la o mașină ca să vezi asta</translation>
     </message>
@@ -861,6 +957,10 @@
     <message>
         <source>Go to connection</source>
         <translation>Mergi la conectare</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Deconectează</translation>
     </message>
 </context>
 <context>
@@ -1719,6 +1819,14 @@
         <translation>Oprește motorul simulat ca să încerci ștergerea codurilor. Obdaryn refuză cât timp merge, ca la o mașină reală.</translation>
     </message>
     <message>
+        <source>Ignition on</source>
+        <translation>Contact pus</translation>
+    </message>
+    <message>
+        <source>Turn the ignition off and the car stops answering, as when you switch a real car off. Obdaryn waits and picks up again by itself when it's back on.</source>
+        <translation>Ia contactul și mașina nu mai răspunde, ca atunci când oprești o mașină reală. Obdaryn așteaptă și reia singur când contactul e pus din nou.</translation>
+    </message>
+    <message>
         <source>About</source>
         <translation>Despre</translation>
     </message>
@@ -1748,6 +1856,10 @@
     <message>
         <source>Replaying a recording</source>
         <translation>Redare înregistrare</translation>
+    </message>
+    <message>
+        <source>Reconnecting…</source>
+        <translation>Reconectare…</translation>
     </message>
     <message>
         <source>Connecting…</source>
@@ -2013,7 +2125,11 @@
     </message>
     <message numerus="yes">
         <source>Calibrated with %n fill-up(s): estimates are multiplied by %1.</source>
-        <translation><numerusform>Calibrat cu %n alimentare: estimările sunt înmulțite cu %1.</numerusform><numerusform>Calibrat cu %n alimentări: estimările sunt înmulțite cu %1.</numerusform><numerusform>Calibrat cu %n de alimentări: estimările sunt înmulțite cu %1.</numerusform></translation>
+        <translation>
+            <numerusform>Calibrat cu %n alimentare: estimările sunt înmulțite cu %1.</numerusform>
+            <numerusform>Calibrat cu %n alimentări: estimările sunt înmulțite cu %1.</numerusform>
+            <numerusform>Calibrat cu %n de alimentări: estimările sunt înmulțite cu %1.</numerusform>
+        </translation>
     </message>
     <message>
         <source>Since the last fill-up: %1 L.</source>
@@ -2334,6 +2450,48 @@
     </message>
 </context>
 <context>
+    <name>obdaryn::AdapterCheck</name>
+    <message>
+        <source>Reads the ignition input</source>
+        <translation>Citește intrarea de contact</translation>
+    </message>
+    <message>
+        <source>CAN error counters</source>
+        <translation>Contoare de erori CAN</translation>
+    </message>
+    <message>
+        <source>Lists its settings</source>
+        <translation>Își listează setările</translation>
+    </message>
+    <message>
+        <source>Flow control, needed for module scans of VW-group, Renault/Dacia and GM cars</source>
+        <translation>Controlul fluxului, necesar la scanarea modulelor pentru mașinile grupului VW, Renault/Dacia și GM</translation>
+    </message>
+    <message>
+        <source>Battery voltage at the OBD socket</source>
+        <translation>Tensiunea bateriei la mufa OBD</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::AdapterCheck::Result</name>
+    <message>
+        <source>Behaves like a genuine ELM327 %1: it knows every command Obdaryn tried.</source>
+        <translation>Se comportă ca un ELM327 %1 original: cunoaște toate comenzile încercate de Obdaryn.</translation>
+    </message>
+    <message>
+        <source>An ELM327-compatible adapter. It reports v1.5, a version Elm Electronics never made, which is common and usually fine. What it supports is listed below.</source>
+        <translation>Un adaptor compatibil ELM327. Raportează v1.5, o versiune pe care Elm Electronics nu a produs-o niciodată, lucru des întâlnit și de obicei fără probleme. Mai jos e ce suportă.</translation>
+    </message>
+    <message>
+        <source>An ELM327-compatible adapter: it reports v%1 but lacks some commands of that version. That's common and usually fine. What it supports is listed below.</source>
+        <translation>Un adaptor compatibil ELM327: raportează v%1, dar îi lipsesc unele comenzi ale acelei versiuni. E des întâlnit și de obicei fără probleme. Mai jos e ce suportă.</translation>
+    </message>
+    <message>
+        <source>This adapter doesn't identify itself as an ELM327, so Obdaryn may not work fully with it.</source>
+        <translation>Adaptorul nu se identifică drept ELM327, așa că Obdaryn s-ar putea să nu funcționeze complet cu el.</translation>
+    </message>
+</context>
+<context>
     <name>obdaryn::AppController</name>
     <message>
         <source>Demo car</source>
@@ -2358,6 +2516,14 @@
     <message>
         <source>Adapter found. Setting it up…</source>
         <translation>Adaptor găsit. Se configurează…</translation>
+    </message>
+    <message>
+        <source>Lost the adapter. Reconnecting, attempt %1 of %2…</source>
+        <translation>Legătura cu adaptorul s-a pierdut. Reconectare, încercarea %1 din %2…</translation>
+    </message>
+    <message>
+        <source>Couldn't reconnect to the adapter after %1 tries. Check that it has power and that this computer is on its Wi-Fi, then connect again.</source>
+        <translation>Reconectarea la adaptor a eșuat după %1 încercări. Verifică dacă are alimentare și dacă acest computer e conectat la rețeaua lui Wi-Fi, apoi conectează-te din nou.</translation>
     </message>
     <message>
         <source>Reading vehicle information</source>
@@ -2566,6 +2732,10 @@
         <source>No answer within %1 ms</source>
         <translation>Niciun răspuns în %1 ms</translation>
     </message>
+    <message>
+        <source>The car stopped answering, probably because the ignition was turned off. Obdaryn picks up again by itself as soon as the car answers.</source>
+        <translation>Mașina nu mai răspunde, probabil pentru că s-a luat contactul. Obdaryn reia singur imediat ce mașina răspunde.</translation>
+    </message>
 </context>
 <context>
     <name>obdaryn::ModuleScanModel</name>
@@ -2661,8 +2831,8 @@
         <translation>Adresa %1 nu a fost găsită.</translation>
     </message>
     <message>
-        <source>Network unreachable. Join the adapter's Wi-Fi network and, on macOS, allow Obdaryn under Privacy &amp; Security → Local Network.</source>
-        <translation>Rețea inaccesibilă. Conectează-te la rețeaua Wi-Fi a adaptorului și, pe macOS, permite accesul pentru Obdaryn în Confidențialitate și securitate → Rețea locală.</translation>
+        <source>Can't reach the adapter at %1.</source>
+        <translation>Adaptorul de la %1 nu poate fi accesat.</translation>
     </message>
 </context>
 <context>

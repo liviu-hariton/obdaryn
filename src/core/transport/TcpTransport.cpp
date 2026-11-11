@@ -12,6 +12,7 @@ TcpTransport::TcpTransport(QString host, quint16 port, QObject *parent)
 
     connect(&m_connectTimer, &QTimer::timeout, this, [this] {
         m_socket.abort();
+        setLastFailure(Failure::Timeout);
         emit failed(tr("No answer from %1. Is this computer connected to the adapter's Wi-Fi?")
                         .arg(description()));
     });
@@ -38,6 +39,7 @@ void TcpTransport::open()
 {
     if (m_socket.state() != QAbstractSocket::UnconnectedState)
         m_socket.abort();
+    setLastFailure(Failure::None);
     m_connectTimer.start();
     m_socket.connectToHost(m_host, m_port);
 }
@@ -71,19 +73,29 @@ void TcpTransport::onErrorOccurred(QAbstractSocket::SocketError error)
     QString message;
     switch (error) {
     case QAbstractSocket::ConnectionRefusedError:
+        setLastFailure(Failure::Refused);
         message = tr("The adapter refused the connection. Another app may already be connected to it.");
         break;
     case QAbstractSocket::RemoteHostClosedError:
+        setLastFailure(Failure::Closed);
         message = tr("The adapter closed the connection.");
         break;
     case QAbstractSocket::HostNotFoundError:
+        setLastFailure(Failure::Unreachable);
         message = tr("Address %1 not found.").arg(m_host);
         break;
     case QAbstractSocket::NetworkError:
-        message = tr("Network unreachable. Join the adapter's Wi-Fi network and, on macOS, "
-                     "allow Obdaryn under Privacy & Security → Local Network.");
+        // "No route to host": either this computer isn't on the adapter's Wi-Fi,
+        // or macOS blocks local-network access for the app.
+        setLastFailure(Failure::Unreachable);
+        message = tr("Can't reach the adapter at %1.").arg(description());
+        break;
+    case QAbstractSocket::SocketTimeoutError:
+        setLastFailure(Failure::Timeout);
+        message = tr("No answer from %1. Is this computer connected to the adapter's Wi-Fi?").arg(description());
         break;
     default:
+        setLastFailure(Failure::Other);
         message = m_socket.errorString();
         break;
     }

@@ -41,6 +41,13 @@ const QList<QByteArray> kExactAtCommands = {
     "DP", "DPN",    // describe protocol (text / number)
     "RV",           // read battery voltage at the OBD pin
     "I", "@1", "@2",// adapter identification (read only)
+    // Read-only adapter diagnostics, used to tell what the adapter really
+    // supports (clone detection). They read the adapter itself and never
+    // reach the car. Approved by the project owner, November 2026.
+    "IGN",          // ignition input pin level
+    "CS",           // CAN status: transmit / receive error counters
+    "PPS",          // programmable parameters summary (read only; PP xx SV/ON stay blocked)
+    "KW",           // key words of the last ISO 9141 / KWP2000 connection
     "PC",           // close protocol
     "CRA",          // reset the receive-address filter
     // ISO-TP flow control. When a module answers with several CAN frames, the

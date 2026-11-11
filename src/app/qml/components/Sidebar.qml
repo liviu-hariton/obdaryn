@@ -13,6 +13,7 @@ Rectangle {
 
     readonly property bool ready: App.connectionState === App.Ready
     readonly property bool busy: App.connectionState === App.Connecting || App.connectionState === App.Initializing
+                                 || App.connectionState === App.Reconnecting
 
     color: Theme.sidebar
     implicitWidth: Theme.sidebarWidth
@@ -84,6 +85,7 @@ Rectangle {
                     Text {
                         Layout.fillWidth: true
                         text: sidebar.ready ? (App.replayMode ? qsTr("Replaying a recording") : qsTr("Connected"))
+                            : App.connectionState === App.Reconnecting ? qsTr("Reconnecting…")
                             : sidebar.busy ? qsTr("Connecting…")
                             : App.connectionState === App.NoVehicle ? qsTr("Car not answering")
                             : App.connectionState === App.Failed ? qsTr("Connection failed")
@@ -100,7 +102,7 @@ Rectangle {
                     Layout.leftMargin: 16
                     visible: text.length > 0
                     text: App.demoMode && App.connectionState !== App.Disconnected ? qsTr("Demo car")
-                        : sidebar.ready ? App.transportDescription : ""
+                        : sidebar.ready || App.connectionState === App.Reconnecting ? App.transportDescription : ""
                     textFormat: Text.PlainText // a recording's car name comes from the file
                     color: Theme.textMuted
                     font.family: Theme.sans

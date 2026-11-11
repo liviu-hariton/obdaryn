@@ -19,6 +19,7 @@
 // car problem" from "UI problem". Like the app, it only reads: every command
 // still passes the safety guard, and nothing here clears codes.
 
+#include "elm327/AdapterCheck.h"
 #include "obd/DtcDatabase.h"
 #include "obd/ModuleScanner.h"
 #include "obd/ObdClient.h"
@@ -272,29 +273,66 @@ int main(int argc, char *argv[])
             });
         });
 
-        // ---- Polling benchmark: values per second the dashboard will get
-        steps.add([&](Steps::Next next) {
-            section("Polling speed");
+        // ---- Polling benchmark: values per second the dashboard will get, and
+        // what response counts ("010C0D1") gain on this adapter and car.
+        auto benchmark = [&](const QString &label, const QList<quint8> &pids, bool responseCounts, Steps::Next next) {
+            client.setResponseCountsEnabled(responseCounts);
             auto clock = std::make_shared<QElapsedTimer>();
             auto count = std::make_shared<int>(0);
             auto rounds = std::make_shared<int>(0);
             auto loop = std::make_shared<std::function<void()>>();
             clock->start();
-            *loop = [&, clock, count, rounds, loop, next] {
+            *loop = [&, label, pids, clock, count, rounds, loop, next] {
                 if (++*rounds > 20) {
                     const double secs = clock->elapsed() / 1000.0;
-                    out << "  " << *count << " values in " << QString::number(secs, 'f', 2) << " s = "
-                        << QString::number(*count / secs, 'f', 1) << " values/s" << Qt::endl;
+                    out << "  " << label.leftJustified(46) << *count << " values in " << QString::number(secs, 'f', 2)
+                        << " s = " << QString::number(*count / secs, 'f', 1) << " values/s, "
+                        << QString::number(20 / secs, 'f', 1) << " cycles/s" << Qt::endl;
                     QTimer::singleShot(0, [loop] { *loop = nullptr; }); // break the self-reference later
                     next();
                     return;
                 }
-                client.readPids({0x0C, 0x0D, 0x05, 0x04, 0x11, 0x0B}, [count, loop](const QList<ObdClient::PidReading> &rs) {
+                client.readPids(pids, [count, loop](const QList<ObdClient::PidReading> &rs) {
                     *count += int(rs.size());
                     QTimer::singleShot(0, [loop] { if (*loop) (*loop)(); });
                 });
             };
             (*loop)();
+        };
+        steps.add([&](Steps::Next next) {
+            section("Polling speed");
+            // The supported-PID map tells which ECUs answer what (needed for response counts).
+            client.readSupportedPids(0x01, [&, next](const QList<quint8> &) {
+                benchmark(QStringLiteral("dashboard, 6 values per request:"), {0x0C, 0x0D, 0x05, 0x04, 0x11, 0x0B}, true, next);
+            });
+        });
+        steps.add([&](Steps::Next next) {
+            benchmark(QStringLiteral("2 values per request, response counts on:"), {0x0C, 0x0D}, true, next);
+        });
+        steps.add([&](Steps::Next next) {
+            benchmark(QStringLiteral("2 values per request, response counts off:"), {0x0C, 0x0D}, false, [&, next] {
+                const char *state = client.responseCounts() == ObdClient::ResponseCounts::NotSupported ? "not supported" : "supported";
+                out << "  response counts on this adapter: " << state << Qt::endl;
+                client.setResponseCountsEnabled(true);
+                next();
+            });
+        });
+
+        // ---- What the adapter really supports (read-only adapter commands only)
+        steps.add([&](Steps::Next next) {
+            section("Adapter check");
+            AdapterCheck::run(client.session(), [&, next](const AdapterCheck::Result &r) {
+                out << "  " << r.identification << " | " << r.description
+                    << (r.deviceId.isEmpty() ? QString() : QStringLiteral(" | ") + r.deviceId) << Qt::endl;
+                out << "  " << r.summary() << Qt::endl;
+                for (const AdapterCheck::Item &i : r.items)
+                    out << "  " << i.command.leftJustified(12) << (i.supported ? "works        " : "not supported") << "  " << i.answer << Qt::endl;
+                const ElmSession::Health h = client.session()->health();
+                out << "  answers: " << QString::number(h.averageMs, 'f', 0) << " ms average, 95 % within "
+                    << QString::number(h.p95Ms, 'f', 0) << " ms; " << h.timeouts << " timeouts and " << h.errors
+                    << " errors in " << h.commands << " commands" << Qt::endl;
+                next();
+            });
         });
     }
 

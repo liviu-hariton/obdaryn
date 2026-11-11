@@ -73,7 +73,7 @@ The safety guard (`src/core/safety/RequestGuard.cpp`) checks every single comman
   - KWP2000: 0x18, 0x1A and 0x21;
   - 0x14 (clear a module's codes), only after you confirm.
 
-Everything that could change how the car behaves is refused, whichever part of the app asks: writing settings (coding, adaptations), actuator tests, routines, security access, ECU resets, diagnostic session changes and flashing. The guard also refuses adapter commands that could push arbitrary bytes onto the car's network. ISO-TP flow control is allowed only as the standard "continue" frame (`30 00 00`), which the adapter needs to receive long answers from some brands' modules.
+Everything that could change how the car behaves is refused, whichever part of the app asks: writing settings (coding, adaptations), actuator tests, routines, security access, ECU resets, diagnostic session changes and flashing. The guard also refuses adapter commands that could push arbitrary bytes onto the car's network. ISO-TP flow control is allowed only as the standard "continue" frame (`30 00 00`), which the adapter needs to receive long answers from some brands' modules. A few read-only adapter commands (`AT IGN`, `AT CS`, `AT PPS`, `AT KW`, besides identification and voltage) are allowed so Obdaryn can tell what an adapter really supports; they never reach the car.
 
 ## 7. What the 2014 Elantra will (probably) show
 

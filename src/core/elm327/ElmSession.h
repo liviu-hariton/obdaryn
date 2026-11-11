@@ -105,6 +105,23 @@ public:
     bool headersEnabled() const { return m_headersEnabled; }
     int queuedCommands() const { return int(m_queue.size()) + (m_inFlight ? 1 : 0); }
 
+    /// How the adapter has been doing since the connection opened.
+    struct Health {
+        int commands = 0;     ///< answered or timed out
+        int timeouts = 0;
+        int errors = 0;       ///< "?", "CAN ERROR", ... to requests to the car
+        int noData = 0;
+        double averageMs = 0; ///< over the last 100 answers
+        double p95Ms = 0;     ///< 95 % of the last 100 answers came faster than this
+    };
+    Health health() const;
+
+    /// Consecutive timeouts after which the adapter counts as unresponsive.
+    static constexpr int kUnresponsiveTimeouts = 3;
+    /// How long service 01 requests may go unanswered before the car counts as
+    /// silent (default 8 s; tests shorten it).
+    void setSilenceThresholdMs(int ms) { m_silentAfterMs = ms; }
+
 signals:
     void stateChanged(obdaryn::ElmSession::State state);
     /// Adapter version, protocol, ... changed.
@@ -115,6 +132,12 @@ signals:
     /// unparsed. Used by SessionRecorder; blocked commands never get here because
     /// they never reach the adapter. On a timeout rawReply is empty.
     void exchanged(const QByteArray &command, const QByteArray &rawReply, qint64 elapsedMs, bool timedOut);
+    /// Several commands in a row got no answer at all while Ready: the adapter
+    /// fell asleep or the Wi-Fi link died. ConnectionKeeper reconnects.
+    void adapterUnresponsive();
+    /// The adapter answers, but the car stopped (ignition turned off). The
+    /// session switches to NoVehicle; ConnectionKeeper waits for the car.
+    void vehicleSilent();
 
 private:
     struct Pending {
@@ -147,6 +170,15 @@ private:
     QTimer m_resyncTimer;
     QElapsedTimer m_commandClock;
     bool m_resyncing = false; ///< discarding a late reply after a timeout
+
+    // Health and watchdog bookkeeping (see health(), adapterUnresponsive(), vehicleSilent()).
+    void recordReply(const Reply &r);
+    Health m_health;
+    QList<qint64> m_latencies;      ///< last 100 answer times
+    int m_consecutiveTimeouts = 0;
+    int m_unansweredLiveRequests = 0;
+    QElapsedTimer m_lastVehicleAnswer;
+    int m_silentAfterMs = 8000;
 };
 
 } // namespace obdaryn

@@ -44,10 +44,12 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 
 ## v0.4 — adapter health and robustness
 
-- [ ] Adapter fingerprinting (clone detection by probing commands), latency and poll-rate benchmark
-- [ ] Tune `AT ST` and use response-count digits for faster polling
-- [ ] Auto-reconnect; detect the adapter going to sleep
-- [ ] Guided macOS Local Network permission help
+- [x] **Adapter check.** Identification (AT I, @1, @2) plus read-only commands every genuine v1.4+ knows (AT IGN, AT CS, AT PPS), flow-control support and voltage. A calm verdict: genuine, ELM327-compatible (including the "v1.5" that Elm Electronics never made), or unknown. Shown above the adapter log and in the probe report.
+- [x] **Connection health:** answer time (average and 95th percentile), timeouts, errors on car requests, combined requests and response counts, live on the adapter page.
+- [x] **Response-count digits** ("010C0D1") when the answering ECUs are known and the answer fits one CAN frame; automatic fallback for adapters that reject them. The probe benchmarks polling with and without them.
+- [ ] Tune `AT ST` from measured answer times (needs the real adapter's numbers first)
+- [x] **Auto-reconnect.** A dropped link or a sleeping adapter (three timeouts in a row) is reconnected with backoff (2, 4, 8, 15, then 30 s, eight tries). A car that goes silent (ignition off) puts Obdaryn in "car not answering", and it picks up again by itself when the car answers. The demo car has an ignition switch to try it.
+- [x] **Connection help:** failures are classified; "unreachable" and "timeout" explain the Wi-Fi and macOS Local Network permission steps, with a button that opens the right System Settings pane; "refused" points to another app holding the adapter.
 
 ## Later
 

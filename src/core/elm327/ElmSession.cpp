@@ -4,6 +4,8 @@
 
 #include "safety/RequestGuard.h"
 
+#include <algorithm>
+
 namespace obdaryn {
 
 namespace {
@@ -99,6 +101,10 @@ void ElmSession::open()
     m_adapterDescription.clear();
     m_headersEnabled = false;
     m_rxBuffer.clear();
+    m_health = {};
+    m_latencies.clear();
+    m_consecutiveTimeouts = 0;
+    m_unansweredLiveRequests = 0;
     emit infoChanged();
     setState(State::Connecting);
     emit trafficLogged(QStringLiteral("!"), tr("Connecting to %1").arg(m_transport->description()));
@@ -171,6 +177,8 @@ void ElmSession::detectVehicle()
                 m_protocol = dpn.ok() && !dpn.lines.isEmpty()
                                  ? protocolFromDpn(dpn.lines.first()) : Protocol::Unknown;
                 emit infoChanged();
+                m_unansweredLiveRequests = 0;
+                m_lastVehicleAnswer.start();
                 setState(State::Ready);
             });
             return;
@@ -314,6 +322,7 @@ void ElmSession::finishInFlight(const QByteArray &rawReply)
     emit trafficLogged(QStringLiteral("<"),
                        QStringLiteral("%1   [%2 ms]").arg(logged).arg(r.elapsedMs));
     emit exchanged(p.command, rawReply, r.elapsedMs, false);
+    recordReply(r);
 
     if (p.callback)
         p.callback(r);
@@ -335,11 +344,73 @@ void ElmSession::onTimeout()
     emit trafficLogged(QStringLiteral("!"), QStringLiteral("%1: %2")
                                                  .arg(QString::fromLatin1(p.command), r.error));
     emit exchanged(p.command, QByteArray(), r.elapsedMs, true);
+    recordReply(r);
 
     m_resyncing = true;
     m_resyncTimer.start();
     if (p.callback)
         p.callback(r);
+}
+
+void ElmSession::recordReply(const Reply &r)
+{
+    ++m_health.commands;
+    switch (r.status) {
+    case Reply::Status::Timeout: ++m_health.timeouts; break;
+    case Reply::Status::AdapterError:
+        // A "?" to an AT command only means the adapter lacks it (the adapter
+        // check asks on purpose); errors on requests to the car are what matter.
+        if (!r.command.startsWith("AT"))
+            ++m_health.errors;
+        break;
+    case Reply::Status::NoData: ++m_health.noData; break;
+    default: break;
+    }
+    if (r.status != Reply::Status::Timeout) {
+        m_latencies << r.elapsedMs;
+        if (m_latencies.size() > 100)
+            m_latencies.removeFirst();
+    }
+
+    // Watchdog 1: the adapter itself stopped answering.
+    m_consecutiveTimeouts = r.status == Reply::Status::Timeout ? m_consecutiveTimeouts + 1 : 0;
+    if (m_state == State::Ready && m_consecutiveTimeouts == kUnresponsiveTimeouts)
+        emit adapterUnresponsive();
+
+    // Watchdog 2: the adapter answers, but the car doesn't (ignition off).
+    // Only live-data requests count: a module scan legitimately gets many
+    // "NO DATA" from modules a car doesn't have.
+    if (!r.command.startsWith("01"))
+        return;
+    if (r.ok()) {
+        m_unansweredLiveRequests = 0;
+        m_lastVehicleAnswer.start();
+        return;
+    }
+    if (r.status == Reply::Status::NoData || r.status == Reply::Status::AdapterError) {
+        ++m_unansweredLiveRequests;
+        if (m_state == State::Ready && m_unansweredLiveRequests >= 5 && m_lastVehicleAnswer.isValid()
+            && m_lastVehicleAnswer.elapsed() >= m_silentAfterMs) {
+            setState(State::NoVehicle, tr("The car stopped answering, probably because the ignition was turned off. "
+                                          "Obdaryn picks up again by itself as soon as the car answers."));
+            emit vehicleSilent();
+        }
+    }
+}
+
+ElmSession::Health ElmSession::health() const
+{
+    Health h = m_health;
+    if (!m_latencies.isEmpty()) {
+        QList<qint64> sorted = m_latencies;
+        std::sort(sorted.begin(), sorted.end());
+        qint64 sum = 0;
+        for (qint64 v : std::as_const(sorted))
+            sum += v;
+        h.averageMs = double(sum) / sorted.size();
+        h.p95Ms = double(sorted[qMin(sorted.size() - 1, qsizetype(sorted.size() * 0.95))]);
+    }
+    return h;
 }
 
 void ElmSession::failAll(Reply::Status status, const QString &error)

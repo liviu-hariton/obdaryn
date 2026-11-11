@@ -18,6 +18,42 @@ QByteArray hexCommand(const QList<quint8> &bytes)
     return raw.toHex().toUpper();
 }
 
+void ObdClient::setResponseCountsEnabled(bool enabled)
+{
+    m_responseCountsEnabled = enabled;
+    if (!enabled)
+        m_responseCounts = ResponseCounts::Off;
+    else if (m_responseCounts == ResponseCounts::Off)
+        m_responseCounts = ResponseCounts::Unknown;
+}
+
+int ObdClient::expectedResponses(const QList<quint8> &group) const
+{
+    if (m_responseCounts == ResponseCounts::NotSupported || m_responseCounts == ResponseCounts::Off
+        || !isCan() || !m_session->headersEnabled() || m_ecuPids.isEmpty())
+        return 0;
+    // One CAN frame holds 7 bytes: 41, then each PID and its data.
+    int bytes = 1;
+    for (quint8 pid : group) {
+        const int len = PidTable::dataLength(pid);
+        if (len < 0)
+            return 0;
+        bytes += 1 + len;
+    }
+    if (bytes > 7)
+        return 0;
+    int ecus = 0;
+    for (auto it = m_ecuPids.cbegin(); it != m_ecuPids.cend(); ++it) {
+        for (quint8 pid : group) {
+            if (it.value().contains(pid)) {
+                ++ecus;
+                break;
+            }
+        }
+    }
+    return ecus >= 1 && ecus <= 15 ? ecus : 0;
+}
+
 QByteArray hexCommand(std::initializer_list<quint8> bytes)
 {
     return hexCommand(QList<quint8>(bytes));
@@ -74,8 +110,11 @@ ObdClient::ObdClient(QObject *parent) : QObject(parent), m_session(new ElmSessio
 {
     // A new connection may be a different car: re-detect multi-PID support.
     connect(m_session, &ElmSession::stateChanged, this, [this](ElmSession::State s) {
-        if (s == ElmSession::State::Connecting)
+        if (s == ElmSession::State::Connecting) {
             m_multiPidSupported = true;
+            m_responseCounts = m_responseCountsEnabled ? ResponseCounts::Unknown : ResponseCounts::Off;
+            m_ecuPids.clear();
+        }
     });
 }
 
@@ -120,6 +159,8 @@ struct ObdClient::SupportedState {
 
 void ObdClient::readSupportedPids(quint8 service, std::function<void(const QList<quint8> &)> callback)
 {
+    if (service == 0x01)
+        m_ecuPids.clear();
     auto state = std::make_shared<SupportedState>();
     state->service = service;
     state->callback = std::move(callback);
@@ -138,10 +179,14 @@ void ObdClient::supportedStep(std::shared_ptr<SupportedState> st)
         for (const EcuMessage &m : r.positive) {
             if (m.data.size() < offset + 4 || quint8(m.data[1]) != st->base)
                 continue;
+            if (st->service == 0x01)
+                m_ecuPids[m.ecu].insert(st->base); // it answers this bitmap request too
             for (int i = 0; i < 32; ++i) {
                 const quint8 byte = quint8(m.data[offset + i / 8]);
                 if (byte & (0x80 >> (i % 8))) {
                     const quint8 pid = quint8(st->base + i + 1);
+                    if (st->service == 0x01)
+                        m_ecuPids[m.ecu].insert(pid);
                     if (PidTable::isSupportBitmap(pid))
                         nextRange = true;
                     else
@@ -205,8 +250,22 @@ void ObdClient::pidBatchStep(std::shared_ptr<PidBatchState> st)
     const QList<quint8> group = st->groups[st->index];
     QList<quint8> cmd{0x01};
     cmd += group;
+    QByteArray command = hexCommand(cmd);
+    const int expected = expectedResponses(group);
+    if (expected > 0)
+        command += QByteArray::number(expected, 16).toUpper();
 
-    request(hexCommand(cmd), [this, st, group](const Response &r) {
+    request(command, [this, st, group, expected](const Response &r) {
+        if (expected > 0) {
+            if (r.reply.status == ElmSession::Reply::Status::AdapterError) {
+                // "?": this adapter doesn't understand the digit. Plain requests from now on.
+                m_responseCounts = ResponseCounts::NotSupported;
+                pidBatchStep(st); // the same group again, without it
+                return;
+            }
+            if (r.ok())
+                m_responseCounts = ResponseCounts::Working;
+        }
         QSet<quint8> answered;
         for (const EcuMessage &m : r.positive) {
             // Walk "41 <pid> <data...> <pid> <data...>".

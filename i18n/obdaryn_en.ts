@@ -1,4 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
 <TS version="2.1" language="en" sourcelanguage="en">
 <context>
     <name>ModulesPage</name>
@@ -69,7 +70,10 @@
     <name>TripPage</name>
     <message numerus="yes">
         <source>Calibrated with %n fill-up(s): estimates are multiplied by %1.</source>
-        <translation><numerusform>Calibrated with %n fill-up: estimates are multiplied by %1.</numerusform><numerusform>Calibrated with %n fill-ups: estimates are multiplied by %1.</numerusform></translation>
+        <translation>
+            <numerusform>Calibrated with %n fill-up: estimates are multiplied by %1.</numerusform>
+            <numerusform>Calibrated with %n fill-ups: estimates are multiplied by %1.</numerusform>
+        </translation>
     </message>
 </context>
 <context>

@@ -124,6 +124,23 @@ public:
     /// Translated meaning of a UDS / KWP negative response code.
     static QString negativeResponseText(quint8 nrc);
 
+    // ---- Adapter capabilities found while talking -----------------------------
+
+    /// Whether combined requests ("010C0D05") work; false once an ECU ignored them.
+    bool multiPidSupported() const { return m_multiPidSupported; }
+
+    /// Response counts: the ELM327 accepts one extra hex digit at the end of a
+    /// request ("010C1") saying how many answers to expect. It then returns as
+    /// soon as they arrived instead of waiting for its timeout, which can make
+    /// live data much faster. Obdaryn adds it only when it knows which ECUs
+    /// will answer and every answer fits in one CAN frame (with multi-frame
+    /// answers some adapters count frames, not answers). Adapters that reject
+    /// it get plain requests for the rest of the connection.
+    enum class ResponseCounts { Unknown, Working, NotSupported, Off };
+    ResponseCounts responseCounts() const { return m_responseCounts; }
+    /// The probe's benchmark compares polling with and without them.
+    void setResponseCountsEnabled(bool enabled);
+
 private:
     struct SupportedState;
     struct PidBatchState;
@@ -134,8 +151,14 @@ private:
     void freezeStep(std::shared_ptr<FreezeState> state);
     void infoStep(std::shared_ptr<InfoState> state);
 
+    /// The response-count digit for a live-data request, or 0 for none.
+    int expectedResponses(const QList<quint8> &group) const;
+
     ElmSession *m_session;
     bool m_multiPidSupported = true; ///< turned off if the ECU ignores extra PIDs
+    bool m_responseCountsEnabled = true;
+    ResponseCounts m_responseCounts = ResponseCounts::Unknown;
+    QHash<QString, QSet<quint8>> m_ecuPids; ///< service 01 PIDs per answering ECU
 };
 
 /// Builds an ELM327 hex command: hexCommand({0x01, 0x0C}) → "010C".

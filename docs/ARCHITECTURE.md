@@ -29,6 +29,9 @@
   - **Prompt and errors.** It strips echoes and `SEARCHING...`, waits for the `>` prompt, and classifies `NO DATA`, `?`, `CAN ERROR` and similar replies.
   - **Initialization.** It sends the init sequence: `ATZ`, `ATE0`, `ATL0`, `ATS1`, `ATH1`, `ATAT1`, `ATSP0`, `0100`, `ATDPN`.
   - **Timeouts.** It never sends a bare CR, because the ELM327 would repeat the last command.
+- **ConnectionKeeper** (`src/core/elm327`) keeps a session alive. `ElmSession` raises `adapterUnresponsive` after three timeouts in a row and switches itself to NoVehicle when live-data requests go unanswered for 8 s (`vehicleSilent`). The keeper reopens a lost link with backoff, only after the session was Ready once and never after the user disconnected, and asks the car again every 5 s while it is silent. Its connections are queued, so it never acts in the middle of the session's reply handling.
+- **AdapterCheck** (`src/core/elm327`) asks identification and a few read-only adapter commands and returns a verdict and a capability list. `ElmSession::health()` keeps answer-time statistics.
+- **Response counts** (`ObdClient`): live-data requests get the ELM327's trailing response-count digit when the answering ECUs are known from the supported-PID map and the answer fits one CAN frame; a "?" turns them off for the connection.
 - **RequestGuard** (`src/core/safety`) is the only gate to the car. It holds an allowlist of read services and adapter commands, and lets clear services through only with explicit confirmation. Its unit tests pin down exactly what may pass.
 - **ResponseParser** (`src/core/obd`) turns reply lines into per-ECU byte messages. It handles:
   - headers on and off,

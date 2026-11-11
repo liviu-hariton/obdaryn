@@ -39,6 +39,25 @@ public:
     /// Short description for logs and the UI, e.g. "192.168.0.10:35000".
     virtual QString description() const = 0;
 
+    /// Why the last open() or the link failed, so the UI can offer the right fix.
+    enum class Failure {
+        None,
+        Unreachable, ///< no route to the adapter: wrong Wi-Fi, or macOS Local Network permission denied
+        Timeout,     ///< nothing answered in time
+        Refused,     ///< the adapter refused (another app is connected)
+        Closed,      ///< the adapter closed the link
+        Other,
+    };
+    Failure lastFailure() const { return m_lastFailure; }
+
+protected:
+    void setLastFailure(Failure f) { m_lastFailure = f; }
+
+private:
+    Failure m_lastFailure = Failure::None;
+
+public:
+
 signals:
     void opened();
     void closed();

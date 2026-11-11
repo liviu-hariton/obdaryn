@@ -51,6 +51,15 @@ public:
     /// Delay before each reply (default 20 ms). Tests set 0.
     void setLatencyMs(int ms) { m_latencyMs = ms; }
 
+    /// The adapter stops answering anything (asleep, or the Wi-Fi link died
+    /// without closing the socket). Tests use it for the reconnect logic.
+    void setAsleep(bool asleep) { m_asleep = asleep; }
+    /// The car stops answering OBD requests (ignition off); the adapter still
+    /// answers AT commands and says NO DATA.
+    void setCarAnswering(bool answering) { m_carAnswering = answering; }
+    /// Answer "?" to requests with a response-count digit, like some old clones.
+    void setRejectsResponseCounts(bool rejects) { m_rejectsResponseCounts = rejects; }
+
 private:
     struct EcuReply {
         QString header;       ///< e.g. "7E8"
@@ -72,6 +81,9 @@ private:
 
     bool m_open = false;
     int m_latencyMs = 20;
+    bool m_asleep = false;
+    bool m_carAnswering = true;
+    bool m_rejectsResponseCounts = false;
 
     // Adapter settings changed by AT commands.
     bool m_echo = true;

@@ -25,6 +25,8 @@ qt_add_library(obdaryn_core STATIC
     report/VehicleReport.h    report/VehicleReport.cpp
     trip/TripComputer.h       trip/TripComputer.cpp
     elm327/ElmSession.h       elm327/ElmSession.cpp
+    elm327/ConnectionKeeper.h elm327/ConnectionKeeper.cpp
+    elm327/AdapterCheck.h     elm327/AdapterCheck.cpp
 )
 
 target_include_directories(obdaryn_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

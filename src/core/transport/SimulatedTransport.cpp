@@ -126,7 +126,7 @@ double SimulatedTransport::seconds() const
 
 void SimulatedTransport::write(const QByteArray &data)
 {
-    if (!m_open)
+    if (!m_open || m_asleep)
         return;
     m_rxBuffer.append(data);
 
@@ -188,6 +188,13 @@ QByteArray SimulatedTransport::handleAt(const QByteArray &body)
         return "ELM327 v1.5";
     if (body == "@1")
         return "OBDII to RS232 Interpreter";
+    // Like many "v1.5" clones: some v1.4 read commands work, others answer "?".
+    if (body == "IGN")
+        return m_carAnswering ? "ON" : "OFF";
+    if (body == "CS")
+        return "T:00 R:00";
+    if (body == "@2" || body == "PPS" || body == "KW")
+        return "?";
     if (body == "RV") {
         const double v = m_engineRunning ? 14.2 + 0.05 * std::sin(seconds()) : 12.4;
         return QByteArray::number(v, 'f', 1) + "V";
@@ -213,8 +220,11 @@ QByteArray SimulatedTransport::handleAt(const QByteArray &body)
 QByteArray SimulatedTransport::handleObd(const QByteArray &normalized)
 {
     QByteArray hex = normalized;
-    if (hex.size() % 2 == 1)
+    if (hex.size() % 2 == 1) {
+        if (m_rejectsResponseCounts)
+            return "?";
         hex.chop(1); // optional response-count digit
+    }
     const QByteArray req = QByteArray::fromHex(hex);
     if (req.isEmpty())
         return "?";
@@ -224,6 +234,9 @@ QByteArray SimulatedTransport::handleObd(const QByteArray &normalized)
         prefix = "SEARCHING...\r"; // the first request triggers the protocol search
         m_protocolFound = true;
     }
+
+    if (!m_carAnswering)
+        return prefix + "NO DATA"; // ignition off: the adapter answers, the car doesn't
 
     QList<EcuReply> replies;
     if (m_header == "7DF") {

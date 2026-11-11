@@ -16,6 +16,14 @@ namespace {
 /// Longest delay we reproduce; a recorded 5 s protocol search isn't worth waiting for again.
 constexpr int kMaxDelayMs = 1500;
 
+/// "010C1" → "010C": the trailing response-count digit doesn't change the answer.
+QByteArray withoutResponseCount(const QByteArray &command)
+{
+    if (!command.startsWith("AT") && command.size() % 2 == 1)
+        return command.left(command.size() - 1);
+    return command;
+}
+
 QByteArray hexSpaced(const QByteArray &bytes)
 {
     return bytes.toHex(' ').toUpper();
@@ -54,8 +62,9 @@ ReplayTransport::ReplayTransport(Recording recording, const QString &name, QObje
     // Exchanges are written in time order, so each list ends up sorted.
     for (qsizetype i = 0; i < m_recording.exchanges.size(); ++i) {
         const RecordedExchange &e = m_recording.exchanges[i];
-        m_byKey[e.key()] << i;
-        m_keyTimes[e.key()] << e.t;
+        const QString key = e.target + QLatin1Char('|') + QString::fromLatin1(withoutResponseCount(e.command));
+        m_byKey[key] << i;
+        m_keyTimes[key] << e.t;
     }
     m_samples = m_recording.pidSamples();
     for (qsizetype i = 0; i < m_samples.size(); ++i) {
@@ -130,8 +139,9 @@ void ReplayTransport::write(const QByteArray &data)
     }
 }
 
-QByteArray ReplayTransport::answer(const QByteArray &command, int *delayMs, bool *silent)
+QByteArray ReplayTransport::answer(const QByteArray &rawCommand, int *delayMs, bool *silent)
 {
+    const QByteArray command = withoutResponseCount(rawCommand);
     const QString target = m_target.header;
     m_target.apply(command);
 
