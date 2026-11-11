@@ -3,7 +3,7 @@
 // The static paths of the code pages, shared by the English (/codes/) and
 // Romanian (/ro/coduri/) routes: one page per code, one per group of generic
 // codes (/codes/p04/) and one list per brand (/codes/hyundai-kia/).
-import { codes, groupsOf, packs, systemOf, type CodeEntry } from "./allCodes";
+import { codes, distinctCodes, groupsOf, packs, systemOf, type CodeEntry } from "./allCodes";
 import { codeStrings } from "../i18n/codes";
 import { routes, type Lang } from "../i18n/ui";
 
@@ -36,7 +36,7 @@ export function segPaths(lang: Lang) {
     return {
       params: { seg: p.id },
       props: {
-        kind: "list", title: c.packTitle(p.label[lang]), lede: c.packLede(entries.length), entries, pack: p.id,
+        kind: "list", title: c.packTitle(p.label[lang]), lede: c.packLede(distinctCodes(entries)), entries, pack: p.id,
         here: { en: `${routes.en.codes}${p.id}/`, ro: `${routes.ro.codes}${p.id}/` },
       } as SegProps,
     };

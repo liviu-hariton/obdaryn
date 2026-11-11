@@ -95,7 +95,7 @@ export const packs: Pack[] = rawPacks
     // The pack labels read "Obdaryn's Ford pack"; the pages name just the brand.
     label: { en: brandName(p.label), ro: capitalise(brandName(p.label_ro)) },
     phrase: { en: p.label as string, ro: p.label_ro as string },
-    count: Object.keys(p.codes).length,
+    count: new Set(Object.keys(p.codes).map((k) => k.split("@")[0])).size,
   }))
   .sort((a, b) => a.label.en.localeCompare(b.label.en));
 
@@ -126,6 +126,10 @@ const byLang = (lang: Lang) => ({
 });
 
 export const codes: Record<Lang, { generic: CodeEntry[]; brand: CodeEntry[] }> = { en: byLang("en"), ro: byLang("ro") };
+
+/** How many distinct codes a list holds, per brand: a code a brand explains for two
+ *  modules (B1040 in the airbag and the body unit) is one code with two pages. */
+export const distinctCodes = (entries: CodeEntry[]) => new Set(entries.map((e) => `${e.pack}:${e.code}`)).size;
 
 /** Whether a generic code has a page in the language (all do in English). */
 export const hasGeneric = (lang: Lang, code: string) =>

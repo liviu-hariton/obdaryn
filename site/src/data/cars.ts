@@ -26,7 +26,8 @@ const packs = new Map<string, number>();
 for (const file of readdirSync(dataDir + "dtc/brands")) {
   if (!file.endsWith(".json")) continue;
   const pack = json("dtc/brands/" + file);
-  packs.set(pack.brand, Object.keys(pack.codes).length);
+  // Distinct codes: a code the pack explains for two modules ("B1040@airbag") counts once.
+  packs.set(pack.brand, new Set(Object.keys(pack.codes).map((k) => k.split("@")[0])).size);
 }
 
 const obdbModels: { make: string; model: string }[] = [];

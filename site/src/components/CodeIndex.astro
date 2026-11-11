@@ -5,7 +5,7 @@
 // codes by group and the manufacturer codes by brand.
 import Base from "../layouts/Base.astro";
 import CodeLookup from "./CodeLookup.astro";
-import { codes, groupsOf, packs, systemOf } from "../data/allCodes";
+import { codes, distinctCodes, groupsOf, packs, systemOf } from "../data/allCodes";
 import { codeStrings } from "../i18n/codes";
 import { num, routes, t, type Lang } from "../i18n/ui";
 
@@ -18,12 +18,13 @@ const groups = groupsOf(list.generic);
 const bySystem = (["powertrain", "body", "chassis", "network"] as const)
   .map((sys) => ({ sys, groups: groups.filter((g) => systemOf(g.entries[0].code) === sys) }))
   .filter((x) => x.groups.length > 0);
-const brandCount = (id: string) => list.brand.filter((e) => e.pack === id).length;
+const brandCount = (id: string) => distinctCodes(list.brand.filter((e) => e.pack === id));
+const brandTotal = distinctCodes(list.brand);
 ---
-<Base lang={lang} page="codes" title={`${c.indexTitle} · Obdaryn`} description={c.indexDescription(num(lang, list.generic.length + list.brand.length))}>
+<Base lang={lang} page="codes" title={`${c.indexTitle} · Obdaryn`} description={c.indexDescription(num(lang, list.generic.length + brandTotal))}>
   <div class="wrap page">
     <h1 class="page-title">{c.indexTitle}</h1>
-    <p class="lede">{c.indexLede(num(lang, list.generic.length), num(lang, list.brand.length))}</p>
+    <p class="lede">{c.indexLede(num(lang, list.generic.length), num(lang, brandTotal))}</p>
     {lang === "ro" && <p class="note">{c.roOnly.note} <a href={routes.en.codes}>{c.roOnly.link}</a></p>}
     <div class="search"><CodeLookup lang={lang} id="lookup-main" /></div>
 
