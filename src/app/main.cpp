@@ -198,6 +198,14 @@ int main(int argc, char *argv[])
             if (QObject *live = window->findChild<QObject *>(QStringLiteral("livePage")))
                 live->setProperty("source", qEnvironmentVariable("OBDARYN_LIVE_SOURCE"));
         }
+        // OBDARYN_HELP_SECTION=3 scrolls the Help page to that section (0 = Start here).
+        if (window && qEnvironmentVariableIsSet("OBDARYN_HELP_SECTION")) {
+            const int section = qEnvironmentVariableIntValue("OBDARYN_HELP_SECTION");
+            QTimer::singleShot(1500, window, [window, section] {
+                if (QObject *help = window->findChild<QObject *>(QStringLiteral("helpPage")))
+                    QMetaObject::invokeMethod(help, "showSection", Q_ARG(QVariant, section));
+            });
+        }
         if (window && qEnvironmentVariableIsSet("OBDARYN_PAGE"))
             window->setProperty("page", qEnvironmentVariableIntValue("OBDARYN_PAGE"));
         const int delay = qEnvironmentVariableIsSet("OBDARYN_DELAY_MS") ? qEnvironmentVariableIntValue("OBDARYN_DELAY_MS") : 4000;

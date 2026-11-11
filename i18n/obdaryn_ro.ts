@@ -758,6 +758,10 @@
         <translation>Obdaryn citește ce raportează calculatoarele mașinii printr-un adaptor Wi-Fi compatibil ELM327, cum ar fi Vgate iCar Pro. Doar citește: nu poate modifica nimic în mașină.</translation>
     </message>
     <message>
+        <source>On this page</source>
+        <translation>Pe această pagină</translation>
+    </message>
+    <message>
         <source>Plug the adapter into the OBD-II socket, under the dashboard on the driver&apos;s side.</source>
         <translation>Introdu adaptorul în mufa OBD-II, sub bord, pe partea șoferului.</translation>
     </message>
