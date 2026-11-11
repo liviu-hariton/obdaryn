@@ -786,6 +786,22 @@
         <translation>Nu ai mașina la îndemână? Încearcă mașina demo sau redă o înregistrare: toate ecranele funcționează cu ambele.</translation>
     </message>
     <message>
+        <source>Supported cars</source>
+        <translation>Mașini compatibile</translation>
+    </message>
+    <message>
+        <source>Every car with a standard OBD-II socket works: in the EU, petrol cars from 2001 and diesels from 2004; in the US, every car from 1996. On all of them Obdaryn reads trouble codes, readiness, the freeze frame, self-test results, live data and vehicle info, and clears codes when you ask.</source>
+        <translation>Merge cu orice mașină cu priză OBD-II standard: în UE, mașinile pe benzină din 2001 și cele diesel din 2004; în SUA, toate mașinile din 1996. La toate, Obdaryn citește codurile de eroare, pregătirea ITP, instantaneul, rezultatele autotestelor, datele în timp real și informațiile despre vehicul, și șterge codurile când îi ceri.</translation>
+    </message>
+    <message>
+        <source>For these brands it knows more, from data that comes with the app:</source>
+        <translation>La aceste mărci știe mai mult, din datele care vin cu aplicația:</translation>
+    </message>
+    <message>
+        <source>Any other brand gets everything standard, and an all-module scan at the standard OBD-II addresses. Module addresses and manufacturer values come from public and community sources; the ones not yet confirmed on a real car are marked as such where they appear.</source>
+        <translation>Orice altă marcă are tot ce e standard, plus scanarea modulelor la adresele OBD-II standard. Adresele modulelor și valorile de producător vin din surse publice și ale comunității; cele încă neconfirmate pe o mașină reală sunt marcate ca atare acolo unde apar.</translation>
+    </message>
+    <message>
         <source>What to do in which car state</source>
         <translation>Ce poți face în fiecare stare a mașinii</translation>
     </message>
@@ -3488,6 +3504,44 @@
     <message>
         <source>Any car (standard addresses only)</source>
         <translation>Orice mașină (doar adrese standard)</translation>
+    </message>
+    <message>
+        <source>All modules</source>
+        <extracomment>Help, supported cars: what the all-module scan covers for a brand</extracomment>
+        <translation>Toate modulele</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n module(s) at the brand&apos;s own addresses, %1 of them confirmed on real cars.</source>
+        <translation>
+            <numerusform>%n modul la adresele proprii ale mărcii, confirmat pe mașini reale: %1.</numerusform>
+            <numerusform>%n module la adresele proprii ale mărcii, din care %1 confirmate pe mașini reale.</numerusform>
+            <numerusform>%n de module la adresele proprii ale mărcii, din care %1 confirmate pe mașini reale.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Code explanations</source>
+        <translation>Explicații de coduri</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n manufacturer code(s), in English and Romanian.</source>
+        <translation>
+            <numerusform>%n cod de producător, în engleză și română.</numerusform>
+            <numerusform>%n coduri de producător, în engleză și română.</numerusform>
+            <numerusform>%n de coduri de producător, în engleză și română.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>%1 values</source>
+        <extracomment>Help, supported cars: &quot;Hyundai values&quot; (manufacturer values for that make)</extracomment>
+        <translation>Valori %1</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n model(s): %1.</source>
+        <translation>
+            <numerusform>%n model: %1.</numerusform>
+            <numerusform>%n modele: %1.</numerusform>
+            <numerusform>%n de modele: %1.</numerusform>
+        </translation>
     </message>
     <message>
         <source>This recording has no module scan to replay. Scan the modules while recording to include them.</source>

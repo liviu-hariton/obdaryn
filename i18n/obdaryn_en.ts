@@ -116,6 +116,27 @@
 <context>
     <name>obdaryn::AppController</name>
     <message numerus="yes">
+        <source>%n module(s) at the brand&apos;s own addresses, %1 of them confirmed on real cars.</source>
+        <translation>
+            <numerusform>%n module at the brand's own address, %1 of them confirmed on real cars.</numerusform>
+            <numerusform>%n modules at the brand's own addresses, %1 of them confirmed on real cars.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n manufacturer code(s), in English and Romanian.</source>
+        <translation>
+            <numerusform>%n manufacturer code, in English and Romanian.</numerusform>
+            <numerusform>%n manufacturer codes, in English and Romanian.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n model(s): %1.</source>
+        <translation>
+            <numerusform>%n model: %1.</numerusform>
+            <numerusform>%n models: %1.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
         <source>Saved %1 next to the recording (%n rows).</source>
         <translation>
             <numerusform>Saved %1 next to the recording (%n row).</numerusform>

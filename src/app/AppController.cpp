@@ -518,6 +518,35 @@ QVariantList AppController::vehicleProfiles() const
     return list;
 }
 
+QVariantList AppController::supportedCars() const
+{
+    QVariantList list;
+    for (const VehicleProfile &p : ModuleCatalog::profiles()) {
+        if (p.id == QLatin1String("generic"))
+            continue; // every car: said in the text above the list
+        QVariantList lines;
+        const int modules = int(p.modules.size());
+        const int confirmed = int(std::count_if(p.modules.cbegin(), p.modules.cend(), [](const ModuleDef &m) { return m.verified; }));
+        //: Help, supported cars: what the all-module scan covers for a brand
+        lines << QVariantMap{{QStringLiteral("label"), tr("All modules")},
+                             {QStringLiteral("text"), tr("%n module(s) at the brand's own addresses, %1 of them confirmed on real cars.", "", modules)
+                                                          .arg(confirmed)}};
+        if (const int codes = DtcDatabase::instance().brandSize(p.id); codes > 0)
+            lines << QVariantMap{{QStringLiteral("label"), tr("Code explanations")},
+                                 {QStringLiteral("text"), tr("%n manufacturer code(s), in English and Romanian.", "", codes)}};
+        for (const QString &make : p.makes) {
+            const QStringList models = ManufacturerData::instance().modelsOf(make);
+            if (models.isEmpty())
+                continue;
+            //: Help, supported cars: "Hyundai values" (manufacturer values for that make)
+            lines << QVariantMap{{QStringLiteral("label"), tr("%1 values").arg(make)},
+                                 {QStringLiteral("text"), tr("%n model(s): %1.", "", int(models.size())).arg(models.join(QStringLiteral(", ")))}};
+        }
+        list << QVariantMap{{QStringLiteral("brand"), p.label}, {QStringLiteral("lines"), lines}};
+    }
+    return list;
+}
+
 void AppController::setProfileId(const QString &id)
 {
     if (!ModuleCatalog::find(id) || (id == m_profileId && m_profileChosenByUser))

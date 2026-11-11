@@ -14,6 +14,22 @@ Obdaryn reads what the car's computers report through an ELM327-compatible Wi-Fi
 
 No car nearby? Try the **demo car**, or replay a recording: every screen works with both.
 
+## Supported cars
+
+Every car with a standard OBD-II socket works: in the EU, petrol cars from 2001 and diesels from 2004; in the US, every car from 1996. On all of them Obdaryn reads trouble codes, readiness, the freeze frame, self-test results, live data and vehicle info, and clears codes when you ask.
+
+For these brands it knows more, from data that comes with the app:
+
+| Brand | All modules | Code explanations | Manufacturer values |
+|---|---|---|---|
+| Ford | Brand module list | Yes, English and Romanian | |
+| Hyundai / Kia / Genesis | Brand module list | Yes, English and Romanian | 50+ Hyundai and Kia models (OBDb) |
+| Renault / Dacia | Brand module list | Yes, English and Romanian | |
+| Toyota / Lexus | Brand module list | Yes, English and Romanian | |
+| Volkswagen group (VW, Audi, Škoda, SEAT, Cupra) | Brand module list | Yes, English and Romanian | |
+
+Any other brand gets everything standard, and an all-module scan at the standard OBD-II addresses. Module addresses and manufacturer values come from public and community sources; the ones not yet confirmed on a real car are marked as such. **Help → Supported cars** in the app lists the exact numbers and models of the version you have.
+
 ## What to do in which car state
 
 | Car state | What you can do |

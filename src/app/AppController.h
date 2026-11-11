@@ -124,6 +124,9 @@ class AppController : public QObject
 
     // Full-vehicle module scan
     Q_PROPERTY(QVariantList vehicleProfiles READ vehicleProfiles CONSTANT)
+    /// What Obdaryn knows per brand, for Help: [{brand, lines: [{label, text}]}],
+    /// built from the shipped data (module lists, code packs, manufacturer values).
+    Q_PROPERTY(QVariantList supportedCars READ supportedCars NOTIFY languageChanged)
     Q_PROPERTY(QString profileId READ profileId WRITE setProfileId NOTIFY profileChanged)
     Q_PROPERTY(QString profileNotes READ profileNotes NOTIFY profileChanged)
     Q_PROPERTY(bool profileChosenByUser READ profileChosenByUser NOTIFY profileChanged)
@@ -322,6 +325,7 @@ public:
     Q_INVOKABLE void findManufacturerValues();
 
     QVariantList vehicleProfiles() const;
+    QVariantList supportedCars() const;
     QString profileId() const { return m_profileId; }
     void setProfileId(const QString &id);
     QString profileNotes() const;

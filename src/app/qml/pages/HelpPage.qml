@@ -27,7 +27,7 @@ Item {
     readonly property real groupX: Math.max(Theme.s6, (width - groupWidth) / 2)
     readonly property real columnX: wide ? groupX + railWidth + railGap : groupX
 
-    readonly property var sections: [start, states, clearing, screens, trouble, words, safety]
+    readonly property var sections: [start, supported, states, clearing, screens, trouble, words, safety]
     /// The section being read: the last one whose heading has reached the top area.
     property int current: 0
     function updateCurrent() {
@@ -132,6 +132,59 @@ Item {
                         wrapMode: Text.WordWrap
                     }
                     Para { text: modelData.text; color: Theme.textMuted }
+                }
+            }
+        }
+    }
+    /// Brand on the left; on the right, one line per thing Obdaryn knows for it,
+    /// each starting with its name in the text colour. Built from App.supportedCars.
+    component BrandRows: ColumnLayout {
+        id: brandRows
+        property var items: []    // [{ brand, lines: [{ label, text }] }]
+        Layout.fillWidth: true
+        spacing: 0
+        function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") }
+        Repeater {
+            model: brandRows.items
+            delegate: ColumnLayout {
+                id: brandRow
+                required property var modelData
+                required property int index
+                Layout.fillWidth: true
+                spacing: 0
+                Rectangle { visible: brandRow.index > 0; Layout.fillWidth: true; implicitHeight: 1; color: Theme.hairline }
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.topMargin: Theme.s3
+                    Layout.bottomMargin: Theme.s3
+                    spacing: Theme.s4
+                    Text {
+                        Layout.preferredWidth: 170
+                        Layout.maximumWidth: 170
+                        Layout.alignment: Qt.AlignTop
+                        text: brandRow.modelData.brand
+                        textFormat: Text.PlainText
+                        color: Theme.text
+                        font.family: Theme.sans
+                        font.pixelSize: Theme.fontBody
+                        font.weight: Font.DemiBold
+                        lineHeight: 1.4
+                        wrapMode: Text.WordWrap
+                    }
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: Theme.s2
+                        Repeater {
+                            model: brandRow.modelData.lines
+                            delegate: Para {
+                                required property var modelData
+                                textFormat: Text.StyledText
+                                color: Theme.textMuted
+                                text: "<font color=\"" + Theme.text + "\">" + brandRows.esc(modelData.label) + "</font> · "
+                                      + brandRows.esc(modelData.text)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -319,6 +372,18 @@ Item {
                     ]
                 }
                 Para { text: qsTr("No car nearby? Try the demo car, or replay a recording: every screen works with both."); color: Theme.textMuted }
+            }
+
+            Section {
+                id: supported
+                title: qsTr("Supported cars")
+                Para { text: qsTr("Every car with a standard OBD-II socket works: in the EU, petrol cars from 2001 and diesels from 2004; in the US, every car from 1996. On all of them Obdaryn reads trouble codes, readiness, the freeze frame, self-test results, live data and vehicle info, and clears codes when you ask.") }
+                Para { text: qsTr("For these brands it knows more, from data that comes with the app:") }
+                BrandRows { items: App.supportedCars }
+                Para {
+                    text: qsTr("Any other brand gets everything standard, and an all-module scan at the standard OBD-II addresses. Module addresses and manufacturer values come from public and community sources; the ones not yet confirmed on a real car are marked as such where they appear.")
+                    color: Theme.textMuted
+                }
             }
 
             Section {
