@@ -2,8 +2,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 //
 // A real screenshot of the app (tools/capture-site-images.sh), in the visitor's
-// language and theme: the dark capture under a dark system theme, the light one
-// otherwise. Served as responsive WebP, framed by a hairline like the app's panels.
+// language and theme: both captures are in the page and only the current theme's
+// shows (.when-light / .when-dark in global.css), so the theme button switches
+// them too; the hidden one is lazy and never downloaded. Served as responsive
+// WebP, framed by a hairline like the app's panels.
 // Never shown wider than the app's real size (captures are 2x), so every screenshot
 // on the page reads at the same scale.
 import type { ImageMetadata } from "astro";
@@ -26,12 +28,10 @@ const [light, dark] = await Promise.all([make(pick("light")), make(pick("dark"))
 const lightSrc = pick("light");
 ---
 <figure class="screen" style={`max-width:${Math.round(lightSrc.width / 2)}px`}>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset={dark.srcSet.attribute} sizes={sizes} type="image/webp" />
-    <source srcset={light.srcSet.attribute} sizes={sizes} type="image/webp" />
-    <img src={light.src} alt={alt} width={lightSrc.width} height={lightSrc.height}
-         loading={eager ? "eager" : "lazy"} decoding="async" />
-  </picture>
+  <img class="when-light" src={light.src} srcset={light.srcSet.attribute} sizes={sizes} alt={alt}
+       width={lightSrc.width} height={lightSrc.height} loading={eager ? "eager" : "lazy"} decoding="async" />
+  <img class="when-dark" src={dark.src} srcset={dark.srcSet.attribute} sizes={sizes} alt={alt}
+       width={lightSrc.width} height={lightSrc.height} loading="lazy" decoding="async" />
 </figure>
 
 <style>

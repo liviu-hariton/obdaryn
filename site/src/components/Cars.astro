@@ -16,7 +16,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
 ---
 <Base lang={lang} page="cars" title={`${c.title} · Obdaryn`} description={c.description}>
   <div class="wrap page">
-    <h1>{c.title}</h1>
+    <h1 class="page-title">{c.title}</h1>
     <p class="lede">{c.lede}</p>
     <p class="gen">{c.generated(version)}</p>
 
@@ -59,8 +59,6 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
 </Base>
 
 <style>
-  .page { max-width: calc(920px + 2 * var(--gutter)); padding-top: clamp(40px, 6vw, 72px); }
-  h1 { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; }
   .lede { color: var(--text-muted); font-size: 18px; margin-top: var(--s4); max-width: 66ch; }
   .gen { font-size: 13px; color: var(--text-faint); margin-top: var(--s3); }
   section { margin-top: var(--s8); }

@@ -46,10 +46,38 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1); /* exponential ease-out */
   --gutter: clamp(16px, 4.5vw, 64px);
   --page: 1312px;
+  --top-h: 72px; /* the sticky top bar's height; anchors stop below it */
 }
 
+/* Dark theme. It applies when the visitor picked it with the theme button
+ * (data-theme="dark" on <html>, remembered in the browser) or when the system is
+ * dark and they haven't picked light. Keep the two token blocks identical. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --window: #0F1114;
+  --sidebar: #14171B;
+  --surface: #171A1F;
+  --hover: #1D2127;
+  --selected: #232831;
+  --hairline: #262A31;
+  --field-border: #323843;
+  --text: #E8EAED;
+  --text-muted: #A3A9B2;
+  --text-faint: #7E858F;
+  --red: #F0564A;
+  --amber: #F2A93B;
+  --green: #3CBF7A;
+  --blue: #5B97F7;
+  --red-ink: #F0564A;
+  --amber-ink: #F2A93B;
+  --green-ink: #3CBF7A;
+  --blue-ink: #5B97F7;
+  --unlit: #3A3F47;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px rgb(0 0 0 / 0.4);
+}
+:root[data-theme="light"] { color-scheme: light; }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --window: #0F1114;
     --sidebar: #14171B;
     --surface: #171A1F;
@@ -73,6 +101,16 @@
   }
 }
 
+/* Pieces drawn per theme (logos, screenshots, the theme button's icon): only the
+ * current theme's version shows. Lazy images that are hidden are never fetched. */
+:root[data-theme="light"] .when-dark,
+:root[data-theme="dark"] .when-light { display: none !important; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .when-dark { display: none !important; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .when-light { display: none !important; } }
+
+/* On phones the top bar has two rows (Base.astro). */
+@media (max-width: 640px) { :root { --top-h: 82px; } }
+
 @media (prefers-reduced-motion: reduce) {
   :root { --fast: 0ms; --normal: 0ms; --bulb: 0ms; }
   html { scroll-behavior: auto !important; }
@@ -80,7 +118,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--top-h) + var(--s5)); -webkit-text-size-adjust: 100%; }
 body {
   background: var(--window);
   color: var(--text);
@@ -111,8 +149,13 @@ html { scrollbar-color: var(--field-border) transparent; scrollbar-gutter: stabl
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
 }
-.skip { position: absolute; left: var(--s4); top: -64px; z-index: 10; background: var(--surface); padding: var(--s2) var(--s3); border-radius: var(--radius); }
+.skip { position: absolute; left: var(--s4); top: -64px; z-index: 20; background: var(--surface); padding: var(--s2) var(--s3); border-radius: var(--radius); }
 .skip:focus { top: var(--s3); }
+
+/* Reading pages (download, supported cars, privacy, not found) share one column,
+ * so their titles start on the same line from page to page. */
+.page { max-width: calc(920px + 2 * var(--gutter)); padding-top: clamp(40px, 6vw, 72px); }
+.page-title { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; }
 
 /* Buttons: the app's four variants, at web size. One primary per view. */
 .btn {

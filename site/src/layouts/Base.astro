@@ -2,8 +2,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 //
 // Every page: the head (title, description, language alternates, social card),
-// the top bar, and the footer. No scripts from anywhere else, no cookies.
+// the top bar (sticky, with the theme button), and the footer. No scripts from
+// anywhere else, no cookies: the theme choice stays in the browser's own storage.
 import "../styles/global.css";
+import Icon from "../components/Icon.astro";
 import { routes, t, type Lang, type PageId } from "../i18n/ui";
 import { copyrightYears, contactEmail, repoUrl } from "../data/site";
 
@@ -37,6 +39,14 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0F1114" media="(prefers-color-scheme: dark)" />
+  <!-- Before the first paint: apply the theme the visitor picked earlier, so the
+       page never flashes the other one. Without a saved choice it follows the system. -->
+  <script is:inline>
+    try {
+      const saved = localStorage.getItem("obdaryn-theme");
+      if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
+    } catch {}
+  </script>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta property="og:type" content="website" />
@@ -56,10 +66,8 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   <header class="top">
     <div class="wrap top-inner">
       <a class="brand" href={r.home} aria-label="Obdaryn">
-        <picture>
-          <source srcset="/logo-dark.svg" media="(prefers-color-scheme: dark)" />
-          <img src="/logo.svg" alt="" width="28" height="28" />
-        </picture>
+        <img class="when-light" src="/logo.svg" alt="" width="36" height="36" />
+        <img class="when-dark" src="/logo-dark.svg" alt="" width="36" height="36" />
         <span>Obdaryn</span>
       </a>
       <nav aria-label={lang === "ro" ? "Principal" : "Main"}>
@@ -70,9 +78,17 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
             </li>
           ))}
           <li class="nav-gh"><a href={repoUrl}>{s.nav.github}</a></li>
-          <li><a class="lang" href={otherHref} hreflang={other} lang={other}>{s.otherLang}</a></li>
         </ul>
       </nav>
+      <div class="tools">
+        <!-- Hidden until the script below runs: without JavaScript it couldn't work. -->
+        <button type="button" class="theme" data-theme-toggle hidden aria-pressed="false"
+                aria-label={s.theme.label} data-to-dark={s.theme.toDark} data-to-light={s.theme.toLight}>
+          <Icon name="moon" class="when-light" />
+          <Icon name="sun" class="when-dark" />
+        </button>
+        <a class="lang" href={otherHref} hreflang={other} lang={other}>{s.otherLang}</a>
+      </div>
     </div>
   </header>
 
@@ -84,10 +100,8 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
     <div class="wrap foot-inner">
       <div class="foot-brand">
         <a class="brand" href={r.home}>
-          <picture>
-            <source srcset="/logo-dark.svg" media="(prefers-color-scheme: dark)" />
-            <img src="/logo.svg" alt="" width="24" height="24" loading="lazy" />
-          </picture>
+          <img class="when-light" src="/logo.svg" alt="" width="32" height="32" loading="lazy" />
+          <img class="when-dark" src="/logo-dark.svg" alt="" width="32" height="32" loading="lazy" />
           <span>Obdaryn</span>
         </a>
         <p>{s.footer.tagline}</p>
@@ -107,35 +121,86 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
       </div>
     </div>
   </footer>
+  <script>
+    // The theme button flips light and dark and remembers the choice in this
+    // browser. Until it's used, the site follows the system theme, live.
+    const root = document.documentElement;
+    const systemDark = matchMedia("(prefers-color-scheme: dark)");
+    const isDark = () => (root.dataset.theme ? root.dataset.theme === "dark" : systemDark.matches);
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")];
+
+    const sync = () => {
+      const dark = isDark();
+      for (const b of buttons) {
+        b.setAttribute("aria-pressed", String(dark));
+        b.title = (dark ? b.dataset.toLight : b.dataset.toDark) ?? "";
+      }
+      // The browser's own chrome (Safari's tab bar, mobile status bars) follows too.
+      for (const m of document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')) {
+        m.content = dark ? "#0F1114" : "#F7F8FA";
+      }
+    };
+
+    for (const b of buttons) {
+      b.hidden = false;
+      b.addEventListener("click", () => {
+        const next = isDark() ? "light" : "dark";
+        root.dataset.theme = next;
+        try { localStorage.setItem("obdaryn-theme", next); } catch {}
+        sync();
+      });
+    }
+    systemDark.addEventListener("change", sync);
+    sync();
+  </script>
 </body>
 </html>
 
 <style>
-  .top { border-bottom: 1px solid var(--hairline); }
-  .top-inner { display: flex; align-items: center; gap: var(--s4); min-height: 72px; }
-  .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  /* The top bar stays in view: solid ground, a hairline under it, above the page. */
+  .top { position: sticky; top: 0; z-index: 10; background: var(--window); border-bottom: 1px solid var(--hairline); }
+  .top-inner { display: flex; align-items: center; gap: var(--s4) var(--s6); min-height: var(--top-h); }
+  .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; font-weight: 700; font-size: 20px; letter-spacing: -0.015em; }
+  .brand img { width: 36px; height: 36px; flex: none; }
   .top .brand { margin-right: auto; }
   nav ul { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s1) var(--s5); list-style: none; padding: 0; }
   nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; padding: 6px 0; transition: color var(--fast) var(--ease); }
   nav a:hover, nav a[aria-current="page"] { color: var(--text); }
   nav a[aria-current="page"] { font-weight: 600; }
-  nav .lang { border: 1px solid var(--hairline); border-radius: var(--radius); padding: 5px 10px; }
-  nav .lang:hover { background: var(--hover); }
+
+  /* Theme button and language switch: two quiet outlined controls of one height. */
+  .tools { display: flex; align-items: center; gap: var(--s2); }
+  .theme, .lang {
+    display: inline-flex; align-items: center; justify-content: center; height: 34px;
+    border: 1px solid var(--hairline); border-radius: var(--radius); background: transparent;
+    color: var(--text-muted); text-decoration: none; font: 500 15px/1 var(--sans);
+    transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+  }
+  .theme { width: 34px; padding: 0; cursor: pointer; }
+  .theme[hidden] { display: none; }
+  .theme :global(svg) { width: 18px; height: 18px; }
+  .lang { padding: 0 11px; }
+  .theme:hover, .lang:hover { background: var(--hover); color: var(--text); }
+
   @media (max-width: 860px) {
     .nav-gh { display: none; }
   }
+  /* Phones: the brand and the two controls on the first row, the links under them. */
   @media (max-width: 640px) {
-    .top-inner { flex-wrap: wrap; padding-block: var(--s3); gap: var(--s2); }
-    .top .brand { width: 100%; }
-    nav ul { gap: var(--s1) var(--s3); }
+    .top-inner { flex-wrap: wrap; padding-block: 10px 6px; gap: 6px var(--s3); min-height: 0; }
+    .brand { font-size: 18px; gap: 10px; }
+    .brand img { width: 32px; height: 32px; }
+    nav { order: 3; width: 100%; }
+    nav ul { gap: var(--s1) var(--s4); }
     nav a { font-size: 14px; }
-    nav .lang { padding: 3px 8px; }
     nav li:not(.nav-download):first-child { display: none; }
   }
 
   .foot { margin-top: var(--s9); border-top: 1px solid var(--hairline); background: var(--sidebar); }
   .foot-inner { display: grid; grid-template-columns: 1fr auto; gap: var(--s5) var(--s7); padding-block: var(--s7); }
-  .foot-brand p { color: var(--text-muted); font-size: 15px; margin-top: var(--s2); }
+  .foot .brand { font-size: 18px; gap: 10px; }
+  .foot .brand img { width: 32px; height: 32px; }
+  .foot-brand p { color: var(--text-muted); font-size: 15px; margin-top: var(--s3); }
   .foot-links { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, auto); gap: var(--s2) var(--s7); align-content: start; }
   .foot-links a { color: var(--text-muted); text-decoration: none; font-size: 15px; }
   .foot-links a:hover { color: var(--text); text-decoration: underline; }

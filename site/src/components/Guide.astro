@@ -27,17 +27,17 @@ const headings = doc.getHeadings().filter((h) => h.depth === 2);
 
 <style>
   .layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); padding-top: clamp(40px, 6vw, 72px); }
-  .rail { position: sticky; top: var(--s5); align-self: start; }
+  /* Sticks under the top bar; the links' padding hangs left so their text lines up with the page edge. */
+  .rail { position: sticky; top: calc(var(--top-h) + var(--s5)); align-self: start; margin-left: -10px; }
   .rail p { font-size: 13px; font-weight: 600; color: var(--text-faint); padding: 0 10px var(--s2); }
   .rail ul { list-style: none; padding: 0; display: grid; gap: 2px; }
   .rail a { display: block; padding: 6px 10px; border-radius: var(--radius); color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; }
   .rail a:hover { background: var(--hover); color: var(--text); }
   .guide :global(h1) { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: var(--s4); }
   .guide :global(h1 + p) { color: var(--text-muted); font-size: 18px; }
-  .guide :global(h2) { scroll-margin-top: var(--s5); }
   @media (max-width: 900px) {
     .layout { grid-template-columns: 1fr; }
-    .rail { position: static; border-bottom: 1px solid var(--hairline); padding-bottom: var(--s4); }
+    .rail { position: static; margin-left: 0; border-bottom: 1px solid var(--hairline); padding-bottom: var(--s4); }
     .rail ul { display: flex; flex-wrap: wrap; gap: 2px var(--s2); }
   }
 </style>

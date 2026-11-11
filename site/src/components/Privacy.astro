@@ -12,8 +12,8 @@ const p = t(lang).privacyPage;
 const last = p.sections.length - 1;
 ---
 <Base lang={lang} page="privacy" title={`${p.title} · Obdaryn`} description={p.description}>
-  <div class="wrap page prose">
-    <h1>{p.title}</h1>
+  <div class="wrap page"><div class="prose">
+    <h1 class="page-title">{p.title}</h1>
     {p.sections.map(([h, text], i) => (
       <section>
         <h2>{h}</h2>
@@ -21,11 +21,9 @@ const last = p.sections.length - 1;
       </section>
     ))}
     <p class="updated">{p.updated}</p>
-  </div>
+  </div></div>
 </Base>
 
 <style>
-  .page { padding-top: clamp(40px, 6vw, 72px); max-width: calc(70ch + 2 * var(--gutter)); }
-  h1 { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; }
   .updated { font-size: 13px; color: var(--text-faint); margin-top: var(--s7); }
 </style>

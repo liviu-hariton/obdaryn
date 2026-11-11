@@ -22,6 +22,7 @@ export const ui = {
     langName: "English",
     otherLang: "Română",
     skip: "Skip to content",
+    theme: { label: "Dark theme", toDark: "Switch to the dark theme", toLight: "Switch to the light theme" },
     nav: { features: "Features", cars: "Supported cars", guide: "Guide", download: "Download", github: "GitHub" },
     download: "Download for macOS",
     versionLine: (v: string) => `Version ${v} · macOS 14.4 or later · free`,
@@ -148,7 +149,7 @@ export const ui = {
       description: "Obdaryn sends nothing online, and this site uses no cookies and no trackers.",
       sections: [
         ["The app", "Obdaryn sends nothing online. It talks only to the OBD-II adapter in your car. There are no accounts, no analytics and no update checks. Recordings and reports stay on your computer, in folders you choose. They include your car's VIN, so check them before sharing."],
-        ["This website", "This site sets no cookies, runs no analytics or trackers, and loads nothing from other companies: its fonts and images come from obdaryn.eu itself. Like any web server, ours keeps standard access logs (IP address, time, page requested, browser) for security and to fix errors. They are not shared with anyone and are deleted after a few weeks."],
+        ["This website", "This site sets no cookies, runs no analytics or trackers, and loads nothing from other companies: its fonts and images come from obdaryn.eu itself. Like any web server, ours keeps standard access logs (IP address, time, page requested, browser) for security and to fix errors. They are not shared with anyone and are deleted after a few weeks. If you switch between the light and dark theme, your browser remembers the choice on your device; it isn't a cookie and is never sent to us."],
         ["Downloads", "The download button takes you to GitHub, where the installer is published. GitHub's own privacy statement applies there."],
         ["Contact", "Questions about privacy, or anything else:"],
       ],
@@ -167,6 +168,7 @@ export const ui = {
     langName: "Română",
     otherLang: "English",
     skip: "Sari la conținut",
+    theme: { label: "Temă întunecată", toDark: "Treci la tema întunecată", toLight: "Treci la tema deschisă" },
     nav: { features: "Funcții", cars: "Mașini compatibile", guide: "Ghid", download: "Descarcă", github: "GitHub" },
     download: "Descarcă pentru macOS",
     versionLine: (v: string) => `Versiunea ${v} · macOS 14.4 sau mai nou · gratuit`,
@@ -293,7 +295,7 @@ export const ui = {
       description: "Obdaryn nu trimite nimic online, iar acest site nu folosește cookie-uri și nici instrumente de urmărire.",
       sections: [
         ["Aplicația", "Obdaryn nu trimite nimic online. Comunică doar cu adaptorul OBD-II din mașină. Nu are conturi, statistici sau verificări de actualizări. Înregistrările și rapoartele rămân pe calculatorul tău, în dosarele pe care le alegi. Ele conțin seria de șasiu (VIN) a mașinii, așa că verifică-le înainte să le trimiți cuiva."],
-        ["Acest site", "Site-ul nu setează cookie-uri, nu rulează statistici sau instrumente de urmărire și nu încarcă nimic de la alte companii: fonturile și imaginile vin chiar de pe obdaryn.eu. Ca orice server web, al nostru păstrează jurnale de acces standard (adresa IP, ora, pagina cerută, browserul), pentru securitate și pentru remedierea erorilor. Nu sunt date nimănui și se șterg după câteva săptămâni."],
+        ["Acest site", "Site-ul nu setează cookie-uri, nu rulează statistici sau instrumente de urmărire și nu încarcă nimic de la alte companii: fonturile și imaginile vin chiar de pe obdaryn.eu. Ca orice server web, al nostru păstrează jurnale de acces standard (adresa IP, ora, pagina cerută, browserul), pentru securitate și pentru remedierea erorilor. Nu sunt date nimănui și se șterg după câteva săptămâni. Dacă treci între tema deschisă și cea întunecată, browserul ține minte alegerea pe dispozitivul tău; nu e un cookie și nu ne e trimisă nouă."],
         ["Descărcări", "Butonul de descărcare te duce pe GitHub, unde e publicat programul de instalare. Acolo se aplică declarația de confidențialitate a GitHub."],
         ["Contact", "Întrebări despre confidențialitate sau orice altceva:"],
       ],

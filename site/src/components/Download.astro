@@ -16,7 +16,7 @@ const d = s.downloadPage;
 <Base lang={lang} page="download" title={`${d.title} · Obdaryn`} description={d.description}>
   <div class="wrap page">
     <header class="head">
-      <h1>{d.title}</h1>
+      <h1 class="page-title">{d.title}</h1>
       <p class="lede">{d.lede}</p>
       <div class="get">
         <DownloadButton lang={lang} />
@@ -48,8 +48,8 @@ const d = s.downloadPage;
 </Base>
 
 <style>
-  .page { max-width: calc(760px + 2 * var(--gutter)); padding-top: clamp(40px, 6vw, 72px); }
-  h1 { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; }
+  /* The shared reading column, kept to a 760px measure for these short rows. */
+  .head, section { max-width: 760px; }
   .lede { color: var(--text-muted); font-size: 18px; margin-top: var(--s4); }
   .get { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); margin-top: var(--s6); }
   .file { font-size: 14px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
