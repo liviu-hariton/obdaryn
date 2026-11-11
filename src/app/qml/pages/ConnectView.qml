@@ -35,6 +35,7 @@ Item {
 
             ColumnLayout {
                 spacing: Theme.s2
+                Logo { size: 56; Layout.bottomMargin: Theme.s3 }
                 Text {
                     text: qsTr("Connect to your car")
                     color: Theme.text

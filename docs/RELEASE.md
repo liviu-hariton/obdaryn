@@ -26,6 +26,7 @@ The script:
 ## Version and icon
 
 - The version comes from `project(Obdaryn VERSION …)` in the top-level `CMakeLists.txt`.
+- The in-app logo is `src/app/assets/brand/logo.svg`, the same drawing as the icon without the macOS margins; change both together.
 - The icon is `src/app/macos/Obdaryn.icns`, made from `src/app/macos/icon-1024.png`:
 
   ```bash

@@ -46,15 +46,20 @@ Rectangle {
         height: Math.max(flick.height - y - Theme.s3, implicitHeight)
         spacing: 2
 
-        Text {
-            text: "Obdaryn"
-            color: Theme.text
-            font.family: Theme.sans
-            font.pixelSize: 17
-            font.weight: Font.Bold
-            font.letterSpacing: -0.2
-            Layout.leftMargin: 10
-            Layout.bottomMargin: sidebar.compact ? Theme.s2 : Theme.s4
+        // The logo mark and the name.
+        RowLayout {
+            Layout.leftMargin: 8
+            Layout.bottomMargin: sidebar.compact ? 6 : Theme.s4
+            spacing: 10
+            Logo { size: sidebar.compact ? 20 : 24 } // short windows: every pixel counts
+            Text {
+                text: "Obdaryn"
+                color: Theme.text
+                font.family: Theme.sans
+                font.pixelSize: 17
+                font.weight: Font.Bold
+                font.letterSpacing: -0.2
+            }
         }
 
         // ---- Connection status --------------------------------------------

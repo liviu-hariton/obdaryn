@@ -51,6 +51,7 @@ qt_add_qml_module(obdaryn
         qml/components/KeyValue.qml
         qml/components/EmptyState.qml
         qml/components/BrandValues.qml
+        qml/components/Logo.qml
         qml/components/Segmented.qml
         qml/components/ToggleSwitch.qml
         qml/components/TextInput.qml
@@ -89,7 +90,7 @@ file(GLOB OBDARYN_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/assets/icons/*.svg")
 qt_add_resources(obdaryn "obdaryn_assets"
     PREFIX "/"
     BASE "${CMAKE_CURRENT_SOURCE_DIR}/assets"
-    FILES ${OBDARYN_FONTS} ${OBDARYN_ICONS})
+    FILES ${OBDARYN_FONTS} ${OBDARYN_ICONS} assets/brand/logo.svg)
 
 target_link_libraries(obdaryn PRIVATE
     obdaryn_core
