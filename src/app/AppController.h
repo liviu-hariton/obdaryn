@@ -89,6 +89,14 @@ class AppController : public QObject
     Q_PROPERTY(bool likelyReadyForInspection READ likelyReadyForInspection NOTIFY readinessChanged)
     Q_PROPERTY(bool dieselEngine READ dieselEngine NOTIFY readinessChanged)
 
+    // On-board monitor test results (service 06)
+    /// Grouped per monitor: [{monitor, verdict, tests: [{name, value, limits, verdict,
+    /// position, minPosition, maxPosition}]}]; verdict is "passed"/"close"/"failed"/"notRun".
+    Q_PROPERTY(QVariantList monitorTests READ monitorTests NOTIFY monitorTestsChanged)
+    Q_PROPERTY(bool monitorTestsRead READ monitorTestsRead NOTIFY monitorTestsChanged)
+    Q_PROPERTY(bool readingMonitorTests READ readingMonitorTests NOTIFY monitorTestsChanged)
+    Q_PROPERTY(QString monitorTestsError READ monitorTestsError NOTIFY monitorTestsChanged)
+
     // Freeze frame
     Q_PROPERTY(bool freezeFrameAvailable READ freezeFrameAvailable NOTIFY freezeFrameChanged)
     Q_PROPERTY(QString freezeFrameDtc READ freezeFrameDtc NOTIFY freezeFrameChanged)
@@ -170,6 +178,8 @@ public:
     Q_INVOKABLE void refreshCodes();
     Q_INVOKABLE void refreshReadiness();
     Q_INVOKABLE void refreshFreezeFrame();
+    /// Reads the monitor test results (service 06) on request.
+    Q_INVOKABLE void readMonitorTests();
     /// Clears codes. QML must have shown the confirmation first; the result
     /// arrives through clearFinished().
     Q_INVOKABLE void clearCodes();
@@ -260,6 +270,12 @@ public:
     bool likelyReadyForInspection() const { return m_readiness.likelyReadyForInspection(); }
     bool dieselEngine() const { return m_readiness.compressionIgnition; }
 
+    QVariantList monitorTests() const;
+    bool monitorTestsRead() const { return m_monitorTestsRead; }
+    bool readingMonitorTests() const { return m_readingMonitorTests; }
+    QString monitorTestsError() const { return m_monitorTestsError; }
+    const QList<MonitorTest> &monitorTestList() const { return m_monitorTests; }
+
     bool freezeFrameAvailable() const { return m_freeze.available; }
     QString freezeFrameDtc() const { return m_freeze.dtc; }
     QVariantList freezeFrameValues() const;
@@ -307,6 +323,7 @@ signals:
     void vehicleChanged();
     void readinessChanged();
     void freezeFrameChanged();
+    void monitorTestsChanged();
     void languageChanged();
     /// Result of clearCodes(): success flag and a message for the user.
     void clearFinished(bool success, const QString &message);
@@ -382,6 +399,10 @@ private:
     ObdClient::VehicleInformation m_info;
     MonitorStatus m_readiness;
     ObdClient::FreezeFrame m_freeze;
+    QList<MonitorTest> m_monitorTests;
+    bool m_monitorTestsRead = false;
+    bool m_readingMonitorTests = false;
+    QString m_monitorTestsError;
 
     QTimer m_pollTimer;
     QTimer m_voltageTimer;

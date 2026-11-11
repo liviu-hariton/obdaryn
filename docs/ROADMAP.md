@@ -55,7 +55,7 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 
 - [ ] Windows build (MSIX or installer), then Android and iOS (Qt for mobile; BLE adapters on iOS)
 - [ ] Bluetooth LE and USB serial transports
-- [ ] Mode 06 (on-board monitor test results) with readable limits
+- [x] **Mode 06 (on-board monitor test results)** on CAN cars: every monitor's latest test with its limits, units from the SAE J1979 table (unknown units shown raw, still judged), verdicts passed / close to the limit (within 10 %) / failed / not run yet, a small range bar per test, and a section in the shareable report
 - [x] Romanian titles for all generic codes, plus full Romanian explanations for the 132 most common
 - [ ] Imperial units
 

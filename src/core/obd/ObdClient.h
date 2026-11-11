@@ -6,6 +6,7 @@
 
 #include "elm327/ElmSession.h"
 #include "obd/Dtc.h"
+#include "obd/MonitorTests.h"
 #include "obd/Readiness.h"
 #include "obd/ResponseParser.h"
 
@@ -75,6 +76,15 @@ public:
 
     /// Readiness monitors + MIL (PID 01), taken from the engine ECU.
     void readMonitorStatus(std::function<void(const MonitorStatus &)> callback);
+
+    /**
+     * @brief Reads the on-board monitor test results (service 06).
+     *
+     * Asks which monitor IDs the car supports ("0600", "0620", ...), then
+     * reads each one. CAN cars only: older protocols use a different,
+     * manufacturer-specific layout. `error` is empty on success.
+     */
+    void readMonitorTests(std::function<void(const QList<MonitorTest> &, const QString &error)> callback);
 
     // ---- Trouble codes ------------------------------------------------------
 

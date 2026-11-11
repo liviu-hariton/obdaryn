@@ -2,6 +2,8 @@
 
 #include "obd/ObdClient.h"
 
+#include <QTimer>
+
 #include "obd/Pids.h"
 #include "obd/VehicleInfo.h"
 
@@ -292,6 +294,32 @@ void ObdClient::pidBatchStep(std::shared_ptr<PidBatchState> st)
         }
         ++st->index;
         pidBatchStep(st);
+    });
+}
+
+void ObdClient::readMonitorTests(std::function<void(const QList<MonitorTest> &, const QString &)> callback)
+{
+    if (!isCan()) {
+        QTimer::singleShot(0, this, [callback] {
+            callback({}, tr("Test results are read on CAN cars only for now (most cars from 2008 on)."));
+        });
+        return;
+    }
+    readSupportedPids(0x06, [this, callback](const QList<quint8> &mids) {
+        if (mids.isEmpty()) {
+            callback({}, tr("The car doesn't report any test results."));
+            return;
+        }
+        auto results = std::make_shared<QList<MonitorTest>>();
+        auto remaining = std::make_shared<int>(int(mids.size()));
+        for (quint8 mid : mids) {
+            request(hexCommand({0x06, mid}), [results, remaining, callback](const Response &r) {
+                for (const EcuMessage &m : r.positive)
+                    *results += MonitorTestCodec::fromResponse(m);
+                if (--*remaining == 0)
+                    callback(*results, QString());
+            });
+        }
     });
 }
 

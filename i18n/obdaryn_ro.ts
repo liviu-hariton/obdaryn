@@ -937,6 +937,149 @@
     </message>
 </context>
 <context>
+    <name>MonitorTests</name>
+    <message>
+        <source>bank %1 sensor %2</source>
+        <translation>banc %1 senzor %2</translation>
+    </message>
+    <message>
+        <source>bank %1</source>
+        <translation>banc %1</translation>
+    </message>
+    <message>
+        <source>Oxygen sensor</source>
+        <translation>Sondă lambda</translation>
+    </message>
+    <message>
+        <source>Catalyst</source>
+        <translation>Catalizator</translation>
+    </message>
+    <message>
+        <source>EGR system</source>
+        <translation>Sistem EGR</translation>
+    </message>
+    <message>
+        <source>Variable valve timing</source>
+        <translation>Distribuție variabilă</translation>
+    </message>
+    <message>
+        <source>EVAP system, cap off or large leak (0.150")</source>
+        <translation>Sistem EVAP, bușon lipsă sau scăpare mare (0,150")</translation>
+    </message>
+    <message>
+        <source>EVAP system, 0.090" leak</source>
+        <translation>Sistem EVAP, scăpare de 0,090"</translation>
+    </message>
+    <message>
+        <source>EVAP system, 0.040" leak</source>
+        <translation>Sistem EVAP, scăpare de 0,040"</translation>
+    </message>
+    <message>
+        <source>EVAP system, 0.020" leak</source>
+        <translation>Sistem EVAP, scăpare de 0,020"</translation>
+    </message>
+    <message>
+        <source>EVAP purge flow</source>
+        <translation>Debit de purjare EVAP</translation>
+    </message>
+    <message>
+        <source>Misfire, all cylinders</source>
+        <translation>Rateuri, toți cilindrii</translation>
+    </message>
+    <message>
+        <source>Oxygen sensor heater</source>
+        <translation>Încălzire sondă lambda</translation>
+    </message>
+    <message>
+        <source>Heated catalyst</source>
+        <translation>Catalizator încălzit</translation>
+    </message>
+    <message>
+        <source>Secondary air system %1</source>
+        <translation>Sistem de aer secundar %1</translation>
+    </message>
+    <message>
+        <source>Fuel system</source>
+        <translation>Sistem de alimentare</translation>
+    </message>
+    <message>
+        <source>Boost pressure control</source>
+        <translation>Control presiune turbo</translation>
+    </message>
+    <message>
+        <source>NOx absorber</source>
+        <translation>Absorbant NOx</translation>
+    </message>
+    <message>
+        <source>NOx catalyst</source>
+        <translation>Catalizator NOx</translation>
+    </message>
+    <message>
+        <source>Misfire, cylinder %1</source>
+        <translation>Rateuri, cilindrul %1</translation>
+    </message>
+    <message>
+        <source>Particulate filter</source>
+        <translation>Filtru de particule</translation>
+    </message>
+    <message>
+        <source>Monitor 0x%1</source>
+        <translation>Monitor 0x%1</translation>
+    </message>
+    <message>
+        <source>Rich to lean threshold voltage</source>
+        <translation>Prag de tensiune bogat → sărac</translation>
+    </message>
+    <message>
+        <source>Lean to rich threshold voltage</source>
+        <translation>Prag de tensiune sărac → bogat</translation>
+    </message>
+    <message>
+        <source>Low voltage for switch time</source>
+        <translation>Tensiune joasă pentru timpul de comutare</translation>
+    </message>
+    <message>
+        <source>High voltage for switch time</source>
+        <translation>Tensiune înaltă pentru timpul de comutare</translation>
+    </message>
+    <message>
+        <source>Rich to lean switch time</source>
+        <translation>Timp de comutare bogat → sărac</translation>
+    </message>
+    <message>
+        <source>Lean to rich switch time</source>
+        <translation>Timp de comutare sărac → bogat</translation>
+    </message>
+    <message>
+        <source>Minimum sensor voltage</source>
+        <translation>Tensiune minimă a sondei</translation>
+    </message>
+    <message>
+        <source>Maximum sensor voltage</source>
+        <translation>Tensiune maximă a sondei</translation>
+    </message>
+    <message>
+        <source>Time between transitions</source>
+        <translation>Timp între comutări</translation>
+    </message>
+    <message>
+        <source>Sensor period</source>
+        <translation>Perioada sondei</translation>
+    </message>
+    <message>
+        <source>Misfires, average of the last 10 drives</source>
+        <translation>Rateuri, media ultimelor 10 drumuri</translation>
+    </message>
+    <message>
+        <source>Misfires, last or current drive</source>
+        <translation>Rateuri, drumul curent sau ultimul</translation>
+    </message>
+    <message>
+        <source>Manufacturer test 0x%1</source>
+        <translation>Test al producătorului 0x%1</translation>
+    </message>
+</context>
+<context>
     <name>NotConnected</name>
     <message>
         <source>Reconnecting to the adapter…</source>
@@ -1747,6 +1890,46 @@
         <source>Not complete</source>
         <translation>Incomplet</translation>
     </message>
+    <message>
+        <source>Failed</source>
+        <translation>Picat</translation>
+    </message>
+    <message>
+        <source>Close to the limit</source>
+        <translation>Aproape de limită</translation>
+    </message>
+    <message>
+        <source>Passed</source>
+        <translation>Trecut</translation>
+    </message>
+    <message>
+        <source>Not run yet</source>
+        <translation>Încă nerulat</translation>
+    </message>
+    <message>
+        <source>Self-test results</source>
+        <translation>Rezultatele autotestelor</translation>
+    </message>
+    <message>
+        <source>all within their limits</source>
+        <translation>toate în limite</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n failed</source>
+        <translation><numerusform>%n picat</numerusform><numerusform>%n picate</numerusform><numerusform>%n de picate</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n close to the limit</source>
+        <translation><numerusform>%n aproape de limită</numerusform><numerusform>%n aproape de limită</numerusform><numerusform>%n aproape de limită</numerusform></translation>
+    </message>
+    <message>
+        <source>Read test results</source>
+        <translation>Citește rezultatele testelor</translation>
+    </message>
+    <message>
+        <source>Each monitor keeps the result of its last test next to the limits the car judges it by. A result close to its limit points to a part that's wearing out, before the check-engine light comes on. Results reset when codes are cleared.</source>
+        <translation>Fiecare monitor păstrează rezultatul ultimului test, alături de limitele după care îl judecă mașina. Un rezultat aproape de limită arată o piesă care se uzează, înainte să se aprindă martorul de motor. Rezultatele se resetează la ștergerea codurilor.</translation>
+    </message>
 </context>
 <context>
     <name>Report</name>
@@ -2242,6 +2425,50 @@
         <source>Nm</source>
         <translation>Nm</translation>
     </message>
+    <message>
+        <source>mV</source>
+        <translation>mV</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation>A</translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <translation>ms</translation>
+    </message>
+    <message>
+        <source>mΩ</source>
+        <translation>mΩ</translation>
+    </message>
+    <message>
+        <source>Ω</source>
+        <translation>Ω</translation>
+    </message>
+    <message>
+        <source>kΩ</source>
+        <translation>kΩ</translation>
+    </message>
+    <message>
+        <source>°C</source>
+        <translation>°C</translation>
+    </message>
+    <message>
+        <source>°</source>
+        <translation>°</translation>
+    </message>
+    <message>
+        <source>Hz</source>
+        <translation>Hz</translation>
+    </message>
+    <message>
+        <source>counts</source>
+        <translation>ori</translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation>%</translation>
+    </message>
 </context>
 <context>
     <name>VehiclePage</name>
@@ -2566,6 +2793,18 @@
         <translation>%1: coduri șterse. Orice cod încă afișat este un defect prezent chiar acum.</translation>
     </message>
     <message>
+        <source>%1 to %2</source>
+        <translation>între %1 și %2</translation>
+    </message>
+    <message>
+        <source>at most %1</source>
+        <translation>cel mult %1</translation>
+    </message>
+    <message>
+        <source>at least %1</source>
+        <translation>cel puțin %1</translation>
+    </message>
+    <message>
         <source>Not connected to a car.</source>
         <translation>Nu ești conectat la o mașină.</translation>
     </message>
@@ -2777,6 +3016,14 @@
 </context>
 <context>
     <name>obdaryn::ObdClient</name>
+    <message>
+        <source>Test results are read on CAN cars only for now (most cars from 2008 on).</source>
+        <translation>Deocamdată rezultatele testelor se citesc doar la mașinile CAN (majoritatea mașinilor din 2008 încoace).</translation>
+    </message>
+    <message>
+        <source>The car doesn't report any test results.</source>
+        <translation>Mașina nu raportează niciun rezultat de test.</translation>
+    </message>
     <message>
         <source>The engine is running (%1 rpm). Switch the engine off, leave the ignition ON, and try again.</source>
         <translation>Motorul este pornit (%1 rot/min). Oprește motorul, lasă contactul pus și încearcă din nou.</translation>
@@ -3029,6 +3276,34 @@
         <source>Every self-test has finished.</source>
         <translation>Toate autotestele s-au încheiat.</translation>
     </message>
+    <message numerus="yes">
+        <source>%n failed</source>
+        <translation><numerusform>%n picat</numerusform><numerusform>%n picate</numerusform><numerusform>%n de picate</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n close to the limit</source>
+        <translation><numerusform>%n aproape de limită</numerusform><numerusform>%n aproape de limită</numerusform><numerusform>%n aproape de limită</numerusform></translation>
+    </message>
+    <message>
+        <source>Self-test results</source>
+        <translation>Rezultatele autotestelor</translation>
+    </message>
+    <message>
+        <source>Failed</source>
+        <translation>Picat</translation>
+    </message>
+    <message>
+        <source>Close to a limit</source>
+        <translation>Aproape de o limită</translation>
+    </message>
+    <message>
+        <source>Passed</source>
+        <translation>Trecut</translation>
+    </message>
+    <message>
+        <source>Every test that has run is within its limits.</source>
+        <translation>Toate testele rulate sunt în limite.</translation>
+    </message>
     <message>
         <source>%1 km</source>
         <translation>%1 km</translation>
@@ -3176,6 +3451,30 @@
     <message>
         <source>The self-tests the car runs on its emission systems. They reset when codes are cleared and finish over a few days of normal driving. An emissions inspection (ITP) can fail a car with incomplete monitors; how many are allowed depends on the country.</source>
         <translation>Autotestele pe care mașina le face sistemelor de emisii. Se resetează la ștergerea codurilor și se încheie după câteva zile de mers normal. O inspecție de emisii (ITP) poate respinge o mașină cu monitoare neîncheiate; câte sunt acceptate depinde de țară.</translation>
+    </message>
+    <message>
+        <source>%1 to %2</source>
+        <translation>între %1 și %2</translation>
+    </message>
+    <message>
+        <source>at most %1</source>
+        <translation>cel mult %1</translation>
+    </message>
+    <message>
+        <source>at least %1</source>
+        <translation>cel puțin %1</translation>
+    </message>
+    <message>
+        <source>Close to the limit</source>
+        <translation>Aproape de limită</translation>
+    </message>
+    <message>
+        <source>Not run yet</source>
+        <translation>Încă nerulat</translation>
+    </message>
+    <message>
+        <source>The latest result of each monitor's tests, next to the limits the car judges it by. A result close to its limit points to a part that's wearing out.</source>
+        <translation>Ultimul rezultat al testelor fiecărui monitor, alături de limitele după care îl judecă mașina. Un rezultat aproape de limită arată o piesă care se uzează.</translation>
     </message>
     <message>
         <source>Freeze frame</source>

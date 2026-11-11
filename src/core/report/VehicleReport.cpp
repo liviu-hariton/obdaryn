@@ -14,6 +14,7 @@
 #include <QSet>
 #include <QStringList>
 
+#include <algorithm>
 #include <cmath>
 
 namespace obdaryn::VehicleReport {
@@ -238,6 +239,21 @@ QString summarySection(const ReportInput &in)
                                       : tr("Every self-test has finished."));
     }
 
+    // Self-test results, when they were read.
+    if (in.monitorTestsRead && !in.monitorTests.isEmpty()) {
+        int failed = 0, close = 0;
+        for (const MonitorTest &t : in.monitorTests) {
+            failed += t.verdict == MonitorTest::Verdict::Failed;
+            close += t.verdict == MonitorTest::Verdict::Close;
+        }
+        QStringList parts;
+        if (failed) parts << tr("%n failed", "", failed);
+        if (close) parts << tr("%n close to the limit", "", close);
+        rows += summaryRow(tr("Self-test results"),
+                           failed ? colored(kRed, tr("Failed")) : close ? colored(kAmber, tr("Close to a limit")) : colored(kGreen, tr("Passed")),
+                           parts.isEmpty() ? tr("Every test that has run is within its limits.") : parts.join(QStringLiteral(" · ")) + QLatin1Char('.'));
+    }
+
     // When were the codes last cleared? On a used car, "just now" deserves a question.
     double km = 0, warmups = 0, minutes = 0;
     const bool hasKm = pidValue(in, 0x31, &km), hasWarmups = pidValue(in, 0x30, &warmups), hasMinutes = pidValue(in, 0x4E, &minutes);
@@ -388,6 +404,41 @@ QString readinessSection(const ReportInput &in)
              rows);
 }
 
+QString monitorTestsSection(const ReportInput &in)
+{
+    if (!in.monitorTestsRead || in.monitorTests.isEmpty())
+        return {};
+    QList<MonitorTest> tests = in.monitorTests;
+    std::stable_sort(tests.begin(), tests.end(), [](const MonitorTest &a, const MonitorTest &b) {
+        return a.mid != b.mid ? a.mid < b.mid : a.tid < b.tid;
+    });
+    QString rows;
+    for (const MonitorTest &t : std::as_const(tests)) {
+        const QString unit = t.unit.isEmpty() ? QString() : QLatin1Char(' ') + esc(t.unit);
+        QString value, limits;
+        if (t.verdict != MonitorTest::Verdict::NotRun) {
+            value = number(t.value, t.decimals) + unit;
+            if (t.hasMin && t.hasMax)
+                limits = tr("%1 to %2").arg(number(t.minimum, t.decimals), number(t.maximum, t.decimals)) + unit;
+            else if (t.hasMax)
+                limits = tr("at most %1").arg(number(t.maximum, t.decimals)) + unit;
+            else if (t.hasMin)
+                limits = tr("at least %1").arg(number(t.minimum, t.decimals)) + unit;
+        }
+        const QString verdict = t.verdict == MonitorTest::Verdict::Failed ? colored(kRed, tr("Failed"))
+                              : t.verdict == MonitorTest::Verdict::Close ? colored(kAmber, tr("Close to the limit"))
+                              : t.verdict == MonitorTest::Verdict::Passed ? tr("Passed")
+                                                                          : QStringLiteral("<span class=\"faint\">%1</span>").arg(tr("Not run yet"));
+        rows += QStringLiteral("<tr><td class=\"label\" width=\"42%\">%1<br><span class=\"faint\">%2</span></td>"
+                               "<td width=\"16%\">%3</td><td class=\"faint\" width=\"22%\">%4</td><td>%5</td></tr>")
+                    .arg(esc(t.monitorName()), esc(t.testName()), value, limits, verdict);
+    }
+    return QStringLiteral("<h2>%1</h2><p class=\"muted\">%2</p><table class=\"rows\" width=\"100%\" cellspacing=\"0\" cellpadding=\"4\">%3</table>")
+        .arg(tr("Self-test results"),
+             tr("The latest result of each monitor's tests, next to the limits the car judges it by. A result close to its limit points to a part that's wearing out."),
+             rows);
+}
+
 QString freezeFrameSection(const ReportInput &in)
 {
     if (!in.freezeFrame.available)
@@ -508,6 +559,7 @@ QString html(const ReportInput &in, Target target)
     body += codesSection(in);
     body += modulesSection(in);
     body += readinessSection(in);
+    body += monitorTestsSection(in);
     body += freezeFrameSection(in);
     body += vehicleSection(in);
     body += aboutSection(in);

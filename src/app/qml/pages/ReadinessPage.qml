@@ -167,6 +167,171 @@ Item {
                 }
             }
 
+            // ---- Self-test results (service 06) -------------------------------------
+            // The numbers behind the monitors. Read on request: it takes a few
+            // seconds and most people only need it when chasing a problem.
+            ColumnLayout {
+                id: tests
+                Layout.fillWidth: true
+                spacing: 0
+                readonly property var groups: App.monitorTests
+                readonly property int failed: count("failed")
+                readonly property int close: count("close")
+                function count(verdict) {
+                    let n = 0
+                    for (const g of groups)
+                        for (const t of g.tests)
+                            if (t.verdict === verdict) n++
+                    return n
+                }
+                function verdictText(v) {
+                    return v === "failed" ? qsTr("Failed") : v === "close" ? qsTr("Close to the limit")
+                         : v === "passed" ? qsTr("Passed") : qsTr("Not run yet")
+                }
+                function verdictColor(v) {
+                    return v === "failed" ? Theme.redInk : v === "close" ? Theme.amberInk
+                         : v === "passed" ? Theme.textMuted : Theme.textFaint
+                }
+
+                SectionTitle {
+                    Layout.fillWidth: true
+                    Layout.bottomMargin: Theme.s2
+                    text: qsTr("Self-test results")
+                    detail: !App.monitorTestsRead ? ""
+                          : tests.failed + tests.close === 0 ? qsTr("all within their limits")
+                          : [tests.failed ? qsTr("%n failed", "", tests.failed) : "",
+                             tests.close ? qsTr("%n close to the limit", "", tests.close) : ""].filter(s => s.length).join(" · ")
+                    AppButton {
+                        variant: "quiet"
+                        iconName: "refresh-cw"
+                        text: App.monitorTestsRead ? qsTr("Read again") : qsTr("Read test results")
+                        busy: App.readingMonitorTests
+                        enabled: !App.readingMonitorTests && !App.scanning && !App.moduleScanRunning
+                        onClicked: App.readMonitorTests()
+                    }
+                }
+
+                Text {
+                    Layout.fillWidth: true
+                    Layout.bottomMargin: Theme.s3
+                    visible: !App.monitorTestsRead || App.monitorTestsError.length > 0
+                    text: App.monitorTestsError.length > 0 ? App.monitorTestsError
+                        : qsTr("Each monitor keeps the result of its last test next to the limits the car judges it by. A result close to its limit points to a part that's wearing out, before the check-engine light comes on. Results reset when codes are cleared.")
+                    color: Theme.textMuted
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontBody
+                    wrapMode: Text.WordWrap
+                    lineHeight: 1.3
+                }
+
+                Repeater {
+                    model: tests.groups
+                    delegate: ColumnLayout {
+                        id: group
+                        required property var modelData
+                        Layout.fillWidth: true
+                        spacing: 0
+
+                        // Monitor name, with its worst result.
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Layout.topMargin: Theme.s3
+                            Layout.bottomMargin: Theme.s1
+                            Text {
+                                Layout.fillWidth: true
+                                text: group.modelData.monitor
+                                color: Theme.text
+                                font.family: Theme.sans
+                                font.pixelSize: Theme.fontBody
+                                font.weight: Font.DemiBold
+                                elide: Text.ElideRight
+                            }
+                        }
+
+                        Repeater {
+                            model: group.modelData.tests
+                            delegate: Item {
+                                id: test
+                                required property var modelData
+                                Layout.fillWidth: true
+                                // Long Romanian test names wrap to two lines instead of being cut.
+                                implicitHeight: Math.max(40, testRow.implicitHeight + 14)
+                                Rectangle { anchors.top: parent.top; width: parent.width; height: 1; color: Theme.hairline }
+                                RowLayout {
+                                    id: testRow
+                                    anchors.fill: parent
+                                    spacing: Theme.s4
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: test.modelData.name
+                                        color: Theme.textMuted
+                                        font.family: Theme.sans
+                                        font.pixelSize: Theme.fontBody
+                                        wrapMode: Text.WordWrap
+                                        maximumLineCount: 2
+                                        elide: Text.ElideRight
+                                    }
+                                    // Where the value sits between its limits.
+                                    Item {
+                                        Layout.preferredWidth: 120
+                                        Layout.preferredHeight: 12
+                                        visible: test.modelData.verdict !== "notRun"
+                                        Rectangle {
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            width: parent.width; height: 2; radius: 1
+                                            color: Theme.hairline
+                                        }
+                                        Repeater { // limit ticks
+                                            model: [test.modelData.minPosition, test.modelData.maxPosition].filter(p => p >= 0)
+                                            delegate: Rectangle {
+                                                required property real modelData
+                                                x: modelData * (120 - 1)
+                                                width: 1; height: 12
+                                                color: Theme.textFaint
+                                            }
+                                        }
+                                        Rectangle {
+                                            x: test.modelData.position * (120 - 8)
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            width: 8; height: 8; radius: 4
+                                            color: test.modelData.verdict === "failed" ? Theme.red
+                                                 : test.modelData.verdict === "close" ? Theme.amber : Theme.green
+                                        }
+                                    }
+                                    Text {
+                                        Layout.preferredWidth: 90
+                                        horizontalAlignment: Text.AlignRight
+                                        text: test.modelData.value
+                                        color: Theme.text
+                                        font.family: Theme.sans
+                                        font.pixelSize: Theme.fontBody
+                                        font.features: { "tnum": 1 }
+                                    }
+                                    Text {
+                                        Layout.preferredWidth: 130
+                                        text: test.modelData.limits
+                                        color: Theme.textFaint
+                                        font.family: Theme.sans
+                                        font.pixelSize: Theme.fontSmall
+                                        font.features: { "tnum": 1 }
+                                        elide: Text.ElideRight
+                                    }
+                                    Text {
+                                        Layout.preferredWidth: 130
+                                        horizontalAlignment: Text.AlignRight
+                                        text: tests.verdictText(test.modelData.verdict)
+                                        color: tests.verdictColor(test.modelData.verdict)
+                                        font.family: Theme.sans
+                                        font.pixelSize: Theme.fontBody
+                                        font.weight: test.modelData.verdict === "failed" || test.modelData.verdict === "close" ? Font.DemiBold : Font.Normal
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             Item { Layout.preferredHeight: Theme.s6 }
         }
     }

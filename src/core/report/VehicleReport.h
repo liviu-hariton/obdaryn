@@ -5,6 +5,7 @@
 #pragma once
 
 #include "obd/ModuleScanner.h"
+#include "obd/MonitorTests.h"
 #include "obd/ObdClient.h"
 #include "obd/Readiness.h"
 
@@ -44,6 +45,9 @@ struct ReportInput
     MonitorStatus readiness;
     QList<Dtc> dtcs;           ///< generic OBD-II codes (stored, pending, permanent)
     ObdClient::FreezeFrame freezeFrame;
+
+    bool monitorTestsRead = false;  ///< service 06 results were read for this report
+    QList<MonitorTest> monitorTests;
 
     bool modulesScanned = false;
     QList<ModuleResult> modules;

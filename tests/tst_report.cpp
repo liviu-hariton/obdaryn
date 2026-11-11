@@ -20,6 +20,7 @@ private slots:
     void escapesEverything();
     void targets();
     void fileName();
+    void monitorTests();
 
 private:
     static ReportInput sample();
@@ -130,6 +131,19 @@ void TestReport::fileName()
     QCOMPARE(VehicleReport::suggestedBaseName(in), QStringLiteral("Obdaryn report 2026-11-11 Hyundai 2014"));
     in.source = ReportInput::Source::Demo;
     QCOMPARE(VehicleReport::suggestedBaseName(in), QStringLiteral("Obdaryn report 2026-11-11 demo car"));
+}
+
+void TestReport::monitorTests()
+{
+    ReportInput in = sample();
+    QVERIFY(!VehicleReport::html(in).contains(QStringLiteral("Self-test results"))); // not read: not shown
+    EcuMessage m{"7E8", QByteArray::fromHex("46" "218003" "0069" "0000" "0064"), {}}; // catalyst 1.05, at most 1.00
+    in.monitorTestsRead = true;
+    in.monitorTests = MonitorTestCodec::fromResponse(m);
+    const QString html = VehicleReport::html(in);
+    QVERIFY(html.contains(QStringLiteral("Self-test results")));
+    QVERIFY(html.contains(QStringLiteral("Catalyst, bank 1")));
+    QVERIFY(html.contains(QStringLiteral(">Failed<")));
 }
 
 QTEST_GUILESS_MAIN(TestReport)

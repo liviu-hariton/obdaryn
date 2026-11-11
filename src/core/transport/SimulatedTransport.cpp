@@ -282,6 +282,49 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::engineReply(const QByteA
         }
         return payload.size() > 1 ? reply(payload) : QList<EcuReply>{};
     }
+    case 0x06: { // on-board monitor test results: 06 <MID>
+        if (req.size() < 2)
+            return {};
+        const quint8 mid = quint8(req[1]);
+        // Monitors with results: oxygen sensors, catalyst (failing, which is
+        // why P0420 is stored), EVAP (not run since the last clear), O2 heater, misfire.
+        static const QSet<quint8> kMids = {0x01, 0x02, 0x21, 0x3C, 0x41, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5};
+        if (mid % 0x20 == 0)
+            return reply(QByteArray(1, char(0x46)) + char(mid) + supportedMask(kMids, mid));
+        if (!kMids.contains(mid))
+            return {};
+        auto record = [mid](quint8 tid, quint8 uasid, int value, int min, int max) {
+            QByteArray r;
+            r += char(mid);
+            r += char(tid);
+            r += char(uasid);
+            for (int v : {value, min, max}) {
+                r += char((v >> 8) & 0xFF);
+                r += char(v & 0xFF);
+            }
+            return r;
+        };
+        QByteArray payload(1, char(0x46));
+        switch (mid) {
+        case 0x01:
+            payload += record(0x01, 0x0B, 450, 400, 500);  // rich-to-lean threshold, V
+            payload += record(0x05, 0x10, 72, 0, 100);     // rich-to-lean switch time, ms
+            payload += record(0x06, 0x10, 58, 0, 100);     // lean-to-rich switch time, ms
+            break;
+        case 0x02: payload += record(0x07, 0x0B, 80, 0, 400); break;         // minimum voltage, V
+        case 0x21: payload += record(0x80, 0x03, 105, 0, 100); break;        // catalyst: failing
+        case 0x3C: payload += record(0x80, 0x01, 0, 0, 0); break;            // EVAP: not run yet
+        case 0x41: payload += record(0x80, 0x12, 38, 0, 60); break;          // heater warm-up, s
+        case 0xA1: payload += record(0x0C, 0x24, 3, 0, 50); break;
+        default: { // misfire per cylinder: cylinder 3 near its limit
+            const int cyl = mid - 0xA1;
+            payload += record(0x0B, 0x24, cyl == 3 ? 9 : 0, 0, 10);
+            payload += record(0x0C, 0x24, cyl == 3 ? 2 : 0, 0, 10);
+            break;
+        }
+        }
+        return reply(payload);
+    }
     case 0x02: { // freeze frame: 02 <pid> <frame>
         if (req.size() < 3 || quint8(req[2]) != 0x00 || m_stored.isEmpty())
             return {};

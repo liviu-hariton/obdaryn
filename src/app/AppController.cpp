@@ -408,6 +408,10 @@ void AppController::resetVehicleData()
     m_info = {};
     m_readiness = {};
     m_freeze = {};
+    m_monitorTests.clear();
+    m_monitorTestsRead = false;
+    m_monitorTestsError.clear();
+    emit monitorTestsChanged();
     m_batteryVoltage = 0;
     m_lastScanTime.clear();
     m_moduleScanTime.clear();
@@ -634,6 +638,101 @@ void AppController::refreshFreezeFrame()
         m_freeze = ff;
         emit freezeFrameChanged();
     });
+}
+
+void AppController::readMonitorTests()
+{
+    if (m_readingMonitorTests || busyWithModules() || m_client->session()->state() != ElmSession::State::Ready)
+        return;
+    m_readingMonitorTests = true;
+    emit monitorTestsChanged();
+    m_client->readMonitorTests([this](const QList<MonitorTest> &tests, const QString &error) {
+        m_readingMonitorTests = false;
+        m_monitorTestsRead = true;
+        m_monitorTests = tests;
+        m_monitorTestsError = error;
+        emit monitorTestsChanged();
+    });
+}
+
+namespace {
+const char *verdictKey(MonitorTest::Verdict v)
+{
+    switch (v) {
+    case MonitorTest::Verdict::Passed: return "passed";
+    case MonitorTest::Verdict::Close: return "close";
+    case MonitorTest::Verdict::Failed: return "failed";
+    case MonitorTest::Verdict::NotRun: break;
+    }
+    return "notRun";
+}
+/// Worse first: a monitor shows its worst test.
+int severity(MonitorTest::Verdict v)
+{
+    return v == MonitorTest::Verdict::Failed ? 3 : v == MonitorTest::Verdict::Close ? 2 : v == MonitorTest::Verdict::Passed ? 1 : 0;
+}
+} // namespace
+
+QVariantList AppController::monitorTests() const
+{
+    QList<MonitorTest> sorted = m_monitorTests;
+    std::stable_sort(sorted.begin(), sorted.end(), [](const MonitorTest &a, const MonitorTest &b) {
+        return a.mid != b.mid ? a.mid < b.mid : a.tid < b.tid;
+    });
+    const QLocale locale;
+    auto number = [&locale](double v, int decimals) { return locale.toString(v, 'f', decimals); };
+
+    QVariantList groups;
+    QVariantList tests;
+    int currentMid = -1;
+    MonitorTest::Verdict worst = MonitorTest::Verdict::NotRun;
+    QString monitor;
+    auto flush = [&] {
+        if (currentMid >= 0)
+            groups << QVariantMap{{QStringLiteral("monitor"), monitor},
+                                  {QStringLiteral("verdict"), QLatin1String(verdictKey(worst))},
+                                  {QStringLiteral("tests"), tests}};
+        tests.clear();
+        worst = MonitorTest::Verdict::NotRun;
+    };
+    for (const MonitorTest &t : std::as_const(sorted)) {
+        if (t.mid != currentMid) {
+            flush();
+            currentMid = t.mid;
+            monitor = t.monitorName();
+        }
+        if (severity(t.verdict) > severity(worst))
+            worst = t.verdict;
+        const QString unit = t.unit.isEmpty() ? QString() : QLatin1Char(' ') + t.unit;
+        QString limits;
+        if (t.verdict == MonitorTest::Verdict::NotRun)
+            ; // a test that hasn't run has no limits yet (all zero)
+        else if (t.hasMin && t.hasMax)
+            limits = tr("%1 to %2").arg(number(t.minimum, t.decimals), number(t.maximum, t.decimals)) + unit;
+        else if (t.hasMax)
+            limits = tr("at most %1").arg(number(t.maximum, t.decimals)) + unit;
+        else if (t.hasMin)
+            limits = tr("at least %1").arg(number(t.minimum, t.decimals)) + unit;
+
+        // Where the value sits, for the little range bar: a domain a bit wider
+        // than the limits, so a value just outside still shows.
+        double lo = t.hasMin ? t.minimum : 0, hi = t.hasMax ? t.maximum : (t.hasMin ? t.minimum * 2 : 1);
+        if (!t.hasMin && t.hasMax && t.maximum < 0)
+            lo = t.maximum * 2;
+        const double pad = (hi - lo) * 0.15;
+        lo -= t.hasMin ? pad : 0;
+        hi += pad;
+        auto pos = [lo, hi](double v) { return hi > lo ? qBound(0.0, (v - lo) / (hi - lo), 1.0) : 0.5; };
+        tests << QVariantMap{{QStringLiteral("name"), t.testName()},
+                             {QStringLiteral("value"), t.verdict == MonitorTest::Verdict::NotRun ? QString() : number(t.value, t.decimals) + unit},
+                             {QStringLiteral("limits"), limits},
+                             {QStringLiteral("verdict"), QLatin1String(verdictKey(t.verdict))},
+                             {QStringLiteral("position"), pos(t.value)},
+                             {QStringLiteral("minPosition"), t.hasMin ? pos(t.minimum) : -1.0},
+                             {QStringLiteral("maxPosition"), t.hasMax ? pos(t.maximum) : -1.0}};
+    }
+    flush();
+    return groups;
 }
 
 void AppController::clearCodes()
@@ -931,6 +1030,8 @@ void AppController::saveReport(const QString &pathOrUrl, bool open)
         input.readiness = m_readiness;
         input.dtcs = m_dtcs->dtcList();
         input.freezeFrame = m_freeze;
+        input.monitorTestsRead = m_monitorTestsRead && m_monitorTestsError.isEmpty();
+        input.monitorTests = m_monitorTests;
         input.modulesScanned = moduleScanDone();
         input.modules = m_moduleScanner->results();
         for (const auto &r : readings) {

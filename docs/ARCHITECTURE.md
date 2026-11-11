@@ -43,6 +43,7 @@
   - `Pids`: about 90 standard SAE J1979 parameters with their formulas.
   - `Dtc`: 2-byte codes such as P0420, and the system each one belongs to.
   - `Readiness`: the monitor status in PID 01.
+  - `MonitorTests`: service 06 test records (MID, TID, unit and scaling ID, value, limits), scaled and judged.
   - `VehicleInfo`: VIN, model year, manufacturer, calibration IDs, CVNs and ECU names.
   - `DtcDatabase`: plain-language explanations from obdex.
 - **Recording** (`src/core/recording`) saves and replays sessions.

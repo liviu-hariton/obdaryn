@@ -11,6 +11,7 @@
   - Renault/Dacia (24)
 - **All modules.** A full-vehicle scan reads codes from ABS, airbag, body, cluster and other modules too, using per-brand module lists: Hyundai/Kia, Toyota, Ford, VW group, Renault/Dacia, or generic for any car.
 - **Readiness for inspection.** Which self-tests (monitors) have completed, and whether the car is likely to pass the emissions check.
+- **Self-test results (Mode 06).** The numbers behind the readiness monitors, each next to the limits the car judges it by, so a part that's wearing out shows before the check-engine light comes on.
 - **Freeze frame.** The sensor snapshot taken when a fault was stored.
 - **Live data.** Every standard sensor the car supports, with sparklines. A pinned dashboard refreshes several times per second thanks to multi-PID requests.
 - **Vehicle info.** Decoded VIN, calibration IDs, CVNs and ECU names.

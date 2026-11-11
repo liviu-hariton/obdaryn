@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
+<?xml version='1.0' encoding='utf-8'?>
 <TS version="2.1" language="en" sourcelanguage="en">
 <context>
     <name>ModulesPage</name>
@@ -47,6 +46,17 @@
             <numerusform>%n more in other modules</numerusform>
             <numerusform>%n more in other modules</numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>ReadinessPage</name>
+    <message numerus="yes">
+        <source>%n failed</source>
+        <translation><numerusform>%n failed</numerusform><numerusform>%n failed</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n close to the limit</source>
+        <translation><numerusform>%n close to the limit</numerusform><numerusform>%n close to the limit</numerusform></translation>
     </message>
 </context>
 <context>
@@ -122,6 +132,14 @@
             <numerusform>%n module answered.</numerusform>
             <numerusform>%n modules answered.</numerusform>
         </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n failed</source>
+        <translation><numerusform>%n failed</numerusform><numerusform>%n failed</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n close to the limit</source>
+        <translation><numerusform>%n close to the limit</numerusform><numerusform>%n close to the limit</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n warm-up(s)</source>

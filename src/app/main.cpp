@@ -107,6 +107,14 @@ int main(int argc, char *argv[])
         if (qEnvironmentVariableIsSet("OBDARYN_IGNITION_OFF_AT_MS"))
             QTimer::singleShot(qEnvironmentVariableIntValue("OBDARYN_IGNITION_OFF_AT_MS"), controller, [controller] { controller->setDemoIgnitionOn(false); });
     }
+    // OBDARYN_READ_TESTS=1 reads the monitor test results (service 06) once the first scan ends.
+    if (qEnvironmentVariableIntValue("OBDARYN_READ_TESTS") == 1) {
+        if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App"))
+            QObject::connect(controller, &obdaryn::AppController::scanFinished, controller, [controller] {
+                if (!controller->vin().isEmpty() && !controller->monitorTestsRead())
+                    QTimer::singleShot(300, controller, [controller] { controller->readMonitorTests(); });
+            });
+    }
     if (qEnvironmentVariableIsSet("OBDARYN_REPORT")) {
         if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
             const bool afterModules = qEnvironmentVariableIntValue("OBDARYN_SCAN_MODULES") == 1;
