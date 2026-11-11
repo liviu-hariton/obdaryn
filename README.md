@@ -77,9 +77,13 @@ In CLion, open the folder and add `-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt` to 
 | `i18n` | Translations (`obdaryn_ro.ts`) |
 | `tools` | Data import scripts (obdex codes, OBDb values, Romanian code texts), the first real-car test (`first-contact.sh`), and the release, website and screenshot scripts (`make-release.sh`, `publish-release.sh`, `deploy-site.sh`, `capture-site-images.sh`, `capture-readme-images.sh`) |
 | `docs` | Architecture, car-interaction guide, roadmap, user guide (English and Romanian) |
-| `site` | The obdaryn.eu website (Astro, static), built from the app's own data, including a page per trouble code; see [docs/RELEASE.md](docs/RELEASE.md#the-website) |
+| `site` | The obdaryn.eu website (Astro, static), built from the app's own data, including a page per trouble code and an [`llms.txt`](https://obdaryn.eu/llms.txt) for AI agents; see [docs/RELEASE.md](docs/RELEASE.md#the-website) |
 
 Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) before contributing. Every source file is commented for newcomers.
+
+## Support
+
+Obdaryn is free and stays free. If it saved you a trip to the workshop, you can [buy me a coffee](https://www.buymeacoffee.com/liviuhariton). Bug reports and pull requests are just as welcome: [issues](https://github.com/liviu-hariton/obdaryn/issues).
 
 ## Licence and credits
 

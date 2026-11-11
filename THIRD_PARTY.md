@@ -7,6 +7,7 @@
 | [JetBrains Mono](https://www.jetbrains.com/lp/mono/) | Codes, VINs, hex and the adapter log, in the app and on the website (`@fontsource-variable/jetbrains-mono`) | SIL Open Font License 1.1 |
 | [Lucide](https://lucide.dev) | Stroke icons (`src/app/assets/icons`, and the website's `site/src/components/Icon.astro`); the engine telltale icon is Obdaryn's own | ISC |
 | [Astro](https://astro.build) | Builds the website in `site/` (not part of the app) | MIT |
+| GitHub mark | The website's links to the GitHub repository (`site/src/components/Icon.astro`), used as [GitHub's logo guidelines](https://github.com/logos) allow | GitHub's trademark; not covered by Obdaryn's licence |
 | [OBDb](https://github.com/OBDb) | Manufacturer values for Hyundai and Kia models (`src/core/data/obdb/hyundai-kia.json`, built by `tools/import_obdb.py`), and recorded Elantra answers used as test data (`tests/data/obdb_elantra_cases.json`) | CC BY-SA 4.0 (adapted: filtered and reformatted; see `src/core/data/obdb/LICENSE.md`) |
 | [obdex](https://github.com/foerbsnavi/obdex) | Generic OBD-II trouble-code titles, descriptions, causes, symptoms and repair hints (`src/core/data/dtc_generic.json`, built by `tools/import_obdex.py`) | CC0-1.0 (public domain) |
 
