@@ -11,6 +11,7 @@ import CodeLookup from "./CodeLookup.astro";
 import { codeStrings } from "../i18n/codes";
 import DownloadButton from "./DownloadButton.astro";
 import Icon from "./Icon.astro";
+import AdapterCard from "./AdapterCard.astro";
 import Screen from "./Screen.astro";
 import { brands, brandCodeTotal, generic, modelCount } from "../data/cars";
 import { genericCount } from "../data/codes";
@@ -113,6 +114,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
       <dl class="rows needs">
         {h.needs.map(([what, detail]) => <div class="row"><dt>{what}</dt><dd>{detail}</dd></div>)}
       </dl>
+      <div class="adapter-wrap"><AdapterCard lang={lang} /></div>
     </div>
     <div>
       <h3 class="steps-title">{h.stepsTitle}</h3>
@@ -227,6 +229,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
   /* What you need. */
   .need { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7) clamp(32px, 6vw, 96px); }
   .needs { margin-top: var(--s6); }
+  .adapter-wrap { margin-top: var(--s6); }
   .needs dt { color: var(--text); font-weight: 600; }
   .needs dd { color: var(--text-muted); margin: 0; }
   .steps-title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-top: 12px; }

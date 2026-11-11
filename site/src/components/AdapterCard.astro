@@ -1,0 +1,48 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// The adapter Obdaryn is developed with: its photo, name, what it is, and a link
+// to the vendor's product page. On the home page ("What you need") and the
+// download page (Requirements). The photo is Vgate's, cut out of its white
+// background and served from this site (nothing is loaded from Vgate); it sits on
+// a softly lit plate so the black adapter stays visible in the dark theme.
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import photo from "../assets/products/vgate-icar-pro-wifi.png";
+import { adapterUrl } from "../data/site";
+import { t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang; heading?: "h3" | "h2" }
+const { lang, heading: Heading = "h3" } = Astro.props;
+const a = t(lang).adapter;
+---
+<figure class="adapter">
+  <div class="plate">
+    <Image src={photo} alt={a.alt} widths={[200, 400]} sizes="200px" format="webp" loading="lazy" />
+    <span class="credit">{a.credit}</span>
+  </div>
+  <figcaption>
+    <Heading class="name">{a.name}</Heading>
+    <p class="text">{a.text}</p>
+    <a class="vendor" href={adapterUrl} rel="noopener">{a.link}<Icon name="arrow-up-right" size={15} /></a>
+  </figcaption>
+</figure>
+
+<style>
+  .adapter { display: grid; grid-template-columns: 200px 1fr; gap: var(--s5); align-items: center; margin: 0; }
+  /* A plate lit from above: white in the light theme, a lifted grey in the dark one. */
+  .plate {
+    position: relative; display: grid; place-items: center; aspect-ratio: 1; padding: 18px;
+    border: 1px solid var(--hairline); border-radius: var(--radius-lg);
+    background: radial-gradient(ellipse 80% 70% at 50% 42%, color-mix(in srgb, var(--surface), #fff 16%), var(--surface));
+  }
+  .plate img { width: 100%; height: auto; }
+  .credit { position: absolute; right: 8px; bottom: 6px; font-size: 11px; color: var(--text-faint); }
+  .name { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); margin: 0; }
+  .text { color: var(--text-muted); margin-top: var(--s2); max-width: 34em; }
+  .vendor { display: inline-flex; align-items: center; gap: 4px; margin-top: var(--s3); font-weight: 500; }
+  @media (max-width: 520px) {
+    .adapter { grid-template-columns: 1fr; }
+    .plate { max-width: 240px; }
+  }
+</style>

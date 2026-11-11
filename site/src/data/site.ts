@@ -23,6 +23,8 @@ export const dmgUrl = `${repoUrl}/releases/download/v${version}/Obdaryn-${versio
 export const releasesUrl = `${repoUrl}/releases`;
 export const issuesUrl = `${repoUrl}/issues`;
 export const contactEmail = "hello@obdaryn.eu";
+/** The adapter Obdaryn is developed with: the vendor's product page. */
+export const adapterUrl = "https://www.vgatemall.com/products-detail/i-14/";
 /** Where "Buy me a coffee" leads (a plain link: nothing is loaded from there). */
 export const coffeeUrl = "https://www.buymeacoffee.com/liviuhariton";
 export const firstPublished = 2026;
