@@ -4,8 +4,8 @@
 
 find_package(Qt6 REQUIRED COMPONENTS Svg)
 
-# The app icon (macOS bundle). Made from macos/icon-1024.png:
-#   sips + iconutil, see docs/RELEASE.md.
+# The app icon (macOS bundle), built from macos/Obdaryn.iconset with iconutil
+# (see docs/RELEASE.md); macos/icon-master*.svg are the drawings.
 set(OBDARYN_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/macos/Obdaryn.icns")
 set_source_files_properties(${OBDARYN_APP_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
@@ -90,7 +90,9 @@ file(GLOB OBDARYN_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/assets/icons/*.svg")
 qt_add_resources(obdaryn "obdaryn_assets"
     PREFIX "/"
     BASE "${CMAKE_CURRENT_SOURCE_DIR}/assets"
-    FILES ${OBDARYN_FONTS} ${OBDARYN_ICONS} assets/brand/logo.svg)
+    FILES ${OBDARYN_FONTS} ${OBDARYN_ICONS}
+          assets/brand/logo.svg assets/brand/logo-dark.svg
+          assets/brand/logo-small.svg assets/brand/logo-small-dark.svg)
 
 target_link_libraries(obdaryn PRIVATE
     obdaryn_core

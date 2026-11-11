@@ -30,7 +30,7 @@ C.ApplicationWindow {
     // The ignition "bulb check": when the car first answers, every telltale
     // lights briefly and the live traces sweep in, then the real state shows.
     property bool bulbCheck: false
-    Timer { id: bulbTimer; interval: 1200; onTriggered: window.bulbCheck = false }
+    Timer { id: bulbTimer; interval: Theme.bulbCheck; onTriggered: window.bulbCheck = false }
     Connections {
         target: App
         function onConnectionChanged() {

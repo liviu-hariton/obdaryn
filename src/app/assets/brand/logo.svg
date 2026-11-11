@@ -1,17 +1,2 @@
-<!-- Obdaryn logo: the check-engine telltale, lit amber, on a graphite tile.
-     Same drawing as the app icon (src/app/macos/icon-1024.png), without the
-     macOS icon margins. GPL-3.0-or-later. -->
-<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-  <defs>
-    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#262B34"/>
-      <stop offset="1" stop-color="#121519"/>
-    </linearGradient>
-  </defs>
-  <rect x="0" y="0" width="100" height="100" rx="22.5" fill="url(#tile)"/>
-  <g transform="translate(15.2 17.4) scale(2.9)" fill="none" stroke="#F2A93B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M10 4.5h4M12 4.5v3"/>
-    <path d="M2 10.5v6M2 13.5h3"/>
-    <path d="M5 10.5 7 8.5h3l1-1h3l1 1h2l2 2h1.5v-1.5H22v7.5h-1.5V15H19l-2 3H8l-3-3z"/>
-  </g>
-</svg>
+<!-- Obdaryn logo mark (full drawing, 32px and up): the OBD-II port on a graphite tile, pin 16 (battery power) lit amber. Light ground. From design-handoff/obdaryn-brand. GPL-3.0-or-later. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40"><title>Obdaryn</title><defs><linearGradient id="t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262B34"/><stop offset="1" stop-color="#121519"/></linearGradient></defs><rect width="40" height="40" rx="9" fill="url(#t)"/><path d="M8 13.5h24l-3.2 13H11.2Z" fill="none" stroke="#A3A9B2" stroke-width="2" stroke-linejoin="round"/><g fill="#4A515C"><circle cx="12.6" cy="18" r="0.95"/><circle cx="14.7" cy="18" r="0.95"/><circle cx="16.8" cy="18" r="0.95"/><circle cx="18.9" cy="18" r="0.95"/><circle cx="21.1" cy="18" r="0.95"/><circle cx="23.2" cy="18" r="0.95"/><circle cx="25.3" cy="18" r="0.95"/><circle cx="27.4" cy="18" r="0.95"/><circle cx="13.5" cy="22.2" r="0.95"/><circle cx="15.4" cy="22.2" r="0.95"/><circle cx="17.3" cy="22.2" r="0.95"/><circle cx="19.1" cy="22.2" r="0.95"/><circle cx="20.9" cy="22.2" r="0.95"/><circle cx="22.7" cy="22.2" r="0.95"/><circle cx="24.6" cy="22.2" r="0.95"/></g><circle cx="26.5" cy="22.2" r="1.6" fill="#F2A93B"/></svg>

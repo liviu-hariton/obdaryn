@@ -25,7 +25,7 @@ Item {
         property: "reveal"
         from: 0
         to: 1
-        duration: 1100
+        duration: Theme.sweep
         easing.type: Easing.OutExpo
     }
 

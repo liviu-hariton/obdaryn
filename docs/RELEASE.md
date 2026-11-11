@@ -26,16 +26,11 @@ The script:
 ## Version and icon
 
 - The version comes from `project(Obdaryn VERSION …)` in the top-level `CMakeLists.txt`.
-- The in-app logo is `src/app/assets/brand/logo.svg`, the same drawing as the icon without the macOS margins; change both together.
-- The icon is `src/app/macos/Obdaryn.icns`, made from `src/app/macos/icon-1024.png`:
+- The in-app logo is `src/app/assets/brand/logo.svg` (32px and up) and `logo-small.svg` (below 32px), each with a `-dark` variant that adds the hairline edge. The app icon is the same drawing with the macOS margins: `src/app/macos/icon-master.svg` and `icon-master-small.svg`. Change them together.
+- The icon is `src/app/macos/Obdaryn.icns`, built from the PNGs in `src/app/macos/Obdaryn.iconset` (the 16 and 32px slots use the small drawing, so don't resample them from the 1024px master):
 
   ```bash
-  mkdir Obdaryn.iconset
-  for s in 16 32 128 256 512; do
-    sips -z $s $s icon-1024.png --out Obdaryn.iconset/icon_${s}x${s}.png
-    sips -z $((s*2)) $((s*2)) icon-1024.png --out Obdaryn.iconset/icon_${s}x${s}@2x.png
-  done
-  iconutil -c icns Obdaryn.iconset -o Obdaryn.icns
+  iconutil -c icns src/app/macos/Obdaryn.iconset -o src/app/macos/Obdaryn.icns
   ```
 
 ## Signing for other people

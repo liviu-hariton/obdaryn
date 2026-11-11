@@ -50,6 +50,7 @@ QtObject {
     readonly property color blueInk:     dark ? "#5B97F7" : "#2A64CC"   // links and blue text (5.2:1 on light)
     readonly property color blueFill:    dark ? "#2F6FE0" : "#2F6FE0"   // primary button ground (white text 4.6:1)
     readonly property color redFill:     dark ? "#C8372D" : "#C8372D"
+    readonly property color onFill:      "#FFFFFF"                      // text and marks on a filled ground
     readonly property color unlit:       dark ? "#3A3F47" : "#B9C0CA"   // a telltale that is off
 
     // Charts comparing two recordings: A and B. Validated with the dataviz
@@ -92,8 +93,11 @@ QtObject {
     readonly property int readingMaxWidth: 920   // single-column pages (readiness, vehicle, settings)
 
     // ---- Motion ------------------------------------------------------------------
-    readonly property int fast: reduceMotion ? 0 : 120
-    readonly property int normal: reduceMotion ? 0 : 220
+    // All exponential ease-out; Reduce motion zeroes them (and skips the bulb check and sweep).
+    readonly property int fast: reduceMotion ? 0 : 120         // hover, toggles, small state changes
+    readonly property int normal: reduceMotion ? 0 : 220       // telltale cross-fade, jumps, expanding rows
+    readonly property int bulbCheck: reduceMotion ? 0 : 1200   // every telltale lit when the car first answers
+    readonly property int sweep: reduceMotion ? 0 : 1100       // sparklines drawing in during the bulb check
 
     /// "#RRGGBB" without the hash, for image://icon/<name>/<RRGGBB>.
     function hex(c) {

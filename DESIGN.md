@@ -55,6 +55,10 @@ colors:
   trace-4-dark: "#4FC1C9"
   trace-5-dark: "#E8EAED"
   trace-6-dark: "#9AA4FF"
+  chart-a: "#2F6FE0"
+  chart-a-dark: "#4C88EE"
+  chart-b: "#1E8A50"
+  chart-b-dark: "#2EA866"
 typography:
   value:
     fontFamily: "Inter, sans-serif"
@@ -109,6 +113,12 @@ spacing:
   s5: "24px"
   s6: "32px"
   s7: "48px"
+motion:
+  fast: "120ms"
+  normal: "220ms"
+  bulbCheck: "1200ms"
+  sweep: "1100ms"
+  easing: "exponential ease-out"
 components:
   button-primary:
     backgroundColor: "{colors.blue-fill}"
@@ -308,6 +318,7 @@ Calm and native; one button component with four variants.
 ### Inputs / Fields
 - **Style:** 36px, field ground, 1px field-border, 6px radius, 10px side padding, 12px muted label above. Mono when the field takes an address or hex.
 - **Focus:** border becomes 2px Telltale Blue.
+- **Error:** a 1px telltale-red border and, under the field, a 12px `red-ink` sentence that says how to fix the value ("Enter a number between 0.5 and 10").
 
 ### Description source line
 Under every code explanation there is a quiet 12px faint note. It names where the text comes from (obdex, or Obdaryn's brand pack) and how sure the meaning is (official document or two independent sources), and always ends with "Guidance only; confirm with a workshop". Below it sits a row of source links in `blueInk`, underlined. Each link is keyboard-focusable, with the focus ring 3px outside it. NHTSA documents are labelled by their id, official ones are marked "(official)", and wrapped links align with the first link. The note is hidden when no source wrote the text above it.
@@ -327,9 +338,9 @@ Under every code explanation there is a quiet 12px faint note. It names where th
 - **Nav item:** 32px row, 16px icon plus 14px label in muted text; current item gets the `selected` ground, full text color and 600 weight. A count badge marks codes: red fill when any are stored, amber when they are only pending (Trouble codes counts generic codes; All modules counts codes outside engine and transmission). ⌘1–⌘8 follow the sidebar order.
 
 ### Logo mark
-The engine telltale lit amber on a graphite tile (22.5% corner radius, `#262B34` to `#121519` top to bottom), the same drawing as the app icon (`src/app/assets/brand/logo.svg`; the icon PNG adds the macOS margins). Two places only: 24px beside the name at the top of the sidebar (20px in windows under 760px tall), and 56px above "Connect to your car". In dark theme the tile carries a 1px hairline edge so it stays a tile on the dark sidebar.
+The OBD-II port on a graphite tile (22.5% corner radius, `#262B34` to `#121519` top to bottom): the port outline in `#A3A9B2`, its 16 pins unlit in `#4A515C` except pin 16, battery power, lit `#F2A93B`. At 32px and up the full drawing shows every pin; below 32px a simplified drawing keeps only the outline and the lit pin (`src/app/assets/brand/logo.svg` and `logo-small.svg`; the app icon is the same drawing with the macOS margins, and its 16 and 32px slots use the simplified one). Two places only: 24px beside the name at the top of the sidebar (20px in windows under 760px tall), and 56px above "Connect to your car". In dark theme the tile carries a 1px `#262A31` edge (the `-dark` files) so it stays a tile on the dark sidebar.
 
-**The Tile Rule.** The amber engine outside of state appears only inside its graphite tile. The bare amber glyph always means the check-engine light is on.
+**The Tile Rule.** Brand amber appears only inside the graphite tile, as the port's lit pin. The amber engine glyph always means the check-engine light is on and is never used as branding.
 
 ### Telltale (signature)
 An instrument-cluster lamp: a line icon shown in its telltale color when lit and in `unlit` grey when off, cross-fading over 220ms with exponential ease-out. The check-engine lamp is the real engine telltale symbol, lit amber. The lead status cell draws it at 40px; secondary cells at 28px.
@@ -347,7 +358,7 @@ When the car first answers, every telltale lights for 1.2s and every sparkline s
 - **Do** switch to the ink variant (`amber-ink`, `red-ink`, `green-ink`) whenever a state color is set as text.
 - **Do** set codes, VINs, hex, module addresses and log lines in JetBrains Mono, and everything else in Inter.
 - **Do** group content as hairline-divided rows and key/value lists; reserve the 10px framed panel for a status summary or a contained well.
-- **Do** route every duration through the motion tokens (120ms or 220ms, exponential ease-out) so Reduce motion zeroes it.
+- **Do** route every duration through the motion tokens (`fast` 120ms, `normal` 220ms, `bulbCheck` 1200ms, `sweep` 1100ms, all exponential ease-out) so Reduce motion zeroes it.
 - **Do** check every new screen in both themes and at the 1040 x 680 minimum, in English and Romanian.
 
 ### Don't:

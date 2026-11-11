@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 //
-// The Obdaryn logo mark: the engine telltale lit amber on its graphite tile.
-// It is the one place the amber engine appears outside of state, and always
-// inside the tile, so it never reads as a lit check-engine lamp.
+// The Obdaryn logo mark: the OBD-II port on a graphite tile, its pin 16
+// (battery power) lit amber. Below 32px the simplified drawing (outline and
+// the lit pin) stays legible; the dark variants carry a hairline edge so the
+// tile holds on dark grounds. Brand amber appears only here, as that pin.
 import QtQuick
 import Obdaryn
 
@@ -16,18 +17,9 @@ Item {
 
     Image {
         anchors.fill: parent
-        source: "qrc:/brand/logo.svg"
+        source: "qrc:/brand/logo" + (logo.size < 32 ? "-small" : "") + (Theme.dark ? "-dark" : "") + ".svg"
         sourceSize: Qt.size(logo.size * 2, logo.size * 2) // crisp on Retina
         smooth: true
         mipmap: true
-    }
-    // On the dark sidebar the graphite tile needs an edge to stay a tile.
-    Rectangle {
-        anchors.fill: parent
-        radius: logo.size * 0.225
-        color: "transparent"
-        border.width: 1
-        border.color: Theme.hairline
-        visible: Theme.dark
     }
 }
