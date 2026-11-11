@@ -26,6 +26,15 @@ Item {
     readonly property var scan: App.moduleScan
     property string expandedId: ""
 
+    /// A module found by searching that no list knows, so it's named by its address.
+    function hasUnnamedModule() {
+        for (let i = 0; i < page.scan.count; ++i) {
+            if (String(page.scan.data(page.scan.index(i, 0), Qt.UserRole + 1)).startsWith("found-"))
+                return true
+        }
+        return false
+    }
+
     /// The module's own warning lamp (ISO 2575), or "" when it has none.
     function telltaleOf(category) {
         return category === "engine" ? "engine" : category === "abs" ? "abs" : category === "airbag" ? "airbag"
@@ -76,6 +85,14 @@ Item {
                 text: qsTr("Stop")
                 iconName: "x"
                 onClicked: App.cancelModuleScan()
+            }
+            // For modules the list doesn't know: ask every address, then scan what answered.
+            AppButton {
+                visible: !App.moduleScanRunning
+                iconName: "search"
+                text: qsTr("Search every address")
+                enabled: !App.scanning
+                onClicked: App.discoverModules()
             }
             AppButton {
                 visible: !App.moduleScanRunning
@@ -187,10 +204,63 @@ Item {
             wrapMode: Text.WordWrap
         }
 
+        // Searching every address: where it is, and what has answered so far.
+        ColumnLayout {
+            Layout.fillWidth: true
+            visible: App.discoveryRunning
+            spacing: Theme.s2
+            Text {
+                Layout.fillWidth: true
+                textFormat: Text.StyledText
+                // Only the address is set in the mono face (monoHex would also catch "120").
+                text: qsTr("Searching every address: %1 · %2 of %3")
+                      .arg('<font face="' + Theme.mono + '" color="' + Theme.text + '">' + App.discoveryAddress + '</font>')
+                      .arg(App.discoveryDone).arg(App.discoveryTotal)
+                color: Theme.textMuted
+                font.family: Theme.sans
+                font.pixelSize: Theme.fontBody
+                font.features: { "tnum": 1 }
+                elide: Text.ElideRight
+            }
+            Rectangle {
+                Layout.fillWidth: true
+                implicitHeight: 3
+                radius: 1.5
+                color: Theme.hairline
+                Rectangle {
+                    height: parent.height
+                    radius: parent.radius
+                    color: Theme.blue
+                    width: App.discoveryTotal > 0 ? parent.width * App.discoveryDone / App.discoveryTotal : 0
+                    Behavior on width { NumberAnimation { duration: Theme.normal; easing.type: Easing.OutExpo } }
+                }
+            }
+            Text {
+                Layout.fillWidth: true
+                Layout.topMargin: Theme.s2
+                textFormat: Text.StyledText
+                text: App.discoveryFound.length === 0
+                      ? qsTr("Nothing has answered yet.")
+                      : page.monoHex(qsTr("Answered: %1").arg(App.discoveryFound.join(" · ")))
+                color: App.discoveryFound.length ? Theme.text : Theme.textFaint
+                font.family: Theme.sans
+                font.pixelSize: Theme.fontBody
+                wrapMode: Text.WordWrap
+            }
+            Text {
+                Layout.fillWidth: true
+                text: qsTr("Takes about a minute. Keep the ignition on; the engine is best off. At each address Obdaryn only asks “are you there?”, which changes nothing in the car. The codes of the modules that answer are read next.")
+                color: Theme.textFaint
+                font.family: Theme.sans
+                font.pixelSize: Theme.fontSmall
+                wrapMode: Text.WordWrap
+            }
+        }
+
         // Progress while scanning, summary afterwards.
         ColumnLayout {
             Layout.fillWidth: true
-            visible: page.scan.count > 0
+            visible: page.scan.count > 0 && !App.discoveryRunning
             spacing: Theme.s2
             Text {
                 Layout.fillWidth: true
@@ -200,6 +270,7 @@ Item {
                             .arg(page.scan.codeCount === 0 ? qsTr("no trouble codes")
                                  : qsTr("%n code(s)", "", page.scan.codeCount) + " " + qsTr("in %n module(s)", "", page.scan.modulesWithCodes))
                         + (App.moduleScanTime.length && !App.moduleScanRunning ? " · " + qsTr("scanned at %1").arg(App.moduleScanTime) : "")
+                        + (App.moduleScanSearched ? " · " + qsTr("found by searching every address") : "")
                 color: Theme.textMuted
                 font.family: Theme.sans
                 font.pixelSize: Theme.fontBody
@@ -224,18 +295,31 @@ Item {
 
         // First visit: what a module scan is.
         EmptyState {
-            visible: page.scan.count === 0
+            visible: page.scan.count === 0 && !App.discoveryRunning
             Layout.topMargin: Theme.s4
             iconName: "cpu"
             title: qsTr("Scan every module")
             message: qsTr("Generic OBD-II only reaches the engine and transmission. A module scan asks each module directly, so codes behind the ABS, airbag or body warning lights show up too. It takes 5–15 seconds; the ignition must be ON and the engine may run. Live data pauses while it runs.")
         }
+        Text {
+            Layout.fillWidth: true
+            Layout.maximumWidth: 560
+            // Reads as the empty state's second paragraph: cancel its empty action row and the column gap.
+            Layout.topMargin: Theme.s3 - Theme.s4 - 2 * Theme.s2
+            visible: page.scan.count === 0 && !App.discoveryRunning
+            text: qsTr("If this brand has no module list yet, or a module seems missing, Search every address asks each diagnostic address in turn and then reads the codes of whatever answers. It takes about a minute.")
+            color: Theme.textMuted
+            font.family: Theme.sans
+            font.pixelSize: Theme.fontBody
+            lineHeight: 1.3
+            wrapMode: Text.WordWrap
+        }
 
-        Item { Layout.fillHeight: true; visible: page.scan.count === 0 } // keep the empty state at the top
+        Item { Layout.fillHeight: true; visible: page.scan.count === 0 || App.discoveryRunning } // keep the content at the top
 
         ListView {
             id: list
-            visible: page.scan.count > 0
+            visible: page.scan.count > 0 && !App.discoveryRunning
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
@@ -331,7 +415,7 @@ Item {
                                     font.weight: Font.DemiBold
                                 }
                                 Text {
-                                    visible: !row.verified
+                                    visible: !row.verified && !App.moduleScanSearched   // after a search, every listed module did answer there
                                     text: qsTr("unconfirmed address")
                                     color: Theme.textFaint
                                     font.family: Theme.sans
@@ -556,10 +640,13 @@ Item {
 
             footer: Text {
                 width: ListView.view.width
-                visible: !App.moduleScanRunning && page.scan.count > page.scan.answeredCount
+                visible: !App.moduleScanRunning && (App.moduleScanSearched ? page.hasUnnamedModule() : page.scan.count > page.scan.answeredCount)
                 topPadding: Theme.s4
                 bottomPadding: Theme.s4
-                text: qsTr("\"Not found\" means nothing answered at that address. The module may not be fitted to this car, may use another address on this model, or may sit on a bus the OBD socket doesn't reach.")
+                text: App.moduleScanSearched
+                      ? qsTr("A module found by searching is named by its address: Obdaryn doesn't know yet what it is. Its codes are explained when they are standard ones.")
+                      : qsTr("\"Not found\" means nothing answered at that address. The module may not be fitted to this car, may use another address on this model, or may sit on a bus the OBD socket doesn't reach.")
+                        + " " + qsTr("Search every address finds modules at addresses this list doesn't know.")
                 color: Theme.textFaint
                 font.family: Theme.sans
                 font.pixelSize: Theme.fontSmall

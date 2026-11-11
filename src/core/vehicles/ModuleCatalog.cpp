@@ -15,6 +15,10 @@ namespace obdaryn {
 
 QString ModuleDef::displayName() const
 {
+    // A module found by searching every address (ModuleDiscovery) isn't in any
+    // list, so all we know is where it answered.
+    if (id.startsWith(QLatin1String("found-")))
+        return QCoreApplication::translate("Module", "Module at %1").arg(QStringLiteral("%1").arg(tx, 3, 16, QLatin1Char('0')).toUpper());
     return ModuleCatalog::categoryName(category);
 }
 

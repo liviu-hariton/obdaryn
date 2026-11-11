@@ -34,6 +34,7 @@ namespace obdaryn {
 class SimulatedTransport;
 class ConnectionKeeper;
 class ReplayTransport;
+class ModuleDiscovery;
 class SessionRecorder;
 
 /**
@@ -135,6 +136,17 @@ class AppController : public QObject
     Q_PROPERTY(QString moduleScanTime READ moduleScanTime NOTIFY moduleScanChanged)
     /// Profile the current module results came from (its brand pack explains their codes).
     Q_PROPERTY(QString moduleScanProfile READ moduleScanProfile NOTIFY moduleScanChanged)
+    /// The current module results come from searching every address, not a brand list.
+    Q_PROPERTY(bool moduleScanSearched READ moduleScanSearched NOTIFY moduleScanChanged)
+
+    // Searching every address for modules no list knows (ModuleDiscovery)
+    Q_PROPERTY(bool discoveryRunning READ discoveryRunning NOTIFY discoveryChanged)
+    Q_PROPERTY(int discoveryDone READ discoveryDone NOTIFY discoveryChanged)
+    Q_PROPERTY(int discoveryTotal READ discoveryTotal NOTIFY discoveryChanged)
+    /// The address being asked now, "7A4" (empty when not searching).
+    Q_PROPERTY(QString discoveryAddress READ discoveryAddress NOTIFY discoveryChanged)
+    /// Addresses that answered so far, ["7D1 → 7D9", ...].
+    Q_PROPERTY(QStringList discoveryFound READ discoveryFound NOTIFY discoveryChanged)
 
     // Recording and replay
     Q_PROPERTY(bool recording READ recording NOTIFY recordingChanged)
@@ -222,6 +234,13 @@ public:
 
     /// Scans every module of the current profile (ABS, airbag, body...).
     Q_INVOKABLE void scanModules();
+    /**
+     * Searches every 11-bit diagnostic address for a module (about a minute),
+     * then scans the codes of whatever answered. For modules the brand's list
+     * doesn't know. Sends only AT SH and TesterPresent (3E 00) while searching.
+     */
+    Q_INVOKABLE void discoverModules();
+    /// Stops the module scan or the address search.
     Q_INVOKABLE void cancelModuleScan();
     /// Clears one module's codes after the user confirmed; result via moduleClearFinished().
     Q_INVOKABLE void clearModuleCodes(int row);
@@ -338,6 +357,12 @@ public:
     bool moduleScanDone() const { return !m_moduleScanTime.isEmpty(); }
     QString moduleScanTime() const { return m_moduleScanTime; }
     QString moduleScanProfile() const { return m_moduleScanner->profileId(); }
+    bool moduleScanSearched() const { return m_moduleScanSearched; }
+    bool discoveryRunning() const;
+    int discoveryDone() const;
+    int discoveryTotal() const;
+    QString discoveryAddress() const;
+    QStringList discoveryFound() const;
 
     bool recording() const;
     QString recordingTime() const;
@@ -379,6 +404,7 @@ signals:
     void moduleClearFinished(bool success, const QString &message);
     void profileChanged();
     void moduleScanChanged();
+    void discoveryChanged();
     void recordingChanged();
     void recordingTick();
     void recordingsChanged();
@@ -415,7 +441,9 @@ private:
     /// Runs `action` once no live-data poll is in flight. Module work changes the
     /// adapter's target address, so it must never interleave with a poll.
     void whenPollIdle(std::function<void()> action);
-    bool busyWithModules() const { return m_moduleScanner->running() || bool(m_afterPoll); }
+    bool busyWithModules() const { return m_moduleScanner->running() || discoveryRunning() || bool(m_afterPoll); }
+    /// Live polling restarts once module work is over (if the car is still there).
+    void resumePolling();
     /// The adapter is pointed at one module (module work or a manufacturer read):
     /// requests meant for all OBD-II ECUs must wait.
     bool adapterBusy() const { return busyWithModules() || m_manufacturerReading; }
@@ -480,6 +508,8 @@ private:
 
     ModuleScanner *m_moduleScanner;
     ModuleScanModel *m_moduleModel;
+    ModuleDiscovery *m_discovery;
+    bool m_moduleScanSearched = false;
     QString m_profileId = QStringLiteral("generic");
     bool m_profileChosenByUser = false;
     QString m_moduleScanTime;

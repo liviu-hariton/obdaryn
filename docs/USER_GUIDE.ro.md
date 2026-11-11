@@ -62,7 +62,7 @@ Cu contactul pus și motorul oprit, mașina își descarcă bateria. Ține astfe
 |---|---|
 | **Prezentare generală** | Martorul de motor, pregătirea pentru ITP, bateria, codurile și principalele valori în timp real, dintr-o privire. **Salvează raportul…** (⌘S) face un PDF sau o pagină web de dat unui cumpărător sau mecanic. |
 | **Coduri de eroare** | Codurile de la motor și transmisie, fiecare explicat: ce înseamnă, cauze probabile, dacă contează la ITP. |
-| **Toate modulele** | Cere codurile de la ABS, airbag, caroserie și celelalte module, folosind lista de module a mărcii mașinii. |
+| **Toate modulele** | Cere codurile de la ABS, airbag, caroserie și celelalte module, folosind lista de module a mărcii mașinii. **Caută la toate adresele** găsește modulele pe care lista nu le cunoaște (cam un minut, cu contactul pus). |
 | **Pregătire ITP** | Ce autoteste s-au încheiat de la ultima ștergere a codurilor. **Citește rezultatele testelor** arată rezultatele autotestelor (Mode 06) cu limitele lor: un rezultat aproape de limită indică o piesă care se uzează. |
 | **Instantaneu** | Valorile senzorilor salvate când a fost memorat un defect. |
 | **Date în timp real** | Toate valorile raportate de mașină, cu istoricul recent. Fixează valori în Prezentare generală. La Hyundai și Kia, **Valori Hyundai** (sau **Valori Kia**) arată ce raportează modulele peste valorile standard: alege modelul, apoi **Caută valorile**. Aceste definiții vin de la comunitatea OBDb și nu sunt verificate pe mașina ta. |
@@ -84,7 +84,7 @@ Apasă **Înregistrează** în bara laterală cât timp ești conectat. Obdaryn 
 | Adaptorul refuză | E conectată altă aplicație, adesea una de pe telefon. Închide-o și conectează-te din nou. |
 | Mașina nu răspunde | Pune contactul. Dacă l-ai luat, Obdaryn reia singur legătura când îl pui la loc. |
 | Conexiunea se întrerupe | Adaptorul poate fi intrat în repaus sau s-a schimbat rețeaua Wi-Fi. Obdaryn se reconectează singur; dacă renunță, ia contactul și pune-l la loc, apoi apasă din nou Conectează. |
-| Un modul apare „Negăsit” | Modelul tău poate nu îl are sau folosește altă adresă. Adresele marcate „neconfirmată” vin din liste ale comunității. |
+| Un modul apare „Negăsit” | Modelul tău poate nu îl are sau folosește altă adresă. Adresele marcate „neconfirmată” vin din liste ale comunității. Încearcă **Caută la toate adresele**. |
 | Datele în timp real vin încet | Adaptoarele ieftine și mașinile mai vechi răspund încet. Fixează mai puține valori în Prezentare generală; valorile fixate și cele din grafice se actualizează primele. |
 | Un cod a revenit | Defectul e tot acolo. Ștergerea doar stinge martorul; cauza trebuie reparată. |
 

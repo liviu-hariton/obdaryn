@@ -4,6 +4,8 @@
 
 #include "obd/ManufacturerData.h"
 #include "obd/ManufacturerReader.h"
+#include "obd/ModuleDiscovery.h"
+#include "obd/ModuleAddressing.h"
 
 #include "elm327/AdapterCheck.h"
 #include "elm327/ConnectionKeeper.h"
@@ -100,6 +102,7 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
       m_trafficLog(new TrafficLogModel(this)),
       m_moduleScanner(new ModuleScanner(m_client, this)),
       m_moduleModel(new ModuleScanModel(m_moduleScanner, this)),
+      m_discovery(new ModuleDiscovery(m_client, this)),
       m_recorder(new SessionRecorder(m_client->session(), this)),
       m_keeper(new ConnectionKeeper(m_client->session(), this)),
       m_charts(new ChartModel(this)),
@@ -121,10 +124,26 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
     connect(m_moduleScanner, &ModuleScanner::finished, this, [this] {
         m_moduleScanTime = QLocale().toString(QTime::currentTime(), QLocale::ShortFormat);
         emit moduleScanChanged();
-        if (m_client->session()->state() == ElmSession::State::Ready && !scanning()) {
-            m_pollingEnabled = true;
-            schedulePoll();
+        resumePolling();
+    });
+
+    // Searching every address: when it ends, the addresses that answered are
+    // scanned like a brand's module list (codes, part numbers).
+    connect(m_discovery, &ModuleDiscovery::progress, this, &AppController::discoveryChanged);
+    connect(m_discovery, &ModuleDiscovery::moduleFound, this, &AppController::discoveryChanged);
+    connect(m_discovery, &ModuleDiscovery::finished, this, [this] {
+        const bool carThere = m_client->session()->state() == ElmSession::State::Ready;
+        if (!m_discovery->cancelled() && carThere && !m_discovery->found().isEmpty()) {
+            const VehicleProfile *known = ModuleCatalog::find(m_profileId);
+            m_moduleScanSearched = true;
+            m_moduleScanner->scan(m_discovery->asProfile(known ? *known : VehicleProfile{}));
+        } else if (!m_discovery->cancelled() && carThere) {
+            emit notice(false, tr("No module answered at any address. Check that the ignition is on, then try again."));
         }
+        emit discoveryChanged();
+        emit moduleScanChanged();
+        if (!m_moduleScanner->running())
+            resumePolling();
     });
 
     ElmSession *session = m_client->session();
@@ -221,6 +240,7 @@ void AppController::disconnectAdapter()
     m_keeper->stop(); // the user asked: no reconnecting
     m_afterPoll = nullptr;
     m_moduleScanner->cancel();
+    m_discovery->cancel();
     m_pollingEnabled = false;
     m_pollTimer.stop();
     m_voltageTimer.stop();
@@ -436,6 +456,7 @@ void AppController::resetVehicleData()
     m_batteryVoltage = 0;
     m_lastScanTime.clear();
     m_moduleScanTime.clear();
+    m_moduleScanSearched = false;
     if (!m_profileChosenByUser)
         m_profileId = QStringLiteral("generic");
     emit profileChanged();
@@ -595,13 +616,53 @@ void AppController::scanModules()
         || scanning() || busyWithModules())
         return;
     const VehicleProfile copy = *profile;
+    m_moduleScanSearched = false;
     whenPollIdle([this, copy] { m_moduleScanner->scan(copy); });
+    emit moduleScanChanged();
+}
+
+void AppController::discoverModules()
+{
+    if (m_replay) {
+        emit notice(false, tr("Searching every address needs a car: a recording only replays what was asked while recording."));
+        return;
+    }
+    if (m_client->session()->state() != ElmSession::State::Ready || scanning() || busyWithModules())
+        return;
+    whenPollIdle([this] { m_discovery->run(); emit discoveryChanged(); emit moduleScanChanged(); });
     emit moduleScanChanged();
 }
 
 void AppController::cancelModuleScan()
 {
     m_moduleScanner->cancel();
+    m_discovery->cancel();
+}
+
+void AppController::resumePolling()
+{
+    if (m_client->session()->state() == ElmSession::State::Ready && !scanning() && !busyWithModules()) {
+        m_pollingEnabled = true;
+        schedulePoll();
+    }
+}
+
+bool AppController::discoveryRunning() const { return m_discovery->running(); }
+int AppController::discoveryDone() const { return m_discovery->done(); }
+int AppController::discoveryTotal() const { return m_discovery->total(); }
+
+QString AppController::discoveryAddress() const
+{
+    const quint16 id = m_discovery->currentId();
+    return id ? QString::fromLatin1(ModuleAddressing::hex3(id)) : QString();
+}
+
+QStringList AppController::discoveryFound() const
+{
+    QStringList list;
+    for (const DiscoveredModule &d : m_discovery->found())
+        list << QString::fromLatin1(ModuleAddressing::hex3(d.tx)) + QStringLiteral(" → ") + QString::fromLatin1(ModuleAddressing::hex3(d.rx));
+    return list;
 }
 
 void AppController::clearModuleCodes(int row)

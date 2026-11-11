@@ -81,6 +81,7 @@ int main(int argc, char *argv[])
     //   OBDARYN_APPEARANCE=light|dark  OBDARYN_LANG=en|ro  OBDARYN_DELAY_MS=4000  OBDARYN_SIZE=WxH
     //   OBDARYN_SCAN_MODULES=1  OBDARYN_RECORD=1 (record once the first scan ends;
     //   OBDARYN_RECORD_AFTER_MS=5000 waits that long first, so two demo recordings differ)
+    //   OBDARYN_DISCOVER_MODULES=1 (search every address for modules once the first scan ends, then scan them)
     //   OBDARYN_REPLAY=file.obdrec (replay instead of the demo car)
     //   OBDARYN_DEMO_TRIPS=1 (save the demo car's trips, to capture the trip history)
     //   OBDARYN_RECORDINGS_DIR / OBDARYN_REPORTS_DIR=folder (read by AppController; keeps captures out of ~/Documents)
@@ -105,6 +106,13 @@ int main(int argc, char *argv[])
                 QObject::connect(controller, &obdaryn::AppController::scanFinished, controller, [controller] {
                     if (!controller->moduleScanDone() && !controller->vin().isEmpty())
                         QTimer::singleShot(300, controller, [controller] { controller->scanModules(); });
+                });
+            }
+            // OBDARYN_DISCOVER_MODULES=1 searches every address instead, once the first scan ends.
+            if (qEnvironmentVariableIntValue("OBDARYN_DISCOVER_MODULES") == 1) {
+                QObject::connect(controller, &obdaryn::AppController::scanFinished, controller, [controller] {
+                    if (!controller->moduleScanDone() && !controller->discoveryRunning() && !controller->vin().isEmpty())
+                        QTimer::singleShot(300, controller, [controller] { controller->discoverModules(); });
                 });
             }
         }

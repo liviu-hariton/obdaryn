@@ -62,7 +62,7 @@ Standard OBD-II live data is the same on every car. A brand's modules know much 
 
 ## 4c. Looking for modules a brand list doesn't know (discovery)
 
-For brands whose module addresses aren't public yet (Suzuki today), `obdaryn-probe --discover` (step 3 of `tools/first-contact.sh`) asks every 11-bit diagnostic address whether a module is there:
+For brands whose module addresses aren't public yet (Suzuki today), the app's **Search every address** button (All modules screen) and `obdaryn-probe --discover` (step 3 of `tools/first-contact.sh`) ask every 11-bit diagnostic address whether a module is there:
 
 - **What it sends:** `AT CRA` once, so the adapter shows answers from any reply ID; then for each address from 700 to 7F7, `AT SH <address>` and TesterPresent (`3E 00`); at the end `AT FCSM0`, `AT CRA` and `AT SH 7DF` restore the standard addressing. TesterPresent reads nothing and changes nothing in a module, in any session. All of it is on the read-only allowlist; nothing new was allowed for discovery.
 - **What counts as an answer:** a positive reply (`7E 00`) or a refusal (`7F 3E xx`), which still proves a module is there. Other frames on the bus are ignored.

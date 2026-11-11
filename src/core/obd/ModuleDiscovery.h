@@ -66,6 +66,10 @@ public:
     bool running() const { return m_running; }
     int done() const { return m_index; }
     int total() const { return int(m_candidates.size()); }
+    /// The address being asked now (0 when not running).
+    quint16 currentId() const { return m_running && m_index < m_candidates.size() ? m_candidates[m_index] : 0; }
+    /// The last run was stopped by cancel() before it asked every address.
+    bool cancelled() const { return m_cancel; }
     const QList<DiscoveredModule> &found() const { return m_found; }
 
     /**

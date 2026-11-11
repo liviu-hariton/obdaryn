@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>© %1 %2 and contributors</source>
-        <extracomment>%1 = year of first publication, %2 = the author&apos;s name</extracomment>
+        <extracomment>%1 = the copyright years (&quot;2026&quot; or &quot;2026–2028&quot;), %2 = the author&apos;s name</extracomment>
         <translation>© %1 %2 și colaboratorii</translation>
     </message>
 </context>
@@ -973,12 +973,20 @@
         <translation>Ecranele</translation>
     </message>
     <message>
+        <source>Asks ABS, airbag, body and the other modules for their codes, using the module list of your car&apos;s brand. Search every address finds modules the list doesn&apos;t know (about a minute, ignition on).</source>
+        <translation>Cere codurile de la ABS, airbag, caroserie și celelalte module, folosind lista de module a mărcii mașinii. Caută la toate adresele găsește modulele pe care lista nu le cunoaște (cam un minut, cu contactul pus).</translation>
+    </message>
+    <message>
         <source>Every value the car reports, with its recent history. Pin values to the Overview. On Hyundai and Kia cars, the brand&apos;s own values too, from the OBDb community: choose the model, then Find values.</source>
         <translation>Fiecare valoare raportată de mașină, cu istoricul recent. Fixează valori pe Prezentarea generală. La Hyundai și Kia, și valorile proprii ale mărcii, din comunitatea OBDb: alege modelul, apoi Caută valorile.</translation>
     </message>
     <message>
         <source>When something doesn&apos;t work</source>
         <translation>Când ceva nu merge</translation>
+    </message>
+    <message>
+        <source>Your model may not have it, or uses another address. Addresses marked &quot;unconfirmed&quot; come from community lists. Try Search every address.</source>
+        <translation>Modelul tău poate nu îl are sau folosește altă adresă. Adresele marcate „neconfirmată” vin din liste ale comunității. Încearcă Caută la toate adresele.</translation>
     </message>
     <message>
         <source>Privacy and safety</source>
@@ -1117,10 +1125,6 @@
         <translation>Toate modulele</translation>
     </message>
     <message>
-        <source>Asks ABS, airbag, body and the other modules for their codes, using the module list of your car&apos;s brand.</source>
-        <translation>Întreabă ABS, airbag, caroseria și celelalte module de codurile lor, folosind lista de module a mărcii mașinii tale.</translation>
-    </message>
-    <message>
         <source>Readiness</source>
         <translation>Pregătire ITP</translation>
     </message>
@@ -1207,10 +1211,6 @@
     <message>
         <source>A module shows &quot;Not found&quot;</source>
         <translation>Un modul apare „Negăsit”</translation>
-    </message>
-    <message>
-        <source>Your model may not have it, or uses another address. Addresses marked &quot;unconfirmed&quot; come from community lists.</source>
-        <translation>Modelul tău s-ar putea să nu îl aibă sau folosește altă adresă. Adresele marcate „neconfirmată” provin din liste ale comunității.</translation>
     </message>
     <message>
         <source>Live data is slow</source>
@@ -1538,6 +1538,10 @@
 <context>
     <name>Module</name>
     <message>
+        <source>Module at %1</source>
+        <translation>Modulul de la %1</translation>
+    </message>
+    <message>
         <source>Engine</source>
         <translation>Motor</translation>
     </message>
@@ -1605,6 +1609,10 @@
         <translation>Oprește</translation>
     </message>
     <message>
+        <source>Search every address</source>
+        <translation>Caută la toate adresele</translation>
+    </message>
+    <message>
         <source>Scan again</source>
         <translation>Scanează din nou</translation>
     </message>
@@ -1631,6 +1639,22 @@
     <message>
         <source>About this list</source>
         <translation>Despre această listă</translation>
+    </message>
+    <message>
+        <source>Searching every address: %1 · %2 of %3</source>
+        <translation>Se caută la toate adresele: %1 · %2 din %3</translation>
+    </message>
+    <message>
+        <source>Nothing has answered yet.</source>
+        <translation>Nu a răspuns încă nimic.</translation>
+    </message>
+    <message>
+        <source>Answered: %1</source>
+        <translation>Au răspuns: %1</translation>
+    </message>
+    <message>
+        <source>Takes about a minute. Keep the ignition on; the engine is best off. At each address Obdaryn only asks “are you there?”, which changes nothing in the car. The codes of the modules that answer are read next.</source>
+        <translation>Durează cam un minut. Ține contactul pus; e bine ca motorul să fie oprit. La fiecare adresă, Obdaryn doar întreabă „ești acolo?”, ceea ce nu schimbă nimic în mașină. Apoi citește codurile modulelor care au răspuns.</translation>
     </message>
     <message>
         <source>Asking module %1 of %2…</source>
@@ -1665,12 +1689,20 @@
         <translation>scanat la %1</translation>
     </message>
     <message>
+        <source>found by searching every address</source>
+        <translation>găsite căutând la toate adresele</translation>
+    </message>
+    <message>
         <source>Scan every module</source>
         <translation>Scanează toate modulele</translation>
     </message>
     <message>
         <source>Generic OBD-II only reaches the engine and transmission. A module scan asks each module directly, so codes behind the ABS, airbag or body warning lights show up too. It takes 5–15 seconds; the ignition must be ON and the engine may run. Live data pauses while it runs.</source>
         <translation>OBD-II generic ajunge doar la motor și cutia de viteze. Scanarea modulelor întreabă direct fiecare modul, așa că apar și codurile din spatele martorilor ABS, airbag sau caroserie. Durează 5–15 secunde; contactul trebuie să fie pus, iar motorul poate merge. Datele în timp real se opresc pe durata scanării.</translation>
+    </message>
+    <message>
+        <source>If this brand has no module list yet, or a module seems missing, Search every address asks each diagnostic address in turn and then reads the codes of whatever answers. It takes about a minute.</source>
+        <translation>Dacă marca nu are încă o listă de module sau pare că lipsește un modul, Caută la toate adresele întreabă pe rând fiecare adresă de diagnoză, apoi citește codurile a ce răspunde. Durează cam un minut.</translation>
     </message>
     <message>
         <source>unconfirmed address</source>
@@ -1745,8 +1777,16 @@
         <translation>Șterge codurile acestui modul…</translation>
     </message>
     <message>
+        <source>A module found by searching is named by its address: Obdaryn doesn&apos;t know yet what it is. Its codes are explained when they are standard ones.</source>
+        <translation>Un modul găsit prin căutare e numit după adresa lui: Obdaryn nu știe încă ce modul este. Codurile lui sunt explicate când sunt coduri standard.</translation>
+    </message>
+    <message>
         <source>&quot;Not found&quot; means nothing answered at that address. The module may not be fitted to this car, may use another address on this model, or may sit on a bus the OBD socket doesn&apos;t reach.</source>
         <translation>„Negăsit” înseamnă că nimic nu a răspuns la acea adresă. Modulul poate lipsi de pe această mașină, poate folosi altă adresă pe acest model sau poate fi pe o magistrală la care mufa OBD nu ajunge.</translation>
+    </message>
+    <message>
+        <source>Search every address finds modules at addresses this list doesn&apos;t know.</source>
+        <translation>Caută la toate adresele găsește module la adrese pe care lista aceasta nu le cunoaște.</translation>
     </message>
 </context>
 <context>
@@ -3697,6 +3737,10 @@
         <translation>Mașina demo</translation>
     </message>
     <message>
+        <source>No module answered at any address. Check that the ignition is on, then try again.</source>
+        <translation>Niciun modul nu a răspuns la vreo adresă. Verifică dacă contactul e pus, apoi încearcă din nou.</translation>
+    </message>
+    <message>
         <source>Recording saved: %1, %2 long.</source>
         <translation>Înregistrare salvată: %1, durată %2.</translation>
     </message>
@@ -3789,6 +3833,10 @@
     <message>
         <source>This recording has no module scan to replay. Scan the modules while recording to include them.</source>
         <translation>Înregistrarea nu conține o scanare a modulelor. Scanează modulele în timp ce înregistrezi, ca să fie incluse.</translation>
+    </message>
+    <message>
+        <source>Searching every address needs a car: a recording only replays what was asked while recording.</source>
+        <translation>Căutarea la toate adresele are nevoie de mașină: o înregistrare redă doar ce s-a întrebat în timpul înregistrării.</translation>
     </message>
     <message>
         <source>This is a recording, so there is no car to clear codes on.</source>

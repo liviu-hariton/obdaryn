@@ -422,7 +422,7 @@ Item {
                     items: [
                         { label: qsTr("Overview"), text: qsTr("The check-engine light, readiness, battery, codes and the main live values at a glance. Save report… makes a PDF or web page to share.") },
                         { label: qsTr("Trouble codes"), text: qsTr("Codes from the engine and transmission, each explained: what it means, likely causes, whether it matters for the ITP.") },
-                        { label: qsTr("All modules"), text: qsTr("Asks ABS, airbag, body and the other modules for their codes, using the module list of your car's brand.") },
+                        { label: qsTr("All modules"), text: qsTr("Asks ABS, airbag, body and the other modules for their codes, using the module list of your car's brand. Search every address finds modules the list doesn't know (about a minute, ignition on).") },
                         { label: qsTr("Readiness"), text: qsTr("Which self-tests have finished since codes were last cleared, and the self-test results with their limits.") },
                         { label: qsTr("Freeze frame"), text: qsTr("The sensor values saved when a fault was stored.") },
                         { label: qsTr("Live data"), text: qsTr("Every value the car reports, with its recent history. Pin values to the Overview. On Hyundai and Kia cars, the brand's own values too, from the OBDb community: choose the model, then Find values.") },
@@ -443,7 +443,7 @@ Item {
                         { label: qsTr("The adapter refuses"), text: qsTr("Another app is connected to it, often a phone app. Close it and connect again.") },
                         { label: qsTr("The car isn't answering"), text: qsTr("Turn the ignition ON. If you switched it off, Obdaryn picks up again by itself when it's back on.") },
                         { label: qsTr("The connection drops"), text: qsTr("The adapter may have fallen asleep or the Wi-Fi changed. Obdaryn reconnects by itself; if it gives up, turn the ignition off and on, then press Connect again.") },
-                        { label: qsTr("A module shows \"Not found\""), text: qsTr("Your model may not have it, or uses another address. Addresses marked \"unconfirmed\" come from community lists.") },
+                        { label: qsTr("A module shows \"Not found\""), text: qsTr("Your model may not have it, or uses another address. Addresses marked \"unconfirmed\" come from community lists. Try Search every address.") },
                         { label: qsTr("Live data is slow"), text: qsTr("Cheap adapters and older cars answer slowly. Pin fewer values to the Overview; pinned and charted values refresh first.") },
                         { label: qsTr("A code came back"), text: qsTr("The fault is still there. Clearing only turns the light off; the cause needs fixing.") },
                     ]

@@ -62,7 +62,7 @@ Clearing is the only thing Obdaryn does that changes anything in the car, and on
 |---|---|
 | **Overview** | The check-engine light, readiness, battery, codes and the main live values at a glance. **Save report…** (⌘S) makes a PDF or web page to share with a buyer or a mechanic. |
 | **Trouble codes** | Codes from the engine and transmission, each explained: what it means, likely causes, whether it matters for the ITP. |
-| **All modules** | Asks ABS, airbag, body and the other modules for their codes, using the module list of your car's brand. |
+| **All modules** | Asks ABS, airbag, body and the other modules for their codes, using the module list of your car's brand. **Search every address** finds modules the list doesn't know (about a minute, ignition on). |
 | **Readiness** | Which self-tests have finished since codes were last cleared. **Read test results** shows the self-test results (Mode 06) with their limits: a result close to its limit points to a part that's wearing out. |
 | **Freeze frame** | The sensor values saved when a fault was stored. |
 | **Live data** | Every value the car reports, with its recent history. Pin values to the Overview. On Hyundai and Kia cars, **Hyundai values** (or **Kia values**) lists what the car's modules report beyond the standard: choose the model, then **Find values**. These definitions come from the OBDb community and aren't checked on your car. |
@@ -84,7 +84,7 @@ Press **Record** in the sidebar while connected. Obdaryn saves everything the ca
 | The adapter refuses | Another app is connected to it, often a phone app. Close it and connect again. |
 | The car isn't answering | Turn the ignition ON. If you switched it off, Obdaryn picks up again by itself when it's back on. |
 | The connection drops | The adapter may have fallen asleep or the Wi-Fi changed. Obdaryn reconnects by itself; if it gives up, turn the ignition off and on, then press Connect again. |
-| A module shows "Not found" | Your model may not have it, or uses another address. Addresses marked "unconfirmed" come from community lists. |
+| A module shows "Not found" | Your model may not have it, or uses another address. Addresses marked "unconfirmed" come from community lists. Try **Search every address**. |
 | Live data is slow | Cheap adapters and older cars answer slowly. Pin fewer values to the Overview; pinned and charted values refresh first. |
 | A code came back | The fault is still there. Clearing only turns the light off; the cause needs fixing. |
 

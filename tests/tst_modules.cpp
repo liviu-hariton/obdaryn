@@ -255,6 +255,12 @@ void TestModules::discoversModules()
         absNamed |= (m.tx == 0x7D1 && m.category == QStringLiteral("abs"));
     QVERIFY(absNamed);
     QVERIFY(profile.modules.size() >= 5);
+    // Without a list, a found module is named by where it answered.
+    const VehicleProfile unknown = discovery.asProfile(VehicleProfile{});
+    bool addressNamed = false;
+    for (const ModuleDef &m : unknown.modules)
+        addressNamed |= (m.tx == 0x7D1 && m.displayName() == QStringLiteral("Module at 7D1") && m.category == QStringLiteral("other"));
+    QVERIFY(addressNamed);
 
     // Addressing is restored: a generic OBD-II request reaches the engine again.
     bool engineAnswered = false;
