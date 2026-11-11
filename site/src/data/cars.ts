@@ -18,9 +18,15 @@ export interface Brand {
   codes: number;
   /** Models with manufacturer values, by make (OBDb). */
   models: Record<string, string[]>;
+  /** Whether it lists modules beyond the standard OBD-II addresses. */
+  beyondStandard: boolean;
 }
 
-interface Vehicles { id: string; label: string; makes: string[]; modules: { verified?: boolean }[] }
+interface Vehicles { id: string; label: string; makes: string[]; modules: { tx: string; verified?: boolean }[] }
+
+/** The ISO 15765-4 addresses every CAN car has (7E0-7E7): a profile with only these
+ *  knows nothing beyond the standard yet. */
+const standardAddress = (tx: string) => /^7E[0-7]$/i.test(tx);
 
 const packs = new Map<string, number>();
 for (const file of readdirSync(dataDir + "dtc/brands")) {
@@ -49,11 +55,16 @@ const all: Brand[] = readdirSync(dataDir + "vehicles")
       id: v.id, label: v.label, makes: v.makes,
       modules: v.modules.length, modulesConfirmed: v.modules.filter((m) => m.verified).length,
       codes: packs.get(v.id) ?? 0, models,
+      beyondStandard: v.modules.some((m) => !standardAddress(m.tx)),
     };
   });
 
-/** Brands with their own data, alphabetically. */
-export const brands = all.filter((b) => b.id !== "generic").sort((a, b) => a.label.localeCompare(b.label));
+/** Brands Obdaryn knows more about than the standard, alphabetically: a code pack,
+ *  modules beyond the standard addresses, or manufacturer values. A profile that so
+ *  far lists only the standard addresses (Suzuki, until its pack lands) isn't one. */
+export const brands = all
+  .filter((b) => b.id !== "generic" && (b.codes > 0 || b.beyondStandard || Object.keys(b.models).length > 0))
+  .sort((a, b) => a.label.localeCompare(b.label));
 /** The standard module list every other car gets. */
 export const generic = all.find((b) => b.id === "generic")!;
 export const brandCodeTotal = brands.reduce((n, b) => n + b.codes, 0);

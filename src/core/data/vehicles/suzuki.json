@@ -1,0 +1,18 @@
+{
+  "id": "suzuki",
+  "label": "Suzuki",
+  "makes": ["Suzuki", "Maruti Suzuki"],
+  "wmi": ["JSA", "JS2", "JS3", "TSM", "MA3", "MBH", "VSE"],
+  "notes": "Only the standard OBD-II addresses so far. The engine (7E0) and gearbox (7E1) answer on recorded Suzukis (OBDb: Swift, Jimny, Splash, Vitara), and the 2019 Swift answers on 7E4 too. ABS, airbag, body and the other Suzuki modules have no public addresses yet, so they are left out until a real Suzuki is recorded. Swift and Jimny up to about 2010 use K-line instead of CAN. The Toyota-built Across and Swace use Toyota's electronics.",
+  "notes_ro": "Deocamdată doar adresele OBD-II standard. Motorul (7E0) și cutia de viteze (7E1) răspund pe mașinile Suzuki înregistrate (OBDb: Swift, Jimny, Splash, Vitara), iar Swift 2019 răspunde și pe 7E4. ABS-ul, airbagul, caroseria și celelalte module Suzuki nu au încă adrese publice, așa că lipsesc până se înregistrează o mașină Suzuki reală. Swift și Jimny până pe la 2010 folosesc linia K în loc de CAN. Across și Swace, construite de Toyota, folosesc electronica Toyota.",
+  "modules": [
+    {"id": "sz-engine", "category": "engine", "tx": "7E0", "rx": "7E8", "dtc": "auto", "verified": true, "source": "ISO 15765-4; OBDb Suzuki-Swift, Suzuki-Jimny, Suzuki-Splash, Suzuki-Vitara recordings"},
+    {"id": "sz-transmission", "category": "transmission", "tx": "7E1", "rx": "7E9", "dtc": "auto", "verified": true, "source": "ISO 15765-4; OBDb Suzuki recordings"},
+    {"id": "sz-7e2", "category": "hybrid", "tx": "7E2", "rx": "7EA", "dtc": "auto", "verified": false, "source": "ISO 15765-4 (not seen on a Suzuki yet)"},
+    {"id": "sz-7e3", "category": "other", "tx": "7E3", "rx": "7EB", "dtc": "auto", "verified": false, "source": "ISO 15765-4 (not seen on a Suzuki yet)"},
+    {"id": "sz-7e4", "category": "other", "tx": "7E4", "rx": "7EC", "dtc": "auto", "verified": true, "source": "ISO 15765-4; OBDb Suzuki-Swift 2019 recording"},
+    {"id": "sz-7e5", "category": "other", "tx": "7E5", "rx": "7ED", "dtc": "auto", "verified": false, "source": "ISO 15765-4 (not seen on a Suzuki yet)"},
+    {"id": "sz-7e6", "category": "other", "tx": "7E6", "rx": "7EE", "dtc": "auto", "verified": false, "source": "ISO 15765-4 (not seen on a Suzuki yet)"},
+    {"id": "sz-7e7", "category": "other", "tx": "7E7", "rx": "7EF", "dtc": "auto", "verified": false, "source": "ISO 15765-4 (not seen on a Suzuki yet)"}
+  ]
+}

@@ -2,7 +2,7 @@
   "id": "toyota-lexus",
   "label": "Toyota / Lexus",
   "makes": ["Toyota", "Lexus"],
-  "wmi": ["JT", "SB1", "VNK", "NMT", "JTH", "4T1", "5TD"],
+  "wmi": ["JT", "SB1", "VNK", "NMT", "JTH", "4T1", "5TD", "JST"],
   "notes": "Most Toyota modules answer on request ID + 8. Body modules behind the 750 gateway use extended addressing and are not scanned yet.",
   "notes_ro": "Majoritatea modulelor Toyota răspund pe adresa cererii + 8. Modulele de caroserie din spatele gateway-ului 750 folosesc adresare extinsă și nu sunt încă scanate.",
   "modules": [

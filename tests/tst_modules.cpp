@@ -92,6 +92,13 @@ void TestModules::profileMatching()
     QCOMPARE(ModuleCatalog::forVehicle("Škoda", "").id, QStringLiteral("vag"));      // by name, no VIN
     QCOMPARE(ModuleCatalog::forVehicle("", "JTDBR32E").id, QStringLiteral("toyota-lexus")); // 2-char WMI
     QCOMPARE(ModuleCatalog::forVehicle("Lada", "XTA21").id, QStringLiteral("generic"));
+    // Suzuki: Japanese, Hungarian (also the Fiat Sedici) and Spanish (Santana) VINs.
+    QCOMPARE(ModuleCatalog::forVehicle("", "JSAJTD54V00100001").id, QStringLiteral("suzuki"));
+    QCOMPARE(ModuleCatalog::forVehicle("", "TSMLYD21S00100001").id, QStringLiteral("suzuki"));
+    QCOMPARE(ModuleCatalog::forVehicle("", "VSEFJ13V000100001").id, QStringLiteral("suzuki")); // not SEAT (VSS)
+    QCOMPARE(ModuleCatalog::forVehicle("Suzuki", "").id, QStringLiteral("suzuki"));
+    // The Toyota-built Suzuki Across carries Toyota's electronics.
+    QCOMPARE(ModuleCatalog::forVehicle("", "JSTGBRFV00D085679").id, QStringLiteral("toyota-lexus"));
 }
 
 void TestModules::flowControlRule()

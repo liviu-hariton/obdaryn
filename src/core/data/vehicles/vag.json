@@ -2,7 +2,7 @@
   "id": "vag",
   "label": "Volkswagen group (VW, Audi, Škoda, SEAT, Cupra)",
   "makes": ["Volkswagen", "Audi", "Škoda", "SEAT", "Cupra", "Porsche"],
-  "wmi": ["WVW", "WVG", "WV1", "WV2", "3VW", "1VW", "WAU", "WUA", "TMB", "VSS", "VSE"],
+  "wmi": ["WVW", "WVG", "WV1", "WV2", "3VW", "1VW", "WAU", "WUA", "TMB", "VSS"],
   "notes": "UDS addresses of MQB-generation cars (roughly 2013+). Answers don't follow the +8 rule, so the adapter is told where to send ISO-TP flow control. Older cars that use VW's TP 2.0 protocol aren't supported yet.",
   "notes_ro": "Adrese UDS pentru mașinile din generația MQB (aprox. 2013+). Răspunsurile nu respectă regula +8, așa că adaptorului i se spune unde să trimită controlul de flux ISO-TP. Mașinile mai vechi, cu protocolul VW TP 2.0, nu sunt încă suportate.",
   "modules": [
