@@ -50,6 +50,7 @@ qt_add_qml_module(obdaryn
         qml/components/ClearCodesDialog.qml
         qml/components/NotConnected.qml
         qml/components/DescriptionSource.qml
+        qml/components/Dropdown.qml
         qml/pages/OverviewPage.qml
         qml/pages/ConnectView.qml
         qml/pages/CodesPage.qml
@@ -61,12 +62,14 @@ qt_add_qml_module(obdaryn
         qml/pages/SettingsPage.qml
         qml/pages/ModulesPage.qml
         qml/pages/TripPage.qml
+        qml/pages/ChartsPage.qml
     SOURCES
         AppController.h AppController.cpp
         models/LiveDataModel.h models/LiveDataModel.cpp
         models/DtcModel.h models/DtcModel.cpp
         models/TrafficLogModel.h models/TrafficLogModel.cpp
         models/ModuleScanModel.h models/ModuleScanModel.cpp
+        models/ChartModel.h models/ChartModel.cpp
         report/ReportWriter.h report/ReportWriter.cpp
 )
 

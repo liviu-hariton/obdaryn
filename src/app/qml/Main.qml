@@ -8,6 +8,7 @@
 //   2 Readiness                                  6 Adapter log
 //   3 Freeze frame                               7 Settings
 //   8 All modules (full-vehicle scan)          9 Trip (distance and fuel)
+//  10 Charts (several values over time)
 import QtQuick
 import QtQuick.Controls.Basic as C
 import QtQuick.Dialogs
@@ -62,9 +63,9 @@ C.ApplicationWindow {
     }
 
     // Keyboard: ⌘1…⌘9 follow the sidebar order, ⌘, opens Settings, ⌘R scans again, ⌘S saves the report.
-    readonly property var sidebarOrder: [0, 1, 8, 2, 3, 4, 9, 5, 6]
+    readonly property var sidebarOrder: [0, 1, 8, 2, 3, 4, 10, 9, 5, 6]
     Repeater {
-        model: window.sidebarOrder.length
+        model: Math.min(9, window.sidebarOrder.length) // ⌘1–⌘9
         delegate: Item {
             required property int index
             Shortcut { sequence: "Ctrl+" + (index + 1); onActivated: window.page = window.sidebarOrder[index] }
@@ -110,6 +111,7 @@ C.ApplicationWindow {
                 onObdClearRequested: window.requestClear()
             }
             TripPage { onOpenPage: p => window.page = p }
+            ChartsPage { current: window.page === 10; onOpenPage: p => window.page = p }
         }
     }
 

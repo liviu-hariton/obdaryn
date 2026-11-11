@@ -35,7 +35,7 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 ## v0.3 — logging and reports
 
 - [x] **Record sessions** and replay them without the car. A recording holds every request and raw answer with timing and target module (`.obdrec`, JSON Lines). Replay follows the recorded clock, rebuilds live data per value, and never replays a clear. The probe records too (`--record`, `--replay`), and `tools/first-contact.sh` saves a recording next to each log.
-- [ ] Charts with several signals, saved presets, and session comparison
+- [x] **Charts:** up to six values, one strip each on a shared time axis (never two y-scales), live (last 1–10 minutes, the charted values polled every cycle) or from a recording, optionally compared with a second recording (A solid, B dashed, with a legend). A crosshair reads every value at one moment; built-in and saved presets; copy as CSV. Lines are reduced to two points per pixel column so spikes survive
 - [x] CSV export of a recording's live data: one row per moment, one column per value (Parquet maybe later)
 - [x] **Shareable report** (PDF or web page): a summary at a glance (check-engine light, codes, other modules, ITP readiness, when the codes were last cleared, battery), every code with its explanation, the module scan, readiness monitors, freeze frame and vehicle identification. It says plainly when it was made from the demo car or a recording. Save with ⌘S or "Save report…" on the Overview.
 - [ ] The probe writes the same report (`--report-html`), so first-contact runs leave one behind

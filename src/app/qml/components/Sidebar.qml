@@ -255,6 +255,11 @@ Rectangle {
         }
         NavItem {
             Layout.fillWidth: true
+            text: qsTr("Charts"); iconName: "chart-line"
+            current: sidebar.currentPage === 10; onClicked: sidebar.navigate(10)
+        }
+        NavItem {
+            Layout.fillWidth: true
             text: qsTr("Trip"); iconName: "fuel"
             current: sidebar.currentPage === 9; onClicked: sidebar.navigate(9)
         }

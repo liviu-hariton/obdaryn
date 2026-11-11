@@ -16,6 +16,10 @@ RowLayout {
 
     ColumnLayout {
         Layout.fillWidth: true
+        // Take what the actions leave: a long subtitle wraps instead of
+        // pushing the actions off the right edge (Romanian runs longer).
+        Layout.minimumWidth: 0
+        Layout.preferredWidth: 0
         spacing: 4
         Text {
             id: titleText

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "models/ChartModel.h"
 #include "models/DtcModel.h"
 #include "models/LiveDataModel.h"
 #include "models/ModuleScanModel.h"
@@ -107,6 +108,7 @@ class AppController : public QObject
     Q_PROPERTY(obdaryn::DtcModel *dtcs READ dtcs CONSTANT)
     Q_PROPERTY(obdaryn::TrafficLogModel *trafficLog READ trafficLog CONSTANT)
     Q_PROPERTY(obdaryn::ModuleScanModel *moduleScan READ moduleScan CONSTANT)
+    Q_PROPERTY(obdaryn::ChartModel *charts READ charts CONSTANT)
 
     // Full-vehicle module scan
     Q_PROPERTY(QVariantList vehicleProfiles READ vehicleProfiles CONSTANT)
@@ -291,6 +293,7 @@ public:
     DtcModel *dtcs() const { return m_dtcs; }
     TrafficLogModel *trafficLog() const { return m_trafficLog; }
     ModuleScanModel *moduleScan() const { return m_moduleModel; }
+    ChartModel *charts() const { return m_charts; }
 
     QVariantList vehicleProfiles() const;
     QString profileId() const { return m_profileId; }
@@ -369,6 +372,8 @@ private:
     QString recordingsFolder() const;
     QString reportsFolder() const;
     // Trip computer
+    /// Live data polls the trip's and the charts' inputs on every cycle.
+    void updateRequiredPids();
     void startTrip();
     void endTrip();
     void feedTrip(const QList<ObdClient::PidReading> &readings);
@@ -435,6 +440,9 @@ private:
     QTimer m_ticker; ///< refreshes the recording / replay clocks once a second
     QVariantList m_recordings;
 
+    ChartModel *m_charts;
+    QElapsedTimer m_chartClock;
+    QSet<quint8> m_tripInputs;
     TripComputer m_trip;
     bool m_tripActive = false;
     QElapsedTimer m_tripClock;

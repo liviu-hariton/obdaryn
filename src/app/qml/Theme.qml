@@ -52,6 +52,13 @@ QtObject {
     readonly property color redFill:     dark ? "#C8372D" : "#C8372D"
     readonly property color unlit:       dark ? "#3A3F47" : "#B9C0CA"   // a telltale that is off
 
+    // Charts comparing two recordings: A and B. Validated with the dataviz
+    // palette checks (lightness band, colour-blind and normal-vision separation,
+    // contrast) on each theme's surface; B is also drawn dashed and named in a
+    // legend, so the pair never relies on colour alone.
+    readonly property color chartA: dark ? "#4C88EE" : "#2F6FE0"
+    readonly property color chartB: dark ? "#2EA866" : "#1E8A50"
+
     // Series colours for live traces: calm, distinct, never red/amber (those mean state).
     readonly property var series: dark
         ? ["#5B97F7", "#3CBF7A", "#C792EA", "#4FC1C9", "#E8EAED", "#9AA4FF"]

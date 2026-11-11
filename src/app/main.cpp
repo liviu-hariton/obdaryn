@@ -115,6 +115,13 @@ int main(int argc, char *argv[])
                     QTimer::singleShot(300, controller, [controller] { controller->readMonitorTests(); });
             });
     }
+    // OBDARYN_CHART_A / OBDARYN_CHART_B=file.obdrec load recordings into the Charts screen.
+    if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
+        if (qEnvironmentVariableIsSet("OBDARYN_CHART_A"))
+            controller->charts()->loadRecording(0, qEnvironmentVariable("OBDARYN_CHART_A"));
+        if (qEnvironmentVariableIsSet("OBDARYN_CHART_B"))
+            controller->charts()->loadRecording(1, qEnvironmentVariable("OBDARYN_CHART_B"));
+    }
     if (qEnvironmentVariableIsSet("OBDARYN_REPORT")) {
         if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
             const bool afterModules = qEnvironmentVariableIntValue("OBDARYN_SCAN_MODULES") == 1;

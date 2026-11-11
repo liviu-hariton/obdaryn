@@ -98,8 +98,12 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
       m_moduleScanner(new ModuleScanner(m_client, this)),
       m_moduleModel(new ModuleScanModel(m_moduleScanner, this)),
       m_recorder(new SessionRecorder(m_client->session(), this)),
-      m_keeper(new ConnectionKeeper(m_client->session(), this))
+      m_keeper(new ConnectionKeeper(m_client->session(), this)),
+      m_charts(new ChartModel(this))
 {
+    m_chartClock.start();
+    connect(m_charts, &ChartModel::requiredPidsChanged, this, &AppController::updateRequiredPids);
+    connect(m_charts, &ChartModel::notice, this, &AppController::notice);
     connect(m_keeper, &ConnectionKeeper::changed, this, &AppController::onKeeperChanged);
     // Code titles follow the car's brand pack (e.g. Hyundai/Kia for P1326).
     connect(this, &AppController::profileChanged, this, [this] { m_dtcs->setContext(m_profileId, m_language); });
@@ -467,6 +471,7 @@ void AppController::runFullScan()
                     setScanStep(tr("Finding supported live data"));
                     m_client->readSupportedPids(0x01, [this](const QList<quint8> &pids) {
                         m_liveData->setSupportedPids(pids);
+                        m_charts->setSupported(QSet<quint8>(pids.cbegin(), pids.cend()));
                         readStatusPids();
                         if (m_adapterCheck.isEmpty() && !m_replay) {
                             m_adapterCheck.insert(QStringLiteral("done"), false);
@@ -806,6 +811,7 @@ void AppController::pollLiveData()
             m_liveData->applyReading(r.pid, r.raw);
         }
         feedTrip(readings);
+        m_charts->addReadings(m_chartClock.elapsed(), readings);
         m_samplesThisSecond += int(seen.size());
         if (m_rateClock.elapsed() >= 1000) {
             m_liveData->setSamplesPerSecond(m_samplesThisSecond * 1000.0 / m_rateClock.restart());
@@ -1105,6 +1111,11 @@ QString AppController::tripKey() const
     return QStringLiteral("trips/") + (m_vin.isEmpty() ? QStringLiteral("unknown") : m_vin);
 }
 
+void AppController::updateRequiredPids()
+{
+    m_liveData->setRequiredPids(m_tripInputs | m_charts->requiredPids());
+}
+
 void AppController::startTrip()
 {
     const QSet<quint8> supported = m_liveData->supportedPids();
@@ -1123,7 +1134,8 @@ void AppController::startTrip()
     m_trip.setSupported(supported);
     m_trip.setSettings(ts);
     m_trip.reset();
-    m_liveData->setRequiredPids(TripComputer::inputPids(supported, diesel));
+    m_tripInputs = TripComputer::inputPids(supported, diesel);
+    updateRequiredPids();
     m_tripBanked = 0;
     m_tripLastBank = 0;
     m_tripLastEmit = 0;
@@ -1202,7 +1214,8 @@ void AppController::endTrip()
         settings.endGroup();
     }
     m_tripActive = false;
-    m_liveData->setRequiredPids({});
+    m_tripInputs.clear();
+    updateRequiredPids();
     loadTripHistory();
     refreshTrip();
 }
@@ -1337,6 +1350,7 @@ void AppController::setUnits(const QString &units)
     emit freezeFrameChanged();
     refreshTrip();
     loadTripHistory();
+    m_charts->retranslate();
     emit unitsChanged();
 }
 
@@ -1555,6 +1569,7 @@ void AppController::setLanguage(const QString &code)
     m_dtcs->setContext(m_profileId, lang);
     m_moduleModel->setLanguage(lang);
     refreshRecordings();         // car names and dates are localized
+    m_charts->retranslate();
     emit languageChanged();
     emit readinessChanged();     // monitor names
     emit freezeFrameChanged();   // PID names

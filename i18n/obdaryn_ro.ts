@@ -1,6 +1,169 @@
 <?xml version='1.0' encoding='utf-8'?>
 <TS version="2.1" language="ro" sourcelanguage="en">
 <context>
+    <name>ChartsPage</name>
+    <message>
+        <source>Open a recording</source>
+        <translation>Deschide o înregistrare</translation>
+    </message>
+    <message>
+        <source>Obdaryn recordings (*.obdrec)</source>
+        <translation>Înregistrări Obdaryn (*.obdrec)</translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation>Toate fișierele (*)</translation>
+    </message>
+    <message>
+        <source>Charts</source>
+        <translation>Grafice</translation>
+    </message>
+    <message>
+        <source>Live values, one chart each on the same time axis. Hover to read every value at one moment.</source>
+        <translation>Valori în timp real, câte un grafic fiecare, pe aceeași axă a timpului. Treci cu mouse-ul peste ele ca să citești toate valorile dintr-un moment.</translation>
+    </message>
+    <message>
+        <source>A whole recording, one chart per value. Add a second recording to compare two drives.</source>
+        <translation>O înregistrare întreagă, câte un grafic pe valoare. Adaugă o a doua înregistrare ca să compari două drumuri.</translation>
+    </message>
+    <message>
+        <source>Live</source>
+        <translation>În timp real</translation>
+    </message>
+    <message>
+        <source>Recordings</source>
+        <translation>Înregistrări</translation>
+    </message>
+    <message>
+        <source>Copy as CSV</source>
+        <translation>Copiază ca CSV</translation>
+    </message>
+    <message>
+        <source>Last</source>
+        <translation>Ultimele</translation>
+    </message>
+    <message>
+        <source>1 min</source>
+        <translation>1 min</translation>
+    </message>
+    <message>
+        <source>2 min</source>
+        <translation>2 min</translation>
+    </message>
+    <message>
+        <source>5 min</source>
+        <translation>5 min</translation>
+    </message>
+    <message>
+        <source>10 min</source>
+        <translation>10 min</translation>
+    </message>
+    <message>
+        <source>Choose a recording…</source>
+        <translation>Alege o înregistrare…</translation>
+    </message>
+    <message>
+        <source>Recording to chart</source>
+        <translation>Înregistrarea de afișat</translation>
+    </message>
+    <message>
+        <source>Compare with…</source>
+        <translation>Compară cu…</translation>
+    </message>
+    <message>
+        <source>Second recording to compare</source>
+        <translation>A doua înregistrare de comparat</translation>
+    </message>
+    <message>
+        <source>Stop comparing</source>
+        <translation>Oprește comparația</translation>
+    </message>
+    <message>
+        <source>Open a file…</source>
+        <translation>Deschide un fișier…</translation>
+    </message>
+    <message>
+        <source>Presets</source>
+        <translation>Seturi</translation>
+    </message>
+    <message>
+        <source>Delete the preset %1</source>
+        <translation>Șterge setul %1</translation>
+    </message>
+    <message>
+        <source>Save as preset…</source>
+        <translation>Salvează ca set…</translation>
+    </message>
+    <message>
+        <source>Preset name</source>
+        <translation>Numele setului</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salvează</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Anulează</translation>
+    </message>
+    <message>
+        <source>Values</source>
+        <translation>Valori</translation>
+    </message>
+    <message>
+        <source>Remove %1 from the charts</source>
+        <translation>Scoate %1 din grafice</translation>
+    </message>
+    <message>
+        <source>Up to %1 values</source>
+        <translation>Cel mult %1 valori</translation>
+    </message>
+    <message>
+        <source>Add a value…</source>
+        <translation>Adaugă o valoare…</translation>
+    </message>
+    <message>
+        <source>Add a value to the charts</source>
+        <translation>Adaugă o valoare în grafice</translation>
+    </message>
+    <message>
+        <source>Connect to a car for live charts</source>
+        <translation>Conectează-te la o mașină pentru grafice în timp real</translation>
+    </message>
+    <message>
+        <source>Or chart a recording: it works without the car.</source>
+        <translation>Sau afișează o înregistrare: funcționează fără mașină.</translation>
+    </message>
+    <message>
+        <source>Chart a recording</source>
+        <translation>Afișează o înregistrare</translation>
+    </message>
+    <message>
+        <source>Choose a recording</source>
+        <translation>Alege o înregistrare</translation>
+    </message>
+    <message>
+        <source>Pick one above. Recordings are made with Record session in the sidebar while connected.</source>
+        <translation>Alege una mai sus. Înregistrările se fac cu Înregistrează sesiunea din bara laterală, cât ești conectat.</translation>
+    </message>
+    <message>
+        <source>No recordings yet. While connected, press Record session in the sidebar, then chart the recording here.</source>
+        <translation>Nicio înregistrare încă. Cât ești conectat, apasă Înregistrează sesiunea în bara laterală, apoi afișează înregistrarea aici.</translation>
+    </message>
+    <message>
+        <source>Pick the values to chart</source>
+        <translation>Alege valorile de afișat</translation>
+    </message>
+    <message>
+        <source>Choose a preset or up to %1 values above.</source>
+        <translation>Alege un set sau până la %1 valori mai sus.</translation>
+    </message>
+    <message>
+        <source>no readings in this window</source>
+        <translation>nicio citire în acest interval</translation>
+    </message>
+</context>
+<context>
     <name>ClearCodesDialog</name>
     <message>
         <source>Clear trouble codes?</source>
@@ -2177,6 +2340,10 @@
         <translation>Date în timp real</translation>
     </message>
     <message>
+        <source>Charts</source>
+        <translation>Grafice</translation>
+    </message>
+    <message>
         <source>Trip</source>
         <translation>Călătorie</translation>
     </message>
@@ -2952,6 +3119,53 @@
     <message>
         <source>The pump and the estimate are more than twice apart, so this fill-up wasn't used. Usually some drives happened without Obdaryn. Counting starts again from this fill-up.</source>
         <translation>Pompa și estimarea diferă de mai mult de două ori, așa că alimentarea nu a fost folosită. De obicei unele drumuri au fost făcute fără Obdaryn. Numărarea reîncepe de la această alimentare.</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::ChartModel</name>
+    <message>
+        <source>Fuel mixture</source>
+        <translation>Amestec</translation>
+    </message>
+    <message>
+        <source>Engine load</source>
+        <translation>Sarcina motorului</translation>
+    </message>
+    <message>
+        <source>Temperatures</source>
+        <translation>Temperaturi</translation>
+    </message>
+    <message>
+        <source>Charging</source>
+        <translation>Încărcare</translation>
+    </message>
+    <message>
+        <source>Speed and throttle</source>
+        <translation>Viteză și accelerație</translation>
+    </message>
+    <message>
+        <source>Saved the preset "%1".</source>
+        <translation>Setul „%1” a fost salvat.</translation>
+    </message>
+    <message>
+        <source>Couldn't open %1. %2</source>
+        <translation>Nu s-a putut deschide %1. %2</translation>
+    </message>
+    <message>
+        <source>%1 has no live data to chart.</source>
+        <translation>%1 nu conține date în timp real de afișat.</translation>
+    </message>
+    <message>
+        <source>%1 to %2</source>
+        <translation>între %1 și %2</translation>
+    </message>
+    <message>
+        <source>now</source>
+        <translation>acum</translation>
+    </message>
+    <message>
+        <source>Time (s)</source>
+        <translation>Timp (s)</translation>
     </message>
 </context>
 <context>
