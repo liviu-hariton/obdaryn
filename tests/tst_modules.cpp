@@ -6,6 +6,7 @@
 #include "obd/ModuleScanner.h"
 #include "obd/ObdClient.h"
 #include "obd/Pids.h"
+#include "obd/ModuleDiscovery.h"
 #include "transport/SimulatedTransport.h"
 #include "vehicles/ModuleCatalog.h"
 
@@ -28,6 +29,7 @@ private slots:
     void scansDemoCar();
     void restoresGenericAddressing();
     void clearsOneModule();
+    void discoversModules();
 
 private:
     bool connectDemo();
@@ -215,6 +217,49 @@ void TestModules::clearsOneModule()
     QVERIFY(QTest::qWaitFor([&] { return done; }, 5000));
     QVERIFY(ok);
     QCOMPARE(scanner.results()[airbagIndex].dtcs.size(), 0);
+}
+
+void TestModules::discoversModules()
+{
+    QVERIFY(connectDemo());
+    ModuleDiscovery discovery(m_client);
+    QSignalSpy done(&discovery, &ModuleDiscovery::finished);
+    discovery.run();
+    QVERIFY(done.wait(60000));
+
+    // The demo car's modules answer TesterPresent, positively or with a refusal,
+    // and each is found at its reply ID.
+    auto has = [&](quint16 tx, quint16 rx) {
+        for (const DiscoveredModule &d : discovery.found())
+            if (d.tx == tx && d.rx == rx)
+                return true;
+        return false;
+    };
+    QVERIFY(has(0x7D1, 0x7D9)); // ABS (refuses 3E: still present)
+    QVERIFY(has(0x7D2, 0x7DA)); // airbag
+    QVERIFY(has(0x7A0, 0x7A8)); // body
+    QVERIFY(has(0x7C6, 0x7CE)); // cluster
+    QVERIFY(has(0x7D6, 0x7DE)); // TPMS (answers 3E positively)
+    // Never transmitted on a reply ID: no request ID is a standard reply ID or
+    // the reply ID of a module found earlier.
+    for (const DiscoveredModule &d : discovery.found()) {
+        QVERIFY(d.tx < 0x7E8 || d.tx > 0x7EF);
+        for (const DiscoveredModule &other : discovery.found())
+            QVERIFY(d.tx != other.rx);
+    }
+
+    // The found addresses scan like a brand list: known ones keep their names.
+    const VehicleProfile profile = discovery.asProfile(*ModuleCatalog::find(QStringLiteral("hyundai-kia")));
+    bool absNamed = false;
+    for (const ModuleDef &m : profile.modules)
+        absNamed |= (m.tx == 0x7D1 && m.category == QStringLiteral("abs"));
+    QVERIFY(absNamed);
+    QVERIFY(profile.modules.size() >= 5);
+
+    // Addressing is restored: a generic OBD-II request reaches the engine again.
+    bool engineAnswered = false;
+    m_client->request("0100", [&](const ObdClient::Response &r) { engineAnswered = r.ok(); });
+    QVERIFY(QTest::qWaitFor([&] { return engineAnswered; }, 3000));
 }
 
 QTEST_GUILESS_MAIN(TestModules)

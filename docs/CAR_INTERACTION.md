@@ -60,6 +60,17 @@ Standard OBD-II live data is the same on every car. A brand's modules know much 
 - **Car state.** Ignition ON; engine running for meaningful engine values.
 - **Not checked on your car.** These definitions come from other owners' cars. Compare a few values with Car Scanner before relying on them, and report wrong ones to OBDb.
 
+## 4c. Looking for modules a brand list doesn't know (discovery)
+
+For brands whose module addresses aren't public yet (Suzuki today), `obdaryn-probe --discover` (step 3 of `tools/first-contact.sh`) asks every 11-bit diagnostic address whether a module is there:
+
+- **What it sends:** `AT CRA` once, so the adapter shows answers from any reply ID; then for each address from 700 to 7F7, `AT SH <address>` and TesterPresent (`3E 00`); at the end `AT FCSM0`, `AT CRA` and `AT SH 7DF` restore the standard addressing. TesterPresent reads nothing and changes nothing in a module, in any session. All of it is on the read-only allowlist; nothing new was allowed for discovery.
+- **What counts as an answer:** a positive reply (`7E 00`) or a refusal (`7F 3E xx`), which still proves a module is there. Other frames on the bus are ignored.
+- **What it never does:** transmit on the functional address 7DF, on the standard reply IDs 7E8–7EF, or on a reply ID found during the sweep, so it never sends with an ID another module answers with.
+- **Then:** the ordinary module scan reads the codes and part numbers of everything that answered, with UDS `19 02 FF` or KWP `18 02 FF 00` as usual.
+- **Car state:** ignition ON, engine off. About 240 addresses, roughly a minute.
+- **Limits:** 11-bit CAN only. Modules behind an extended address (Toyota's 750 gateway) or on 29-bit CAN aren't found this way.
+
 ## 5. What clearing codes really does
 
 Clearing (OBD-II service 04) is the only thing Obdaryn does that changes anything in the car. It is still not a write to a module's software or settings: the clear command is part of the standard. Before you confirm, know that clearing:

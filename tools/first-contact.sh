@@ -3,6 +3,8 @@
 #
 # First contact with a real car. Run it in the car, laptop joined to the
 # adapter's Wi-Fi ("V-LINK"). It only reads; nothing is cleared or changed.
+# Steps: ignition on, engine running, then (optional) a search for the car's
+# other modules at every diagnostic address.
 #
 #   tools/first-contact.sh            # Vgate iCar Pro Wi-Fi at 192.168.0.10:35000
 #   tools/first-contact.sh HOST PORT
@@ -53,14 +55,30 @@ run() {
 }
 
 echo
-echo "Step 1 of 2: ignition ON, engine OFF. Press Enter when ready."
+echo "Step 1 of 3: ignition ON, engine OFF. Press Enter when ready."
 read _
 run ignition-on "$@"
 
 echo
-echo "Step 2 of 2: start the engine and let it idle. Press Enter when it runs (or Ctrl+C to stop here)."
+echo "Step 2 of 3: start the engine and let it idle. Press Enter when it runs (or Ctrl+C to stop here)."
 read _
 run engine-running "$@"
+
+# Step 3 finds modules the brand's list doesn't know yet (ABS, airbag, body...).
+# It sends only "AT SH <address>" and TesterPresent (3E 00) to each 11-bit
+# diagnostic address, then reads the codes of whatever answered.
+echo
+echo "Step 3 of 3 (optional): look for the car's other modules (about a minute)."
+echo "Switch the engine OFF and leave the ignition ON. Each of ~240 addresses gets a"
+echo "harmless \"are you there?\" (TesterPresent); nothing is changed or cleared."
+printf "Run it? [y/N] "
+read ANSWER
+if [ "$ANSWER" = "y" ] || [ "$ANSWER" = "Y" ]; then
+    LOG="$DIR/logs/first-contact-$STAMP-discovery.log"
+    "$PROBE" "$HOST" "$PORT" --discover --verbose --record "$DIR/logs/first-contact-$STAMP-discovery.obdrec" > "$LOG" 2>&1
+    echo "  saved $LOG"
+    sed -n '/^== Module discovery/,/^Done/p' "$LOG" | grep -vE "^    [<>]" | head -40
+fi
 
 echo
 echo "Done. Rejoin your normal Wi-Fi and tell Claude the logs are in logs/."

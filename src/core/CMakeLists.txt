@@ -16,6 +16,7 @@ qt_add_library(obdaryn_core STATIC
     obd/VehicleInfo.h         obd/VehicleInfo.cpp
     obd/ObdClient.h           obd/ObdClient.cpp
     obd/ModuleScanner.h       obd/ModuleScanner.cpp
+    obd/ModuleDiscovery.h     obd/ModuleDiscovery.cpp
     obd/ModuleAddressing.h    obd/ModuleAddressing.cpp
     obd/ManufacturerData.h    obd/ManufacturerData.cpp obd/ManufacturerNames.cpp
     obd/ManufacturerReader.h  obd/ManufacturerReader.cpp

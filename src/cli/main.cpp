@@ -19,12 +19,18 @@
 //     --model NAME   also read the manufacturer values of this model (OBDb data
 //                    pack, e.g. "Elantra" for a Hyundai): which modules answer
 //                    which requests, with the decoded values
+//     --discover     look for modules at every 11-bit diagnostic address
+//                    (7xx), for cars whose brand list doesn't know them yet:
+//                    sends only AT SH <id> and TesterPresent (3E 00) to each,
+//                    then reads the codes of whatever answered. About a
+//                    minute; ignition ON, engine off.
 //
 // It uses exactly the same core library as the app, so it tells "adapter or
 // car problem" from "UI problem". Like the app, it only reads: every command
 // still passes the safety guard, and nothing here clears codes.
 
 #include "elm327/AdapterCheck.h"
+#include "obd/ModuleDiscovery.h"
 #include "obd/DtcDatabase.h"
 #include "obd/ManufacturerData.h"
 #include "obd/ManufacturerReader.h"
@@ -96,6 +102,35 @@ QString pidHex(quint8 p)
 
 } // namespace
 
+// One line per module of a scan (and its codes, explained), for the module scan
+// and for the modules found by discovery.
+static void printModules(QTextStream &out, const QList<obdaryn::ModuleResult> &results, const QString &brand)
+{
+    using namespace obdaryn;
+    for (const ModuleResult &m : results) {
+        const char *state = m.state == ModuleResult::State::Answered ? "answered"
+                          : m.state == ModuleResult::State::ObdOnly ? "generic OBD-II only"
+                          : m.state == ModuleResult::State::Absent ? "not found" : "error";
+        out << "  " << m.module.addressText() << "  " << m.module.displayName().leftJustified(26) << state;
+        if (m.state == ModuleResult::State::Answered)
+            out << (m.protocol == DiagProtocol::Uds ? " (UDS)" : " (KWP2000)");
+        if (!m.partNumber.isEmpty())
+            out << "  part " << m.partNumber;
+        if (!m.softwareVersion.isEmpty())
+            out << "  sw " << m.softwareVersion;
+        if (!m.module.verified)
+            out << "  [unconfirmed address]";
+        if (m.state == ModuleResult::State::Error)
+            out << "  " << m.error;
+        out << Qt::endl;
+        for (const ModuleDtc &d : m.dtcs) {
+            const DtcInfo info = DtcDatabase::instance().lookup(d.code, brand, QStringLiteral("en"), m.module.category);
+            out << "      " << d.displayCode() << "  status 0x" << QString::number(d.status, 16).toUpper()
+                << (d.activeNow ? "  [present now]" : "") << "  " << (info.known ? info.title : info.system) << Qt::endl;
+        }
+    }
+}
+
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
@@ -115,6 +150,7 @@ int main(int argc, char *argv[])
     const QString brandModel = takeValue(QStringLiteral("--model"));
     const bool report = args.removeAll(QStringLiteral("--report")) > 0 || !reportHtmlPath.isEmpty();
     const bool modules = args.removeAll(QStringLiteral("--modules")) > 0 || report;
+    const bool discover = args.removeAll(QStringLiteral("--discover")) > 0;
     const bool verbose = args.removeAll(QStringLiteral("--verbose")) > 0;
     const bool demo = args.removeAll(QStringLiteral("--demo")) > 0;
     const QString recordPath = takeValue(QStringLiteral("--record"));
@@ -454,31 +490,49 @@ int main(int argc, char *argv[])
             QObject::connect(scanner, &ModuleScanner::finished, [&out, &rep, scanner, next, profile] {
                 rep.modulesScanned = true;
                 rep.modules = scanner->results();
-                for (const ModuleResult &m : scanner->results()) {
-                    const char *state = m.state == ModuleResult::State::Answered ? "answered"
-                                      : m.state == ModuleResult::State::ObdOnly ? "generic OBD-II only"
-                                      : m.state == ModuleResult::State::Absent ? "not found" : "error";
-                    out << "  " << m.module.addressText() << "  " << m.module.displayName().leftJustified(26) << state;
-                    if (m.state == ModuleResult::State::Answered)
-                        out << (m.protocol == DiagProtocol::Uds ? " (UDS)" : " (KWP2000)");
-                    if (!m.partNumber.isEmpty())
-                        out << "  part " << m.partNumber;
-                    if (!m.softwareVersion.isEmpty())
-                        out << "  sw " << m.softwareVersion;
-                    if (!m.module.verified)
-                        out << "  [unconfirmed address]";
-                    if (m.state == ModuleResult::State::Error)
-                        out << "  " << m.error;
-                    out << Qt::endl;
-                    for (const ModuleDtc &d : m.dtcs) {
-                        const DtcInfo info = DtcDatabase::instance().lookup(d.code, profile.id, QStringLiteral("en"), m.module.category);
-                        out << "      " << d.displayCode() << "  status 0x" << QString::number(d.status, 16).toUpper()
-                            << (d.activeNow ? "  [present now]" : "") << "  " << (info.known ? info.title : info.system) << Qt::endl;
-                    }
-                }
+                printModules(out, scanner->results(), profile.id);
                 next();
             });
             scanner->scan(profile);
+        });
+    }
+
+    // ---- Module discovery: every 7xx address, for brands without a module list
+    if (discover) {
+        steps.add([&](Steps::Next next) {
+            const VehicleProfile known = ModuleCatalog::forVehicle(make, vin);
+            section("Module discovery");
+            out << "  Asking every 11-bit diagnostic address (700-7F7) whether a module is there." << Qt::endl
+                << "  Sent to each: AT SH <address>, then TesterPresent (3E 00). Nothing else." << Qt::endl;
+            auto *discovery = new ModuleDiscovery(&client, &app);
+            QObject::connect(discovery, &ModuleDiscovery::progress, [&out](int done, int total) {
+                if (done > 0 && done < total && done % 40 == 0)
+                    out << "  ... " << done << " of " << total << " addresses" << Qt::endl;
+            });
+            QObject::connect(discovery, &ModuleDiscovery::moduleFound, [&out](const DiscoveredModule &d) {
+                out << "  found " << QString::number(d.tx, 16).toUpper() << " -> " << QString::number(d.rx, 16).toUpper()
+                    << (d.positive ? QStringLiteral("  answered")
+                                   : QStringLiteral("  refused (NRC %1), still present")
+                                         .arg(QString::number(d.nrc, 16).toUpper().rightJustified(2, QLatin1Char('0'))))
+                    << Qt::endl;
+            });
+            QObject::connect(discovery, &ModuleDiscovery::finished, [&, discovery, known, next] {
+                out << "  " << discovery->found().size() << " addresses answered" << Qt::endl;
+                if (discovery->found().isEmpty()) {
+                    next();
+                    return;
+                }
+                // Read the codes and part numbers of everything that answered.
+                section("Codes of the modules found");
+                const VehicleProfile profile = discovery->asProfile(known);
+                auto *scanner = new ModuleScanner(&client, &app);
+                QObject::connect(scanner, &ModuleScanner::finished, [&out, scanner, next, profile] {
+                    printModules(out, scanner->results(), profile.id);
+                    next();
+                });
+                scanner->scan(profile);
+            });
+            discovery->run();
         });
     }
 
