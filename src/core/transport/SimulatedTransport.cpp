@@ -435,6 +435,10 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::moduleReply(const QByteA
             m_stored.clear(); m_pending.clear(); m_monitorsIncomplete = 0xE5;
             return reply("7E8", QByteArray::fromHex("54FF00"));
         case 0x19: return negative("7E8", 0x11);
+        case 0x21: {
+            const QByteArray a = req.size() == 2 ? localData(header, quint8(req[1])) : QByteArray();
+            return a.isEmpty() ? negative("7E8", 0x31) : reply("7E8", a);
+        }
         default:   return engineReply(req);
         }
     }
@@ -453,6 +457,10 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::moduleReply(const QByteA
         case 0x18: return reply("7D9", kwpDtcs(m_absFault ? QList<QPair<quint16, quint8>>{{0x5203, 0xE0}}
                                                          : QList<QPair<quint16, quint8>>{}));
         case 0x1A: return reply("7D9", QByteArray::fromHex("5A87") + "58920-3X000");
+        case 0x21: {
+            const QByteArray a = req.size() == 2 ? localData(header, quint8(req[1])) : QByteArray();
+            return a.isEmpty() ? negative("7D9", 0x31) : reply("7D9", a);
+        }
         case 0x14:
             if (clearAll) m_absFault = false; // a real active fault would come straight back
             return reply("7D9", QByteArray::fromHex("54FF00"));
@@ -500,7 +508,11 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::moduleReply(const QByteA
             return reply("7DE", QByteArray::fromHex("7E00"));
         return {};
     }
-    return {}; // steering, climate...: not fitted in the demo car
+    if (header == "7D4" && sid == 0x21) { // steering: answers its local data only
+        const QByteArray a = req.size() == 2 ? localData(header, quint8(req[1])) : QByteArray();
+        return a.isEmpty() ? QList<EcuReply>{} : reply("7DC", a);
+    }
+    return {}; // climate...: not fitted in the demo car
 }
 
 QByteArray SimulatedTransport::joinBytes(const QByteArray &bytes) const
@@ -551,15 +563,61 @@ QByteArray SimulatedTransport::formatFrames(const EcuReply &reply) const
     return lines.join("\r");
 }
 
+SimulatedTransport::Drive SimulatedTransport::driveNow() const
+{
+    const double t = seconds();
+    const bool on = m_engineRunning;
+    Drive d;
+    // A slow "driving" wave between 0 and 1 that drives rpm, load, throttle...
+    d.drive = on ? 0.5 + 0.5 * std::sin(t * 0.45) : 0.0;
+    d.rpm = on ? 780.0 + 2400.0 * d.drive * d.drive : 0.0;
+    d.speed = on ? std::max(0.0, 75.0 * std::sin(t * 0.08)) : 0.0;
+    d.coolant = on ? std::min(89.0, 38.0 + t * 0.9) : 31.0;
+    return d;
+}
+
+QByteArray SimulatedTransport::localData(const QByteArray &header, quint8 id) const
+{
+    // Answers recorded from a real 2014 Elantra (OBDb Hyundai-Elantra test cases,
+    // CC BY-SA 4.0), with the live parts patched from the simulated engine.
+    // Offsets are into the answer: "61 <id>" then the data.
+    const Drive d = driveNow();
+    auto put = [](QByteArray &a, int at, double v) { a[at] = char(std::clamp(int(std::lround(v)), 0, 255)); };
+    if (header == "7E0") {
+        switch (id) {
+        case 0x01: { // rpm, temperatures, manifold pressure
+            QByteArray a = QByteArray::fromHex("61019FB73E00CECF5134194B0000000028025144402F1B00005B00B900006000000C0180B83786A0");
+            const int rpm4 = int(d.rpm * 4);
+            a[9] = char(rpm4 & 0xFF);           // engine speed, little-endian, 0.25 rpm
+            a[10] = char((rpm4 >> 8) & 0xFF);
+            put(a, 27, (d.coolant + 48) / 0.75);        // coolant
+            put(a, 35, (31 + 48) / 0.75);               // intake air
+            put(a, 36, (d.coolant - 4 + 48) / 0.75);    // engine oil, a little behind the coolant
+            return a;
+        }
+        case 0x02: return QByteArray::fromHex("6102D4F40000000078009601000000CE060000000056000004000400040004000000000000000000");
+        case 0x13: return QByteArray::fromHex("61130000000000000000453A000000000000453A0000");
+        case 0x1D: return QByteArray::fromHex("611D0F0F3F3C000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000041440000D3340000FD620000DF8800000000000000000000FC3F00000000000000000000000000000000000000000043013E014D014DA900");
+        default: return {};
+        }
+    }
+    if (header == "7D1" && id == 0x01) { // wheel speeds
+        QByteArray a = QByteArray::fromHex("6101DFEBEF01000A000001E7FF00000000FF81FF00D0C400000000FF7FFB080008050000FFFFFFFFFF");
+        for (int wheel = 0; wheel < 4; ++wheel)
+            put(a, 13 + wheel, d.speed + (wheel == 1 ? 0.6 : 0)); // the front right one turns a bit faster
+        return a;
+    }
+    if (header == "7D4" && id == 0x01) // steering angle
+        return QByteArray::fromHex("61010CE700000500FFFB0000000000242404000000004C");
+    return {};
+}
+
 QByteArray SimulatedTransport::pidData(quint8 pid) const
 {
     const double t = seconds();
     const bool on = m_engineRunning;
-    // A slow "driving" wave between 0 and 1 that drives rpm, load, throttle...
-    const double drive = on ? 0.5 + 0.5 * std::sin(t * 0.45) : 0.0;
-    const double rpm = on ? 780.0 + 2400.0 * drive * drive : 0.0;
-    const double speed = on ? std::max(0.0, 75.0 * std::sin(t * 0.08)) : 0.0;
-    const double coolant = on ? std::min(89.0, 38.0 + t * 0.9) : 31.0;
+    const Drive now = driveNow();
+    const double drive = now.drive, rpm = now.rpm, speed = now.speed, coolant = now.coolant;
 
     switch (pid) {
     case 0x01: {

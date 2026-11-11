@@ -2,6 +2,8 @@
 //
 // Live data: every standard value the car supports, with its recent history.
 // Pinned values also appear on the Overview and refresh on every cycle.
+// For brands with a data pack (OBDb), a second view lists the manufacturer
+// values the car's modules answer.
 import QtQuick
 import QtQuick.Controls.Basic as C
 import QtQuick.Layouts
@@ -9,10 +11,18 @@ import Obdaryn
 
 Item {
     id: page
+    objectName: "livePage"
     property bool bulbCheck: false
     signal openPage(int p)
     readonly property bool ready: App.connectionState === App.Ready
     property bool showRaw: false
+    /// "standard" (generic OBD-II) or "brand" (manufacturer values).
+    property string source: "standard"
+    readonly property var brand: App.manufacturerSetup
+    readonly property bool brandView: page.source === "brand" && page.brand.available === true
+
+    // Manufacturer values are read only while they are on screen.
+    Binding { target: App; property: "manufacturerActive"; value: page.visible && page.ready && page.brandView }
 
     NotConnected {
         visible: !page.ready
@@ -31,12 +41,15 @@ Item {
         PageHeader {
             Layout.fillWidth: true
             title: qsTr("Live data")
-            subtitle: App.liveData.count > 0
+            subtitle: page.brandView
+                      ? (page.brand.state === "found" ? qsTr("%n value(s) from the car's modules", "", App.manufacturerValues.count) : "")
+                      : App.liveData.count > 0
                       ? qsTr("%1 values · %2 readings per second · pinned values refresh first")
                             .arg(App.liveData.count)
                             .arg(Number(App.liveData.samplesPerSecond).toLocaleString(Qt.locale(), "f", 1))
                       : ""
             AppButton {
+                visible: !page.brandView
                 variant: "quiet"
                 iconName: "copy"
                 text: qsTr("Copy as CSV")
@@ -47,8 +60,17 @@ Item {
         RowLayout {
             Layout.fillWidth: true
             spacing: Theme.s4
+            Segmented {
+                visible: page.brand.available === true
+                model: [{ value: "standard", label: qsTr("Standard (OBD-II)") },
+                        //: Live data: the manufacturer's own values, e.g. "Hyundai values"
+                        { value: "brand", label: qsTr("%1 values").arg(page.brand.make) }]
+                value: page.source
+                onPicked: v => page.source = v
+            }
             C.TextField {
                 id: search
+                visible: !page.brandView || page.brand.state === "found"
                 Layout.preferredWidth: 320
                 implicitHeight: 34
                 leftPadding: 34
@@ -70,6 +92,7 @@ Item {
             }
             Item { Layout.fillWidth: true }
             ToggleSwitch {
+                visible: !page.brandView
                 text: qsTr("Show raw bytes")
                 checked: page.showRaw
                 onToggled: page.showRaw = checked
@@ -78,6 +101,7 @@ Item {
 
         // Column headings.
         RowLayout {
+            visible: !page.brandView
             Layout.fillWidth: true
             Layout.topMargin: Theme.s2
             spacing: Theme.s4
@@ -96,6 +120,7 @@ Item {
 
         ListView {
             id: list
+            visible: !page.brandView
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
@@ -194,6 +219,15 @@ Item {
                     }
                 }
             }
+        }
+
+        // ---- Manufacturer values ---------------------------------------------
+        BrandValues {
+            visible: page.brandView
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            setup: page.brand
+            filter: search.text
         }
     }
 }

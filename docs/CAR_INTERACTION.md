@@ -50,6 +50,16 @@ Generic OBD-II only reaches the engine (and usually the transmission). Warning l
 - **What each module answers.** For every module that answers you get its codes, whether each fault is present right now, whether it asks for a warning light, and its part number.
 - **Clearing a module's codes.** Same rules as before: confirm, engine off, ignition ON. Clearing never repairs anything; an active ABS or airbag fault comes straight back.
 
+## 4b. Manufacturer values (Hyundai and Kia)
+
+Standard OBD-II live data is the same on every car. A brand's modules know much more: oil temperature, each wheel's speed, the steering angle, tyre pressures. **Live data → Hyundai values** reads them, from the community [OBDb](https://github.com/OBDb) definitions:
+
+- **What is sent.** Read-only requests only: `21 xx` (read local data) and `22 xx xx` (read data by identifier), each to one module, after pointing the adapter at it (`AT SH`, `AT CRA`). The safety guard checks each one; the standard addressing is restored afterwards.
+- **Choose the model once.** The definitions differ per model and year. The year comes from the VIN; the model you pick, and Obdaryn remembers it for this car.
+- **Find values.** Obdaryn asks each module once which values it answers, which takes up to a minute (absent modules cost a short timeout each). After that it reads only what answered, a few requests at a time between the standard live data, and only while the screen is open.
+- **Car state.** Ignition ON; engine running for meaningful engine values.
+- **Not checked on your car.** These definitions come from other owners' cars. Compare a few values with Car Scanner before relying on them, and report wrong ones to OBDb.
+
 ## 5. What clearing codes really does
 
 Clearing (OBD-II service 04) is the only thing Obdaryn does that changes anything in the car. It is still not a write to a module's software or settings: the clear command is part of the standard. Before you confirm, know that clearing:

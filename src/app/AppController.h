@@ -7,6 +7,7 @@
 #include "models/ChartModel.h"
 #include "models/DtcModel.h"
 #include "models/LiveDataModel.h"
+#include "models/ManufacturerValuesModel.h"
 #include "models/ModuleScanModel.h"
 #include "models/TrafficLogModel.h"
 #include "obd/ObdClient.h"
@@ -111,6 +112,15 @@ class AppController : public QObject
     Q_PROPERTY(obdaryn::TrafficLogModel *trafficLog READ trafficLog CONSTANT)
     Q_PROPERTY(obdaryn::ModuleScanModel *moduleScan READ moduleScan CONSTANT)
     Q_PROPERTY(obdaryn::ChartModel *charts READ charts CONSTANT)
+    Q_PROPERTY(obdaryn::ManufacturerValuesModel *manufacturerValues READ manufacturerValues CONSTANT)
+
+    // Manufacturer values (OBDb data packs): which model, and what the car answers.
+    /// {available, make, models, model, year, yearFromVin, state, progress, total,
+    ///  answered, attribution}. state: "choose" (no model yet), "ready" (model
+    ///  chosen, not asked yet), "finding", "found", "none" (nothing answered).
+    Q_PROPERTY(QVariantMap manufacturerSetup READ manufacturerSetup NOTIFY manufacturerSetupChanged)
+    /// True while the manufacturer values are on screen: only then are they polled.
+    Q_PROPERTY(bool manufacturerActive READ manufacturerActive WRITE setManufacturerActive NOTIFY manufacturerActiveChanged)
 
     // Full-vehicle module scan
     Q_PROPERTY(QVariantList vehicleProfiles READ vehicleProfiles CONSTANT)
@@ -300,6 +310,16 @@ public:
     TrafficLogModel *trafficLog() const { return m_trafficLog; }
     ModuleScanModel *moduleScan() const { return m_moduleModel; }
     ChartModel *charts() const { return m_charts; }
+    ManufacturerValuesModel *manufacturerValues() const { return m_manufacturerValues; }
+    QVariantMap manufacturerSetup() const;
+    bool manufacturerActive() const { return m_manufacturerActive; }
+    void setManufacturerActive(bool active);
+    /// Chooses the car's model for manufacturer values (remembered per VIN).
+    Q_INVOKABLE void setManufacturerModel(const QString &model);
+    /// Sets the model year when the VIN doesn't tell it.
+    Q_INVOKABLE void setManufacturerYear(int year);
+    /// Asks every module once which of the model's values it answers.
+    Q_INVOKABLE void findManufacturerValues();
 
     QVariantList vehicleProfiles() const;
     QString profileId() const { return m_profileId; }
@@ -356,6 +376,8 @@ signals:
     void adapterCheckChanged();
     void adapterHealthChanged();
     void tripHistoryChanged();
+    void manufacturerSetupChanged();
+    void manufacturerActiveChanged();
     /// A short message for the toast (recording saved, export written, ...).
     void notice(bool success, const QString &message);
 
@@ -368,6 +390,15 @@ private:
     void schedulePoll();
     void pollLiveData();
     void resetVehicleData();
+    /// Loads the remembered manufacturer setup for this car (model, year, values it answers).
+    void loadManufacturerSetup();
+    /// The chosen model's commands for the car's year, or empty.
+    QList<ManufacturerCommand> manufacturerCommands() const;
+    /// Readable names of the modules, from the brand's module list ("Engine", "ABS / ESC").
+    QHash<quint16, QString> manufacturerModuleNames() const;
+    /// Reads the answered commands that are due (OBDb's interval); false if none is.
+    bool pollManufacturerValues();
+    QString vehicleSettingsGroup() const;
     void readStatusPids();
     void readVoltage();
     void pickProfileForVehicle();
@@ -448,6 +479,14 @@ private:
 
     ChartModel *m_charts;
     QElapsedTimer m_chartClock;
+    ManufacturerValuesModel *m_manufacturerValues;
+    QString m_manufacturerModel;
+    int m_manufacturerYear = 0;               ///< set by the user when the VIN has no year
+    QList<ManufacturerCommand> m_manufacturerAnswered; ///< the commands this car answers
+    QHash<QString, qint64> m_manufacturerLastRead;    ///< command key -> m_chartClock ms
+    QString m_manufacturerState = QStringLiteral("choose");
+    int m_manufacturerProgress = 0, m_manufacturerTotal = 0;
+    bool m_manufacturerActive = false;
     QSet<quint8> m_tripInputs;
     TripComputer m_trip;
     bool m_tripActive = false;

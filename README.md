@@ -14,6 +14,7 @@
 - **Self-test results (Mode 06).** The numbers behind the readiness monitors, each next to the limits the car judges it by, so a part that's wearing out shows before the check-engine light comes on.
 - **Freeze frame.** The sensor snapshot taken when a fault was stored.
 - **Live data.** Every standard sensor the car supports, with sparklines. A pinned dashboard refreshes several times per second thanks to multi-PID requests.
+- **Manufacturer values (Hyundai and Kia).** What the car's modules report beyond standard OBD-II, such as oil temperature, wheel speeds, steering angle or tyre pressures, from the community [OBDb](https://github.com/OBDb) definitions for 50+ models. Obdaryn asks each module once which values it answers, then reads only those.
 - **Vehicle info.** Decoded VIN, calibration IDs, CVNs and ECU names.
 - **Clearing codes**, only when you ask, never with the engine running, and with the consequences explained first.
 - **Charts.** Several live values on a shared time axis, presets for common questions (mixture, load, temperatures, charging), and two recordings side by side to compare drives before and after a repair.

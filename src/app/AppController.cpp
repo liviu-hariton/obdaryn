@@ -2,6 +2,9 @@
 
 #include "AppController.h"
 
+#include "obd/ManufacturerData.h"
+#include "obd/ManufacturerReader.h"
+
 #include "elm327/AdapterCheck.h"
 #include "elm327/ConnectionKeeper.h"
 #include "obd/DtcDatabase.h"
@@ -98,7 +101,8 @@ AppController::AppController(QQmlEngine *engine, QObject *parent)
       m_moduleModel(new ModuleScanModel(m_moduleScanner, this)),
       m_recorder(new SessionRecorder(m_client->session(), this)),
       m_keeper(new ConnectionKeeper(m_client->session(), this)),
-      m_charts(new ChartModel(this))
+      m_charts(new ChartModel(this)),
+      m_manufacturerValues(new ManufacturerValuesModel(this))
 {
     m_chartClock.start();
     connect(m_charts, &ChartModel::requiredPidsChanged, this, &AppController::updateRequiredPids);
@@ -405,6 +409,13 @@ void AppController::setScanStep(const QString &step)
 
 void AppController::resetVehicleData()
 {
+    m_manufacturerModel.clear();
+    m_manufacturerYear = 0;
+    m_manufacturerAnswered.clear();
+    m_manufacturerLastRead.clear();
+    m_manufacturerState = QStringLiteral("choose");
+    m_manufacturerValues->clear();
+    emit manufacturerSetupChanged();
     m_vin.clear();
     m_manufacturer.clear();
     m_vinRegion.clear();
@@ -453,6 +464,7 @@ void AppController::runFullScan()
         m_dtcs->setEcuNames(info.ecuNames);
         emit vehicleChanged();
         pickProfileForVehicle();
+        loadManufacturerSetup();
 
         setScanStep(tr("Checking readiness monitors"));
         m_client->readMonitorStatus([this](const MonitorStatus &status) {
@@ -791,6 +803,9 @@ void AppController::pollLiveData()
 {
     if (!m_pollingEnabled || m_client->session()->state() != ElmSession::State::Ready)
         return;
+    // Manufacturer values on screen and due: they take this turn.
+    if (pollManufacturerValues())
+        return;
     const QList<quint8> batch = m_liveData->nextPollBatch();
     if (batch.isEmpty())
         return;
@@ -821,6 +836,201 @@ void AppController::pollLiveData()
         }
         schedulePoll();
     });
+}
+
+// ---------------------------------------------------------------------------
+// Manufacturer values (OBDb data packs)
+
+QString AppController::vehicleSettingsGroup() const
+{
+    // Per car: a model chosen for one VIN must not follow the user to the next car.
+    return QStringLiteral("vehicles/") + (m_vin.isEmpty() ? QStringLiteral("unknown") : m_vin);
+}
+
+QVariantMap AppController::manufacturerSetup() const
+{
+    const QStringList models = ManufacturerData::instance().modelsOf(m_manufacturer);
+    const int vinYear = decodeVin(m_vin).modelYear;
+    return {{QStringLiteral("available"), !models.isEmpty()},
+            {QStringLiteral("make"), m_manufacturer},
+            {QStringLiteral("models"), models},
+            {QStringLiteral("model"), m_manufacturerModel},
+            {QStringLiteral("year"), vinYear > 0 ? vinYear : m_manufacturerYear},
+            {QStringLiteral("yearFromVin"), vinYear > 0},
+            {QStringLiteral("state"), m_manufacturerState},
+            {QStringLiteral("progress"), m_manufacturerProgress},
+            {QStringLiteral("total"), m_manufacturerTotal},
+            {QStringLiteral("answered"), int(m_manufacturerAnswered.size())},
+            {QStringLiteral("attribution"), ManufacturerData::instance().attribution()}};
+}
+
+QList<ManufacturerCommand> AppController::manufacturerCommands() const
+{
+    const ManufacturerModel *model = ManufacturerData::instance().find(m_manufacturer, m_manufacturerModel);
+    if (!model)
+        return {};
+    const int vinYear = decodeVin(m_vin).modelYear;
+    return model->commandsFor(vinYear > 0 ? vinYear : m_manufacturerYear);
+}
+
+QHash<quint16, QString> AppController::manufacturerModuleNames() const
+{
+    QHash<quint16, QString> names;
+    if (const VehicleProfile *p = ModuleCatalog::find(ModuleCatalog::forVehicle(m_manufacturer, m_vin).id)) {
+        for (const ModuleDef &m : p->modules)
+            names.insert(m.tx, m.displayName());
+    }
+    return names;
+}
+
+void AppController::loadManufacturerSetup()
+{
+    QSettings settings;
+    settings.beginGroup(vehicleSettingsGroup());
+    m_manufacturerModel = settings.value(QStringLiteral("manufacturerModel")).toString();
+    m_manufacturerYear = settings.value(QStringLiteral("manufacturerYear")).toInt();
+    const QStringList answered = settings.value(QStringLiteral("manufacturerAnswered")).toStringList();
+    const bool asked = settings.contains(QStringLiteral("manufacturerAnswered"));
+    settings.endGroup();
+    if (!ManufacturerData::instance().find(m_manufacturer, m_manufacturerModel))
+        m_manufacturerModel.clear();
+    // What this car answered last time: no need to ask every module again.
+    m_manufacturerAnswered.clear();
+    for (const ManufacturerCommand &c : manufacturerCommands()) {
+        if (answered.contains(c.key()))
+            m_manufacturerAnswered << c;
+    }
+    m_manufacturerLastRead.clear();
+    m_manufacturerValues->setCommands(m_manufacturerAnswered, manufacturerModuleNames());
+    m_manufacturerState = m_manufacturerModel.isEmpty() ? QStringLiteral("choose")
+                        : !asked ? QStringLiteral("ready")
+                        : m_manufacturerAnswered.isEmpty() ? QStringLiteral("none") : QStringLiteral("found");
+    emit manufacturerSetupChanged();
+}
+
+void AppController::setManufacturerModel(const QString &model)
+{
+    if (model == m_manufacturerModel || !ManufacturerData::instance().find(m_manufacturer, model))
+        return;
+    QSettings settings;
+    settings.beginGroup(vehicleSettingsGroup());
+    settings.setValue(QStringLiteral("manufacturerModel"), model);
+    settings.remove(QStringLiteral("manufacturerAnswered")); // another model: ask again
+    settings.endGroup();
+    loadManufacturerSetup();
+}
+
+void AppController::setManufacturerYear(int year)
+{
+    if (year < 1996 || year > QDate::currentDate().year() + 1 || year == m_manufacturerYear)
+        return;
+    QSettings settings;
+    settings.beginGroup(vehicleSettingsGroup());
+    settings.setValue(QStringLiteral("manufacturerYear"), year);
+    settings.remove(QStringLiteral("manufacturerAnswered"));
+    settings.endGroup();
+    loadManufacturerSetup();
+}
+
+void AppController::setManufacturerActive(bool active)
+{
+    if (active == m_manufacturerActive)
+        return;
+    m_manufacturerActive = active;
+    emit manufacturerActiveChanged();
+    if (active)
+        schedulePoll();
+}
+
+void AppController::findManufacturerValues()
+{
+    const QList<ManufacturerCommand> commands = manufacturerCommands();
+    if (commands.isEmpty() || m_manufacturerState == QLatin1String("finding")
+        || m_client->session()->state() != ElmSession::State::Ready || scanning() || busyWithModules())
+        return;
+    m_manufacturerState = QStringLiteral("finding");
+    m_manufacturerProgress = 0;
+    m_manufacturerTotal = int(commands.size());
+    emit manufacturerSetupChanged();
+    // Module requests change the adapter's target address: never during a poll.
+    const QString vin = m_vin;
+    whenPollIdle([this, commands, vin] {
+        ManufacturerReader::read(m_client, commands, [this, commands, vin](const QList<ManufacturerReader::Result> &results) {
+            if (vin != m_vin || m_manufacturerState != QLatin1String("finding"))
+                return; // another car (or a new connection) meanwhile: these answers aren't its
+            m_manufacturerAnswered.clear();
+            QStringList keys;
+            for (int i = 0; i < results.size(); ++i) {
+                if (results[i].answered) {
+                    m_manufacturerAnswered << commands[i];
+                    keys << commands[i].key();
+                }
+            }
+            // A recording or the demo car says nothing about the user's car: remember only real ones.
+            if (!m_demo && !m_replay) {
+                QSettings settings;
+                settings.beginGroup(vehicleSettingsGroup());
+                settings.setValue(QStringLiteral("manufacturerAnswered"), keys);
+                settings.endGroup();
+            }
+            m_manufacturerValues->setCommands(m_manufacturerAnswered, manufacturerModuleNames());
+            m_manufacturerLastRead.clear();
+            for (int i = 0; i < results.size(); ++i) {
+                if (results[i].answered) {
+                    m_manufacturerValues->applyResult(commands[i], results[i]);
+                    m_manufacturerLastRead.insert(commands[i].key(), m_chartClock.elapsed());
+                }
+            }
+            m_manufacturerState = m_manufacturerAnswered.isEmpty() ? QStringLiteral("none") : QStringLiteral("found");
+            emit manufacturerSetupChanged();
+            if (m_client->session()->state() == ElmSession::State::Ready) {
+                m_pollingEnabled = true;
+                schedulePoll();
+            }
+        }, [this](int done, int total) {
+            m_manufacturerProgress = done;
+            m_manufacturerTotal = total;
+            emit manufacturerSetupChanged();
+        });
+    });
+}
+
+bool AppController::pollManufacturerValues()
+{
+    if (!m_manufacturerActive || m_manufacturerAnswered.isEmpty())
+        return false;
+    // The commands whose interval has passed, a few per turn so generic live
+    // data (trip, pinned values) keeps flowing in between.
+    constexpr int kPerTurn = 4;
+    const qint64 now = m_chartClock.elapsed();
+    QList<ManufacturerCommand> due;
+    for (const ManufacturerCommand &c : std::as_const(m_manufacturerAnswered)) {
+        const auto it = m_manufacturerLastRead.constFind(c.key());
+        if (it == m_manufacturerLastRead.cend() || now - *it >= qint64(c.intervalSeconds * 1000)) {
+            due << c;
+            if (due.size() >= kPerTurn)
+                break;
+        }
+    }
+    if (due.isEmpty())
+        return false;
+    for (const ManufacturerCommand &c : std::as_const(due))
+        m_manufacturerLastRead.insert(c.key(), now);
+    m_pollInFlight = true;
+    ManufacturerReader::read(m_client, due, [this, due](const QList<ManufacturerReader::Result> &results) {
+        m_pollInFlight = false;
+        if (m_afterPoll) {
+            // Module work was waiting for this poll to finish.
+            auto action = std::move(m_afterPoll);
+            m_afterPoll = nullptr;
+            action();
+            return;
+        }
+        for (int i = 0; i < results.size(); ++i)
+            m_manufacturerValues->applyResult(due[i], results[i]);
+        schedulePoll();
+    });
+    return true;
 }
 
 // ---------------------------------------------------------------------------
@@ -1358,6 +1568,7 @@ void AppController::setUnits(const QString &units)
     refreshTrip();
     loadTripHistory();
     m_charts->retranslate();
+    m_manufacturerValues->refreshTexts();
     emit unitsChanged();
 }
 

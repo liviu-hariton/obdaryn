@@ -2,6 +2,82 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ro" sourcelanguage="en">
 <context>
+    <name>BrandValues</name>
+    <message>
+        <source>Choose the model…</source>
+        <translation>Alege modelul…</translation>
+    </message>
+    <message>
+        <source>Car model</source>
+        <translation>Modelul mașinii</translation>
+    </message>
+    <message>
+        <source>%1, from the VIN</source>
+        <extracomment>Live data, manufacturer values: e.g. &quot;2014, from the VIN&quot;</extracomment>
+        <translation>%1, din VIN</translation>
+    </message>
+    <message>
+        <source>Model year</source>
+        <translation>Anul modelului</translation>
+    </message>
+    <message>
+        <source>Find again</source>
+        <translation>Caută din nou</translation>
+    </message>
+    <message>
+        <source>From OBDb, a community database (CC BY-SA 4.0). These values aren&apos;t checked on your car: compare with a workshop tool before relying on one.</source>
+        <translation>Din OBDb, o bază de date a comunității (CC BY-SA 4.0). Valorile nu sunt verificate pe mașina ta: compară-le cu un tester de service înainte să te bazezi pe ele.</translation>
+    </message>
+    <message>
+        <source>Choose your model</source>
+        <translation>Alege modelul mașinii</translation>
+    </message>
+    <message>
+        <source>Asking the modules… %1 of %2</source>
+        <translation>Se întreabă modulele… %1 din %2</translation>
+    </message>
+    <message>
+        <source>No module answered</source>
+        <translation>Niciun modul n-a răspuns</translation>
+    </message>
+    <message>
+        <source>Find the values your car reports</source>
+        <translation>Află ce valori raportează mașina ta</translation>
+    </message>
+    <message>
+        <source>%1 values come from community definitions for each model. Pick yours above.</source>
+        <translation>Valorile %1 vin din definiții ale comunității pentru fiecare model. Alege-l pe al tău mai sus.</translation>
+    </message>
+    <message>
+        <source>Your car may answer other requests than the ones listed for this model and year. Check the model and year, turn the ignition ON, and try again.</source>
+        <translation>Mașina ta poate răspunde la alte cereri decât cele știute pentru acest model și an. Verifică modelul și anul, pune contactul și încearcă din nou.</translation>
+    </message>
+    <message>
+        <source>Each module is asked once whether it reports each value. It only reads.</source>
+        <translation>Fiecare modul e întrebat o dată dacă raportează fiecare valoare. Doar citește.</translation>
+    </message>
+    <message>
+        <source>Obdaryn asks each module once which of the %1 %2 values it reports. This takes up to a minute and only reads; afterwards the values refresh on their own while this screen is open.</source>
+        <translation>Obdaryn întreabă o dată fiecare modul care dintre valorile %1 %2 le raportează. Durează până la un minut și doar citește; apoi valorile se actualizează singure cât timp ecranul e deschis.</translation>
+    </message>
+    <message>
+        <source>Find values</source>
+        <translation>Caută valorile</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Valoare</translation>
+    </message>
+    <message>
+        <source>Module</source>
+        <translation>Modul</translation>
+    </message>
+    <message>
+        <source>Reading</source>
+        <translation>Citire</translation>
+    </message>
+</context>
+<context>
     <name>ChartsPage</name>
     <message>
         <source>Open a recording</source>
@@ -666,6 +742,10 @@
         <translation>Ecranele</translation>
     </message>
     <message>
+        <source>Every value the car reports, with its recent history. Pin values to the Overview. On Hyundai and Kia cars, the brand&apos;s own values too, from the OBDb community: choose the model, then Find values.</source>
+        <translation>Fiecare valoare raportată de mașină, cu istoricul recent. Fixează valori pe Prezentarea generală. La Hyundai și Kia, și valorile proprii ale mărcii, din comunitatea OBDb: alege modelul, apoi Caută valorile.</translation>
+    </message>
+    <message>
         <source>When something doesn&apos;t work</source>
         <translation>Când ceva nu merge</translation>
     </message>
@@ -808,10 +888,6 @@
     <message>
         <source>Live data</source>
         <translation>Date în timp real</translation>
-    </message>
-    <message>
-        <source>Every value the car reports, with its recent history. Pin values to the Overview.</source>
-        <translation>Toate valorile raportate de mașină, cu istoricul recent. Fixează valori în Prezentare generală.</translation>
     </message>
     <message>
         <source>Charts</source>
@@ -1000,6 +1076,14 @@
         <source>Live data</source>
         <translation>Date în timp real</translation>
     </message>
+    <message numerus="yes">
+        <source>%n value(s) from the car&apos;s modules</source>
+        <translation>
+            <numerusform>%n valoare din modulele mașinii</numerusform>
+            <numerusform>%n valori din modulele mașinii</numerusform>
+            <numerusform>%n de valori din modulele mașinii</numerusform>
+        </translation>
+    </message>
     <message>
         <source>%1 values · %2 readings per second · pinned values refresh first</source>
         <translation>%1 valori · %2 citiri pe secundă · valorile fixate se actualizează primele</translation>
@@ -1007,6 +1091,15 @@
     <message>
         <source>Copy as CSV</source>
         <translation>Copiază ca CSV</translation>
+    </message>
+    <message>
+        <source>Standard (OBD-II)</source>
+        <translation>Standard (OBD-II)</translation>
+    </message>
+    <message>
+        <source>%1 values</source>
+        <extracomment>Live data: the manufacturer&apos;s own values, e.g. &quot;Hyundai values&quot;</extracomment>
+        <translation>Valori %1</translation>
     </message>
     <message>
         <source>Filter, e.g. temperature</source>
@@ -3652,6 +3745,29 @@
     <message>
         <source>The car stopped answering, probably because the ignition was turned off. Obdaryn picks up again by itself as soon as the car answers.</source>
         <translation>Mașina nu mai răspunde, probabil pentru că s-a luat contactul. Obdaryn reia singur imediat ce mașina răspunde.</translation>
+    </message>
+</context>
+<context>
+    <name>obdaryn::ManufacturerValuesModel</name>
+    <message>
+        <source>Other</source>
+        <translation>Altele</translation>
+    </message>
+    <message>
+        <source>On</source>
+        <translation>Pornit</translation>
+    </message>
+    <message>
+        <source>Off</source>
+        <translation>Oprit</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Da</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nu</translation>
     </message>
 </context>
 <context>

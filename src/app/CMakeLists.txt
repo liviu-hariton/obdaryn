@@ -50,6 +50,7 @@ qt_add_qml_module(obdaryn
         qml/components/Chip.qml
         qml/components/KeyValue.qml
         qml/components/EmptyState.qml
+        qml/components/BrandValues.qml
         qml/components/Segmented.qml
         qml/components/ToggleSwitch.qml
         qml/components/TextInput.qml
@@ -78,6 +79,7 @@ qt_add_qml_module(obdaryn
         models/TrafficLogModel.h models/TrafficLogModel.cpp
         models/ModuleScanModel.h models/ModuleScanModel.cpp
         models/ChartModel.h models/ChartModel.cpp
+        models/ManufacturerValuesModel.h models/ManufacturerValuesModel.cpp
         report/ReportWriter.h report/ReportWriter.cpp
 )
 

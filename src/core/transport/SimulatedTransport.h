@@ -75,6 +75,11 @@ private:
     QByteArray formatFrames(const EcuReply &reply) const;
     QByteArray joinBytes(const QByteArray &bytes) const;
     QByteArray pidData(quint8 pid) const;
+    /// Hyundai "21 xx" local-data answers (manufacturer values), or empty.
+    QByteArray localData(const QByteArray &header, quint8 id) const;
+    /// The simulated engine right now.
+    struct Drive { double drive, rpm, speed, coolant; };
+    Drive driveNow() const;
     QByteArray freezeFrameData(quint8 pid) const;
     double seconds() const;
     void resetAdapterSettings();

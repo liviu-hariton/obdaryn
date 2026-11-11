@@ -2,12 +2,22 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en" sourcelanguage="en">
 <context>
+    <name>LivePage</name>
+    <message numerus="yes">
+        <source>%n value(s) from the car&apos;s modules</source>
+        <translation>
+            <numerusform>%n value from the car&apos;s modules</numerusform>
+            <numerusform>%n values from the car&apos;s modules</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
     <name>LogPage</name>
     <message numerus="yes">
         <source>%n command(s) answered with an error; the log below shows which</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n command answered with an error; the log below shows which</numerusform>
+            <numerusform>%n commands answered with an error; the log below shows which</numerusform>
         </translation>
     </message>
 </context>

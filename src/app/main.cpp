@@ -141,6 +141,17 @@ int main(int argc, char *argv[])
                     QTimer::singleShot(300, controller, [controller] { controller->readMonitorTests(); });
             });
     }
+    // OBDARYN_BRAND_MODEL=Elantra chooses the model for manufacturer values once the car
+    // is known; OBDARYN_FIND_BRAND=1 also asks the modules which values they answer.
+    if (qEnvironmentVariableIsSet("OBDARYN_BRAND_MODEL")) {
+        if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
+            QObject::connect(controller, &obdaryn::AppController::scanFinished, controller, [controller] {
+                controller->setManufacturerModel(qEnvironmentVariable("OBDARYN_BRAND_MODEL"));
+                if (qEnvironmentVariableIntValue("OBDARYN_FIND_BRAND") == 1)
+                    QTimer::singleShot(300, controller, [controller] { controller->findManufacturerValues(); });
+            });
+        }
+    }
     // OBDARYN_CHART_A / OBDARYN_CHART_B=file.obdrec load recordings into the Charts screen.
     if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
         if (qEnvironmentVariableIsSet("OBDARYN_CHART_A"))
@@ -181,6 +192,11 @@ int main(int argc, char *argv[])
             const QString key = qEnvironmentVariable("OBDARYN_OPEN_CODE");
             if (QObject *modules = window->findChild<QObject *>(QStringLiteral("modulesPage")))
                 modules->setProperty("openCode", key);
+        }
+        // OBDARYN_LIVE_SOURCE=brand shows the manufacturer values on the Live data screen.
+        if (window && qEnvironmentVariableIsSet("OBDARYN_LIVE_SOURCE")) {
+            if (QObject *live = window->findChild<QObject *>(QStringLiteral("livePage")))
+                live->setProperty("source", qEnvironmentVariable("OBDARYN_LIVE_SOURCE"));
         }
         if (window && qEnvironmentVariableIsSet("OBDARYN_PAGE"))
             window->setProperty("page", qEnvironmentVariableIntValue("OBDARYN_PAGE"));

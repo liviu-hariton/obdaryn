@@ -6,6 +6,7 @@
 | [Inter](https://rsms.me/inter/) | UI typeface (`src/app/assets/fonts`) | SIL Open Font License 1.1 |
 | [JetBrains Mono](https://www.jetbrains.com/lp/mono/) | Codes, VINs, hex and the adapter log | SIL Open Font License 1.1 |
 | [Lucide](https://lucide.dev) | Stroke icons (`src/app/assets/icons`); the engine telltale icon is Obdaryn's own | ISC |
+| [OBDb](https://github.com/OBDb) | Manufacturer values for Hyundai and Kia models (`src/core/data/obdb/hyundai-kia.json`, built by `tools/import_obdb.py`), and recorded Elantra answers used as test data (`tests/data/obdb_elantra_cases.json`) | CC BY-SA 4.0 (adapted: filtered and reformatted; see `src/core/data/obdb/LICENSE.md`) |
 | [obdex](https://github.com/foerbsnavi/obdex) | Generic OBD-II trouble-code titles, descriptions, causes, symptoms and repair hints (`src/core/data/dtc_generic.json`, built by `tools/import_obdex.py`) | CC0-1.0 (public domain) |
 
 The obdex descriptions are written independently and are not SAE J2012 text. We credit the project voluntarily: "OBD-II code data: obdex (https://github.com/foerbsnavi/obdex), CC0-1.0".
@@ -16,6 +17,4 @@ Module addresses in `src/core/data/vehicles/` are facts (CAN identifiers) gather
 
 Brand trouble-code packs (`src/core/data/dtc/brands/`) are written for Obdaryn (GPL-3.0-or-later). The meanings are facts checked against public sources, mostly Hyundai/Kia documents filed with NHTSA, and each entry links them. No manual text is copied.
 
-## Planned
-
-- [OBDb](https://github.com/OBDb) manufacturer signal sets, CC-BY-SA-4.0. They will ship as separate, attributed data files, and changes to them will be shared under the same licence.
+The OBDb data ships as separate data files under CC BY-SA 4.0, not as part of Obdaryn's GPL code. Each model in the pack records the OBDb repository and commit it came from. Signals that decode to impossible values on OBDb's own recordings are left out (listed with reasons in `tools/import_obdb.py`); fixes belong upstream in OBDb.

@@ -29,7 +29,11 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [ ] 29-bit CAN modules (Honda, some GM), Toyota's extended addressing behind gateway 750, and VW's older TP 2.0.
 - [x] Brand-specific code descriptions, starting with Hyundai/Kia: 159 codes (177 module-specific entries) in English and Romanian, with sources (see `docs/brand-packs.md`).
 - [x] Brand packs for Toyota/Lexus, Ford, VW group and Renault/Dacia (see `docs/brand-packs.md`).
-- [ ] **Manufacturer data packs.** Import OBDb signal sets (CC-BY-SA-4.0, shipped as separate attributed data files) for enhanced live data. Hyundai/Kia first: `21xx` reads on 7E0 / 7E1 / 7D1 and similar.
+- [x] **Manufacturer data packs.** OBDb signal sets for 52 Hyundai and Kia models (`tools/import_obdb.py`, CC BY-SA 4.0, a separate attributed data file): read-only `21xx` / `22xxxx` requests, verified (non-debug) commands only, filtered by model year. Live data gets a "Hyundai values" view: choose the model, find what the modules answer (remembered per VIN), then the values refresh at OBDb's suggested rates while on screen. The probe reads them too (`--model Elantra`), and `tools/first-contact.sh` asks for the model.
+  - Decoder checked against OBDb's recordings of real 2012–2015 Elantras; signals that decode to impossible values there are left out.
+  - [ ] Confirm the Elantra values against Car Scanner on the real car; report wrong definitions upstream to OBDb.
+  - [ ] Charting and pinning manufacturer values; Romanian names for the most useful ones.
+  - [ ] More brands (Toyota, Ford, VW group, Renault/Dacia) once their OBDb sets are checked.
 - [ ] **Brand pack loader.** A JSON schema, a contribute-back flow, and a "record which PIDs my car answers" mode.
 
 ## v0.3 — logging and reports

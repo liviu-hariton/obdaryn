@@ -1,0 +1,694 @@
+{
+ "source": "OBDb Hyundai-Elantra test cases (https://github.com/OBDb/Hyundai-Elantra, tests/test_cases), CC BY-SA 4.0. Real answers recorded from Elantras, with the values OBDb decodes from them.",
+ "cases": [
+  {
+   "year": 2014,
+   "header": "7D1",
+   "request": "2101",
+   "lines": [
+    "7D9 10 29 61 01 DF EB EF 01",
+    "7D9 21 00 0A 00 00 01 E7 FF",
+    "7D9 22 00 00 00 00 FF 81 FF",
+    "7D9 23 00 D0 C4 00 00 00 00",
+    "7D9 24 FF 7F FB 08 00 08 05",
+    "7D9 25 00 00 FF FF FF FF FF"
+   ],
+   "expected": {
+    "ELANTRA_FL_VSS": 0.0,
+    "ELANTRA_FR_VSS": 0.0,
+    "ELANTRA_RL_VSS": 0.0,
+    "ELANTRA_RR_VSS": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7D1",
+   "request": "2101",
+   "lines": [
+    "7D9 10 29 61 01 DF EB EF 01",
+    "7D9 21 0C 0A 00 00 01 E6 FF",
+    "7D9 22 00 00 00 00 FF 81 FF",
+    "7D9 23 00 D0 C0 00 00 00 00",
+    "7D9 24 FF 7F FA 07 FD 08 00",
+    "7D9 25 00 00 FF FF FF FF FF"
+   ],
+   "expected": {
+    "ELANTRA_FL_VSS": 0.0,
+    "ELANTRA_FR_VSS": 0.0,
+    "ELANTRA_RL_VSS": 0.0,
+    "ELANTRA_RR_VSS": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7D1",
+   "request": "2101",
+   "lines": [
+    "7D9 10 29 61 01 DF EB EF 01",
+    "7D9 21 10 0A 00 00 01 E6 FF",
+    "7D9 22 00 00 00 00 FF 81 FF",
+    "7D9 23 00 D0 C4 00 00 00 00",
+    "7D9 24 FF 7F FB 07 FF 07 FF",
+    "7D9 25 00 00 FF FF FF FF FF"
+   ],
+   "expected": {
+    "ELANTRA_FL_VSS": 0.0,
+    "ELANTRA_FR_VSS": 0.0,
+    "ELANTRA_RL_VSS": 0.0,
+    "ELANTRA_RR_VSS": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7D4",
+   "request": "2101",
+   "lines": [
+    "7DC 10 17 61 01 0C B4 00 00",
+    "7DC 21 82 00 00 01 00 00 00",
+    "7DC 22 00 00 1C 1C 17 00 00",
+    "7DC 23 00 00 4C 00 00 00 00"
+   ],
+   "expected": {
+    "ELANTRA_STEER_ANGLE_V2": 13.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7D4",
+   "request": "2101",
+   "lines": [
+    "7DC 10 17 61 01 0C E7 00 00",
+    "7DC 21 05 00 FF FB 00 00 00",
+    "7DC 22 00 00 24 24 04 00 00",
+    "7DC 23 00 00 4C 00 00 00 00"
+   ],
+   "expected": {
+    "ELANTRA_STEER_ANGLE_V2": 0.5
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7D4",
+   "request": "2101",
+   "lines": [
+    "7DC 10 17 61 01 0E 02 00 00",
+    "7DC 21 82 00 FF FC 00 00 00",
+    "7DC 22 03 00 1C 1C 64 00 00",
+    "7DC 23 00 00 6C 00 00 00 00"
+   ],
+   "expected": {
+    "ELANTRA_STEER_ANGLE_V2": 13.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7D6",
+   "request": "2106",
+   "lines": [
+    "7DE 10 20 61 06 FF FF 7F FF",
+    "7DE 21 00 00 FF FF 7F FF 00",
+    "7DE 22 00 FF FF 7F FF 00 00",
+    "7DE 23 FF FF 7F FF 00 00 FF",
+    "7DE 24 FF 7F FF 00 00 00 00"
+   ],
+   "expected": {
+    "ELANTRA_FR_TP": 0.0,
+    "ELANTRA_FR_TT": -50.0,
+    "ELANTRA_RL_TP": 1.75127
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2101",
+   "lines": [
+    "7E8 10 28 61 01 9F B7 3E 00",
+    "7E8 21 BC 00 51 00 00 60 00",
+    "7E8 22 00 00 00 16 02 D0 41",
+    "7E8 23 C0 1C 04 00 00 A7 00",
+    "7E8 24 98 00 00 63 00 00 1A",
+    "7E8 25 01 7D 94 44 8C A1 AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_ENGINE_IDLE_RPM": 960.0,
+    "ELANTRA_CONTROL_MODULE_VOLTAGE": 0.0,
+    "ELANTRA_CONTROL_MODULE_VOLTAGE_AFTER_IGNITION": 81.0,
+    "ELANTRA_COOLANT_T_SENSOR_VOLTAGE": 0.81543,
+    "ELANTRA_ENGINE_COOLANT_T": 66.0,
+    "ELANTRA_ENGINE_OIL_T": 63.0,
+    "ELANTRA_ENGINE_RPM": 0.0,
+    "ELANTRA_IAT_SENSOR_VOLTAGE": 1.37695,
+    "ELANTRA_INTAKE_AIR_T": 45.75,
+    "ELANTRA_INTAKE_MANIFOLD_ABSOLUTE_PRESSURE": 65.8125,
+    "ELANTRA_MAP_SENSOR_VOLTAGE": 2.60742
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2101",
+   "lines": [
+    "7E8 10 28 61 01 9F B7 3E 00",
+    "7E8 21 CE CF 51 34 19 4B 00",
+    "7E8 22 00 00 00 28 02 51 44",
+    "7E8 23 40 2F 1B 00 00 5B 00",
+    "7E8 24 B9 00 00 60 00 00 0C",
+    "7E8 25 01 80 B8 37 86 A0 AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_ENGINE_IDLE_RPM": 750.0,
+    "ELANTRA_CONTROL_MODULE_VOLTAGE": 207.0,
+    "ELANTRA_CONTROL_MODULE_VOLTAGE_AFTER_IGNITION": 81.0,
+    "ELANTRA_COOLANT_T_SENSOR_VOLTAGE": 0.44434,
+    "ELANTRA_ENGINE_COOLANT_T": 90.75,
+    "ELANTRA_ENGINE_OIL_T": 90.0,
+    "ELANTRA_ENGINE_RPM": 1613.0,
+    "ELANTRA_IAT_SENSOR_VOLTAGE": 1.30859,
+    "ELANTRA_INTAKE_AIR_T": 48.0,
+    "ELANTRA_INTAKE_MANIFOLD_ABSOLUTE_PRESSURE": 68.31641,
+    "ELANTRA_MAP_SENSOR_VOLTAGE": 2.69531
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2101",
+   "lines": [
+    "7E8 10 28 61 01 9F B7 3E 00",
+    "7E8 21 CE CF 59 A8 0A 44 00",
+    "7E8 22 00 00 00 61 01 2B 2B",
+    "7E8 23 C0 20 0A 00 00 58 00",
+    "7E8 24 BB 00 00 66 00 00 CC",
+    "7E8 25 00 8D B7 36 BA FE AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_ENGINE_IDLE_RPM": 680.0,
+    "ELANTRA_CONTROL_MODULE_VOLTAGE": 207.0,
+    "ELANTRA_CONTROL_MODULE_VOLTAGE_AFTER_IGNITION": 89.0,
+    "ELANTRA_COOLANT_T_SENSOR_VOLTAGE": 0.42969,
+    "ELANTRA_ENGINE_COOLANT_T": 92.25,
+    "ELANTRA_ENGINE_OIL_T": 89.25,
+    "ELANTRA_ENGINE_RPM": 682.0,
+    "ELANTRA_IAT_SENSOR_VOLTAGE": 0.99609,
+    "ELANTRA_INTAKE_AIR_T": 57.75,
+    "ELANTRA_INTAKE_MANIFOLD_ABSOLUTE_PRESSURE": 43.16797,
+    "ELANTRA_MAP_SENSOR_VOLTAGE": 1.72363
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2102",
+   "lines": [
+    "7E8 10 28 61 02 D4 F4 00 00",
+    "7E8 21 00 00 78 00 96 01 00",
+    "7E8 22 00 00 CE 06 00 00 00",
+    "7E8 23 00 56 00 00 04 00 04",
+    "7E8 24 00 04 00 04 00 00 00",
+    "7E8 25 00 00 00 00 00 00 AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_EVAPORATIVE_PURGE": 0.0,
+    "ELANTRA_FUEL_INJECTION_TIMING_1": 3.2768,
+    "ELANTRA_FUEL_INJECTION_TIMING_2": 3.2768,
+    "ELANTRA_FUEL_INJECTION_TIMING_3": 3.2768,
+    "ELANTRA_FUEL_INJECTION_TIMING_4": 3.2768,
+    "ELANTRA_OXYGEN_SENSOR_11": -0.2,
+    "ELANTRA_OXYGEN_SENSOR_21": 0.4252,
+    "ELANTRA_VSS_V2": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2102",
+   "lines": [
+    "7E8 10 28 61 02 D4 F4 00 00",
+    "7E8 21 00 00 78 00 9B 01 00",
+    "7E8 22 00 00 0A 05 00 00 00",
+    "7E8 23 00 56 00 00 03 00 03",
+    "7E8 24 00 03 00 03 00 00 00",
+    "7E8 25 00 00 00 00 00 00 AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_EVAPORATIVE_PURGE": 0.0,
+    "ELANTRA_FUEL_INJECTION_TIMING_1": 2.4576,
+    "ELANTRA_FUEL_INJECTION_TIMING_2": 2.4576,
+    "ELANTRA_FUEL_INJECTION_TIMING_3": 2.4576,
+    "ELANTRA_FUEL_INJECTION_TIMING_4": 2.4576,
+    "ELANTRA_OXYGEN_SENSOR_11": -0.2,
+    "ELANTRA_OXYGEN_SENSOR_21": 0.4252,
+    "ELANTRA_VSS_V2": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2102",
+   "lines": [
+    "7E8 10 28 61 02 D4 F4 00 00",
+    "7E8 21 00 00 78 00 AC 01 00",
+    "7E8 22 00 00 B9 07 00 00 00",
+    "7E8 23 00 56 00 00 04 00 03",
+    "7E8 24 00 04 00 04 00 00 00",
+    "7E8 25 00 00 00 00 00 00 AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_EVAPORATIVE_PURGE": 0.0,
+    "ELANTRA_FUEL_INJECTION_TIMING_1": 3.2768,
+    "ELANTRA_FUEL_INJECTION_TIMING_2": 2.4576,
+    "ELANTRA_FUEL_INJECTION_TIMING_3": 3.2768,
+    "ELANTRA_FUEL_INJECTION_TIMING_4": 3.2768,
+    "ELANTRA_OXYGEN_SENSOR_11": -0.2,
+    "ELANTRA_OXYGEN_SENSOR_21": 0.4252,
+    "ELANTRA_VSS_V2": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2104",
+   "lines": [
+    "7E8 10 18 61 04 FF FF 03 00",
+    "7E8 21 FF D0 C8 77 F4 76 F8",
+    "7E8 22 C0 F0 E2 30 D8 F7 00",
+    "7E8 23 10 33 00 10 AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_COOLANT_FAN_HIGH_SPEED__1_8_": 0.0,
+    "ELANTRA_COOLANT_FAN_LOW_SPEED__1_8_": 1.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2104",
+   "lines": [
+    "7E8 10 18 61 04 FF FF 03 00",
+    "7E8 21 FF D1 C8 70 F2 76 F8",
+    "7E8 22 C0 F8 E0 30 D4 F1 00",
+    "7E8 23 10 33 00 10 AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_COOLANT_FAN_HIGH_SPEED__1_8_": 0.0,
+    "ELANTRA_COOLANT_FAN_LOW_SPEED__1_8_": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2104",
+   "lines": [
+    "7E8 10 18 61 04 FF FF 03 00",
+    "7E8 21 FF D1 C8 70 F2 76 F8",
+    "7E8 22 C0 F8 E0 30 D4 F7 00",
+    "7E8 23 10 33 00 10 AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_COOLANT_FAN_HIGH_SPEED__1_8_": 0.0,
+    "ELANTRA_COOLANT_FAN_LOW_SPEED__1_8_": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2113",
+   "lines": [
+    "7E8 10 16 61 13 00 00 00 00",
+    "7E8 21 00 00 00 00 44 3A 00",
+    "7E8 22 00 00 00 00 00 44 3A",
+    "7E8 23 00 00 AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_TIMING_ADVANCE_1": 0.0,
+    "ELANTRA_TIMING_ADVANCE_2": 0.0,
+    "ELANTRA_TIMING_ADVANCE_3": 0.0,
+    "ELANTRA_TIMING_ADVANCE_4": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2113",
+   "lines": [
+    "7E8 10 16 61 13 00 00 00 00",
+    "7E8 21 00 00 00 00 45 3A 00",
+    "7E8 22 00 00 00 00 00 45 3A",
+    "7E8 23 00 00 AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_TIMING_ADVANCE_1": 0.0,
+    "ELANTRA_TIMING_ADVANCE_2": 0.0,
+    "ELANTRA_TIMING_ADVANCE_3": 0.0,
+    "ELANTRA_TIMING_ADVANCE_4": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2113",
+   "lines": [
+    "7E8 10 16 61 13 00 00 00 00",
+    "7E8 21 00 00 00 00 49 3A 00",
+    "7E8 22 00 00 00 00 00 49 3A",
+    "7E8 23 00 00 AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_TIMING_ADVANCE_1": 0.0,
+    "ELANTRA_TIMING_ADVANCE_2": 0.0,
+    "ELANTRA_TIMING_ADVANCE_3": 0.0,
+    "ELANTRA_TIMING_ADVANCE_4": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2114",
+   "lines": [
+    "7E8 10 2B 61 14 CF 07 FE 00",
+    "7E8 21 08 02 3C 01 04 00 62",
+    "7E8 22 00 00 4E 01 48 02 6C",
+    "7E8 23 80 02 FF 03 00 FD 03",
+    "7E8 24 00 00 00 00 82 11 00",
+    "7E8 25 00 D2 00 1A 00 00 00",
+    "7E8 26 CD 03 AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_THROTTLE_ACTUATOR": 0.78125,
+    "ELANTRA_COOLANT_FAN__PWM_": 0.0,
+    "ELANTRA_RELATIVE_ACCELERATOR_PEDAL_POSITION": 0.78125,
+    "ELANTRA_RELATIVE_ACCELERATOR_PEDAL_POSITION_VOLTAGE": 18433.0,
+    "ELANTRA_REQUESTED_TORQUE": 0.38608,
+    "ELANTRA_THROTTLE_POSITION_SENSOR_VOLTAGE__2": 0.11963,
+    "ELANTRA_THROTTLE_POSITION__1": 7.71484,
+    "ELANTRA_THROTTLE_POSITION__2": 0.09766
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2114",
+   "lines": [
+    "7E8 10 2B 61 14 CF 07 FE 00",
+    "7E8 21 1C 01 47 02 04 00 62",
+    "7E8 22 00 00 4A 01 46 02 6E",
+    "7E8 23 80 02 FF 03 00 FE 03",
+    "7E8 24 00 00 00 00 CE 11 00",
+    "7E8 25 00 D2 00 1A 00 00 00",
+    "7E8 26 CD 03 AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_THROTTLE_ACTUATOR": 0.39062,
+    "ELANTRA_COOLANT_FAN__PWM_": 0.0,
+    "ELANTRA_RELATIVE_ACCELERATOR_PEDAL_POSITION": 0.78125,
+    "ELANTRA_RELATIVE_ACCELERATOR_PEDAL_POSITION_VOLTAGE": 17921.0,
+    "ELANTRA_REQUESTED_TORQUE": 0.3876,
+    "ELANTRA_THROTTLE_POSITION_SENSOR_VOLTAGE__2": 0.11963,
+    "ELANTRA_THROTTLE_POSITION__1": 14.2334,
+    "ELANTRA_THROTTLE_POSITION__2": 0.09766
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2114",
+   "lines": [
+    "7E8 10 2B 61 14 CF 07 FE 00",
+    "7E8 21 80 07 00 00 00 00 5E",
+    "7E8 22 00 00 40 01 44 01 5A",
+    "7E8 23 00 00 FF 03 00 FE 03",
+    "7E8 24 00 00 00 00 40 12 00",
+    "7E8 25 00 D1 00 16 00 00 00",
+    "7E8 26 CD 03 AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_COMMANDED_THROTTLE_ACTUATOR": 2.73438,
+    "ELANTRA_COOLANT_FAN__PWM_": 0.0,
+    "ELANTRA_RELATIVE_ACCELERATOR_PEDAL_POSITION": 0.39062,
+    "ELANTRA_RELATIVE_ACCELERATOR_PEDAL_POSITION_VOLTAGE": 17409.0,
+    "ELANTRA_REQUESTED_TORQUE": 0.3876,
+    "ELANTRA_THROTTLE_POSITION_SENSOR_VOLTAGE__2": 0.11475,
+    "ELANTRA_THROTTLE_POSITION__1": 0.0,
+    "ELANTRA_THROTTLE_POSITION__2": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2116",
+   "lines": [
+    "7E8 10 20 61 16 FF FF 00 00",
+    "7E8 21 01 C6 17 FF FF 00 10",
+    "7E8 22 70 10 00 00 00 00 2D",
+    "7E8 23 0B 00 00 00 42 39 CC",
+    "7E8 24 CC 00 00 39 00 AA AA"
+   ],
+   "expected": {
+    "ELANTRA_KNOCK_RETARD_CYLINDER_1": 12.0,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_2": 0.0,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_3": 0.0,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_4": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2116",
+   "lines": [
+    "7E8 10 20 61 16 FF FF 00 00",
+    "7E8 21 02 2D 01 C2 00 00 10",
+    "7E8 22 EC 0F 00 00 42 FB 38",
+    "7E8 23 01 00 00 00 FD 2A 6A",
+    "7E8 24 AA 5B FF 5A 00 AA AA"
+   ],
+   "expected": {
+    "ELANTRA_KNOCK_RETARD_CYLINDER_1": 11.25,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_2": 0.0,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_3": 0.0,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_4": 49.5
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "2116",
+   "lines": [
+    "7E8 10 20 61 16 FF FF 00 00",
+    "7E8 21 02 2D 01 C3 00 00 10",
+    "7E8 22 A0 0F 00 00 95 F7 35",
+    "7E8 23 01 00 00 00 67 2A 6B",
+    "7E8 24 A7 1C FA 5A 00 AA AA"
+   ],
+   "expected": {
+    "ELANTRA_KNOCK_RETARD_CYLINDER_1": 11.25,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_2": 0.0,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_3": 0.0,
+    "ELANTRA_KNOCK_RETARD_CYLINDER_4": 111.75
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "211D",
+   "lines": [
+    "7E8 10 70 61 1D 0F 0F 3F 3C",
+    "7E8 21 00 00 00 00 00 00 00",
+    "7E8 22 00 00 00 00 00 00 00",
+    "7E8 23 00 00 00 00 00 00 00",
+    "7E8 24 00 00 00 00 00 00 00",
+    "7E8 25 00 00 00 00 00 00 00",
+    "7E8 26 00 00 00 00 00 00 00",
+    "7E8 27 00 00 00 00 00 00 00",
+    "7E8 28 00 41 44 00 00 D3 34",
+    "7E8 29 00 00 FD 62 00 00 DF",
+    "7E8 2A 88 00 00 00 00 00 00",
+    "7E8 2B 00 00 00 00 FC 3F 00",
+    "7E8 2C 00 00 00 00 00 00 00",
+    "7E8 2D 00 00 00 00 00 00 00",
+    "7E8 2E 00 00 00 00 00 00 43",
+    "7E8 2F 01 3E 01 4D 01 4D A9",
+    "7E8 20 00 AA AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_MIS_1": 0.0,
+    "ELANTRA_MIS_2": 0.0,
+    "ELANTRA_MIS_3": 0.0,
+    "ELANTRA_MIS_4": 0.0,
+    "ELANTRA_MIS_CAT_1": 0.0,
+    "ELANTRA_MIS_CAT_2": 0.0,
+    "ELANTRA_MIS_CAT_3": 0.0,
+    "ELANTRA_MIS_CAT_4": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "211D",
+   "lines": [
+    "7E8 10 70 61 1D 0F 0F 3F 3C",
+    "7E8 21 00 00 00 00 00 00 00",
+    "7E8 22 00 00 00 00 00 00 00",
+    "7E8 23 00 00 00 00 00 00 00",
+    "7E8 24 00 00 00 00 00 00 00",
+    "7E8 25 00 00 00 00 00 00 00",
+    "7E8 26 00 00 00 00 00 00 00",
+    "7E8 27 00 00 00 00 00 00 00",
+    "7E8 28 00 44 53 00 00 45 1F",
+    "7E8 29 00 00 E0 53 00 00 54",
+    "7E8 2A 5E 00 00 00 00 00 00",
+    "7E8 2B 00 00 00 00 FC 3F 00",
+    "7E8 2C 00 00 00 00 00 00 00",
+    "7E8 2D 00 00 00 00 00 0E 00",
+    "7E8 2E 00 00 00 00 00 00 4D",
+    "7E8 2F 01 3E 01 4D 01 4D A9",
+    "7E8 20 00 AA AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_MIS_1": 0.0,
+    "ELANTRA_MIS_2": 0.0,
+    "ELANTRA_MIS_3": 0.0,
+    "ELANTRA_MIS_4": 0.0,
+    "ELANTRA_MIS_CAT_1": 0.0,
+    "ELANTRA_MIS_CAT_2": 0.0,
+    "ELANTRA_MIS_CAT_3": 0.0,
+    "ELANTRA_MIS_CAT_4": 0.0
+   }
+  },
+  {
+   "year": 2014,
+   "header": "7E0",
+   "request": "211D",
+   "lines": [
+    "7E8 10 70 61 1D 0F 0F 3F 3C",
+    "7E8 21 00 00 00 00 00 00 00",
+    "7E8 22 00 00 00 00 00 00 00",
+    "7E8 23 00 00 00 00 00 00 00",
+    "7E8 24 00 00 00 00 00 00 00",
+    "7E8 25 00 00 00 00 00 00 00",
+    "7E8 26 00 00 00 00 00 00 00",
+    "7E8 27 00 00 00 00 00 00 00",
+    "7E8 28 00 7D 1F 00 00 F2 3C",
+    "7E8 29 00 00 92 41 00 00 C8",
+    "7E8 2A 43 00 00 00 00 00 00",
+    "7E8 2B 00 00 00 00 FC 3F 00",
+    "7E8 2C 00 00 00 00 00 00 00",
+    "7E8 2D 00 00 00 00 00 00 00",
+    "7E8 2E 00 00 00 00 00 00 47",
+    "7E8 2F 01 47 01 47 01 4C A9",
+    "7E8 20 00 AA AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_MIS_1": 0.0,
+    "ELANTRA_MIS_2": 0.0,
+    "ELANTRA_MIS_3": 0.0,
+    "ELANTRA_MIS_4": 0.0,
+    "ELANTRA_MIS_CAT_1": 0.0,
+    "ELANTRA_MIS_CAT_2": 0.0,
+    "ELANTRA_MIS_CAT_3": 0.0,
+    "ELANTRA_MIS_CAT_4": 0.0
+   }
+  },
+  {
+   "year": 2013,
+   "header": "7E0",
+   "request": "211D",
+   "lines": [
+    "7E8 10 70 61 1D 0F 0F 3F 3C",
+    "7E8 21 00 00 00 00 00 00 00",
+    "7E8 22 00 00 00 00 00 00 00",
+    "7E8 23 00 00 00 00 00 00 00",
+    "7E8 24 00 00 00 00 00 00 00",
+    "7E8 25 00 00 00 00 00 00 00",
+    "7E8 26 00 00 00 00 00 00 00",
+    "7E8 27 00 00 00 00 00 00 00",
+    "7E8 28 00 03 07 00 00 84 02",
+    "7E8 29 00 00 5B FA FF FF D9",
+    "7E8 2A 01 00 00 00 00 00 00",
+    "7E8 2B 00 00 00 00 FC 3F 00",
+    "7E8 2C 00 00 00 00 00 00 00",
+    "7E8 2D 00 00 00 00 00 0E 00",
+    "7E8 2E 00 00 00 00 00 00 FD",
+    "7E8 2F 01 C1 01 FF 01 23 E5",
+    "7E8 20 00 AA AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_MIS_1": 0.0,
+    "ELANTRA_MIS_2": 0.0,
+    "ELANTRA_MIS_3": 0.0,
+    "ELANTRA_MIS_4": 0.0,
+    "ELANTRA_MIS_CAT_1": 0.0,
+    "ELANTRA_MIS_CAT_2": 0.0,
+    "ELANTRA_MIS_CAT_3": 0.0,
+    "ELANTRA_MIS_CAT_4": 0.0
+   }
+  },
+  {
+   "year": 2013,
+   "header": "7E0",
+   "request": "211D",
+   "lines": [
+    "7E8 10 70 61 1D 0F 0F 3F 3C",
+    "7E8 21 00 00 00 00 00 00 00",
+    "7E8 22 00 00 00 00 00 00 00",
+    "7E8 23 00 00 00 00 00 00 00",
+    "7E8 24 00 00 00 00 00 00 00",
+    "7E8 25 00 00 00 00 00 00 00",
+    "7E8 26 00 00 00 00 00 00 00",
+    "7E8 27 00 00 00 00 00 00 00",
+    "7E8 28 00 08 FF FF FF 2F 00",
+    "7E8 29 00 00 8E 01 00 00 A8",
+    "7E8 2A FF FF FF 00 00 00 00",
+    "7E8 2B 00 00 00 00 FC 3F 00",
+    "7E8 2C 00 00 00 00 00 00 00",
+    "7E8 2D 00 00 00 00 00 0E 00",
+    "7E8 2E 00 00 00 00 00 00 C8",
+    "7E8 2F 01 C3 01 FF 01 24 DF",
+    "7E8 20 00 AA AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_MIS_1": 0.0,
+    "ELANTRA_MIS_2": 0.0,
+    "ELANTRA_MIS_3": 0.0,
+    "ELANTRA_MIS_4": 0.0,
+    "ELANTRA_MIS_CAT_1": 0.0,
+    "ELANTRA_MIS_CAT_2": 0.0,
+    "ELANTRA_MIS_CAT_3": 0.0,
+    "ELANTRA_MIS_CAT_4": 0.0
+   }
+  },
+  {
+   "year": 2013,
+   "header": "7E0",
+   "request": "211D",
+   "lines": [
+    "7E8 10 70 61 1D 0F 0F 3F 3C",
+    "7E8 21 00 00 00 00 00 00 00",
+    "7E8 22 00 00 00 00 00 00 00",
+    "7E8 23 00 00 00 00 00 00 00",
+    "7E8 24 00 00 00 00 00 00 00",
+    "7E8 25 00 00 00 00 00 00 00",
+    "7E8 26 00 00 00 00 00 00 00",
+    "7E8 27 00 00 00 00 00 00 00",
+    "7E8 28 00 0C FD FF FF 04 0A",
+    "7E8 29 00 00 52 08 00 00 C7",
+    "7E8 2A 00 00 00 00 00 00 00",
+    "7E8 2B 00 00 00 00 FC 3F 00",
+    "7E8 2C 00 00 00 00 00 00 00",
+    "7E8 2D 00 00 00 00 00 0E 00",
+    "7E8 2E 00 00 00 00 00 00 FE",
+    "7E8 2F 01 FD 01 FF 01 24 E4",
+    "7E8 20 00 AA AA AA AA AA AA"
+   ],
+   "expected": {
+    "ELANTRA_MIS_1": 0.0,
+    "ELANTRA_MIS_2": 0.0,
+    "ELANTRA_MIS_3": 0.0,
+    "ELANTRA_MIS_4": 0.0,
+    "ELANTRA_MIS_CAT_1": 0.0,
+    "ELANTRA_MIS_CAT_2": 0.0,
+    "ELANTRA_MIS_CAT_3": 0.0,
+    "ELANTRA_MIS_CAT_4": 0.0
+   }
+  }
+ ]
+}

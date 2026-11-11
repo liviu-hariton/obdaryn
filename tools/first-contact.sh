@@ -31,27 +31,36 @@ if ! nc -z -G 3 "$HOST" "$PORT" 2>/dev/null; then
     exit 1
 fi
 
+# Manufacturer values (OBDb data pack): the probe needs the model, e.g. "Elantra".
+printf "Car model for manufacturer values (e.g. Elantra; press Enter to skip): "
+read MODEL
+set --
+[ -n "$MODEL" ] && set -- --model "$MODEL"
+
+# run <phase> [probe options...]
 run() {
-    LOG="$DIR/logs/first-contact-$STAMP-$1.log"
-    echo "Running the full report ($1). This takes about a minute ..."
-    REC="$DIR/logs/first-contact-$STAMP-$1.obdrec"
-    HTML="$DIR/logs/first-contact-$STAMP-$1.html"
-    "$PROBE" "$HOST" "$PORT" --report --verbose --record "$REC" --report-html "$HTML" > "$LOG" 2>&1
+    PHASE=$1; shift
+    LOG="$DIR/logs/first-contact-$STAMP-$PHASE.log"
+    echo "Running the full report ($PHASE). This takes about a minute ..."
+    REC="$DIR/logs/first-contact-$STAMP-$PHASE.obdrec"
+    HTML="$DIR/logs/first-contact-$STAMP-$PHASE.html"
+    "$PROBE" "$HOST" "$PORT" --report --verbose --record "$REC" --report-html "$HTML" "$@" > "$LOG" 2>&1
     echo "  saved $LOG"
     echo "  the recording $REC"
     [ -s "$HTML" ] && echo "  and the report $HTML (open it in a browser)"
-    grep -E "^  (VIN|Protocol|Adapter):|MIL |values/s|Module list|answered|not found|error" "$LOG" | grep -v "^    " | head -30
+    grep -E "^  (VIN|Protocol|Adapter):|MIL |values/s|Module list|answered|not found|error" "$LOG" \
+        | grep -v "^    " | grep -vE "^  [0-9A-F]{3}:[0-9A-F]+ " | head -30
 }
 
 echo
 echo "Step 1 of 2: ignition ON, engine OFF. Press Enter when ready."
 read _
-run ignition-on
+run ignition-on "$@"
 
 echo
 echo "Step 2 of 2: start the engine and let it idle. Press Enter when it runs (or Ctrl+C to stop here)."
 read _
-run engine-running
+run engine-running "$@"
 
 echo
 echo "Done. Rejoin your normal Wi-Fi and tell Claude the logs are in logs/."

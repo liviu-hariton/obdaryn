@@ -16,6 +16,9 @@
 //     --replay FILE  run against a recording instead of an adapter
 //     --report-html FILE  also save the shareable report (the same web page the
 //                    app saves with "Save report..."); implies --report
+//     --model NAME   also read the manufacturer values of this model (OBDb data
+//                    pack, e.g. "Elantra" for a Hyundai): which modules answer
+//                    which requests, with the decoded values
 //
 // It uses exactly the same core library as the app, so it tells "adapter or
 // car problem" from "UI problem". Like the app, it only reads: every command
@@ -23,6 +26,9 @@
 
 #include "elm327/AdapterCheck.h"
 #include "obd/DtcDatabase.h"
+#include "obd/ManufacturerData.h"
+#include "obd/ManufacturerReader.h"
+#include "obd/ModuleAddressing.h"
 #include "obd/ModuleScanner.h"
 #include "obd/ObdClient.h"
 #include "obd/Pids.h"
@@ -106,6 +112,7 @@ int main(int argc, char *argv[])
         return value;
     };
     const QString reportHtmlPath = takeValue(QStringLiteral("--report-html"));
+    const QString brandModel = takeValue(QStringLiteral("--model"));
     const bool report = args.removeAll(QStringLiteral("--report")) > 0 || !reportHtmlPath.isEmpty();
     const bool modules = args.removeAll(QStringLiteral("--modules")) > 0 || report;
     const bool verbose = args.removeAll(QStringLiteral("--verbose")) > 0;
@@ -395,6 +402,43 @@ int main(int argc, char *argv[])
                 out << "  answers: " << QString::number(h.averageMs, 'f', 0) << " ms average, 95 % within "
                     << QString::number(h.p95Ms, 'f', 0) << " ms; " << h.timeouts << " timeouts and " << h.errors
                     << " errors in " << h.commands << " commands" << Qt::endl;
+                next();
+            });
+        });
+    }
+
+    // ---- Manufacturer values (OBDb data pack for the given model)
+    if (!brandModel.isEmpty()) {
+        steps.add([&](Steps::Next next) {
+            section("Manufacturer values");
+            const ManufacturerModel *model = ManufacturerData::instance().find(make, brandModel);
+            if (!model) {
+                out << "  No data pack for " << make << ' ' << brandModel << ". Models: "
+                    << ManufacturerData::instance().modelsOf(make).join(QStringLiteral(", ")) << Qt::endl;
+                next();
+                return;
+            }
+            const int year = decodeVin(vin).modelYear;
+            const QList<ManufacturerCommand> commands = model->commandsFor(year);
+            out << "  " << model->make << ' ' << model->model << ", model year " << (year > 0 ? QString::number(year) : QStringLiteral("unknown"))
+                << ": " << commands.size() << " requests (" << model->repository << " @ " << model->commit.left(10) << ")" << Qt::endl;
+            ManufacturerReader::read(&client, commands, [&out, commands, next](const QList<ManufacturerReader::Result> &results) {
+                int answered = 0;
+                for (int i = 0; i < results.size(); ++i) {
+                    const ManufacturerCommand &c = commands[i];
+                    const ManufacturerReader::Result &r = results[i];
+                    answered += r.answered ? 1 : 0;
+                    out << "  " << c.key().leftJustified(12)
+                        << (r.answered ? "answered" : r.refused ? "refused (not supported)" : "no answer") << Qt::endl;
+                    for (const ManufacturerReader::Value &v : r.values) {
+                        const ManufacturerSignal &sig = c.signalList[v.signal];
+                        const QString unit = QString::fromUtf8(sig.metricUnit());
+                        out << "      " << sig.name.leftJustified(52)
+                            << QString::number(sig.toMetric(v.value), 'f', sig.decimals()) << (unit.isEmpty() ? QString() : QLatin1Char(' ') + unit)
+                            << "   [" << sig.id << ']' << Qt::endl;
+                    }
+                }
+                out << "  " << answered << " of " << results.size() << " requests answered" << Qt::endl;
                 next();
             });
         });

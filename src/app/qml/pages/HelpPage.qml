@@ -200,7 +200,7 @@ Item {
                         { label: qsTr("All modules"), text: qsTr("Asks ABS, airbag, body and the other modules for their codes, using the module list of your car's brand.") },
                         { label: qsTr("Readiness"), text: qsTr("Which self-tests have finished since codes were last cleared, and the self-test results with their limits.") },
                         { label: qsTr("Freeze frame"), text: qsTr("The sensor values saved when a fault was stored.") },
-                        { label: qsTr("Live data"), text: qsTr("Every value the car reports, with its recent history. Pin values to the Overview.") },
+                        { label: qsTr("Live data"), text: qsTr("Every value the car reports, with its recent history. Pin values to the Overview. On Hyundai and Kia cars, the brand's own values too, from the OBDb community: choose the model, then Find values.") },
                         { label: qsTr("Charts"), text: qsTr("Several values over time, or two recordings compared.") },
                         { label: qsTr("Trip"), text: qsTr("Distance, fuel and consumption. Calibrate the fuel estimate with two fill-ups.") },
                         { label: qsTr("Vehicle info"), text: qsTr("The VIN and what it tells, software versions and the modules that answer.") },

@@ -2,6 +2,7 @@
 
 #include "obd/ModuleScanner.h"
 
+#include "obd/ModuleAddressing.h"
 #include "obd/ObdClient.h"
 #include "obd/Pids.h"
 
@@ -10,11 +11,6 @@
 namespace obdaryn {
 
 namespace {
-
-QByteArray hex3(quint16 id)
-{
-    return QByteArray::number(id, 16).toUpper().rightJustified(3, '0');
-}
 
 // Per-request timeout for module requests. Absent modules cost this much.
 constexpr int kModuleTimeoutMs = 1500;
@@ -174,29 +170,12 @@ void ModuleScanner::scanNext()
 
 void ModuleScanner::address(const ModuleDef &m, std::function<void(bool)> done)
 {
-    ElmSession *s = m_client->session();
-    // The commands run in order; only the header decides success, and done()
-    // is called exactly once, from the last command.
-    auto headerOk = std::make_shared<bool>(false);
-    s->send("ATSH" + hex3(m.tx), [headerOk](const ElmSession::Reply &r) { *headerOk = r.ok(); });
-    // Only listen to this module's answers.
-    s->send("ATCRA" + hex3(m.rx), [](const ElmSession::Reply &) {});
-    if (m.needsFlowControlHeader()) {
-        // Multi-frame answers need a standard "continue" frame sent to the module's own ID.
-        s->send("ATFCSH" + hex3(m.tx), [](const ElmSession::Reply &) {});
-        s->send("ATFCSD300000", [](const ElmSession::Reply &) {});
-        s->send("ATFCSM1", [headerOk, done](const ElmSession::Reply &) { done(*headerOk); });
-    } else {
-        s->send("ATFCSM0", [headerOk, done](const ElmSession::Reply &) { done(*headerOk); });
-    }
+    ModuleAddressing::address(m_client->session(), m.tx, m.rx, m.needsFlowControlHeader(), std::move(done));
 }
 
 void ModuleScanner::restoreAddressing(std::function<void()> done)
 {
-    ElmSession *s = m_client->session();
-    s->send("ATFCSM0", [](const ElmSession::Reply &) {});
-    s->send("ATCRA", [](const ElmSession::Reply &) {});                       // listen to everyone again
-    s->send("ATSH7DF", [done](const ElmSession::Reply &) { done(); });       // functional OBD-II address
+    ModuleAddressing::restore(m_client->session(), std::move(done));
 }
 
 void ModuleScanner::readDtcs(int i, DiagProtocol protocol, bool isFallback, std::function<void()> done)

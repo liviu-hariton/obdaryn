@@ -22,3 +22,6 @@ obdaryn_add_test(tst_trip)
 obdaryn_add_test(tst_health)
 obdaryn_add_test(tst_mode06)
 obdaryn_add_test(tst_charts)
+obdaryn_add_test(tst_manufacturer)
+# Recorded answers from real cars (OBDb test cases, CC BY-SA 4.0).
+target_compile_definitions(tst_manufacturer PRIVATE OBDARYN_TEST_DATA="${CMAKE_CURRENT_SOURCE_DIR}/data")

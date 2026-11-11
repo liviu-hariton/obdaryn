@@ -43,7 +43,7 @@ Clearing is the only thing Obdaryn does that changes anything in the car, and on
 | **All modules** | Asks ABS, airbag, body and the other modules for their codes, using the module list of your car's brand. |
 | **Readiness** | Which self-tests have finished since codes were last cleared. **Read test results** shows the self-test results (Mode 06) with their limits: a result close to its limit points to a part that's wearing out. |
 | **Freeze frame** | The sensor values saved when a fault was stored. |
-| **Live data** | Every value the car reports, with its recent history. Pin values to the Overview. |
+| **Live data** | Every value the car reports, with its recent history. Pin values to the Overview. On Hyundai and Kia cars, **Hyundai values** (or **Kia values**) lists what the car's modules report beyond the standard: choose the model, then **Find values**. These definitions come from the OBDb community and aren't checked on your car. |
 | **Charts** | Up to six values over time, one chart each on a shared time axis, live or from a recording. Compare two recordings to see a drive before and after a repair. Hover, or focus the charts and use the arrow keys, to read every value at one moment. |
 | **Trip** | Distance, fuel and consumption. On cars without an air-flow sensor, enter the engine size. Calibrate the fuel estimate with two fill-ups, and set a fuel price to see the cost. |
 | **Vehicle info** | The VIN and what it tells, software versions and the modules that answer. |
