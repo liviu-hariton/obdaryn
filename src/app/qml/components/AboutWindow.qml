@@ -153,5 +153,18 @@ Window {
             lineHeight: 1.3
             wrapMode: Text.WordWrap
         }
+        // The copyright holder of Obdaryn's own code; third-party parts keep
+        // their own notices (credited above and in THIRD_PARTY.md).
+        Text {
+            Layout.fillWidth: true
+            Layout.topMargin: Theme.s3
+            horizontalAlignment: Text.AlignHCenter
+            //: %1 = year of first publication, %2 = the author's name
+            text: qsTr("© %1 %2 and contributors").arg("2026").arg("Liviu Hariton")
+            color: Theme.textFaint
+            font.family: Theme.sans
+            font.pixelSize: Theme.fontSmall
+            font.features: { "tnum": 1 }
+        }
     }
 }

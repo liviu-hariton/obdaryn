@@ -43,6 +43,11 @@
         <source>Code explanations from obdex (CC0). Manufacturer values from OBDb (CC BY-SA 4.0). Fonts: Inter and JetBrains Mono (SIL Open Font License). Icons: Lucide (ISC). Built with Qt.</source>
         <translation>Explicațiile codurilor provin din obdex (CC0). Valorile de producător provin din OBDb (CC BY-SA 4.0). Fonturi: Inter și JetBrains Mono (SIL Open Font License). Pictograme: Lucide (ISC). Construit cu Qt.</translation>
     </message>
+    <message>
+        <source>© %1 %2 and contributors</source>
+        <extracomment>%1 = year of first publication, %2 = the author&apos;s name</extracomment>
+        <translation>© %1 %2 și colaboratorii</translation>
+    </message>
 </context>
 <context>
     <name>AppMenuBar</name>

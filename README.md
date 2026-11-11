@@ -78,4 +78,6 @@ Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) before contributing. Every sou
 
 ## Licence and credits
 
+Copyright © 2026 Liviu Hariton and contributors.
+
 Obdaryn is licensed under the **GNU General Public License v3.0 or later**; see [LICENSE](LICENSE). Third-party data and fonts are listed in [THIRD_PARTY.md](THIRD_PARTY.md).
