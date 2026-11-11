@@ -79,7 +79,8 @@ int main(int argc, char *argv[])
     // Renders one screen to a PNG and quits; used for design reviews and docs.
     //   OBDARYN_CAPTURE=out.png  OBDARYN_PAGE=0..10  OBDARYN_DEMO=1
     //   OBDARYN_APPEARANCE=light|dark  OBDARYN_LANG=en|ro  OBDARYN_DELAY_MS=4000  OBDARYN_SIZE=WxH
-    //   OBDARYN_SCAN_MODULES=1  OBDARYN_RECORD=1 (record once the first scan ends)
+    //   OBDARYN_SCAN_MODULES=1  OBDARYN_RECORD=1 (record once the first scan ends;
+    //   OBDARYN_RECORD_AFTER_MS=5000 waits that long first, so two demo recordings differ)
     //   OBDARYN_REPLAY=file.obdrec (replay instead of the demo car)
     //   OBDARYN_DEMO_TRIPS=1 (save the demo car's trips, to capture the trip history)
     //   OBDARYN_RECORDINGS_DIR / OBDARYN_REPORTS_DIR=folder (read by AppController; keeps captures out of ~/Documents)
@@ -121,8 +122,12 @@ int main(int argc, char *argv[])
     if (qEnvironmentVariableIntValue("OBDARYN_RECORD") == 1) {
         if (auto *controller = engine.singletonInstance<obdaryn::AppController *>("Obdaryn", "App")) {
             QObject::connect(controller, &obdaryn::AppController::scanFinished, controller, [controller] {
-                if (!controller->vin().isEmpty() && !controller->recording())
-                    controller->startRecording();
+                // The demo car's values follow the time since it connected, so recordings
+                // started at the same moment are identical; a later start shifts them.
+                QTimer::singleShot(qEnvironmentVariableIntValue("OBDARYN_RECORD_AFTER_MS"), controller, [controller] {
+                    if (!controller->vin().isEmpty() && !controller->recording())
+                        controller->startRecording();
+                });
             });
         }
     }

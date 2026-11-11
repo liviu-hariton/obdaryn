@@ -60,6 +60,10 @@ The site at https://obdaryn.eu lives in `site/` (Astro, static, English at `/` a
 - Server settings live in `site/public/.htaccess`: security headers, long caching for the hashed files in `/_astro/`, the 404 page (`site/public/ro/.htaccess` gives `/ro/` its Romanian one), and `ModPagespeed off`, because the server's mod_pagespeed would otherwise rewrite the pages and recompress the screenshots.
 - Social images: `site/public/og-en.png` and `og-ro.png` are captures of the home page's first screen at 1200 × 630, dark theme. Recapture them when the hero changes.
 
+## README screenshots
+
+`tools/capture-readme-images.sh` (after `cmake --build build`) recaptures the screenshots in `docs/images/` from the demo car, offscreen and in English, at the app's real size. It first records two short demo drives (the second starts later, so the comparison chart shows two different lines) and drives two demo trips (so the Trip screen has a history). It takes about ten minutes.
+
 ## Version and icon
 
 - The version comes from `project(Obdaryn VERSION …)` in the top-level `CMakeLists.txt`.
