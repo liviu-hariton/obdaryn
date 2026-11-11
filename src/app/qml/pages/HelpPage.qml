@@ -278,6 +278,7 @@ Item {
     // ---- The rail (wide windows): stays put while the text scrolls ------------
     ColumnLayout {
         visible: page.wide
+        z: 1 // above the scroll view, which covers the whole page and would take the clicks
         x: page.groupX
         y: Theme.s5 + 4
         width: page.railWidth

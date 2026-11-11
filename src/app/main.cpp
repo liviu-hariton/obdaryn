@@ -18,6 +18,7 @@
 #include <QQuickItem>
 #include <QQuickWindow>
 #include <QSettings>
+#include <QMouseEvent>
 #include <QTimer>
 
 #include <functional>
@@ -197,6 +198,21 @@ int main(int argc, char *argv[])
         if (window && qEnvironmentVariableIsSet("OBDARYN_LIVE_SOURCE")) {
             if (QObject *live = window->findChild<QObject *>(QStringLiteral("livePage")))
                 live->setProperty("source", qEnvironmentVariable("OBDARYN_LIVE_SOURCE"));
+        }
+        // OBDARYN_CLICK=x,y clicks there (window coordinates) shortly before the capture,
+        // like a user would: checks that controls really take the mouse.
+        if (window && qEnvironmentVariableIsSet("OBDARYN_CLICK")) {
+            const QStringList xy = qEnvironmentVariable("OBDARYN_CLICK").split(QLatin1Char(','));
+            const int clickDelay = qMax(0, (qEnvironmentVariableIsSet("OBDARYN_DELAY_MS") ? qEnvironmentVariableIntValue("OBDARYN_DELAY_MS") : 4000) - 1500);
+            if (xy.size() == 2) {
+                const QPointF at(xy[0].toDouble(), xy[1].toDouble());
+                QTimer::singleShot(clickDelay, window, [window, at] {
+                    QMouseEvent press(QEvent::MouseButtonPress, at, window->mapToGlobal(at), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+                    QMouseEvent release(QEvent::MouseButtonRelease, at, window->mapToGlobal(at), Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+                    QCoreApplication::sendEvent(window, &press);
+                    QCoreApplication::sendEvent(window, &release);
+                });
+            }
         }
         // OBDARYN_HELP_SECTION=3 scrolls the Help page to that section (0 = Start here).
         if (window && qEnvironmentVariableIsSet("OBDARYN_HELP_SECTION")) {
