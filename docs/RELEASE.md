@@ -6,15 +6,25 @@ Everything happens on your Mac. Nothing is uploaded and no paid service is invol
 tools/make-release.sh
 ```
 
+It builds with **the official Qt binaries**, not Homebrew's: Homebrew builds Qt and its libraries for the newest macOS only, so an installer made with them opens only on that version. Install the official Qt once, into `~/Qt` (the script looks for `~/Qt/6.12.0/macos`; set `QT=...` to use another folder). [aqtinstall](https://github.com/miurahr/aqtinstall) downloads it without a Qt account:
+
+```bash
+python3 -m venv /tmp/aqt && /tmp/aqt/bin/pip install aqtinstall
+/tmp/aqt/bin/aqt install-qt mac desktop 6.12.0 clang_64 --outputdir ~/Qt
+```
+
+Day-to-day development keeps using Homebrew's Qt; only the installer needs the official one.
+
 The script:
 
-1. builds a Release configuration in `build-release/` and runs the unit tests;
-2. copies `Obdaryn.app` to `dist/` and makes it self-contained with `macdeployqt` (the Qt frameworks and plugins go inside the app);
-3. removes the build's Homebrew library path, so a missing library can't hide behind Homebrew on this Mac;
-4. signs the app ad hoc (`codesign --sign -`), which Apple Silicon requires before an app may run;
-5. makes `dist/Obdaryn-<version>.dmg` with the app and an Applications shortcut.
+1. builds a Release configuration in `build-release/` (configured fresh each time) for macOS 14.4 and later, as one universal binary for Apple Silicon and Intel, and runs the unit tests;
+2. copies `Obdaryn.app` to `dist/` and makes it self-contained with `macdeployqt` (the Qt frameworks and plugins go inside the app), leaving out the database drivers Qt adds that need client libraries the app doesn't ship;
+3. removes the build's Qt library path, so a missing library can't hide behind the Qt installed on this Mac;
+4. checks that every binary in the app runs on macOS 14.4, and stops if one needs a newer macOS;
+5. signs the app ad hoc (`codesign --sign -`), which Apple Silicon requires before an app may run;
+6. makes `dist/Obdaryn-<version>.dmg` with the app and an Applications shortcut.
 
-`macdeployqt` prints "Cannot resolve rpath" for some QML plugins (3D, virtual keyboard, PDF, timeline). Obdaryn never loads them, so those messages are expected.
+`macdeployqt` prints "Cannot resolve rpath" for some QML plugins (3D, virtual keyboard, PDF, timeline) and "no file at" for the Mimer, ODBC and PostgreSQL client libraries. Obdaryn never loads any of them, so those messages are expected.
 
 ## Installing and the first launch
 
@@ -24,7 +34,9 @@ The script:
 
 ## Which macOS versions it runs on
 
-The installer runs only on the macOS version it was built on and newer. The Homebrew Qt and its libraries are built for the newest macOS (some need 26.0 or 27.2), and the app itself is built without a deployment target, so its binary asks for the build Mac's version (27.0 today). `LSMinimumSystemVersion` in `Info.plist` says 13.0, but the binaries win. Supporting older macOS needs Qt from the official Qt installer (built for older systems) and `CMAKE_OSX_DEPLOYMENT_TARGET` set to match. The website says "macOS 27 or later" until then.
+macOS 14.4 (Sonoma) and later, on Apple Silicon and Intel. That is the minimum of the official Qt 6.12 binaries; `MIN_MACOS` in `tools/make-release.sh` sets the build's deployment target and `LSMinimumSystemVersion` in `Info.plist` to match. Going lower needs an older Qt (or Qt built from source) with a lower minimum.
+
+The Intel half has been run under Rosetta on an Apple Silicon Mac, not yet on an Intel Mac.
 
 ## Publishing a release and the website
 

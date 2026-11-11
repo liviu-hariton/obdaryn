@@ -9,6 +9,15 @@ find_package(Qt6 REQUIRED COMPONENTS Svg)
 set(OBDARYN_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/macos/Obdaryn.icns")
 set_source_files_properties(${OBDARYN_APP_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
+# The oldest macOS the app claims to run on (Info.plist). Release builds set
+# CMAKE_OSX_DEPLOYMENT_TARGET (tools/make-release.sh); a development build runs
+# only on this Mac, so it takes the official Qt's minimum.
+if(CMAKE_OSX_DEPLOYMENT_TARGET)
+    set(OBDARYN_MIN_MACOS "${CMAKE_OSX_DEPLOYMENT_TARGET}")
+else()
+    set(OBDARYN_MIN_MACOS "14.4")
+endif()
+
 qt_add_executable(obdaryn
     main.cpp
     IconProvider.h IconProvider.cpp

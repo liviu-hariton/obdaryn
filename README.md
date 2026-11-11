@@ -47,7 +47,7 @@ Status: v0.4, in active development and not yet tested on a real car. macOS firs
 
 ## Install (macOS)
 
-Download the installer from **[obdaryn.eu](https://obdaryn.eu/download/)** or the [GitHub releases](https://github.com/liviu-hariton/obdaryn/releases). Open it and drag Obdaryn to Applications. The app isn't notarized, so the first time open it, then go to **System Settings → Privacy & Security** and click **Open Anyway**. For now it needs macOS 27 on Apple Silicon. To build the installer yourself: `tools/make-release.sh`. Details in [docs/RELEASE.md](docs/RELEASE.md).
+Download the installer from **[obdaryn.eu](https://obdaryn.eu/download/)** or the [GitHub releases](https://github.com/liviu-hariton/obdaryn/releases). Open it and drag Obdaryn to Applications. The app isn't notarized, so the first time open it, then go to **System Settings → Privacy & Security** and click **Open Anyway**. It runs on macOS 14.4 (Sonoma) or later, on Apple Silicon and Intel. To build the installer yourself: `tools/make-release.sh` (it needs the official Qt). Details in [docs/RELEASE.md](docs/RELEASE.md).
 
 ## Build (macOS)
 

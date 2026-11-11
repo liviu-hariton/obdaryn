@@ -20,7 +20,7 @@ command -v gh >/dev/null || { echo "Install the GitHub CLI: brew install gh && g
 [[ -z "$(git -C "$DIR" status --porcelain --untracked-files=no)" ]] || { echo "Commit your changes first." >&2; exit 1; }
 
 SHA="$(shasum -a 256 "$DMG" | cut -d' ' -f1)"
-NOTES="Obdaryn $VERSION for macOS (Apple Silicon).
+NOTES="Obdaryn $VERSION for macOS 14.4 (Sonoma) or later, on Apple Silicon and Intel.
 
 The app isn't notarized yet: the first time, open it, then go to System Settings → Privacy & Security and click Open Anyway. Details: https://obdaryn.eu/download/
 

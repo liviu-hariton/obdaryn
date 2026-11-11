@@ -24,7 +24,7 @@ export const ui = {
     skip: "Skip to content",
     nav: { features: "Features", cars: "Supported cars", guide: "Guide", download: "Download", github: "GitHub" },
     download: "Download for macOS",
-    versionLine: (v: string) => `Version ${v} · Apple Silicon · free`,
+    versionLine: (v: string) => `Version ${v} · macOS 14.4 or later · free`,
     home: {
       title: "Obdaryn: free, read-only OBD-II diagnostics for your Mac",
       description: "Obdaryn reads trouble codes, readiness, live data and every module of your car through a cheap ELM327 adapter, and explains each one in plain words. Free, open source and read-only.",
@@ -78,7 +78,7 @@ export const ui = {
       guardLink: "How Obdaryn talks to the car",
       needTitle: "What you need",
       needs: [
-        ["A Mac with Apple Silicon", "macOS 27 or later, for now."],
+        ["A Mac", "macOS 14.4 Sonoma or later, with Apple Silicon or Intel."],
         ["An ELM327 Wi-Fi adapter", "Such as the Vgate iCar Pro Wi-Fi. Most are clones, and they usually work."],
         ["A car with an OBD-II socket", "In the EU, petrol cars from 2001 and diesels from 2004. In the US, every car from 1996."],
       ],
@@ -107,12 +107,12 @@ export const ui = {
     downloadPage: {
       title: "Download Obdaryn",
       description: "Download Obdaryn for macOS: the installer, what you need, and how to open it the first time.",
-      lede: "The installer for Macs with Apple Silicon. Free, with no account to create.",
-      fileLine: (v: string) => `Obdaryn-${v}.dmg · about 64 MB`,
+      lede: "One installer for Macs with Apple Silicon or Intel. Free, with no account to create.",
+      fileLine: (v: string) => `Obdaryn-${v}.dmg · about 80 MB`,
       reqTitle: "Requirements",
       reqs: [
-        ["Mac", "Apple Silicon (M1 or later). Intel Macs aren't supported."],
-        ["macOS", "27 or later, for now. Support for older versions is planned."],
+        ["Mac", "Apple Silicon or Intel."],
+        ["macOS", "14.4 Sonoma or later."],
         ["Adapter", "An ELM327-compatible Wi-Fi adapter, such as the Vgate iCar Pro Wi-Fi."],
       ],
       firstTitle: "Opening it the first time",
@@ -169,7 +169,7 @@ export const ui = {
     skip: "Sari la conținut",
     nav: { features: "Funcții", cars: "Mașini compatibile", guide: "Ghid", download: "Descarcă", github: "GitHub" },
     download: "Descarcă pentru macOS",
-    versionLine: (v: string) => `Versiunea ${v} · Apple Silicon · gratuit`,
+    versionLine: (v: string) => `Versiunea ${v} · macOS 14.4 sau mai nou · gratuit`,
     home: {
       title: "Obdaryn: diagnoză OBD-II gratuită, doar citire, pentru Mac",
       description: "Obdaryn citește codurile de eroare, pregătirea pentru ITP, datele în timp real și toate modulele mașinii printr-un adaptor ELM327 ieftin, și explică fiecare lucru pe înțelesul tău. Gratuit, open-source și doar citire.",
@@ -223,7 +223,7 @@ export const ui = {
       guardLink: "Cum comunică Obdaryn cu mașina",
       needTitle: "De ce ai nevoie",
       needs: [
-        ["Un Mac cu Apple Silicon", "macOS 27 sau mai nou, deocamdată."],
+        ["Un Mac", "macOS 14.4 Sonoma sau mai nou, cu Apple Silicon sau Intel."],
         ["Un adaptor ELM327 Wi-Fi", "De exemplu Vgate iCar Pro Wi-Fi. Cele mai multe sunt clone și de obicei merg."],
         ["O mașină cu priză OBD-II", "În UE, mașinile pe benzină din 2001 și cele diesel din 2004. În SUA, toate mașinile din 1996."],
       ],
@@ -252,12 +252,12 @@ export const ui = {
     downloadPage: {
       title: "Descarcă Obdaryn",
       description: "Descarcă Obdaryn pentru macOS: programul de instalare, de ce ai nevoie și cum îl deschizi prima dată.",
-      lede: "Programul de instalare pentru Mac-urile cu Apple Silicon. Gratuit, fără cont.",
-      fileLine: (v: string) => `Obdaryn-${v}.dmg · aproximativ 64 MB`,
+      lede: "Un singur program de instalare pentru Mac-urile cu Apple Silicon sau Intel. Gratuit, fără cont.",
+      fileLine: (v: string) => `Obdaryn-${v}.dmg · aproximativ 80 MB`,
       reqTitle: "Cerințe",
       reqs: [
-        ["Mac", "Apple Silicon (M1 sau mai nou). Mac-urile cu Intel nu sunt suportate."],
-        ["macOS", "27 sau mai nou, deocamdată. Suportul pentru versiunile mai vechi e planificat."],
+        ["Mac", "Apple Silicon sau Intel."],
+        ["macOS", "14.4 Sonoma sau mai nou."],
         ["Adaptor", "Un adaptor Wi-Fi compatibil ELM327, de exemplu Vgate iCar Pro Wi-Fi."],
       ],
       firstTitle: "Prima deschidere",
