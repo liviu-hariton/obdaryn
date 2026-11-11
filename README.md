@@ -45,7 +45,7 @@
 >
 > **Private.** Obdaryn sends nothing about you or your car online. Its only internet request is the opt-in update check, which fetches one small file holding the newest version number ([privacy](https://obdaryn.eu/privacy/)).
 
-Status: v0.4, in active development and not yet tested on a real car. macOS first; Windows, Android and iOS will follow from the same Qt codebase. See [docs/ROADMAP.md](docs/ROADMAP.md).
+Status: v0.4, in active development and not yet tested on a real car. macOS first; Android and iOS will follow from the same Qt codebase. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 **Using it:** [docs/USER_GUIDE.md](docs/USER_GUIDE.md) (the same guide is in the app under **Help**, ⌘?) and [docs/CAR_INTERACTION.md](docs/CAR_INTERACTION.md) for what each feature asks of the car.
 
