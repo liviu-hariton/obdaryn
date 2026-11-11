@@ -30,9 +30,23 @@
 
 ![All modules: a full-vehicle scan of the demo car](docs/images/all-modules-light.png)
 
+![Charts: several live values on a shared time axis](docs/images/charts-light.png)
+
+![Two recordings compared, the second one dashed](docs/images/charts-compare-dark.png)
+
+![Self-test results (Mode 06) with their limits](docs/images/self-tests-light.png)
+
+![The trip computer](docs/images/trip-light.png)
+
 > **Read-only by design.** A safety guard checks every command and refuses anything that could write to, code, actuate, reset or flash a vehicle module. See [docs/CAR_INTERACTION.md](docs/CAR_INTERACTION.md).
 
-Status: early development (v0.1). macOS first; Windows, Android and iOS will follow from the same Qt codebase. See [docs/ROADMAP.md](docs/ROADMAP.md).
+Status: v0.4, in active development and not yet tested on a real car. macOS first; Windows, Android and iOS will follow from the same Qt codebase. See [docs/ROADMAP.md](docs/ROADMAP.md).
+
+**Using it:** [docs/USER_GUIDE.md](docs/USER_GUIDE.md) (the same guide is in the app under **Help**, ⌘?) and [docs/CAR_INTERACTION.md](docs/CAR_INTERACTION.md) for what each feature asks of the car.
+
+## Install (macOS)
+
+Build the installer on your Mac with `tools/make-release.sh`; it writes `dist/Obdaryn-<version>.dmg`. Open it and drag Obdaryn to Applications. The app isn't notarized, so the first time, right-click Obdaryn → **Open**. Details in [docs/RELEASE.md](docs/RELEASE.md).
 
 ## Build (macOS)
 

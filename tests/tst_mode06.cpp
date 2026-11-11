@@ -91,7 +91,7 @@ void TestMode06::names()
     t.mid = 0xEE;
     t.tid = 0x85;
     QCOMPARE(t.monitorName(), QStringLiteral("Monitor 0xEE"));
-    QCOMPARE(t.testName(), QStringLiteral("Manufacturer test 0x85"));
+    QCOMPARE(t.testName(), QStringLiteral("Manufacturer-specific test")); // the TID is shown separately
 }
 
 void TestMode06::readsDemoCar()

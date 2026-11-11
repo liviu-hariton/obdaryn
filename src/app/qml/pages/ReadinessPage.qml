@@ -204,7 +204,7 @@ Item {
                     AppButton {
                         variant: "quiet"
                         iconName: "refresh-cw"
-                        text: App.monitorTestsRead ? qsTr("Read again") : qsTr("Read test results")
+                        text: App.monitorTestsRead ? qsTr("Read results again") : qsTr("Read test results")
                         busy: App.readingMonitorTests
                         enabled: !App.readingMonitorTests && !App.scanning && !App.moduleScanRunning
                         onClicked: App.readMonitorTests()
@@ -255,21 +255,48 @@ Item {
                                 required property var modelData
                                 Layout.fillWidth: true
                                 // Long Romanian test names wrap to two lines instead of being cut.
-                                implicitHeight: Math.max(40, testRow.implicitHeight + 14)
+                                implicitHeight: Math.max(44, testRow.implicitHeight + 14)
                                 Rectangle { anchors.top: parent.top; width: parent.width; height: 1; color: Theme.hairline }
                                 RowLayout {
                                     id: testRow
                                     anchors.fill: parent
                                     spacing: Theme.s4
-                                    Text {
+                                    ColumnLayout {
                                         Layout.fillWidth: true
-                                        text: test.modelData.name
-                                        color: Theme.textMuted
-                                        font.family: Theme.sans
-                                        font.pixelSize: Theme.fontBody
-                                        wrapMode: Text.WordWrap
-                                        maximumLineCount: 2
-                                        elide: Text.ElideRight
+                                        spacing: 2
+                                        RowLayout {
+                                            Layout.fillWidth: true
+                                            spacing: Theme.s2
+                                            Text {
+                                                Layout.fillWidth: true
+                                                text: test.modelData.name
+                                                color: Theme.textMuted
+                                                font.family: Theme.sans
+                                                font.pixelSize: Theme.fontBody
+                                                wrapMode: Text.WordWrap
+                                                maximumLineCount: 2
+                                                elide: Text.ElideRight
+                                            }
+                                            Text {
+                                                visible: test.modelData.tid.length > 0
+                                                text: test.modelData.tid
+                                                color: Theme.textFaint
+                                                font.family: Theme.mono
+                                                font.pixelSize: Theme.fontCaption
+                                            }
+                                        }
+                                        // Explain first: what a failed or close result means.
+                                        Text {
+                                            Layout.fillWidth: true
+                                            visible: test.modelData.verdict === "failed" || test.modelData.verdict === "close"
+                                            text: test.modelData.verdict === "failed"
+                                                  ? qsTr("Outside the car's own limit: the part or system it checks needs attention.")
+                                                  : qsTr("Within the limit but near it: worth watching, especially before an inspection.")
+                                            color: Theme.textFaint
+                                            font.family: Theme.sans
+                                            font.pixelSize: Theme.fontSmall
+                                            wrapMode: Text.WordWrap
+                                        }
                                     }
                                     // Where the value sits between its limits.
                                     Item {

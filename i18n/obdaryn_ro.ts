@@ -19,8 +19,8 @@
         <translation>Grafice</translation>
     </message>
     <message>
-        <source>Live values, one chart each on the same time axis. Hover to read every value at one moment.</source>
-        <translation>Valori în timp real, câte un grafic fiecare, pe aceeași axă a timpului. Treci cu mouse-ul peste ele ca să citești toate valorile dintr-un moment.</translation>
+        <source>Live values, one chart each on the same time axis. Hover, or focus the charts and use the arrow keys, to read every value at one moment.</source>
+        <translation>Valori în timp real, câte un grafic fiecare, pe aceeași axă a timpului. Treci cu mouse-ul peste ele sau selectează graficele și folosește săgețile ca să citești toate valorile dintr-un moment.</translation>
     </message>
     <message>
         <source>A whole recording, one chart per value. Add a second recording to compare two drives.</source>
@@ -143,12 +143,12 @@
         <translation>Alege o înregistrare</translation>
     </message>
     <message>
-        <source>Pick one above. Recordings are made with Record session in the sidebar while connected.</source>
-        <translation>Alege una mai sus. Înregistrările se fac cu Înregistrează sesiunea din bara laterală, cât ești conectat.</translation>
+        <source>Pick one above. Recordings are made with Record in the sidebar while connected.</source>
+        <translation>Alege una mai sus. Înregistrările se fac cu Înregistrează din bara laterală, cât ești conectat.</translation>
     </message>
     <message>
-        <source>No recordings yet. While connected, press Record session in the sidebar, then chart the recording here.</source>
-        <translation>Nicio înregistrare încă. Cât ești conectat, apasă Înregistrează sesiunea în bara laterală, apoi afișează înregistrarea aici.</translation>
+        <source>No recordings yet. While connected, press Record in the sidebar, then chart the recording here.</source>
+        <translation>Nicio înregistrare încă. Cât ești conectat, apasă Înregistrează în bara laterală, apoi afișează înregistrarea aici.</translation>
     </message>
     <message>
         <source>Pick the values to chart</source>
@@ -161,6 +161,10 @@
     <message>
         <source>no readings in this window</source>
         <translation>nicio citire în acest interval</translation>
+    </message>
+    <message>
+        <source>Charts. Use the left and right arrow keys to read the values at a moment.</source>
+        <translation>Grafice. Folosește săgețile stânga și dreapta ca să citești valorile dintr-un moment.</translation>
     </message>
 </context>
 <context>
@@ -436,6 +440,10 @@
         <translation>Mașina nu răspunde</translation>
     </message>
     <message>
+        <source>The adapter is busy</source>
+        <translation>Adaptorul este ocupat</translation>
+    </message>
+    <message>
         <source>Couldn't reach the adapter</source>
         <translation>Adaptorul nu poate fi accesat</translation>
     </message>
@@ -480,8 +488,8 @@
         <translation>O redare răspunde exact cum a răspuns mașina, așa că toate ecranele funcționează fără ea. Într-o redare codurile nu pot fi șterse.</translation>
     </message>
     <message>
-        <source>Nothing recorded yet. While connected, press Record session in the sidebar: Obdaryn saves everything the car says, and you can replay it here without the car.</source>
-        <translation>Nicio înregistrare încă. Cât ești conectat, apasă Înregistrează sesiunea în bara laterală: Obdaryn salvează tot ce spune mașina, iar apoi o poți reda aici fără mașină.</translation>
+        <source>Nothing recorded yet. While connected, press Record in the sidebar: Obdaryn saves everything the car says, and you can replay it here without the car.</source>
+        <translation>Nicio înregistrare încă. Cât ești conectat, apasă Înregistrează în bara laterală: Obdaryn salvează tot ce spune mașina, iar apoi o poți reda aici fără mașină.</translation>
     </message>
     <message>
         <source>%1 · %2</source>
@@ -636,6 +644,357 @@
     <message>
         <source>The car stores one when a fault is confirmed. Clearing codes erases it.</source>
         <translation>Mașina memorează unul când un defect este confirmat. Ștergerea codurilor îl elimină.</translation>
+    </message>
+</context>
+<context>
+    <name>HelpPage</name>
+    <message>
+        <source>Help</source>
+        <translation>Ajutor</translation>
+    </message>
+    <message>
+        <source>How to connect, what to do in which state of the car, and what each screen tells you.</source>
+        <translation>Cum te conectezi, ce poți face în fiecare stare a mașinii și ce îți spune fiecare ecran.</translation>
+    </message>
+    <message>
+        <source>Start here</source>
+        <translation>Începe aici</translation>
+    </message>
+    <message>
+        <source>Which car state</source>
+        <translation>Starea mașinii</translation>
+    </message>
+    <message>
+        <source>Clearing codes</source>
+        <translation>Ștergerea codurilor</translation>
+    </message>
+    <message>
+        <source>The screens</source>
+        <translation>Ecranele</translation>
+    </message>
+    <message>
+        <source>When something doesn't work</source>
+        <translation>Când ceva nu merge</translation>
+    </message>
+    <message>
+        <source>Words</source>
+        <translation>Termeni</translation>
+    </message>
+    <message>
+        <source>Privacy and safety</source>
+        <translation>Confidențialitate și siguranță</translation>
+    </message>
+    <message>
+        <source>Obdaryn reads what the car's computers report through an ELM327-compatible Wi-Fi adapter such as the Vgate iCar Pro. It only reads: it can't change anything in the car.</source>
+        <translation>Obdaryn citește ce raportează calculatoarele mașinii printr-un adaptor Wi-Fi compatibil ELM327, cum ar fi Vgate iCar Pro. Doar citește: nu poate modifica nimic în mașină.</translation>
+    </message>
+    <message>
+        <source>Plug the adapter into the OBD-II socket, under the dashboard on the driver's side.</source>
+        <translation>Introdu adaptorul în mufa OBD-II, sub bord, pe partea șoferului.</translation>
+    </message>
+    <message>
+        <source>Turn the ignition ON. The engine can stay off; start it for live data with the engine running.</source>
+        <translation>Pune contactul. Motorul poate rămâne oprit; pornește-l pentru date în timp real cu motorul pornit.</translation>
+    </message>
+    <message>
+        <source>Join the adapter's Wi-Fi (usually "V-LINK", no password). This computer has no internet while it's connected; that's normal.</source>
+        <translation>Conectează-te la rețeaua Wi-Fi a adaptorului (de obicei „V-LINK”, fără parolă). Cât timp e conectat, computerul nu are internet; e normal.</translation>
+    </message>
+    <message>
+        <source>Press Connect. The first time, macOS asks to let Obdaryn find devices on the local network: allow it.</source>
+        <translation>Apasă Conectează. Prima dată, macOS cere permisiunea ca Obdaryn să caute dispozitive în rețeaua locală: permite-o.</translation>
+    </message>
+    <message>
+        <source>Close other OBD apps first (Car Scanner, Torque): a Wi-Fi adapter takes one connection at a time.</source>
+        <translation>Închide întâi alte aplicații OBD (Car Scanner, Torque): un adaptor Wi-Fi acceptă o singură conexiune odată.</translation>
+    </message>
+    <message>
+        <source>No car nearby? Try the demo car, or replay a recording: every screen works with both.</source>
+        <translation>Nu ai mașina la îndemână? Încearcă mașina demo sau redă o înregistrare: toate ecranele funcționează cu ambele.</translation>
+    </message>
+    <message>
+        <source>What to do in which car state</source>
+        <translation>Ce poți face în fiecare stare a mașinii</translation>
+    </message>
+    <message>
+        <source>Ignition ON, engine off</source>
+        <translation>Contact pus, motor oprit</translation>
+    </message>
+    <message>
+        <source>Read trouble codes, the freeze frame, readiness and self-test results, vehicle info, and scan all modules. The only state in which codes can be cleared.</source>
+        <translation>Citești codurile de eroare, instantaneul, pregătirea ITP și rezultatele autotestelor, informațiile despre vehicul și scanezi toate modulele. Singura stare în care codurile pot fi șterse.</translation>
+    </message>
+    <message>
+        <source>Engine running, parked</source>
+        <translation>Motor pornit, pe loc</translation>
+    </message>
+    <message>
+        <source>Everything above except clearing, plus meaningful live data: temperatures, fuel trims, charging voltage.</source>
+        <translation>Tot ce e mai sus în afară de ștergere, plus date în timp real cu sens: temperaturi, corecții de amestec, tensiunea de încărcare.</translation>
+    </message>
+    <message>
+        <source>Driving</source>
+        <translation>În mers</translation>
+    </message>
+    <message>
+        <source>Live data, charts, the trip computer and recording a session. A passenger watches the screen, never the driver.</source>
+        <translation>Date în timp real, grafice, calculatorul de bord și înregistrarea unei sesiuni. Ecranul îl urmărește un pasager, niciodată șoferul.</translation>
+    </message>
+    <message>
+        <source>Not connected</source>
+        <translation>Neconectat</translation>
+    </message>
+    <message>
+        <source>Replay or chart recordings, export their data as CSV, and look through saved trips.</source>
+        <translation>Redai sau afișezi înregistrări, le exporți datele ca CSV și răsfoiești călătoriile salvate.</translation>
+    </message>
+    <message>
+        <source>With the ignition ON and the engine off, the car drains its battery. Keep such sessions under 20–30 minutes, or start the engine. Obdaryn shows the battery voltage on the Overview.</source>
+        <translation>Cu contactul pus și motorul oprit, mașina consumă din baterie. Ține astfel de sesiuni sub 20–30 de minute sau pornește motorul. Obdaryn arată tensiunea bateriei în Prezentare generală.</translation>
+    </message>
+    <message>
+        <source>What clearing codes really does</source>
+        <translation>Ce face de fapt ștergerea codurilor</translation>
+    </message>
+    <message>
+        <source>Clearing is the only thing Obdaryn does that changes anything in the car, and only after you confirm with the engine off. It doesn't repair anything:</source>
+        <translation>Ștergerea este singurul lucru prin care Obdaryn schimbă ceva în mașină, și doar după ce confirmi, cu motorul oprit. Nu repară nimic:</translation>
+    </message>
+    <message>
+        <source>The warning light goes off, but comes back if the fault is still there, sometimes after a few drives.</source>
+        <translation>Martorul se stinge, dar se aprinde din nou dacă defectul persistă, uneori după câteva drumuri.</translation>
+    </message>
+    <message>
+        <source>The freeze frame is erased. Read it, or save a report, first.</source>
+        <translation>Instantaneul se șterge. Citește-l sau salvează un raport înainte.</translation>
+    </message>
+    <message>
+        <source>Every readiness monitor resets. The car fails the ITP emissions check until it has been driven enough, usually 50–150 km of mixed driving over a few days. Never clear codes right before an inspection.</source>
+        <translation>Toate monitoarele de pregătire se resetează. Mașina pică testul de emisii la ITP până când a fost condusă suficient, de obicei 50–150 km de mers mixt în câteva zile. Nu șterge niciodată codurile chiar înainte de inspecție.</translation>
+    </message>
+    <message>
+        <source>Permanent codes stay. They clear themselves once the car has re-tested the system and found it fixed.</source>
+        <translation>Codurile permanente rămân. Dispar singure după ce mașina retestează sistemul și îl găsește reparat.</translation>
+    </message>
+    <message>
+        <source>Overview</source>
+        <translation>Prezentare generală</translation>
+    </message>
+    <message>
+        <source>The check-engine light, readiness, battery, codes and the main live values at a glance. Save report… makes a PDF or web page to share.</source>
+        <translation>Martorul de motor, pregătirea ITP, bateria, codurile și principalele valori în timp real dintr-o privire. Salvează raportul… face un PDF sau o pagină web de trimis.</translation>
+    </message>
+    <message>
+        <source>Trouble codes</source>
+        <translation>Coduri de eroare</translation>
+    </message>
+    <message>
+        <source>Codes from the engine and transmission, each explained: what it means, likely causes, whether it matters for the ITP.</source>
+        <translation>Codurile de la motor și cutia de viteze, fiecare explicat: ce înseamnă, cauze probabile, dacă contează la ITP.</translation>
+    </message>
+    <message>
+        <source>All modules</source>
+        <translation>Toate modulele</translation>
+    </message>
+    <message>
+        <source>Asks ABS, airbag, body and the other modules for their codes, using the module list of your car's brand.</source>
+        <translation>Întreabă ABS, airbag, caroseria și celelalte module de codurile lor, folosind lista de module a mărcii mașinii tale.</translation>
+    </message>
+    <message>
+        <source>Readiness</source>
+        <translation>Pregătire ITP</translation>
+    </message>
+    <message>
+        <source>Which self-tests have finished since codes were last cleared, and the self-test results with their limits.</source>
+        <translation>Ce autoteste s-au încheiat de la ultima ștergere a codurilor și rezultatele autotestelor cu limitele lor.</translation>
+    </message>
+    <message>
+        <source>Freeze frame</source>
+        <translation>Instantaneu</translation>
+    </message>
+    <message>
+        <source>The sensor values saved when a fault was stored.</source>
+        <translation>Valorile senzorilor salvate când s-a memorat un defect.</translation>
+    </message>
+    <message>
+        <source>Live data</source>
+        <translation>Date în timp real</translation>
+    </message>
+    <message>
+        <source>Every value the car reports, with its recent history. Pin values to the Overview.</source>
+        <translation>Toate valorile raportate de mașină, cu istoricul recent. Fixează valori în Prezentare generală.</translation>
+    </message>
+    <message>
+        <source>Charts</source>
+        <translation>Grafice</translation>
+    </message>
+    <message>
+        <source>Several values over time, or two recordings compared.</source>
+        <translation>Mai multe valori în timp sau două înregistrări comparate.</translation>
+    </message>
+    <message>
+        <source>Trip</source>
+        <translation>Călătorie</translation>
+    </message>
+    <message>
+        <source>Distance, fuel and consumption. Calibrate the fuel estimate with two fill-ups.</source>
+        <translation>Distanță, combustibil și consum. Calibrează estimarea consumului cu două alimentări.</translation>
+    </message>
+    <message>
+        <source>Vehicle info</source>
+        <translation>Informații vehicul</translation>
+    </message>
+    <message>
+        <source>The VIN and what it tells, software versions and the modules that answer.</source>
+        <translation>Seria de șasiu (VIN) și ce spune ea, versiunile de software și modulele care răspund.</translation>
+    </message>
+    <message>
+        <source>Adapter log</source>
+        <translation>Jurnal adaptor</translation>
+    </message>
+    <message>
+        <source>What the adapter supports, how fast it answers, and every command and answer, for troubleshooting.</source>
+        <translation>Ce suportă adaptorul, cât de repede răspunde și fiecare comandă și răspuns, pentru depanare.</translation>
+    </message>
+    <message>
+        <source>Can't reach the adapter</source>
+        <translation>Adaptorul nu poate fi accesat</translation>
+    </message>
+    <message>
+        <source>Check that this computer is on the adapter's Wi-Fi; macOS sometimes jumps back to your usual network. On macOS 15 and later, allow Obdaryn under System Settings → Privacy &amp; Security → Local Network.</source>
+        <translation>Verifică dacă acest computer e conectat la rețeaua Wi-Fi a adaptorului; macOS revine uneori la rețeaua obișnuită. Pe macOS 15 și mai nou, permite Obdaryn în Setări sistem → Confidențialitate și securitate → Rețea locală.</translation>
+    </message>
+    <message>
+        <source>The adapter refuses</source>
+        <translation>Adaptorul refuză</translation>
+    </message>
+    <message>
+        <source>Another app is connected to it, often a phone app. Close it and connect again.</source>
+        <translation>O altă aplicație e conectată la el, adesea una de pe telefon. Închide-o și conectează-te din nou.</translation>
+    </message>
+    <message>
+        <source>The car isn't answering</source>
+        <translation>Mașina nu răspunde</translation>
+    </message>
+    <message>
+        <source>Turn the ignition ON. If you switched it off, Obdaryn picks up again by itself when it's back on.</source>
+        <translation>Pune contactul. Dacă l-ai luat, Obdaryn reia singur când e pus din nou.</translation>
+    </message>
+    <message>
+        <source>The connection drops</source>
+        <translation>Conexiunea se pierde</translation>
+    </message>
+    <message>
+        <source>The adapter may have fallen asleep or the Wi-Fi changed. Obdaryn reconnects by itself; if it gives up, turn the ignition off and on, then press Connect again.</source>
+        <translation>Adaptorul poate să fi adormit sau s-a schimbat rețeaua Wi-Fi. Obdaryn se reconectează singur; dacă renunță, oprește și pornește contactul, apoi apasă din nou Conectează.</translation>
+    </message>
+    <message>
+        <source>A module shows "Not found"</source>
+        <translation>Un modul apare „Negăsit”</translation>
+    </message>
+    <message>
+        <source>Your model may not have it, or uses another address. Addresses marked "unconfirmed" come from community lists.</source>
+        <translation>Modelul tău s-ar putea să nu îl aibă sau folosește altă adresă. Adresele marcate „neconfirmată” provin din liste ale comunității.</translation>
+    </message>
+    <message>
+        <source>Live data is slow</source>
+        <translation>Datele în timp real vin încet</translation>
+    </message>
+    <message>
+        <source>Cheap adapters and older cars answer slowly. Pin fewer values to the Overview; pinned and charted values refresh first.</source>
+        <translation>Adaptoarele ieftine și mașinile mai vechi răspund încet. Fixează mai puține valori în Prezentare generală; valorile fixate și cele din grafice se actualizează primele.</translation>
+    </message>
+    <message>
+        <source>A code came back</source>
+        <translation>Un cod a revenit</translation>
+    </message>
+    <message>
+        <source>The fault is still there. Clearing only turns the light off; the cause needs fixing.</source>
+        <translation>Defectul e tot acolo. Ștergerea doar stinge martorul; cauza trebuie remediată.</translation>
+    </message>
+    <message>
+        <source>Words you'll see</source>
+        <translation>Termeni pe care îi vei întâlni</translation>
+    </message>
+    <message>
+        <source>Check-engine light (MIL)</source>
+        <translation>Martor de motor (MIL)</translation>
+    </message>
+    <message>
+        <source>The engine warning lamp, turned on by the engine computer for faults that affect emissions.</source>
+        <translation>Lampa de avertizare a motorului, aprinsă de calculatorul motorului pentru defecte care afectează emisiile.</translation>
+    </message>
+    <message>
+        <source>Trouble code (DTC)</source>
+        <translation>Cod de eroare (DTC)</translation>
+    </message>
+    <message>
+        <source>A five-character code such as P0420: P powertrain, C chassis, B body, U network.</source>
+        <translation>Un cod de cinci caractere, de exemplu P0420: P grup motopropulsor, C șasiu, B caroserie, U rețea.</translation>
+    </message>
+    <message>
+        <source>Stored, pending, permanent</source>
+        <translation>Memorat, în așteptare, permanent</translation>
+    </message>
+    <message>
+        <source>Stored: confirmed. Pending: seen once, stored if it happens again. Permanent: can't be cleared by a tool, clears itself once fixed.</source>
+        <translation>Memorat: confirmat. În așteptare: văzut o dată, se memorează dacă reapare. Permanent: nu poate fi șters cu un aparat, dispare singur după reparație.</translation>
+    </message>
+    <message>
+        <source>A snapshot of sensor values taken when a code was stored.</source>
+        <translation>Un instantaneu al valorilor senzorilor, luat când s-a memorat un cod.</translation>
+    </message>
+    <message>
+        <source>Readiness monitors</source>
+        <translation>Monitoare de pregătire</translation>
+    </message>
+    <message>
+        <source>Self-tests of the emission systems. Incomplete monitors can fail an emissions inspection.</source>
+        <translation>Autotestele sistemelor de emisii. Monitoarele neîncheiate pot face o mașină să pice inspecția de emisii.</translation>
+    </message>
+    <message>
+        <source>Self-test results (Mode 06)</source>
+        <translation>Rezultatele autotestelor (Mode 06)</translation>
+    </message>
+    <message>
+        <source>The numbers behind the monitors, each with the limits the car judges it by.</source>
+        <translation>Valorile din spatele monitoarelor, fiecare cu limitele după care o judecă mașina.</translation>
+    </message>
+    <message>
+        <source>ITP</source>
+        <translation>ITP</translation>
+    </message>
+    <message>
+        <source>The periodic technical inspection in Romania, which includes an emissions check.</source>
+        <translation>Inspecția tehnică periodică din România, care include un test de emisii.</translation>
+    </message>
+    <message>
+        <source>VIN</source>
+        <translation>VIN</translation>
+    </message>
+    <message>
+        <source>The car's 17-character serial number.</source>
+        <translation>Seria de șasiu a mașinii, din 17 caractere.</translation>
+    </message>
+    <message>
+        <source>Obdaryn sends nothing online. It talks only to the adapter.</source>
+        <translation>Obdaryn nu trimite nimic pe internet. Comunică doar cu adaptorul.</translation>
+    </message>
+    <message>
+        <source>Recordings and reports stay on this computer and include the VIN. Check them before sharing.</source>
+        <translation>Înregistrările și rapoartele rămân pe acest computer și conțin seria de șasiu (VIN). Verifică-le înainte să le trimiți cuiva.</translation>
+    </message>
+    <message>
+        <source>A safety guard checks every command and refuses anything that could write to, code, reset or flash a module. The only change it allows is clearing trouble codes, after you confirm, with the engine off.</source>
+        <translation>Un filtru de siguranță verifică fiecare comandă și refuză orice ar putea scrie, coda, reseta sau reprograma un modul. Singura modificare permisă este ștergerea codurilor de eroare, după ce confirmi, cu motorul oprit.</translation>
+    </message>
+    <message>
+        <source>Code explanations are guidance from public sources. Confirm with a workshop before replacing parts.</source>
+        <translation>Explicațiile codurilor sunt orientative, din surse publice. Confirmă cu un service înainte să înlocuiești piese.</translation>
+    </message>
+    <message>
+        <source>Obdaryn %1 is free and open-source software (GPL-3.0). Source code and the full guide: github.com/liviu-hariton/obdaryn</source>
+        <translation>Obdaryn %1 este software liber și open-source (GPL-3.0). Codul sursă și ghidul complet: github.com/liviu-hariton/obdaryn</translation>
     </message>
 </context>
 <context>
@@ -1238,8 +1597,8 @@
         <translation>Rateuri, drumul curent sau ultimul</translation>
     </message>
     <message>
-        <source>Manufacturer test 0x%1</source>
-        <translation>Test al producătorului 0x%1</translation>
+        <source>Manufacturer-specific test</source>
+        <translation>Test specific producătorului</translation>
     </message>
 </context>
 <context>
@@ -2098,8 +2457,20 @@
         <translation>Citește rezultatele testelor</translation>
     </message>
     <message>
+        <source>Read results again</source>
+        <translation>Citește din nou rezultatele</translation>
+    </message>
+    <message>
         <source>Each monitor keeps the result of its last test next to the limits the car judges it by. A result close to its limit points to a part that's wearing out, before the check-engine light comes on. Results reset when codes are cleared.</source>
         <translation>Fiecare monitor păstrează rezultatul ultimului test, alături de limitele după care îl judecă mașina. Un rezultat aproape de limită arată o piesă care se uzează, înainte să se aprindă martorul de motor. Rezultatele se resetează la ștergerea codurilor.</translation>
+    </message>
+    <message>
+        <source>Outside the car's own limit: the part or system it checks needs attention.</source>
+        <translation>În afara limitei mașinii: piesa sau sistemul verificat are nevoie de atenție.</translation>
+    </message>
+    <message>
+        <source>Within the limit but near it: worth watching, especially before an inspection.</source>
+        <translation>În limită, dar aproape de ea: merită urmărit, mai ales înainte de o inspecție.</translation>
     </message>
 </context>
 <context>
@@ -2198,7 +2569,7 @@
     </message>
     <message>
         <source>Turn the ignition off and the car stops answering, as when you switch a real car off. Obdaryn waits and picks up again by itself when it's back on.</source>
-        <translation>Ia contactul și mașina nu mai răspunde, ca atunci când oprești o mașină reală. Obdaryn așteaptă și reia singur când contactul e pus din nou.</translation>
+        <translation>Oprește contactul și mașina nu mai răspunde, ca atunci când oprești o mașină reală. Obdaryn așteaptă și reia singur când contactul e pus din nou.</translation>
     </message>
     <message>
         <source>About</source>
@@ -2292,6 +2663,10 @@
         <translation>Oprește redarea</translation>
     </message>
     <message>
+        <source>Dismiss</source>
+        <translation>Închide</translation>
+    </message>
+    <message>
         <source>Diagnose</source>
         <translation>Diagnoză</translation>
     </message>
@@ -2362,6 +2737,10 @@
     <message>
         <source>Adapter log</source>
         <translation>Jurnal adaptor</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Ajutor</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -3316,12 +3695,12 @@
 <context>
     <name>obdaryn::TcpTransport</name>
     <message>
-        <source>No answer from %1. Is this computer connected to the adapter's Wi-Fi?</source>
-        <translation>Niciun răspuns de la %1. Este acest computer conectat la rețeaua Wi-Fi a adaptorului?</translation>
+        <source>No answer from %1.</source>
+        <translation>Niciun răspuns de la %1.</translation>
     </message>
     <message>
-        <source>The adapter refused the connection. Another app may already be connected to it.</source>
-        <translation>Adaptorul a refuzat conexiunea. Poate o altă aplicație este deja conectată la el.</translation>
+        <source>The adapter refused the connection.</source>
+        <translation>Adaptorul a refuzat conexiunea.</translation>
     </message>
     <message>
         <source>The adapter closed the connection.</source>

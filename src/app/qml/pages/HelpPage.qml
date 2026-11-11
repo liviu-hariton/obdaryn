@@ -15,6 +15,7 @@ Item {
     // Building blocks, so the content below reads like the text it is.
     component Para: Text {
         Layout.fillWidth: true
+        Layout.maximumWidth: 680 // about 75 characters a line
         color: Theme.text
         font.family: Theme.sans
         font.pixelSize: Theme.fontBody
@@ -96,6 +97,24 @@ Item {
         id: scroll
         anchors.fill: parent
         contentWidth: availableWidth
+        // Keyboard reading: arrows, Page Up / Down, Home / End.
+        focus: true
+        activeFocusOnTab: true
+        Keys.onPressed: e => {
+            const f = scroll.contentItem
+            const page = scroll.height * 0.9
+            const max = Math.max(0, content.height - scroll.height)
+            let y = f.contentY
+            if (e.key === Qt.Key_Down) y += 40
+            else if (e.key === Qt.Key_Up) y -= 40
+            else if (e.key === Qt.Key_PageDown || e.key === Qt.Key_Space) y += page
+            else if (e.key === Qt.Key_PageUp) y -= page
+            else if (e.key === Qt.Key_Home) y = 0
+            else if (e.key === Qt.Key_End) y = max
+            else return
+            f.contentY = Math.max(0, Math.min(max, y))
+            e.accepted = true
+        }
 
         ColumnLayout {
             id: content
@@ -205,7 +224,7 @@ Item {
                         { label: qsTr("Can't reach the adapter"), text: qsTr("Check that this computer is on the adapter's Wi-Fi; macOS sometimes jumps back to your usual network. On macOS 15 and later, allow Obdaryn under System Settings → Privacy & Security → Local Network.") },
                         { label: qsTr("The adapter refuses"), text: qsTr("Another app is connected to it, often a phone app. Close it and connect again.") },
                         { label: qsTr("The car isn't answering"), text: qsTr("Turn the ignition ON. If you switched it off, Obdaryn picks up again by itself when it's back on.") },
-                        { label: qsTr("The connection drops"), text: qsTr("The adapter may have fallen asleep or the Wi-Fi changed. Obdaryn reconnects by itself; if it gives up, press its button or turn the ignition off and on, then connect.") },
+                        { label: qsTr("The connection drops"), text: qsTr("The adapter may have fallen asleep or the Wi-Fi changed. Obdaryn reconnects by itself; if it gives up, turn the ignition off and on, then press Connect again.") },
                         { label: qsTr("A module shows \"Not found\""), text: qsTr("Your model may not have it, or uses another address. Addresses marked \"unconfirmed\" come from community lists.") },
                         { label: qsTr("Live data is slow"), text: qsTr("Cheap adapters and older cars answer slowly. Pin fewer values to the Overview; pinned and charted values refresh first.") },
                         { label: qsTr("A code came back"), text: qsTr("The fault is still there. Clearing only turns the light off; the cause needs fixing.") },

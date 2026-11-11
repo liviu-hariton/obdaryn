@@ -165,7 +165,7 @@ QString MonitorTest::testName() const
     default: break;
     }
     // Test IDs from 0x80 are defined by each manufacturer.
-    return QCoreApplication::translate("MonitorTests", "Manufacturer test 0x%1").arg(QString::number(tid, 16).toUpper().rightJustified(2, QLatin1Char('0')));
+    return t(QT_TRANSLATE_NOOP("MonitorTests", "Manufacturer-specific test"));
 }
 
 void MonitorTestCodec::scale(MonitorTest &test)

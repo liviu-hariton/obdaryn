@@ -13,7 +13,7 @@ TcpTransport::TcpTransport(QString host, quint16 port, QObject *parent)
     connect(&m_connectTimer, &QTimer::timeout, this, [this] {
         m_socket.abort();
         setLastFailure(Failure::Timeout);
-        emit failed(tr("No answer from %1. Is this computer connected to the adapter's Wi-Fi?")
+        emit failed(tr("No answer from %1.")
                         .arg(description()));
     });
 
@@ -92,7 +92,7 @@ void TcpTransport::onErrorOccurred(QAbstractSocket::SocketError error)
         break;
     case QAbstractSocket::SocketTimeoutError:
         setLastFailure(Failure::Timeout);
-        message = tr("No answer from %1. Is this computer connected to the adapter's Wi-Fi?").arg(description());
+        message = tr("No answer from %1.").arg(description());
         break;
     default:
         setLastFailure(Failure::Other);

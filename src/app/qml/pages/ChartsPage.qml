@@ -47,7 +47,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.topMargin: Theme.s5
                 title: qsTr("Charts")
-                subtitle: page.live ? qsTr("Live values, one chart each on the same time axis. Hover to read every value at one moment.")
+                subtitle: page.live ? qsTr("Live values, one chart each on the same time axis. Hover, or focus the charts and use the arrow keys, to read every value at one moment.")
                                     : qsTr("A whole recording, one chart per value. Add a second recording to compare two drives.")
                 Segmented {
                     model: [{ value: "live", label: qsTr("Live") }, { value: "recording", label: qsTr("Recordings") }]
@@ -83,49 +83,51 @@ Item {
                 Item { Layout.fillWidth: true }
             }
 
-            RowLayout {
+            Flow {
+                id: recordingRow
                 Layout.fillWidth: true
                 spacing: Theme.s3
                 visible: !page.live
-                // Recordings to chart: from the recordings folder, or any file.
-                readonly property var choices: App.recordings.map(r => ({ label: r.title + " · " + r.when, value: r.path }))
+                // Date and time first: two drives of the same car differ there.
+                readonly property var choices: App.recordings.map(r => ({ label: r.when + " · " + r.title, value: r.path }))
+                function labelFor(path, fallback) {
+                    const match = choices.find(c => c.value === path)
+                    return match ? match.label : fallback
+                }
                 Dropdown {
-                    id: pickA
-                    Layout.fillWidth: true
-                    Layout.minimumWidth: 140
-                    Layout.maximumWidth: 300
-                    model: [{ label: qsTr("Choose a recording…"), value: "" }].concat(parent.choices)
+                    width: 300
+                    model: [{ label: qsTr("Choose a recording…"), value: "" }].concat(recordingRow.choices)
                     value: ""
-                    displayText: page.charts.recordingA.length ? page.charts.recordingA : qsTr("Choose a recording…")
+                    displayText: page.charts.recordingA.length ? recordingRow.labelFor(page.charts.recordingAPath, page.charts.recordingA)
+                                                               : qsTr("Choose a recording…")
                     Accessible.name: qsTr("Recording to chart")
                     onPicked: v => { if (v.length) page.charts.loadRecording(0, v) }
                 }
                 Dropdown {
-                    id: pickB
-                    Layout.fillWidth: true
-                    Layout.minimumWidth: 140
-                    Layout.maximumWidth: 300
+                    width: 300
                     enabled: page.charts.recordingA.length > 0
-                    model: [{ label: qsTr("Compare with…"), value: "" }].concat(parent.choices)
+                    model: [{ label: qsTr("Compare with…"), value: "" }].concat(recordingRow.choices)
                     value: ""
-                    displayText: page.charts.recordingB.length ? page.charts.recordingB : qsTr("Compare with…")
+                    displayText: page.charts.recordingB.length ? recordingRow.labelFor(page.charts.recordingBPath, page.charts.recordingB)
+                                                               : qsTr("Compare with…")
                     Accessible.name: qsTr("Second recording to compare")
                     onPicked: v => page.charts.loadRecording(1, v)
                 }
                 AppButton {
                     variant: "quiet"
                     visible: page.comparing
+                    implicitHeight: 36
                     iconName: "x"
                     text: qsTr("Stop comparing")
                     onClicked: page.charts.loadRecording(1, "")
                 }
                 AppButton {
                     variant: "quiet"
+                    implicitHeight: 36
                     iconName: "folder-open"
                     text: qsTr("Open a file…")
                     onClicked: { openDialog.slot = page.charts.recordingA.length ? 1 : 0; openDialog.open() }
                 }
-                Item { Layout.fillWidth: true }
             }
 
             // ---- Presets and the values to chart ------------------------------------
@@ -217,7 +219,8 @@ Item {
                     font.pixelSize: Theme.fontSmall
                 }
                 Repeater {
-                    model: page.charts.available.filter(v => v.selected)
+                    // Same order as the strips below, so a chip removes the strip it names.
+                    model: page.charts.strips
                     delegate: AppButton {
                         required property var modelData
                         variant: "secondary"
@@ -257,8 +260,8 @@ Item {
                 Layout.topMargin: Theme.s5
                 iconName: "chart-line"
                 title: qsTr("Choose a recording")
-                message: App.recordings.length > 0 ? qsTr("Pick one above. Recordings are made with Record session in the sidebar while connected.")
-                                                   : qsTr("No recordings yet. While connected, press Record session in the sidebar, then chart the recording here.")
+                message: App.recordings.length > 0 ? qsTr("Pick one above. Recordings are made with Record in the sidebar while connected.")
+                                                   : qsTr("No recordings yet. While connected, press Record in the sidebar, then chart the recording here.")
             }
             EmptyState {
                 visible: page.charts.available.length > 0 && page.charts.strips.length === 0 && (page.ready || !page.live)
@@ -273,7 +276,8 @@ Item {
                 visible: page.comparing
                 spacing: Theme.s5
                 Repeater {
-                    model: [{ key: "A", name: page.charts.recordingA, dashed: false }, { key: "B", name: page.charts.recordingB, dashed: true }]
+                    model: [{ key: "A", name: recordingRow.labelFor(page.charts.recordingAPath, page.charts.recordingA), dashed: false },
+                            { key: "B", name: recordingRow.labelFor(page.charts.recordingBPath, page.charts.recordingB), dashed: true }]
                     delegate: Row {
                         required property var modelData
                         spacing: 8

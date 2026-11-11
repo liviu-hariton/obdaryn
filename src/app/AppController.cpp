@@ -732,6 +732,8 @@ QVariantList AppController::monitorTests() const
         hi += pad;
         auto pos = [lo, hi](double v) { return hi > lo ? qBound(0.0, (v - lo) / (hi - lo), 1.0) : 0.5; };
         tests << QVariantMap{{QStringLiteral("name"), t.testName()},
+                             // Shown faint next to manufacturer tests, to tell them apart.
+                             {QStringLiteral("tid"), t.tid >= 0x80 ? QStringLiteral("TID %1").arg(QString::number(t.tid, 16).toUpper()) : QString()},
                              {QStringLiteral("value"), t.verdict == MonitorTest::Verdict::NotRun ? QString() : number(t.value, t.decimals) + unit},
                              {QStringLiteral("limits"), limits},
                              {QStringLiteral("verdict"), QLatin1String(verdictKey(t.verdict))},

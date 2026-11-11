@@ -49,6 +49,9 @@ class ChartModel : public QObject
     Q_PROPERTY(QVariantList presets READ presets NOTIFY presetsChanged)
     Q_PROPERTY(QString recordingA READ recordingA NOTIFY sourceChanged)
     Q_PROPERTY(QString recordingB READ recordingB NOTIFY sourceChanged)
+    /// File paths of the loaded recordings (to show their friendly names).
+    Q_PROPERTY(QString recordingAPath READ recordingAPath NOTIFY sourceChanged)
+    Q_PROPERTY(QString recordingBPath READ recordingBPath NOTIFY sourceChanged)
     Q_PROPERTY(int maxSignals READ maxSignals CONSTANT)
 
 public:
@@ -70,6 +73,8 @@ public:
     QVariantList presets() const;
     QString recordingA() const { return m_nameA; }
     QString recordingB() const { return m_nameB; }
+    QString recordingAPath() const { return m_pathA; }
+    QString recordingBPath() const { return m_pathB; }
 
     Q_INVOKABLE void toggleSignal(int pid);
     Q_INVOKABLE void applyPreset(const QString &name);
@@ -126,6 +131,7 @@ private:
     QHash<quint8, SignalSeries> m_a, m_b; ///< recordings, time from their start
     qint64 m_durationA = 0, m_durationB = 0;
     QString m_nameA, m_nameB;
+    QString m_pathA, m_pathB;
 
     QVariantList m_strips;
     QVariantList m_timeTicks;

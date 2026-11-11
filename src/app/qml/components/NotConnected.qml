@@ -11,7 +11,7 @@ EmptyState {
     // not the same as never having connected.
     readonly property bool reconnecting: App.connectionState === App.Reconnecting
     readonly property bool carSilent: App.connectionState === App.NoVehicle
-    iconName: reconnecting ? "refresh-cw" : "plug-zap"
+    iconName: reconnecting ? "refresh-cw" : carSilent ? "car-front" : "plug-zap"
     title: reconnecting ? qsTr("Reconnecting to the adapter…")
          : carSilent ? qsTr("The car isn't answering")
          : qsTr("Connect to a car to see this")

@@ -329,6 +329,7 @@ void ChartModel::loadRecording(int slot, const QString &pathOrUrl)
         m_b.clear();
         m_durationB = 0;
         m_nameB.clear();
+        m_pathB.clear();
         emit sourceChanged();
         emit selectionChanged();
         rebuild();
@@ -349,10 +350,12 @@ void ChartModel::loadRecording(int slot, const QString &pathOrUrl)
         m_b = std::move(series);
         m_durationB = rec.durationMs;
         m_nameB = QFileInfo(path).completeBaseName();
+        m_pathB = QFileInfo(path).absoluteFilePath();
     } else {
         m_a = std::move(series);
         m_durationA = rec.durationMs;
         m_nameA = QFileInfo(path).completeBaseName();
+        m_pathA = QFileInfo(path).absoluteFilePath();
     }
     m_source = QStringLiteral("recording");
     m_refresh.stop();

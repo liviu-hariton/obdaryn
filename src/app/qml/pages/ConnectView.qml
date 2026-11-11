@@ -189,6 +189,7 @@ Item {
                         Text {
                             Layout.fillWidth: true
                             text: view.state === App.NoVehicle ? qsTr("The car isn't answering")
+                                : view.state === App.Failed && App.connectionHint === "refused" ? qsTr("The adapter is busy")
                                 : view.state === App.Failed ? qsTr("Couldn't reach the adapter")
                                 : App.statusMessage
                             color: Theme.text
@@ -301,7 +302,7 @@ Item {
                 Layout.topMargin: -Theme.s3
                 text: App.recordings.length > 0
                       ? qsTr("A replay answers exactly like the car did, so every screen works without it. Codes can't be cleared in a replay.")
-                      : qsTr("Nothing recorded yet. While connected, press Record session in the sidebar: Obdaryn saves everything the car says, and you can replay it here without the car.")
+                      : qsTr("Nothing recorded yet. While connected, press Record in the sidebar: Obdaryn saves everything the car says, and you can replay it here without the car.")
                 color: Theme.textMuted
                 font.family: Theme.sans
                 font.pixelSize: Theme.fontBody

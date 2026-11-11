@@ -38,7 +38,8 @@ Obdaryn reads everything a car will tell an OBD-II scan tool without paying for 
 - **Trouble-code explanations.** Generic codes come from obdex (CC0, English). Manufacturer codes come from Obdaryn brand packs written from public sources and linked per code (Hyundai/Kia first, English and Romanian). Explanations are always labelled as guidance.
 - **Languages.** English (default) and Romanian, switchable at runtime.
 - **Clearing has side effects.** It resets readiness monitors, erases freeze frames and does not remove permanent codes. The UI must say this before the user confirms.
-- **Undecided.** Imperial units, cloud features, accounts. None of these are planned.
+- **Units.** Metric, UK (mph, mpg, °C, psi) or US (mph, mpg, °F, psi) for display; everything is stored in metric and exports stay metric.
+- **Not planned.** Cloud features and accounts. Obdaryn sends nothing online.
 
 ## Brand Commitments
 

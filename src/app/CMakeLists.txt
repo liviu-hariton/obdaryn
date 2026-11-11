@@ -4,9 +4,15 @@
 
 find_package(Qt6 REQUIRED COMPONENTS Svg)
 
+# The app icon (macOS bundle). Made from macos/icon-1024.png:
+#   sips + iconutil, see docs/RELEASE.md.
+set(OBDARYN_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/macos/Obdaryn.icns")
+set_source_files_properties(${OBDARYN_APP_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
 qt_add_executable(obdaryn
     main.cpp
     IconProvider.h IconProvider.cpp
+    ${OBDARYN_APP_ICON}
 )
 set_target_properties(obdaryn PROPERTIES
     OUTPUT_NAME "Obdaryn"
@@ -16,6 +22,7 @@ set_target_properties(obdaryn PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
     MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
     MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/macos/Info.plist.in"
+    MACOSX_BUNDLE_ICON_FILE "Obdaryn.icns"
     WIN32_EXECUTABLE TRUE
 )
 target_compile_definitions(obdaryn PRIVATE OBDARYN_VERSION="${PROJECT_VERSION}")

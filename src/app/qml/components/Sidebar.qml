@@ -79,7 +79,9 @@ Rectangle {
                         // Blue for a replay: talking, but not to a car.
                         color: sidebar.ready ? (App.replayMode ? Theme.blue : Theme.green)
                              : sidebar.busy ? Theme.amber
-                             : App.connectionState === App.NoVehicle || App.connectionState === App.Failed ? Theme.red
+                             // Waiting for the car is not a fault: amber, like reconnecting.
+                             : App.connectionState === App.NoVehicle ? Theme.amber
+                             : App.connectionState === App.Failed ? Theme.red
                              : Theme.unlit
                     }
                     Text {
@@ -197,7 +199,9 @@ Rectangle {
                     implicitHeight: 28
                     variant: "secondary"
                     iconName: "unplug"
-                    text: App.replayMode ? qsTr("Stop replay") : qsTr("Disconnect")
+                    text: App.replayMode ? qsTr("Stop replay")
+                        : App.connectionState === App.Failed ? qsTr("Dismiss") // nothing to disconnect from
+                        : qsTr("Disconnect")
                     onClicked: App.disconnectAdapter()
                 }
             }
