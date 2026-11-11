@@ -26,6 +26,10 @@ set_target_properties(obdaryn PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 target_compile_definitions(obdaryn PRIVATE OBDARYN_VERSION="${PROJECT_VERSION}")
+# The year of the build, for the copyright line ("2026–2027"). CMake honours
+# SOURCE_DATE_EPOCH here, so reproducible builds stay reproducible.
+string(TIMESTAMP OBDARYN_BUILD_YEAR "%Y" UTC)
+target_compile_definitions(obdaryn PRIVATE OBDARYN_BUILD_YEAR=${OBDARYN_BUILD_YEAR})
 target_include_directories(obdaryn PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 obdaryn_set_warnings(obdaryn)
 

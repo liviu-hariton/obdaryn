@@ -46,4 +46,10 @@ hdiutil create -volname "Obdaryn $VERSION" -srcfolder "$STAGE" -ov -format UDZO 
 mv "$STAGE/Obdaryn.app" "$DIST/"
 rm -rf "$STAGE"
 
+# The About window computes its copyright years from the build year; the
+# README's line is plain text, so remind when it falls behind.
+LAST=$(grep -o "Copyright © [0-9–-]*" "$DIR/README.md" | grep -o "[0-9]\{4\}$")
+if [ -n "$LAST" ] && [ "$LAST" -lt "$(date +%Y)" ]; then
+    echo "Note: README.md says Copyright © ...$LAST; make it end in $(date +%Y)."
+fi
 echo "Done: $DIST/Obdaryn-$VERSION.dmg ($(du -h "$DIST/Obdaryn-$VERSION.dmg" | cut -f1))"

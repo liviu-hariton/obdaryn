@@ -177,6 +177,8 @@ class AppController : public QObject
     Q_PROPERTY(QString appVersion READ appVersion CONSTANT)
     /// "Qt 6.12.0 · macOS 27.0": for the About window and bug reports.
     Q_PROPERTY(QString buildInfo READ buildInfo CONSTANT)
+    /// The copyright years: "2026", or "2026–2028" for a build made in 2028.
+    Q_PROPERTY(QString copyrightYears READ copyrightYears CONSTANT)
     Q_PROPERTY(QString dtcAttribution READ dtcAttribution CONSTANT)
     Q_PROPERTY(int dtcDatabaseSize READ dtcDatabaseSize CONSTANT)
 
@@ -354,6 +356,7 @@ public:
     QString language() const { return m_language; }
     QString appVersion() const;
     QString buildInfo() const;
+    QString copyrightYears() const;
     QString dtcAttribution() const;
     int dtcDatabaseSize() const;
 

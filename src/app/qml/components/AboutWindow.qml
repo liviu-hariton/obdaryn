@@ -159,8 +159,8 @@ Window {
             Layout.fillWidth: true
             Layout.topMargin: Theme.s3
             horizontalAlignment: Text.AlignHCenter
-            //: %1 = year of first publication, %2 = the author's name
-            text: qsTr("© %1 %2 and contributors").arg("2026").arg("Liviu Hariton")
+            //: %1 = the copyright years ("2026" or "2026–2028"), %2 = the author's name
+            text: qsTr("© %1 %2 and contributors").arg(App.copyrightYears).arg("Liviu Hariton")
             color: Theme.textFaint
             font.family: Theme.sans
             font.pixelSize: Theme.fontSmall

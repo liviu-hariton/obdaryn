@@ -1872,6 +1872,14 @@ QString AppController::appVersion() const
     return QCoreApplication::applicationVersion();
 }
 
+QString AppController::copyrightYears() const
+{
+    constexpr int kFirstPublished = 2026;
+    constexpr int kBuilt = OBDARYN_BUILD_YEAR;
+    return kBuilt > kFirstPublished ? QStringLiteral("%1–%2").arg(kFirstPublished).arg(kBuilt)
+                                    : QString::number(kFirstPublished);
+}
+
 QString AppController::buildInfo() const
 {
     return QStringLiteral("Qt %1 · %2").arg(QString::fromLatin1(qVersion()), QSysInfo::prettyProductName());

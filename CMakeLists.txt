@@ -14,7 +14,7 @@
 cmake_minimum_required(VERSION 3.21)
 
 project(Obdaryn
-    VERSION 0.4.13
+    VERSION 0.4.14
     DESCRIPTION "Read-only OBD-II diagnostics for ELM327-compatible adapters"
     HOMEPAGE_URL "https://github.com/liviu-hariton/obdaryn"
     LANGUAGES CXX)
