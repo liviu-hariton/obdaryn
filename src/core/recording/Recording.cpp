@@ -82,6 +82,7 @@ bool Recording::load(const QString &path, QString *error)
     header = {};
     exchanges.clear();
     durationMs = 0;
+    double end = -1;
 
     bool first = true;
     while (!file.atEnd()) {
@@ -99,17 +100,25 @@ bool Recording::load(const QString &path, QString *error)
             continue;
         }
         if (o.contains(QStringLiteral("end"))) {
-            durationMs = qMax(durationMs, qint64(o.value(QStringLiteral("end")).toDouble()));
+            end = o.value(QStringLiteral("end")).toDouble();
             continue;
         }
         if (!o.contains(QStringLiteral("c")))
             continue; // a line cut short by a crash, or something newer we don't know
         const RecordedExchange e = exchangeFromJson(o);
+        if (e.t < 0 || e.t > kMaxDurationMs)
+            continue; // impossible time: damaged or crafted
         durationMs = qMax(durationMs, e.t);
         exchanges << e;
     }
     if (first)
         return fail(tr("The file is empty."));
+
+    // The "end" line marks when Record was stopped, shortly after the last
+    // exchange. Trust it only within a minute of that: a crafted file could
+    // otherwise claim a duration of millennia.
+    if (end >= durationMs && end <= durationMs + 60000)
+        durationMs = qint64(end);
 
     // A recording started before the adapter finished connecting (the probe
     // does that) has no protocol in its header; the handshake itself is in the
@@ -161,6 +170,8 @@ bool Recording::peek(const QString &path, QJsonObject *header, qint64 *durationM
             }
         }
     }
+    if (durationMs && (*durationMs < 0 || *durationMs > kMaxDurationMs))
+        *durationMs = 0; // damaged or crafted: show no length rather than an absurd one
     return true;
 }
 

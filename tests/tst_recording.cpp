@@ -30,6 +30,7 @@ private slots:
     void neverReplaysAClear();
     void exportsCsv();
     void rejectsOtherFiles();
+    void ignoresImpossibleTimes();
 
 private:
     static bool waitReady(ObdClient &client);
@@ -234,6 +235,26 @@ void TestRecording::rejectsOtherFiles()
     QVERIFY(!r.load(path, &error));
     QVERIFY(!error.isEmpty());
     QVERIFY(!r.load(m_dir.filePath(QStringLiteral("missing.obdrec")), &error));
+}
+
+void TestRecording::ignoresImpossibleTimes()
+{
+    // A crafted file claiming an absurd duration must not make anything loop over it.
+    const QString path = m_dir.filePath(QStringLiteral("crafted.obdrec"));
+    QFile f(path);
+    QVERIFY(f.open(QIODevice::WriteOnly));
+    f.write("{\"format\":\"obdaryn-recording\",\"version\":1,\"protocol\":6,\"headers\":true}\n"
+            "{\"t\":1000,\"c\":\"010C\",\"r\":\"7E8 04 41 0C 1A F8\\r\",\"ms\":20}\n"
+            "{\"t\":1e18,\"c\":\"010D\",\"r\":\"7E8 03 41 0D 32\\r\",\"ms\":20}\n"
+            "{\"end\":9e18}\n");
+    f.close();
+    Recording r;
+    QVERIFY(r.load(path));
+    QCOMPARE(r.exchanges.size(), 1);  // the impossible time is dropped
+    QCOMPARE(r.durationMs, 1000);     // and the absurd end ignored
+    QJsonObject header;
+    qint64 peeked = 0;
+    QVERIFY(Recording::peek(path, &header, &peeked));
 }
 
 QTEST_GUILESS_MAIN(TestRecording)

@@ -489,7 +489,11 @@ QString ChartModel::toCsv() const
             head << QStringLiteral("\"B: %1\"").arg(name);
     }
     QString csv = head.join(QLatin1Char(',')) + QLatin1Char('\n');
-    for (qint64 t = from; t <= to; t += 500) { // a regular half-second grid
+    // A regular half-second grid, as a bounded row count (never a loop over time
+    // values a file could inflate): 200,000 rows is over a day of data.
+    const qint64 rows = std::min<qint64>((to - from) / 500 + 1, 200000);
+    for (qint64 row = 0; row < rows; ++row) {
+        const qint64 t = from + row * 500;
         QStringList cells{QString::number((t - from) / 1000.0, 'f', 1)};
         for (quint8 pid : std::as_const(pids)) {
             const PidDefinition *def = PidTable::find(pid);

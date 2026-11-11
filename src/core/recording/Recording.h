@@ -64,6 +64,9 @@ public:
     static constexpr int kFormatVersion = 1;
     static constexpr const char *kFormatName = "obdaryn-recording";
     static constexpr const char *kSuffix = "obdrec";
+    /// Longest recording Obdaryn accepts. Times beyond it come from a damaged or
+    /// crafted file and are ignored, so nothing downstream loops over them.
+    static constexpr qint64 kMaxDurationMs = 7LL * 24 * 3600 * 1000;
 
     /// Loads a file; on failure returns false and explains why in *error.
     bool load(const QString &path, QString *error = nullptr);
