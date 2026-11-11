@@ -6,7 +6,7 @@ adaptive
 
 ## Stack
 
-Qt 6 + Qt Quick (QML) with a C++20 core, built with CMake. macOS (Apple Silicon) first; Windows, Android and iOS later from the same codebase. One Obdaryn design language across platforms, honoring each OS's native affordances (menu bar and shortcuts on desktop, safe areas and touch targets on mobile).
+Qt 6 + Qt Quick (QML) with a C++20 core, built with CMake. macOS first (14.4 and later, Apple Silicon and Intel, one universal installer); Windows, Android and iOS later from the same codebase. One Obdaryn design language across platforms, honoring each OS's native affordances (menu bar and shortcuts on desktop, safe areas and touch targets on mobile).
 
 ## Users
 

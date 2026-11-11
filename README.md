@@ -2,7 +2,7 @@
 
 **Free, open-source, read-only OBD-II diagnostics for your car.** It is a desktop app for ELM327-compatible adapters such as the Vgate iCar Pro Wi-Fi.
 
-- **Trouble codes in plain language.** Stored, pending and permanent codes from every OBD module, each with what it means, likely causes, symptoms, whether it matters for the inspection (ITP), and a rough repair cost.
+- **Trouble codes in plain language.** Stored, pending and permanent codes from every OBD module, each with what it means, likely causes, symptoms, whether it matters for the inspection (ITP), and a rough repair cost. The same explanations are on the web, one page per code: [obdaryn.eu/codes](https://obdaryn.eu/codes/).
 - **Brand code explanations.** Manufacturer-specific codes are explained per brand, with links to the public sources, in English and Romanian:
   - Hyundai/Kia (159 codes)
   - Toyota/Lexus (96)
@@ -47,7 +47,7 @@ Status: v0.4, in active development and not yet tested on a real car. macOS firs
 
 ## Install (macOS)
 
-Download the installer from **[obdaryn.eu](https://obdaryn.eu/download/)** or the [GitHub releases](https://github.com/liviu-hariton/obdaryn/releases). Open it and drag Obdaryn to Applications. The app isn't notarized, so the first time open it, then go to **System Settings → Privacy & Security** and click **Open Anyway**. It runs on macOS 14.4 (Sonoma) or later, on Apple Silicon and Intel. To build the installer yourself: `tools/make-release.sh` (it needs the official Qt). Details in [docs/RELEASE.md](docs/RELEASE.md).
+Download the installer from **[obdaryn.eu](https://obdaryn.eu/download/)** or the [GitHub releases](https://github.com/liviu-hariton/obdaryn/releases). Open it and drag Obdaryn to Applications. The app isn't notarized, so the first time open it, then go to **System Settings → Privacy & Security** and click **Open Anyway**. It runs on macOS 14.4 (Sonoma) or later, on Apple Silicon and Intel: one installer of about 58 MB for both. To build the installer yourself: `tools/make-release.sh` (it needs the official Qt, not Homebrew's). Details in [docs/RELEASE.md](docs/RELEASE.md).
 
 ## Build (macOS)
 
@@ -71,9 +71,9 @@ In CLion, open the folder and add `-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt` to 
 | `src/app` | Qt Quick desktop app: controllers, models and QML screens |
 | `tests` | Qt Test unit tests that run against recorded replies and the built-in simulator |
 | `i18n` | Translations (`obdaryn_ro.ts`) |
-| `tools` | Data import scripts (obdex DTC database) |
+| `tools` | Data import scripts (obdex codes, OBDb values, Romanian code texts), the first real-car test (`first-contact.sh`), and the release and website scripts (`make-release.sh`, `publish-release.sh`, `deploy-site.sh`, `capture-site-images.sh`) |
 | `docs` | Architecture, car-interaction guide, roadmap, user guide (English and Romanian) |
-| `site` | The obdaryn.eu website (Astro, static); see [docs/RELEASE.md](docs/RELEASE.md#the-website) |
+| `site` | The obdaryn.eu website (Astro, static), built from the app's own data, including a page per trouble code; see [docs/RELEASE.md](docs/RELEASE.md#the-website) |
 
 Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) before contributing. Every source file is commented for newcomers.
 

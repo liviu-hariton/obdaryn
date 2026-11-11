@@ -69,7 +69,11 @@
 - **App** (`src/app`):
   - **QML singleton.** `AppController` is exposed to QML as the `App` singleton and sequences the first scan: vehicle info → readiness → codes → freeze frame → supported PIDs.
   - **Polling.** After the scan, live data is polled continuously. Pinned values refresh on every cycle; the rest refresh in rotation.
-- **Website** (`site/`): the obdaryn.eu presentation site, a static Astro build that is separate from the app. At build time it reads the app's version, its code databases, its brand data and the user guide straight from this repo, so it can't drift from the app. See [RELEASE.md](RELEASE.md#the-website).
+- **Release** (`tools/make-release.sh`): a Release build against the official Qt 6.12 binaries, as one universal binary (arm64 + x86_64) for macOS 14.4 and later, made self-contained by `macdeployqt`. The script then leaves out the Qt modules the app never loads, by name, and checks the result before signing: no binary may link to a library that was left out, every binary must run on macOS 14.4, and every screen must open from the packaged app. See [RELEASE.md](RELEASE.md).
+- **Website** (`site/`): the obdaryn.eu presentation site, a static Astro build that is separate from the app. At build time it reads the app's version, its code databases, its brand data and the user guide straight from this repo, so it can't drift from the app.
+  - `site/src/data/allCodes.ts` turns `dtc_generic*.json` and the brand packs into one page per code (`/codes/P0420/`, `/codes/<brand>/<code>/`), in Romanian only where the whole explanation is translated; `codeRoutes.ts` holds the static paths, and `/codes/lookup.json` is the list the "Look up a code" box checks against.
+  - Download buttons open `/download/started/`, which starts the installer from the GitHub release named by the version and shows macOS's first-open step.
+  - See [RELEASE.md](RELEASE.md#the-website).
 
 ## Conventions
 

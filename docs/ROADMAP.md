@@ -2,7 +2,7 @@
 
 The ordering follows what DIY owners most often say existing apps lack, or keep behind paywalls (see the research notes below). Every item stays within the read-only safety rules described in [CAR_INTERACTION.md](CAR_INTERACTION.md).
 
-## v0.1 — generic OBD-II on the desktop (this release)
+## v0.1 — generic OBD-II on the desktop
 
 - [x] Wi-Fi ELM327 connection (Vgate iCar Pro), ELM327 initialization and protocol auto-detection
 - [x] Safety guard: an allowlist of read services, clearing only on confirmation, unit-tested
@@ -55,6 +55,17 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [ ] Tune `AT ST` from measured answer times (needs the real adapter's numbers first)
 - [x] **Auto-reconnect.** A dropped link or a sleeping adapter (three timeouts in a row) is reconnected with backoff (2, 4, 8, 15, then 30 s, eight tries). A car that goes silent (ignition off) puts Obdaryn in "car not answering", and it picks up again by itself when the car answers. The demo car has an ignition switch to try it.
 - [x] **Connection help:** failures are classified; "unreachable" and "timeout" explain the Wi-Fi and macOS Local Network permission steps, with a button that opens the right System Settings pane; "refused" points to another app holding the adapter.
+
+## Distribution and website
+
+- [x] **Installer for macOS 14.4 and later,** one universal app for Apple Silicon and Intel, built with the official Qt binaries (`tools/make-release.sh`). Qt modules the app never loads are left out (77 MB → 56 MB), guarded by a link check and an "every screen opens" check.
+- [x] **Releases on GitHub** with the installer and its SHA-256 (`tools/publish-release.sh`).
+- [x] **obdaryn.eu,** in English and Romanian, built from the app's data: the home page explains a demo code the way the app does, a page for every trouble code the app explains (9,533 generic and 461 manufacturer explanations), supported cars, the user guide, a download page that walks through macOS's first-open step, and no cookies or trackers (`tools/deploy-site.sh`).
+- [ ] Sign with an Apple Developer ID and notarize, so macOS opens the app without the Open Anyway step (needs a paid Apple Developer account).
+- [ ] Run the installer on a real Intel Mac (so far only under Rosetta).
+- [ ] macOS older than 14.4: needs an older Qt, or Qt built from source.
+- [ ] Romanian explanations for more generic codes, which also gives them Romanian pages on the site (132 today).
+- [ ] Replace the `Qt.labs.platform` menu bar with Qt Quick's native menus, which would drop QtWidgets (12 MB) from the installer.
 
 ## Later
 
