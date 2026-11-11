@@ -1,0 +1,245 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// The home page, in either language. It opens on a trouble code explained (the
+// moment people search for), then answers the four questions owners bring, shows
+// the read-only guard, what's needed, the cars, the honest status, and closes on
+// the download.
+import Base from "../layouts/Base.astro";
+import CodeExplainer from "./CodeExplainer.astro";
+import DownloadButton from "./DownloadButton.astro";
+import Icon from "./Icon.astro";
+import Screen from "./Screen.astro";
+import { brands, brandCodeTotal, generic, modelCount } from "../data/cars";
+import { genericCount } from "../data/codes";
+import { repoUrl, version } from "../data/site";
+import { num, routes, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const h = s.home;
+const r = routes[lang];
+const docs = `${repoUrl}/blob/main/docs/`;
+const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce((n, l) => n + l.length, 0);
+---
+<Base lang={lang} page="home" title={h.title} description={h.description}>
+  <section class="hero wrap">
+    <div class="offer">
+      <h1>{h.headline}</h1>
+      <p class="lede">{h.lede}</p>
+      <DownloadButton lang={lang} />
+      <p class="version">{s.versionLine(version)}</p>
+      <ul class="facts">
+        <li><Icon name="shield-check" class="green" />{h.facts[0]}</li>
+        <li><Icon name="check" class="faint" />{h.facts[1]}</li>
+        <li><Icon name="check" class="faint" />{h.facts[2]}</li>
+      </ul>
+    </div>
+    <div class="thesis">
+      <CodeExplainer lang={lang} />
+    </div>
+  </section>
+
+  <section class="section wrap" id="features" aria-labelledby="features-title">
+    <h2 class="section-title" id="features-title">{h.ladderTitle}</h2>
+    <p class="section-lede">{h.ladderLede}</p>
+
+    <div class="job job-right job-codes">
+      <div class="job-text">
+        <h3>{h.jobs.light.q}</h3>
+        <p>{h.jobs.light.a(num(lang, genericCount), num(lang, brandCodeTotal))}</p>
+      </div>
+      <Screen name="codes" lang={lang} alt={h.jobs.light.alt} sizes="(min-width: 1100px) 600px, 100vw" />
+    </div>
+
+    <div class="job job-left">
+      <Screen name="readiness" lang={lang} alt={h.jobs.itp.alt} />
+      <div class="job-text">
+        <h3>{h.jobs.itp.q}</h3>
+        <p>{h.jobs.itp.a}</p>
+      </div>
+    </div>
+
+    <div class="job job-wide">
+      <div class="job-text">
+        <h3>{h.jobs.used.q}</h3>
+        <p>{h.jobs.used.a}</p>
+      </div>
+      <Screen name="modules" lang={lang} alt={h.jobs.used.alt} sizes="(min-width: 1440px) 1312px, 100vw" />
+    </div>
+
+    <div class="job job-wide">
+      <div class="job-text">
+        <h3>{h.jobs.live.q}</h3>
+        <p>{h.jobs.live.a(modelCount)}</p>
+      </div>
+      <Screen name="charts" lang={lang} alt={h.jobs.live.alt} sizes="(min-width: 1440px) 1312px, 100vw" />
+    </div>
+  </section>
+
+  <section class="section guard-band" aria-labelledby="guard-title">
+    <div class="wrap">
+      <div class="guard-head">
+        <Icon name="shield-check" size={40} class="green" />
+        <h2 class="section-title" id="guard-title">{h.guardTitle}</h2>
+      </div>
+      <p class="section-lede">{h.guardLede}</p>
+      <div class="ledger">
+        <div>
+          <h3><Icon name="x" class="red" />{h.refused}</h3>
+          <ul>{h.refusedRows.map(([what, hex]) => <li><span>{what}</span><code>{hex}</code></li>)}</ul>
+        </div>
+        <div>
+          <h3><Icon name="check" class="green" />{h.allowed}</h3>
+          <ul>{h.allowedRows.map(([what, hex]) => <li><span>{what}</span><code>{hex}</code></li>)}</ul>
+          <p class="guard-link"><a href={docs + "CAR_INTERACTION.md"}>{h.guardLink}</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap need" aria-labelledby="need-title">
+    <div>
+      <h2 class="section-title" id="need-title">{h.needTitle}</h2>
+      <dl class="rows needs">
+        {h.needs.map(([what, detail]) => <div class="row"><dt>{what}</dt><dd>{detail}</dd></div>)}
+      </dl>
+    </div>
+    <div>
+      <h3 class="steps-title">{h.stepsTitle}</h3>
+      <ol class="steps">{h.steps.map((x) => <li>{x}</li>)}</ol>
+      <p class="no-car">{h.noCar}</p>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="cars-title">
+    <h2 class="section-title" id="cars-title">{h.carsTitle}</h2>
+    <p class="section-lede">{h.carsLede}</p>
+    <ul class="brands">
+      {brands.map((b) => (
+        <li>
+          <span class="brand-name">{b.label}</span>
+          <span class="brand-facts">
+            <span>{s.brandFacts.modules(b.modules, b.modulesConfirmed)}</span>
+            {b.codes > 0 && <span>{s.brandFacts.codes(b.codes)}</span>}
+            {modelsOf(b) > 0 && <span>{s.brandFacts.values(modelsOf(b))}</span>}
+          </span>
+        </li>
+      ))}
+      <li>
+        <span class="brand-name">{lang === "ro" ? "Orice altă marcă" : "Any other brand"}</span>
+        <span class="brand-facts"><span>{s.carsPage.other(generic.modules)}</span></span>
+      </li>
+    </ul>
+    <p class="more"><a href={r.cars}>{h.carsLink}<Icon name="arrow-right" size={16} /></a></p>
+  </section>
+
+  <section class="section wrap status" aria-labelledby="status-title">
+    <h2 id="status-title"><span class="dot amber-dot"></span>{h.statusTitle}</h2>
+    <p>{h.statusText} <a href={docs + "ROADMAP.md"}>{h.statusLink}</a></p>
+  </section>
+
+  <section class="section wrap close" aria-labelledby="close-title">
+    <h2 id="close-title">{h.closeTitle}</h2>
+    <p>{h.closeText}</p>
+    <div class="close-actions">
+      <DownloadButton lang={lang} />
+      <a class="btn btn-secondary" href={repoUrl}>{h.source}</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  :global(.green) { color: var(--green); }
+  :global(.red) { color: var(--red); }
+  :global(.faint) { color: var(--text-faint); }
+
+  /* First viewport: the offer on the right, the explained code on the left. */
+  .hero {
+    display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: var(--s6) clamp(48px, 6vw, 96px);
+    padding-top: clamp(40px, 6vw, 72px); align-items: start;
+  }
+  .offer { grid-column: 2; grid-row: 1; padding-top: var(--s2); }
+  .thesis { grid-column: 1; grid-row: 1; min-width: 0; }
+  h1 { font-size: clamp(36px, 3.4vw, 46px); line-height: 1.08; font-weight: 700; letter-spacing: -0.03em; }
+  .lede { color: var(--text-muted); font-size: 18px; margin: var(--s5) 0 var(--s6); }
+  .version { font-size: 13px; color: var(--text-faint); margin-top: var(--s3); font-variant-numeric: tabular-nums; }
+  .facts { list-style: none; padding: 0; margin-top: var(--s6); border-top: 1px solid var(--hairline); }
+  .facts li { display: flex; gap: var(--s3); align-items: center; padding: 14px 0; border-bottom: 1px solid var(--hairline); font-size: 15px; }
+  /* Narrow screens keep the thesis first: lamp, code and title, then the offer and
+     Download, then the explanation rows. The explainer's parts become items of the
+     hero column (display: contents) so the offer can sit between them. */
+  @media (max-width: 1000px) {
+    .hero { display: flex; flex-direction: column; gap: 0; }
+    .hero { padding-top: var(--s5); }
+    .offer { max-width: 560px; order: 6; margin-top: var(--s5); padding-top: 0; }
+    .lede { font-size: 17px; margin: var(--s3) 0 var(--s5); }
+    .thesis, .thesis :global(.explainer), .thesis :global(.panels), .thesis :global(.panel[data-active]) { display: contents; }
+    .thesis :global(.panel:not([data-active])) { display: none; }
+    .thesis :global(.cluster) { order: 1; }
+    .thesis :global(.switcher) { order: 2; }
+    .thesis :global(.code) { order: 3; }
+    .thesis :global(.title) { order: 4; }
+    .thesis :global(.chips) { order: 5; margin-bottom: 0; }
+    .thesis :global(.rows) { order: 7; margin-top: var(--s7); }
+    .thesis :global(.source) { order: 8; }
+  }
+
+  /* The four questions: text beside a screenshot, varied so the page has a pace. */
+  .job { display: grid; gap: var(--s6) clamp(32px, 5vw, 80px); align-items: center; margin-top: var(--s8); }
+  .job-right { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); }
+  .job-left { grid-template-columns: minmax(0, 8fr) minmax(0, 3fr); }
+  .job-wide { grid-template-columns: 1fr; }
+  .job-codes { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+  .job-wide .job-text { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s4) clamp(32px, 5vw, 80px); align-items: baseline; }
+  .job h3 { font-size: clamp(24px, 2.4vw, 32px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
+  .job p { color: var(--text-muted); font-size: 17px; margin-top: var(--s3); max-width: 60ch; }
+  .job-wide .job-text p { margin-top: 0; }
+  @media (max-width: 900px) {
+    .job-right, .job-left, .job-codes, .job-wide .job-text { grid-template-columns: 1fr; }
+    .job-left .job-text { order: -1; }
+  }
+
+  /* The guard: a quieter band in the sidebar tone, a two-column ledger. */
+  .guard-band { background: var(--sidebar); border-block: 1px solid var(--hairline); margin-top: var(--s9); padding-block: var(--s8); }
+  .guard-head { display: flex; gap: var(--s4); align-items: center; }
+  .ledger { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5) var(--s7); margin-top: var(--s7); }
+  .ledger h3 { display: flex; align-items: center; gap: var(--s2); font-size: 16px; font-weight: 600; padding-bottom: var(--s3); border-bottom: 1px solid var(--hairline); }
+  .ledger ul { list-style: none; padding: 0; }
+  .ledger li { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: var(--s4); row-gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--hairline); font-size: 15px; }
+  .ledger li span { flex: 1 1 18ch; }
+  .ledger code { color: var(--text-muted); margin-left: auto; white-space: nowrap; font-size: 13px; padding-top: 2px; }
+  .guard-link { margin-top: var(--s4); font-size: 15px; }
+  @media (max-width: 800px) { .ledger { grid-template-columns: 1fr; } .ledger li { flex-wrap: wrap; } }
+
+  /* What you need. */
+  .need { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7) clamp(32px, 6vw, 96px); }
+  .needs { margin-top: var(--s6); }
+  .needs dt { color: var(--text); font-weight: 600; }
+  .needs dd { color: var(--text-muted); margin: 0; }
+  .steps-title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-top: 12px; }
+  .steps { list-style: none; counter-reset: step; padding: 0; margin-top: var(--s5); border-top: 1px solid var(--hairline); }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 36px 1fr; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+  .steps li::before { content: counter(step); font-weight: 600; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  .no-car { color: var(--text-muted); margin-top: var(--s4); font-size: 15px; }
+  @media (max-width: 860px) { .need { grid-template-columns: 1fr; } }
+
+  /* Brands, like the app's Help → Supported cars. */
+  .brands { list-style: none; padding: 0; margin-top: var(--s6); border-top: 1px solid var(--hairline); }
+  .brands li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s2) clamp(32px, 5vw, 80px); padding: 16px 0; border-bottom: 1px solid var(--hairline); }
+  .brand-name { font-weight: 600; }
+  .brand-facts { display: flex; flex-wrap: wrap; gap: 2px var(--s5); color: var(--text-muted); font-size: 15px; }
+  .more { margin-top: var(--s4); }
+  .more a { display: inline-flex; gap: 6px; align-items: center; font-weight: 500; }
+  @media (max-width: 700px) { .brands li { grid-template-columns: 1fr; } }
+
+  /* Honest status, then the close. */
+  .status h2 { display: flex; align-items: center; gap: var(--s3); font-size: 20px; font-weight: 600; }
+  .amber-dot { width: 9px; height: 9px; background: var(--amber); }
+  .status p { color: var(--text-muted); max-width: 70ch; margin-top: var(--s3); }
+  .close { text-align: left; border-top: 1px solid var(--hairline); padding-top: var(--s8); margin-top: var(--s9); }
+  .close h2 { font-size: clamp(36px, 5.2vw, 72px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; max-width: 16ch; }
+  .close p { color: var(--text-muted); font-size: 18px; max-width: 58ch; margin-top: var(--s4); }
+  .close-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
+</style>

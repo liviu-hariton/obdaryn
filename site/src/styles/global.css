@@ -1,0 +1,172 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * obdaryn.eu: the app's design language (DESIGN.md) on the web. Graphite and cool
+ * paper grounds following the system theme, hairlines instead of boxes, Inter for
+ * everything, JetBrains Mono only for codes and hex, and the telltale colours only
+ * for state. Fonts are served from this site (no third-party requests).
+ */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+:root {
+  color-scheme: light dark;
+  --window: #F7F8FA;
+  --sidebar: #EEF0F3;
+  --surface: #FFFFFF;
+  --hover: #E8EBEF;
+  --selected: #E1E6EE;
+  --hairline: #DCE0E6;
+  --field-border: #C9CFD8;
+  --text: #15181C;
+  --text-muted: #545C67;
+  --text-faint: #646C77;
+  --red: #C8372D;
+  --amber: #B26700;
+  --green: #1E8A50;
+  --blue: #2F6FE0;
+  --red-ink: #B3302A;
+  --amber-ink: #9A5800;
+  --green-ink: #17703F;
+  --blue-ink: #2860C4;
+  --blue-fill: #2F6FE0;
+  --blue-fill-hover: #2A68D8;
+  --blue-fill-press: #2961C3;
+  --on-fill: #FFFFFF;
+  --unlit: #B9C0CA;
+  --shadow: 0 1px 2px rgb(21 24 28 / 0.06), 0 8px 24px rgb(21 24 28 / 0.08);
+
+  --sans: "Inter Variable", Inter, system-ui, sans-serif;
+  --mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 72px; --s9: 112px;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --fast: 120ms;
+  --normal: 220ms;
+  --bulb: 1200ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1); /* exponential ease-out */
+  --gutter: clamp(16px, 4.5vw, 64px);
+  --page: 1312px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --window: #0F1114;
+    --sidebar: #14171B;
+    --surface: #171A1F;
+    --hover: #1D2127;
+    --selected: #232831;
+    --hairline: #262A31;
+    --field-border: #323843;
+    --text: #E8EAED;
+    --text-muted: #A3A9B2;
+    --text-faint: #7E858F;
+    --red: #F0564A;
+    --amber: #F2A93B;
+    --green: #3CBF7A;
+    --blue: #5B97F7;
+    --red-ink: #F0564A;
+    --amber-ink: #F2A93B;
+    --green-ink: #3CBF7A;
+    --blue-ink: #5B97F7;
+    --unlit: #3A3F47;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px rgb(0 0 0 / 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --fast: 0ms; --normal: 0ms; --bulb: 0ms; }
+  html { scroll-behavior: auto !important; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--window);
+  color: var(--text);
+  font: 400 16px/1.55 var(--sans);
+  font-feature-settings: "cv11" 1; /* Inter's single-storey a reads calmer at body size */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1 0 auto; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+::selection { background: var(--blue-fill); color: var(--on-fill); }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+a { color: var(--blue-ink); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+code, kbd, .mono { font-family: var(--mono); font-size: 0.92em; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+html { scrollbar-color: var(--field-border) transparent; }
+
+.wrap { width: 100%; max-width: calc(var(--page) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.skip { position: absolute; left: var(--s4); top: -64px; z-index: 10; background: var(--surface); padding: var(--s2) var(--s3); border-radius: var(--radius); }
+.skip:focus { top: var(--s3); }
+
+/* Buttons: the app's four variants, at web size. One primary per view. */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
+  height: 48px; padding: 0 22px; border-radius: var(--radius);
+  font: 600 16px/1 var(--sans); text-decoration: none; white-space: nowrap;
+  border: 1px solid transparent; cursor: pointer;
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn-primary { background: var(--blue-fill); color: var(--on-fill); }
+.btn-primary:hover { background: var(--blue-fill-hover); }
+.btn-primary:active { background: var(--blue-fill-press); }
+.btn-secondary { color: var(--text); border-color: var(--field-border); background: transparent; }
+.btn-secondary:hover { background: var(--hover); }
+.btn:hover { text-decoration: none; }
+
+/* Hairline label/value rows, the app's key/value list. */
+.rows { border-top: 1px solid var(--hairline); }
+.row {
+  display: grid; grid-template-columns: minmax(140px, 200px) 1fr; gap: var(--s2) var(--s4);
+  padding: 14px 0; border-bottom: 1px solid var(--hairline);
+}
+.row > :first-child { color: var(--text-muted); font-weight: 500; }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 2px; } }
+
+/* Chips: outlined pills with a state dot or an icon. */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 26px; padding: 2px 10px;
+  border: 1px solid var(--hairline); border-radius: 13px;
+  font-size: 13px; font-weight: 500; color: var(--text-muted); line-height: 1.3;
+}
+.chip svg { width: 14px; height: 14px; flex: none; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+
+/* Page-level type. */
+.section { padding-block: var(--s9) 0; }
+.section-title { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; font-weight: 700; letter-spacing: -0.025em; max-width: 22ch; }
+.section-lede { color: var(--text-muted); font-size: 18px; max-width: 62ch; margin-top: var(--s4); }
+.prose { max-width: 70ch; }
+.prose h2 { font-size: 24px; letter-spacing: -0.015em; margin: var(--s7) 0 var(--s3); }
+.prose h3 { font-size: 18px; margin: var(--s6) 0 var(--s2); }
+.prose p, .prose ul, .prose ol { margin-bottom: var(--s4); }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li { margin-bottom: var(--s2); }
+.prose li::marker { color: var(--text-faint); }
+.prose table { width: 100%; border-collapse: collapse; margin: var(--s3) 0 var(--s5); font-size: 15px; }
+.prose th { text-align: left; font-size: 13px; font-weight: 600; color: var(--text-faint); padding: 0 var(--s4) var(--s2) 0; border-bottom: 1px solid var(--hairline); }
+.prose td { padding: 12px var(--s4) 12px 0; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+.prose td:first-child { width: 30%; }
+.prose strong { font-weight: 600; }
+.prose code { font-size: 0.88em; }
+@media (max-width: 640px) {
+  .prose table, .prose thead, .prose tbody, .prose tr, .prose td { display: block; }
+  .prose thead { display: none; }
+  .prose td { border: 0; padding: 0; width: auto !important; }
+  .prose tr { padding: 12px 0; border-bottom: 1px solid var(--hairline); }
+  .prose td:first-child { font-weight: 600; margin-bottom: 2px; }
+}

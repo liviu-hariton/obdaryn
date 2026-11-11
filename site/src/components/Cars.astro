@@ -1,0 +1,79 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// Supported cars, generated from the data the app ships (src/data/cars.ts).
+import Base from "../layouts/Base.astro";
+import { brands, generic } from "../data/cars";
+import { version } from "../data/site";
+import { t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const c = s.carsPage;
+const withModels = brands.filter((b) => Object.keys(b.models).length > 0);
+const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce((n, l) => n + l.length, 0);
+---
+<Base lang={lang} page="cars" title={`${c.title} · Obdaryn`} description={c.description}>
+  <div class="wrap page">
+    <h1>{c.title}</h1>
+    <p class="lede">{c.lede}</p>
+    <p class="gen">{c.generated(version)}</p>
+
+    <section aria-labelledby="brands">
+      <h2 id="brands">{c.brandsTitle}</h2>
+      <ul class="brands">
+        {brands.map((b) => (
+          <li>
+            <span class="name">{b.label}</span>
+            <ul class="facts">
+              <li>{s.brandFacts.modules(b.modules, b.modulesConfirmed)}</li>
+              {b.codes > 0 && <li>{s.brandFacts.codes(b.codes)}</li>}
+              {modelsOf(b) > 0 && <li>{s.brandFacts.values(modelsOf(b))}</li>}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="other">
+      <h2 id="other">{c.otherTitle}</h2>
+      <p class="sub">{c.other(generic.modules)}</p>
+    </section>
+
+    {withModels.map((b) => (
+      <section aria-labelledby={`models-${b.id}`}>
+        <h2 id={`models-${b.id}`}>{c.modelsTitle}</h2>
+        <p class="sub">{c.modelsLede}</p>
+        {Object.entries(b.models).map(([make, list]) => (
+          <div class="make">
+            <h3>{make}</h3>
+            <ul class="models">{list.map((m) => <li>{m}</li>)}</ul>
+          </div>
+        ))}
+      </section>
+    ))}
+
+    <p class="note">{c.note}</p>
+  </div>
+</Base>
+
+<style>
+  .page { max-width: calc(920px + 2 * var(--gutter)); padding-top: clamp(40px, 6vw, 72px); }
+  h1 { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; }
+  .lede { color: var(--text-muted); font-size: 18px; margin-top: var(--s4); max-width: 66ch; }
+  .gen { font-size: 13px; color: var(--text-faint); margin-top: var(--s3); }
+  section { margin-top: var(--s8); }
+  h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: var(--s4); }
+  .sub { color: var(--text-muted); max-width: 66ch; }
+  .brands { list-style: none; padding: 0; border-top: 1px solid var(--hairline); }
+  .brands > li { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--s2) var(--s6); padding: 16px 0; border-bottom: 1px solid var(--hairline); }
+  .name { font-weight: 600; }
+  .facts { list-style: none; padding: 0; color: var(--text-muted); font-size: 15px; display: grid; gap: 2px; }
+  .make { margin-top: var(--s5); }
+  .make h3 { font-size: 15px; font-weight: 600; padding-bottom: var(--s2); border-bottom: 1px solid var(--hairline); }
+  .models { list-style: none; padding: 0; columns: 4 160px; column-gap: var(--s5); margin-top: var(--s3); }
+  .models li { padding: 4px 0; font-size: 15px; break-inside: avoid; }
+  .note { margin-top: var(--s7); font-size: 14px; color: var(--text-faint); max-width: 70ch; }
+  @media (max-width: 640px) { .brands > li { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,64 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// The download page: the installer, what it needs, and the one-time macOS
+// confirmation an app that isn't notarized asks for.
+import Base from "../layouts/Base.astro";
+import DownloadButton from "./DownloadButton.astro";
+import { releasesUrl, repoUrl, version } from "../data/site";
+import { t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const d = s.downloadPage;
+---
+<Base lang={lang} page="download" title={`${d.title} · Obdaryn`} description={d.description}>
+  <div class="wrap page">
+    <header class="head">
+      <h1>{d.title}</h1>
+      <p class="lede">{d.lede}</p>
+      <div class="get">
+        <DownloadButton lang={lang} />
+        <span class="file">{d.fileLine(version)}</span>
+      </div>
+    </header>
+
+    <section aria-labelledby="req">
+      <h2 id="req">{d.reqTitle}</h2>
+      <dl class="rows">{d.reqs.map(([k, v]) => <div class="row"><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+    </section>
+
+    <section aria-labelledby="first">
+      <h2 id="first">{d.firstTitle}</h2>
+      <p class="sub">{d.firstLede}</p>
+      <ol class="steps">{d.first.map((x) => <li>{x}</li>)}</ol>
+    </section>
+
+    <section aria-labelledby="why">
+      <h2 id="why">{d.whyTitle}</h2>
+      <p class="sub">{d.why} <a href={`${repoUrl}#build-macos`}>{d.buildLink}</a></p>
+    </section>
+
+    <section aria-labelledby="other">
+      <h2 id="other">{d.otherTitle}</h2>
+      <p class="sub">{d.other} <a href={releasesUrl}>{d.otherLink}</a></p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .page { max-width: calc(760px + 2 * var(--gutter)); padding-top: clamp(40px, 6vw, 72px); }
+  h1 { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; }
+  .lede { color: var(--text-muted); font-size: 18px; margin-top: var(--s4); }
+  .get { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); margin-top: var(--s6); }
+  .file { font-size: 14px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  section { margin-top: var(--s8); }
+  h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: var(--s4); }
+  .sub { color: var(--text-muted); max-width: 64ch; margin-bottom: var(--s4); }
+  dt { font-weight: 600; color: var(--text) !important; }
+  dd { margin: 0; color: var(--text-muted); }
+  .steps { list-style: none; counter-reset: step; padding: 0; border-top: 1px solid var(--hairline); }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 36px 1fr; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+  .steps li::before { content: counter(step); font-weight: 600; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+</style>

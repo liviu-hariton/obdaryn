@@ -1,0 +1,170 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// The home page's thesis: a trouble code explained the way the app explains it,
+// from the app's own data (src/data/codes.ts). A small cluster shows which lamp
+// the code lights; a switcher swaps in the demo car's other codes. At load the
+// lamps run the app's ignition bulb check: all lit for 1.2 s, then the real state.
+// Without JavaScript the first code shows and the switcher stays hidden.
+import Icon from "./Icon.astro";
+import { demoCodes } from "../data/codes";
+import { num, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).home;
+const codes = demoCodes[lang];
+const kindColor = { stored: "var(--red)", pending: "var(--amber)", permanent: "var(--blue)" };
+const euro = (n: number) => `€${num(lang, n)}`;
+const difficulty = (d: string) =>
+  lang === "ro" ? ({ easy: "Ușoară", medium: "Medie", hard: "Grea" } as Record<string, string>)[d] ?? d
+                : ({ easy: "Easy", medium: "Medium", hard: "Hard" } as Record<string, string>)[d] ?? d;
+---
+<div class="explainer" data-explainer>
+  <div class="cluster" data-lamp={codes[0].lamp} aria-live="polite">
+    <span class="telltale engine" title={s.lamp.engine}><Icon name="engine" size={52} /></span>
+    <span class="telltale abs" title={s.lamp.abs}><Icon name="abs" size={44} /></span>
+    {codes.map((c, i) => (
+      <span class="lamp-label" data-for={c.code} hidden={i > 0}>{s.lamp[c.lamp]}</span>
+    ))}
+  </div>
+
+  <div class="switcher" role="tablist" aria-label={s.switcher} hidden>
+    <span class="switcher-label" aria-hidden="true">{s.switcher}</span>
+    {codes.map((c, i) => (
+      <button type="button" role="tab" id={`tab-${c.code}`} aria-controls={`code-${c.code}`}
+              aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1} data-code={c.code} data-lamp={c.lamp}>
+        <span class="dot" style={`background:${kindColor[c.kinds[0]]}`}></span>{c.code}
+      </button>
+    ))}
+  </div>
+
+  <div class="panels">
+    {codes.map((c, i) => (
+      <article class="panel" id={`code-${c.code}`} role="tabpanel" aria-labelledby={`tab-${c.code}`} data-active={i === 0 ? "" : undefined} aria-hidden={i === 0 ? undefined : "true"}>
+        <p class="code" lang="en">{c.code}</p>
+        <h2 class="title">{c.title}</h2>
+        <ul class="chips">
+          {c.lamp === "engine" && <li class="chip"><Icon name="engine" size={14} class="amber" />{s.chips.mil}</li>}
+          {c.driveCycle && <li class="chip"><Icon name="activity" size={14} />{s.chips.drive}</li>}
+          {c.lamp === "abs" && <li class="chip"><Icon name="triangle-alert" size={14} class="amber" />{s.chips.lamp}</li>}
+        </ul>
+        <div class="rows">
+          {c.symptoms.length > 0 && (
+            <div class="row"><span>{s.rows.notice}</span>
+              <ul class="plain">{c.symptoms.slice(0, 3).map((x) => <li>{x}</li>)}</ul></div>
+          )}
+          <div class="row"><span>{s.rows.causes}</span>
+            <ul class="causes">{c.causes.slice(0, 4).map(([l, x]) => (
+              <li><span class={`likely ${l}`}>{s.likelihood[l]}</span><span>{x}</span></li>
+            ))}</ul></div>
+          {c.emissions && (
+            <div class="row"><span>{s.rows.itp}</span>
+              <span>{c.lamp === "engine" ? s.itp.lit : s.itp.pending}</span></div>
+          )}
+          {c.repair && (
+            <div class="row"><span>{s.rows.cost}</span>
+              <span><span class="cost">{euro(c.repair.eur[0])} – {euro(c.repair.eur[1])}</span>
+                <span class="muted"> · {difficulty(c.repair.difficulty)}, {s.diy[String(c.repair.diy) as "true" | "false"]}</span></span></div>
+          )}
+          <div class="row"><span>{s.rows.stored}</span>
+            <span class="stored">
+              <span class="chips inline">
+                {c.kinds.map((k) => <span class="chip"><span class="dot" style={`background:${kindColor[k]}`}></span>{s.kinds[k]}</span>)}
+                <span class="module">{s.modules[c.module]}</span>
+              </span>
+              {c.kinds.includes("pending") && <span class="note">{s.kindNote.pending}</span>}
+            </span></div>
+        </div>
+        <p class="source">{s.source[c.source]}</p>
+      </article>
+    ))}
+  </div>
+</div>
+
+<script>
+  // Tabs: click or arrow keys swap the code; the cluster follows. The bulb check
+  // runs once, unless the visitor asked for reduced motion.
+  for (const root of document.querySelectorAll<HTMLElement>("[data-explainer]")) {
+    const cluster = root.querySelector<HTMLElement>(".cluster")!;
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    root.querySelector<HTMLElement>(".switcher")!.hidden = false;
+
+    const select = (tab: HTMLButtonElement, focus = false) => {
+      for (const other of tabs) {
+        const on = other === tab;
+        other.setAttribute("aria-selected", String(on));
+        other.tabIndex = on ? 0 : -1;
+        const panel = root.querySelector<HTMLElement>("#code-" + other.dataset.code)!;
+        panel.toggleAttribute("data-active", on);
+        panel.setAttribute("aria-hidden", String(!on));
+        const label = root.querySelector<HTMLElement>(`.lamp-label[data-for="${other.dataset.code}"]`)!;
+        label.hidden = !on;
+      }
+      cluster.dataset.lamp = tab.dataset.lamp;
+      if (focus) tab.focus();
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => select(tab));
+      tab.addEventListener("keydown", (e) => {
+        const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (e.key === "Home") { e.preventDefault(); select(tabs[0], true); }
+        else if (e.key === "End") { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+        else if (step) { e.preventDefault(); select(tabs[(i + step + tabs.length) % tabs.length], true); }
+      });
+    });
+
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      cluster.classList.add("bulb-check");
+      setTimeout(() => cluster.classList.remove("bulb-check"), 1200);
+    }
+  }
+</script>
+
+<style>
+  .cluster { display: flex; align-items: center; gap: var(--s4); min-height: 56px; }
+  .telltale { color: var(--unlit); transition: color var(--normal) var(--ease); display: inline-flex; }
+  .cluster[data-lamp="engine"] .engine,
+  .cluster[data-lamp="abs"] .abs,
+  .cluster.bulb-check .telltale { color: var(--amber); }
+  .cluster.bulb-check .telltale { transition: none; }
+  .lamp-label { font-size: 15px; font-weight: 600; color: var(--text); margin-left: var(--s1); }
+  .cluster[data-lamp="off"] .lamp-label { color: var(--text-muted); font-weight: 500; }
+
+  .switcher { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s5); }
+  .switcher[hidden] { display: none; }
+  .switcher-label { font-size: 13px; color: var(--text-faint); margin-right: var(--s1); }
+  .switcher button {
+    display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 12px;
+    font: 500 14px/1 var(--mono); color: var(--text-muted); background: transparent;
+    border: 1px solid var(--hairline); border-radius: var(--radius); cursor: pointer;
+    transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+  }
+  .switcher button:hover { background: var(--hover); color: var(--text); }
+  .switcher button[aria-selected="true"] { background: var(--selected); color: var(--text); border-color: transparent; font-weight: 600; }
+
+  /* Every panel sits in the same cell, so switching never moves the page. */
+  .panels { display: grid; }
+  .panel { grid-area: 1 / 1; visibility: hidden; opacity: 0; transition: opacity var(--normal) var(--ease); }
+  .panel[data-active] { visibility: visible; opacity: 1; }
+
+  .code {
+    font: 600 clamp(76px, 11.6vw, 168px)/0.95 var(--mono);
+    letter-spacing: -0.04em; margin: var(--s5) 0 var(--s3); font-variant-numeric: tabular-nums;
+  }
+  .title { font-size: clamp(22px, 2.2vw, 30px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; max-width: 30ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--s2); list-style: none; padding: 0; margin: var(--s4) 0 var(--s6); }
+  .chips.inline { margin: 0; align-items: center; }
+  :global(.amber) { color: var(--amber); }
+  .rows { max-width: 760px; font-size: 15px; }
+  .plain, .causes { list-style: none; padding: 0; display: grid; gap: 6px; }
+  .causes li { display: grid; grid-template-columns: 72px 1fr; gap: var(--s3); }
+  .likely { font-size: 13px; font-weight: 500; color: var(--text-faint); padding-top: 1px; }
+  .likely.high { color: var(--text); font-weight: 600; }
+  .cost { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .muted { color: var(--text-muted); }
+  .stored { display: grid; gap: var(--s2); }
+  .module { font-size: 14px; color: var(--text-muted); margin-left: var(--s1); }
+  .note { font-size: 14px; color: var(--text-muted); }
+  .source { font-size: 13px; color: var(--text-faint); margin-top: var(--s4); max-width: 70ch; }
+</style>

@@ -1,0 +1,43 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// The user guide: the repo's docs/USER_GUIDE.md (English) or USER_GUIDE.ro.md,
+// rendered as it is, so the site and the repo never disagree. On wide screens an
+// "On this page" rail sits on the left, like the app's Help.
+import Base from "../layouts/Base.astro";
+import * as en from "../../../docs/USER_GUIDE.md";
+import * as ro from "../../../docs/USER_GUIDE.ro.md";
+import { t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).guidePage;
+const doc = lang === "ro" ? ro : en;
+const headings = doc.getHeadings().filter((h) => h.depth === 2);
+---
+<Base lang={lang} page="guide" title={`${s.title} · Obdaryn`} description={s.description}>
+  <div class="wrap layout">
+    <nav class="rail" aria-label={lang === "ro" ? "Pe această pagină" : "On this page"}>
+      <p>{lang === "ro" ? "Pe această pagină" : "On this page"}</p>
+      <ul>{headings.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
+    </nav>
+    <article class="prose guide"><doc.Content /></article>
+  </div>
+</Base>
+
+<style>
+  .layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); padding-top: clamp(40px, 6vw, 72px); }
+  .rail { position: sticky; top: var(--s5); align-self: start; }
+  .rail p { font-size: 13px; font-weight: 600; color: var(--text-faint); padding: 0 10px var(--s2); }
+  .rail ul { list-style: none; padding: 0; display: grid; gap: 2px; }
+  .rail a { display: block; padding: 6px 10px; border-radius: var(--radius); color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .rail a:hover { background: var(--hover); color: var(--text); }
+  .guide :global(h1) { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: var(--s4); }
+  .guide :global(h1 + p) { color: var(--text-muted); font-size: 18px; }
+  .guide :global(h2) { scroll-margin-top: var(--s5); }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .rail { position: static; border-bottom: 1px solid var(--hairline); padding-bottom: var(--s4); }
+    .rail ul { display: flex; flex-wrap: wrap; gap: 2px var(--s2); }
+  }
+</style>

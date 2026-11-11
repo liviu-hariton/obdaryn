@@ -69,6 +69,7 @@
 - **App** (`src/app`):
   - **QML singleton.** `AppController` is exposed to QML as the `App` singleton and sequences the first scan: vehicle info → readiness → codes → freeze frame → supported PIDs.
   - **Polling.** After the scan, live data is polled continuously. Pinned values refresh on every cycle; the rest refresh in rotation.
+- **Website** (`site/`): the obdaryn.eu presentation site, a static Astro build that is separate from the app. At build time it reads the app's version, its code databases, its brand data and the user guide straight from this repo, so it can't drift from the app. See [RELEASE.md](RELEASE.md#the-website).
 
 ## Conventions
 

@@ -1,0 +1,31 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// The privacy note: what the app and this site do with data (nothing, and server logs).
+import Base from "../layouts/Base.astro";
+import { contactEmail } from "../data/site";
+import { t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const p = t(lang).privacyPage;
+const last = p.sections.length - 1;
+---
+<Base lang={lang} page="privacy" title={`${p.title} · Obdaryn`} description={p.description}>
+  <div class="wrap page prose">
+    <h1>{p.title}</h1>
+    {p.sections.map(([h, text], i) => (
+      <section>
+        <h2>{h}</h2>
+        <p>{text}{i === last && <> <a href={`mailto:${contactEmail}`}>{contactEmail}</a></>}</p>
+      </section>
+    ))}
+    <p class="updated">{p.updated}</p>
+  </div>
+</Base>
+
+<style>
+  .page { padding-top: clamp(40px, 6vw, 72px); max-width: calc(70ch + 2 * var(--gutter)); }
+  h1 { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; }
+  .updated { font-size: 13px; color: var(--text-faint); margin-top: var(--s7); }
+</style>

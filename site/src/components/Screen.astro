@@ -1,0 +1,40 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// A real screenshot of the app (tools/capture-site-images.sh), in the visitor's
+// language and theme: the dark capture under a dark system theme, the light one
+// otherwise. Served as responsive WebP, framed by a hairline like the app's panels.
+// Never shown wider than the app's real size (captures are 2x), so every screenshot
+// on the page reads at the same scale.
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+import type { Lang } from "../i18n/ui";
+
+interface Props { name: string; lang: Lang; alt: string; sizes?: string; eager?: boolean }
+const { name, lang, alt, sizes = "(min-width: 1100px) 760px, 100vw", eager = false } = Astro.props;
+
+const files = import.meta.glob<{ default: ImageMetadata }>("../assets/screens/*.png", { eager: true });
+const pick = (theme: string) => {
+  const file = files[`../assets/screens/${name}-${lang}-${theme}.png`];
+  if (!file) throw new Error(`Missing screenshot ${name}-${lang}-${theme}.png: run tools/capture-site-images.sh`);
+  return file.default;
+};
+const widths = [640, 960, 1320, 1980];
+const make = (src: ImageMetadata) =>
+  getImage({ src, widths: [...widths.filter((w) => w < src.width), src.width], format: "webp", quality: 82 });
+const [light, dark] = await Promise.all([make(pick("light")), make(pick("dark"))]);
+const lightSrc = pick("light");
+---
+<figure class="screen" style={`max-width:${Math.round(lightSrc.width / 2)}px`}>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset={dark.srcSet.attribute} sizes={sizes} type="image/webp" />
+    <source srcset={light.srcSet.attribute} sizes={sizes} type="image/webp" />
+    <img src={light.src} alt={alt} width={lightSrc.width} height={lightSrc.height}
+         loading={eager ? "eager" : "lazy"} decoding="async" />
+  </picture>
+</figure>
+
+<style>
+  .screen { border: 1px solid var(--hairline); border-radius: var(--radius-lg); overflow: hidden; background: var(--window); }
+  .screen img { width: 100%; }
+</style>

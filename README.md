@@ -47,7 +47,7 @@ Status: v0.4, in active development and not yet tested on a real car. macOS firs
 
 ## Install (macOS)
 
-Build the installer on your Mac with `tools/make-release.sh`; it writes `dist/Obdaryn-<version>.dmg`. Open it and drag Obdaryn to Applications. The app isn't notarized, so the first time, right-click Obdaryn → **Open**. Details in [docs/RELEASE.md](docs/RELEASE.md).
+Download the installer from **[obdaryn.eu](https://obdaryn.eu/download/)** or the [GitHub releases](https://github.com/liviu-hariton/obdaryn/releases). Open it and drag Obdaryn to Applications. The app isn't notarized, so the first time open it, then go to **System Settings → Privacy & Security** and click **Open Anyway**. For now it needs macOS 27 on Apple Silicon. To build the installer yourself: `tools/make-release.sh`. Details in [docs/RELEASE.md](docs/RELEASE.md).
 
 ## Build (macOS)
 
@@ -72,7 +72,8 @@ In CLion, open the folder and add `-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt` to 
 | `tests` | Qt Test unit tests that run against recorded replies and the built-in simulator |
 | `i18n` | Translations (`obdaryn_ro.ts`) |
 | `tools` | Data import scripts (obdex DTC database) |
-| `docs` | Architecture, car-interaction guide, roadmap |
+| `docs` | Architecture, car-interaction guide, roadmap, user guide (English and Romanian) |
+| `site` | The obdaryn.eu website (Astro, static); see [docs/RELEASE.md](docs/RELEASE.md#the-website) |
 
 Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) before contributing. Every source file is commented for newcomers.
 

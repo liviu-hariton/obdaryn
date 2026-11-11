@@ -1,0 +1,144 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// Every page: the head (title, description, language alternates, social card),
+// the top bar, and the footer. No scripts from anywhere else, no cookies.
+import "../styles/global.css";
+import { routes, t, type Lang, type PageId } from "../i18n/ui";
+import { copyrightYears, contactEmail, repoUrl } from "../data/site";
+
+interface Props { lang: Lang; page: PageId | "404"; title: string; description: string }
+const { lang, page, title, description } = Astro.props;
+const s = t(lang);
+const other: Lang = lang === "en" ? "ro" : "en";
+const r = routes[lang];
+const site = Astro.site!;
+const canonical = page === "404" ? undefined : new URL(routes[lang][page], site).href;
+const alternates = page === "404" ? [] : (["en", "ro"] as Lang[]).map((l) => ({ l, href: new URL(routes[l][page], site).href }));
+const otherHref = page === "404" ? routes[other].home : routes[other][page];
+const nav = [
+  { id: "home", href: r.home + "#features", label: s.nav.features },
+  { id: "cars", href: r.cars, label: s.nav.cars },
+  { id: "guide", href: r.guide, label: s.nav.guide },
+  { id: "download", href: r.download, label: s.nav.download },
+] as const;
+const ogImage = new URL(`/og-${lang}.png`, site).href;
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {canonical && <link rel="canonical" href={canonical} />}
+  {alternates.map(({ l, href }) => <link rel="alternate" hreflang={l} href={href} />)}
+  {alternates.length > 0 && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0F1114" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Obdaryn" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:locale" content={lang === "ro" ? "ro_RO" : "en_GB"} />
+  {canonical && <meta property="og:url" content={canonical} />}
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <slot name="head" />
+</head>
+<body>
+  <a class="skip" href="#main">{s.skip}</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href={r.home} aria-label="Obdaryn">
+        <picture>
+          <source srcset="/logo-dark.svg" media="(prefers-color-scheme: dark)" />
+          <img src="/logo.svg" alt="" width="28" height="28" />
+        </picture>
+        <span>Obdaryn</span>
+      </a>
+      <nav aria-label={lang === "ro" ? "Principal" : "Main"}>
+        <ul>
+          {nav.map((n) => (
+            <li class={n.id === "download" ? "nav-download" : undefined}>
+              <a href={n.href} aria-current={n.id === page && n.id !== "home" ? "page" : undefined}>{n.label}</a>
+            </li>
+          ))}
+          <li class="nav-gh"><a href={repoUrl}>{s.nav.github}</a></li>
+          <li><a class="lang" href={otherHref} hreflang={other} lang={other}>{s.otherLang}</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <div class="foot-brand">
+        <a class="brand" href={r.home}>
+          <picture>
+            <source srcset="/logo-dark.svg" media="(prefers-color-scheme: dark)" />
+            <img src="/logo.svg" alt="" width="24" height="24" loading="lazy" />
+          </picture>
+          <span>Obdaryn</span>
+        </a>
+        <p>{s.footer.tagline}</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href={r.download}>{s.nav.download}</a></li>
+        <li><a href={r.guide}>{s.nav.guide}</a></li>
+        <li><a href={r.cars}>{s.nav.cars}</a></li>
+        <li><a href={r.privacy}>{s.footer.privacy}</a></li>
+        <li><a href={repoUrl}>{s.nav.github}</a></li>
+        <li><a href={`mailto:${contactEmail}`}>{s.footer.contact}</a></li>
+        <li><a href={otherHref} hreflang={other} lang={other}>{s.otherLang}</a></li>
+      </ul>
+      <div class="foot-small">
+        <p>{s.footer.noTracking}</p>
+        <p>{s.footer.copyright(copyrightYears)}</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .top { border-bottom: 1px solid var(--hairline); }
+  .top-inner { display: flex; align-items: center; gap: var(--s4); min-height: 72px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .top .brand { margin-right: auto; }
+  nav ul { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s1) var(--s5); list-style: none; padding: 0; }
+  nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; padding: 6px 0; transition: color var(--fast) var(--ease); }
+  nav a:hover, nav a[aria-current="page"] { color: var(--text); }
+  nav a[aria-current="page"] { font-weight: 600; }
+  nav .lang { border: 1px solid var(--hairline); border-radius: var(--radius); padding: 5px 10px; }
+  nav .lang:hover { background: var(--hover); }
+  @media (max-width: 860px) {
+    .nav-gh { display: none; }
+  }
+  @media (max-width: 640px) {
+    .top-inner { flex-wrap: wrap; padding-block: var(--s3); gap: var(--s2); }
+    .top .brand { width: 100%; }
+    nav ul { gap: var(--s1) var(--s3); }
+    nav a { font-size: 14px; }
+    nav .lang { padding: 3px 8px; }
+    nav li:not(.nav-download):first-child { display: none; }
+  }
+
+  .foot { margin-top: var(--s9); border-top: 1px solid var(--hairline); background: var(--sidebar); }
+  .foot-inner { display: grid; grid-template-columns: 1fr auto; gap: var(--s5) var(--s7); padding-block: var(--s7); }
+  .foot-brand p { color: var(--text-muted); font-size: 15px; margin-top: var(--s2); }
+  .foot-links { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, auto); gap: var(--s2) var(--s7); align-content: start; }
+  .foot-links a { color: var(--text-muted); text-decoration: none; font-size: 15px; }
+  .foot-links a:hover { color: var(--text); text-decoration: underline; }
+  .foot-small { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2) var(--s5); border-top: 1px solid var(--hairline); padding-top: var(--s4); font-size: 13px; color: var(--text-faint); }
+  @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; } }
+</style>
