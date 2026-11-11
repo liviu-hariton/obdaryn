@@ -35,8 +35,12 @@ echo "Files on the server that the build doesn't have are deleted (except .well-
 read -r -p "Continue? [y/N] " answer
 [[ "$answer" == "y" || "$answer" == "Y" ]] || { echo "Cancelled."; exit 0; }
 
+# Pages are world-readable files, folders 755. Set here rather than with rsync's
+# --chmod, which the rsync that ships with macOS (openrsync) doesn't have.
+chmod -R u=rwX,go=rX "$SITE/dist"
 # --delete keeps the server an exact copy of the build; .well-known is left alone
-# for Let's Encrypt. Pages are world-readable files, folders 755.
-rsync -az --delete $DRY --exclude=".well-known" --chmod=D755,F644 \
+# for Let's Encrypt. -rlptz rather than -a: the server keeps its own owner and group
+# (HestiaCP serves the folder through the www-data group).
+rsync -rlptz --delete $DRY ${DRY:+-v} --exclude=".well-known" \
       -e "ssh -p $PORT" "$SITE/dist/" "$OBDARYN_SITE_SSH:$REMOTE_PATH"
 echo "Done: https://obdaryn.eu/"
