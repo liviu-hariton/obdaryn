@@ -1,12 +1,26 @@
 ---
 // SPDX-License-Identifier: GPL-3.0-or-later
 //
-// The one primary action: this version's installer, from its GitHub release.
+// The one primary action. On a computer it opens the "download started" page,
+// which fetches this version's installer from its GitHub release and shows how to
+// open it the first time. On a phone or tablet (a touch-only screen) it reads "Get
+// it on your Mac" and goes to the download page's note for phones instead, so
+// nobody downloads an 80 MB Mac installer they can't use. Both are plain links:
+// CSS picks one, so it works without JavaScript.
 import Icon from "./Icon.astro";
-import { dmgUrl } from "../data/site";
-import { t, type Lang } from "../i18n/ui";
+import { routes, t, type Lang } from "../i18n/ui";
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const s = t(lang);
 ---
-<a class="btn btn-primary" href={dmgUrl}><Icon name="download" />{t(lang).download}</a>
+<a class="btn btn-primary on-mac" href={routes[lang].started}><Icon name="download" />{s.download}</a>
+<a class="btn btn-primary on-touch" href={routes[lang].download + "#mac"}>{s.downloadOnMac}<Icon name="arrow-right" /></a>
+
+<style>
+  .on-touch { display: none; }
+  @media (hover: none) and (pointer: coarse) {
+    .on-mac { display: none; }
+    .on-touch { display: inline-flex; }
+  }
+</style>

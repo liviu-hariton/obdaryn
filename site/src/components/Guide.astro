@@ -33,6 +33,7 @@ const headings = doc.getHeadings().filter((h) => h.depth === 2);
   .rail ul { list-style: none; padding: 0; display: grid; gap: 2px; }
   .rail a { display: block; padding: 6px 10px; border-radius: var(--radius); color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; }
   .rail a:hover { background: var(--hover); color: var(--text); }
+  .rail a[aria-current="true"] { background: var(--selected); color: var(--text); font-weight: 600; }
   .guide :global(h1) { font-size: clamp(36px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: var(--s4); }
   .guide :global(h1 + p) { color: var(--text-muted); font-size: 18px; }
   @media (max-width: 900px) {
@@ -41,3 +42,22 @@ const headings = doc.getHeadings().filter((h) => h.depth === 2);
     .rail ul { display: flex; flex-wrap: wrap; gap: 2px var(--s2); }
   }
 </style>
+
+<script>
+  // Mark the rail entry for the section being read: the last heading that has
+  // scrolled above the reading line (just under the sticky top bar).
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".rail a")];
+  const sections = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))));
+  let frame = 0;
+  const mark = () => {
+    frame = 0;
+    const line = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) + 8 || 120;
+    let current = -1;
+    sections.forEach((h, i) => { if (h && h.getBoundingClientRect().top <= line) current = i; });
+    // The last section may be too short to reach the line: at the bottom, it's the one.
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) current = sections.length - 1;
+    links.forEach((a, i) => a.setAttribute("aria-current", String(i === current)));
+  };
+  addEventListener("scroll", () => { frame ||= requestAnimationFrame(mark); }, { passive: true });
+  mark();
+</script>

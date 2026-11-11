@@ -7,6 +7,8 @@
 // the download.
 import Base from "../layouts/Base.astro";
 import CodeExplainer from "./CodeExplainer.astro";
+import CodeLookup from "./CodeLookup.astro";
+import { codeStrings } from "../i18n/codes";
 import DownloadButton from "./DownloadButton.astro";
 import Icon from "./Icon.astro";
 import Screen from "./Screen.astro";
@@ -27,9 +29,10 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
   <section class="hero wrap">
     <div class="offer">
       <h1>{h.headline}</h1>
-      <p class="lede">{h.lede}</p>
+      <p class="lede">{h.lede[0]}<a href="#need">{h.lede[1]}</a>{h.lede[2]}</p>
       <DownloadButton lang={lang} />
       <p class="version">{s.versionLine(version)}</p>
+      <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
       <ul class="facts">
         <li><Icon name="shield-check" class="green" />{h.facts[0]}</li>
         <li><Icon name="check" class="faint" />{h.facts[1]}</li>
@@ -38,6 +41,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
     </div>
     <div class="thesis">
       <CodeExplainer lang={lang} />
+      <div class="your-code"><CodeLookup lang={lang} compact id="lookup-home" label={codeStrings[lang].lookup.labelYours} /></div>
     </div>
   </section>
 
@@ -49,12 +53,13 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
       <div class="job-text">
         <h3>{h.jobs.light.q}</h3>
         <p>{h.jobs.light.a(num(lang, genericCount), num(lang, brandCodeTotal))}</p>
+        <p class="more"><a href={r.codes}>{codeStrings[lang].indexTitle}<Icon name="arrow-right" size={16} /></a></p>
       </div>
       <Screen name="codes" lang={lang} alt={h.jobs.light.alt} sizes="(min-width: 1100px) 600px, 100vw" />
     </div>
 
     <div class="job job-left">
-      <Screen name="readiness" lang={lang} alt={h.jobs.itp.alt} />
+      <Screen name="readiness" lang={lang} alt={h.jobs.itp.alt} sizes="(min-width: 1100px) 900px, 100vw" />
       <div class="job-text">
         <h3>{h.jobs.itp.q}</h3>
         <p>{h.jobs.itp.a}</p>
@@ -99,7 +104,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
     </div>
   </section>
 
-  <section class="section wrap need" aria-labelledby="need-title">
+  <section class="section wrap need" id="need" aria-labelledby="need-title">
     <div>
       <h2 class="section-title" id="need-title">{h.needTitle}</h2>
       <dl class="rows needs">
@@ -147,6 +152,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
       <DownloadButton lang={lang} />
       <a class="btn btn-secondary" href={repoUrl}>{h.source}</a>
     </div>
+    <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
   </section>
 </Base>
 
@@ -165,6 +171,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
   h1 { font-size: clamp(36px, 3.4vw, 46px); line-height: 1.08; font-weight: 700; letter-spacing: -0.03em; }
   .lede { color: var(--text-muted); font-size: 18px; margin: var(--s5) 0 var(--s6); }
   .version { font-size: 13px; color: var(--text-faint); margin-top: var(--s3); font-variant-numeric: tabular-nums; }
+  .your-code { margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid var(--hairline); max-width: 760px; }
   .facts { list-style: none; padding: 0; margin-top: var(--s6); border-top: 1px solid var(--hairline); }
   .facts li { display: flex; gap: var(--s3); align-items: center; padding: 14px 0; border-bottom: 1px solid var(--hairline); font-size: 15px; }
   /* Narrow screens keep the thesis first: lamp, code and title, then the offer and
@@ -184,6 +191,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
     .thesis :global(.chips) { order: 5; margin-bottom: 0; }
     .thesis :global(.rows) { order: 7; margin-top: var(--s7); }
     .thesis :global(.source) { order: 8; }
+    .your-code { order: 9; }
   }
 
   /* The four questions: text beside a screenshot, varied so the page has a pace. */
@@ -194,7 +202,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
   .job-codes { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
   .job-wide .job-text { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s4) clamp(32px, 5vw, 80px); align-items: baseline; }
   .job h3 { font-size: clamp(24px, 2.4vw, 32px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
-  .job p { color: var(--text-muted); font-size: 17px; margin-top: var(--s3); max-width: 60ch; }
+  .job p { color: var(--text-muted); font-size: 17px; margin-top: var(--s3); max-width: 32em; }
   .job-wide .job-text p { margin-top: 0; }
   @media (max-width: 900px) {
     .job-right, .job-left, .job-codes, .job-wide .job-text { grid-template-columns: 1fr; }
@@ -237,9 +245,12 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
   /* Honest status, then the close. */
   .status h2 { display: flex; align-items: center; gap: var(--s3); font-size: 20px; font-weight: 600; }
   .amber-dot { width: 9px; height: 9px; background: var(--amber); }
-  .status p { color: var(--text-muted); max-width: 70ch; margin-top: var(--s3); }
+  .status p { color: var(--text-muted); max-width: 36em; margin-top: var(--s3); }
   .close { text-align: left; border-top: 1px solid var(--hairline); padding-top: var(--s8); margin-top: var(--s9); }
   .close h2 { font-size: clamp(36px, 5.2vw, 72px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; max-width: 16ch; }
-  .close p { color: var(--text-muted); font-size: 18px; max-width: 58ch; margin-top: var(--s4); }
+  .close p { color: var(--text-muted); font-size: 18px; max-width: 31em; margin-top: var(--s4); }
   .close-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
+  .close .early { margin-top: var(--s3); }
+  .lede a { color: inherit; text-decoration-color: var(--field-border); }
+  .lede a:hover { color: var(--text); text-decoration-color: currentColor; }
 </style>

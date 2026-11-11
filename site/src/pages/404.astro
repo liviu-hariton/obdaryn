@@ -1,23 +1,5 @@
 ---
 // SPDX-License-Identifier: GPL-3.0-or-later
-// One 404 for both languages: English first, Romanian under it.
-import Base from "../layouts/Base.astro";
-import { routes, t } from "../i18n/ui";
-const en = t("en").notFound;
-const ro = t("ro").notFound;
+import NotFound from "../components/NotFound.astro";
 ---
-<Base lang="en" page="404" title={`${en.title} · Obdaryn`} description={en.text}>
-  <div class="wrap page">
-    <p class="code">404</p>
-    <h1>{en.title}</h1>
-    <p>{en.text} <a href={routes.en.home}>{en.home}</a></p>
-    <p lang="ro" class="ro">{ro.text} <a href={routes.ro.home}>{ro.home}</a></p>
-  </div>
-</Base>
-<style>
-  .page { padding-top: clamp(48px, 8vw, 112px); }
-  .code { font: 600 clamp(76px, 11vw, 160px)/1 var(--mono); letter-spacing: -0.04em; color: var(--text-faint); }
-  h1 { font-size: 32px; letter-spacing: -0.02em; margin: var(--s4) 0 var(--s3); }
-  p { color: var(--text-muted); }
-  .ro { margin-top: var(--s2); }
-</style>
+<NotFound lang="en" />

@@ -1,0 +1,97 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// "Look up a code": type the code your scan tool shows and go to its page. The
+// list of codes (/codes/lookup.json, about 30 KB compressed) loads only when
+// someone looks something up. A code with a page in the visitor's language opens
+// there, otherwise in English; a manufacturer code that several brands use asks
+// which brand. Without JavaScript the form opens the code index instead.
+import { routes, type Lang } from "../i18n/ui";
+import { codeStrings } from "../i18n/codes";
+
+interface Props { lang: Lang; compact?: boolean; another?: boolean; id?: string; label?: string }
+const { lang, compact = false, another = false, id = "lookup", label } = Astro.props;
+const s = codeStrings[lang].lookup;
+---
+<form class:list={["lookup", { compact }]} action={routes[lang].codes} method="get" data-lookup={lang}
+      data-msg-format={s.badFormat} data-msg-unknown={s.unknown("{c}")} data-msg-maker={s.unknownMaker("{c}")}
+      data-msg-many={s.many("{c}")} data-msg-failed={s.failed}>
+  <label for={id}>{label ?? (another ? s.labelAnother : s.label)}</label>
+  <div class="field">
+    <input id={id} name="q" type="text" inputmode="text" autocomplete="off" autocapitalize="characters"
+           spellcheck="false" maxlength="12" placeholder={s.placeholder} aria-describedby={`${id}-hint`} />
+    <button type="submit" class="btn btn-secondary">{s.button}</button>
+  </div>
+  <p class="hint" id={`${id}-hint`} aria-live="polite">{compact ? "" : s.hint}</p>
+  <ul class="choices" hidden></ul>
+</form>
+
+<style>
+  .lookup label { display: block; font-weight: 600; font-size: 15px; margin-bottom: var(--s2); }
+  .field { display: flex; gap: var(--s2); max-width: 420px; }
+  input {
+    flex: 1; min-width: 0; height: 48px; padding: 0 14px; border-radius: var(--radius);
+    border: 1px solid var(--field-border); background: var(--surface); color: var(--text);
+    font: 500 17px/1 var(--mono); letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  input::placeholder { color: var(--text-faint); text-transform: none; font-family: var(--sans); font-size: 16px; letter-spacing: 0; }
+  input:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; border-color: transparent; }
+  .compact input, .compact .btn { height: 40px; }
+  .compact .btn { padding: 0 16px; font-size: 15px; }
+  .compact input { font-size: 15px; }
+  .hint { font-size: 13px; color: var(--text-faint); margin-top: var(--s2); max-width: 34em; }
+  .hint:empty { display: none; }
+  .hint[data-state="error"] { color: var(--red-ink); }
+  .choices { list-style: none; padding: 0; margin-top: var(--s2); display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .choices[hidden] { display: none; }
+  .choices a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border: 1px solid var(--field-border); border-radius: var(--radius); color: var(--text); text-decoration: none; font-size: 14px; }
+  .choices a:hover { background: var(--hover); }
+</style>
+
+<script>
+  // Normalise what was typed ("p0420", "P0420-00", "P 0420"), check it against the
+  // list and go to the page. The list is fetched once, the first time it's needed.
+  type Lookup = { en: string; ro: string; generic: string[]; genericRo: string[]; brand: Record<string, [string, string, string, string][]> };
+  let list: Promise<Lookup> | undefined;
+  const load = () => (list ??= fetch("/codes/lookup.json").then((r) => { if (!r.ok) throw new Error(); return r.json(); }));
+
+  for (const form of document.querySelectorAll<HTMLFormElement>("[data-lookup]")) {
+    const lang = form.dataset.lookup as "en" | "ro";
+    const input = form.querySelector("input")!;
+    const hint = form.querySelector<HTMLElement>(".hint")!;
+    const choices = form.querySelector<HTMLUListElement>(".choices")!;
+    const say = (text: string, error = true) => {
+      hint.textContent = text;
+      if (error) hint.dataset.state = "error"; else delete hint.dataset.state;
+    };
+    input.addEventListener("focus", () => { void load().catch(() => {}); }, { once: true });
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      choices.hidden = true;
+      choices.replaceChildren();
+      const code = input.value.toUpperCase().replace(/[\s-]/g, "").slice(0, 5);
+      if (!/^[PBCU][0-9A-F]{4}$/.test(code)) { say(form.dataset.msgFormat!); input.focus(); return; }
+      let data: Lookup;
+      try { data = await load(); } catch { list = undefined; say(form.dataset.msgFailed!); return; }
+      const base = lang === "ro" ? data.ro : data.en;
+      if (lang === "ro" && data.genericRo.includes(code)) { location.href = `${data.ro}${code}/`; return; }
+      if (data.generic.includes(code)) { location.href = `${data.en}${code}/`; return; }
+      const brands = data.brand[code] ?? [];
+      if (brands.length === 1) { location.href = `${base}${brands[0][0]}/${brands[0][1]}/`; return; }
+      if (brands.length > 1) {
+        say(form.dataset.msgMany!.replace("{c}", code), false);
+        for (const [pack, slug, labelEn, labelRo] of brands) {
+          const a = document.createElement("a");
+          a.href = `${base}${pack}/${slug}/`;
+          a.textContent = lang === "ro" ? labelRo : labelEn;
+          const li = document.createElement("li");
+          li.append(a);
+          choices.append(li);
+        }
+        choices.hidden = false;
+        return;
+      }
+      say((code[1] === "1" ? form.dataset.msgMaker! : form.dataset.msgUnknown!).replace("{c}", code));
+    });
+  }
+</script>

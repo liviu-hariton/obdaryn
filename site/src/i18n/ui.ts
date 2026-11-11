@@ -10,11 +10,11 @@ export type Lang = "en" | "ro";
 export const deN = (n: number) => (n >= 20 && (n % 100 === 0 || n % 100 >= 20) ? " de" : "");
 /** The same, for a number already formatted as text ("9.533"). */
 const de = (text: string) => deN(Number(text.replace(/\D/g, "")));
-export type PageId = "home" | "download" | "guide" | "cars" | "privacy";
+export type PageId = "home" | "download" | "started" | "guide" | "cars" | "privacy" | "codes";
 
 export const routes: Record<Lang, Record<PageId, string>> = {
-  en: { home: "/", download: "/download/", guide: "/guide/", cars: "/cars/", privacy: "/privacy/" },
-  ro: { home: "/ro/", download: "/ro/descarca/", guide: "/ro/ghid/", cars: "/ro/masini/", privacy: "/ro/confidentialitate/" },
+  en: { home: "/", download: "/download/", started: "/download/started/", guide: "/guide/", cars: "/cars/", privacy: "/privacy/", codes: "/codes/" },
+  ro: { home: "/ro/", download: "/ro/descarca/", started: "/ro/descarca/a-inceput/", guide: "/ro/ghid/", cars: "/ro/masini/", privacy: "/ro/confidentialitate/", codes: "/ro/coduri/" },
 };
 
 export const ui = {
@@ -25,12 +25,14 @@ export const ui = {
     theme: { label: "Dark theme", toDark: "Switch to the dark theme", toLight: "Switch to the light theme" },
     nav: { features: "Features", cars: "Supported cars", guide: "Guide", download: "Download", github: "GitHub" },
     download: "Download for macOS",
+    downloadOnMac: "Get it on your Mac",
     versionLine: (v: string) => `Version ${v} · macOS 14.4 or later · free`,
+    earlyAccess: "Early access: not yet tested on a real car.",
     home: {
       title: "Obdaryn: free, read-only OBD-II diagnostics for your Mac",
       description: "Obdaryn reads trouble codes, readiness, live data and every module of your car through a cheap ELM327 adapter, and explains each one in plain words. Free, open source and read-only.",
       headline: "Know what your car is telling you.",
-      lede: "Obdaryn reads trouble codes, readiness, live data and every module through a cheap ELM327 adapter, and explains each one in plain words.",
+      lede: ["Obdaryn reads trouble codes, readiness, live data and every module through a ", "cheap ELM327 adapter", ", and explains each one in plain words."],
       facts: ["Read-only: it can't change anything in your car", "Free and open source, no subscription", "In English and Romanian"],
       lamp: { engine: "Check-engine light on", abs: "ABS warning light on", off: "Check-engine light off for now" },
       switcher: "Codes from the demo car",
@@ -53,7 +55,7 @@ export const ui = {
       ladderLede: "Reading and clearing codes, readiness, the freeze frame, live data and a report are the basics. Other apps put them behind a paywall. In Obdaryn they're free.",
       jobs: {
         light: { q: "Why is the light on?", a: (generic: string, brand: string) => `Stored, pending and permanent codes from the engine and every other module. Each one comes with what it means, likely causes, what you may notice, whether it matters for the ITP and a rough repair cost. ${generic} generic codes, plus ${brand} manufacturer codes for Hyundai/Kia, Toyota/Lexus, Ford, the VW group and Renault/Dacia, in English and Romanian.`, alt: "The trouble codes screen explaining P0133, with its likely causes and repair cost" },
-        itp: { q: "Will it pass the inspection?", a: "See which self-tests have finished since the codes were last cleared, and whether the car is likely to pass the emissions check. Then read the numbers behind them, each next to the limits the car judges it by, so a part that's wearing out shows up before the light comes on.", alt: "The readiness screen with self-test results and their limits" },
+        itp: { q: "Will it pass the inspection?", a: "See which self-tests have finished since the codes were last cleared, and whether the car is likely to pass the emissions check. Then read the numbers behind them, each next to the limits the car judges it by, so a part that's wearing out shows up before the light comes on. And don't clear codes right before the inspection: the self-tests start over, and the car fails until it has been driven enough.", alt: "The readiness screen with self-test results and their limits" },
         used: { q: "Is this used car hiding something?", a: "Scan ABS, airbag, body, the instrument cluster and the other modules, and see how recently the codes were cleared. Then save it all as one PDF or web page, to hand to a mechanic or to ask the seller about.", alt: "All modules: a full-vehicle scan of the demo car" },
         live: { q: "What is the engine doing right now?", a: (models: number) => `Every sensor the car reports, with its recent history. Charts on a shared time axis, two recordings side by side before and after a repair, and a trip computer that works on cars without an air-flow sensor too. On Hyundai and Kia, values beyond the standard for ${models} models, such as oil temperature, wheel speeds and tyre pressures.`, alt: "Charts of several live values on a shared time axis" },
       },
@@ -87,7 +89,8 @@ export const ui = {
       steps: [
         "Plug the adapter into the OBD-II socket, under the dashboard on the driver's side.",
         "Turn the ignition on and join the adapter's Wi-Fi, usually “V-LINK”.",
-        "Open Obdaryn and press Connect. It reads the car and shows what it found.",
+        "Open Obdaryn. The first time, macOS asks you to confirm it once: System Settings → Privacy & Security → Open Anyway.",
+        "Press Connect. Obdaryn reads the car and shows what it found.",
       ],
       noCar: "No car nearby? The app has a demo car built in, and every screen works with it.",
       carsTitle: "Works on every OBD-II car. Knows more about these.",
@@ -130,6 +133,20 @@ export const ui = {
       otherTitle: "Other versions",
       other: "Every version, with its changes, is on the GitHub releases page.",
       otherLink: "All releases",
+      macTitle: "On a phone or tablet?",
+      macText: "Obdaryn is a Mac app. Open obdaryn.eu on your Mac to download it, or send yourself the link.",
+      share: "Send the link",
+      copied: "Link copied",
+    },
+    startedPage: {
+      title: "Your download has started",
+      description: "Obdaryn is downloading. How to open it the first time.",
+      lede: (v: string) => `Obdaryn-${v}.dmg, about 80 MB, is on its way from GitHub. The first time you open it, macOS asks you to confirm once.`,
+      retry: "Download didn't start?",
+      retryLink: "Download it directly",
+      nextTitle: "Then, at the car",
+      next: "Plug in the adapter, turn the ignition on, join the adapter's Wi-Fi and press Connect.",
+      nextLink: "The full guide",
     },
     carsPage: {
       title: "Supported cars",
@@ -139,7 +156,7 @@ export const ui = {
       brandsTitle: "Brands Obdaryn knows more about",
       otherTitle: "Every other brand",
       other: (n: number) => `Gets everything standard, plus a scan of the ${n} standard OBD-II module addresses.`,
-      modelsTitle: "Manufacturer values, by model",
+      modelsTitle: "Hyundai and Kia values, by model",
       modelsLede: "On these Hyundai and Kia models, Obdaryn can read what the modules report beyond the standard, from the community OBDb definitions (CC BY-SA 4.0). They aren't checked on every car: Obdaryn first asks each module which values it answers.",
       note: "Module addresses and manufacturer values come from public and community sources, such as recordings other people made on their own cars with OBDb. Obdaryn itself hasn't been tested on a real car yet. Addresses nobody has confirmed are marked as such in the app.",
     },
@@ -150,7 +167,7 @@ export const ui = {
       sections: [
         ["The app", "Obdaryn sends nothing online. It talks only to the OBD-II adapter in your car. There are no accounts, no analytics and no update checks. Recordings and reports stay on your computer, in folders you choose. They include your car's VIN, so check them before sharing."],
         ["This website", "This site sets no cookies, runs no analytics or trackers, and loads nothing from other companies: its fonts and images come from obdaryn.eu itself. Like any web server, ours keeps standard access logs (IP address, time, page requested, browser) for security and to fix errors. They are not shared with anyone and are deleted after a few weeks. If you switch between the light and dark theme, your browser remembers the choice on your device; it isn't a cookie and is never sent to us."],
-        ["Downloads", "The download button takes you to GitHub, where the installer is published. GitHub's own privacy statement applies there."],
+        ["Downloads", "The installer is published on GitHub, and the download button fetches it from there. GitHub's own privacy statement applies to that download."],
         ["Contact", "Questions about privacy, or anything else:"],
       ],
       updated: "Last updated: 11 November 2026",
@@ -171,12 +188,14 @@ export const ui = {
     theme: { label: "Temă întunecată", toDark: "Treci la tema întunecată", toLight: "Treci la tema deschisă" },
     nav: { features: "Funcții", cars: "Mașini compatibile", guide: "Ghid", download: "Descarcă", github: "GitHub" },
     download: "Descarcă pentru macOS",
+    downloadOnMac: "Descarcă-l pe Mac",
     versionLine: (v: string) => `Versiunea ${v} · macOS 14.4 sau mai nou · gratuit`,
+    earlyAccess: "Acces timpuriu: încă netestat pe o mașină reală.",
     home: {
       title: "Obdaryn: diagnoză OBD-II gratuită, doar citire, pentru Mac",
       description: "Obdaryn citește codurile de eroare, pregătirea pentru ITP, datele în timp real și toate modulele mașinii printr-un adaptor ELM327 ieftin, și explică fiecare lucru pe înțelesul tău. Gratuit, open-source și doar citire.",
       headline: "Află ce îți spune mașina.",
-      lede: "Obdaryn citește codurile de eroare, pregătirea pentru ITP, datele în timp real și toate modulele printr-un adaptor ELM327 ieftin, și explică fiecare lucru pe înțelesul tău.",
+      lede: ["Obdaryn citește codurile de eroare, pregătirea pentru ITP, datele în timp real și toate modulele printr-un ", "adaptor ELM327 ieftin", ", și explică fiecare lucru pe înțelesul tău."],
       facts: ["Doar citire: nu poate modifica nimic în mașină", "Gratuit și open-source, fără abonament", "În română și engleză"],
       lamp: { engine: "Martorul de motor e aprins", abs: "Martorul ABS e aprins", off: "Martorul de motor e stins deocamdată" },
       switcher: "Coduri de la mașina demo",
@@ -199,7 +218,7 @@ export const ui = {
       ladderLede: "Citirea și ștergerea codurilor, pregătirea pentru ITP, instantaneul, datele în timp real și un raport sunt elementele de bază. Alte aplicații le pun în spatele unui abonament. În Obdaryn sunt gratuite.",
       jobs: {
         light: { q: "De ce e aprins martorul?", a: (generic: string, brand: string) => `Coduri memorate, în așteptare și permanente, de la motor și de la toate celelalte module. Fiecare vine cu ce înseamnă, cauze probabile, ce poți observa, dacă contează la ITP și un cost orientativ de reparație. ${generic}${de(generic)} coduri generice, plus ${brand}${de(brand)} coduri de producător pentru Hyundai/Kia, Toyota/Lexus, Ford, grupul VW și Renault/Dacia, în română și engleză.`, alt: "Ecranul de coduri de eroare explicând P0133, cu cauzele probabile și costul reparației" },
-        itp: { q: "Trece de ITP?", a: "Vezi ce autoteste s-au încheiat de la ultima ștergere a codurilor și dacă mașina are șanse să treacă de testul de emisii. Apoi citește valorile din spatele lor, fiecare lângă limitele după care o judecă mașina, ca o piesă care se uzează să se vadă înainte să se aprindă martorul.", alt: "Ecranul de pregătire ITP cu rezultatele autotestelor și limitele lor" },
+        itp: { q: "Trece de ITP?", a: "Vezi ce autoteste s-au încheiat de la ultima ștergere a codurilor și dacă mașina are șanse să treacă de testul de emisii. Apoi citește valorile din spatele lor, fiecare lângă limitele după care o judecă mașina, ca o piesă care se uzează să se vadă înainte să se aprindă martorul. Și nu șterge codurile chiar înainte de ITP: autotestele o iau de la capăt, iar mașina pică până nu rulează destul.", alt: "Ecranul de pregătire ITP cu rezultatele autotestelor și limitele lor" },
         used: { q: "Ascunde ceva mașina asta la mâna a doua?", a: "Scanează ABS-ul, airbagul, caroseria, bordul și celelalte module și vezi cât de recent au fost șterse codurile. Apoi salvează totul într-un singur PDF sau o pagină web, pentru mecanic sau ca să-l întrebi pe vânzător.", alt: "Toate modulele: o scanare completă a mașinii demo" },
         live: { q: "Ce face motorul chiar acum?", a: (models: number) => `Fiecare senzor raportat de mașină, cu istoricul recent. Grafice pe o axă de timp comună, două înregistrări una lângă alta, înainte și după o reparație, și un computer de bord care merge și pe mașinile fără debitmetru. La Hyundai și Kia, valori peste cele standard pentru ${models}${deN(models)} modele, cum ar fi temperatura uleiului, turațiile roților și presiunea în anvelope.`, alt: "Grafice cu mai multe valori în timp real pe o axă de timp comună" },
       },
@@ -233,7 +252,8 @@ export const ui = {
       steps: [
         "Pune adaptorul în priza OBD-II, sub bord, pe partea șoferului.",
         "Pune contactul și conectează-te la rețeaua Wi-Fi a adaptorului, de obicei „V-LINK”.",
-        "Deschide Obdaryn și apasă Conectează. Citește mașina și îți arată ce a găsit.",
+        "Deschide Obdaryn. Prima dată, macOS îți cere o confirmare: Configurări sistem → Confidențialitate și securitate → Deschide oricum.",
+        "Apasă Conectează. Obdaryn citește mașina și îți arată ce a găsit.",
       ],
       noCar: "Nu ai mașina la îndemână? Aplicația are o mașină demo inclusă și toate ecranele merg cu ea.",
       carsTitle: "Merge pe orice mașină cu OBD-II. Pe acestea le cunoaște mai bine.",
@@ -276,6 +296,20 @@ export const ui = {
       otherTitle: "Alte versiuni",
       other: "Toate versiunile, cu modificările lor, sunt pe pagina de versiuni de pe GitHub.",
       otherLink: "Toate versiunile",
+      macTitle: "Ești pe telefon sau tabletă?",
+      macText: "Obdaryn e o aplicație pentru Mac. Deschide obdaryn.eu pe Mac ca s-o descarci, sau trimite-ți linkul.",
+      share: "Trimite linkul",
+      copied: "Link copiat",
+    },
+    startedPage: {
+      title: "Descărcarea a început",
+      description: "Obdaryn se descarcă. Cum îl deschizi prima dată.",
+      lede: (v: string) => `Obdaryn-${v}.dmg, aproximativ 80 MB, se descarcă de pe GitHub. Prima dată când îl deschizi, macOS îți cere o confirmare, o singură dată.`,
+      retry: "Nu a pornit descărcarea?",
+      retryLink: "Descarcă direct",
+      nextTitle: "Apoi, la mașină",
+      next: "Pune adaptorul în priză, pune contactul, conectează-te la Wi-Fi-ul adaptorului și apasă Conectează.",
+      nextLink: "Ghidul complet",
     },
     carsPage: {
       title: "Mașini compatibile",
@@ -285,7 +319,7 @@ export const ui = {
       brandsTitle: "Mărcile pe care Obdaryn le cunoaște mai bine",
       otherTitle: "Orice altă marcă",
       other: (n: number) => `Primește tot ce e standard, plus o scanare a celor ${n} adrese standard de module OBD-II.`,
-      modelsTitle: "Valori de producător, pe modele",
+      modelsTitle: "Valori Hyundai și Kia, pe modele",
       modelsLede: "Pe aceste modele Hyundai și Kia, Obdaryn poate citi ce raportează modulele peste valorile standard, din definițiile comunității OBDb (CC BY-SA 4.0). Nu sunt verificate pe fiecare mașină: Obdaryn întreabă mai întâi fiecare modul ce valori știe.",
       note: "Adresele modulelor și valorile de producător vin din surse publice și ale comunității, de exemplu înregistrări făcute de alți oameni pe propriile mașini, cu OBDb. Obdaryn însuși nu a fost încă testat pe o mașină reală. Adresele pe care nu le-a confirmat nimeni sunt marcate ca atare în aplicație.",
     },
@@ -296,7 +330,7 @@ export const ui = {
       sections: [
         ["Aplicația", "Obdaryn nu trimite nimic online. Comunică doar cu adaptorul OBD-II din mașină. Nu are conturi, statistici sau verificări de actualizări. Înregistrările și rapoartele rămân pe calculatorul tău, în dosarele pe care le alegi. Ele conțin seria de șasiu (VIN) a mașinii, așa că verifică-le înainte să le trimiți cuiva."],
         ["Acest site", "Site-ul nu setează cookie-uri, nu rulează statistici sau instrumente de urmărire și nu încarcă nimic de la alte companii: fonturile și imaginile vin chiar de pe obdaryn.eu. Ca orice server web, al nostru păstrează jurnale de acces standard (adresa IP, ora, pagina cerută, browserul), pentru securitate și pentru remedierea erorilor. Nu sunt date nimănui și se șterg după câteva săptămâni. Dacă treci între tema deschisă și cea întunecată, browserul ține minte alegerea pe dispozitivul tău; nu e un cookie și nu ne e trimisă nouă."],
-        ["Descărcări", "Butonul de descărcare te duce pe GitHub, unde e publicat programul de instalare. Acolo se aplică declarația de confidențialitate a GitHub."],
+        ["Descărcări", "Programul de instalare e publicat pe GitHub, iar butonul de descărcare îl ia de acolo. Pentru acea descărcare se aplică declarația de confidențialitate a GitHub."],
         ["Contact", "Întrebări despre confidențialitate sau orice altceva:"],
       ],
       updated: "Ultima actualizare: 11 noiembrie 2026",

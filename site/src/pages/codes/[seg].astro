@@ -1,0 +1,11 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Every generic code's page, the groups of generic codes and each brand's list.
+import CodePage from "../../components/CodePage.astro";
+import CodeList from "../../components/CodeList.astro";
+import { segPaths, type SegProps } from "../../data/codeRoutes";
+
+export const getStaticPaths = () => segPaths("en");
+const p = Astro.props as SegProps;
+---
+{p.kind === "code" ? <CodePage lang="en" entry={p.entry} /> : <CodeList lang="en" {...p} />}

@@ -24,9 +24,15 @@ export default defineConfig({
   markdown: { processor: unified({ rehypePlugins: [rehypeDocLinks] }) },
   site: "https://obdaryn.eu",
   trailingSlash: "always",
-  build: { format: "directory" },
+  // Stylesheets stay separate files, cached once for all 10,000-odd code pages,
+  // instead of being copied into every page.
+  build: { format: "directory", inlineStylesheets: "never" },
   integrations: [
-    sitemap({ i18n: { defaultLocale: "en", locales: { en: "en", ro: "ro" } } }),
+    sitemap({
+      i18n: { defaultLocale: "en", locales: { en: "en", ro: "ro" } },
+      // The download-started pages aren't for search results, and neither are the 404s.
+      filter: (page) => !/\/(started|a-inceput|404)\/$/.test(page),
+    }),
   ],
   vite: {
     // The guide and the data files live in the app's repo, one level up.

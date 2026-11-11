@@ -1,0 +1,11 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Every manufacturer code's page.
+import CodePage from "../../../../components/CodePage.astro";
+import { brandPaths } from "../../../../data/codeRoutes";
+import type { CodeEntry } from "../../../../data/allCodes";
+
+export const getStaticPaths = () => brandPaths("ro");
+const { entry } = Astro.props as { entry: CodeEntry };
+---
+<CodePage lang="ro" entry={entry} />

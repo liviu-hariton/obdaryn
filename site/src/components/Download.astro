@@ -22,7 +22,15 @@ const d = s.downloadPage;
         <DownloadButton lang={lang} />
         <span class="file">{d.fileLine(version)}</span>
       </div>
+      <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
     </header>
+
+    <!-- Shown on touch-only screens, where the Download button points here. -->
+    <section id="mac" class="mac" aria-labelledby="mac-title">
+      <h2 id="mac-title">{d.macTitle}</h2>
+      <p class="sub">{d.macText}</p>
+      <button type="button" class="btn btn-secondary" data-share hidden data-copied={d.copied}>{d.share}</button>
+    </section>
 
     <section aria-labelledby="req">
       <h2 id="req">{d.reqTitle}</h2>
@@ -48,6 +56,9 @@ const d = s.downloadPage;
 </Base>
 
 <style>
+  .early { margin-top: var(--s3); }
+  .mac { display: none; }
+  @media (hover: none) and (pointer: coarse) { .mac { display: block; } }
   /* The shared reading column, kept to a 760px measure for these short rows. */
   .head, section { max-width: 760px; }
   .lede { color: var(--text-muted); font-size: 18px; margin-top: var(--s4); }
@@ -55,10 +66,26 @@ const d = s.downloadPage;
   .file { font-size: 14px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
   section { margin-top: var(--s8); }
   h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: var(--s4); }
-  .sub { color: var(--text-muted); max-width: 64ch; margin-bottom: var(--s4); }
+  .sub { color: var(--text-muted); max-width: 34em; margin-bottom: var(--s4); }
   dt { font-weight: 600; color: var(--text) !important; }
   dd { margin: 0; color: var(--text-muted); }
   .steps { list-style: none; counter-reset: step; padding: 0; border-top: 1px solid var(--hairline); }
   .steps li { counter-increment: step; display: grid; grid-template-columns: 36px 1fr; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
   .steps li::before { content: counter(step); font-weight: 600; color: var(--text-faint); font-variant-numeric: tabular-nums; }
 </style>
+
+<script>
+  // "Send the link": the phone's share sheet where there is one (AirDrop, Messages,
+  // mail to yourself), otherwise copy the page's address. Hidden without JavaScript.
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-share]")) {
+    button.hidden = false;
+    const url = location.origin + location.pathname;
+    button.addEventListener("click", async () => {
+      try {
+        if (navigator.share) { await navigator.share({ title: document.title, url }); return; }
+        await navigator.clipboard.writeText(url);
+        button.textContent = button.dataset.copied ?? "";
+      } catch { /* the visitor closed the share sheet */ }
+    });
+  }
+</script>

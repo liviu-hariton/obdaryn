@@ -1,0 +1,64 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// A list of codes with their titles: one generic group (P04xx) or one brand's
+// manufacturer codes. Each row links to the code's page.
+import Base from "../layouts/Base.astro";
+import CodeLookup from "./CodeLookup.astro";
+import { codeStrings } from "../i18n/codes";
+import { routes, type Lang } from "../i18n/ui";
+import type { CodeEntry } from "../data/allCodes";
+
+interface Props {
+  lang: Lang;
+  title: string;
+  lede: string;
+  entries: CodeEntry[];
+  /** Brand lists link to /codes/<pack>/<slug>/ and name each code's module. */
+  pack?: string;
+  here: Partial<Record<Lang, string>>;
+  prev?: { href: string; label: string };
+  next?: { href: string; label: string };
+}
+const { lang, title, lede, entries, pack, here, prev, next } = Astro.props;
+const c = codeStrings[lang];
+const base = routes[lang].codes;
+const href = (e: CodeEntry) => (pack ? `${base}${pack}/${e.slug}/` : `${base}${e.slug}/`);
+---
+<Base lang={lang} page="codes" title={`${title} · Obdaryn`} description={lede} here={here}>
+  <div class="wrap page">
+    <nav class="crumbs" aria-label={lang === "ro" ? "Unde ești" : "You are here"}><a href={base}>{c.indexTitle}</a></nav>
+    <h1 class="page-title">{title}</h1>
+    <p class="lede">{lede}</p>
+    <ul class="list">
+      {entries.map((e) => (
+        <li>
+          <a class="code" href={href(e)}>{e.code}</a>
+          <span class="t">{e.title}{pack && e.module && <span class="module"> · {c.modules[e.module]}</span>}</span>
+        </li>
+      ))}
+    </ul>
+    {(prev || next) && (
+      <nav class="pager" aria-label={lang === "ro" ? "Alte grupuri" : "Other groups"}>
+        {prev ? <a href={prev.href}>← {prev.label}</a> : <span />}
+        {next && <a href={next.href}>{next.label} →</a>}
+      </nav>
+    )}
+    <div class="search"><CodeLookup lang={lang} compact another id="lookup-list" /></div>
+  </div>
+</Base>
+
+<style>
+  .crumbs { font-size: 14px; margin-bottom: var(--s4); }
+  .crumbs a { color: var(--text-muted); text-decoration: none; }
+  .crumbs a:hover { color: var(--text); text-decoration: underline; }
+  .lede { color: var(--text-muted); font-size: 17px; margin-top: var(--s3); }
+  .list { list-style: none; padding: 0; margin-top: var(--s6); border-top: 1px solid var(--hairline); }
+  .list li { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: var(--s4); padding: 10px 0; border-bottom: 1px solid var(--hairline); font-size: 15px; }
+  .code { font: 600 15px/1.5 var(--mono); text-decoration: none; }
+  .code:hover { text-decoration: underline; }
+  .module { color: var(--text-muted); }
+  .pager { display: flex; justify-content: space-between; gap: var(--s4); margin-top: var(--s6); font-weight: 500; }
+  .pager a { text-decoration: none; }
+  .search { margin-top: var(--s7); }
+</style>

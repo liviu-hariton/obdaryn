@@ -49,6 +49,7 @@ The Intel half has been run under Rosetta on an Apple Silicon Mac, not yet on an
 The site at https://obdaryn.eu lives in `site/` (Astro, static, English at `/` and Romanian at `/ro/`). It reads the version from `CMakeLists.txt`, the explained codes and supported cars from `src/core/data/`, and the guide from `docs/USER_GUIDE.md` and `docs/USER_GUIDE.ro.md`, so it changes with the app. It loads nothing from other servers and sets no cookies.
 
 - Preview: `cd site && npm install && npm run dev`, then open http://localhost:4321.
+- Size: about 10,700 pages (one per trouble code, in English, and in Romanian where the explanation is translated), about 180 MB, built in a few seconds. The first upload takes a while; later ones send only what changed.
 - Screenshots: `tools/capture-site-images.sh` (after building the app) captures every screen the site shows, in both languages and themes, from the demo car.
 - Deploy: create `site/.deploy.env` (git-ignored) with `OBDARYN_SITE_SSH="user@server"`, then run `tools/deploy-site.sh` (or `--dry-run` first). It builds, asks, and `rsync`s `site/dist/` into the HestiaCP web root (`~/web/obdaryn.eu/public_html/`).
 - Social images: `site/public/og-en.png` and `og-ro.png` are captures of the home page's first screen at 1200 × 630, dark theme. Recapture them when the hero changes.

@@ -1,0 +1,74 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// The code index (/codes/, /ro/coduri/): look a code up, or browse the generic
+// codes by group and the manufacturer codes by brand.
+import Base from "../layouts/Base.astro";
+import CodeLookup from "./CodeLookup.astro";
+import { codes, groupsOf, packs, systemOf } from "../data/allCodes";
+import { codeStrings } from "../i18n/codes";
+import { num, routes, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = codeStrings[lang];
+const base = routes[lang].codes;
+const list = codes[lang];
+const groups = groupsOf(list.generic);
+const bySystem = (["powertrain", "body", "chassis", "network"] as const)
+  .map((sys) => ({ sys, groups: groups.filter((g) => systemOf(g.entries[0].code) === sys) }))
+  .filter((x) => x.groups.length > 0);
+const brandCount = (id: string) => list.brand.filter((e) => e.pack === id).length;
+---
+<Base lang={lang} page="codes" title={`${c.indexTitle} · Obdaryn`} description={c.indexDescription(num(lang, list.generic.length + list.brand.length))}>
+  <div class="wrap page">
+    <h1 class="page-title">{c.indexTitle}</h1>
+    <p class="lede">{c.indexLede(num(lang, list.generic.length), num(lang, list.brand.length))}</p>
+    {lang === "ro" && <p class="note">{c.roOnly.note} <a href={routes.en.codes}>{c.roOnly.link}</a></p>}
+    <div class="search"><CodeLookup lang={lang} id="lookup-main" /></div>
+
+    <section aria-labelledby="generic">
+      <h2 id="generic">{c.genericTitle}</h2>
+      <p class="sub">{c.genericLede}</p>
+      <dl class="rows systems">
+        {bySystem.map(({ sys, groups }) => (
+          <div class="row">
+            <dt>{c.systems[sys]}</dt>
+            <dd><ul class="groups">{groups.map((g) => (
+              <li><a class="hit" href={`${base}${g.id}/`}>{g.label}</a><span class="n">{g.entries.length}</span></li>
+            ))}</ul></dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section aria-labelledby="brand">
+      <h2 id="brand">{c.brandTitle}</h2>
+      <p class="sub">{c.brandLede}</p>
+      <ul class="rows brands">
+        {packs.map((p) => (
+          <li class="row"><a href={`${base}${p.id}/`}>{p.label[lang]}</a><span class="muted">{c.count(brandCount(p.id))}</span></li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .lede { color: var(--text-muted); font-size: 18px; margin-top: var(--s4); max-width: 35em; }
+  .note { color: var(--text-muted); font-size: 15px; margin-top: var(--s3); max-width: 40em; }
+  .search { margin-top: var(--s6); }
+  section { margin-top: var(--s8); }
+  h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; }
+  .sub { color: var(--text-muted); margin: var(--s2) 0 var(--s4); }
+  .systems dt { color: var(--text); font-weight: 600; }
+  .systems dd { margin: 0; }
+  .groups { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .groups li { display: inline-flex; align-items: baseline; gap: 6px; }
+  .groups a { font: 500 15px/1.6 var(--mono); }
+  .n { font-size: 12px; color: var(--text-faint); font-variant-numeric: tabular-nums; margin-right: var(--s3); }
+  .brands { list-style: none; padding: 0; }
+  .brands .row { grid-template-columns: minmax(0, 1fr) auto; }
+  .brands a { font-weight: 600; color: var(--text); }
+  .muted { color: var(--text-muted); }
+</style>

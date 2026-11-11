@@ -1,6 +1,12 @@
 # Ghidul utilizatorului Obdaryn
 
-Același ghid e și în aplicație, la **Ajutor** (⌘?). Pentru ce îi cere fiecare funcție mașinii și adaptorului, în detaliu, vezi [CAR_INTERACTION.md](CAR_INTERACTION.md) (în engleză).
+Același ghid e și în aplicație, la **Ajutor** (⌘?). Pentru ce îi cere fiecare funcție mașinii și adaptorului, în detaliu, vezi [cum comunică Obdaryn cu mașina](CAR_INTERACTION.md) (în engleză).
+
+## Instalarea și prima deschidere
+
+1. Descarcă programul de instalare de pe [obdaryn.eu](https://obdaryn.eu/ro/descarca/), deschide-l și trage **Obdaryn** în **Aplicații**. Merge pe macOS 14.4 sau mai nou, pe Apple Silicon și Intel.
+2. Deschide Obdaryn. Pentru că nu e încă notarizat de Apple, macOS spune că nu poate verifica aplicația de programe malițioase. Apasă **Gata**.
+3. Deschide **Configurări sistem → Confidențialitate și securitate**. La Securitate, lângă „Obdaryn a fost blocat”, apasă **Deschide oricum** și confirmă cu parola. Faci asta o singură dată; după aceea se deschide normal.
 
 ## Primii pași
 

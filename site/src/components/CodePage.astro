@@ -1,0 +1,154 @@
+---
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// One trouble code's page: the code and its title, then the same rows the app's
+// Trouble codes screen shows (how the car detects it, what you may notice, likely
+// causes, the ITP, repair), the source, and beside it the offer to read your own
+// car's codes. Built for every code the app explains (src/data/allCodes.ts).
+import Base from "../layouts/Base.astro";
+import DownloadButton from "./DownloadButton.astro";
+import CodeLookup from "./CodeLookup.astro";
+import Icon from "./Icon.astro";
+import { codes, hasGeneric, packs, systemOf, type CodeEntry } from "../data/allCodes";
+import { version } from "../data/site";
+import { codeStrings } from "../i18n/codes";
+import { num, routes, t, type Lang } from "../i18n/ui";
+
+interface Props { lang: Lang; entry: CodeEntry }
+const { lang, entry: e } = Astro.props;
+const s = t(lang);
+const c = codeStrings[lang];
+const base = routes[lang].codes;
+const pack = packs.find((p) => p.id === e.pack);
+const brand = pack?.label[lang];
+const isGeneric = e.pack === "generic";
+
+// This code's address in each language it has a page in.
+const pathIn = (l: Lang) => {
+  if (isGeneric) return l === "en" || hasGeneric(l, e.code) ? `${routes[l].codes}${e.slug}/` : undefined;
+  return codes[l].brand.some((x) => x.pack === e.pack && x.slug === e.slug) ? `${routes[l].codes}${e.pack}/${e.slug}/` : undefined;
+};
+const here = { en: pathIn("en"), ro: pathIn("ro") };
+
+const group = e.code.slice(0, 3);
+const up = isGeneric ? { href: `${base}${group.toLowerCase()}/`, label: c.groupTitle(`${group}xx`) } : { href: `${base}${e.pack}/`, label: c.packTitle(brand!) };
+const title = isGeneric ? c.pageTitle(e.code, e.title) : c.brandPageTitle(e.code, brand!, e.title);
+// A related code links to its page in this language when there is one, else in English.
+const relatedHref = (code: string) => (lang === "ro" && hasGeneric("ro", code) ? `${base}${code}/` : `${routes.en.codes}${code}/`);
+const euro = (n: number) => `€${num(lang, n)}`;
+// A source reads as its site plus the document's name, so three links to one site
+// (NHTSA filings, say) can be told apart: "static.nhtsa.gov › MC-10149942-9999.pdf".
+const sourceName = (u: string) => {
+  try {
+    const url = new URL(u);
+    const last = decodeURIComponent(url.pathname.split("/").filter(Boolean).pop() ?? "");
+    const name = last.length > 48 ? last.slice(0, 45) + "…" : last;
+    return url.hostname.replace(/^www\./, "") + (name ? ` › ${name}` : "");
+  } catch { return u; }
+};
+---
+<Base lang={lang} page="codes" title={`${title} · Obdaryn`} description={c.pageDescription(e.code, e.title)} here={here}>
+  <div class="wrap code-page">
+    <nav class="crumbs" aria-label={lang === "ro" ? "Unde ești" : "You are here"}>
+      <a href={base}>{c.indexTitle}</a><span aria-hidden="true">/</span><a href={up.href}>{up.label}</a>
+    </nav>
+
+    <article class="main">
+      <h1><span class="code">{e.code}</span><span class="title">{e.title}</span></h1>
+      <ul class="chips">
+        <li class="chip">{isGeneric ? c.kind.generic : c.kind.brand(brand!)} · {isGeneric ? c.systems[systemOf(e.code)] : c.modules[e.module!]}</li>
+        {e.flags.mil && <li class="chip"><Icon name="engine" size={14} class="amber" />{c.chips.mil}</li>}
+        {e.flags.lamp && !e.flags.mil && <li class="chip"><Icon name="triangle-alert" size={14} class="amber" />{c.chips.lamp}</li>}
+        {e.flags.emissions && <li class="chip"><Icon name="list-checks" size={14} class="amber" />{c.chips.itp}</li>}
+        {e.flags.limp && <li class="chip"><Icon name="triangle-alert" size={14} class="red" />{c.chips.limp}</li>}
+        {e.flags.driveCycle && <li class="chip"><Icon name="activity" size={14} />{c.chips.drive}</li>}
+      </ul>
+
+      <dl class="rows">
+        {e.detects && <div class="row"><dt>{c.rows.detects}</dt><dd>{e.detects}</dd></div>}
+        {e.symptoms.length > 0 && (
+          <div class="row"><dt>{c.rows.notice}</dt><dd><ul class="plain">{e.symptoms.map((x) => <li>{x}</li>)}</ul></dd></div>
+        )}
+        {e.causes.length > 0 && (
+          <div class="row"><dt>{c.rows.causes}</dt><dd><ul class="causes">{e.causes.map(([l, x]) => (
+            <li><span class={`likely ${l}`}>{c.likelihood[l]}</span><span>{x}</span></li>
+          ))}</ul></dd></div>
+        )}
+        {e.flags.emissions && <div class="row"><dt>{c.rows.itp}</dt><dd>{e.flags.mil ? c.itp.lit : c.itp.emissions}</dd></div>}
+        {e.repair && (
+          <div class="row"><dt>{c.rows.repair}</dt><dd>
+            <span class="strong">{c.difficulty[e.repair.difficulty] ?? e.repair.difficulty}</span>
+            <span class="muted"> · {c.diy[String(e.repair.diy) as "true" | "false"]}</span>
+            {e.repair.eur && <span class="cost">{c.cost}: <span class="strong tabular">{euro(e.repair.eur[0])} – {euro(e.repair.eur[1])}</span></span>}
+          </dd></div>
+        )}
+        {e.related.length > 0 && (
+          <div class="row"><dt>{c.rows.related}</dt><dd><ul class="related">{e.related.map((r) => <li><a class="hit" href={relatedHref(r)}>{r}</a></li>)}</ul></dd></div>
+        )}
+        {e.sources && (
+          <div class="row"><dt>{c.rows.sources}</dt><dd>
+            <ul class="sources">{e.sources.map((x) => <li><a href={x.u} rel="nofollow noopener">{sourceName(x.u)}</a>{x.o && <span class="muted"> · {c.official}</span>}</li>)}</ul>
+            {e.confidence && <p class="muted small">{c.confidence[e.confidence]}</p>}
+          </dd></div>
+        )}
+      </dl>
+      <p class="source">{isGeneric ? c.source.generic : c.source.brand(pack!.phrase[lang])}</p>
+    </article>
+
+    <aside class="aside">
+      <div class="offer">
+        <h2>{c.cta.title}</h2>
+        <p>{c.cta.text}</p>
+        <DownloadButton lang={lang} />
+        <p class="version">{s.versionLine(version)}</p>
+        <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
+      </div>
+      <CodeLookup lang={lang} compact another />
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .code-page {
+    display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: var(--s5) clamp(48px, 6vw, 96px);
+    padding-top: clamp(32px, 4vw, 48px); align-items: start;
+  }
+  .crumbs { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s2); font-size: 14px; color: var(--text-faint); }
+  .crumbs a { color: var(--text-muted); text-decoration: none; }
+  .crumbs a:hover { color: var(--text); text-decoration: underline; }
+  .main { min-width: 0; }
+  h1 { display: grid; gap: var(--s3); }
+  .code { font: 600 clamp(64px, 8vw, 112px)/0.95 var(--mono); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+  .title { font-size: clamp(22px, 2.2vw, 30px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; max-width: 30ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--s2); list-style: none; padding: 0; margin: var(--s4) 0 var(--s6); }
+  :global(.amber) { color: var(--amber); }
+  :global(.red) { color: var(--red); }
+  .rows { max-width: 760px; font-size: 15px; }
+  .rows dt { color: var(--text-muted); font-weight: 500; }
+  .rows dd { margin: 0; }
+  .plain, .causes, .sources { list-style: none; padding: 0; display: grid; gap: 6px; }
+  .causes li { display: grid; grid-template-columns: 72px 1fr; gap: var(--s3); }
+  .likely { font-size: 13px; font-weight: 500; color: var(--text-faint); padding-top: 1px; }
+  .likely.high { color: var(--text); font-weight: 600; }
+  .strong { font-weight: 600; }
+  .tabular { font-variant-numeric: tabular-nums; }
+  .muted { color: var(--text-muted); }
+  .small { font-size: 13px; margin-top: var(--s2); }
+  .cost { display: block; margin-top: 4px; color: var(--text-muted); }
+  .related { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .related a { display: inline-flex; align-items: center; height: 30px; padding: 0 10px; border: 1px solid var(--field-border); border-radius: var(--radius); font: 500 14px/1 var(--mono); color: var(--text); text-decoration: none; }
+  .related a:hover { background: var(--hover); }
+  .sources a { word-break: break-all; }
+  .source { font-size: 13px; color: var(--text-faint); margin-top: var(--s4); max-width: 44em; }
+
+  /* The offer: hairline-framed column, sticky under the top bar on wide screens. */
+  .aside { position: sticky; top: calc(var(--top-h) + var(--s5)); display: grid; gap: var(--s6); }
+  .offer { border-top: 1px solid var(--hairline); padding-top: var(--s5); }
+  .offer h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; }
+  .offer > p:not(.version):not(.early) { color: var(--text-muted); font-size: 15px; margin: var(--s3) 0 var(--s5); }
+  .version { font-size: 13px; color: var(--text-faint); margin-top: var(--s3); }
+  @media (max-width: 960px) {
+    .code-page { grid-template-columns: minmax(0, 1fr); }
+    .aside { position: static; }
+  }
+</style>

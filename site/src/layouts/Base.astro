@@ -8,18 +8,30 @@ import "../styles/global.css";
 import Icon from "../components/Icon.astro";
 import { routes, t, type Lang, type PageId } from "../i18n/ui";
 import { copyrightYears, contactEmail, repoUrl } from "../data/site";
+import { codeStrings } from "../i18n/codes";
 
-interface Props { lang: Lang; page: PageId | "404"; title: string; description: string }
-const { lang, page, title, description } = Astro.props;
+interface Props {
+  lang: Lang;
+  page: PageId | "404";
+  title: string;
+  description: string;
+  /** Pages outside the fixed routes (a code's page): this page's address in each
+   *  language it exists in. Without the other language, the switch goes to its home. */
+  here?: Partial<Record<Lang, string>>;
+  /** Keep the page out of search results (the download-started page). */
+  noindex?: boolean;
+}
+const { lang, page, title, description, here, noindex = false } = Astro.props;
 const s = t(lang);
 const other: Lang = lang === "en" ? "ro" : "en";
 const r = routes[lang];
 const site = Astro.site!;
-const canonical = page === "404" ? undefined : new URL(routes[lang][page], site).href;
-const alternates = page === "404" ? [] : (["en", "ro"] as Lang[]).map((l) => ({ l, href: new URL(routes[l][page], site).href }));
-const otherHref = page === "404" ? routes[other].home : routes[other][page];
+const pathIn = (l: Lang) => (here ? here[l] : page === "404" ? undefined : routes[l][page]);
+const canonical = pathIn(lang) && new URL(pathIn(lang)!, site).href;
+const alternates = (["en", "ro"] as Lang[]).flatMap((l) => (pathIn(l) ? [{ l, href: new URL(pathIn(l)!, site).href }] : []));
+const otherHref = pathIn(other) ?? routes[other].home;
 const nav = [
-  { id: "home", href: r.home + "#features", label: s.nav.features },
+  { id: "codes", href: r.codes, label: codeStrings[lang].nav },
   { id: "cars", href: r.cars, label: s.nav.cars },
   { id: "guide", href: r.guide, label: s.nav.guide },
   { id: "download", href: r.download, label: s.nav.download },
@@ -34,8 +46,9 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   <title>{title}</title>
   <meta name="description" content={description} />
   {canonical && <link rel="canonical" href={canonical} />}
-  {alternates.map(({ l, href }) => <link rel="alternate" hreflang={l} href={href} />)}
-  {alternates.length > 0 && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
+  {noindex && <meta name="robots" content="noindex" />}
+  {alternates.length > 1 && alternates.map(({ l, href }) => <link rel="alternate" hreflang={l} href={href} />)}
+  {alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0F1114" media="(prefers-color-scheme: dark)" />
@@ -74,20 +87,20 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
         <ul>
           {nav.map((n) => (
             <li class={n.id === "download" ? "nav-download" : undefined}>
-              <a href={n.href} aria-current={n.id === page && n.id !== "home" ? "page" : undefined}>{n.label}</a>
+              <a class="hit" href={n.href} aria-current={n.id === page && n.id !== "home" ? "page" : undefined}>{n.label}</a>
             </li>
           ))}
-          <li class="nav-gh"><a href={repoUrl}>{s.nav.github}</a></li>
+          <li class="nav-gh"><a class="hit" href={repoUrl}>{s.nav.github}</a></li>
         </ul>
       </nav>
       <div class="tools">
         <!-- Hidden until the script below runs: without JavaScript it couldn't work. -->
-        <button type="button" class="theme" data-theme-toggle hidden aria-pressed="false"
+        <button type="button" class="theme hit" data-theme-toggle hidden aria-pressed="false"
                 aria-label={s.theme.label} data-to-dark={s.theme.toDark} data-to-light={s.theme.toLight}>
           <Icon name="moon" class="when-light" />
           <Icon name="sun" class="when-dark" />
         </button>
-        <a class="lang" href={otherHref} hreflang={other} lang={other}>{s.otherLang}</a>
+        <a class="lang hit" href={otherHref} hreflang={other} lang={other}>{s.otherLang}</a>
       </div>
     </div>
   </header>
@@ -108,6 +121,7 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
       </div>
       <ul class="foot-links">
         <li><a href={r.download}>{s.nav.download}</a></li>
+        <li><a href={r.codes}>{codeStrings[lang].short}</a></li>
         <li><a href={r.guide}>{s.nav.guide}</a></li>
         <li><a href={r.cars}>{s.nav.cars}</a></li>
         <li><a href={r.privacy}>{s.footer.privacy}</a></li>
@@ -172,7 +186,7 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   .tools { display: flex; align-items: center; gap: var(--s2); }
   .theme, .lang {
     display: inline-flex; align-items: center; justify-content: center; height: 34px;
-    border: 1px solid var(--hairline); border-radius: var(--radius); background: transparent;
+    border: 1px solid var(--field-border); border-radius: var(--radius); background: transparent;
     color: var(--text-muted); text-decoration: none; font: 500 15px/1 var(--sans);
     transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
   }
@@ -185,15 +199,15 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   @media (max-width: 860px) {
     .nav-gh { display: none; }
   }
-  /* Phones: the brand and the two controls on the first row, the links under them. */
-  @media (max-width: 640px) {
+  /* Narrow windows and phones: the brand and the two controls on the first row,
+     the links under them (--top-h in global.css matches this height). */
+  @media (max-width: 800px) {
     .top-inner { flex-wrap: wrap; padding-block: 10px 6px; gap: 6px var(--s3); min-height: 0; }
     .brand { font-size: 18px; gap: 10px; }
     .brand img { width: 32px; height: 32px; }
     nav { order: 3; width: 100%; }
     nav ul { gap: var(--s1) var(--s4); }
     nav a { font-size: 14px; }
-    nav li:not(.nav-download):first-child { display: none; }
   }
 
   .foot { margin-top: var(--s9); border-top: 1px solid var(--hairline); background: var(--sidebar); }
@@ -203,6 +217,7 @@ const ogImage = new URL(`/og-${lang}.png`, site).href;
   .foot-brand p { color: var(--text-muted); font-size: 15px; margin-top: var(--s3); }
   .foot-links { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, auto); gap: var(--s2) var(--s7); align-content: start; }
   .foot-links a { color: var(--text-muted); text-decoration: none; font-size: 15px; }
+  @media (pointer: coarse) { .foot-links { row-gap: 0; } .foot-links a { display: inline-block; padding-block: 12px; } }
   .foot-links a:hover { color: var(--text); text-decoration: underline; }
   .foot-small { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2) var(--s5); border-top: 1px solid var(--hairline); padding-top: var(--s4); font-size: 13px; color: var(--text-faint); }
   @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; } }

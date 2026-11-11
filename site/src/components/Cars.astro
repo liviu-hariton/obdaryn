@@ -59,11 +59,11 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
 </Base>
 
 <style>
-  .lede { color: var(--text-muted); font-size: 18px; margin-top: var(--s4); max-width: 66ch; }
+  .lede { color: var(--text-muted); font-size: 18px; margin-top: var(--s4); max-width: 35em; }
   .gen { font-size: 13px; color: var(--text-faint); margin-top: var(--s3); }
   section { margin-top: var(--s8); }
   h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: var(--s4); }
-  .sub { color: var(--text-muted); max-width: 66ch; }
+  .sub { color: var(--text-muted); max-width: 35em; }
   .brands { list-style: none; padding: 0; border-top: 1px solid var(--hairline); }
   .brands > li { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--s2) var(--s6); padding: 16px 0; border-bottom: 1px solid var(--hairline); }
   .name { font-weight: 600; }
@@ -72,6 +72,6 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
   .make h3 { font-size: 15px; font-weight: 600; padding-bottom: var(--s2); border-bottom: 1px solid var(--hairline); }
   .models { list-style: none; padding: 0; columns: 4 160px; column-gap: var(--s5); margin-top: var(--s3); }
   .models li { padding: 4px 0; font-size: 15px; break-inside: avoid; }
-  .note { margin-top: var(--s7); font-size: 14px; color: var(--text-faint); max-width: 70ch; }
+  .note { margin-top: var(--s7); font-size: 14px; color: var(--text-faint); max-width: 40em; }
   @media (max-width: 640px) { .brands > li { grid-template-columns: 1fr; } }
 </style>

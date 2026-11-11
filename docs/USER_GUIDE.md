@@ -1,6 +1,12 @@
 # Obdaryn user guide
 
-The same guide is in the app under **Help** (⌘?). For what each feature asks of the car and the adapter in more depth, see [CAR_INTERACTION.md](CAR_INTERACTION.md).
+The same guide is in the app under **Help** (⌘?). For what each feature asks of the car and the adapter in more depth, see [how Obdaryn talks to the car](CAR_INTERACTION.md).
+
+## Install and open it the first time
+
+1. Download the installer from [obdaryn.eu](https://obdaryn.eu/download/), open it and drag **Obdaryn** to **Applications**. It runs on macOS 14.4 or later, on Apple Silicon and Intel.
+2. Open Obdaryn. Because it isn't notarized by Apple yet, macOS says it can't check the app for malicious software. Click **Done**.
+3. Open **System Settings → Privacy & Security**. Under Security, next to "Obdaryn was blocked", click **Open Anyway** and confirm with your password. You do this once; after that it opens normally.
 
 ## Start here
 
