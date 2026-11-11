@@ -60,6 +60,7 @@ qt_add_qml_module(obdaryn
         qml/pages/LogPage.qml
         qml/pages/SettingsPage.qml
         qml/pages/ModulesPage.qml
+        qml/pages/TripPage.qml
     SOURCES
         AppController.h AppController.cpp
         models/LiveDataModel.h models/LiveDataModel.cpp

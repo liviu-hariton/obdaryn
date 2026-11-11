@@ -1,0 +1,331 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// Trip computer: distance, fuel and consumption for the current drive,
+// how the fuel is measured, fill-up calibration and recent trips.
+// Read at a glance by a passenger on a test drive, so the four main numbers
+// are big and come first.
+import QtQuick
+import QtQuick.Controls.Basic as C
+import QtQuick.Layouts
+import Obdaryn
+
+Item {
+    id: page
+    signal openPage(int p)
+    readonly property bool ready: App.connectionState === App.Ready
+    readonly property var trip: App.trip
+
+    function num(v, decimals) { return Number(v).toLocaleString(Qt.locale(), "f", decimals) }
+    /// Accepts "1.8" and "1,8" (Romanian keyboards type a comma).
+    function parseNumber(text) { return parseFloat(String(text).replace(",", ".")) }
+
+    NotConnected {
+        visible: !page.ready
+        anchors.centerIn: parent
+        width: Math.min(560, parent.width - 2 * Theme.s6)
+        onConnectRequested: page.openPage(0)
+    }
+
+    C.ScrollView {
+        id: scroll
+        visible: page.ready
+        anchors.fill: parent
+        contentWidth: availableWidth
+
+        ColumnLayout {
+            id: content
+            width: Math.min(Theme.contentMaxWidth, scroll.availableWidth - 2 * Theme.s6)
+            x: (scroll.availableWidth - width) / 2
+            spacing: Theme.s6
+
+            PageHeader {
+                Layout.fillWidth: true
+                Layout.topMargin: Theme.s5
+                title: qsTr("Trip")
+                subtitle: page.trip.active ? qsTr("Started at %1 · %2").arg(page.trip.startedAt).arg(page.trip.duration) : ""
+                AppButton {
+                    text: qsTr("New trip")
+                    iconName: "refresh-cw"
+                    enabled: page.trip.active === true
+                    Accessible.description: qsTr("Saves this trip and starts counting from zero")
+                    onClicked: App.newTrip()
+                }
+            }
+
+            // ---- The four numbers -------------------------------------------------
+            component BigValue: ColumnLayout {
+                id: big
+                property string label
+                property string value
+                property string unit
+                Layout.fillWidth: true
+                Layout.preferredWidth: 1
+                spacing: 4
+                Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: Theme.hairline; Layout.bottomMargin: Theme.s2 }
+                Text {
+                    Layout.fillWidth: true
+                    text: big.label
+                    color: Theme.textMuted
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontSmall
+                    elide: Text.ElideRight
+                }
+                RowLayout {
+                    spacing: 6
+                    Text {
+                        Layout.alignment: Qt.AlignBaseline
+                        text: big.value
+                        color: big.value === "—" ? Theme.textFaint : Theme.text
+                        font.family: Theme.sans
+                        font.pixelSize: Theme.fontDisplay
+                        font.weight: Font.DemiBold
+                        font.letterSpacing: -1
+                        font.features: { "tnum": 1 }
+                    }
+                    Text {
+                        Layout.alignment: Qt.AlignBaseline
+                        visible: big.value !== "—"
+                        text: big.unit
+                        color: Theme.textMuted
+                        font.family: Theme.sans
+                        font.pixelSize: Theme.fontEmphasis
+                    }
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: Theme.s5
+                BigValue {
+                    label: qsTr("Distance")
+                    value: page.num(page.trip.distanceKm, page.trip.distanceKm < 100 ? 1 : 0)
+                    unit: qsTr("km")
+                }
+                BigValue {
+                    label: qsTr("Fuel used")
+                    value: page.trip.fuelKnown ? page.num(page.trip.fuelLiters, page.trip.fuelLiters < 10 ? 2 : 1) : "—"
+                    unit: qsTr("L")
+                }
+                BigValue {
+                    label: qsTr("Average")
+                    value: page.trip.fuelKnown && page.trip.averageL100 > 0 ? page.num(page.trip.averageL100, 1) : "—"
+                    unit: qsTr("L/100 km")
+                }
+                BigValue {
+                    // Standing still, L/100 km is meaningless: show the flow instead.
+                    label: page.trip.moving ? qsTr("Right now") : qsTr("Right now, standing")
+                    value: !page.trip.fuelKnown ? "—"
+                         : page.trip.moving ? page.num(page.trip.instantL100, 1) : page.num(page.trip.instantLph, 1)
+                    unit: page.trip.moving ? qsTr("L/100 km") : qsTr("L/h")
+                }
+            }
+
+            // ---- Times and speeds -------------------------------------------------
+            GridLayout {
+                Layout.fillWidth: true
+                columns: 2
+                columnSpacing: Theme.s6
+                rowSpacing: 0
+                KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Driving"); value: page.trip.drivingTime || "" }
+                KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Average speed")
+                           value: page.trip.averageSpeed > 0 ? qsTr("%1 km/h").arg(page.num(page.trip.averageSpeed, 0)) : "—" }
+                KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Idling"); value: page.trip.idleTime || "" }
+                KeyValue { Layout.fillWidth: true; Layout.preferredWidth: 1; labelWidth: 160; label: qsTr("Top speed")
+                           value: qsTr("%1 km/h").arg(page.num(page.trip.maxSpeed || 0, 0)) }
+            }
+
+            // ---- How fuel is measured ----------------------------------------------
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.maximumWidth: Theme.readingMaxWidth
+                spacing: Theme.s3
+
+                SectionTitle { Layout.fillWidth: true; text: qsTr("How fuel is measured") }
+
+                Text {
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    color: Theme.text
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontBody
+                    lineHeight: 1.3
+                    text: {
+                        switch (page.trip.method) {
+                        case "fuelRate": return qsTr("The engine computer reports its fuel rate, so fuel use is measured, not estimated.")
+                        case "maf": return qsTr("Estimated from the air-flow sensor: fuel is the air the engine breathes divided by the air-fuel ratio. Expect up to 10–20 % error until it's calibrated with fill-ups.")
+                        case "speedDensity": return qsTr("This car has no air-flow sensor, so fuel is estimated from manifold pressure, intake temperature, engine speed and the engine size. Expect up to 10–20 % error until it's calibrated with fill-ups.")
+                        case "needsEngineSize": return qsTr("This car has no air-flow sensor. Enter the engine size and Obdaryn estimates fuel from manifold pressure, intake temperature and engine speed.")
+                        default: return page.trip.diesel
+                                 ? qsTr("This diesel doesn't report its fuel rate, and a diesel's air-fuel ratio varies too much to estimate fuel from air flow. Distance and times still work.")
+                                 : qsTr("This car reports neither fuel rate, air flow nor manifold pressure, so fuel can't be estimated. Distance and times still work.")
+                        }
+                    }
+                }
+
+                // Engine size, only where the estimate needs it.
+                RowLayout {
+                    visible: page.trip.method === "speedDensity" || page.trip.method === "needsEngineSize"
+                    spacing: Theme.s3
+                    TextInput {
+                        id: engineField
+                        Layout.preferredWidth: 160
+                        Layout.maximumWidth: 160
+                        label: qsTr("Engine size (liters)")
+                        placeholder: qsTr("e.g. 1.6")
+                        text: page.trip.engineLiters > 0 ? page.num(page.trip.engineLiters, 1) : ""
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        onAccepted: engineSave.clicked()
+                    }
+                    AppButton {
+                        id: engineSave
+                        Layout.alignment: Qt.AlignBottom
+                        implicitHeight: 36
+                        text: qsTr("Save")
+                        readonly property real liters: page.parseNumber(engineField.text)
+                        enabled: liters >= 0.5 && liters <= 10 && Math.abs(liters - page.trip.engineLiters) > 0.001
+                        onClicked: App.setEngineLiters(liters)
+                    }
+                    Text {
+                        Layout.alignment: Qt.AlignBottom
+                        Layout.bottomMargin: 9
+                        Layout.fillWidth: true
+                        text: qsTr("From the registration certificate: cm³ ÷ 1000.")
+                        color: Theme.textFaint
+                        font.family: Theme.sans
+                        font.pixelSize: Theme.fontSmall
+                        wrapMode: Text.WordWrap
+                    }
+                }
+
+                // Calibration with fill-ups.
+                Text {
+                    Layout.fillWidth: true
+                    visible: page.trip.fuelKnown === true || page.trip.method === "maf" || page.trip.method === "speedDensity"
+                    wrapMode: Text.WordWrap
+                    color: Theme.textMuted
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontBody
+                    lineHeight: 1.3
+                    text: !page.trip.saved
+                          ? qsTr("Trips of the demo car and of recordings aren't saved, and fill-ups can't be recorded for them.")
+                          : page.trip.calibrationFillUps > 0
+                            ? qsTr("Calibrated with %n fill-up(s): estimates are multiplied by %1.", "", page.trip.calibrationFillUps).arg(page.num(page.trip.calibration, 2))
+                              + (page.trip.fillUpStarted ? " " + qsTr("Since the last fill-up: %1 L.").arg(page.num(page.trip.sinceFillUpLiters, 1)) : "")
+                            : page.trip.fillUpStarted
+                              ? qsTr("Counting since your last fill-up: %1 L so far. At the next fill-up, enter the liters the pump shows to calibrate. Every drive in between must be followed by Obdaryn.").arg(page.num(page.trip.sinceFillUpLiters, 1))
+                              : qsTr("Not calibrated yet. Fill the tank to the click and record the fill-up, drive normally with Obdaryn connected, then record the next fill-up: Obdaryn compares the pump with its estimate.")
+                }
+
+                RowLayout {
+                    visible: page.trip.saved === true && !fillForm.visible
+                    spacing: Theme.s2
+                    AppButton {
+                        text: qsTr("Record a fill-up")
+                        iconName: "fuel"
+                        onClicked: { fillForm.visible = true; litersField.text = ""; litersField.forceActiveFocus() }
+                    }
+                    AppButton {
+                        visible: page.trip.calibrationFillUps > 0
+                        variant: "quiet"
+                        text: qsTr("Reset calibration")
+                        onClicked: App.resetFuelCalibration()
+                    }
+                }
+
+                // Inline, not a dialog: it's one number.
+                RowLayout {
+                    id: fillForm
+                    visible: false
+                    spacing: Theme.s3
+                    TextInput {
+                        id: litersField
+                        Layout.preferredWidth: 180
+                        Layout.maximumWidth: 180
+                        label: qsTr("Liters at the pump")
+                        placeholder: qsTr("e.g. 38.5")
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        onAccepted: fillSave.clicked()
+                    }
+                    AppButton {
+                        id: fillSave
+                        Layout.alignment: Qt.AlignBottom
+                        implicitHeight: 36
+                        variant: "primary"
+                        text: qsTr("Save fill-up")
+                        readonly property real liters: page.parseNumber(litersField.text)
+                        enabled: liters > 0 && liters <= 200
+                        onClicked: { App.recordFillUp(liters); fillForm.visible = false }
+                    }
+                    AppButton {
+                        Layout.alignment: Qt.AlignBottom
+                        implicitHeight: 36
+                        variant: "quiet"
+                        text: qsTr("Cancel")
+                        onClicked: fillForm.visible = false
+                    }
+                    Text {
+                        Layout.alignment: Qt.AlignBottom
+                        Layout.bottomMargin: 9
+                        Layout.fillWidth: true
+                        text: qsTr("Fill to the first click of the nozzle, every time.")
+                        color: Theme.textFaint
+                        font.family: Theme.sans
+                        font.pixelSize: Theme.fontSmall
+                        wrapMode: Text.WordWrap
+                    }
+                }
+            }
+
+            // ---- Recent trips -------------------------------------------------------
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.bottomMargin: Theme.s6
+                visible: page.trip.saved === true
+                spacing: 0
+
+                SectionTitle { Layout.fillWidth: true; text: qsTr("Recent trips"); Layout.bottomMargin: Theme.s2 }
+
+                Text {
+                    visible: App.tripHistory.length === 0
+                    Layout.fillWidth: true
+                    text: qsTr("Trips are saved here when you disconnect or start a new trip.")
+                    color: Theme.textMuted
+                    font.family: Theme.sans
+                    font.pixelSize: Theme.fontBody
+                    wrapMode: Text.WordWrap
+                }
+
+                Repeater {
+                    model: App.tripHistory
+                    delegate: ColumnLayout {
+                        id: row
+                        required property var modelData
+                        Layout.fillWidth: true
+                        spacing: 0
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Layout.topMargin: Theme.s2
+                            Layout.bottomMargin: Theme.s2
+                            spacing: Theme.s4
+                            component Cell: Text {
+                                color: Theme.text
+                                font.family: Theme.sans
+                                font.pixelSize: Theme.fontBody
+                                font.features: { "tnum": 1 }
+                                elide: Text.ElideRight
+                            }
+                            Cell { Layout.fillWidth: true; text: row.modelData.when; color: Theme.textMuted }
+                            Cell { Layout.preferredWidth: 90; horizontalAlignment: Text.AlignRight; text: qsTr("%1 km").arg(page.num(row.modelData.distanceKm, 1)) }
+                            Cell { Layout.preferredWidth: 80; horizontalAlignment: Text.AlignRight
+                                   text: row.modelData.fuelKnown ? qsTr("%1 L").arg(page.num(row.modelData.fuelLiters, 2)) : "—" }
+                            Cell { Layout.preferredWidth: 120; horizontalAlignment: Text.AlignRight
+                                   text: row.modelData.averageL100 > 0 ? qsTr("%1 L/100 km").arg(page.num(row.modelData.averageL100, 1)) : "—" }
+                            Cell { Layout.preferredWidth: 90; horizontalAlignment: Text.AlignRight; text: row.modelData.duration; color: Theme.textMuted }
+                        }
+                        Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: Theme.hairline }
+                    }
+                }
+            }
+        }
+    }
+}

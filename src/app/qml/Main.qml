@@ -7,7 +7,7 @@
 //   1 Trouble codes                              5 Vehicle info
 //   2 Readiness                                  6 Adapter log
 //   3 Freeze frame                               7 Settings
-//   8 All modules (full-vehicle scan)
+//   8 All modules (full-vehicle scan)          9 Trip (distance and fuel)
 import QtQuick
 import QtQuick.Controls.Basic as C
 import QtQuick.Dialogs
@@ -61,8 +61,8 @@ C.ApplicationWindow {
         onAccepted: App.saveReport(selectedFile)
     }
 
-    // Keyboard: ⌘1…⌘8 follow the sidebar order, ⌘, opens Settings, ⌘R scans again, ⌘S saves the report.
-    readonly property var sidebarOrder: [0, 1, 8, 2, 3, 4, 5, 6]
+    // Keyboard: ⌘1…⌘9 follow the sidebar order, ⌘, opens Settings, ⌘R scans again, ⌘S saves the report.
+    readonly property var sidebarOrder: [0, 1, 8, 2, 3, 4, 9, 5, 6]
     Repeater {
         model: window.sidebarOrder.length
         delegate: Item {
@@ -109,6 +109,7 @@ C.ApplicationWindow {
                 onClearRequested: (row, name) => window.requestModuleClear(row, name)
                 onObdClearRequested: window.requestClear()
             }
+            TripPage { onOpenPage: p => window.page = p }
         }
     }
 

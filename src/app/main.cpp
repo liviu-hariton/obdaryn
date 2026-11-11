@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
     //   OBDARYN_APPEARANCE=light|dark  OBDARYN_LANG=en|ro  OBDARYN_DELAY_MS=4000  OBDARYN_SIZE=WxH
     //   OBDARYN_SCAN_MODULES=1  OBDARYN_RECORD=1 (record once the first scan ends)
     //   OBDARYN_REPLAY=file.obdrec (replay instead of the demo car)
+    //   OBDARYN_DEMO_TRIPS=1 (save the demo car's trips, to capture the trip history)
     //   OBDARYN_RECORDINGS_DIR / OBDARYN_REPORTS_DIR=folder (read by AppController; keeps captures out of ~/Documents)
     //   OBDARYN_REPORT=out.pdf|out.html (save the report after the scan, or after the module scan with OBDARYN_SCAN_MODULES=1)
     const QString capturePath = qEnvironmentVariable("OBDARYN_CAPTURE");

@@ -39,7 +39,8 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [x] CSV export of a recording's live data: one row per moment, one column per value (Parquet maybe later)
 - [x] **Shareable report** (PDF or web page): a summary at a glance (check-engine light, codes, other modules, ITP readiness, when the codes were last cleared, battery), every code with its explanation, the module scan, readiness monitors, freeze frame and vehicle identification. It says plainly when it was made from the demo car or a recording. Save with ⌘S or "Save report…" on the Overview.
 - [ ] The probe writes the same report (`--report-html`), so first-contact runs leave one behind
-- [ ] **Trip and fuel statistics** from MAF or speed-density, with a calibration factor checked against fill-ups
+- [x] **Trip and fuel statistics.** Distance from speed; fuel from the fuel-rate value, the air-flow sensor, or speed-density (manifold pressure, intake temperature, rpm and the engine size) for cars without one; fuel cut while coasting counts as zero. A per-car calibration factor learned from fill-ups (liter-weighted, refuses implausible ones). Trips of real cars are saved per car; demo and replay trips never are.
+- [ ] Trip statistics in the shareable report, and a fuel price for trip costs
 
 ## v0.4 — adapter health and robustness
 

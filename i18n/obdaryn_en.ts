@@ -66,6 +66,13 @@
     </message>
 </context>
 <context>
+    <name>TripPage</name>
+    <message numerus="yes">
+        <source>Calibrated with %n fill-up(s): estimates are multiplied by %1.</source>
+        <translation><numerusform>Calibrated with %n fill-up: estimates are multiplied by %1.</numerusform><numerusform>Calibrated with %n fill-ups: estimates are multiplied by %1.</numerusform></translation>
+    </message>
+</context>
+<context>
     <name>obdaryn::AppController</name>
     <message numerus="yes">
         <source>Saved %1 next to the recording (%n rows).</source>
@@ -79,27 +86,45 @@
     <name>obdaryn::VehicleReport</name>
     <message numerus="yes">
         <source>%n stored</source>
-        <translation><numerusform>%n stored</numerusform><numerusform>%n stored</numerusform></translation>
+        <translation>
+            <numerusform>%n stored</numerusform>
+            <numerusform>%n stored</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n pending</source>
-        <translation><numerusform>%n pending</numerusform><numerusform>%n pending</numerusform></translation>
+        <translation>
+            <numerusform>%n pending</numerusform>
+            <numerusform>%n pending</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n permanent</source>
-        <translation><numerusform>%n permanent</numerusform><numerusform>%n permanent</numerusform></translation>
+        <translation>
+            <numerusform>%n permanent</numerusform>
+            <numerusform>%n permanent</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n code(s)</source>
-        <translation><numerusform>%n code</numerusform><numerusform>%n codes</numerusform></translation>
+        <translation>
+            <numerusform>%n code</numerusform>
+            <numerusform>%n codes</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n module(s) answered.</source>
-        <translation><numerusform>%n module answered.</numerusform><numerusform>%n modules answered.</numerusform></translation>
+        <translation>
+            <numerusform>%n module answered.</numerusform>
+            <numerusform>%n modules answered.</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n warm-up(s)</source>
-        <translation><numerusform>%n warm-up</numerusform><numerusform>%n warm-ups</numerusform></translation>
+        <translation>
+            <numerusform>%n warm-up</numerusform>
+            <numerusform>%n warm-ups</numerusform>
+        </translation>
     </message>
 </context>
 </TS>

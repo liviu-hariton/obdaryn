@@ -19,8 +19,12 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QFileInfo>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <QStandardPaths>
 #include <QUrl>
+
+#include <cmath>
 #include <QGuiApplication>
 #include <QLibraryInfo>
 #include <QLocale>
@@ -149,6 +153,7 @@ AppController::~AppController()
 {
     m_pollTimer.stop();
     m_voltageTimer.stop();
+    endTrip(); // quitting while connected still saves the trip
 }
 
 // ---------------------------------------------------------------------------
@@ -175,6 +180,7 @@ void AppController::connectDemo()
 
 void AppController::startSession(Transport *transport, bool demo)
 {
+    endTrip();
     m_afterPoll = nullptr;
     m_pollingEnabled = false;
     m_pollTimer.stop();
@@ -216,6 +222,7 @@ void AppController::onSessionStateChanged()
         break;
     case ElmSession::State::NoVehicle:
     case ElmSession::State::Failed:
+        endTrip();
         m_statusMessage = s->lastError();
         m_pollingEnabled = false;
         m_voltageTimer.stop();
@@ -227,6 +234,7 @@ void AppController::onSessionStateChanged()
         runFullScan();
         break;
     case ElmSession::State::Disconnected:
+        endTrip();
         m_statusMessage.clear();
         m_pollingEnabled = false;
         m_voltageTimer.stop();
@@ -477,10 +485,14 @@ void AppController::readStatusPids()
         for (const auto &r : readings) {
             if (r.pid == 0x1C && m_obdStandard.isEmpty())
                 m_obdStandard = PidTable::describeStatus(0x1C, r.raw);
-            if (r.pid == 0x51 && m_fuelType.isEmpty())
+            if (r.pid == 0x51 && m_fuelType.isEmpty()) {
                 m_fuelType = PidTable::describeStatus(0x51, r.raw);
+                m_fuelTypeCode = r.raw.isEmpty() ? 0 : quint8(r.raw[0]);
+            }
         }
         emit vehicleChanged();
+        if (!m_tripActive)
+            startTrip(); // the supported PIDs and the fuel type are known now
     });
 }
 
@@ -587,6 +599,7 @@ void AppController::pollLiveData()
             seen.insert(r.pid);
             m_liveData->applyReading(r.pid, r.raw);
         }
+        feedTrip(readings);
         m_samplesThisSecond += int(seen.size());
         if (m_rateClock.elapsed() >= 1000) {
             m_liveData->setSamplesPerSecond(m_samplesThisSecond * 1000.0 / m_rateClock.restart());
@@ -832,6 +845,294 @@ void AppController::saveReport(const QString &pathOrUrl, bool open)
         if (open)
             QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     });
+}
+
+// ---------------------------------------------------------------------------
+// Trip computer
+
+namespace {
+constexpr int kTripHistoryLength = 20;
+constexpr double kMinSavedTripKm = 0.5;        // shorter "trips" are just connecting in the driveway
+constexpr qint64 kTripBankIntervalMs = 30000;  // fuel is banked toward the fill-up count this often
+constexpr qint64 kTripEmitIntervalMs = 250;    // the screen refreshes four times a second
+
+/// "40 s", "23 min" or "1 h 05 min".
+QString durationText(qint64 ms)
+{
+    if (ms < 60000)
+        return AppController::tr("%1 s").arg(ms / 1000);
+    const qint64 minutes = ms / 60000;
+    if (minutes < 60)
+        return AppController::tr("%1 min").arg(minutes);
+    return AppController::tr("%1 h %2 min").arg(minutes / 60).arg(minutes % 60, 2, 10, QLatin1Char('0'));
+}
+
+QString methodKey(TripComputer::FuelMethod m)
+{
+    switch (m) {
+    case TripComputer::FuelMethod::FuelRate: return QStringLiteral("fuelRate");
+    case TripComputer::FuelMethod::MassAirFlow: return QStringLiteral("maf");
+    case TripComputer::FuelMethod::SpeedDensity: return QStringLiteral("speedDensity");
+    case TripComputer::FuelMethod::NeedsEngineSize: return QStringLiteral("needsEngineSize");
+    case TripComputer::FuelMethod::None: break;
+    }
+    return QStringLiteral("none");
+}
+} // namespace
+
+QString AppController::tripKey() const
+{
+    // Per car: calibration and engine size belong to one vehicle.
+    if (m_demo)
+        return QStringLiteral("trips/demo");
+    return QStringLiteral("trips/") + (m_vin.isEmpty() ? QStringLiteral("unknown") : m_vin);
+}
+
+void AppController::startTrip()
+{
+    const QSet<quint8> supported = m_liveData->supportedPids();
+    // Diesel: the compression-ignition readiness flag, or PID 51 (diesel, hybrid diesel, bifuel diesel).
+    const bool diesel = m_readiness.compressionIgnition || m_fuelTypeCode == 0x04 || m_fuelTypeCode == 0x13 || m_fuelTypeCode == 0x17;
+
+    QSettings settings;
+    settings.beginGroup(tripKey());
+    TripComputer::Settings ts;
+    ts.diesel = diesel;
+    // The demo car is a 1.8 L Elantra; real cars need the owner to say.
+    ts.engineLiters = settings.value(QStringLiteral("engineLiters"), m_demo ? 1.8 : 0.0).toDouble();
+    ts.calibration = settings.value(QStringLiteral("calibration"), 1.0).toDouble();
+    settings.endGroup();
+
+    m_trip.setSupported(supported);
+    m_trip.setSettings(ts);
+    m_trip.reset();
+    m_liveData->setRequiredPids(TripComputer::inputPids(supported, diesel));
+    m_tripBanked = 0;
+    m_tripLastBank = 0;
+    m_tripLastEmit = 0;
+    m_tripStarted = QDateTime::currentDateTime();
+    m_tripClock.start();
+    m_tripActive = true;
+    loadTripHistory();
+    refreshTrip();
+}
+
+void AppController::feedTrip(const QList<ObdClient::PidReading> &readings)
+{
+    if (!m_tripActive)
+        return;
+    QHash<quint8, double> values;
+    for (const auto &r : readings) {
+        if (values.contains(r.pid))
+            continue; // first ECU (the engine) wins
+        if (r.pid == 0x03) { // fuel system status: a bit field, not a number
+            if (!r.raw.isEmpty())
+                values.insert(r.pid, quint8(r.raw[0]));
+            continue;
+        }
+        const PidDefinition *def = PidTable::find(r.pid);
+        double v = 0;
+        if (def && def->value(r.raw, &v) && std::isfinite(v))
+            values.insert(r.pid, v);
+    }
+    const qint64 now = m_tripClock.elapsed();
+    m_trip.addSample(now, values);
+    if (now - m_tripLastBank >= kTripBankIntervalMs) {
+        m_tripLastBank = now;
+        bankTripFuel();
+    }
+    if (now - m_tripLastEmit >= kTripEmitIntervalMs) {
+        m_tripLastEmit = now;
+        refreshTrip();
+    }
+}
+
+void AppController::bankTripFuel()
+{
+    // Adds this trip's new fuel to the car's "since the last fill-up" count,
+    // as it goes, so a crash or a flat laptop battery loses little.
+    const double delta = m_trip.stats().rawFuelLiters - m_tripBanked;
+    if (!tripSaved() || delta <= 0 || !m_trip.stats().fuelKnown)
+        return;
+    QSettings settings;
+    settings.beginGroup(tripKey());
+    if (settings.value(QStringLiteral("fillUpStarted")).toBool())
+        settings.setValue(QStringLiteral("rawSinceFillUp"), settings.value(QStringLiteral("rawSinceFillUp")).toDouble() + delta);
+    settings.endGroup();
+    m_tripBanked = m_trip.stats().rawFuelLiters;
+}
+
+void AppController::endTrip()
+{
+    if (!m_tripActive)
+        return;
+    bankTripFuel();
+    const TripComputer::Stats &st = m_trip.stats();
+    if (tripSaved() && st.distanceKm >= kMinSavedTripKm) {
+        QSettings settings;
+        settings.beginGroup(tripKey());
+        QJsonArray history = QJsonDocument::fromJson(settings.value(QStringLiteral("history")).toByteArray()).array();
+        history.prepend(QJsonObject{{QStringLiteral("start"), m_tripStarted.toString(Qt::ISODate)},
+                                    {QStringLiteral("km"), st.distanceKm},
+                                    {QStringLiteral("liters"), st.fuelLiters},
+                                    {QStringLiteral("ms"), double(st.durationMs)},
+                                    {QStringLiteral("fuelKnown"), st.fuelKnown}});
+        while (history.size() > kTripHistoryLength)
+            history.removeLast();
+        settings.setValue(QStringLiteral("history"), QJsonDocument(history).toJson(QJsonDocument::Compact));
+        settings.endGroup();
+    }
+    m_tripActive = false;
+    m_liveData->setRequiredPids({});
+    loadTripHistory();
+    refreshTrip();
+}
+
+void AppController::newTrip()
+{
+    if (!m_tripActive)
+        return;
+    endTrip();
+    startTrip();
+}
+
+void AppController::loadTripHistory()
+{
+    m_tripHistory.clear();
+    if (tripSaved()) {
+        QSettings settings;
+        const QJsonArray history = QJsonDocument::fromJson(settings.value(tripKey() + QStringLiteral("/history")).toByteArray()).array();
+        for (const QJsonValue &v : history) {
+            const QJsonObject o = v.toObject();
+            const double km = o.value(QStringLiteral("km")).toDouble();
+            const double liters = o.value(QStringLiteral("liters")).toDouble();
+            const bool known = o.value(QStringLiteral("fuelKnown")).toBool();
+            const QDateTime start = QDateTime::fromString(o.value(QStringLiteral("start")).toString(), Qt::ISODate);
+            m_tripHistory << QVariantMap{{QStringLiteral("when"), QLocale().toString(start, QLocale::ShortFormat)},
+                                         {QStringLiteral("distanceKm"), km},
+                                         {QStringLiteral("fuelLiters"), liters},
+                                         {QStringLiteral("averageL100"), known && km >= 0.2 ? liters / km * 100.0 : 0.0},
+                                         {QStringLiteral("duration"), durationText(qint64(o.value(QStringLiteral("ms")).toDouble()))},
+                                         {QStringLiteral("fuelKnown"), known}};
+        }
+    }
+    emit tripHistoryChanged();
+}
+
+QVariantMap AppController::buildTripMap() const
+{
+    const TripComputer::Stats &st = m_trip.stats();
+    const TripComputer::Settings &ts = m_trip.settings();
+    QSettings settings;
+    settings.beginGroup(tripKey());
+    const bool fillUpStarted = settings.value(QStringLiteral("fillUpStarted")).toBool();
+    // Fuel since the last fill-up, including what this trip hasn't banked yet.
+    const double sinceFillUp = (settings.value(QStringLiteral("rawSinceFillUp")).toDouble()
+                                + (tripSaved() ? st.rawFuelLiters - m_tripBanked : 0)) * ts.calibration;
+    const int fillUps = settings.value(QStringLiteral("calibrationFillUps")).toInt();
+    settings.endGroup();
+    return {
+        {QStringLiteral("active"), m_tripActive},
+        {QStringLiteral("saved"), tripSaved()},
+        {QStringLiteral("startedAt"), m_tripStarted.isValid() ? QLocale().toString(m_tripStarted.time(), QLocale::ShortFormat) : QString()},
+        {QStringLiteral("distanceKm"), st.distanceKm},
+        {QStringLiteral("fuelLiters"), st.fuelLiters},
+        {QStringLiteral("fuelKnown"), st.fuelKnown},
+        {QStringLiteral("averageL100"), st.litersPer100Km()},
+        {QStringLiteral("instantL100"), st.instantLitersPer100Km()},
+        {QStringLiteral("instantLph"), st.instantLph},
+        {QStringLiteral("moving"), st.instantSpeedKmh >= 3},
+        {QStringLiteral("averageSpeed"), st.averageSpeedKmh()},
+        {QStringLiteral("maxSpeed"), st.maxSpeedKmh},
+        {QStringLiteral("duration"), durationText(st.durationMs)},
+        {QStringLiteral("drivingTime"), durationText(st.movingMs)},
+        {QStringLiteral("idleTime"), durationText(st.idleMs)},
+        {QStringLiteral("method"), methodKey(m_trip.method())},
+        {QStringLiteral("diesel"), ts.diesel},
+        {QStringLiteral("engineLiters"), ts.engineLiters},
+        {QStringLiteral("calibration"), ts.calibration},
+        {QStringLiteral("calibrationFillUps"), fillUps},
+        {QStringLiteral("fillUpStarted"), fillUpStarted},
+        {QStringLiteral("sinceFillUpLiters"), sinceFillUp},
+    };
+}
+
+void AppController::refreshTrip()
+{
+    // Built once per change, not per QML binding: it reads the settings.
+    m_tripCache = buildTripMap();
+    emit tripChanged();
+}
+
+void AppController::setEngineLiters(double liters)
+{
+    if (liters < 0.5 || liters > 10 || !m_tripActive)
+        return;
+    QSettings().setValue(tripKey() + QStringLiteral("/engineLiters"), liters);
+    TripComputer::Settings ts = m_trip.settings();
+    ts.engineLiters = liters;
+    m_trip.setSettings(ts);
+    refreshTrip();
+}
+
+void AppController::recordFillUp(double liters)
+{
+    if (!tripSaved()) {
+        emit notice(false, tr("Fill-ups can only be recorded with your own car connected, not the demo car or a recording."));
+        return;
+    }
+    if (liters <= 0 || liters > 200)
+        return;
+    bankTripFuel();
+    QSettings settings;
+    settings.beginGroup(tripKey());
+    if (!settings.value(QStringLiteral("fillUpStarted")).toBool()) {
+        emit notice(true, tr("Fill-up recorded. Obdaryn now counts the fuel it estimates; at your next fill-up, enter the liters again to calibrate."));
+    } else {
+        const auto c = TripComputer::learnCalibration(settings.value(QStringLiteral("calibration"), 1.0).toDouble(),
+                                                      settings.value(QStringLiteral("calibrationLiters")).toDouble(), liters,
+                                                      settings.value(QStringLiteral("rawSinceFillUp")).toDouble());
+        switch (c.result) {
+        case TripComputer::Calibration::Result::Learned: {
+            settings.setValue(QStringLiteral("calibration"), c.factor);
+            settings.setValue(QStringLiteral("calibrationLiters"), c.liters);
+            settings.setValue(QStringLiteral("calibrationFillUps"), settings.value(QStringLiteral("calibrationFillUps")).toInt() + 1);
+            TripComputer::Settings ts = m_trip.settings();
+            ts.calibration = c.factor;
+            m_trip.setSettings(ts);
+            const int percent = qRound(qAbs(c.measuredFactor - 1.0) * 100);
+            emit notice(true, c.measuredFactor >= 1.0
+                                  ? tr("Calibrated: the pump took %1 % more than Obdaryn estimated. Fuel figures now include the correction.").arg(percent)
+                                  : tr("Calibrated: the pump took %1 % less than Obdaryn estimated. Fuel figures now include the correction.").arg(percent));
+            break;
+        }
+        case TripComputer::Calibration::Result::TooLittleFuel:
+            emit notice(false, tr("Too little driving since the last fill-up to compare (under 5 L estimated). Counting starts again from this fill-up."));
+            break;
+        case TripComputer::Calibration::Result::TooFarOff:
+            emit notice(false, tr("The pump and the estimate are more than twice apart, so this fill-up wasn't used. Usually some drives happened without Obdaryn. Counting starts again from this fill-up."));
+            break;
+        }
+    }
+    // The tank is full now, whatever the outcome: count from here.
+    settings.setValue(QStringLiteral("fillUpStarted"), true);
+    settings.setValue(QStringLiteral("rawSinceFillUp"), 0.0);
+    settings.endGroup();
+    refreshTrip();
+}
+
+void AppController::resetFuelCalibration()
+{
+    QSettings settings;
+    settings.beginGroup(tripKey());
+    settings.remove(QStringLiteral("calibration"));
+    settings.remove(QStringLiteral("calibrationLiters"));
+    settings.remove(QStringLiteral("calibrationFillUps"));
+    settings.endGroup();
+    TripComputer::Settings ts = m_trip.settings();
+    ts.calibration = 1.0;
+    m_trip.setSettings(ts);
+    refreshTrip();
 }
 
 // ---------------------------------------------------------------------------

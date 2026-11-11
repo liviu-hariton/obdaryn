@@ -15,6 +15,7 @@
 - **Live data.** Every standard sensor the car supports, with sparklines. A pinned dashboard refreshes several times per second thanks to multi-PID requests.
 - **Vehicle info.** Decoded VIN, calibration IDs, CVNs and ECU names.
 - **Clearing codes**, only when you ask, never with the engine running, and with the consequences explained first.
+- **Trip computer.** Distance, fuel used, average and instant consumption, driving and idle time, with recent trips per car. Works on cars without an air-flow sensor too (many Hyundai, Kia and Toyota engines), from manifold pressure and the engine size, and learns a correction from your fill-ups.
 - **Shareable report.** One PDF or web page with everything read from the car: a summary at a glance, every code explained, all modules, readiness, freeze frame and vehicle identification. Useful for a used-car check or to hand to a mechanic; it also shows how recently the codes were cleared, which on a car for sale deserves a question.
 - **Record and replay.** Record a session (a drive, a fault that comes and goes) and replay it later without the car: every screen works as if it were connected. Export the live data as CSV for a spreadsheet.
 - **Adapter console.** Every command and answer, for troubleshooting.

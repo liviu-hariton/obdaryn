@@ -56,8 +56,14 @@ public:
     void setSupportedPids(const QList<quint8> &pids);
     void clear();
 
-    /// PIDs to request in the next polling cycle.
+    /// PIDs to request in the next polling cycle: the required ones, the
+    /// pinned ones, then a few others in rotation.
     QList<quint8> nextPollBatch();
+    /// PIDs read on every cycle whatever is pinned (the trip computer's inputs).
+    /// May include non-numeric PIDs such as 0x03, which have no row.
+    void setRequiredPids(const QSet<quint8> &pids) { m_required = pids; }
+    /// Every service 01 PID the car said it supports (numeric or not).
+    QSet<quint8> supportedPids() const { return m_supported; }
     void applyReading(quint8 pid, const QByteArray &raw);
 
     Q_INVOKABLE void setPinned(int pid, bool pinned);
@@ -91,6 +97,8 @@ private:
 
     QList<Row> m_rows;
     QSet<quint8> m_pinned;
+    QSet<quint8> m_required;
+    QSet<quint8> m_supported;
     int m_rotation = 0;
     double m_samplesPerSecond = 0;
 };

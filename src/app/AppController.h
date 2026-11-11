@@ -9,8 +9,10 @@
 #include "models/ModuleScanModel.h"
 #include "models/TrafficLogModel.h"
 #include "obd/ObdClient.h"
+#include "trip/TripComputer.h"
 
 #include <QElapsedTimer>
+#include <QDateTime>
 #include <QJsonObject>
 #include <QObject>
 #include <QPointer>
@@ -118,6 +120,15 @@ class AppController : public QObject
     /// The folder they are saved in, for display ("~/Documents/Obdaryn/Recordings").
     Q_PROPERTY(QString recordingsFolder READ recordingsFolderDisplay CONSTANT)
 
+    // Trip computer
+    /// The running trip: distanceKm, fuelLiters, averageL100, instantL100, instantLph,
+    /// averageSpeed, maxSpeed, duration, drivingTime, idleTime, startedAt, fuelKnown,
+    /// method, engineLiters, calibration, calibrationFillUps, fillUpStarted,
+    /// sinceFillUpLiters, saved (trips of this car are kept), active.
+    Q_PROPERTY(QVariantMap trip READ trip NOTIFY tripChanged)
+    /// This car's last trips, newest first: {when, distanceKm, fuelLiters, averageL100, duration, fuelKnown}.
+    Q_PROPERTY(QVariantList tripHistory READ tripHistory NOTIFY tripHistoryChanged)
+
     // App
     Q_PROPERTY(QString language READ language NOTIFY languageChanged)
     Q_PROPERTY(QString appVersion READ appVersion CONSTANT)
@@ -170,6 +181,14 @@ public:
     Q_INVOKABLE void exportRecordingCsv(const QString &pathOrUrl);
     Q_INVOKABLE void showRecordingsFolder() const;
     Q_INVOKABLE void refreshRecordings();
+
+    /// Saves the current trip to the history and starts a new one.
+    Q_INVOKABLE void newTrip();
+    /// The tank was just filled to the click with `liters`; learns the calibration (see TripComputer).
+    Q_INVOKABLE void recordFillUp(double liters);
+    Q_INVOKABLE void resetFuelCalibration();
+    /// Engine size in liters, needed by cars without an air-flow sensor.
+    Q_INVOKABLE void setEngineLiters(double liters);
 
     /// Where the save dialog starts: Documents/Obdaryn/Reports/<date> <car>.pdf
     Q_INVOKABLE QUrl suggestedReportUrl() const;
@@ -243,6 +262,8 @@ public:
     QString replayPosition() const;
     QVariantList recordings() const { return m_recordings; }
     QString recordingsFolderDisplay() const;
+    QVariantMap trip() const { return m_tripCache; }
+    QVariantList tripHistory() const { return m_tripHistory; }
 
     QString language() const { return m_language; }
     QString appVersion() const;
@@ -269,6 +290,8 @@ signals:
     void recordingChanged();
     void recordingTick();
     void recordingsChanged();
+    void tripChanged();
+    void tripHistoryChanged();
     /// A short message for the toast (recording saved, export written, ...).
     void notice(bool success, const QString &message);
 
@@ -288,6 +311,23 @@ private:
     bool busyWithModules() const { return m_moduleScanner->running() || bool(m_afterPoll); }
     QString recordingsFolder() const;
     QString reportsFolder() const;
+    // Trip computer
+    void startTrip();
+    void endTrip();
+    void feedTrip(const QList<ObdClient::PidReading> &readings);
+    void bankTripFuel();
+    /// Trips are saved (history, fill-up calibration) only for a real car.
+    /// OBDARYN_DEMO_TRIPS=1 (developer capture mode) saves the demo car's too, under its own key.
+    bool tripSaved() const
+    {
+        if (m_replay || m_vin.isEmpty())
+            return false;
+        return !m_demo || qEnvironmentVariableIntValue("OBDARYN_DEMO_TRIPS") == 1;
+    }
+    QString tripKey() const;
+    void loadTripHistory();
+    QVariantMap buildTripMap() const;
+    void refreshTrip();
     void updateTicker();
 
     QQmlEngine *m_engine;
@@ -332,6 +372,17 @@ private:
     QPointer<ReplayTransport> m_replay;
     QTimer m_ticker; ///< refreshes the recording / replay clocks once a second
     QVariantList m_recordings;
+
+    TripComputer m_trip;
+    bool m_tripActive = false;
+    QElapsedTimer m_tripClock;
+    QDateTime m_tripStarted;
+    double m_tripBanked = 0;      ///< raw liters of this trip already added to "since fill-up"
+    qint64 m_tripLastBank = 0;
+    qint64 m_tripLastEmit = 0;
+    int m_fuelTypeCode = 0;       ///< PID 51 raw value
+    QVariantList m_tripHistory;
+    QVariantMap m_tripCache;
 };
 
 } // namespace obdaryn

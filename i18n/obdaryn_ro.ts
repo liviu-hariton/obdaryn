@@ -1854,6 +1854,10 @@
         <translation>Date în timp real</translation>
     </message>
     <message>
+        <source>Trip</source>
+        <translation>Călătorie</translation>
+    </message>
+    <message>
         <source>Vehicle</source>
         <translation>Vehicul</translation>
     </message>
@@ -1883,6 +1887,193 @@
     <message>
         <source>Dismiss</source>
         <translation>Închide</translation>
+    </message>
+</context>
+<context>
+    <name>TripPage</name>
+    <message>
+        <source>Trip</source>
+        <translation>Călătorie</translation>
+    </message>
+    <message>
+        <source>Started at %1 · %2</source>
+        <translation>Începută la %1 · %2</translation>
+    </message>
+    <message>
+        <source>New trip</source>
+        <translation>Călătorie nouă</translation>
+    </message>
+    <message>
+        <source>Saves this trip and starts counting from zero</source>
+        <translation>Salvează călătoria și începe numărarea de la zero</translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation>Distanță</translation>
+    </message>
+    <message>
+        <source>km</source>
+        <translation>km</translation>
+    </message>
+    <message>
+        <source>Fuel used</source>
+        <translation>Combustibil consumat</translation>
+    </message>
+    <message>
+        <source>L</source>
+        <translation>L</translation>
+    </message>
+    <message>
+        <source>Average</source>
+        <translation>Medie</translation>
+    </message>
+    <message>
+        <source>L/100 km</source>
+        <translation>L/100 km</translation>
+    </message>
+    <message>
+        <source>Right now</source>
+        <translation>Acum</translation>
+    </message>
+    <message>
+        <source>Right now, standing</source>
+        <translation>Acum, pe loc</translation>
+    </message>
+    <message>
+        <source>L/h</source>
+        <translation>L/h</translation>
+    </message>
+    <message>
+        <source>Driving</source>
+        <translation>În mers</translation>
+    </message>
+    <message>
+        <source>Average speed</source>
+        <translation>Viteză medie</translation>
+    </message>
+    <message>
+        <source>%1 km/h</source>
+        <translation>%1 km/h</translation>
+    </message>
+    <message>
+        <source>Idling</source>
+        <translation>La ralanti</translation>
+    </message>
+    <message>
+        <source>Top speed</source>
+        <translation>Viteză maximă</translation>
+    </message>
+    <message>
+        <source>How fuel is measured</source>
+        <translation>Cum se măsoară consumul</translation>
+    </message>
+    <message>
+        <source>The engine computer reports its fuel rate, so fuel use is measured, not estimated.</source>
+        <translation>Calculatorul motorului raportează debitul de combustibil, deci consumul este măsurat, nu estimat.</translation>
+    </message>
+    <message>
+        <source>Estimated from the air-flow sensor: fuel is the air the engine breathes divided by the air-fuel ratio. Expect up to 10–20 % error until it's calibrated with fill-ups.</source>
+        <translation>Estimat din debitmetrul de aer: combustibilul este aerul aspirat de motor împărțit la raportul aer-combustibil. Eroarea poate fi de 10–20 % până la calibrarea cu alimentări.</translation>
+    </message>
+    <message>
+        <source>This car has no air-flow sensor, so fuel is estimated from manifold pressure, intake temperature, engine speed and the engine size. Expect up to 10–20 % error until it's calibrated with fill-ups.</source>
+        <translation>Mașina nu are debitmetru de aer, așa că consumul este estimat din presiunea din galeria de admisie, temperatura aerului, turația și capacitatea motorului. Eroarea poate fi de 10–20 % până la calibrarea cu alimentări.</translation>
+    </message>
+    <message>
+        <source>This car has no air-flow sensor. Enter the engine size and Obdaryn estimates fuel from manifold pressure, intake temperature and engine speed.</source>
+        <translation>Mașina nu are debitmetru de aer. Introdu capacitatea motorului și Obdaryn estimează consumul din presiunea din galeria de admisie, temperatura aerului și turație.</translation>
+    </message>
+    <message>
+        <source>This diesel doesn't report its fuel rate, and a diesel's air-fuel ratio varies too much to estimate fuel from air flow. Distance and times still work.</source>
+        <translation>Acest diesel nu raportează debitul de combustibil, iar la un diesel raportul aer-combustibil variază prea mult ca să estimezi consumul din aer. Distanța și timpii funcționează în continuare.</translation>
+    </message>
+    <message>
+        <source>This car reports neither fuel rate, air flow nor manifold pressure, so fuel can't be estimated. Distance and times still work.</source>
+        <translation>Mașina nu raportează nici debitul de combustibil, nici debitul de aer, nici presiunea din galerie, așa că consumul nu poate fi estimat. Distanța și timpii funcționează în continuare.</translation>
+    </message>
+    <message>
+        <source>Engine size (liters)</source>
+        <translation>Capacitate motor (litri)</translation>
+    </message>
+    <message>
+        <source>e.g. 1.6</source>
+        <translation>ex. 1,6</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salvează</translation>
+    </message>
+    <message>
+        <source>From the registration certificate: cm³ ÷ 1000.</source>
+        <translation>Din certificatul de înmatriculare: cm³ ÷ 1000.</translation>
+    </message>
+    <message>
+        <source>Trips of the demo car and of recordings aren't saved, and fill-ups can't be recorded for them.</source>
+        <translation>Călătoriile mașinii demo și ale înregistrărilor nu se salvează, iar pentru ele nu se pot înregistra alimentări.</translation>
+    </message>
+    <message numerus="yes">
+        <source>Calibrated with %n fill-up(s): estimates are multiplied by %1.</source>
+        <translation><numerusform>Calibrat cu %n alimentare: estimările sunt înmulțite cu %1.</numerusform><numerusform>Calibrat cu %n alimentări: estimările sunt înmulțite cu %1.</numerusform><numerusform>Calibrat cu %n de alimentări: estimările sunt înmulțite cu %1.</numerusform></translation>
+    </message>
+    <message>
+        <source>Since the last fill-up: %1 L.</source>
+        <translation>De la ultima alimentare: %1 L.</translation>
+    </message>
+    <message>
+        <source>Counting since your last fill-up: %1 L so far. At the next fill-up, enter the liters the pump shows to calibrate. Every drive in between must be followed by Obdaryn.</source>
+        <translation>Se numără de la ultima alimentare: %1 L până acum. La următoarea alimentare, introdu litrii afișați de pompă ca să calibrezi. Fiecare drum dintre alimentări trebuie urmărit de Obdaryn.</translation>
+    </message>
+    <message>
+        <source>Not calibrated yet. Fill the tank to the click and record the fill-up, drive normally with Obdaryn connected, then record the next fill-up: Obdaryn compares the pump with its estimate.</source>
+        <translation>Încă necalibrat. Fă plinul până la oprirea pistolului și înregistrează alimentarea, mergi normal cu Obdaryn conectat, apoi înregistrează următoarea alimentare: Obdaryn compară pompa cu estimarea sa.</translation>
+    </message>
+    <message>
+        <source>Record a fill-up</source>
+        <translation>Înregistrează o alimentare</translation>
+    </message>
+    <message>
+        <source>Reset calibration</source>
+        <translation>Resetează calibrarea</translation>
+    </message>
+    <message>
+        <source>Liters at the pump</source>
+        <translation>Litri la pompă</translation>
+    </message>
+    <message>
+        <source>e.g. 38.5</source>
+        <translation>ex. 38,5</translation>
+    </message>
+    <message>
+        <source>Save fill-up</source>
+        <translation>Salvează alimentarea</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Anulează</translation>
+    </message>
+    <message>
+        <source>Fill to the first click of the nozzle, every time.</source>
+        <translation>Alimentează de fiecare dată până la prima oprire a pistolului.</translation>
+    </message>
+    <message>
+        <source>Recent trips</source>
+        <translation>Călătorii recente</translation>
+    </message>
+    <message>
+        <source>Trips are saved here when you disconnect or start a new trip.</source>
+        <translation>Călătoriile se salvează aici când te deconectezi sau începi o călătorie nouă.</translation>
+    </message>
+    <message>
+        <source>%1 km</source>
+        <translation>%1 km</translation>
+    </message>
+    <message>
+        <source>%1 L</source>
+        <translation>%1 L</translation>
+    </message>
+    <message>
+        <source>%1 L/100 km</source>
+        <translation>%1 L/100 km</translation>
     </message>
 </context>
 <context>
@@ -2281,6 +2472,42 @@
         <source>Report saved: %1</source>
         <translation>Raport salvat: %1</translation>
     </message>
+    <message>
+        <source>%1 s</source>
+        <translation>%1 s</translation>
+    </message>
+    <message>
+        <source>%1 min</source>
+        <translation>%1 min</translation>
+    </message>
+    <message>
+        <source>%1 h %2 min</source>
+        <translation>%1 h %2 min</translation>
+    </message>
+    <message>
+        <source>Fill-ups can only be recorded with your own car connected, not the demo car or a recording.</source>
+        <translation>Alimentările se pot înregistra doar cu mașina ta conectată, nu cu mașina demo sau cu o înregistrare.</translation>
+    </message>
+    <message>
+        <source>Fill-up recorded. Obdaryn now counts the fuel it estimates; at your next fill-up, enter the liters again to calibrate.</source>
+        <translation>Alimentare înregistrată. Obdaryn numără acum combustibilul estimat; la următoarea alimentare, introdu din nou litrii ca să calibrezi.</translation>
+    </message>
+    <message>
+        <source>Calibrated: the pump took %1 % more than Obdaryn estimated. Fuel figures now include the correction.</source>
+        <translation>Calibrat: la pompă au intrat cu %1 % mai mult decât a estimat Obdaryn. Valorile consumului includ acum corecția.</translation>
+    </message>
+    <message>
+        <source>Calibrated: the pump took %1 % less than Obdaryn estimated. Fuel figures now include the correction.</source>
+        <translation>Calibrat: la pompă au intrat cu %1 % mai puțin decât a estimat Obdaryn. Valorile consumului includ acum corecția.</translation>
+    </message>
+    <message>
+        <source>Too little driving since the last fill-up to compare (under 5 L estimated). Counting starts again from this fill-up.</source>
+        <translation>Prea puțin drum de la ultima alimentare pentru o comparație (sub 5 L estimați). Numărarea reîncepe de la această alimentare.</translation>
+    </message>
+    <message>
+        <source>The pump and the estimate are more than twice apart, so this fill-up wasn't used. Usually some drives happened without Obdaryn. Counting starts again from this fill-up.</source>
+        <translation>Pompa și estimarea diferă de mai mult de două ori, așa că alimentarea nu a fost folosită. De obicei unele drumuri au fost făcute fără Obdaryn. Numărarea reîncepe de la această alimentare.</translation>
+    </message>
 </context>
 <context>
     <name>obdaryn::DtcModel</name>
@@ -2554,19 +2781,35 @@
     </message>
     <message numerus="yes">
         <source>%n stored</source>
-        <translation><numerusform>%n memorat</numerusform><numerusform>%n memorate</numerusform><numerusform>%n de memorate</numerusform></translation>
+        <translation>
+            <numerusform>%n memorat</numerusform>
+            <numerusform>%n memorate</numerusform>
+            <numerusform>%n de memorate</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n pending</source>
-        <translation><numerusform>%n în așteptare</numerusform><numerusform>%n în așteptare</numerusform><numerusform>%n în așteptare</numerusform></translation>
+        <translation>
+            <numerusform>%n în așteptare</numerusform>
+            <numerusform>%n în așteptare</numerusform>
+            <numerusform>%n în așteptare</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n permanent</source>
-        <translation><numerusform>%n permanent</numerusform><numerusform>%n permanente</numerusform><numerusform>%n de permanente</numerusform></translation>
+        <translation>
+            <numerusform>%n permanent</numerusform>
+            <numerusform>%n permanente</numerusform>
+            <numerusform>%n de permanente</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n code(s)</source>
-        <translation><numerusform>%n cod</numerusform><numerusform>%n coduri</numerusform><numerusform>%n de coduri</numerusform></translation>
+        <translation>
+            <numerusform>%n cod</numerusform>
+            <numerusform>%n coduri</numerusform>
+            <numerusform>%n de coduri</numerusform>
+        </translation>
     </message>
     <message>
         <source>Other modules</source>
@@ -2590,7 +2833,11 @@
     </message>
     <message numerus="yes">
         <source>%n module(s) answered.</source>
-        <translation><numerusform>A răspuns %n modul.</numerusform><numerusform>Au răspuns %n module.</numerusform><numerusform>Au răspuns %n de module.</numerusform></translation>
+        <translation>
+            <numerusform>A răspuns %n modul.</numerusform>
+            <numerusform>Au răspuns %n module.</numerusform>
+            <numerusform>Au răspuns %n de module.</numerusform>
+        </translation>
     </message>
     <message>
         <source>Inspection readiness</source>
@@ -2618,7 +2865,11 @@
     </message>
     <message numerus="yes">
         <source>%n warm-up(s)</source>
-        <translation><numerusform>%n ciclu de încălzire</numerusform><numerusform>%n cicluri de încălzire</numerusform><numerusform>%n de cicluri de încălzire</numerusform></translation>
+        <translation>
+            <numerusform>%n ciclu de încălzire</numerusform>
+            <numerusform>%n cicluri de încălzire</numerusform>
+            <numerusform>%n de cicluri de încălzire</numerusform>
+        </translation>
     </message>
     <message>
         <source>%1 h of engine running</source>

@@ -87,6 +87,7 @@ void LiveDataModel::setSupportedPids(const QList<quint8> &pids)
 {
     beginResetModel();
     m_rows.clear();
+    m_supported = QSet<quint8>(pids.cbegin(), pids.cend());
     for (quint8 pid : pids) {
         const PidDefinition *def = PidTable::find(pid);
         if (def && def->isNumeric())
@@ -122,7 +123,14 @@ QList<quint8> LiveDataModel::nextPollBatch()
 {
     QList<quint8> batch;
     QList<quint8> others;
+    for (quint8 pid : std::as_const(m_required)) {
+        if (m_supported.contains(pid))
+            batch << pid;
+    }
+    std::sort(batch.begin(), batch.end());
     for (const Row &r : std::as_const(m_rows)) {
+        if (batch.contains(r.pid))
+            continue;
         if (m_pinned.contains(r.pid))
             batch << r.pid;
         else
