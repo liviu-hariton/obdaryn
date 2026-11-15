@@ -68,7 +68,7 @@ Cu contactul pus și motorul oprit, mașina își descarcă bateria. Ține astfe
 | **Date în timp real** | Toate valorile raportate de mașină, cu istoricul recent. Fixează valori în Prezentare generală. La Hyundai și Kia, **Valori Hyundai** (sau **Valori Kia**) arată ce raportează modulele peste valorile standard: alege modelul, apoi **Caută valorile**. Aceste definiții vin de la comunitatea OBDb și nu sunt verificate pe mașina ta. |
 | **Grafice** | Până la șase valori în timp, câte un grafic pentru fiecare, pe o axă de timp comună, în timp real sau dintr-o înregistrare. Compară două înregistrări ca să vezi un drum înainte și după o reparație. Treci cu mouse-ul sau dă focus graficelor și folosește săgețile ca să citești toate valorile dintr-un moment. |
 | **Călătorie** | Distanța, combustibilul și consumul. La mașinile fără debitmetru, introdu capacitatea motorului. Calibrează estimarea consumului cu două alimentări și setează un preț al combustibilului ca să vezi costul. |
-| **Informații vehicul** | Seria de șasiu (VIN) și ce spune ea, versiunile software și modulele care răspund. |
+| **Informații vehicul** | Seria de șasiu (VIN) și ce spune ea, versiunile software, modulele care răspund și contoarele monitoarelor: de câte ori s-a terminat fiecare autotest de emisii. Ștergerea codurilor nu le resetează, așa că numere mici la o mașină cu mulți kilometri sugerează o resetare recentă. |
 | **Jurnal adaptor** | Ce suportă adaptorul, cât de repede răspunde și fiecare comandă și răspuns, pentru depanare. |
 | **Ajutor**, **Setări** | Acest ghid; limba (română, engleză), aspectul, unitățile de măsură (metric, UK, SUA) și verificarea actualizărilor (oprită până o pornești). |
 

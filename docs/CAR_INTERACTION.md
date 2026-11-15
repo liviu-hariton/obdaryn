@@ -27,7 +27,7 @@ This guide covers what each feature asks of the car, which state the car must be
 | Read trouble codes (stored / pending / permanent) | ON | off or running | Modules answer as soon as they are powered |
 | Freeze frame | ON | off or running | It is stored data, so the engine state doesn't matter |
 | Readiness / "ready for ITP?" | ON | off or running | Status is stored and updated while driving |
-| Vehicle info (VIN, calibration IDs, ECU names) | ON | off or running | |
+| Vehicle info (VIN, calibration IDs, ECU names, monitor counters) | ON | off or running | |
 | Live data at rest (temperatures, voltage, fuel trims at idle) | ON | running | Most sensors read 0 or are frozen with the engine off |
 | Live data while driving | ON | running | A **passenger** watches the screen. Never the driver. |
 | **Clear trouble codes** | **ON** | **off** | Obdaryn refuses while it sees engine speed above 0 |
@@ -43,11 +43,12 @@ This guide covers what each feature asks of the car, which state the car must be
 
 Generic OBD-II only reaches the engine (and usually the transmission). Warning lights for ABS, airbag, tyre pressure or the body computer come from modules that must be asked one by one. **All modules** does that:
 
-- **Car state.** Ignition ON. The engine may run.
+- **Car state.** Ignition ON, preferably with the engine off. Some modules (on a 2015 Elantra: ABS and power steering) refuse to give their codes while the engine runs; Obdaryn then says so and asks for a scan with the engine off.
 - **Duration.** About 5–15 seconds; each missing module costs a short adapter timeout. Live data pauses meanwhile.
 - **Which module list.** Obdaryn picks the module list from the VIN (Hyundai/Kia for your Elantra). You can choose another list if the VIN isn't reported.
 - **"Unconfirmed address".** These addresses come from community lists. If such a module shows "Not found", the module may be fine but at another address on your model.
 - **What each module answers.** For every module that answers you get its codes, whether each fault is present right now, whether it asks for a warning light, and its part number.
+- **When a module refuses.** A module that says "busy" is asked again twice. If it refuses both UDS and KWP, Obdaryn explains the more telling of the two refusals: engine running, or a diagnostic session needed (Obdaryn never opens one, to stay read-only; those codes need the brand's own tool). The engine computer often answers only generic OBD-II and shows as "Generic OBD-II only": its codes are the ones on the Trouble codes screen.
 - **Clearing a module's codes.** Same rules as before: confirm, engine off, ignition ON. Clearing never repairs anything; an active ABS or airbag fault comes straight back.
 
 ## 4b. Manufacturer values (Hyundai and Kia)

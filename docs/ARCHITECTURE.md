@@ -65,7 +65,7 @@
   It always restores functional addressing (`AT SH 7DF`) afterwards. The app pauses live polling for the duration, and waits for an in-flight poll to finish first, because the adapter's target address is shared state.
 - **ModuleDiscovery** (`src/core/obd`) finds modules no brand list knows. After `AT CRA` it asks every 11-bit request ID from 700 to 7F7 with `AT SH <id>` and TesterPresent (`3E 00`), skipping 7DF, the standard reply IDs 7E8–7EF and every reply ID found so far, so it never transmits on an ID a module answers with. A positive answer (`7E`) or a refusal (`7F 3E`) both mean a module is there. `asProfile()` turns the answers into a `VehicleProfile`: an address the brand's list knows keeps its entry, the others become "Module at 7D1" (category `other`, unconfirmed). `ModuleScanner` then reads them like any list. The app runs it from **Search every address** (All modules screen, Car menu), the probe from `--discover`; see [CAR_INTERACTION.md](CAR_INTERACTION.md#4c-looking-for-modules-a-brand-list-doesnt-know-discovery).
 - **ObdClient** (`src/core/obd`) offers diagnostic intents as single asynchronous calls:
-  - **Multi-PID batching.** On CAN it batches up to 6 PIDs per request, falling back to one per request when an ECU ignores the extras.
+  - **Multi-PID batching.** On CAN it batches up to 6 PIDs per request, falling back to one per request when an ECU ignores the extras. Only PIDs the car lists as supported are batched: an unsupported one is never answered, and in a batch it would look like an ECU that ignores extras (a real 2015 Elantra did this with PIDs 1C + 51).
   - **Safe clearing.** It refuses to clear codes while the engine runs.
 - **App** (`src/app`):
   - **QML singleton.** `AppController` is exposed to QML as the `App` singleton and sequences the first scan: vehicle info → readiness → codes → freeze frame → supported PIDs.
@@ -99,4 +99,5 @@
 - `tst_responseparser`: recorded adapter output, including multi-frame, 29-bit and legacy.
 - `tst_decoders`: PID formulas, DTC decoding, readiness, VIN and the DTC database.
 - `tst_session`: end-to-end runs against the simulator (connect, scan, clear with the engine on and off, guard enforcement).
-- `tst_modules`: brand profiles, UDS and KWP code decoding, and a full module scan of the simulated Hyundai, including the protocol fallback, restored addressing and a guarded per-module clear.
+- `tst_modules`: brand profiles, UDS and KWP code decoding, and a full module scan of the simulated Hyundai, including the protocol fallback, the retry of a busy module, restored addressing and a guarded per-module clear.
+- `tst_realcars`: replays of trimmed recordings from real cars (`tests/data/*.obdrec`, VIN removed) that once showed a bug, such as the 2015 Elantra's PID 51 and its module refusals.

@@ -9,7 +9,7 @@ The ordering follows what DIY owners most often say existing apps lack, or keep 
 - [x] Trouble codes (stored / pending / permanent) from every OBD module, with plain-language explanations (obdex, 9,533 codes)
 - [x] Freeze frame
 - [x] Readiness monitors with an "is it ready for the ITP?" verdict
-- [x] Vehicle info: VIN decoding, calibration IDs, CVNs, ECU names
+- [x] Vehicle info: VIN decoding, calibration IDs, CVNs, ECU names, in-use performance counters (09 08 / 0B)
 - [x] Live data with multi-PID batching (up to 6 PIDs per CAN request), pinned dashboard values, sparklines
 - [x] Clearing codes: refused while the engine runs, with the consequences explained first
 - [x] Adapter console (raw traffic) for troubleshooting

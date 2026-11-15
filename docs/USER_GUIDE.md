@@ -68,7 +68,7 @@ Clearing is the only thing Obdaryn does that changes anything in the car, and on
 | **Live data** | Every value the car reports, with its recent history. Pin values to the Overview. On Hyundai and Kia cars, **Hyundai values** (or **Kia values**) lists what the car's modules report beyond the standard: choose the model, then **Find values**. These definitions come from the OBDb community and aren't checked on your car. |
 | **Charts** | Up to six values over time, one chart each on a shared time axis, live or from a recording. Compare two recordings to see a drive before and after a repair. Hover, or focus the charts and use the arrow keys, to read every value at one moment. |
 | **Trip** | Distance, fuel and consumption. On cars without an air-flow sensor, enter the engine size. Calibrate the fuel estimate with two fill-ups, and set a fuel price to see the cost. |
-| **Vehicle info** | The VIN and what it tells, software versions and the modules that answer. |
+| **Vehicle info** | The VIN and what it tells, software versions, the modules that answer, and the monitor counters: how often each emission self-test finished. Clearing codes doesn't reset those, so low numbers on a high-mileage car hint at a recent reset. |
 | **Adapter log** | What the adapter supports, how fast it answers, and every command and answer, for troubleshooting. |
 | **Help**, **Settings** | This guide; language (English, Romanian), appearance, units (metric, UK, US), and the update check (off until you turn it on). |
 
