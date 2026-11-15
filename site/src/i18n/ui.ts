@@ -112,7 +112,7 @@ export const ui = {
       source: "Source on GitHub",
     },
     brandFacts: {
-      modules: (n: number, c: number) => `${n} modules${c ? `, ${c} of them at addresses confirmed by community recordings` : ""}`,
+      modules: (n: number, c: number) => `${n} modules${c ? `, ${c} of them at addresses confirmed on real cars` : ""}`,
       codes: (n: number) => `${n} manufacturer codes explained`,
       values: (n: number) => `Manufacturer values for ${n} models`,
     },
@@ -286,7 +286,7 @@ export const ui = {
       source: "Codul sursă pe GitHub",
     },
     brandFacts: {
-      modules: (n: number, c: number) => `${n} module${c ? `, dintre care ${c} la adrese confirmate de înregistrări ale comunității` : ""}`,
+      modules: (n: number, c: number) => `${n} module${c ? `, dintre care ${c} la adrese confirmate pe mașini reale` : ""}`,
       codes: (n: number) => `${n}${deN(n)} coduri de producător explicate`,
       values: (n: number) => `Valori de producător pentru ${n}${deN(n)} modele`,
     },

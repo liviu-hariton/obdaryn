@@ -9,9 +9,9 @@
     {"id": "hk-engine", "category": "engine", "tx": "7E0", "rx": "7E8", "dtc": "kwp", "verified": true, "source": "OBDb Hyundai-Elantra"},
     {"id": "hk-transmission", "category": "transmission", "tx": "7E1", "rx": "7E9", "dtc": "kwp", "verified": true, "source": "OBDb Hyundai-Elantra"},
     {"id": "hk-abs", "category": "abs", "tx": "7D1", "rx": "7D9", "dtc": "auto", "verified": true, "source": "OBDb Hyundai-Elantra"},
-    {"id": "hk-airbag", "category": "airbag", "tx": "7D2", "rx": "7DA", "dtc": "auto", "verified": false, "source": "community lists, unconfirmed"},
+    {"id": "hk-airbag", "category": "airbag", "tx": "7D2", "rx": "7DA", "dtc": "auto", "verified": true, "source": "Obdaryn road test, 2015 Hyundai Elantra (EU): answers on 7DA"},
     {"id": "hk-steering", "category": "steering", "tx": "7D4", "rx": "7DC", "dtc": "auto", "verified": true, "source": "OBDb Hyundai-Elantra (MDPS)"},
-    {"id": "hk-tpms", "category": "tpms", "tx": "7D6", "rx": "7DE", "dtc": "auto", "verified": false, "source": "OBDb (2013 and earlier)"},
+    {"id": "hk-tpms", "category": "tpms", "tx": "7D6", "rx": "7DE", "dtc": "auto", "verified": true, "source": "OBDb (2013 and earlier); Obdaryn road test, 2015 Hyundai Elantra (EU): answers on 7DE"},
     {"id": "hk-body", "category": "body", "tx": "7A0", "rx": "7A8", "dtc": "auto", "verified": true, "source": "OBDb Hyundai-Elantra (BCM)"},
     {"id": "hk-cluster", "category": "cluster", "tx": "7C6", "rx": "7CE", "dtc": "auto", "verified": true, "source": "OBDb Hyundai-Elantra"},
     {"id": "hk-climate", "category": "climate", "tx": "7B3", "rx": "7BB", "dtc": "auto", "verified": false, "source": "Hyundai/Kia EV PID lists, unconfirmed on ICE cars"}
