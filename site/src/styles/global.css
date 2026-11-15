@@ -152,10 +152,6 @@ html { scrollbar-color: var(--field-border) transparent; scrollbar-gutter: stabl
 .skip { position: absolute; left: var(--s4); top: -64px; z-index: 20; background: var(--surface); padding: var(--s2) var(--s3); border-radius: var(--radius); }
 .skip:focus { top: var(--s3); }
 
-/* Early access, said beside every Download button: an amber dot and one line. */
-.early { display: flex; align-items: center; gap: var(--s2); font-size: 13px; color: var(--text-muted); margin-top: 6px; }
-.early .dot { background: var(--amber); }
-
 /* On touch screens, small controls get a 44px hit area without changing how they look. */
 @media (pointer: coarse) {
   .hit { position: relative; }

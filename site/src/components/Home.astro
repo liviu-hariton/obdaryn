@@ -36,7 +36,6 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
       <p class="lede">{h.lede[0]}<a href="#need">{h.lede[1]}</a>{h.lede[2]}</p>
       <DownloadButton lang={lang} />
       <p class="version">{s.versionLine(version)}</p>
-      <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
       <ul class="facts">
         <li><Icon name="shield-check" class="green" />{h.facts[0]}</li>
         <li><Icon name="check" class="faint" />{h.facts[1]}</li>
@@ -146,7 +145,7 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
   </section>
 
   <section class="section wrap status" aria-labelledby="status-title">
-    <h2 id="status-title"><span class="dot amber-dot"></span>{h.statusTitle}</h2>
+    <h2 id="status-title"><span class="dot green-dot"></span>{h.statusTitle}</h2>
     <p>{h.statusText} <a href={docs + "ROADMAP.md"}>{h.statusLink}</a></p>
   </section>
 
@@ -157,7 +156,6 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
       <DownloadButton lang={lang} />
       <a class="btn btn-secondary" href={repoUrl}><Icon name="github" />{h.source}</a>
     </div>
-    <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
   </section>
 </Base>
 
@@ -250,13 +248,12 @@ const modelsOf = (b: (typeof brands)[number]) => Object.values(b.models).reduce(
 
   /* Honest status, then the close. */
   .status h2 { display: flex; align-items: center; gap: var(--s3); font-size: 20px; font-weight: 600; }
-  .amber-dot { width: 9px; height: 9px; background: var(--amber); }
+  .green-dot { width: 9px; height: 9px; background: var(--green); }
   .status p { color: var(--text-muted); max-width: 36em; margin-top: var(--s3); }
   .close { text-align: left; border-top: 1px solid var(--hairline); padding-top: var(--s8); margin-top: var(--s9); }
   .close h2 { font-size: clamp(36px, 5.2vw, 72px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; max-width: 16ch; }
   .close p { color: var(--text-muted); font-size: 18px; max-width: 31em; margin-top: var(--s4); }
   .close-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
-  .close .early { margin-top: var(--s3); }
   .lede a { color: inherit; text-decoration-color: var(--field-border); }
   .lede a:hover { color: var(--text); text-decoration-color: currentColor; }
 </style>

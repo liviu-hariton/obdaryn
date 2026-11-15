@@ -33,7 +33,6 @@ const d = s.downloadPage;
     <section aria-labelledby="next">
       <h2 id="next">{p.nextTitle}</h2>
       <p class="sub">{p.next} <a href={routes[lang].guide}>{p.nextLink}</a></p>
-      <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
     </section>
 
     <p class="retry">{p.retry} <a href={dmgUrl} data-dmg>{p.retryLink}</a></p>
@@ -49,7 +48,6 @@ const d = s.downloadPage;
   .steps { list-style: none; counter-reset: step; padding: 0; border-top: 1px solid var(--hairline); }
   .steps li { counter-increment: step; display: grid; grid-template-columns: 36px 1fr; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
   .steps li::before { content: counter(step); font-weight: 600; color: var(--text-faint); font-variant-numeric: tabular-nums; }
-  .early { margin-top: var(--s4); }
   .retry { margin-top: var(--s8); font-size: 15px; color: var(--text-muted); }
 </style>
 

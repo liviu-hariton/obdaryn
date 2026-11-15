@@ -25,7 +25,6 @@ const d = s.downloadPage;
         <DownloadButton lang={lang} />
         <span class="file">{d.fileLine(version)}</span>
       </div>
-      <p class="early"><span class="dot"></span>{s.earlyAccess}</p>
     </header>
 
     <!-- Shown on touch-only screens, where the Download button points here. -->
@@ -63,7 +62,6 @@ const d = s.downloadPage;
   .adapter-wrap { margin-top: var(--s5); }
   /* Links to GitHub carry its mark, kept with the first word so it never wraps alone. */
   .gh-link :global(svg) { display: inline-block; vertical-align: -2px; margin-right: 5px; }
-  .early { margin-top: var(--s3); }
   .mac { display: none; }
   @media (hover: none) and (pointer: coarse) { .mac { display: block; } }
   /* The shared reading column, kept to a 760px measure for these short rows. */
