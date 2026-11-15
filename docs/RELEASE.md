@@ -44,8 +44,9 @@ The Intel half has been run under Rosetta on an Apple Silicon Mac, not yet on an
 ## Publishing a release and the website
 
 1. `tools/make-release.sh` builds `dist/Obdaryn-<version>.dmg`.
-2. `tools/publish-release.sh` tags the commit `v<version>` and creates the GitHub release with the `.dmg` and its SHA-256. It needs the GitHub CLI, signed in once (`brew install gh`, `gh auth login`).
-3. `tools/deploy-site.sh` rebuilds the website so its download button names the new version, and copies it to obdaryn.eu. See [the website section](#the-website).
+2. Write what changed in `docs/releases/<version>.md` and commit it: Markdown, starting with what's new and what's fixed, in plain words for car owners (see `docs/releases/0.4.19.md`). The publish script adds the opening line, the first-launch note and the checksum around it. `tools/publish-release.sh --dry-run` prints the finished notes without publishing anything.
+3. `tools/publish-release.sh` tags the commit `v<version>` and creates the GitHub release with the `.dmg`, the notes and its SHA-256. Without a notes file it asks before publishing a release with no changelog. It needs the GitHub CLI, signed in once (`brew install gh`, `gh auth login`).
+4. `tools/deploy-site.sh` rebuilds the website so its download button names the new version, and copies it to obdaryn.eu. See [the website section](#the-website).
 
 Keep this order. The website takes its version from `CMakeLists.txt`, so deploying it before the release exists makes every Download button point to a file that isn't there yet. The deploy also publishes `latest.json`, which tells apps with the update check turned on that the new version is out.
 
