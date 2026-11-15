@@ -59,6 +59,10 @@ public:
     void setCarAnswering(bool answering) { m_carAnswering = answering; }
     /// Answer "?" to requests with a response-count digit, like some old clones.
     void setRejectsResponseCounts(bool rejects) { m_rejectsResponseCounts = rejects; }
+    /// The module at this request ID answers its next `times` trouble-code
+    /// requests with "busy, repeat the request" (NRC 0x21), as a real Hyundai
+    /// power-steering module did.
+    void setModuleBusy(const QByteArray &header, int times) { m_busyHeader = header; m_busyCount = times; }
 
 private:
     struct EcuReply {
@@ -106,6 +110,8 @@ private:
     quint8 m_monitorsIncomplete = 0x05; ///< bit set = monitor not yet complete
     bool m_absFault = true;     ///< C1203 in the ABS module
     bool m_airbagFault = true;  ///< B1346 in the airbag module
+    QByteArray m_busyHeader;    ///< see setModuleBusy()
+    int m_busyCount = 0;
 
     QByteArray m_rxBuffer;
     QElapsedTimer m_clock;

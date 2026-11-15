@@ -81,9 +81,15 @@ class AppController : public QObject
     Q_PROPERTY(int modelYear READ modelYear NOTIFY vehicleChanged)
     Q_PROPERTY(QString vinRegion READ vinRegion NOTIFY vehicleChanged)
     Q_PROPERTY(bool vinCheckDigitValid READ vinCheckDigitValid NOTIFY vehicleChanged)
+    /// False for VINs where the check digit is optional (Europe, Korea, Japan...).
+    Q_PROPERTY(bool vinCheckDigitRequired READ vinCheckDigitRequired NOTIFY vehicleChanged)
     Q_PROPERTY(QStringList calibrationIds READ calibrationIds NOTIFY vehicleChanged)
     Q_PROPERTY(QStringList cvns READ cvns NOTIFY vehicleChanged)
     Q_PROPERTY(QVariantList modules READ modules NOTIFY vehicleChanged)
+    /// In-use performance tracking (service 09, PID 08 / 0B): {available, ecu,
+    /// ignitionCycles, obdConditions, monitors: [{name, completed, conditions, ratio}]}.
+    /// Monitors with both counters at zero (not fitted) are left out.
+    Q_PROPERTY(QVariantMap performance READ performance NOTIFY vehicleChanged)
     Q_PROPERTY(QString obdStandard READ obdStandard NOTIFY vehicleChanged)
     Q_PROPERTY(QString fuelType READ fuelType NOTIFY vehicleChanged)
 
@@ -311,9 +317,11 @@ public:
     int modelYear() const { return m_modelYear; }
     QString vinRegion() const { return m_vinRegion; }
     bool vinCheckDigitValid() const { return m_vinCheckDigitValid; }
+    bool vinCheckDigitRequired() const { return m_vinCheckDigitRequired; }
     QStringList calibrationIds() const { return m_info.calibrationIds; }
     QStringList cvns() const { return m_info.cvns; }
     QVariantList modules() const;
+    QVariantMap performance() const;
     QString obdStandard() const { return m_obdStandard; }
     QString fuelType() const { return m_fuelType; }
 
@@ -493,6 +501,7 @@ private:
     QString m_vin, m_manufacturer, m_vinRegion, m_obdStandard, m_fuelType;
     int m_modelYear = 0;
     bool m_vinCheckDigitValid = false;
+    bool m_vinCheckDigitRequired = false;
     ObdClient::VehicleInformation m_info;
     MonitorStatus m_readiness;
     ObdClient::FreezeFrame m_freeze;

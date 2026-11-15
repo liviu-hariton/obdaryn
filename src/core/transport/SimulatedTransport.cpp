@@ -357,10 +357,21 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::engineReply(const QByteA
         const quint8 pid = quint8(req[1]);
         QByteArray head = QByteArray(1, char(0x49)) + char(pid);
         switch (pid) {
-        case 0x00: return reply(head + supportedMask({0x02, 0x04, 0x06, 0x0A}, 0x00));
+        case 0x00: return reply(head + supportedMask({0x02, 0x04, 0x06, 0x08, 0x0A}, 0x00));
         case 0x02: return reply(head + char(0x01) + kVin);
         case 0x04: return reply(head + char(0x01) + padded("6AG1EU3B2KFA1000", 16));
         case 0x06: return reply(head + char(0x01) + QByteArray::fromHex("3A1FC207"));
+        case 0x08: {
+            // In-use performance tracking, 20 counters: OBD conditions, ignition
+            // cycles, then completed / conditions per monitor. A single-bank
+            // engine without secondary air: bank 2 and AIR stay at zero.
+            static const quint16 counters[] = {412, 1180,  389, 412,  0, 0,  401, 412,  0, 0,
+                                               380, 412,  0, 0,  96, 412,  395, 412,  0, 0};
+            QByteArray p = head + char(std::size(counters));
+            for (quint16 c : counters)
+                p += u16(c);
+            return reply(p);
+        }
         case 0x0A: return reply(head + char(0x01) + padded(QByteArray("ECM\0-EngineControl", 18), 20));
         default:   return {};
         }
@@ -420,6 +431,12 @@ QList<SimulatedTransport::EcuReply> SimulatedTransport::moduleReply(const QByteA
         return p;
     };
     const bool clearAll = (sid == 0x14);
+
+    if (header == m_busyHeader && m_busyCount > 0 && (sid == 0x18 || sid == 0x19)) {
+        --m_busyCount;
+        const QByteArray rx = QByteArray::number(header.toInt(nullptr, 16) + 8, 16).toUpper();
+        return {{QString::fromLatin1(rx), QByteArray("\x7F", 1) + char(sid) + char(0x21)}};
+    }
 
     if (header == "7E0") { // engine, KWP2000 on CAN like a 2014 Hyundai
         switch (sid) {

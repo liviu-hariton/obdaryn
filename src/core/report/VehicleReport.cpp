@@ -425,6 +425,34 @@ QString readinessSection(const ReportInput &in)
              rows);
 }
 
+QString performanceSection(const ReportInput &in)
+{
+    const InUsePerformance &perf = in.info.performance;
+    if (!perf.available)
+        return {};
+    QString rows;
+    rows += keyValueRow(tr("Engine starts counted"), QString::number(perf.ignitionCycles));
+    rows += keyValueRow(tr("Drives where monitors could run"), QString::number(perf.obdConditions));
+    QString monitors;
+    for (const InUsePerformance::Monitor &m : perf.monitors) {
+        if (m.unused())
+            continue; // not fitted (bank 2, secondary air...)
+        const double ratio = m.ratio();
+        monitors += QStringLiteral("<tr><td class=\"label\" width=\"45%\">%1</td><td width=\"30%\">%2</td><td class=\"faint\">%3</td></tr>")
+                        .arg(esc(m.name),
+                             tr("%1 of %2 drives").arg(m.completed).arg(m.conditions),
+                             ratio < 0 ? QString() : QStringLiteral("%1 %").arg(qRound(ratio * 100)));
+    }
+    return QStringLiteral("<h2>%1</h2><p class=\"muted\">%2</p>"
+                          "<table class=\"rows\" width=\"100%\" cellspacing=\"0\" cellpadding=\"4\">%3</table>"
+                          "<table class=\"rows\" width=\"100%\" cellspacing=\"0\" cellpadding=\"4\">%4</table>")
+        .arg(tr("Monitor counters"),
+             tr("How often each emission monitor finished, out of the drives where it could run. Clearing codes "
+                "doesn't reset these counters: only a reprogrammed engine computer, or one that lost its memory, "
+                "starts again from zero. Low numbers on a car with high mileage hint at a recent reset."),
+             rows, monitors);
+}
+
 QString monitorTestsSection(const ReportInput &in)
 {
     if (!in.monitorTestsRead || in.monitorTests.isEmpty())
@@ -526,7 +554,9 @@ QString vehicleSection(const ReportInput &in)
     rows += keyValueRow(tr("Model year"), vin.modelYear > 0 ? QString::number(vin.modelYear) : QString());
     rows += keyValueRow(tr("Made in"), esc(vin.region));
     if (vin.valid)
-        rows += keyValueRow(tr("VIN check digit"), vin.checkDigitValid ? tr("Valid") : tr("Doesn't match (normal outside North America)"));
+        rows += keyValueRow(tr("VIN check digit"), vin.checkDigitValid      ? tr("Valid")
+                                                   : vin.checkDigitRequired ? tr("Doesn't match")
+                                                                            : tr("Doesn't match (normal outside North America)"));
     rows += keyValueRow(tr("OBD standard"), esc(in.obdStandard));
     rows += keyValueRow(tr("Fuel"), esc(in.fuelType));
     rows += keyValueRow(tr("Protocol"), esc(in.protocol));
@@ -618,6 +648,7 @@ QString html(const ReportInput &in, Target target)
     body += codesSection(in);
     body += modulesSection(in);
     body += readinessSection(in);
+    body += performanceSection(in);
     body += monitorTestsSection(in);
     body += freezeFrameSection(in);
     body += tripSection(in);

@@ -116,6 +116,11 @@ void TestSession::readsVehicleInfo()
     QCOMPARE(info.calibrationIds, QStringList{"6AG1EU3B2KFA1000"});
     QCOMPARE(info.ecuNames.value("7E8"), QStringLiteral("ECM-EngineControl"));
     QVERIFY(info.ecuNames.contains("7E9"));
+    // In-use performance counters (09 08), multi-frame on CAN.
+    QVERIFY(info.performance.available);
+    QCOMPARE(info.performance.ecu, QStringLiteral("7E8"));
+    QCOMPARE(info.performance.ignitionCycles, 1180);
+    QCOMPARE(info.performance.monitors.size(), 9);
 }
 
 void TestSession::readsFreezeFrame()

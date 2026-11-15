@@ -1323,6 +1323,73 @@
     </message>
 </context>
 <context>
+    <name>Ipt</name>
+    <message>
+        <source>Catalyst, bank 1</source>
+        <translation>Catalizator, bancul 1</translation>
+    </message>
+    <message>
+        <source>Catalyst, bank 2</source>
+        <translation>Catalizator, bancul 2</translation>
+    </message>
+    <message>
+        <source>Oxygen sensor, bank 1</source>
+        <translation>Sondă lambda, bancul 1</translation>
+    </message>
+    <message>
+        <source>Oxygen sensor, bank 2</source>
+        <translation>Sondă lambda, bancul 2</translation>
+    </message>
+    <message>
+        <source>EGR / VVT system</source>
+        <translation>Sistem EGR / VVT</translation>
+    </message>
+    <message>
+        <source>Secondary air</source>
+        <translation>Aer secundar</translation>
+    </message>
+    <message>
+        <source>Evaporative system (EVAP)</source>
+        <translation>Sistem de recuperare a vaporilor (EVAP)</translation>
+    </message>
+    <message>
+        <source>Rear oxygen sensor, bank 1</source>
+        <translation>Sondă lambda spate, bancul 1</translation>
+    </message>
+    <message>
+        <source>Rear oxygen sensor, bank 2</source>
+        <translation>Sondă lambda spate, bancul 2</translation>
+    </message>
+    <message>
+        <source>NMHC catalyst</source>
+        <translation>Catalizator NMHC</translation>
+    </message>
+    <message>
+        <source>NOx catalyst (SCR)</source>
+        <translation>Catalizator NOx (SCR)</translation>
+    </message>
+    <message>
+        <source>NOx adsorber</source>
+        <translation>Absorbant NOx</translation>
+    </message>
+    <message>
+        <source>Particulate filter (DPF)</source>
+        <translation>Filtru de particule (DPF)</translation>
+    </message>
+    <message>
+        <source>Exhaust gas sensor</source>
+        <translation>Senzor de gaze de evacuare</translation>
+    </message>
+    <message>
+        <source>Boost pressure</source>
+        <translation>Presiune de supraalimentare</translation>
+    </message>
+    <message>
+        <source>Fuel system</source>
+        <translation>Sistem de alimentare</translation>
+    </message>
+</context>
+<context>
     <name>KeyValue</name>
     <message>
         <source>Copy %1</source>
@@ -2075,6 +2142,18 @@
     <message>
         <source>Not available in the current diagnostic session.</source>
         <translation>Indisponibil în sesiunea de diagnoză curentă.</translation>
+    </message>
+    <message>
+        <source>The engine speed is too high.</source>
+        <translation>Turația motorului este prea mare.</translation>
+    </message>
+    <message>
+        <source>The engine is running.</source>
+        <translation>Motorul este pornit.</translation>
+    </message>
+    <message>
+        <source>The vehicle is moving too fast.</source>
+        <translation>Mașina merge prea repede.</translation>
     </message>
     <message>
         <source>Negative response 0x%1.</source>
@@ -3553,8 +3632,16 @@
         <translation>Invalidă</translation>
     </message>
     <message>
-        <source>Mandatory in North America only; European cars often don&apos;t use it.</source>
-        <translation>Obligatorie doar în America de Nord; mașinile europene adesea nu o folosesc.</translation>
+        <source>Not used</source>
+        <translation>Nefolosită</translation>
+    </message>
+    <message>
+        <source>Normal for this car: only North American and Chinese VINs must have one.</source>
+        <translation>Normal pentru această mașină: doar VIN-urile din America de Nord și China trebuie să aibă una.</translation>
+    </message>
+    <message>
+        <source>Mandatory in North America and China only; European cars often don&apos;t use it.</source>
+        <translation>Obligatorie doar în America de Nord și China; mașinile europene adesea nu o folosesc.</translation>
     </message>
     <message>
         <source>OBD standard</source>
@@ -3595,6 +3682,38 @@
     <message>
         <source>Checksums of that software. A change without an official update can mean the ECU was modified.</source>
         <translation>Sume de control ale acelui software. O schimbare fără o actualizare oficială poate însemna că ECU-ul a fost modificat.</translation>
+    </message>
+    <message>
+        <source>Monitor counters</source>
+        <translation>Contoare ale monitoarelor</translation>
+    </message>
+    <message>
+        <source>reported by %1</source>
+        <translation>raportate de %1</translation>
+    </message>
+    <message>
+        <source>Engine starts counted</source>
+        <translation>Porniri ale motorului numărate</translation>
+    </message>
+    <message>
+        <source>Clearing codes doesn&apos;t reset these counters: only a reprogrammed engine computer, or one that lost its memory, starts again from zero. Low numbers on a car with high mileage hint at a recent reset.</source>
+        <translation>Ștergerea codurilor nu resetează aceste contoare: doar un calculator de motor reprogramat sau unul care și-a pierdut memoria o ia de la zero. Numere mici la o mașină cu mulți kilometri sugerează o resetare recentă.</translation>
+    </message>
+    <message>
+        <source>Drives where monitors could run</source>
+        <translation>Drumuri în care monitoarele puteau rula</translation>
+    </message>
+    <message>
+        <source>Below: how many of these drives each emission monitor finished.</source>
+        <translation>Mai jos: câte dintre aceste drumuri a terminat fiecare monitor de emisii.</translation>
+    </message>
+    <message>
+        <source>%1 of %2 drives (%3 %)</source>
+        <translation>%1 din %2 drumuri (%3 %)</translation>
+    </message>
+    <message>
+        <source>%1 of %2 drives</source>
+        <translation>%1 din %2 drumuri</translation>
     </message>
     <message>
         <source>Connection</source>
@@ -4745,12 +4864,36 @@
         <translation>Adaptorul nu a acceptat adresa modulului.</translation>
     </message>
     <message>
-        <source>The module answers, but not to trouble-code requests. Scan again with the ignition ON; if it persists, this module needs the brand&apos;s own diagnostic tool.</source>
-        <translation>Modulul răspunde, dar nu la cererile de coduri de eroare. Scanează din nou cu contactul pus; dacă problema persistă, acest modul are nevoie de aparatul de diagnoză al mărcii.</translation>
+        <source>Its codes need the brand&apos;s own diagnostic tool.</source>
+        <translation>Codurile lui cer testerul de diagnoză al mărcii.</translation>
     </message>
     <message>
-        <source>%1 Scan again with the ignition ON; if it persists, this module needs the brand&apos;s own diagnostic tool.</source>
-        <translation>%1 Scanează din nou cu contactul pus; dacă problema persistă, acest modul are nevoie de aparatul de diagnoză al mărcii.</translation>
+        <source>The module answers, but not to trouble-code requests.</source>
+        <translation>Modulul răspunde, dar nu la cererile de coduri de eroare.</translation>
+    </message>
+    <message>
+        <source>The module gives its codes only inside a diagnostic session, which Obdaryn never opens so that it stays read-only.</source>
+        <translation>Modulul își dă codurile doar într-o sesiune de diagnoză, pe care Obdaryn nu o deschide niciodată, ca să rămână doar în citire.</translation>
+    </message>
+    <message>
+        <source>The module refuses while the engine is running (%1 rpm). Switch the engine off, leave the ignition ON, and scan again.</source>
+        <translation>Modulul refuză cât timp motorul este pornit (%1 rot/min). Oprește motorul, lasă contactul pus și scanează din nou.</translation>
+    </message>
+    <message>
+        <source>%1 Scan again with the engine off and the ignition ON; if it persists, this module needs the brand&apos;s own diagnostic tool.</source>
+        <translation>%1 Scanează din nou cu motorul oprit și contactul pus; dacă persistă, acest modul cere testerul de diagnoză al mărcii.</translation>
+    </message>
+    <message>
+        <source>The module stayed busy. Scan again in a moment.</source>
+        <translation>Modulul a rămas ocupat. Scanează din nou peste câteva momente.</translation>
+    </message>
+    <message>
+        <source>The module doesn&apos;t support the standard trouble-code requests (UDS or KWP2000).</source>
+        <translation>Modulul nu acceptă cererile standard de coduri de eroare (UDS sau KWP2000).</translation>
+    </message>
+    <message>
+        <source>%1 If it persists, this module needs the brand&apos;s own diagnostic tool.</source>
+        <translation>%1 Dacă persistă, acest modul cere testerul de diagnoză al mărcii.</translation>
     </message>
     <message>
         <source>Scan the modules first.</source>
@@ -5223,6 +5366,26 @@
         <translation>Autotestele pe care mașina le face sistemelor de emisii. Se resetează la ștergerea codurilor și se încheie după câteva zile de mers normal. O inspecție de emisii (ITP) poate respinge o mașină cu monitoare neîncheiate; câte sunt acceptate depinde de țară.</translation>
     </message>
     <message>
+        <source>Engine starts counted</source>
+        <translation>Porniri ale motorului numărate</translation>
+    </message>
+    <message>
+        <source>Drives where monitors could run</source>
+        <translation>Drumuri în care monitoarele puteau rula</translation>
+    </message>
+    <message>
+        <source>%1 of %2 drives</source>
+        <translation>%1 din %2 drumuri</translation>
+    </message>
+    <message>
+        <source>Monitor counters</source>
+        <translation>Contoare ale monitoarelor</translation>
+    </message>
+    <message>
+        <source>How often each emission monitor finished, out of the drives where it could run. Clearing codes doesn&apos;t reset these counters: only a reprogrammed engine computer, or one that lost its memory, starts again from zero. Low numbers on a car with high mileage hint at a recent reset.</source>
+        <translation>De câte ori a terminat fiecare monitor de emisii, din drumurile în care putea rula. Ștergerea codurilor nu resetează aceste contoare: doar un calculator de motor reprogramat sau unul care și-a pierdut memoria o ia de la zero. Numere mici la o mașină cu mulți kilometri sugerează o resetare recentă.</translation>
+    </message>
+    <message>
         <source>%1 to %2</source>
         <translation>între %1 și %2</translation>
     </message>
@@ -5349,6 +5512,10 @@
     <message>
         <source>Valid</source>
         <translation>Validă</translation>
+    </message>
+    <message>
+        <source>Doesn&apos;t match</source>
+        <translation>Nu se potrivește</translation>
     </message>
     <message>
         <source>Doesn&apos;t match (normal outside North America)</source>

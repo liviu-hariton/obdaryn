@@ -449,6 +449,7 @@ void AppController::resetVehicleData()
     m_fuelType.clear();
     m_modelYear = 0;
     m_vinCheckDigitValid = false;
+    m_vinCheckDigitRequired = false;
     m_info = {};
     m_readiness = {};
     m_freeze = {};
@@ -488,6 +489,7 @@ void AppController::runFullScan()
         m_modelYear = vin.modelYear;
         m_vinRegion = vin.region;
         m_vinCheckDigitValid = vin.checkDigitValid;
+        m_vinCheckDigitRequired = vin.checkDigitRequired;
         m_dtcs->setEcuNames(info.ecuNames);
         emit vehicleChanged();
         pickProfileForVehicle();
@@ -705,7 +707,14 @@ void AppController::readVoltage()
 void AppController::readStatusPids()
 {
     // OBD standard (PID 1C) and fuel type (PID 51) are text, not live values.
-    m_client->readPids({0x1C, 0x51}, [this](const QList<ObdClient::PidReading> &readings) {
+    // Ask only for the ones the car supports: many petrol cars have no PID 51,
+    // and asking for nothing costs a 'NO DATA' wait.
+    QList<quint8> wanted;
+    for (quint8 pid : {quint8(0x1C), quint8(0x51)}) {
+        if (m_client->pidAdvertised(pid))
+            wanted << pid;
+    }
+    m_client->readPids(wanted, [this](const QList<ObdClient::PidReading> &readings) {
         for (const auto &r : readings) {
             if (r.pid == 0x1C && m_obdStandard.isEmpty())
                 m_obdStandard = PidTable::describeStatus(0x1C, r.raw);
@@ -1803,6 +1812,27 @@ QVariantList AppController::modules() const
     for (const QString &a : addresses)
         list << QVariantMap{{QStringLiteral("address"), a}, {QStringLiteral("name"), m_info.ecuNames.value(a)}};
     return list;
+}
+
+QVariantMap AppController::performance() const
+{
+    const InUsePerformance &perf = m_info.performance;
+    if (!perf.available)
+        return {{QStringLiteral("available"), false}};
+    QVariantList monitors;
+    for (const InUsePerformance::Monitor &m : perf.monitors) {
+        if (m.unused())
+            continue;
+        monitors << QVariantMap{{QStringLiteral("name"), m.name},
+                                {QStringLiteral("completed"), m.completed},
+                                {QStringLiteral("conditions"), m.conditions},
+                                {QStringLiteral("ratio"), m.ratio()}};
+    }
+    return {{QStringLiteral("available"), true},
+            {QStringLiteral("ecu"), perf.ecu},
+            {QStringLiteral("ignitionCycles"), perf.ignitionCycles},
+            {QStringLiteral("obdConditions"), perf.obdConditions},
+            {QStringLiteral("monitors"), monitors}};
 }
 
 QVariantList AppController::monitors() const

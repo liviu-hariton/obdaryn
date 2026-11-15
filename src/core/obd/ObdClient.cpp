@@ -102,7 +102,12 @@ QString ObdClient::negativeResponseText(quint8 nrc)
     case 0x33: return t(QT_TRANSLATE_NOOP("Nrc", "Access denied by the module."));
     case 0x78: return t(QT_TRANSLATE_NOOP("Nrc", "The module is still working on the answer."));
     case 0x7E:
-    case 0x7F: return t(QT_TRANSLATE_NOOP("Nrc", "Not available in the current diagnostic session."));
+    case 0x7F:
+    case 0x80: // KWP2000's code for the same thing
+        return t(QT_TRANSLATE_NOOP("Nrc", "Not available in the current diagnostic session."));
+    case 0x81: return t(QT_TRANSLATE_NOOP("Nrc", "The engine speed is too high."));
+    case 0x83: return t(QT_TRANSLATE_NOOP("Nrc", "The engine is running."));
+    case 0x88: return t(QT_TRANSLATE_NOOP("Nrc", "The vehicle is moving too fast."));
     default:
         return t(QT_TRANSLATE_NOOP("Nrc", "Negative response 0x%1.")).arg(nrc, 2, 16, QLatin1Char('0'));
     }
@@ -210,6 +215,17 @@ void ObdClient::supportedStep(std::shared_ptr<SupportedState> st)
 // ---------------------------------------------------------------------------
 // Live values
 
+bool ObdClient::pidAdvertised(quint8 pid) const
+{
+    if (m_ecuPids.isEmpty())
+        return true;
+    for (auto it = m_ecuPids.cbegin(); it != m_ecuPids.cend(); ++it) {
+        if (it.value().contains(pid))
+            return true;
+    }
+    return false;
+}
+
 struct ObdClient::PidBatchState {
     QList<QList<quint8>> groups;
     int index = 0;
@@ -223,11 +239,14 @@ void ObdClient::readPids(const QList<quint8> &pids, std::function<void(const QLi
     st->callback = std::move(callback);
 
     // Group PIDs whose answer length is known (needed to split a combined
-    // answer); everything else is requested on its own.
+    // answer) and that the car says it supports; everything else is requested
+    // on its own. An unsupported PID in a group would simply be left out of
+    // the answer, which looks exactly like an ECU that ignores combined
+    // requests (a real Hyundai did this with PIDs 1C + 51, see pidBatchStep).
     const bool batch = isCan() && m_multiPidSupported;
     QList<quint8> current;
     for (quint8 pid : pids) {
-        if (batch && PidTable::dataLength(pid) > 0) {
+        if (batch && PidTable::dataLength(pid) > 0 && pidAdvertised(pid)) {
             current << pid;
             if (current.size() == 6) {
                 st->groups << current;
@@ -285,6 +304,9 @@ void ObdClient::pidBatchStep(std::shared_ptr<PidBatchState> st)
 
         // Some ECUs only answer the first PID of a combined request. Detect it
         // once, then fall back to one PID per request for this connection.
+        // Only groups of PIDs the car advertised count as evidence (readPids
+        // makes sure of that): a PID the car doesn't have is never answered,
+        // combined or not, and must not switch combined requests off.
         if (group.size() > 1 && r.ok() && answered.size() <= 1 && m_multiPidSupported) {
             m_multiPidSupported = false;
             for (quint8 pid : group) {
@@ -478,8 +500,9 @@ void ObdClient::readVehicleInfo(std::function<void(const VehicleInformation &)> 
     auto st = std::make_shared<InfoState>();
     st->callback = std::move(callback);
     readSupportedPids(0x09, [this, st](const QList<quint8> &supported) {
-        // 02 VIN, 04 calibration IDs, 06 CVNs, 0A ECU names.
-        for (quint8 pid : {quint8(0x02), quint8(0x04), quint8(0x06), quint8(0x0A)}) {
+        // 02 VIN, 04 calibration IDs, 06 CVNs, 08 / 0B monitor counters
+        // (petrol / diesel), 0A ECU names.
+        for (quint8 pid : {quint8(0x02), quint8(0x04), quint8(0x06), quint8(0x08), quint8(0x0A), quint8(0x0B)}) {
             if (supported.contains(pid))
                 st->pids << pid;
         }
@@ -515,6 +538,12 @@ void ObdClient::infoStep(std::shared_ptr<InfoState> st)
                 break;
             case 0x0A:
                 st->info.ecuNames.insert(m.ecu, VehicleInfoCodec::ecuName(m, can));
+                break;
+            case 0x08:
+            case 0x0B:
+                // Answers come sorted by ECU, so the engine (7E8) wins.
+                if (!st->info.performance.available)
+                    st->info.performance = VehicleInfoCodec::performanceTracking(m, can, pid);
                 break;
             default:
                 break;

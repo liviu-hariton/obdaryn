@@ -47,8 +47,16 @@ Item {
                 KeyValue { label: qsTr("Model year"); value: App.modelYear > 0 ? App.modelYear : ""
                            note: qsTr("Decoded from the VIN. European VINs don't always encode it, so treat it as a hint.") }
                 KeyValue { label: qsTr("Built in"); value: App.vinRegion }
-                KeyValue { label: qsTr("VIN check digit"); value: App.vin.length ? (App.vinCheckDigitValid ? qsTr("Valid") : qsTr("Not valid")) : ""
-                           note: qsTr("Mandatory in North America only; European cars often don't use it.") }
+                // The check digit is mandatory only for North American and Chinese
+                // VINs; elsewhere a mismatch is normal and must not read as a warning.
+                KeyValue { label: qsTr("VIN check digit")
+                           value: !App.vin.length ? ""
+                                  : App.vinCheckDigitValid ? qsTr("Valid")
+                                  : App.vinCheckDigitRequired ? qsTr("Not valid")
+                                  : qsTr("Not used")
+                           note: App.vin.length && !App.vinCheckDigitValid && !App.vinCheckDigitRequired
+                                 ? qsTr("Normal for this car: only North American and Chinese VINs must have one.")
+                                 : qsTr("Mandatory in North America and China only; European cars often don't use it.") }
                 KeyValue { label: qsTr("OBD standard"); value: App.obdStandard }
                 KeyValue { label: qsTr("Fuel"); value: App.fuelType }
             }
@@ -91,6 +99,36 @@ Item {
                     value: App.cvns.join("  ")
                     mono: true
                     note: qsTr("Checksums of that software. A change without an official update can mean the ECU was modified.")
+                }
+            }
+
+            // In-use performance tracking (service 09, PID 08 / 0B). Shown only
+            // when the car reports it; monitors it doesn't have are left out.
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 0
+                visible: App.performance.available === true
+                SectionTitle { text: qsTr("Monitor counters"); detail: App.performance.ecu ? qsTr("reported by %1").arg(App.performance.ecu) : ""; Layout.bottomMargin: Theme.s2 }
+                KeyValue {
+                    label: qsTr("Engine starts counted")
+                    value: App.performance.available ? Number(App.performance.ignitionCycles).toLocaleString(Qt.locale(), "f", 0) : ""
+                    note: qsTr("Clearing codes doesn't reset these counters: only a reprogrammed engine computer, or one that lost its memory, starts again from zero. Low numbers on a car with high mileage hint at a recent reset.")
+                }
+                KeyValue {
+                    label: qsTr("Drives where monitors could run")
+                    value: App.performance.available ? Number(App.performance.obdConditions).toLocaleString(Qt.locale(), "f", 0) : ""
+                    note: qsTr("Below: how many of these drives each emission monitor finished.")
+                }
+                Repeater {
+                    model: App.performance.monitors || []
+                    delegate: KeyValue {
+                        required property var modelData
+                        label: modelData.name
+                        value: (modelData.ratio >= 0
+                                ? qsTr("%1 of %2 drives (%3 %)").arg(modelData.completed).arg(modelData.conditions)
+                                      .arg(Math.round(modelData.ratio * 100))
+                                : qsTr("%1 of %2 drives").arg(modelData.completed).arg(modelData.conditions))
+                    }
                 }
             }
 

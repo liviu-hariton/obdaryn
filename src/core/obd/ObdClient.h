@@ -9,6 +9,7 @@
 #include "obd/MonitorTests.h"
 #include "obd/Readiness.h"
 #include "obd/ResponseParser.h"
+#include "obd/VehicleInfo.h"
 
 #include <QHash>
 #include <QList>
@@ -72,7 +73,13 @@ public:
     };
     /// Reads current values. On CAN, up to 6 PIDs are sent in one request,
     /// which makes live data several times faster than one-by-one polling.
+    /// PIDs no ECU listed as supported are still asked, but on their own, so a
+    /// silent one can't make a combined request look broken.
     void readPids(const QList<quint8> &pids, std::function<void(const QList<PidReading> &)> callback);
+
+    /// Whether an ECU listed this service 01 PID in its support bitmaps. True
+    /// while the bitmaps haven't been read yet: there is nothing to go by.
+    bool pidAdvertised(quint8 pid) const;
 
     /// Readiness monitors + MIL (PID 01), taken from the engine ECU.
     void readMonitorStatus(std::function<void(const MonitorStatus &)> callback);
@@ -125,6 +132,7 @@ public:
         QStringList calibrationIds;   ///< software versions of emission-related ECUs
         QStringList cvns;             ///< calibration verification numbers (checksums)
         QHash<QString, QString> ecuNames; ///< address → "ECM-EngineControl"
+        InUsePerformance performance;     ///< monitor counters (PID 08 / 0B), from the first ECU that has them
     };
     void readVehicleInfo(std::function<void(const VehicleInformation &)> callback);
 

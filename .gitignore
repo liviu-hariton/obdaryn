@@ -28,3 +28,5 @@ logs/
 
 # Session recordings contain the VIN
 *.obdrec
+# ...except test fixtures, trimmed and with the VIN removed
+!tests/data/*.obdrec

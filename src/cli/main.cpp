@@ -243,7 +243,10 @@ int main(int argc, char *argv[])
             out << "  VIN:      " << (v.vin.isEmpty() ? QStringLiteral("(not reported)") : v.vin);
             if (!v.manufacturer.isEmpty())
                 out << "  (" << v.manufacturer << ", " << v.modelYear << ", check digit "
-                    << (v.checkDigitValid ? "valid" : "not valid") << ")";
+                    << (v.checkDigitValid      ? "valid"
+                        : v.checkDigitRequired ? "not valid"
+                                               : "doesn't match, normal outside North America")
+                    << ")";
             out << Qt::endl;
             for (auto it = info.ecuNames.begin(); it != info.ecuNames.end(); ++it)
                 out << "  Module:   " << it.key() << "  " << it.value() << Qt::endl;
@@ -251,6 +254,19 @@ int main(int argc, char *argv[])
                 out << "  CALID:    " << c << Qt::endl;
             for (const QString &c : info.cvns)
                 out << "  CVN:      " << c << Qt::endl;
+            if (info.performance.available) {
+                const InUsePerformance &perf = info.performance;
+                out << "  Monitor counters (" << perf.ecu << "): " << perf.ignitionCycles << " engine starts, "
+                    << perf.obdConditions << " drives where monitors could run" << Qt::endl;
+                for (const auto &m : perf.monitors) {
+                    if (m.unused())
+                        continue;
+                    out << "    " << m.name.leftJustified(30) << m.completed << " of " << m.conditions;
+                    if (m.ratio() >= 0)
+                        out << "  (" << qRound(m.ratio() * 100) << " %)";
+                    out << Qt::endl;
+                }
+            }
             next();
         });
     });

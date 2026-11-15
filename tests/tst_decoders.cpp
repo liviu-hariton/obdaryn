@@ -24,6 +24,7 @@ private slots:
     void brandPack();
     void readiness();
     void vin();
+    void performanceTracking();
     void protocolNumbers();
     void units();
 };
@@ -170,11 +171,53 @@ void TestDecoders::vin()
     const VinInfo us = decodeVin("1M8GDM9AXKP042788");
     QVERIFY(us.valid);
     QVERIFY(us.checkDigitValid);
+    QVERIFY(us.checkDigitRequired);
+
+    // A real European Hyundai (2015 Elantra, Romania): the 9th character is a
+    // letter, so the check digit can't match, and that's normal.
+    const VinInfo eu = decodeVin("KMHDH41CAFU000001");
+    QVERIFY(eu.valid);
+    QVERIFY(!eu.checkDigitValid);
+    QVERIFY(!eu.checkDigitRequired);
+    QCOMPARE(eu.modelYear, 2015);
 
     QVERIFY(!decodeVin("KMHDH41EBEU00000O").valid); // letter O is never used
 
     EcuMessage m{"7E8", QByteArray("\x49\x02\x01", 3) + "KMHDH41EBEU000001", {}};
     QCOMPARE(VehicleInfoCodec::vin(m, true), QStringLiteral("KMHDH41EBEU000001"));
+}
+
+void TestDecoders::performanceTracking()
+{
+    // CAN, petrol (PID 08), 20 counters: OBDCOND 412, IGNCNTR 1180, then pairs.
+    QByteArray data = QByteArray::fromHex("490814");
+    for (int c : {412, 1180, 389, 412, 0, 0, 401, 412, 0, 0, 380, 412, 0, 0, 96, 412, 395, 412, 0, 0})
+        data += char(c >> 8) + QByteArray(1, char(c & 0xFF));
+    data += QByteArray(3, '\0'); // frame padding beyond the count must be ignored
+    const InUsePerformance p = VehicleInfoCodec::performanceTracking(EcuMessage{"7E8", data, {}}, true, 0x08);
+    QVERIFY(p.available);
+    QVERIFY(!p.compressionIgnition);
+    QCOMPARE(p.obdConditions, 412);
+    QCOMPARE(p.ignitionCycles, 1180);
+    QCOMPARE(p.monitors.size(), 9);
+    QCOMPARE(p.monitors[0].completed, 389);
+    QCOMPARE(p.monitors[0].conditions, 412);
+    QVERIFY(qAbs(p.monitors[0].ratio() - 389.0 / 412) < 1e-9);
+    QVERIFY(p.monitors[1].unused());            // bank 2 on a 4-cylinder
+    QCOMPARE(p.monitors[1].ratio(), -1.0);
+
+    // Older ECUs send 16 counters (no rear oxygen sensors): 7 monitors.
+    QByteArray older = QByteArray::fromHex("490810") + QByteArray(32, char(1));
+    QCOMPARE(VehicleInfoCodec::performanceTracking(EcuMessage{"7E8", older, {}}, true, 0x08).monitors.size(), 7);
+
+    // Diesel layout (PID 0B).
+    QByteArray diesel = QByteArray::fromHex("490B10") + QByteArray(32, char(2));
+    const InUsePerformance d = VehicleInfoCodec::performanceTracking(EcuMessage{"7E8", diesel, {}}, true, 0x0B);
+    QVERIFY(d.compressionIgnition);
+    QCOMPARE(d.monitors.size(), 7);
+
+    // Too short to hold even the two general counters.
+    QVERIFY(!VehicleInfoCodec::performanceTracking(EcuMessage{"7E8", QByteArray::fromHex("49080100"), {}}, true, 0x08).available);
 }
 
 void TestDecoders::protocolNumbers()

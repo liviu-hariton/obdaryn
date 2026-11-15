@@ -6,6 +6,8 @@
 #include "obd/ObdClient.h"
 #include "obd/Pids.h"
 
+#include <QTimer>
+
 #include <memory>
 
 namespace obdaryn {
@@ -17,6 +19,38 @@ constexpr int kModuleTimeoutMs = 1500;
 // The keep-alive probe of a silent address. A real ELM327 answers NO DATA in
 // ~0.2 s; this only bounds adapters that stay quiet instead.
 constexpr int kPingTimeoutMs = 800;
+// "Busy, repeat the request" (NRC 0x21): ask again this many times, this far apart.
+constexpr int kBusyRetries = 2;
+constexpr int kBusyRetryDelayMs = 300;
+
+// How much a negative response code tells the user. When both protocols are
+// refused, the more telling of the two refusals is the one explained: "needs a
+// diagnostic session" says more than "service not supported", which every
+// module answers to the protocol it doesn't speak.
+int refusalWeight(quint8 nrc)
+{
+    switch (nrc) {
+    case 0x7E:
+    case 0x7F:
+    case 0x80: // KWP2000: not supported in the active diagnostic session
+        return 5;
+    case 0x22: // conditions not correct
+    case 0x81: // engine speed too high
+    case 0x83: // engine is running
+    case 0x88: // vehicle speed too high
+        return 4;
+    case 0x21: // busy
+        return 3;
+    case 0x00: // no refusal at all (silence)
+        return 0;
+    default:
+        return 1;
+    }
+}
+
+bool needsSession(quint8 nrc) { return refusalWeight(nrc) == 5; }
+bool conditionsNotMet(quint8 nrc) { return refusalWeight(nrc) == 4; }
+bool notSupported(quint8 nrc) { return nrc == 0x11 || nrc == 0x12; }
 
 } // namespace
 
@@ -111,6 +145,7 @@ void ModuleScanner::scan(const VehicleProfile &profile)
     m_cancel = false;
     m_index = -1;
     m_obdResponders.clear();
+    m_engineRpm = -1;
     emit started(int(m_results.size()));
 
     // Which modules answer standard OBD-II? (Functional address 7DF.)
@@ -121,7 +156,19 @@ void ModuleScanner::scan(const VehicleProfile &profile)
             if (ok && m.ecu.size() == 3)
                 m_obdResponders.insert(quint16(id));
         }
-        scanNext();
+        // Is the engine running? Some modules only give their codes with the
+        // engine off, and the advice for a refusal depends on it.
+        m_client->readPids({0x0C}, [this](const QList<ObdClient::PidReading> &readings) {
+            const PidDefinition *def = PidTable::find(0x0C);
+            for (const auto &rd : readings) {
+                double rpm = 0;
+                if (def && def->value(rd.raw, &rpm)) {
+                    m_engineRpm = rpm;
+                    break;
+                }
+            }
+            scanNext();
+        });
     });
 }
 
@@ -154,7 +201,7 @@ void ModuleScanner::scanNext()
             scanNext();
             return;
         }
-        readDtcs(i, m_results[i].module.dtc, false, [this, i] {
+        readDtcs(i, DtcAttempt{.protocol = m_results[i].module.dtc}, [this, i] {
             if (m_results[i].state != ModuleResult::State::Answered) {
                 emit moduleUpdated(i);
                 scanNext();
@@ -178,12 +225,13 @@ void ModuleScanner::restoreAddressing(std::function<void()> done)
     ModuleAddressing::restore(m_client->session(), std::move(done));
 }
 
-void ModuleScanner::readDtcs(int i, DiagProtocol protocol, bool isFallback, std::function<void()> done)
+void ModuleScanner::readDtcs(int i, DtcAttempt attempt, std::function<void()> done)
 {
-    const bool uds = protocol != DiagProtocol::Kwp; // Auto tries UDS first
+    const bool uds = attempt.protocol != DiagProtocol::Kwp; // Auto tries UDS first
     const QByteArray cmd = uds ? QByteArray("1902FF") : QByteArray("1802FF00");
+    const DiagProtocol other = uds ? DiagProtocol::Kwp : DiagProtocol::Uds;
 
-    m_client->request(cmd, [this, i, uds, isFallback, done](const ObdClient::Response &r) {
+    m_client->request(cmd, [this, i, uds, other, attempt, done](const ObdClient::Response &r) {
         ModuleResult &res = m_results[i];
         if (r.ok()) {
             res.state = ModuleResult::State::Answered;
@@ -194,13 +242,25 @@ void ModuleScanner::readDtcs(int i, DiagProtocol protocol, bool isFallback, std:
             done();
             return;
         }
-        if (!isFallback) {
+        const quint8 nrc = r.negative.isEmpty() ? 0 : quint8(r.negative.first().data[2]);
+
+        // "Busy, repeat the request": the module is there and speaks this
+        // protocol, it just can't answer yet. Ask again after a short wait.
+        if (nrc == 0x21 && attempt.busyRetries < kBusyRetries) {
+            DtcAttempt again = attempt;
+            ++again.busyRetries;
+            QTimer::singleShot(kBusyRetryDelayMs, this, [this, i, again, done] { readDtcs(i, again, done); });
+            return;
+        }
+
+        if (!attempt.isFallback) {
             if (r.reply.status == ElmSession::Reply::Status::NotConnected) {
                 res.state = ModuleResult::State::Error;
                 res.error = r.errorText();
                 done();
                 return;
             }
+            const DtcAttempt fallback{.protocol = other, .isFallback = true, .firstRefusal = nrc};
             if (r.negative.isEmpty()) {
                 // Silence. Some modules ignore requests they don't support
                 // instead of refusing them, so don't conclude "absent" yet.
@@ -211,27 +271,62 @@ void ModuleScanner::readDtcs(int i, DiagProtocol protocol, bool isFallback, std:
                     return;
                 }
                 // One keep-alive (TesterPresent) tells "not fitted" from "fitted but silent".
-                m_client->request("3E00", [this, i, uds, done](const ObdClient::Response &ping) {
-                    ModuleResult &res = m_results[i];
+                m_client->request("3E00", [this, i, fallback, done](const ObdClient::Response &ping) {
                     if (ping.positive.isEmpty() && ping.negative.isEmpty()) {
-                        res.state = ModuleResult::State::Absent;
+                        m_results[i].state = ModuleResult::State::Absent;
                         done();
                         return;
                     }
-                    readDtcs(i, uds ? DiagProtocol::Kwp : DiagProtocol::Uds, true, done);
+                    readDtcs(i, fallback, done);
                 }, ElmSession::Options{.timeoutMs = kPingTimeoutMs});
                 return;
             }
             // The module is there but refused this protocol: try the other one.
-            readDtcs(i, uds ? DiagProtocol::Kwp : DiagProtocol::Uds, true, done);
+            readDtcs(i, fallback, done);
             return;
         }
-        res.state = ModuleResult::State::Error;
-        res.error = r.negative.isEmpty()
-                        ? tr("The module answers, but not to trouble-code requests. Scan again with the ignition ON; if it persists, this module needs the brand's own diagnostic tool.")
-                        : tr("%1 Scan again with the ignition ON; if it persists, this module needs the brand's own diagnostic tool.").arg(r.errorText());
+
+        // Both protocols refused (or the re-read after a clear failed):
+        // explain the more telling of the two refusals.
+        explainRefusal(i, refusalWeight(attempt.firstRefusal) >= refusalWeight(nrc) ? attempt.firstRefusal : nrc);
         done();
     }, ElmSession::Options{.timeoutMs = kModuleTimeoutMs});
+}
+
+void ModuleScanner::explainRefusal(int i, quint8 nrc)
+{
+    ModuleResult &res = m_results[i];
+    // A module that answers generic OBD-II but none of the manufacturer
+    // requests (typically the engine ECU) isn't broken: its codes were read
+    // with the generic OBD-II scan.
+    if (m_obdResponders.contains(res.module.rx) && (nrc == 0 || notSupported(nrc) || needsSession(nrc))) {
+        res.state = ModuleResult::State::ObdOnly;
+        res.error.clear();
+        return;
+    }
+
+    res.state = ModuleResult::State::Error;
+    const QString brandTool = tr("Its codes need the brand's own diagnostic tool.");
+    if (nrc == 0) {
+        res.error = tr("The module answers, but not to trouble-code requests.") + QLatin1Char(' ') + brandTool;
+    } else if (needsSession(nrc)) {
+        res.error = tr("The module gives its codes only inside a diagnostic session, which Obdaryn "
+                       "never opens so that it stays read-only.") + QLatin1Char(' ') + brandTool;
+    } else if (conditionsNotMet(nrc) && m_engineRpm > 0) {
+        res.error = tr("The module refuses while the engine is running (%1 rpm). Switch the engine off, "
+                       "leave the ignition ON, and scan again.").arg(qRound(m_engineRpm));
+    } else if (conditionsNotMet(nrc)) {
+        res.error = tr("%1 Scan again with the engine off and the ignition ON; if it persists, this module "
+                       "needs the brand's own diagnostic tool.").arg(ObdClient::negativeResponseText(nrc));
+    } else if (nrc == 0x21) {
+        res.error = tr("The module stayed busy. Scan again in a moment.");
+    } else if (notSupported(nrc)) {
+        res.error = tr("The module doesn't support the standard trouble-code requests (UDS or KWP2000).")
+                    + QLatin1Char(' ') + brandTool;
+    } else {
+        res.error = tr("%1 If it persists, this module needs the brand's own diagnostic tool.")
+                        .arg(ObdClient::negativeResponseText(nrc));
+    }
 }
 
 void ModuleScanner::readIdentification(int i, std::function<void()> done)
@@ -296,7 +391,8 @@ void ModuleScanner::clearModule(int i, std::function<void(bool, const QString &)
                 const bool cleared = r.ok();
                 const QString message = cleared ? QString() : r.errorText();
                 // Re-read what's left: a fault that is still present comes straight back.
-                readDtcs(i, uds ? DiagProtocol::Uds : DiagProtocol::Kwp, true, [this, i, cleared, message, callback] {
+                const DtcAttempt reread{.protocol = uds ? DiagProtocol::Uds : DiagProtocol::Kwp, .isFallback = true};
+                readDtcs(i, reread, [this, i, cleared, message, callback] {
                     emit moduleUpdated(i);
                     restoreAddressing([this, cleared, message, callback] {
                         m_running = false;

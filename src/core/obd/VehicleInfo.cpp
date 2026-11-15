@@ -6,6 +6,8 @@
 #include <QDate>
 #include <QHash>
 
+#include <iterator>
+
 namespace obdaryn {
 
 namespace {
@@ -154,6 +156,7 @@ VinInfo decodeVin(const QString &raw)
     const int rem = sum % 11;
     const QChar expected = rem == 10 ? QLatin1Char('X') : QChar(u'0' + rem);
     info.checkDigitValid = ok && v[8] == expected;
+    info.checkDigitRequired = (v[0] >= QLatin1Char('1') && v[0] <= QLatin1Char('5')) || v[0] == QLatin1Char('L');
 
     // Model year (position 10). The code repeats every 30 years.
     static const QString yearCodes = QStringLiteral("ABCDEFGHJKLMNPRSTVWXY123456789");
@@ -204,6 +207,61 @@ QString ecuName(const EcuMessage &m, bool can)
 {
     // 20 bytes: 4-char acronym (NUL padded), '-', 15-char name.
     return asciiOf(infoPayload(m, can, true));
+}
+
+InUsePerformance performanceTracking(const EcuMessage &m, bool can, quint8 pid)
+{
+    // SAE J1979: 2-byte counters. CAN answers start with a count byte (NODI,
+    // the number of counters); older protocols just send the counters.
+    // Order: OBDCOND, IGNCNTR, then one (completed, conditions) pair per monitor.
+    // Older ECUs send fewer pairs, newer standards may send more; unknown
+    // extra pairs are ignored.
+    auto t = [](const char *s) { return QCoreApplication::translate("Ipt", s); };
+    static const char *const spark[] = {
+        QT_TRANSLATE_NOOP("Ipt", "Catalyst, bank 1"),
+        QT_TRANSLATE_NOOP("Ipt", "Catalyst, bank 2"),
+        QT_TRANSLATE_NOOP("Ipt", "Oxygen sensor, bank 1"),
+        QT_TRANSLATE_NOOP("Ipt", "Oxygen sensor, bank 2"),
+        QT_TRANSLATE_NOOP("Ipt", "EGR / VVT system"),
+        QT_TRANSLATE_NOOP("Ipt", "Secondary air"),
+        QT_TRANSLATE_NOOP("Ipt", "Evaporative system (EVAP)"),
+        QT_TRANSLATE_NOOP("Ipt", "Rear oxygen sensor, bank 1"),
+        QT_TRANSLATE_NOOP("Ipt", "Rear oxygen sensor, bank 2"),
+    };
+    static const char *const compression[] = {
+        QT_TRANSLATE_NOOP("Ipt", "NMHC catalyst"),
+        QT_TRANSLATE_NOOP("Ipt", "NOx catalyst (SCR)"),
+        QT_TRANSLATE_NOOP("Ipt", "NOx adsorber"),
+        QT_TRANSLATE_NOOP("Ipt", "Particulate filter (DPF)"),
+        QT_TRANSLATE_NOOP("Ipt", "Exhaust gas sensor"),
+        QT_TRANSLATE_NOOP("Ipt", "EGR / VVT system"),
+        QT_TRANSLATE_NOOP("Ipt", "Boost pressure"),
+        QT_TRANSLATE_NOOP("Ipt", "Fuel system"),
+    };
+
+    InUsePerformance out;
+    out.ecu = m.ecu;
+    out.compressionIgnition = pid == 0x0B;
+    QByteArray p = infoPayload(m, can, true);
+    if (can && m.data.size() >= 3) {
+        // Trust the count byte over the frame padding.
+        const int count = quint8(m.data[2]);
+        p = p.left(qsizetype(count) * 2);
+    }
+    QList<int> counters;
+    for (qsizetype i = 0; i + 1 < p.size(); i += 2)
+        counters << (quint8(p[i]) << 8 | quint8(p[i + 1]));
+    if (counters.size() < 2)
+        return out;
+
+    out.available = true;
+    out.obdConditions = counters[0];
+    out.ignitionCycles = counters[1];
+    const char *const *names = out.compressionIgnition ? compression : spark;
+    const int known = out.compressionIgnition ? int(std::size(compression)) : int(std::size(spark));
+    for (int k = 0; k < known && 2 + 2 * k + 1 < counters.size(); ++k)
+        out.monitors << InUsePerformance::Monitor{t(names[k]), counters[2 + 2 * k], counters[3 + 2 * k]};
+    return out;
 }
 
 } // namespace VehicleInfoCodec

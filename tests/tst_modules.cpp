@@ -27,6 +27,7 @@ private slots:
     void decodesUds();
     void decodesKwp();
     void scansDemoCar();
+    void retriesBusyModule();
     void restoresGenericAddressing();
     void clearsOneModule();
     void discoversModules();
@@ -174,6 +175,20 @@ void TestModules::scansDemoCar()
     // TPMS answers TesterPresent but not code requests: present, codes unreadable.
     QCOMPARE(find(scanner, "tpms")->state, ModuleResult::State::Error);
     QVERIFY(!find(scanner, "tpms")->error.isEmpty());
+}
+
+void TestModules::retriesBusyModule()
+{
+    // The ABS module says "busy" to its first two code requests. Asked again,
+    // it answers. Without the retry, both protocols get "busy" and its codes are lost.
+    QVERIFY(connectDemo());
+    m_sim->setModuleBusy("7D1", 2);
+    ModuleScanner scanner(m_client);
+    QVERIFY(runScan(scanner));
+    const ModuleResult *abs = find(scanner, "abs");
+    QCOMPARE(abs->state, ModuleResult::State::Answered);
+    QCOMPARE(abs->dtcs.size(), 1);
+    QCOMPARE(abs->dtcs[0].code, QStringLiteral("C1203"));
 }
 
 void TestModules::restoresGenericAddressing()

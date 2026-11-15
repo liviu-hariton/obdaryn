@@ -15,13 +15,16 @@ Item {
     property bool copyable: false
     property int labelWidth: 220
 
-    implicitHeight: Math.max(44, col.implicitHeight + 2 * Theme.s3)
+    // Tall enough for whichever side wraps more: the value with its note, or a
+    // long label (Romanian labels often take two lines).
+    implicitHeight: Math.max(44, Math.max(col.implicitHeight, labelText.implicitHeight) + 2 * Theme.s3)
     Layout.fillWidth: true
 
     RowLayout {
         anchors.fill: parent
         spacing: Theme.s4
         Text {
+            id: labelText
             Layout.preferredWidth: kv.labelWidth
             Layout.alignment: Qt.AlignTop
             Layout.topMargin: Theme.s3

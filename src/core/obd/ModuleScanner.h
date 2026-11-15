@@ -68,8 +68,15 @@ QString asciiField(const QByteArray &bytes);
  *  1. points the adapter at it (AT SH <request ID>, AT CRA <response ID>, and
  *     the standard flow-control header when the brand doesn't use the +8 rule);
  *  2. reads the codes with UDS 0x19 02 FF or KWP2000 0x18 02 FF 00, falling
- *     back from one to the other when the module refuses the first;
+ *     back from one to the other when the module refuses the first (a module
+ *     that answers "busy" is asked again a couple of times first);
  *  3. reads its spare-part number and software version (UDS 0x22, KWP 0x1A).
+ *
+ * Before the first module it reads the engine speed: some modules only give
+ * their codes with the engine off, and the advice shown for a refusal says so.
+ * A module that refuses both protocols but answers generic OBD-II (usually the
+ * engine ECU) is reported as "OBD-II only", since its codes come from the
+ * generic scan.
  *
  * Afterwards it always restores the standard OBD-II addressing (7DF, all
  * modules), so live data and generic requests keep working. Everything sent
@@ -108,12 +115,22 @@ private:
     void scanNext();
     void address(const ModuleDef &m, std::function<void(bool ok)> done);
     void restoreAddressing(std::function<void()> done);
-    void readDtcs(int index, DiagProtocol protocol, bool isFallback, std::function<void()> done);
+    /// One trouble-code request and what came before it for this module.
+    struct DtcAttempt {
+        DiagProtocol protocol = DiagProtocol::Auto;
+        bool isFallback = false;  ///< the other protocol was tried already (or no fallback wanted)
+        int busyRetries = 0;      ///< times the module said "busy, ask again" (NRC 0x21)
+        quint8 firstRefusal = 0;  ///< negative response code of the first protocol, 0 for none
+    };
+    void readDtcs(int index, DtcAttempt attempt, std::function<void()> done);
+    /// Sets the Error / ObdOnly state of a module that refused both protocols.
+    void explainRefusal(int index, quint8 nrc);
     void readIdentification(int index, std::function<void()> done);
 
     ObdClient *m_client;
     QList<ModuleResult> m_results;
     QSet<quint16> m_obdResponders; ///< response IDs that answered a generic 0100
+    double m_engineRpm = -1;       ///< engine speed when the scan started; -1 if unknown
     QString m_profileId;
     int m_index = -1;
     bool m_running = false;
